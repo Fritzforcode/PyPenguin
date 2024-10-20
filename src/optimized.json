@@ -1,0 +1,97 @@
+{
+    "sprites": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "dataFormat": "svg",
+                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "rotationCenter": [
+                        240,
+                        180
+                    ]
+                }
+            ],
+            "sounds": [],
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 50,
+            "videoState": "on",
+            "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "fileStem": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "rotationCenter": [
+                        26,
+                        46
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "dataFormat": "wav",
+                    "fileStem": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "rate": 48000,
+                    "sampleCount": 17867
+                },
+                {
+                    "name": "art-of-samples-buzz-120-bpm-audio-logo-245396",
+                    "dataFormat": "mp3",
+                    "fileStem": "64ff5535a3f758aec5ae068a6bdbaa5b",
+                    "rate": 48000,
+                    "sampleCount": 388702
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "position": [
+                0,
+                0
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "variables": [
+        {
+            "name": "my variable",
+            "currentValue": 0,
+            "mode": "global",
+            "sprite": null
+        }
+    ],
+    "lists": [],
+    "monitors": [],
+    "extensionData": {},
+    "extensions": [],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": "",
+        "platform": {
+            "name": "PenguinMod",
+            "url": "https://penguinmod.com/",
+            "version": "stable"
+        }
+    }
+}
