@@ -1,5 +1,5 @@
 from helper_functions import pp, ikv, readJSONFile, writeJSONFile, WhatIsGoingOnError
-
+print("hi")
 opcodeDatabase = readJSONFile("opcode_database.jsonc")
 
 def translateComment(data):
