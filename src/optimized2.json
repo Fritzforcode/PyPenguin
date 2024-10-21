@@ -1,0 +1,174 @@
+{
+    "sprites": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "dataFormat": "svg",
+                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "rotationCenter": [
+                        240,
+                        180
+                    ]
+                }
+            ],
+            "sounds": [],
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 50,
+            "videoState": "on",
+            "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "scripts": [
+                {
+                    "position": [
+                        101,
+                        709
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when [KEY_OPTION] key pressed",
+                            "inputs": {},
+                            "options": {
+                                "KEY_OPTION": "space"
+                            },
+                            "comment": {
+                                "position": [
+                                    373.37771889015477,
+                                    717.2603804976843
+                                ],
+                                "size": [
+                                    200,
+                                    200
+                                ],
+                                "minimized": false,
+                                "text": "hukhuk seen"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        79,
+                        939
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "broadcast [BROADCAST_INPUT]",
+                            "inputs": {
+                                "BROADCAST_INPUT": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "message1"
+                                }
+                            },
+                            "options": {},
+                            "comment": {
+                                "position": [
+                                    322.75193164966714,
+                                    947.3217321325224
+                                ],
+                                "size": [
+                                    200,
+                                    200
+                                ],
+                                "minimized": true,
+                                "text": "hukhuk hidden"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "comments": [
+                {
+                    "position": [
+                        123.94350405092592,
+                        399.6219324182581
+                    ],
+                    "size": [
+                        200,
+                        200
+                    ],
+                    "minimized": false,
+                    "text": "wefwefwef seen"
+                },
+                {
+                    "position": [
+                        523.2535807291666,
+                        383.8597163447627
+                    ],
+                    "size": [
+                        200,
+                        200
+                    ],
+                    "minimized": true,
+                    "text": "wefwefwef hidden"
+                }
+            ],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "fileStem": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "rotationCenter": [
+                        26,
+                        46
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "dataFormat": "wav",
+                    "fileStem": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "rate": 48000,
+                    "sampleCount": 17867
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "position": [
+                0,
+                0
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "variables": [
+        {
+            "name": "my variable",
+            "currentValue": 0,
+            "mode": "global",
+            "sprite": null
+        }
+    ],
+    "lists": [],
+    "monitors": [],
+    "extensionData": {},
+    "extensions": [],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": "",
+        "platform": {
+            "name": "PenguinMod",
+            "url": "https://penguinmod.com/",
+            "version": "stable"
+        }
+    }
+}

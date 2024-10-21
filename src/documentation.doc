@@ -4,17 +4,12 @@ Magic Values:
         - text: 10 eg. say
         - number: 4 eg. operator
         - boolean: 2 (hidden when empty) eg. not
+    * look into scratch wiki "file format"
 
 Missing Features:
-- cloud variables
 - procedures
 - more block opcodes
 
 EXPLORE AND MAYBE TRANSLATE EXTENSIONDATA
 
 comment minimum size: w:52; h:32
-
-translate other sprite attributes:
-["isStage", "name", "variables", "lists", "broadcasts", "customVars", "blocks", "comments", "currentCostume", "costumes", "sounds", "id", "volume", "layerOrder"] # stage and sprites
-["tempo", "videoTransparency", "videoState", "textToSpeechLanguage"] # only stage
-["visible", "x", "y", "size", "direction", "draggable", "rotationStyle"] # only sprites

@@ -20,13 +20,13 @@ def flipKeysAndValues(obj: dict):
 
 
 
-def readJSONFile(file_path):
-    with open(file_path, "r", encoding="utf-8") as file:
+def readJSONFile(filePath):
+    with open(filePath, "r", encoding="utf-8") as file:
         string = file.read()
     return parser.loads(string)
 
-def writeJSONFile(file_path, data):
-    with open(file_path, "w") as file:
+def writeJSONFile(filePath, data):
+    with open(filePath, "w") as file:
         dump(data, file, indent=4)
 
 
@@ -39,7 +39,7 @@ class WhatIsGoingOnError(Exception):
 
 
 
-"5I9nI;7P)jdiR-_X;/%l"
+
 
 literalCharSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#%()*+,-./:;=?@[]^_`{|}~"
 

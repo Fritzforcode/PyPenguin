@@ -37,7 +37,7 @@
                     "text": "Configuration for https://penguinmod.com/\nYou can move, resize, and minimize this comment, but don't edit it by hand. This comment can be deleted to remove the stored settings.\n{} // _twconfig_"
                 }
             },
-            "currentCostume": 0,
+            "currentCostume": 1,
             "costumes": [
                 {
                     "name": "backdrop1",
@@ -46,6 +46,15 @@
                     "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
                     "rotationCenterX": 240,
                     "rotationCenterY": 180
+                },
+                {
+                    "name": "sample_640\u00d7426",
+                    "bitmapResolution": 2,
+                    "dataFormat": "jpg",
+                    "assetId": "5599b338e08279ac9fba058ab8bc630f",
+                    "md5ext": "5599b338e08279ac9fba058ab8bc630f.jpg",
+                    "rotationCenterX": 320,
+                    "rotationCenterY": 213
                 }
             ],
             "sounds": [],
@@ -188,7 +197,17 @@
                     "topLevel": false
                 }
             },
-            "comments": {},
+            "comments": {
+                "g": {
+                    "blockId": null,
+                    "x": 591.1111111111105,
+                    "y": 330.2716049382699,
+                    "width": 397.0369873046875,
+                    "height": 474.0740051269531,
+                    "minimized": false,
+                    "text": ""
+                }
+            },
             "currentCostume": 0,
             "costumes": [
                 {

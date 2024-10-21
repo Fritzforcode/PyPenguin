@@ -173,7 +173,7 @@ def generateBlockChildrenPs(data):
             ancestorPs.append(childP)
     return ancestorPs, blockChildrenPs
 
-def translateComments(data):
+def translateCostumes(data):
     newCostumeDatas = []
     for costumeData in data:
         pp(costumeData)
@@ -225,7 +225,7 @@ def optimizeProject(sourcePath, targetPath):
                 commentDatas=commentDatas,
             )
             newScriptDatas.append(newScriptData)
-        translatedCostumeDatas = translateComments(data=spriteData["costumes"])
+        translatedCostumeDatas = translateCostumes(data=spriteData["costumes"])
         translatedSoundDatas   = translateSounds  (data=spriteData["sounds"])
         #print(ancestorPs)
         #pp(blockResults)
@@ -270,6 +270,6 @@ def optimizeProject(sourcePath, targetPath):
     writeJSONFile(targetPath, newData)
 
 optimizeProject(
-    sourcePath="source.json", 
-    targetPath="optimized.json",
+    sourcePath="test.json",#"source.json", 
+    targetPath="optimized3.json",
 )
