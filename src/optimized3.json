@@ -185,25 +185,41 @@
             "name": "my variable",
             "currentValue": 0,
             "mode": "global",
-            "sprite": null
+            "sprite": null,
+            "monitor": null
         },
         {
             "name": "d",
             "currentValue": 0,
             "mode": "global",
-            "sprite": null
+            "sprite": null,
+            "monitor": null
         },
         {
             "name": "ydx",
             "currentValue": 0,
             "mode": "global",
-            "sprite": null
+            "sprite": null,
+            "monitor": null
         },
         {
             "name": "zt",
             "currentValue": 0,
             "mode": "local",
-            "sprite": "Sprite1"
+            "sprite": "Sprite1",
+            "monitor": {
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    5,
+                    212
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            }
         }
     ],
     "lists": [
@@ -211,42 +227,17 @@
             "name": "add",
             "currentValue": [],
             "mode": "global",
-            "sprite": null
-        }
-    ],
-    "monitors": [
-        {
-            "id": "/~,@3IDW`(7!;Z=WHQxq",
-            "mode": "list",
-            "opcode": "data_listcontents",
-            "params": {
-                "LIST": "add"
-            },
-            "spriteName": null,
-            "value": [],
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 5,
-            "visible": true
-        },
-        {
-            "id": "5P#en_TFQO_O0g?,?FxY",
-            "mode": "default",
-            "opcode": "data_variable",
-            "params": {
-                "VARIABLE": "zt"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 212,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
+            "sprite": null,
+            "monitor": {
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    5,
+                    5
+                ]
+            }
         }
     ],
     "extensionData": {},

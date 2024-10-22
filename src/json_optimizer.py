@@ -1,5 +1,5 @@
 from helper_functions import pp, ikv, readJSONFile, writeJSONFile, WhatIsGoingOnError
-print("hi")
+
 opcodeDatabase = readJSONFile("opcode_database.jsonc")
 
 def translateComment(data):
@@ -110,53 +110,6 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
     else:
         return newDatas
 
-def translateVariables(data):
-    newData = []
-    for spriteData in data:
-        for i,variableID,variableData in ikv(spriteData["variables"]):
-            name = variableData[0]
-            currentValue = variableData[1]
-            if spriteData["isStage"]:
-                if len(variableData) == 3 and variableData[2] == True:
-                    mode = "cloud"
-                else:
-                    mode = "global"
-                sprite = None
-            else:
-                mode = "local"
-                sprite = spriteData["name"]
-            if spriteData["customVars"] != []:
-                raise WhatIsGoingOnError("THANK YOU!!! I have been trying to find out what 'customVars' is used for.")
-            newVariableData = {
-                "name"        : name,
-                "currentValue": currentValue,
-                "mode"        : mode,
-                "sprite"      : sprite,
-            }
-            newData.append(newVariableData)
-    return newData
-
-def translateLists(data):
-    newData = []
-    for spriteData in data:
-        for i,listID,listData in ikv(spriteData["lists"]):
-            name = listData[0]
-            currentValue = listData[1]
-            if spriteData["isStage"]:
-                mode = "global"
-                sprite = None
-            else:
-                mode = "local"
-                sprite = spriteData["name"]
-            newListData = {
-                "name"        : name,
-                "currentValue": currentValue,
-                "mode"        : mode,
-                "sprite"      : sprite,
-            }
-            newData.append(newListData)
-    return newData
-
 def generateBlockChildrenPs(data):
     blockParentPs = {k:v["parent"] for i,k,v in ikv(data)} # Get all block's parents
     blockChildrenPs = {k:[] for k in data.keys()} # Create an empty dict which records each block's children
@@ -173,7 +126,7 @@ def generateBlockChildrenPs(data):
             ancestorPs.append(childP)
     return ancestorPs, blockChildrenPs
 
-def translateCostumes(data):
+def translateComments(data):
     newCostumeDatas = []
     for costumeData in data:
         pp(costumeData)
@@ -205,6 +158,82 @@ def translateSounds(data):
         newSoundDatas.append(newSoundData)
     return newSoundDatas
 
+def translateVariables(data, monitorDatas):
+    newData = []
+    for spriteData in data:
+        for i,variableID,variableData in ikv(spriteData["variables"]):
+            name = variableData[0]
+            currentValue = variableData[1]
+            if spriteData["isStage"]:
+                if len(variableData) == 3 and variableData[2] == True:
+                    mode = "cloud"
+                else:
+                    mode = "global"
+                sprite = None
+            else:
+                mode = "local"
+                sprite = spriteData["name"]
+            if spriteData["customVars"] != []:
+                raise WhatIsGoingOnError("Wow! I have been trying to find out what 'customVars' is used for. Can you explain how you did that? Please write me on GitHub.")
+            
+            monitorIDs = [i["id"] for i in monitorDatas]
+            # if there is no monitor for that variable
+            if variableID not in monitorIDs:
+                newMonitorData = None
+            else:
+                monitorData = monitorDatas[monitorIDs.index(variableID)]
+                newMonitorData = {
+                    "size"        : [monitorData["width"], monitorData["height"]],
+                    "position"    : [monitorData["x"], monitorData["y"]],
+                    "sliderMin"   : monitorData["sliderMin"],
+                    "sliderMax"   : monitorData["sliderMax"],
+                    "onlyIntegers": monitorData["isDiscrete"],
+                }
+            
+            newVariableData = {
+                "name"        : name,
+                "currentValue": currentValue,
+                "mode"        : mode,
+                "sprite"      : sprite,
+                "monitor"     : newMonitorData,
+            }
+            newData.append(newVariableData)
+    return newData
+
+def translateLists(data, monitorDatas):
+    newData = []
+    for spriteData in data:
+        for i,listID,listData in ikv(spriteData["lists"]):
+            name = listData[0]
+            currentValue = listData[1]
+            if spriteData["isStage"]:
+                mode = "global"
+                sprite = None
+            else:
+                mode = "local"
+                sprite = spriteData["name"]
+            
+            monitorIDs = [i["id"] for i in monitorDatas]
+            # if there is no monitor for that variable
+            if listID not in monitorIDs:
+                newMonitorData = None
+            else:
+                monitorData = monitorDatas[monitorIDs.index(listID)]
+                newMonitorData = {
+                    "size"        : [monitorData["width"], monitorData["height"]],
+                    "position"    : [monitorData["x"], monitorData["y"]],
+                }
+            
+            newListData = {
+                "name"        : name,
+                "currentValue": currentValue,
+                "mode"        : mode,
+                "sprite"      : sprite,
+                "monitor"     : newMonitorData,
+            }
+            newData.append(newListData)
+    return newData
+
 def optimizeProject(sourcePath, targetPath):
     dataSource = readJSONFile(sourcePath)
     newSpriteDatas = []
@@ -225,7 +254,7 @@ def optimizeProject(sourcePath, targetPath):
                 commentDatas=commentDatas,
             )
             newScriptDatas.append(newScriptData)
-        translatedCostumeDatas = translateCostumes(data=spriteData["costumes"])
+        translatedCostumeDatas = translateComments(data=spriteData["costumes"])
         translatedSoundDatas   = translateSounds  (data=spriteData["sounds"])
         #print(ancestorPs)
         #pp(blockResults)
@@ -259,9 +288,14 @@ def optimizeProject(sourcePath, targetPath):
         newSpriteDatas.append(newSpriteData)
     newData = {
         "sprites"      : newSpriteDatas,
-        "variables"    : translateVariables(data=dataSource["targets"]),
-        "lists"        : translateLists    (data=dataSource["targets"]),
-        "monitors"     : dataSource["monitors"],
+        "variables"    : translateVariables(
+            data=dataSource["targets"], 
+            monitorDatas=dataSource["monitors"],
+        ),
+        "lists"        : translateLists(
+            data=dataSource["targets"],
+            monitorDatas=dataSource["monitors"],
+        ),
         "extensionData": dataSource["extensionData"],
         "extensions"   : dataSource["extensions"],
         "meta"         : dataSource["meta"],
@@ -270,6 +304,6 @@ def optimizeProject(sourcePath, targetPath):
     writeJSONFile(targetPath, newData)
 
 optimizeProject(
-    sourcePath="test.json",#"source.json", 
+    sourcePath="test.json", 
     targetPath="optimized3.json",
 )

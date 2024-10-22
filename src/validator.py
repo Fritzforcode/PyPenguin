@@ -9,13 +9,13 @@ commentSchema = {
     "type": ["object", "null"],
     "properties": {
         "position": {
-            "type": "array",
-            "items": {"type": ["number", "integer"]},
+            "type"    : "array",
+            "items"   : {"type": ["number", "integer"]},
             "minItems": 2,
             "maxItems": 2,
         },
         "size": {
-            "type": "array",
+            "type" : "array",
             "items": [
                 # Comments must be at least 52(x) by 32(y) big
                 {"type": ["integer", "number"], "minimum": 52},
@@ -25,7 +25,7 @@ commentSchema = {
             "maxItems": 2,
         },
         "minimized": {"type": "boolean"},
-        "text": {"type": "string"},
+        "text"     : {"type": "string"},
     },
     "required": ["position", "size", "minimized", "text"],
 }
@@ -42,9 +42,9 @@ blockSchema = {
 scriptSchema = {
         "type": "object",
         "properties": {
-            "position": {
-                "type": "array",
-                "items": {"type": "integer"},
+            "position"    : {
+                "type"    : "array",
+                "items"   : {"type": "integer"},
                 "minItems": 2,
                 "maxItems": 2,
             },
@@ -52,93 +52,19 @@ scriptSchema = {
         },
         "required": ["position", "blocks"],
 }
-"""            {
-        "position": [301, 258],
-        "blocks": [
-            {
-                "opcode": "set [VARIABLE] to (VALUE)",
-                "inputs": {
-                    "VALUE": {
-                        "mode": "block-and-text",
-                        "block": null,
-                        "text": "0"
-                    }
-                },
-                "options": {
-                    "VARIABLE": "my variable"
-                },
-                "comment": null
-            },
-            {
-                "opcode": "change [VARIABLE] by (VALUE)",
-                "inputs": {
-                    "VALUE": {
-                        "mode": "block-and-text",
-                        "block": null,
-                        "text": "1"
-                    }
-                },
-                "options": {
-                    "VARIABLE": "d"
-                },
-                "comment": null
-            },
-            {
-                "opcode": "set [VARIABLE] to (VALUE)",
-                "inputs": {
-                    "VALUE": {
-                        "mode": "block-and-text",
-                        "block": null,
-                        "text": "0"
-                    }
-                },
-                "options": {
-                    "VARIABLE": "ydx"
-                },
-                "comment": null
-            },
-            {
-                "opcode": "change [VARIABLE] by (VALUE)",
-                "inputs": {
-                    "VALUE": {
-                        "mode": "block-and-text",
-                        "block": null,
-                        "text": "1"
-                    }
-                },
-                "options": {
-                    "VARIABLE": "zt"
-                },
-                "comment": null
-            },
-            {
-                "opcode": "add (ITEM) to [LIST]",
-                "inputs": {
-                    "ITEM": {
-                        "mode": "block-and-text",
-                        "block": null,
-                        "text": "thing"
-                    }
-                },
-                "options": {
-                    "LIST": "add"
-                },
-                "comment": null
-            }
-        ]
-    }"""
 costumeSchema = {
     "type": "object",
     "properties": {
-        "name": {"type": "string"},
+        "name"            : {"type": "string"},
         "bitmapResolution": {"type": "integer", "minimum": 1},
-        "dataFormat": {"type": "string"},
-        "fileStem": {"type": "string"},
+        "dataFormat"      : {"type": "string"},
+        "fileStem"        : {"type": "string"},
         "rotationCenter": {
             "type": "array",
+            "items"   : {"type": ["integer", "number"]},
             "minItems": 2,
             "maxItems": 2,
-            "items": {"type": ["integer", "number"]},
+ 
         },
     },
     "required": ["name", "dataFormat", "fileStem", "rotationCenter"],
@@ -147,51 +73,104 @@ costumeSchema = {
 soundSchema = {
     "type": "object",
     "properties": {
-        "name": {"type": "string"},
-        "dataFormat": {"type": "string"},
-        "fileStem": {"type": "string"},
-        "rate": {"type": "integer"},
+        "name"       : {"type": "string"},
+        "dataFormat" : {"type": "string"},
+        "fileStem"   : {"type": "string"},
+        "rate"       : {"type": "integer"},
         "sampleCount": {"type": "integer"},
     },
-    "required": [],
+    "required": ["name", "dataFormat", "fileStem", "rate", "sampleCount"],
 }
-stageSchema = {
 
+stageSchema = {
     "type": "object",
     "properties": {
+        # stage version
         "isStage": {"type": "boolean", "const": True},
         "name": {"type": "string", "const": "Stage"},
-        "scripts": {"type": "array", "items": scriptSchema},
-        "comments": {"type": "array", "items": commentSchema},
+        # common
+        "scripts"       : {"type": "array", "items": scriptSchema},
+        "comments"      : {"type": "array", "items": commentSchema},
         "currentCostume": {"type": "integer", "minimum":0},
-        "costumes": {"type": "array", "items": costumeSchema},
-        "sounds": {"type": "array", "items": soundSchema},
-        #"sounds": [],
-        #"volume": 100,
-        #"layerOrder": 0,
-        #"tempo": 60,
-        #"videoTransparency": 50,
-        #"videoState": "on",
-        #"textToSpeechLanguage": None,
-        "required": ["isStage", "name", "scripts", "comments", "currentCostume", "costumes", "sounds", "volume", "layerOrder", "tempo", "videoTransparency", "videoState", "textToSpeechLanguage"],
-    },
+        "costumes"      : {"type": "array", "items": costumeSchema},
+        "sounds"        : {"type": "array", "items": soundSchema},
+        "volume"        : {"type": ["integer", "number"], "minimum": 0, "maximum": 100},
+        "layerOrder"    : {"type": "integer", "minimum": 0}, ! # explore details
+        # only stage
+        "tempo": {"type": "integer", "minimum": 0}, ! # explore details
+        "videoTransparency": {"type": "integer", "minimum": 0, "maximum": 100}, ! # explore details
+        "videoState": {"type": "string", "enum": ["on", "", "off"]}, # find middle state; scratch wiki
+        "textToSpeechLanguage": {"type": ["null", "string"], "enum": textToSpeechLanguages},
+    },        
+    "required": ["isStage", "name", "scripts", "comments", "currentCostume", "costumes", "sounds", "volume", "layerOrder", "tempo", "videoTransparency", "videoState", "textToSpeechLanguage"],
 }
-spriteSchema = {}
+spriteSchema = {
+    "type": "object",
+    "properties": {
+        # sprite version
+        "isStage": {"type": "boolean", "const": False},
+        "name": {"type": "string"}, ! #can it be "Stage" too?
+        # common
+        "scripts"       : stageSchema["properties"]["scripts"],
+        "comments"      : stageSchema["properties"]["comments"],
+        "currentCostume": stageSchema["properties"]["currentCostume"],
+        "costumes"      : stageSchema["properties"]["costumes"],
+        "sounds"        : stageSchema["properties"]["sounds"],
+        "volume"        : stageSchema["properties"]["volume"],
+        "layerOrder"    : stageSchema["properties"]["layerOrder"],
+        # sprite only
+        "visible": {"type": "boolean"},
+        "position": {
+            "type": "array",
+            "items": {"type": ["integer", "number"]},
+            "minItems": 2,
+            "maxItems": 2,
+        }, ! # check for range maybe
+        "size": {"type": ["integer", "number"]}, ! # float too right?
+        "direction": {"type": ["integer", "number"]}, ! # float too right?
+        "draggable": {"type": "boolean"},
+        "rotationStyle": {"type": "string", "enum": ["all around"]}, ! # scratch wiki
+    },        
+    "required": ["isStage", "name", "scripts", "comments", "currentCostume", "costumes", "sounds", "volume", "layerOrder", "tempo", "videoTransparency", "videoState", "textToSpeechLanguage"],
+}
+variableSchema = {
+    "type": "object",
+    "properties": {
+        "name"        : {"type": "string"},
+        "currentValue": {"type": ["string", "integer", "number"]}, ! # check which types it can be
+        "mode"        : {"type": "string", "enum": ["cloud", "global", "local"]},
+        "sprite"      : {"type": ["string", "null"]},
+    },
+    "required": ["name", "currentValue", "mode", "sprite"],
+}
+listSchema = {
+    "type": "object",
+    "properties": {
+        "name"        : variableSchema["properties"]["name"],
+        "currentValue": variableSchema["properties"]["currentValue"],
+        "mode"        : {"type": "string", "enum": ["global", "local"]},
+        "sprite"      : variableSchema["properties"]["sprite"],
+    },
+    "required": ["name", "currentValue", "mode", "sprite"],
+}
+monitorSchema = {
+    "type": "object"
+}             
 projectSchema = {
     "type": "object",
     "properties": {
         "sprites": {
             "type": "array",
-            "items": stageSchema,
+            "items"          : stageSchema,
             "additionalItems": spriteSchema,
-            "minItems": 1,
+            "minItems"       : 1,
         },
-        "variables": 0,
-        "lists": 0,
-        "monitors": 0,
+        "variables"    : {"type": "array", "items": variableSchema},
+        "lists"        : {"type": "array", "items": listSchema},
+        "monitors"     : {"type": "array", "items": monitorSchema},
         "extensionData": 0,
-        "extensions": 0,
-        "meta": 0,
+        "extensions"   : 0,
+        "meta"         : 0,
     },
     "required": ["sprites", "variables", "lists", "monitors", "extensionData", "extensions", "meta"],
 }
@@ -200,6 +179,7 @@ projectSchema = {
 #ALSO CHECK BLOCK INPUTS AND OPTIONS WITH A SCRIPT#
 #ALSO CHECK currentCOSTUME IN RANGE               #
 #ALSO CHECK dataFormat???                         #
+#CHECK variable "sprite" existing and fine-ity with local mode
 #ONLY ALLOW bitmapResolution to be removed when stage and its svg#
 #NO OVERLAPPING NAMES IN SOUNDS, COSTUMES, SPRITES?
 ###################################################
