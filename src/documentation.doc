@@ -17,3 +17,6 @@ comment minimum size: w:52; h:32
 maybe rename assets and put into folder structure
 maybe remove "sampleCount"
 maybe translate currentValue for cetain types
+
+layerOrder: highest is in front
+back is 1 for sprites. stage always =0
