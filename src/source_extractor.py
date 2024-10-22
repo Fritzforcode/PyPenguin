@@ -38,9 +38,8 @@ def extract(
 
 
 if __name__ == "__main__":
-    input_path = input("File: ")
-    target = input("source.json? ")
+    filename = input("Filename: ")
     extract(
-        pmp_file_path="studies/"+input_path,
-        json_file_path="source.json" if target == "" else target,
+        pmp_file_path="studies/"+filename+".pmp",
+        json_file_path="studies/"+filename+".json",
     )

@@ -4,20 +4,7 @@
             "isStage": true,
             "name": "Stage",
             "scripts": [],
-            "comments": [
-                {
-                    "position": [
-                        50,
-                        50
-                    ],
-                    "size": [
-                        350,
-                        170
-                    ],
-                    "minimized": false,
-                    "text": "Configuration for https://penguinmod.com/\nYou can move, resize, and minimize this comment, but don't edit it by hand. This comment can be deleted to remove the stored settings.\n{} // _twconfig_"
-                }
-            ],
+            "comments": [],
             "currentCostume": 0,
             "costumes": [
                 {
@@ -44,8 +31,8 @@
             "scripts": [
                 {
                     "position": [
-                        301,
-                        258
+                        196,
+                        449
                     ],
                     "blocks": [
                         {
@@ -54,7 +41,7 @@
                                 "VALUE": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "0"
+                                    "text": ".#21"
                                 }
                             },
                             "options": {
@@ -63,12 +50,54 @@
                             "comment": null
                         },
                         {
-                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
                                 "VALUE": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "1"
+                                    "text": "NaN"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "a"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-Infinity"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "b"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1+e20"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "c"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-300000"
                                 }
                             },
                             "options": {
@@ -82,25 +111,33 @@
                                 "VALUE": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "0"
+                                    "text": "5.2"
                                 }
                             },
                             "options": {
-                                "VARIABLE": "ydx"
+                                "VARIABLE": "e"
                             },
                             "comment": null
-                        },
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        490,
+                        450
+                    ],
+                    "blocks": [
                         {
-                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "opcode": "add (ITEM) to [LIST]",
                             "inputs": {
-                                "VALUE": {
+                                "ITEM": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "1"
+                                    "text": ".#21"
                                 }
                             },
                             "options": {
-                                "VARIABLE": "zt"
+                                "LIST": "list"
                             },
                             "comment": null
                         },
@@ -110,11 +147,67 @@
                                 "ITEM": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "thing"
+                                    "text": "NaN"
                                 }
                             },
                             "options": {
-                                "LIST": "add"
+                                "LIST": "list"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "add (ITEM) to [LIST]",
+                            "inputs": {
+                                "ITEM": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-Infinity"
+                                }
+                            },
+                            "options": {
+                                "LIST": "list"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "add (ITEM) to [LIST]",
+                            "inputs": {
+                                "ITEM": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1+e20"
+                                }
+                            },
+                            "options": {
+                                "LIST": "list"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "add (ITEM) to [LIST]",
+                            "inputs": {
+                                "ITEM": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1e20"
+                                }
+                            },
+                            "options": {
+                                "LIST": "list"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "add (ITEM) to [LIST]",
+                            "inputs": {
+                                "ITEM": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "5.2"
+                                }
+                            },
+                            "options": {
+                                "LIST": "list"
                             },
                             "comment": null
                         }
@@ -151,8 +244,8 @@
                 0,
                 0
             ],
-            "size": 100,
-            "direction": 90,
+            "size": 100.54,
+            "direction": 90.65,
             "draggable": false,
             "rotationStyle": "all around"
         }
@@ -160,70 +253,149 @@
     "variables": [
         {
             "name": "my variable",
+            "currentValue": ".#21",
+            "mode": "global",
+            "sprite": null,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    5,
+                    57
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            }
+        },
+        {
+            "name": "a",
             "currentValue": 0,
             "mode": "global",
-            "sprite": null
+            "sprite": null,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    5,
+                    5
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            }
+        },
+        {
+            "name": "b",
+            "currentValue": 0,
+            "mode": "global",
+            "sprite": null,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    5,
+                    31
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            }
+        },
+        {
+            "name": "c",
+            "currentValue": "1+e20",
+            "mode": "global",
+            "sprite": null,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    5,
+                    83
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            }
         },
         {
             "name": "d",
-            "currentValue": 0,
+            "currentValue": -300000,
             "mode": "global",
-            "sprite": null
+            "sprite": null,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    5,
+                    109
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            }
         },
         {
-            "name": "ydx",
-            "currentValue": 0,
+            "name": "e",
+            "currentValue": 5.2,
             "mode": "global",
-            "sprite": null
-        },
-        {
-            "name": "zt",
-            "currentValue": 0,
-            "mode": "local",
-            "sprite": "Sprite1"
+            "sprite": null,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    5,
+                    135
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            }
         }
     ],
     "lists": [
         {
-            "name": "add",
-            "currentValue": [],
+            "name": "list",
+            "currentValue": [
+                ".#21",
+                0,
+                0,
+                "1+e20",
+                "1e20",
+                5.2
+            ],
             "mode": "global",
-            "sprite": null
-        }
-    ],
-    "monitors": [
-        {
-            "id": "/~,@3IDW`(7!;Z=WHQxq",
-            "mode": "list",
-            "opcode": "data_listcontents",
-            "params": {
-                "LIST": "add"
-            },
-            "spriteName": null,
-            "value": [],
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 5,
-            "visible": true
-        },
-        {
-            "id": "5P#en_TFQO_O0g?,?FxY",
-            "mode": "default",
-            "opcode": "data_variable",
-            "params": {
-                "VARIABLE": "zt"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 212,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
+            "sprite": null,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    124,
+                    225
+                ],
+                "position": [
+                    262,
+                    45
+                ]
+            }
         }
     ],
     "extensionData": {},

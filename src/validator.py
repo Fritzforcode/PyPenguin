@@ -4,6 +4,7 @@ from helper_functions import readJSONFile, ikv, pp
 
 opcodeDatabase = readJSONFile(filePath="opcode_database.jsonc")
 allowedOpcodes = [data["newOpcode"] for data in opcodeDatabase.values()]
+textToSpeechLanguages = ["ar", "zh-cn", "da", "nl", "en", "fr", "de", "hi", "is", "it", "ja", "ko", "nb", "pl", "pt-br", "pt", "ro", "ru", "es", "es-419", "sv", "tr", "cy"] # language abbreviations
 
 commentSchema = {
     "type": ["object", "null"],
@@ -95,11 +96,12 @@ stageSchema = {
         "costumes"      : {"type": "array", "items": costumeSchema},
         "sounds"        : {"type": "array", "items": soundSchema},
         "volume"        : {"type": ["integer", "number"], "minimum": 0, "maximum": 100},
-        "layerOrder"    : {"type": "integer", "minimum": 0}, ! # explore details
+        # stage version
+        "layerOrder"    : {"type": "integer", "const": 0},
         # only stage
-        "tempo": {"type": "integer", "minimum": 0}, ! # explore details
-        "videoTransparency": {"type": "integer", "minimum": 0, "maximum": 100}, ! # explore details
-        "videoState": {"type": "string", "enum": ["on", "", "off"]}, # find middle state; scratch wiki
+        "tempo": {"type": "integer", "minimum": 20, "maximum": 500},
+        "videoTransparency": {"type": ["integer", "number"]}, # explore details
+        "videoState": {"type": "string", "enum": ["on", "on flipped", "off"]},
         "textToSpeechLanguage": {"type": ["null", "string"], "enum": textToSpeechLanguages},
     },        
     "required": ["isStage", "name", "scripts", "comments", "currentCostume", "costumes", "sounds", "volume", "layerOrder", "tempo", "videoTransparency", "videoState", "textToSpeechLanguage"],
@@ -109,7 +111,7 @@ spriteSchema = {
     "properties": {
         # sprite version
         "isStage": {"type": "boolean", "const": False},
-        "name": {"type": "string"}, ! #can it be "Stage" too?
+        "name": {"type": "string"},
         # common
         "scripts"       : stageSchema["properties"]["scripts"],
         "comments"      : stageSchema["properties"]["comments"],
@@ -117,7 +119,8 @@ spriteSchema = {
         "costumes"      : stageSchema["properties"]["costumes"],
         "sounds"        : stageSchema["properties"]["sounds"],
         "volume"        : stageSchema["properties"]["volume"],
-        "layerOrder"    : stageSchema["properties"]["layerOrder"],
+        # sprite version
+        "layerOrder"    : {"type": "integer", "minimum": 1},
         # sprite only
         "visible": {"type": "boolean"},
         "position": {
@@ -125,37 +128,77 @@ spriteSchema = {
             "items": {"type": ["integer", "number"]},
             "minItems": 2,
             "maxItems": 2,
-        }, ! # check for range maybe
-        "size": {"type": ["integer", "number"]}, ! # float too right?
-        "direction": {"type": ["integer", "number"]}, ! # float too right?
+        },
+        "size": {"type": ["integer", "number"]}, 
+        "direction": {"type": ["integer", "number"]}, 
         "draggable": {"type": "boolean"},
-        "rotationStyle": {"type": "string", "enum": ["all around"]}, ! # scratch wiki
+        "rotationStyle": {"type": "string", "enum": ["all around", "left-right", "don't rotate"]}, 
     },        
     "required": ["isStage", "name", "scripts", "comments", "currentCostume", "costumes", "sounds", "volume", "layerOrder", "tempo", "videoTransparency", "videoState", "textToSpeechLanguage"],
+}
+variableMonitorSchema = {
+    "type": ["object", "null"],
+    "properties": {
+        "visible": {"type": "boolean"},
+        "size"   : {
+            "type": "array",
+            "items": {"type": "integer"},
+            "minItems": 2,
+            "maxItems": 2,
+        },
+        "position": {
+            "type": "array",
+            "items": {"type": "integer"},
+            "minItems": 2,
+            "maxItems": 2,
+        },
+        "sliderMin"   : {"type": ["integer", "number"]},
+        "sliderMax"   : {"type": ["integer", "number"]},
+        "onlyIntegers": {"type": "boolean"},
+    },
+    "required": ["visible", "size", "position", "sliderMin", "sliderMax", "onlyIntegers"],
 }
 variableSchema = {
     "type": "object",
     "properties": {
         "name"        : {"type": "string"},
-        "currentValue": {"type": ["string", "integer", "number"]}, ! # check which types it can be
+        "currentValue": {"type": ["string", "integer", "number"]}, 
         "mode"        : {"type": "string", "enum": ["cloud", "global", "local"]},
         "sprite"      : {"type": ["string", "null"]},
+        "monitor"     : variableMonitorSchema,
     },
-    "required": ["name", "currentValue", "mode", "sprite"],
+    "required": ["name", "currentValue", "mode", "sprite", "monitor"],
+}
+listMonitorSchema = {
+    "type": ["object", "null"],
+    "properties": {
+        "visible": {"type": "boolean"},
+        "size"   : {
+            "type": "array",
+            "items": {"type": "integer"},
+            "minItems": 2,
+            "maxItems": 2,
+        },
+        "position": {
+            "type": "array",
+            "items": {"type": "integer"},
+            "minItems": 2,
+            "maxItems": 2,
+        },
+    },
+    "required": ["visible", "size", "position"],
 }
 listSchema = {
     "type": "object",
     "properties": {
         "name"        : variableSchema["properties"]["name"],
-        "currentValue": variableSchema["properties"]["currentValue"],
+        "currentValue": {"type": "array", "items": variableSchema["properties"]["currentValue"]},
         "mode"        : {"type": "string", "enum": ["global", "local"]},
         "sprite"      : variableSchema["properties"]["sprite"],
+        "monitor"     : listMonitorSchema,
     },
-    "required": ["name", "currentValue", "mode", "sprite"],
-}
-monitorSchema = {
-    "type": "object"
-}             
+    "required": ["name", "currentValue", "mode", "sprite", "monitor"],
+}   
 projectSchema = {
     "type": "object",
     "properties": {
@@ -167,7 +210,6 @@ projectSchema = {
         },
         "variables"    : {"type": "array", "items": variableSchema},
         "lists"        : {"type": "array", "items": listSchema},
-        "monitors"     : {"type": "array", "items": monitorSchema},
         "extensionData": 0,
         "extensions"   : 0,
         "meta"         : 0,

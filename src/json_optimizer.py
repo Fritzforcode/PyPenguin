@@ -129,7 +129,7 @@ def generateBlockChildrenPs(data):
 def translateCostumes(data):
     newCostumeDatas = []
     for costumeData in data:
-        pp(costumeData)
+        #pp(costumeData)
         newCostumeData = {
             "name"            : costumeData["name"],
             "bitmapResolution": None,
@@ -147,7 +147,7 @@ def translateCostumes(data):
 def translateSounds(data):
     newSoundDatas = []
     for soundData in data:
-        pp(soundData)
+        #pp(soundData)
         newSoundData = {
             "name"       : soundData["name"],
             "dataFormat" : soundData["dataFormat"],
@@ -183,6 +183,7 @@ def translateVariables(data, monitorDatas):
             else:
                 monitorData = monitorDatas[monitorIDs.index(variableID)]
                 newMonitorData = {
+                    "visible"     : monitorData["visible"],
                     "size"        : [monitorData["width"], monitorData["height"]],
                     "position"    : [monitorData["x"], monitorData["y"]],
                     "sliderMin"   : monitorData["sliderMin"],
@@ -220,6 +221,7 @@ def translateLists(data, monitorDatas):
             else:
                 monitorData = monitorDatas[monitorIDs.index(listID)]
                 newMonitorData = {
+                    "visible"     : monitorData["visible"],
                     "size"        : [monitorData["width"], monitorData["height"]],
                     "position"    : [monitorData["x"], monitorData["y"]],
                 }
@@ -237,7 +239,7 @@ def translateLists(data, monitorDatas):
 def optimizeProject(sourcePath, targetPath):
     dataSource = readJSONFile(sourcePath)
     newSpriteDatas = []
-    pp(dataSource)
+    #pp(dataSource)
     for i, spriteData in enumerate(dataSource["targets"]):
         commentDatas = spriteData["comments"]
         floatingCommentDatas = [] # The comments that aren't connected to any blocks
@@ -300,10 +302,10 @@ def optimizeProject(sourcePath, targetPath):
         "extensions"   : dataSource["extensions"],
         "meta"         : dataSource["meta"],
     }
-    pp(newData)
+    #pp(newData)
     writeJSONFile(targetPath, newData)
 
 optimizeProject(
-    sourcePath="test.json", 
-    targetPath="optimized3.json",
+    sourcePath="studies/typeTest.json", 
+    targetPath="optimized.json",
 )

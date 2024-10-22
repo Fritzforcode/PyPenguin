@@ -5,8 +5,7 @@ opcodeDatabase = readJSONFile("opcode_database.jsonc")
 def translateVariables(data, spriteNames):
     tokens = {k:{} for k in spriteNames+[None]}
     newData = {k:{} for k in spriteNames+[None]}
-    #print(Tokens)
-    #print(newData)
+    newMonitorDatas = []
     for variableData in data:
         sprite = variableData["sprite"]
         name = variableData["name"]
@@ -14,6 +13,27 @@ def translateVariables(data, spriteNames):
 
 
         newVariableData = [name, variableData["currentValue"]]
+
+        monitorData = variableData["monitor"]
+        if monitorData != None:
+            newMonitorData = {
+                "id"        : tokens[sprite][name],
+                "mode"      : "default",
+                "opcode"    : "data_variable",
+                "params"    : {"VARIABLE": name},
+                "spriteName": sprite,
+                "value"     : variableData["currentValue"],
+                "width"     : monitorData["size"][0],
+                "height"    : monitorData["size"][1],
+                "x"         : monitorData["position"][0],
+                "y"         : monitorData["position"][1],
+                "visible"   : monitorData["visible"],
+                "sliderMin" : monitorData["sliderMin"],
+                "sliderMax" : monitorData["sliderMax"],
+                "isDiscrete": monitorData["onlyIntegers"],
+            }
+            newMonitorDatas.append(newMonitorData)
+
         match variableData["mode"]:
             case "cloud":
                 if not name.startswith("\u2601 "): raise ValueError("Cloud variables have to start with '☁ ' eg. '☁ var'")
@@ -25,13 +45,12 @@ def translateVariables(data, spriteNames):
             
 
         newData[sprite][tokens[sprite][name]] = newVariableData
-    return newData, tokens
+    return newData, tokens, newMonitorDatas
 
 def translateLists(data, spriteNames):
     tokens = {k:{} for k in spriteNames+[None]}
     newData = {k:{} for k in spriteNames+[None]}
-    #print(Tokens)
-    #print(newData)
+    newMonitorDatas = []
     for listData in data:
         sprite = listData["sprite"]
         name = listData["name"]
@@ -39,8 +58,26 @@ def translateLists(data, spriteNames):
 
 
         newListData = [name, listData["currentValue"]]
+
+        monitorData = listData["monitor"]
+        if monitorData != None:
+            newMonitorData = {
+                "id"        : tokens[sprite][name],
+                "mode"      : "list",
+                "opcode"    : "data_listcontents",
+                "params"    : {"LIST": name},
+                "spriteName": sprite,
+                "value"     : listData["currentValue"],
+                "width"     : monitorData["size"][0],
+                "height"    : monitorData["size"][1],
+                "x"         : monitorData["position"][0],
+                "y"         : monitorData["position"][1],
+                "visible"   : monitorData["visible"],
+            }
+            newMonitorDatas.append(newMonitorData)
+
         newData[sprite][tokens[sprite][name]] = newListData
-    return newData, tokens
+    return newData, tokens, newMonitorDatas
 
 def findBlockBroadcastMessages(data):
     for i,opcode,opcodeData in ikv(opcodeDatabase):
@@ -67,7 +104,6 @@ def findBlockBroadcastMessages(data):
                 broadcastMessages.append(optionData)
     return broadcastMessages
     
-
 def generateBroadcastTokens(data, spriteNames):
     broadcastMessages = []
     for spriteData in data:
@@ -83,7 +119,6 @@ def generateBroadcastTokens(data, spriteNames):
     newTokens = {spriteName:{} for spriteName in spriteNames}
     newTokens[None] = tokens 
     return newTokens
-
 
 def translateOptions(optionDatas, opcode, spriteName, tokens):
     variableTokens = tokens["variables"]
@@ -272,7 +307,7 @@ def unnestScript(data, spriteName, tokens, scriptID):
 def translateCostumes(data):
     newCostumeDatas = []
     for costumeData in data:
-        pp(costumeData)
+        #pp(costumeData)
         newCostumeData = {
             "name"            : costumeData["name"],
             "bitmapResolution": None,
@@ -306,16 +341,16 @@ def translateSounds(data):
 def deoptimizeProject(sourcePath, targetPath):
     data = readJSONFile(sourcePath)
     spriteNames = [sprite["name"] for sprite in data["sprites"]][1:]
-    ##pp(data["variables"])
-    translatedVariableDatas, variableTokens = translateVariables(
+    translatedVariableDatas, variableTokens, variableMonitorDatas = translateVariables(
         data=data["variables"], 
         spriteNames=spriteNames,
     )
-    translatedListDatas, listTokens = translateLists(
+    translatedListDatas, listTokens, listMonitorDatas = translateLists(
         data=data["lists"], 
         spriteNames=spriteNames,
     )
-    #pp(translatedListDatas)
+    monitorDatas = variableMonitorDatas + listMonitorDatas
+    pp(monitorDatas)
     broadcastTokens = generateBroadcastTokens(
         data=data["sprites"],
         spriteNames=spriteNames,
@@ -341,8 +376,8 @@ def deoptimizeProject(sourcePath, targetPath):
         newSpriteBlocks = {}
         #pp(spriteData)
         for scriptID, scriptData in enumerate(spriteData["scripts"]):
-            print(444*"|")
-            pp(scriptData)
+            #print(444*"|")
+            #pp(scriptData)
             linkedScriptData, scriptCommentDatasA = linkBlocksToScript(
                 data=scriptData, 
                 spriteName=spriteData["name"],
@@ -358,7 +393,7 @@ def deoptimizeProject(sourcePath, targetPath):
             )
             scriptCommentDatas = scriptCommentDatasA | scriptCommentDatasB
             newCommentDatas |= scriptCommentDatas
-            pp(scriptCommentDatas)
+            #pp(scriptCommentDatas)
             #pp(unnestedScriptData)
             newSpriteBlocks |= unnestedScriptData
         nameKey = None if spriteData["isStage"] else spriteData["name"]
@@ -414,12 +449,12 @@ def deoptimizeProject(sourcePath, targetPath):
         newSpriteDatas.append(newSpriteData)
     newProjectData = {
         "targets"      : newSpriteDatas,
-        "monitors"     : data["monitors"],
+        "monitors"     : monitorDatas,
         "extensionData": data["extensionData"],
         "extensions"   : data["extensions"],
         "meta"         : data["meta"],
     }
-    pp(newProjectData)
+    #pp(newProjectData)
     writeJSONFile(targetPath, newProjectData)    
 
 
