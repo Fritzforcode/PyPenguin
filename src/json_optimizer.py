@@ -1,4 +1,5 @@
-from helper_functions import pp, ikv, readJSONFile, writeJSONFile, WhatIsGoingOnError
+from helper_functions import readJSONFile, writeJSONFile, pp, ikv, WhatIsGoingOnError
+
 
 opcodeDatabase = readJSONFile("opcode_database.jsonc")
 
