@@ -1,4 +1,3 @@
-from pprint import pprint
 from json import dump
 from jsoncomment import JsonComment
 parser = JsonComment()
