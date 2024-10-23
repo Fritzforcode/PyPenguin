@@ -1,3 +1,5 @@
+exec("import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))")
+
 from helper_functions import readJSONFile, writeJSONFile, pp, ikv, WhatIsGoingOnError
 
 from costumes_sounds import translateCostumes, translateSounds
@@ -5,7 +7,7 @@ from variables_lists import translateVariables, translateLists
 from blocks_scripts import translateScript, generateBlockChildrenPs
 from comments import translateComment
 
-opcodeDatabase = readJSONFile("../assets/opcode_database.jsonc")
+opcodeDatabase = readJSONFile("../../assets/opcode_database.jsonc")
 
 
 def optimizeProject(sourcePath, targetPath):
@@ -74,6 +76,6 @@ def optimizeProject(sourcePath, targetPath):
     writeJSONFile(targetPath, newData)
 
 optimizeProject(
-    sourcePath="../assets/studies/typeTest.json", 
-    targetPath="../assets/optimized.json",
+    sourcePath="../../assets/studies/typeTest.json", 
+    targetPath="../../assets/optimized.json",
 )
