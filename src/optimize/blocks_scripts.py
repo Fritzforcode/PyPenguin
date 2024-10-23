@@ -1,8 +1,8 @@
-from helper_functions import ikv, WhatIsGoingOnError
+from helper_functions import ikv, WhatIsGoingOnError, readJSONFile
 
 from comments import translateComment
 
-opcodeDatabase = readJSONFile("../../assets/opcode_database.jsonc")
+opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
 
 
 def translateInputs(data):

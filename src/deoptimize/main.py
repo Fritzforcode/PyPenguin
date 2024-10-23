@@ -1,7 +1,6 @@
 exec("import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))")
 
-from helper_functions import readJSONFile, writeJSONFile, generateRandomToken, generateSelector, pp, ikv, 
-flipKeysAndValues, WhatIsGoingOnError
+from helper_functions import readJSONFile, writeJSONFile, generateRandomToken, generateSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
 
 from variables_lists import translateVariables, translateLists
 from broadcasts import generateBroadcastTokens
@@ -9,7 +8,7 @@ from blocks_scripts import linkBlocksToScript, unnestScript
 from costumes_sounds import translateCostumes, translateSounds
 from comments import translateComment
 
-opcodeDatabase = readJSONFile("../../assets/opcode_database.jsonc")
+opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
 
 def generateTokens(data):
     spriteNames = [sprite["name"] for sprite in data["sprites"]][1:]
@@ -120,4 +119,4 @@ def deoptimizeProject(sourcePath, targetPath):
     writeJSONFile(targetPath, newProjectData)    
 
 
-deoptimizeProject(sourcePath="optimized.json", targetPath="deoptimized.json")
+deoptimizeProject(sourcePath="assets/optimized.json", targetPath="asssets/deoptimized.json")

@@ -1,6 +1,6 @@
 from helper_functions import ikv, WhatIsGoingOnError, generateRandomToken, readJSONFile 
 
-opcodeDatabase = readJSONFile("../../assets/opcode_database.jsonc")
+opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
 
 
 def findBlockBroadcastMessages(data):

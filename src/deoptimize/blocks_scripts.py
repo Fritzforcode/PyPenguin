@@ -2,7 +2,7 @@ from helper_functions import ikv, WhatIsGoingOnError, generateSelector, readJSON
 from options import translateOptions
 from comments import translateComment
 
-opcodeDatabase = readJSONFile("../../assets/opcode_database.jsonc")
+opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
 
 
 def prepareBlock(data, spriteName, tokens):
