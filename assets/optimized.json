@@ -31,190 +31,50 @@
             "scripts": [
                 {
                     "position": [
-                        196,
-                        449
+                        93,
+                        525
                     ],
                     "blocks": [
                         {
-                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "opcode": "broadcast [BROADCAST_INPUT]",
                             "inputs": {
-                                "VALUE": {
+                                "BROADCAST_INPUT": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": ".#21"
+                                    "text": "message1"
                                 }
                             },
-                            "options": {
-                                "VARIABLE": "my variable"
-                            },
-                            "comment": null
-                        },
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "NaN"
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "a"
-                            },
-                            "comment": null
-                        },
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "-Infinity"
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "b"
-                            },
-                            "comment": null
-                        },
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1+e20"
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "c"
-                            },
-                            "comment": null
-                        },
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "-300000"
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "d"
-                            },
-                            "comment": null
-                        },
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "5.2"
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "e"
-                            },
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        490,
-                        450
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "add (ITEM) to [LIST]",
-                            "inputs": {
-                                "ITEM": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": ".#21"
-                                }
-                            },
-                            "options": {
-                                "LIST": "list"
-                            },
-                            "comment": null
-                        },
-                        {
-                            "opcode": "add (ITEM) to [LIST]",
-                            "inputs": {
-                                "ITEM": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "NaN"
-                                }
-                            },
-                            "options": {
-                                "LIST": "list"
-                            },
-                            "comment": null
-                        },
-                        {
-                            "opcode": "add (ITEM) to [LIST]",
-                            "inputs": {
-                                "ITEM": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "-Infinity"
-                                }
-                            },
-                            "options": {
-                                "LIST": "list"
-                            },
-                            "comment": null
-                        },
-                        {
-                            "opcode": "add (ITEM) to [LIST]",
-                            "inputs": {
-                                "ITEM": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1+e20"
-                                }
-                            },
-                            "options": {
-                                "LIST": "list"
-                            },
-                            "comment": null
-                        },
-                        {
-                            "opcode": "add (ITEM) to [LIST]",
-                            "inputs": {
-                                "ITEM": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1e20"
-                                }
-                            },
-                            "options": {
-                                "LIST": "list"
-                            },
-                            "comment": null
-                        },
-                        {
-                            "opcode": "add (ITEM) to [LIST]",
-                            "inputs": {
-                                "ITEM": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "5.2"
-                                }
-                            },
-                            "options": {
-                                "LIST": "list"
-                            },
-                            "comment": null
+                            "options": {},
+                            "comment": {
+                                "position": [
+                                    335.22222222222223,
+                                    532.5185185185185
+                                ],
+                                "size": [
+                                    200,
+                                    200
+                                ],
+                                "minimized": false,
+                                "text": "y"
+                            }
                         }
                     ]
                 }
             ],
-            "comments": [],
+            "comments": [
+                {
+                    "position": [
+                        185,
+                        271
+                    ],
+                    "size": [
+                        200,
+                        200
+                    ],
+                    "minimized": false,
+                    "text": "x"
+                }
+            ],
             "currentCostume": 0,
             "costumes": [
                 {
@@ -244,8 +104,8 @@
                 0,
                 0
             ],
-            "size": 100.54,
-            "direction": 90.65,
+            "size": 100,
+            "direction": 90,
             "draggable": false,
             "rotationStyle": "all around"
         }
@@ -253,26 +113,13 @@
     "variables": [
         {
             "name": "my variable",
-            "currentValue": 0.24,
+            "currentValue": 0,
             "mode": "global",
             "sprite": null,
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    3,
-                    57
-                ],
-                "sliderMin": -1.3,
-                "sliderMax": 5.9,
-                "onlyIntegers": false
-            }
+            "monitor": null
         },
         {
-            "name": "a",
+            "name": "var2",
             "currentValue": 0,
             "mode": "global",
             "sprite": null,
@@ -292,10 +139,30 @@
             }
         },
         {
-            "name": "b",
+            "name": "\u2601 cloud",
             "currentValue": 0,
-            "mode": "global",
+            "mode": "cloud",
             "sprite": null,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    5,
+                    264
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            }
+        },
+        {
+            "name": "locVar",
+            "currentValue": 0,
+            "mode": "local",
+            "sprite": "Sprite1",
             "monitor": {
                 "visible": true,
                 "size": [
@@ -310,90 +177,40 @@
                 "sliderMax": 100,
                 "onlyIntegers": true
             }
-        },
-        {
-            "name": "c",
-            "currentValue": "1+e20",
-            "mode": "global",
-            "sprite": null,
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    5,
-                    83
-                ],
-                "sliderMin": 0,
-                "sliderMax": 100,
-                "onlyIntegers": true
-            }
-        },
-        {
-            "name": "d",
-            "currentValue": -300000,
-            "mode": "global",
-            "sprite": null,
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    5,
-                    109
-                ],
-                "sliderMin": 0,
-                "sliderMax": 100,
-                "onlyIntegers": true
-            }
-        },
-        {
-            "name": "e",
-            "currentValue": 5.2,
-            "mode": "global",
-            "sprite": null,
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    5,
-                    135
-                ],
-                "sliderMin": 0,
-                "sliderMax": 100,
-                "onlyIntegers": true
-            }
         }
     ],
     "lists": [
         {
-            "name": "list",
-            "currentValue": [
-                ".#21",
-                0,
-                0,
-                "1+e20",
-                "1e20",
-                5.2
-            ],
+            "name": "glob",
+            "currentValue": [],
             "mode": "global",
             "sprite": null,
             "monitor": {
                 "visible": true,
                 "size": [
-                    124,
-                    225
+                    0,
+                    0
                 ],
                 "position": [
-                    262,
-                    45
+                    5,
+                    57
+                ]
+            }
+        },
+        {
+            "name": "loc",
+            "currentValue": [],
+            "mode": "global",
+            "sprite": null,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    155,
+                    57
                 ]
             }
         }

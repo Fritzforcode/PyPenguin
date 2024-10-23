@@ -40,6 +40,6 @@ def extract(
 if __name__ == "__main__":
     filename = input("Filename: ")
     extract(
-        pmp_file_path="studies/"+filename+".pmp",
-        json_file_path="studies/"+filename+".json",
+        pmp_file_path ="assets/studies/"+filename+".pmp",
+        json_file_path="assets/studies/"+filename+".json",
     )
