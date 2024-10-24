@@ -19,11 +19,7 @@
             ],
             "sounds": [],
             "volume": 100,
-            "layerOrder": 0,
-            "tempo": 60,
-            "videoTransparency": 50,
-            "videoState": "on",
-            "textToSpeechLanguage": null
+            "layerOrder": 0
         },
         {
             "isStage": false,
@@ -215,6 +211,10 @@
             }
         }
     ],
+    "tempo": 60,
+    "videoTransparency": 50,
+    "videoState": "on",
+    "textToSpeechLanguage": null,
     "extensionData": {},
     "extensions": [],
     "meta": {
