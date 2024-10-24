@@ -35,19 +35,6 @@ def validateInputs(data, opcode, opcodeData):
 
         inputValue = data["inputs"][inputID]
         match opcodeData["inputTypes"][inputID]: # type of the input
-            case "key":
-                possibleValues = [
-                    "space", "up arrow", "down arrow", "right arrow", "left arrow", 
-                    "enter", "any", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", 
-                    "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", 
-                    "x", "y", "z", "-", ",", ".", "`", "=", "[", "]", "\\", ";", "'", 
-                    "/", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", 
-                    "{", "}", "|", ":", '"', "?", "<", ">", "~", "backspace", "delete", 
-                    "shift", "caps lock", "scroll lock", "control", "escape", "insert", 
-                    "home", "end", "page up", "page down"
-                ]
-                if inputValue not in possibleValues:
-                    return f"{inputID} must be one of {possibleValues}"
             case "broadcast":
                 if not isinstance(inputValue, str):
                     return f"{inputID} must be a string"
@@ -63,12 +50,48 @@ def validateInputs(data, opcode, opcodeData):
                     return f"{inputID} must be a string"
     return None
 
+def validateOptions(data, opcode, opcodeData):
+    allowedOptionIDs = list(opcodeData["optionTypes"].keys()) # List of options which are defined for the specific opcode
+    for i, optionID, optionValue in ikv(data["options"]):
+        if optionID not in allowedOptionIDs:
+            return f"Input '{optionID}' is not defined for a block with opcode {opcode}"
+    for optionID in allowedOptionIDs:
+        if optionID not in data["options"]:
+            return f"A block with opcode {opcode} must have the input '{optionID}'"
+
+        optionValue = data["options"][optionID]
+        match opcodeData["optionTypes"][optionID]: # type of the option
+            case "key":
+                possibleValues = [
+                    "space", "up arrow", "down arrow", "right arrow", "left arrow", 
+                    "enter", "any", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", 
+                    "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", 
+                    "x", "y", "z", "-", ",", ".", "`", "=", "[", "]", "\\", ";", "'", 
+                    "/", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", 
+                    "{", "}", "|", ":", '"', "?", "<", ">", "~", "backspace", "delete", 
+                    "shift", "caps lock", "scroll lock", "control", "escape", "insert", 
+                    "home", "end", "page up", "page down"
+                ]
+                if optionValue not in possibleValues:
+                    return f"{optionID} must be one of {possibleValues}"
+            case "broadcast":
+                if not isinstance(optionValue, str):
+                    return f"{optionID} must be a string"
+            case "variable":
+                pass
+            case "list":
+                pass
+    return None
+
 def validateBlock(data):
     opcode = data["opcode"]
     opcodeData = opcodeDatabase[opcode]
     
     error = validateInputs(data=data, opcode=opcode, opcodeData=opcodeData)
     if error: return error
+    error = validateOptions(data=data, opcode=opcode, opcodeData=opcodeData)
+    if error: return error
+    
 
 
     return None # else no error
@@ -113,6 +136,7 @@ def validateProject(data):
 ###################################################
 # FORCE 52 by 32 on comments
 #ALSO CHECK BLOCK INPUTS AND OPTIONS WITH A SCRIPT#
+# --> check variable or list existance
 
 #ALSO CHECK dataFormat???                         #
 #CHECK variable "sprite" existing and fine-ity with local mode
