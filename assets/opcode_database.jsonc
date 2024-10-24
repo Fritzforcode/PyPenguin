@@ -11,7 +11,7 @@
         "category": "events",
         "newOpcode": "when [KEY_OPTION] key pressed",
         "inputTypes": {},
-        "optionTypes": {"KEY_OPTION": "pressed key"}
+        "optionTypes": {"KEY_OPTION": "key"}
     },
     "event_whenbroadcastreceived": {
         "type": "hat",
