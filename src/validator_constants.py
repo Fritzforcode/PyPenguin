@@ -65,7 +65,22 @@ schema = {
                 { "$ref": "#/definitions/blockSchema" }
               ]
             }
-          }
+          },
+          "required": ["mode", "block"]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mode": { "type": "string", "const": "block-and-text" },
+            "block": {
+              "oneOf": [
+                { "type": "null" },
+                { "$ref": "#/definitions/blockSchema" }
+              ]
+            },
+            "text": { "type": "string" }
+          },
+          "required": ["mode", "block", "text"]
         }
       ]
     },
