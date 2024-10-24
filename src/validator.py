@@ -5,6 +5,9 @@ import jsonschema.exceptions
 from helper_functions import readJSONFile, ikv, pp
 from validator_constants import opcodeDatabase, schema, allowedOpcodes
 
+def error(path, message):
+    return f"Validation error at {'/'.join(path)}:\n\t{message}"
+
 # Function to validate the JSON structure
 def validateJSONSchema(json_data, schema):
     try:
@@ -17,40 +20,41 @@ def validateJSONSchema(json_data, schema):
         return error_message
 
 
-
 #################################################################################################
 # the following functions detect some errors causes (which i think can happen)                  #
 # which would not be detected with jsonschema                                                   #
 # if you find an error cause that is not detected by this this script, tell me on Github        #
 #################################################################################################
 
-def validateInputs(data, opcode, opcodeData):
+def validateInputs(path, data, opcode, opcodeData):
     allowedInputIDs = list(opcodeData["inputTypes"].keys()) # List of inputs which are defined for the specific opcode
     for i, inputID, inputValue in ikv(data["inputs"]):
         if inputID not in allowedInputIDs:
-            return f"Input '{inputID}' is not defined for a block with opcode {opcode}"
+            return error(path, f"Input '{inputID}' is not defined for a block with opcode {opcode}")
     for inputID in allowedInputIDs:
         if inputID not in data["inputs"]:
-            return f"A block with opcode {opcode} must have the input '{inputID}'"
+            return error(path, f"A block with opcode {opcode} must have the input '{inputID}'")
 
         inputValue = data["inputs"][inputID]
         match opcodeData["inputTypes"][inputID]: # type of the input
             case "broadcast":
                 if inputValue["mode"] != "block-and-text":
-                    return f"{inputID} must be in 'block-and-text' mode"
+                    return error(path, f"{inputID} must be in 'block-and-text' mode")
             case "number":
                 if inputValue["mode"] != "block-and-text":
-                    return f"{inputID} must be in 'block-and-text' mode"
+                    return error(path, f"{inputID} must be in 'block-and-text' mode")
                 allowedChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-"]
                 for char in inputValue["text"]:
                     if char not in allowedChars:
-                        return f"The 'text' attribute of {inputID} must be a combination of these characters: {allowedChars}"
+                        return error(path, f"The 'text' attribute of {inputID} must be a combination of these characters: {allowedChars}")
             case "text":
                 if inputValue["mode"] != "block-and-text":
-                    return f"{inputID} must be in 'block-and-text' mode"
+                    return error(path, f"{inputID} must be in 'block-and-text' mode")
     return None
 
-def validateOptions(data, opcode, opcodeData, context):
+#TODO: add path debugging everywhere
+
+def validateOptions(path, data, opcode, opcodeData, context):
     allowedOptionIDs = list(opcodeData["optionTypes"].keys()) # List of options which are defined for the specific opcode
     for i, optionID, optionValue in ikv(data["options"]):
         if optionID not in allowedOptionIDs:
