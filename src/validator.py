@@ -3,7 +3,7 @@ from jsonschema import validate as validateSchema
 import jsonschema.exceptions
 
 from helper_functions import readJSONFile, ikv, pp
-from validator_constants import opcodeDatabase, projectSchema, allowedOpcodes
+from validator_constants import opcodeDatabase, schema, allowedOpcodes
 
 # Function to validate the JSON structure
 def validateJSONSchema(json_data, schema):
@@ -36,18 +36,18 @@ def validateInputs(data, opcode, opcodeData):
         inputValue = data["inputs"][inputID]
         match opcodeData["inputTypes"][inputID]: # type of the input
             case "broadcast":
-                if not isinstance(inputValue, str):
-                    return f"{inputID} must be a string"
+                if inputValue["mode"] != "block-and-text":
+                    return f"{inputID} must be in 'block-and-text' mode"
             case "number":
-                if not isinstance(inputValue, str):
-                    return f"{inputID} must be a string"
+                if inputValue["mode"] != "block-and-text":
+                    return f"{inputID} must be in 'block-and-text' mode"
                 allowedChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-"]
-                for char in inputValue:
+                for char in inputValue["text"]:
                     if char not in allowedChars:
-                        return f"{inputID} must be a combination of these characters: {allowedChars}"
+                        return f"The 'text' attribute of {inputID} must be a combination of these characters: {allowedChars}"
             case "text":
-                if not isinstance(inputValue, str):
-                    return f"{inputID} must be a string"
+                if inputValue["mode"] != "block-and-text":
+                    return f"{inputID} must be in 'block-and-text' mode"
     return None
 
 def validateOptions(data, opcode, opcodeData, context):
@@ -87,7 +87,7 @@ def validateOptions(data, opcode, opcodeData, context):
 
 def validateBlock(data, context):
     opcode = data["opcode"]
-    opcodeData = opcodeDatabase[opcode]
+    opcodeData = list(opcodeDatabase.values())[allowedOpcodes.index(opcode)]
     
     error = validateInputs(data=data, opcode=opcode, opcodeData=opcodeData)
     if error: return error
@@ -123,13 +123,13 @@ def validateSprite(i, data, context):
             return "'layerOrder' of a non-stage sprite must be at least 1"
         
 
-        for script in data["scipts"]:
+        for script in data["scripts"]:
             error = validateScript(data=script, context=context)
             if error: return error
     return None # else no error
 
 def validateProject(data):
-    for i, sprite in data["sprites"]:
+    for i, sprite in enumerate(data["sprites"]):
         scopeVariables = []
         for variable in data["variables"]:
             if variable["mode"] == "global" \
@@ -159,7 +159,7 @@ def validateProject(data):
 ###################################################
 
 jsonData = readJSONFile("assets/optimized.json")
-error = validateJSONSchema(jsonData, projectSchema)
+error = validateJSONSchema(jsonData, schema)
 
 
 if not error:
@@ -171,8 +171,3 @@ if not error:
 else:
     print(f"Validation failed:\n{error}")
 
-"""
-Validation failed:
-Validation error at sprites/1/name:
-        'Stage' was expected"""
-# Why does it force the name to be "Stage" on sprite 1? it shoul only force it upon sprite 0
