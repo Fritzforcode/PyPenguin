@@ -42,14 +42,7 @@ def optimizeProject(sourcePath, targetPath):
             "volume"        : spriteData["volume"],
             "layerOrder"    : spriteData["layerOrder"],
         }
-        if spriteData["isStage"]:
-            newSpriteData |= {
-                "tempo"               : spriteData["tempo"],
-                "videoTransparency"   : spriteData["videoTransparency"],
-                "videoState"          : spriteData["videoState"],
-                "textToSpeechLanguage": spriteData["textToSpeechLanguage"],
-            }
-        else:
+        if not spriteData["isStage"]:
             newSpriteData |= {
                 "visible"      : spriteData["visible"],
                 "position"     : [spriteData["x"], spriteData["y"]],
@@ -59,6 +52,7 @@ def optimizeProject(sourcePath, targetPath):
                 "rotationStyle": spriteData["rotationStyle"],
             }
         newSpriteDatas.append(newSpriteData)
+    stageData = dataSource["targets"][0]
     newData = {
         "sprites"      : newSpriteDatas,
         "variables"    : translateVariables(
@@ -69,9 +63,14 @@ def optimizeProject(sourcePath, targetPath):
             data=dataSource["targets"],
             monitorDatas=dataSource["monitors"],
         ),
-        "extensionData": dataSource["extensionData"],
-        "extensions"   : dataSource["extensions"],
-        "meta"         : dataSource["meta"],
+        "tempo"               : stageData["tempo"], # I moved these from the stage to the project because they influence the whole project
+        "videoTransparency"   : stageData["videoTransparency"],
+        "videoState"          : stageData["videoState"],
+        "textToSpeechLanguage": stageData["textToSpeechLanguage"],
+
+        "extensionData"       : dataSource["extensionData"],
+        "extensions"          : dataSource["extensions"],
+        "meta"                : dataSource["meta"],
     }
     writeJSONFile(targetPath, newData)
 
