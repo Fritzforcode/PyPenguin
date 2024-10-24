@@ -25,7 +25,7 @@
         "category": "events",
         "newOpcode": "broadcast [BROADCAST_INPUT]",
         "inputTypes": {"BROADCAST_INPUT": "broadcast"},
-        "optionTypes": {},
+        "optionTypes": {}
     },
     // Control
     // Sensing
