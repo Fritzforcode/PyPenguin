@@ -50,7 +50,7 @@ def validateInputs(data, opcode, opcodeData):
                     return f"{inputID} must be a string"
     return None
 
-def validateOptions(data, opcode, opcodeData):
+def validateOptions(data, opcode, opcodeData, context):
     allowedOptionIDs = list(opcodeData["optionTypes"].keys()) # List of options which are defined for the specific opcode
     for i, optionID, optionValue in ikv(data["options"]):
         if optionID not in allowedOptionIDs:
@@ -78,31 +78,33 @@ def validateOptions(data, opcode, opcodeData):
                 if not isinstance(optionValue, str):
                     return f"{optionID} must be a string"
             case "variable":
-                pass
+                if optionValue not in [var["name"] for var in context["scopeVariables"]]:
+                    return f"{optionID} must be a defined variable"
             case "list":
-                pass
+                if optionValue not in [list_["name"] for list_ in context["scopeLists"]]:
+                    return f"{optionID} must be a defined list"
     return None
 
-def validateBlock(data):
+def validateBlock(data, context):
     opcode = data["opcode"]
     opcodeData = opcodeDatabase[opcode]
     
     error = validateInputs(data=data, opcode=opcode, opcodeData=opcodeData)
     if error: return error
-    error = validateOptions(data=data, opcode=opcode, opcodeData=opcodeData)
+    error = validateOptions(data=data, opcode=opcode, opcodeData=opcodeData, context=context)
     if error: return error
     
 
 
     return None # else no error
 
-def validateScript(data):
+def validateScript(data, context):
     for block in data["blocks"]:
-        error = validateBlock(data=block)
+        error = validateBlock(data=block, context=context)
         if error: return error
     return None # else no error
 
-def validateSprite(i, data):
+def validateSprite(i, data, context):
     if i == 0: # If it should be the stage
         if data["isStage"] != True:
             return "'isStage' of the stage (the first sprite) must always be True"
@@ -122,13 +124,24 @@ def validateSprite(i, data):
         
 
         for script in data["scipts"]:
-            error = validateScript(data=script)
+            error = validateScript(data=script, context=context)
             if error: return error
     return None # else no error
 
 def validateProject(data):
     for i, sprite in data["sprites"]:
-        error = validateSprite(i=i, data=sprite)
+        scopeVariables = []
+        for variable in data["variables"]:
+            if variable["mode"] == "global" \
+            or (variable["mode"] == "local" and variable["sprite"] == sprite["name"]): # add global and local variables
+                scopeVariables.append(variable)
+        scopeLists = []
+        for list in data["lists"]:
+            if list["mode"] == "global" \
+            or (list["mode"] == "local" and list["sprite"] == sprite["name"]): # add global and local lists
+                scopeLists.append(list)
+        context = {"scopeVariables": scopeVariables, "scopeLists": scopeLists}
+        error = validateSprite(i=i, data=sprite, context=context)
         if error: return error
 
     return None # else no error
