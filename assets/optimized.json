@@ -27,50 +27,28 @@
             "scripts": [
                 {
                     "position": [
-                        93,
-                        525
+                        440,
+                        233
                     ],
                     "blocks": [
                         {
-                            "opcode": "broadcast [BROADCAST_INPUT]",
+                            "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
-                                "BROADCAST_INPUT": {
+                                "VALUE": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "message1"
+                                    "text": "0"
                                 }
                             },
-                            "options": {},
-                            "comment": {
-                                "position": [
-                                    335.22222222222223,
-                                    532.5185185185185
-                                ],
-                                "size": [
-                                    200,
-                                    200
-                                ],
-                                "minimized": false,
-                                "text": "y"
-                            }
+                            "options": {
+                                "VARIABLE": "var"
+                            },
+                            "comment": null
                         }
                     ]
                 }
             ],
-            "comments": [
-                {
-                    "position": [
-                        185,
-                        271
-                    ],
-                    "size": [
-                        200,
-                        200
-                    ],
-                    "minimized": false,
-                    "text": "x"
-                }
-            ],
+            "comments": [],
             "currentCostume": 0,
             "costumes": [
                 {
@@ -115,10 +93,10 @@
             "monitor": null
         },
         {
-            "name": "var2",
+            "name": "var",
             "currentValue": 0,
-            "mode": "global",
-            "sprite": null,
+            "mode": "local",
+            "sprite": "Sprite1",
             "monitor": {
                 "visible": true,
                 "size": [
@@ -133,84 +111,9 @@
                 "sliderMax": 100,
                 "onlyIntegers": true
             }
-        },
-        {
-            "name": "\u2601 cloud",
-            "currentValue": 0,
-            "mode": "cloud",
-            "sprite": null,
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    5,
-                    264
-                ],
-                "sliderMin": 0,
-                "sliderMax": 100,
-                "onlyIntegers": true
-            }
-        },
-        {
-            "name": "locVar",
-            "currentValue": 0,
-            "mode": "local",
-            "sprite": "Sprite1",
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    5,
-                    31
-                ],
-                "sliderMin": 0,
-                "sliderMax": 100,
-                "onlyIntegers": true
-            }
         }
     ],
-    "lists": [
-        {
-            "name": "glob",
-            "currentValue": [],
-            "mode": "global",
-            "sprite": null,
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    5,
-                    57
-                ]
-            }
-        },
-        {
-            "name": "loc",
-            "currentValue": [],
-            "mode": "global",
-            "sprite": null,
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    155,
-                    57
-                ]
-            }
-        }
-    ],
+    "lists": [],
     "tempo": 60,
     "videoTransparency": 50,
     "videoState": "on",
