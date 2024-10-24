@@ -1,10 +1,9 @@
-# Magic Values:
-    ## Input Types:
-        - broadcasts: 11
-        - text: 10 eg. say
-        - number: 4 eg. operator
-        - boolean: 2 (hidden when empty) eg. not
-    * look into scratch wiki "file format"
+# Magic Values(Input Types):
+- broadcasts: 11
+- text: 10 eg. say
+- number: 4 eg. operator
+- boolean: 2 (hidden when empty) eg. not
+- look into scratch wiki "file format"
 
 # Missing Features:
 - procedures
