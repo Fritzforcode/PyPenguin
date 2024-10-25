@@ -17,7 +17,7 @@
         "type": "hat",
         "category": "events",
         "newOpcode": "when i receive [BROADCAST_OPTION]",
-        "inputTyes": {},
+        "inputTypes": {},
         "optionTypes": {"BROADCAST_OPTION": "broadcast"}
     },
     "event_broadcast": {
