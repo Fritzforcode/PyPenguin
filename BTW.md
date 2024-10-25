@@ -14,6 +14,7 @@ EXPLORE AND MAYBE TRANSLATE EXTENSIONDATA
 maybe rename assets and put into folder structure
 maybe remove "sampleCount"
 maybe translate currentValue for cetain types
+ADD OTHER MONITOR TYPES
 
 layerOrder: highest is in front
 back is 1 for sprites. stage always =0
