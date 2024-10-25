@@ -5,19 +5,20 @@ import jsonschema.exceptions
 from helper_functions import readJSONFile, ikv, pp
 from validator_constants import opcodeDatabase, schema, allowedOpcodes
 
-def error(path, message):
+def formatError(path, message):
+    path = [str(i) for i in path] # Convert all indexes to string
     return f"Validation error at {'/'.join(path)}:\n\t{message}"
 
 # Function to validate the JSON structure
-def validateJSONSchema(json_data, schema):
-    try:
-        validateSchema(instance=json_data, schema=schema)
-        return None
-    except jsonschema.exceptions.ValidationError as err:
-        # Custom error message
-        error_path = list(err.absolute_path)
-        error_message = f"Validation error at {'/'.join(map(str, error_path))}:\n\t{err.message}"
-        return error_message
+def validateJSONSchema(jsonData, schema):
+    #try:
+    validateSchema(instance=jsonData, schema=schema)
+    return None # no error
+    #except jsonschema.exceptions.ValidationError as err:
+    #    # Custom error message
+    #    error_path = list(err.absolute_path)
+    #    error_message = f"Validation error at {'/'.join(map(str, error_path))}:\n\t{err.message}"
+    #    return error_message
 
 
 #################################################################################################
@@ -28,42 +29,42 @@ def validateJSONSchema(json_data, schema):
 
 def validateInputs(path, data, opcode, opcodeData):
     allowedInputIDs = list(opcodeData["inputTypes"].keys()) # List of inputs which are defined for the specific opcode
-    for i, inputID, inputValue in ikv(data["inputs"]):
+    for i, inputID, inputValue in ikv(data):
         if inputID not in allowedInputIDs:
-            return error(path, f"Input '{inputID}' is not defined for a block with opcode {opcode}")
+            return formatError(path, f"Input '{inputID}' is not defined for a block with opcode {opcode}")
     for inputID in allowedInputIDs:
-        if inputID not in data["inputs"]:
-            return error(path, f"A block with opcode {opcode} must have the input '{inputID}'")
+        if inputID not in data:
+            return formatError(path, f"A block with opcode {opcode} must have the input '{inputID}'")
 
-        inputValue = data["inputs"][inputID]
+        inputValue = data[inputID]
         match opcodeData["inputTypes"][inputID]: # type of the input
             case "broadcast":
                 if inputValue["mode"] != "block-and-text":
-                    return error(path, f"{inputID} must be in 'block-and-text' mode")
+                    return formatError(path, f"{inputID} must be in 'block-and-text' mode")
             case "number":
                 if inputValue["mode"] != "block-and-text":
-                    return error(path, f"{inputID} must be in 'block-and-text' mode")
+                    return formatError(path, f"{inputID} must be in 'block-and-text' mode")
                 allowedChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-"]
                 for char in inputValue["text"]:
                     if char not in allowedChars:
-                        return error(path, f"The 'text' attribute of {inputID} must be a combination of these characters: {allowedChars}")
+                        return formatError(path, f"The 'text' attribute of {inputID} must be a combination of these characters: {allowedChars}")
             case "text":
                 if inputValue["mode"] != "block-and-text":
-                    return error(path, f"{inputID} must be in 'block-and-text' mode")
-    return None
+                    return formatError(path, f"{inputID} must be in 'block-and-text' mode")
+    return None # else no error
 
 #TODO: add path debugging everywhere
 
 def validateOptions(path, data, opcode, opcodeData, context):
     allowedOptionIDs = list(opcodeData["optionTypes"].keys()) # List of options which are defined for the specific opcode
-    for i, optionID, optionValue in ikv(data["options"]):
+    for i, optionID, optionValue in ikv(data):
         if optionID not in allowedOptionIDs:
-            return f"Input '{optionID}' is not defined for a block with opcode {opcode}"
+            return formatError(path, f"Input '{optionID}' is not defined for a block with opcode {opcode}")
     for optionID in allowedOptionIDs:
-        if optionID not in data["options"]:
-            return f"A block with opcode {opcode} must have the input '{optionID}'"
+        if optionID not in data:
+            return formatError(path, f"A block with opcode {opcode} must have the input '{optionID}'")
 
-        optionValue = data["options"][optionID]
+        optionValue = data[optionID]
         match opcodeData["optionTypes"][optionID]: # type of the option
             case "key":
                 possibleValues = [
@@ -77,58 +78,70 @@ def validateOptions(path, data, opcode, opcodeData, context):
                     "home", "end", "page up", "page down"
                 ]
                 if optionValue not in possibleValues:
-                    return f"{optionID} must be one of {possibleValues}"
+                    return formatError(path, f"{optionID} must be one of {possibleValues}")
             case "broadcast":
                 if not isinstance(optionValue, str):
-                    return f"{optionID} must be a string"
+                    return formatError(path, f"{optionID} must be a string")
             case "variable":
                 if optionValue not in [var["name"] for var in context["scopeVariables"]]:
-                    return f"{optionID} must be a defined variable"
+                    return formatError(path, f"{optionID} must be a defined variable")
             case "list":
                 if optionValue not in [list_["name"] for list_ in context["scopeLists"]]:
-                    return f"{optionID} must be a defined list"
-    return None
+                    return formatError(path, f"{optionID} must be a defined list")
+    return None #else no error
 
-def validateBlock(data, context):
+def validateBlock(path, data, context):
     opcode = data["opcode"]
     opcodeData = list(opcodeDatabase.values())[allowedOpcodes.index(opcode)]
     
-    error = validateInputs(data=data, opcode=opcode, opcodeData=opcodeData)
+    error = validateInputs(
+        path=path+["inputs"], 
+        data=data["inputs"], 
+        opcode=opcode, 
+        opcodeData=opcodeData,
+    )
     if error: return error
-    error = validateOptions(data=data, opcode=opcode, opcodeData=opcodeData, context=context)
+    error = validateOptions(
+        path=path+["options"], 
+        data=data["options"], 
+        opcode=opcode, 
+        opcodeData=opcodeData, 
+        context=context,
+    )
     if error: return error
     
 
 
     return None # else no error
 
-def validateScript(data, context):
-    for block in data["blocks"]:
-        error = validateBlock(data=block, context=context)
+def validateScript(path, data, context):
+    for i, block in enumerate(data["blocks"]):
+        error = validateBlock(path=path+["blocks"]+[i], data=block, context=context)
         if error: return error
     return None # else no error
 
-def validateSprite(i, data, context):
+def validateSprite(path, data, context):
+    i = path[-1]
     if i == 0: # If it should be the stage
         if data["isStage"] != True:
-            return "'isStage' of the stage (the first sprite) must always be True"
+            return formatError(path, "'isStage' of the stage (the first sprite) must always be True")
         if data["name"] != "Stage": 
-            return "'name' of the stage (the first sprite) must always be 'Stage'"
+            return formatError(path, "'name' of the stage (the first sprite) must always be 'Stage'")
     else: # If it should be a sprite
         if data["isStage"] != False:
-            return "'isStage' of a non-stage sprite must always be False"
+            return formatError(path, "'isStage' of a non-stage sprite must always be False")
         
         # Insure the sprite-only properties are given
         for property in ["visible", "position", "size", "direction", "draggable", "rotationStyle"]:
             if property not in data:
-                return f"A non-stage sprite must have the attribute '{property}'"
+                return formatError(path, f"A non-stage sprite must have the attribute '{property}'")
         
         if data["layerOrder"] < 1:
-            return "'layerOrder' of a non-stage sprite must be at least 1"
+            return formatError(path, "'layerOrder' of a non-stage sprite must be at least 1")
         
 
-        for script in data["scripts"]:
-            error = validateScript(data=script, context=context)
+        for j, script in enumerate(data["scripts"]):
+            error = validateScript(path=path+["scripts"]+[j], data=script, context=context)
             if error: return error
     return None # else no error
 
@@ -145,12 +158,13 @@ def validateProject(data):
             or (list["mode"] == "local" and list["sprite"] == sprite["name"]): # add global and local lists
                 scopeLists.append(list)
         context = {"scopeVariables": scopeVariables, "scopeLists": scopeLists}
-        error = validateSprite(i=i, data=sprite, context=context)
+        error = validateSprite(path=["sprites"]+[i], data=sprite, context=context)
         if error: return error
 
     return None # else no error
 
 ###################################################
+# force input "text" existing
 # FORCE 52 by 32 on comments
 #ALSO CHECK BLOCK INPUTS AND OPTIONS WITH A SCRIPT#
 # --> check variable or list existance
@@ -163,15 +177,17 @@ def validateProject(data):
 ###################################################
 
 jsonData = readJSONFile("assets/optimized.json")
-error = validateJSONSchema(jsonData, schema)
+error = validateJSONSchema(jsonData=jsonData, schema=schema)
 
 
-if not error:
-    error = validateProject(data=jsonData)
-    if not error:
-        print("Valid JSON structure")
-    else:
-        print(f"Validation failed:\n{error}")
-else:
-    print(f"Validation failed:\n{error}")
+#if not error:
+#    error = validateProject(data=jsonData)
+#    if not error:
+#        print("Validation succeeded")
+#    else:
+#        indentedError = "\t" + "\n\t".join(error.splitlines())
+#        print(f"Validation failed:\n{indentedError}")
+#else:
+#    indentedError = "\t" + "\n\t".join(error.splitlines())
+#    print(f"Validation failed:\n{indentedError}")
 

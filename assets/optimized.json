@@ -36,7 +36,7 @@
                             "inputs": {
                                 "VALUE": {
                                     "mode": "block-and-text",
-                                    "block": null,
+                                    "block": 3,
                                     "text": "0"
                                 }
                             },
