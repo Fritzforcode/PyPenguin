@@ -1,5 +1,5 @@
 import jsonschema
-from jsonschema import validate as validateSchema
+from jsonschema import validate as validate
 import jsonschema.exceptions
 
 from helper_functions import readJSONFile, ikv, pp
@@ -9,16 +9,6 @@ def formatError(path, message):
     path = [str(i) for i in path] # Convert all indexes to string
     return f"Validation error at {'/'.join(path)}:\n\t{message}"
 
-# Function to validate the JSON structure
-def validateJSONSchema(jsonData, schema):
-    #try:
-    validateSchema(instance=jsonData, schema=schema)
-    return None # no error
-    #except jsonschema.exceptions.ValidationError as err:
-    #    # Custom error message
-    #    error_path = list(err.absolute_path)
-    #    error_message = f"Validation error at {'/'.join(map(str, error_path))}:\n\t{err.message}"
-    #    return error_message
 
 
 #################################################################################################
@@ -53,7 +43,6 @@ def validateInputs(path, data, opcode, opcodeData):
                     return formatError(path, f"{inputID} must be in 'block-and-text' mode")
     return None # else no error
 
-#TODO: add path debugging everywhere
 
 def validateOptions(path, data, opcode, opcodeData, context):
     allowedOptionIDs = list(opcodeData["optionTypes"].keys()) # List of options which are defined for the specific opcode
@@ -140,9 +129,9 @@ def validateSprite(path, data, context):
             return formatError(path, "'layerOrder' of a non-stage sprite must be at least 1")
         
 
-        for j, script in enumerate(data["scripts"]):
-            error = validateScript(path=path+["scripts"]+[j], data=script, context=context)
-            if error: return error
+    for j, script in enumerate(data["scripts"]):
+        error = validateScript(path=path+["scripts"]+[j], data=script, context=context)
+        if error: return error
     return None # else no error
 
 def validateProject(data):

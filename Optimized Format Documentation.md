@@ -64,7 +64,7 @@ Must be an array of sprites. The first sprite is always the stage. Then the othe
 Must be an array of scripts. A script must be an object with the following properties:
 * `"position"`: The position of a block reporter or the first block in a script. Must be a two-long array of integers.
 
-* `"blocks"`: The blocks of the script(still an array even for a single block reporter). They are in order from top of the script to bottom of the script. Must be an array of blocks. [Block Format](#format-of-a-block)
+* `"blocks"`: The blocks of the script in an array (even for a (single) block reporter). They are in order from top of the script to bottom of the script. [Block Format](#format-of-a-block)
 
 
 
@@ -104,7 +104,7 @@ Must be an object of block-specific keys and values. Currently there is only one
 
 
 ## Defined Block Opcodes
-
+You can find the currently defined block opcodes [HERE](assets/opcode_database.jsonc)
 
 
 ## Format of Comments
