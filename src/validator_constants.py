@@ -66,7 +66,7 @@ projectSchema = {
 spriteSchema = {
   "type": "object",
   "properties": {
-    "isStage": { "type": "boolean" },
+    "isStage": { "type": "boolean", "const": False },
     "name"   : { "type": "string" },
     "scripts": {
       "type" : "array",

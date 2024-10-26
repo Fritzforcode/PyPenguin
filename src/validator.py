@@ -114,13 +114,11 @@ def validateSprite(path, data, context):
     if i == 0: # If it should be the stage
         # Validate stage format
         validateSchema(pathToData=path, data=data, schema=stageSchema)
-        if data["isStage"] != True:
-            raise formatError(path, "'isStage' of the stage (the first sprite) must always be True")
         if data["name"] != "Stage": 
             raise formatError(path, "'name' of the stage (the first sprite) must always be 'Stage'")
     else: # If it should be a sprite
-        if data["isStage"] != False:
-            raise formatError(path, "'isStage' of a non-stage sprite must always be False")
+        # Validate sprite format
+        validateSchema(pathToData=path, data=data, schema=spriteSchema)
         
         # Insure the sprite-only properties are given
         for property in ["visible", "position", "size", "direction", "draggable", "rotationStyle"]:
