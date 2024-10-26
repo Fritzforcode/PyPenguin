@@ -26,11 +26,12 @@ def formatError(path, message):
 # if you find an error cause that is not detected by this this script, tell me on Github        #
 #################################################################################################
 
-def validateInputs(path, data, opcode, opcodeData):    
+def validateInputs(path, data, opcode, opcodeData):
     allowedInputIDs = list(opcodeData["inputTypes"].keys()) # List of inputs which are defined for the specific opcode
     for i, inputID, inputValue in ikv(data):
         if inputID not in allowedInputIDs:
             raise formatError(path, f"Input '{inputID}' is not defined for a block with opcode {opcode}")
+    # Check input formats
     for inputID in allowedInputIDs:
         if inputID not in data:
             raise formatError(path, f"A block with opcode {opcode} must have the input '{inputID}'")
@@ -89,6 +90,9 @@ def validateOptions(path, data, opcode, opcodeData, context):
 def validateBlock(path, data, context):
     opcode = data["opcode"]
     opcodeData = list(opcodeDatabase.values())[allowedOpcodes.index(opcode)]
+
+    # Check block format
+    validateSchema(pathToData=path, data=data, schema=blockSchema)
     
     validateInputs(
         path=path+["inputs"], 
@@ -103,21 +107,24 @@ def validateBlock(path, data, context):
         opcodeData=opcodeData, 
         context=context,
     )
-    
 
 def validateScript(path, data, context):
+    # Check script format
+    validateSchema(pathToData=path, data=data, schema=scriptSchema)
+
+    # Check block formats
     for i, block in enumerate(data["blocks"]):
         validateBlock(path=path+["blocks"]+[i], data=block, context=context)
 
 def validateSprite(path, data, context):
     i = path[-1]
     if i == 0: # If it should be the stage
-        # Validate stage format
+        # Check stage format
         validateSchema(pathToData=path, data=data, schema=stageSchema)
         if data["name"] != "Stage": 
             raise formatError(path, "'name' of the stage (the first sprite) must always be 'Stage'")
     else: # If it should be a sprite
-        # Validate sprite format
+        # Check sprite format
         validateSchema(pathToData=path, data=data, schema=spriteSchema)
         
         # Insure the sprite-only properties are given
@@ -128,7 +135,7 @@ def validateSprite(path, data, context):
         if data["layerOrder"] < 1:
             raise formatError(path, "'layerOrder' of a non-stage sprite must be at least 1")
         
-
+    # Check script formats
     for j, script in enumerate(data["scripts"]):
         validateScript(path=path+["scripts"]+[j], data=script, context=context)
     
@@ -154,6 +161,9 @@ def validateProject(data):
         validateSprite(path=["sprites"]+[i], data=sprite, context=context)
 
 ###################################################
+#validate vars, lists and their monitors
+
+# check input "block"
 # force input "text" existing
 # FORCE 52 by 32 on comments
 #ALSO CHECK BLOCK INPUTS AND OPTIONS WITH A SCRIPT#
