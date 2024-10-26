@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pypenguin"
+version = "0.0.1"
+authors = [
+  { name = "Fritzforcode" },
+]
+description = "Python tool for creating, editing, and inspecting Penguinmod (.pmp) files"
+readme = "README.md"
+requires-python = ">=3.6"
+classifiers = [
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Utilities",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+[project.urls]
+homepage = "https://github.com/Fritzforcode/PyPenguin"
+issues = "https://github.com/Fritzforcode/PyPenguin/issues"
+format_documentation = "https://github.com/Fritzforcode/PyPenguin/blob/main/Optimized%20Format%20Documentation.md"

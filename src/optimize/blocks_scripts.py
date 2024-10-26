@@ -54,7 +54,7 @@ def translateOptions(opcode, data):
                 newFieldData = fieldData[0]
             case "broadcast":
                 newFieldData = fieldData[0]
-            case "pressed key":
+            case "key":
                 newFieldData = fieldData[0]
             case _: raise WhatIsGoingOnError(opcodeData["optionTypes"][fieldID])
         newData[fieldID] = newFieldData

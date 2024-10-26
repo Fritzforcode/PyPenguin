@@ -99,7 +99,8 @@ An input value must be an object with the following properties:
 
 
 ## Format of Options 
-
+Must be an object of block-specific keys and values. Currently there is only one option value type, a string.
+#### Example
 
 
 ## Defined Block Opcodes
