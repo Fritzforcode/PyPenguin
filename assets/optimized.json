@@ -18,8 +18,7 @@
                 }
             ],
             "sounds": [],
-            "volume": 100,
-            "layerOrder": 0
+            "volume": 100
         },
         {
             "isStage": false,
@@ -36,7 +35,7 @@
                             "inputs": {
                                 "VALUE": {
                                     "mode": "block-and-text",
-                                    "block": 3,
+                                    "block": null,
                                     "text": "0"
                                 }
                             },
