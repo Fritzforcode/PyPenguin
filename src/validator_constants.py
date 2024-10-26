@@ -165,9 +165,122 @@ stageSchema = {
   ]
 }
 
-variableSchema = {}
+scriptSchema = {
+  "type": "object",
+  "properties": {
+    "position": {
+      "type"    : "array",
+      "items"   : { "type": "integer" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "blocks": {
+      "type" : "array",
+#      "items": { "$ref": "#/definitions/blockSchema" }
+    }
+  },
+  "required": ["position", "blocks"]
+}
 
-listSchema = {}
+blockSchema = {
+  "type": "object",
+  "properties": {
+    "opcode": {
+      "type": "string",
+      "enum": allowedOpcodes
+    },
+    "inputs": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9_]+$": { "type": "object" }
+      },
+      "additionalProperties": False
+    },
+    "options": { "type": "object" },
+    "comment": { "type": ["null", "object"] }
+  },
+  "required": ["opcode", "inputs", "options", "comment"]
+}
+
+inputSchema = {
+  "type": "object",
+  "properties": {
+    "mode": { "type": "string", "enum": ["block-only", "block-and-text"] },
+    "block": { "type": ["null", "object"] },
+    "text": { "type": "string" }
+  },
+  "required": ["mode", "block"]
+}
+
+variableSchema = {
+  "type": "object",
+  "properties": {
+    "name"        : { "type": "string" },
+    "currentValue": { "type": ["string", "integer", "number"] },
+    "mode"        : { "type": "string", "enum": ["cloud", "global", "local"] },
+    "sprite"      : { "type": ["string", "null"] },
+    "monitor"     : { "$ref": "#/definitions/variableMonitorSchema" }
+  },
+  "required": ["name", "currentValue", "mode", "sprite", "monitor"]
+}
+
+listSchema = {
+  "type": "object",
+  "properties": {
+    "name"        : { "type": "string" },
+    "currentValue": {
+      "type" : "array",
+      "items": ["string", "integer", "number"],
+    },
+    "mode"        : { "type": "string", "enum": ["global", "local"] },
+    "sprite"      : { "type": ["string", "null"] },
+    "monitor"     : { "$ref": "#/definitions/listMonitorSchema" }
+  },
+  "required": ["name", "currentValue", "mode", "sprite", "monitor"]
+}
+
+variableMonitorSchema = {
+  "type": ["object", "null"],
+  "properties": {
+    "visible": { "type": "boolean" },
+    "size"   : {
+      "type"    : "array",
+      "items"   : { "type": "integer" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "position": {
+      "type"    : "array",
+      "items"   : { "type": "integer" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "sliderMin"   : { "type": ["integer", "number"] },
+    "sliderMax"   : { "type": ["integer", "number"] },
+    "onlyIntegers": { "type": "boolean" }
+  },
+  "required": ["visible", "size", "position", "sliderMin", "sliderMax", "onlyIntegers"]
+  }
+
+listMonitorSchema = {
+  "type": ["object", "null"],
+  "properties": {
+    "visible": { "type": "boolean" },
+    "size": {
+      "type"    : "array",
+      "items"   : { "type": "integer" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "position": {
+      "type"    : "array",
+      "items"   : { "type": "integer" },
+      "minItems": 2,
+      "maxItems": 2
+    }
+  },
+  "required": ["visible", "size", "position"]
+}
 
 metaSchema = {
   "type": "object",
@@ -187,5 +300,4 @@ metaSchema = {
   },
   "required": ["semver", "vm", "agent", "platform"]
 }
-
 
