@@ -40,10 +40,10 @@ def optimizeProject(sourcePath, targetPath):
             "costumes"      : translatedCostumeDatas,
             "sounds"        : translatedSoundDatas,
             "volume"        : spriteData["volume"],
-            "layerOrder"    : spriteData["layerOrder"],
         }
         if not spriteData["isStage"]:
             newSpriteData |= {
+                "layerOrder"    : spriteData["layerOrder"],
                 "visible"      : spriteData["visible"],
                 "position"     : [spriteData["x"], spriteData["y"]],
                 "size"         : spriteData["size"],

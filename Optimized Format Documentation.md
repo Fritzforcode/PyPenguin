@@ -42,7 +42,7 @@ Must be an array of sprites. The first sprite is always the stage. Then the othe
 
 * `"volume"`: Must be a number between `0` and `100`.
 
-* `"layerOrder"`: The layer the sprite is on. Must always be `0` for the stage. For all other sprites it must be an integer and at least `1`.
+* `"layerOrder"(*)`: The layer the sprite is on. Must be an integer and at least `1`.
 
 * `"visible"(*)`: Wether the sprite is shown or hidden. Must be a boolean.
 

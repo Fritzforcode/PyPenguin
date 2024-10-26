@@ -162,8 +162,7 @@ stageSchema = {
     "currentCostume",
     "costumes",
     "sounds",
-    "volume",
-    "layerOrder"
+    "volume"
   ]
 }
 

@@ -3,7 +3,6 @@ from jsonschema import validate, exceptions
 
 
 from helper_functions import readJSONFile, ikv, pp
-from validator_constants_old import opcodeDatabase, schema, allowedOpcodes
 from validator_constants import *
 
 def validateSchema(pathToData, data, schema):
