@@ -87,15 +87,14 @@ def deoptimizeProject(sourcePath, targetPath):
             "sounds"        : newSoundDatas,
             "id"            : generateRandomToken(),
             "volume"        : spriteData["volume"],
-            "layerOrder"    : spriteData["layerOrder"],
         }
         if spriteData["isStage"]:
             newSpriteData["broadcasts"] = flipKeysAndValues(tokens["broadcasts"][None])
             newSpriteData |= {
-                "tempo"               : spriteData["tempo"],
-                "videoTransparency"   : spriteData["videoTransparency"],
-                "videoState"          : spriteData["videoState"],
-                "textToSpeechLanguage": spriteData["textToSpeechLanguage"],
+                "tempo"               : data["tempo"],
+                "videoTransparency"   : data["videoTransparency"],
+                "videoState"          : data["videoState"],
+                "textToSpeechLanguage": data["textToSpeechLanguage"],
             }
         else:
             newSpriteData |= {
@@ -106,6 +105,7 @@ def deoptimizeProject(sourcePath, targetPath):
                 "direction"    : spriteData["direction"],
                 "draggable"    : spriteData["draggable"],
                 "rotationStyle": spriteData["rotationStyle"],
+                "layerOrder"   : spriteData["layerOrder"],
             }
         newSpriteDatas.append(newSpriteData)
     newProjectData = {
@@ -119,4 +119,4 @@ def deoptimizeProject(sourcePath, targetPath):
     writeJSONFile(targetPath, newProjectData)    
 
 
-deoptimizeProject(sourcePath="assets/optimized.json", targetPath="asssets/deoptimized.json")
+deoptimizeProject(sourcePath="assets/optimized.json", targetPath="assets/deoptimized.json")
