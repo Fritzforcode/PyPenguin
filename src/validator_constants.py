@@ -70,20 +70,20 @@ spriteSchema = {
     "name"   : { "type": "string" },
     "scripts": {
       "type" : "array",
-      "items": { "$ref": "#/definitions/scriptSchema" }
+#      "items": { "$ref": "#/definitions/scriptSchema" }
     },
     "comments": {
       "type" : "array",
-      "items": { "$ref": "#/definitions/commentSchema" }
+#      "items": { "$ref": "#/definitions/commentSchema" }
     },
     "currentCostume": { "type": "integer", "minimum": 0 },
     "costumes": {
       "type" : "array",
-      "items": { "$ref": "#/definitions/costumeSchema" }
+#      "items": { "$ref": "#/definitions/costumeSchema" }
     },
     "sounds": {
       "type" : "array",
-      "items": { "$ref": "#/definitions/soundSchema" }
+#      "items": { "$ref": "#/definitions/soundSchema" }
     },
     "volume": {
       "type"   : ["integer", "number"],
@@ -132,27 +132,26 @@ stageSchema = {
     "name"   : { "type": "string", "const": "Stage" },
     "scripts": {
       "type" : "array",
-      "items": { "$ref": "#/definitions/scriptSchema" }
+#      "items": { "$ref": "#/definitions/scriptSchema" }
     },
     "comments": {
       "type" : "array",
-      "items": { "$ref": "#/definitions/commentSchema" }
+#      "items": { "$ref": "#/definitions/commentSchema" }
     },
     "currentCostume": { "type": "integer", "minimum": 0 },
     "costumes": {
       "type" : "array",
-      "items": { "$ref": "#/definitions/costumeSchema" }
+#      "items": { "$ref": "#/definitions/costumeSchema" }
     },
     "sounds": {
       "type" : "array",
-      "items": { "$ref": "#/definitions/soundSchema" }
+#      "items": { "$ref": "#/definitions/soundSchema" }
     },
     "volume": {
       "type": ["integer", "number"],
       "minimum": 0,
       "maximum": 100
-    },
-    "layerOrder": { "type": "integer", "const": 0 }
+    }
   },
   "required": [
     "isStage",
