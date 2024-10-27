@@ -35,7 +35,20 @@
                             "inputs": {
                                 "VALUE": {
                                     "mode": "block-and-text",
-                                    "block": null,
+                                    "block": {
+                                        "opcode": "set [VARIABLE] to (VALUE)",
+                                        "inputs": {
+                                            "VALUE": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "text123"
+                                            }
+                                        },
+                                        "options": {
+                                            "VARIABLE": "var",
+                                        },
+                                        "comment": {}
+                                    },
                                     "text": "0"
                                 }
                             },

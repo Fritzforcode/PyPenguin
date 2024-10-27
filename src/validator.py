@@ -21,33 +21,40 @@ def formatError(path, message):
     return ValidationError(f"{('at [' + '/'.join(path) + '] - ') if path != [] else ''}{message}")
 
 #################################################################################################
-# the following functions detect some errors causes (which i think can happen)                  #
-# which would not be detected with jsonschema                                                   #
+# the following functions detect some error causes (which i think can happen)                   #
+# which can't be detected with jsonschema                                                        #
 # if you find an error cause that is not detected by this this script, tell me on Github        #
 #################################################################################################
 
-def validateInputs(path, data, opcode, opcodeData):
+def validateInputs(path, data, context, opcode, opcodeData):
     allowedInputIDs = list(opcodeData["inputTypes"].keys()) # List of inputs which are defined for the specific opcode
     for i, inputID, inputValue in ikv(data):
         if inputID not in allowedInputIDs:
-            raise formatError(path, f"Input '{inputID}' is not defined for a block with opcode {opcode}")
+            raise formatError(path, f"Input '{inputID}' is not defined for a block with opcode '{opcode}'")
     # Check input formats
     for inputID in allowedInputIDs:
         if inputID not in data:
-            raise formatError(path, f"A block with opcode {opcode} must have the input '{inputID}'")
+            raise formatError(path, f"A block with opcode '{opcode}' must have the input '{inputID}'")
 
         inputValue = data[inputID]
+        # Check input value format
+        validateSchema(pathToData=path+[inputID], data=inputValue, schema=inputSchema)
+        if inputValue["mode"] == "block-and-text" and "text" not in inputValue: # when the input "text" field is missing
+            raise formatError(path+[inputID], f"An input of the 'block-and-text' mode must have the 'text' attribute")
+        if inputValue["block"] != None: # When the input has a block, check the block format
+           validateBlock(path=path+[inputID]+["block"], data=inputValue["block"], context=context)
+                
         match opcodeData["inputTypes"][inputID]: # type of the input
             case "broadcast":
                 if inputValue["mode"] != "block-and-text":
-                    raise formatError(path, f"{inputID} must be in 'block-and-text' mode")
+                    raise formatError(path+[inputID], f"Must be in 'block-and-text' mode")
             case "number":
                 if inputValue["mode"] != "block-and-text":
-                    raise formatError(path, f"{inputID} must be in 'block-and-text' mode")
+                    raise formatError(path+[inputID], f"Must be in 'block-and-text' mode")
                 allowedChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-"]
                 for char in inputValue["text"]:
                     if char not in allowedChars:
-                        raise formatError(path, f"The 'text' attribute of {inputID} must be a combination of these characters: {allowedChars}")
+                        raise formatError(path+[inputID], f"The 'text' attribute must be a combination of these characters: {allowedChars}")
             case "text":
                 if inputValue["mode"] != "block-and-text":
                     raise formatError(path, f"{inputID} must be in 'block-and-text' mode")
@@ -57,10 +64,10 @@ def validateOptions(path, data, opcode, opcodeData, context):
     allowedOptionIDs = list(opcodeData["optionTypes"].keys()) # List of options which are defined for the specific opcode
     for i, optionID, optionValue in ikv(data):
         if optionID not in allowedOptionIDs:
-            raise formatError(path, f"Input '{optionID}' is not defined for a block with opcode {opcode}")
+            raise formatError(path, f"Option '{optionID}' is not defined for a block with opcode '{opcode}'")
     for optionID in allowedOptionIDs:
         if optionID not in data:
-            raise formatError(path, f"A block with opcode {opcode} must have the input '{optionID}'")
+            raise formatError(path, f"A block with opcode '{opcode}' must have the option '{optionID}'")
 
         optionValue = data[optionID]
         match opcodeData["optionTypes"][optionID]: # type of the option
@@ -76,27 +83,29 @@ def validateOptions(path, data, opcode, opcodeData, context):
                     "home", "end", "page up", "page down"
                 ]
                 if optionValue not in possibleValues:
-                    raise formatError(path, f"{optionID} must be one of {possibleValues}")
+                    raise formatError(path+[optionID], f"Must be one of {possibleValues}")
             case "broadcast":
                 if not isinstance(optionValue, str):
-                    raise formatError(path, f"{optionID} must be a string")
+                    raise formatError(path+[optionID], f"Must be a string")
             case "variable":
                 if optionValue not in [var["name"] for var in context["scopeVariables"]]:
-                    raise formatError(path, f"{optionID} must be a defined variable")
+                    raise formatError(path+[optionID], f"Must be a defined variable")
             case "list":
                 if optionValue not in [list_["name"] for list_ in context["scopeLists"]]:
-                    raise formatError(path, f"{optionID} must be a defined list")
+                    raise formatError(path+[optionID], f"Must be a defined list")
 
 def validateBlock(path, data, context):
-    opcode = data["opcode"]
-    opcodeData = list(opcodeDatabase.values())[allowedOpcodes.index(opcode)]
-
     # Check block format
     validateSchema(pathToData=path, data=data, schema=blockSchema)
     
+    opcode = data["opcode"]
+    opcodeData = list(opcodeDatabase.values())[allowedOpcodes.index(opcode)]
+
+    
     validateInputs(
         path=path+["inputs"], 
-        data=data["inputs"], 
+        data=data["inputs"],
+        context=context, 
         opcode=opcode, 
         opcodeData=opcodeData,
     )
@@ -163,11 +172,9 @@ def validateProject(data):
 ###################################################
 #validate vars, lists and their monitors
 
-# check input "block"
-# force input "text" existing
+# check options
+# check comment format
 # FORCE 52 by 32 on comments
-#ALSO CHECK BLOCK INPUTS AND OPTIONS WITH A SCRIPT#
-# --> check variable or list existance
 
 #ALSO CHECK dataFormat???                         #
 #CHECK variable "sprite" existing and fine-ity with local mode
