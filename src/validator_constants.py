@@ -36,7 +36,7 @@ projectSchema = {
       #"items": { "$ref": "#/definitions/listSchema" }
     },
     "tempo": { "type": "integer", "minimum": 20, "maximum": 500 },
-    "videoTransparency": { "type": ["integer", "number"] },
+    "videoTransparency": { "type": "number" },
     "videoState": {
       "type": "string",
       "enum": ["on", "on flipped", "off"]
@@ -86,7 +86,7 @@ spriteSchema = {
 #      "items": { "$ref": "#/definitions/soundSchema" }
     },
     "volume": {
-      "type"   : ["integer", "number"],
+      "type"   : "number",
       "minimum": 0,
       "maximum": 100
     },
@@ -94,12 +94,12 @@ spriteSchema = {
     "visible"   : { "type": "boolean" },
     "position"  : {
       "type"    : "array",
-      "items"   : { "type": ["integer", "number"] },
+      "items"   : { "type": "number" },
       "minItems": 2,
       "maxItems": 2
     },
-    "size"         : { "type": ["integer", "number"] },
-    "direction"    : { "type": ["integer", "number"] },
+    "size"         : { "type": "number" },
+    "direction"    : { "type": "number" },
     "draggable"    : { "type": "boolean" },
     "rotationStyle": {
       "type": "string",
@@ -148,7 +148,7 @@ stageSchema = {
 #      "items": { "$ref": "#/definitions/soundSchema" }
     },
     "volume": {
-      "type": ["integer", "number"],
+      "type": "number",
       "minimum": 0,
       "maximum": 100
     }
@@ -202,6 +202,28 @@ blockSchema = {
   "required": ["opcode", "inputs", "options", "comment"]
 }
 
+commentSchema = {
+  "type": ["object", "null"],
+  "properties": {
+    "position": {
+      "type"    : "array",
+      "items"   : { "type": "number" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "size": {
+      "type"    : "array",
+      "items"   : { "type": "number" },
+      "minItems": 2,
+      "maxItems": 2,
+      "additionalItems": False
+    },
+    "minimized": { "type": "boolean" },
+    "text"     : { "type": "string" }
+  },
+  "required": ["position", "size", "minimized", "text"]
+}
+
 inputSchema = {
   "type": "object",
   "properties": {
@@ -212,11 +234,13 @@ inputSchema = {
   "required": ["mode", "block"]
 }
 
+optionSchema = { "type": "string" }
+
 variableSchema = {
   "type": "object",
   "properties": {
     "name"        : { "type": "string" },
-    "currentValue": { "type": ["string", "integer", "number"] },
+    "currentValue": { "type": ["string", "number"] },
     "mode"        : { "type": "string", "enum": ["cloud", "global", "local"] },
     "sprite"      : { "type": ["string", "null"] },
     "monitor"     : { "$ref": "#/definitions/variableMonitorSchema" }
@@ -230,7 +254,7 @@ listSchema = {
     "name"        : { "type": "string" },
     "currentValue": {
       "type" : "array",
-      "items": ["string", "integer", "number"],
+      "items": ["string", "number"],
     },
     "mode"        : { "type": "string", "enum": ["global", "local"] },
     "sprite"      : { "type": ["string", "null"] },
@@ -255,8 +279,8 @@ variableMonitorSchema = {
       "minItems": 2,
       "maxItems": 2
     },
-    "sliderMin"   : { "type": ["integer", "number"] },
-    "sliderMax"   : { "type": ["integer", "number"] },
+    "sliderMin"   : { "type": "number" },
+    "sliderMax"   : { "type": "number" },
     "onlyIntegers": { "type": "boolean" }
   },
   "required": ["visible", "size", "position", "sliderMin", "sliderMax", "onlyIntegers"]

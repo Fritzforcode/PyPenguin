@@ -1,4 +1,4 @@
-from helper_functions import ikv, WhatIsGoingOnError, generateSelector, readJSONFile
+from helper_functions import ikv, pp, WhatIsGoingOnError, generateSelector, readJSONFile
 from options import translateOptions
 from comments import translateComment
 
@@ -63,7 +63,6 @@ def linkBlocksToScript(data, spriteName, tokens, scriptID):
                 id=ownID,
             )
             
-
     return newData, newCommentDatas
 
 def unnestScript(data, spriteName, tokens, scriptID):

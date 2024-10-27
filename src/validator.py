@@ -70,6 +70,9 @@ def validateOptions(path, data, opcode, opcodeData, context):
             raise formatError(path, f"A block with opcode '{opcode}' must have the option '{optionID}'")
 
         optionValue = data[optionID]
+        # Check input value format
+        validateSchema(pathToData=path+[optionID], data=optionValue, schema=optionSchema)
+        
         match opcodeData["optionTypes"][optionID]: # type of the option
             case "key":
                 possibleValues = [
@@ -94,9 +97,20 @@ def validateOptions(path, data, opcode, opcodeData, context):
                 if optionValue not in [list_["name"] for list_ in context["scopeLists"]]:
                     raise formatError(path+[optionID], f"Must be a defined list")
 
+def validateComment(path, data):
+    validateSchema(pathToData=path, data=data, schema=commentSchema)
+    if data != None:
+        if data["size"][0] < 52:
+            raise formatError(path+["size"]+[0], f"Must be at least 52")
+        if data["size"][1] < 32:
+            raise formatError(path+["size"]+[1], f"Must be at least 32")
+
+
 def validateBlock(path, data, context):
     # Check block format
     validateSchema(pathToData=path, data=data, schema=blockSchema)
+
+    validateComment(path=path+["comment"], data=data["comment"])
     
     opcode = data["opcode"]
     opcodeData = list(opcodeDatabase.values())[allowedOpcodes.index(opcode)]
@@ -139,10 +153,10 @@ def validateSprite(path, data, context):
         # Insure the sprite-only properties are given
         for property in ["visible", "position", "size", "direction", "draggable", "rotationStyle"]:
             if property not in data:
-                raise formatError(path, f"A non-stage sprite must have the attribute '{property}'")
+                raise formatError(path, f"A sprite (but not the stage) must have the attribute '{property}'")
         
         if data["layerOrder"] < 1:
-            raise formatError(path, "'layerOrder' of a non-stage sprite must be at least 1")
+            raise formatError(path, "'layerOrder' of a sprite must be at least 1")
         
     # Check script formats
     for j, script in enumerate(data["scripts"]):
@@ -172,7 +186,6 @@ def validateProject(data):
 ###################################################
 #validate vars, lists and their monitors
 
-# check options
 # check comment format
 # FORCE 52 by 32 on comments
 
