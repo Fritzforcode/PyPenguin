@@ -59,7 +59,6 @@ def validateInputs(path, data, context, opcode, opcodeData):
                 if inputValue["mode"] != "block-and-text":
                     raise formatError(path, f"{inputID} must be in 'block-and-text' mode")
 
-
 def validateOptions(path, data, opcode, opcodeData, context):
     allowedOptionIDs = list(opcodeData["optionTypes"].keys()) # List of options which are defined for the specific opcode
     for i, optionID, optionValue in ikv(data):
@@ -169,6 +168,7 @@ def validateProject(data):
     validateSchema(pathToData=["meta"], data=data["meta"], schema=metaSchema)
     
     # Check sprite formats
+    spriteNames = []
     for i, sprite in enumerate(data["sprites"]):
         scopeVariables = []
         for variable in data["variables"]:
@@ -182,18 +182,68 @@ def validateProject(data):
                 scopeLists.append(list)
         context = {"scopeVariables": scopeVariables, "scopeLists": scopeLists}
         validateSprite(path=["sprites"]+[i], data=sprite, context=context)
+        spriteName = None if i == 0 else sprite["name"] # None for the stage
+        if spriteName in spriteNames: # If there is the same sprite name twice
+            raise formatError(path=["sprites"]+[i]+["name"], message="Sprite names mustn't be the same")
+        spriteNames.append(spriteName)
+    
+    # Check variable formats
+    variableNames = {name: [] for name in spriteNames}
+    for i, variable in enumerate(data["variables"]):
+        validateVariable(path=["variables"]+[i], data=variable, spriteNames=spriteNames)
+        variableName = variable["name"]
+        spriteName = None if variable["mode"] in ["global", "cloud"] else variable["sprite"] # None for the stage
+
+        error = formatError(path=["variables"]+[i]+["sprite"], message="Variable names mustn't be the same")
+        if variable["mode"] in ["global", "cloud"]: 
+            # global var: raise if var name alredy exists in any other sprite
+            for names in variableNames.values():
+                if variableName in names:
+                    raise error
+        else: 
+            # local var: raise if var name alredy exists in own sprite or the stage
+            if variableName in (variableNames[None] + variableNames[spriteName]): # If the same variable name alredy exists
+                raise error
+        
+
+
+        variableNames[variable["sprite"]].append(variableName)
+
+def validateVariable(path, data, spriteNames):
+    # Check variable format
+    validateSchema(pathToData=path, data=data, schema=variableSchema)
+    validateSchema(pathToData=path+["monitor"], data=data["monitor"], schema=variableMonitorSchema)
+    if data["sprite"] not in spriteNames:
+        raise formatError(path=path+["sprite"], message=f"Sprite {data['sprite']} doesn't exist")
+    monitor = data["monitor"]
+    if not monitor["sliderMin"] <= monitor["sliderMax"]:
+        raise formatError(path=path, message="'sliderMin' must be below 'sliderMax'")
+    if monitor["onlyIntegers"]:
+        if not isinstance(monitor["sliderMin"], int):
+            raise formatError(path=path+["monitor"]+["sliderMin"], message="Must be an integer because 'onlyIntegers' is true")
+        if not isinstance(monitor["sliderMax"], int):
+            raise formatError(path=path+["monitor"]+["sliderMax"], message="Must be an integer because 'onlyIntegers' is true")
+        
+
+def validateList(path, data, spriteNames):
+    # Check list format
+    validateSchema(pathToData=path, data=data, schema=listSchema)
+    validateSchema(pathToData=path+["monitor"], data=data["monitor"], schema=listMonitorSchema)
+    if data["sprite"] not in spriteNames:
+        raise formatError(path=path+["sprite"], message=f"Sprite {data['sprite']} doesn't exist")
 
 ###################################################
+# slidermin below slidermax
+# only integers fine with min and max
+
 #validate vars, lists and their monitors
-
-# check comment format
-# FORCE 52 by 32 on comments
-
-#ALSO CHECK dataFormat???                         #
 #CHECK variable "sprite" existing and fine-ity with local mode
+
+
+#ALSO CHECK dataFormat???
 #ONLY ALLOW bitmapResolution to be removed when stage and its svg#
 #NO OVERLAPPING NAMES IN SOUNDS, COSTUMES, SPRITES?
-#ALSO CHECK currentCOSTUME IN RANGE               #
+#ALSO CHECK currentCOSTUME IN RANGE
 ###################################################
 
 data = readJSONFile("assets/optimized.json")

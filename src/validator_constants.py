@@ -243,7 +243,7 @@ variableSchema = {
     "currentValue": { "type": ["string", "number"] },
     "mode"        : { "type": "string", "enum": ["cloud", "global", "local"] },
     "sprite"      : { "type": ["string", "null"] },
-    "monitor"     : { "$ref": "#/definitions/variableMonitorSchema" }
+    "monitor"     : { "type": ["object", "null"] }
   },
   "required": ["name", "currentValue", "mode", "sprite", "monitor"]
 }
@@ -258,7 +258,7 @@ listSchema = {
     },
     "mode"        : { "type": "string", "enum": ["global", "local"] },
     "sprite"      : { "type": ["string", "null"] },
-    "monitor"     : { "$ref": "#/definitions/listMonitorSchema" }
+    "monitor"     : { "type": ["object", "null"] }
   },
   "required": ["name", "currentValue", "mode", "sprite", "monitor"]
 }
@@ -269,7 +269,7 @@ variableMonitorSchema = {
     "visible": { "type": "boolean" },
     "size"   : {
       "type"    : "array",
-      "items"   : { "type": "integer" },
+      "items"   : { "type": "integer", "minimum": 0 },
       "minItems": 2,
       "maxItems": 2
     },
@@ -292,7 +292,7 @@ listMonitorSchema = {
     "visible": { "type": "boolean" },
     "size": {
       "type"    : "array",
-      "items"   : { "type": "integer" },
+      "items"   : { "type": "integer", "minimum": 0 },
       "minItems": 2,
       "maxItems": 2
     },

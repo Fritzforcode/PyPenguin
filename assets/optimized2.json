@@ -86,19 +86,13 @@
     "variables": [
         {
             "name": "my variable",
-            "currentValue": -15,
+            "currentValue": 0,
             "mode": "global",
             "sprite": null,
             "monitor": {
                 "visible": true,
-                "size": [
-                    0,
-                    3
-                ],
-                "position": [
-                    47,
-                    219
-                ],
+                "size": [0, 0],
+                "position": [0, 50],
                 "sliderMin": -77,
                 "sliderMax": 3,
                 "onlyIntegers": true

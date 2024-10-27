@@ -6,7 +6,7 @@
             "variables": {
                 "X#fH=/ZM.T|B;rKrmG[s": [
                     "my variable",
-                    0
+                    -15
                 ]
             },
             "lists": {},
@@ -108,6 +108,24 @@
         }
     ],
     "monitors": [
+        {
+            "id": "X#fH=/ZM.T|B;rKrmG[s",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "my variable"
+            },
+            "spriteName": null,
+            "value": -15,
+            "width": 0,
+            "height": 3,
+            "x": 47,
+            "y": 219,
+            "visible": true,
+            "sliderMin": -77,
+            "sliderMax": 3,
+            "isDiscrete": true
+        },
         {
             "id": "NmjQ-_mT(OA^.)?Hh^bl",
             "mode": "default",

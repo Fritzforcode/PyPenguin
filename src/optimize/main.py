@@ -75,6 +75,6 @@ def optimizeProject(sourcePath, targetPath):
     writeJSONFile(targetPath, newData)
 
 optimizeProject(
-    sourcePath="assets/studies/varTest.json", 
+    sourcePath="assets/studies/varTest2.json", 
     targetPath="assets/optimized.json",
 )
