@@ -85,44 +85,11 @@
     ],
     "variables": [
         {
-            "name": "my variable",
-            "currentValue": -15,
-            "mode": "global",
-            "sprite": null,
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    3
-                ],
-                "position": [
-                    47,
-                    219
-                ],
-                "sliderMin": -77,
-                "sliderMax": 3,
-                "onlyIntegers": true
-            }
-        },
-        {
             "name": "var",
-            "currentValue": 0,
+            "currentValue": 33,
             "mode": "local",
-            "sprite": "Sprite1",
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    5,
-                    5
-                ],
-                "sliderMin": 0,
-                "sliderMax": 100,
-                "onlyIntegers": true
-            }
+            "sprite": null,
+            "monitor": null
         }
     ],
     "lists": [],

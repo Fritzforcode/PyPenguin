@@ -196,7 +196,13 @@ blockSchema = {
       },
       "additionalProperties": False
     },
-    "options": { "type": "object" },
+    "options": { 
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9_]+$": { "type": "string" }
+      },
+      "additionalProperties": False
+    },
     "comment": { "type": ["null", "object"] }
   },
   "required": ["opcode", "inputs", "options", "comment"]
@@ -233,8 +239,6 @@ inputSchema = {
   },
   "required": ["mode", "block"]
 }
-
-optionSchema = { "type": "string" }
 
 variableSchema = {
   "type": "object",

@@ -18,3 +18,9 @@ ADD OTHER MONITOR TYPES
 
 layerOrder: highest is in front
 back is 1 for sprites. stage always =0
+
+direction into range 180 to -180
+
+test variable overlapping detection
+
+can var "currentValue" be boolean too?

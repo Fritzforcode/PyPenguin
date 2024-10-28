@@ -69,8 +69,8 @@ def validateOptions(path, data, opcode, opcodeData, context):
             raise formatError(path, f"A block with opcode '{opcode}' must have the option '{optionID}'")
 
         optionValue = data[optionID]
-        # Check input value format
-        validateSchema(pathToData=path+[optionID], data=optionValue, schema=optionSchema)
+        # Check option value format (was paused due to always being a string)
+        # validateSchema(pathToData=path+[optionID], data=optionValue, schema=optionSchema)
         
         match opcodeData["optionTypes"][optionID]: # type of the option
             case "key":
@@ -103,7 +103,6 @@ def validateComment(path, data):
             raise formatError(path+["size"]+[0], f"Must be at least 52")
         if data["size"][1] < 32:
             raise formatError(path+["size"]+[1], f"Must be at least 32")
-
 
 def validateBlock(path, data, context):
     # Check block format
@@ -171,7 +170,10 @@ def validateProject(data):
     spriteNames = []
     for i, sprite in enumerate(data["sprites"]):
         scopeVariables = []
-        for variable in data["variables"]:
+        for j, variable in enumerate(data["variables"]):
+            validateVariableSchema(path=["variables"]+[j], data=variable)
+            if "mode" not in variable:
+                raise formatError(path="", message="")
             if variable["mode"] == "global" \
             or (variable["mode"] == "local" and variable["sprite"] == sprite["name"]): # add global and local variables
                 scopeVariables.append(variable)
@@ -204,27 +206,28 @@ def validateProject(data):
             # local var: raise if var name alredy exists in own sprite or the stage
             if variableName in (variableNames[None] + variableNames[spriteName]): # If the same variable name alredy exists
                 raise error
+        variableNames[spriteName].append(variableName) # add it to the vars of its sprite
         
-
-
-        variableNames[variable["sprite"]].append(variableName)
-
-def validateVariable(path, data, spriteNames):
+def validateVariableSchema(path, data):
     # Check variable format
     validateSchema(pathToData=path, data=data, schema=variableSchema)
     validateSchema(pathToData=path+["monitor"], data=data["monitor"], schema=variableMonitorSchema)
+def validateVariable(path, data, spriteNames):
     if data["sprite"] not in spriteNames:
-        raise formatError(path=path+["sprite"], message=f"Sprite {data['sprite']} doesn't exist")
+        raise formatError(path=path+["sprite"], message=f"Sprite '{data['sprite']}' doesn't exist. if you meant to make a stage variable use the 'global' mode and null for sprite")
+    if data["mode"] in ["global", "cloud"]: # global var
+        if data["sprite"] != None:
+            raise formatError(path=path+["sprite"], message="For a non-local variable (see 'mode') this must be null")
     monitor = data["monitor"]
-    if not monitor["sliderMin"] <= monitor["sliderMax"]:
-        raise formatError(path=path, message="'sliderMin' must be below 'sliderMax'")
-    if monitor["onlyIntegers"]:
-        if not isinstance(monitor["sliderMin"], int):
-            raise formatError(path=path+["monitor"]+["sliderMin"], message="Must be an integer because 'onlyIntegers' is true")
-        if not isinstance(monitor["sliderMax"], int):
-            raise formatError(path=path+["monitor"]+["sliderMax"], message="Must be an integer because 'onlyIntegers' is true")
+    if monitor != None:
+        if not monitor["sliderMin"] <= monitor["sliderMax"]:
+            raise formatError(path=path, message="'sliderMin' must be below 'sliderMax'")
+        if monitor["onlyIntegers"]:
+            if not isinstance(monitor["sliderMin"], int):
+                raise formatError(path=path+["monitor"]+["sliderMin"], message="Must be an integer because 'onlyIntegers' is true")
+            if not isinstance(monitor["sliderMax"], int):
+                raise formatError(path=path+["monitor"]+["sliderMax"], message="Must be an integer because 'onlyIntegers' is true")
         
-
 def validateList(path, data, spriteNames):
     # Check list format
     validateSchema(pathToData=path, data=data, schema=listSchema)
@@ -233,19 +236,19 @@ def validateList(path, data, spriteNames):
         raise formatError(path=path+["sprite"], message=f"Sprite {data['sprite']} doesn't exist")
 
 ###################################################
-# slidermin below slidermax
-# only integers fine with min and max
-
 #validate vars, lists and their monitors
-#CHECK variable "sprite" existing and fine-ity with local mode
+# check var "sprite" being None in global or cloud and sth in local mode
 
 
 #ALSO CHECK dataFormat???
 #ONLY ALLOW bitmapResolution to be removed when stage and its svg#
 #NO OVERLAPPING NAMES IN SOUNDS, COSTUMES, SPRITES?
 #ALSO CHECK currentCOSTUME IN RANGE
+#validate extension names?
 ###################################################
 
 data = readJSONFile("assets/optimized.json")
 validateProject(data=data)
 print("Validation succeeded")
+
+# TODO: bring local vars back to sprites again; update validator, optimizer and deoptimizer for that
