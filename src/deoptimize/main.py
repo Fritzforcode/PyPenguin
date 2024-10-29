@@ -13,11 +13,11 @@ opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
 def generateTokens(data):
     spriteNames = [sprite["name"] for sprite in data["sprites"]][1:]
     translatedVariableDatas, variableTokens, variableMonitorDatas = translateVariables(
-        data=data["variables"], 
+        data=data, 
         spriteNames=spriteNames,
     )
     translatedListDatas, listTokens, listMonitorDatas = translateLists(
-        data=data["lists"], 
+        data=data, 
         spriteNames=spriteNames,
     )
     monitorDatas = variableMonitorDatas + listMonitorDatas

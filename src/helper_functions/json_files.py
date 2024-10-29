@@ -18,5 +18,15 @@ def readJSONFile(filePath):
             return read(filePath)    
 
 def writeJSONFile(filePath, data):
-    with open(filePath, "w") as file:
-        dump(data, file, indent=4)
+    def write(filePath, data):
+        with open(filePath, "w") as file:
+            dump(data, file, indent=4)
+    try:
+        return write(filePath=filePath, data=data)
+    except FileNotFoundError:
+        try:
+            filePath = "../" + filePath # Go up a directory
+            return write(filePath=filePath, data=data)
+        except FileNotFoundError:
+            filePath = "../" + filePath # Go up a second directory
+            return write(filePath=filePath, data=data)

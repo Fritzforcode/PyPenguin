@@ -31,6 +31,16 @@ def optimizeProject(sourcePath, targetPath):
             newScriptDatas.append(newScriptData)
         translatedCostumeDatas = translateCostumes(data=spriteData["costumes"])
         translatedSoundDatas   = translateSounds  (data=spriteData["sounds"])
+        translatedVariableDatas = translateVariables(
+            data=spriteData, 
+            monitorDatas=dataSource["monitors"]
+        )
+        translatedListDatas = translateLists(
+            data=dataSource["targets"],
+            monitorDatas=dataSource["monitors"],
+        )
+        #pp(spriteData)
+        #pp(translatedVariableDatas)
         newSpriteData = {
             "isStage"       : i == 0,
             "name"          : spriteData["name"],
@@ -41,28 +51,27 @@ def optimizeProject(sourcePath, targetPath):
             "sounds"        : translatedSoundDatas,
             "volume"        : spriteData["volume"],
         }
-        if not spriteData["isStage"]:
+        if spriteData["isStage"]:
+            globalVariableDatas = translatedVariableDatas
+            globalListDatas = translatedListDatas
+        else:
             newSpriteData |= {
+                "localVariables": translatedVariableDatas,
+                "localLists"    : translatedListDatas,
                 "layerOrder"    : spriteData["layerOrder"],
-                "visible"      : spriteData["visible"],
-                "position"     : [spriteData["x"], spriteData["y"]],
-                "size"         : spriteData["size"],
-                "direction"    : spriteData["direction"],
-                "draggable"    : spriteData["draggable"],
-                "rotationStyle": spriteData["rotationStyle"],
+                "visible"       : spriteData["visible"],
+                "position"      : [spriteData["x"], spriteData["y"]],
+                "size"          : spriteData["size"],
+                "direction"     : spriteData["direction"],
+                "draggable"     : spriteData["draggable"],
+                "rotationStyle" : spriteData["rotationStyle"],
             }
         newSpriteDatas.append(newSpriteData)
     stageData = dataSource["targets"][0]
     newData = {
-        "sprites"      : newSpriteDatas,
-        "variables"    : translateVariables(
-            data=dataSource["targets"], 
-            monitorDatas=dataSource["monitors"],
-        ),
-        "lists"        : translateLists(
-            data=dataSource["targets"],
-            monitorDatas=dataSource["monitors"],
-        ),
+        "sprites"        : newSpriteDatas,
+        "globalVariables": globalVariableDatas,
+        "globalLists"    : globalListDatas,
         "tempo"               : stageData["tempo"], # I moved these from the stage to the project because they influence the whole project
         "videoTransparency"   : stageData["videoTransparency"],
         "videoState"          : stageData["videoState"],
@@ -72,9 +81,10 @@ def optimizeProject(sourcePath, targetPath):
         "extensions"          : dataSource["extensions"],
         "meta"                : dataSource["meta"],
     }
+    pp(newData)
     writeJSONFile(targetPath, newData)
 
 optimizeProject(
     sourcePath="assets/studies/varTest2.json", 
-    targetPath="assets/optimized.json",
+    targetPath="../../assets/optimized.json",
 )

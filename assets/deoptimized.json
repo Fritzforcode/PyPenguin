@@ -7,6 +7,11 @@
                 "X#fH=/ZM.T|B;rKrmG[s": [
                     "my variable",
                     -15
+                ],
+                "NmjQ-_mT(OA^.)?Hh^bl": [
+                    "\u2601 mycloudVar",
+                    0,
+                    true
                 ]
             },
             "lists": {},
@@ -26,7 +31,7 @@
                 }
             ],
             "sounds": [],
-            "id": "Za:QFPiy`CEs]*lkO=/n",
+            "id": "M^Lp^Q]A^}K)lXO{ELxy",
             "volume": 100,
             "tempo": 60,
             "videoTransparency": 50,
@@ -37,7 +42,7 @@
             "isStage": false,
             "name": "Sprite1",
             "variables": {
-                "NmjQ-_mT(OA^.)?Hh^bl": [
+                "Za:QFPiy`CEs]*lkO=/n": [
                     "var",
                     0
                 ]
@@ -62,7 +67,7 @@
                     "fields": {
                         "VARIABLE": [
                             "var",
-                            "NmjQ-_mT(OA^.)?Hh^bl",
+                            "Za:QFPiy`CEs]*lkO=/n",
                             ""
                         ]
                     },
@@ -95,7 +100,7 @@
                     "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
                 }
             ],
-            "id": "M^Lp^Q]A^}K)lXO{ELxy",
+            "id": "xeH-ilqtek]Y@J?EB}#|",
             "volume": 100,
             "visible": true,
             "x": 0,
@@ -127,7 +132,7 @@
             "isDiscrete": true
         },
         {
-            "id": "NmjQ-_mT(OA^.)?Hh^bl",
+            "id": "Za:QFPiy`CEs]*lkO=/n",
             "mode": "default",
             "opcode": "data_variable",
             "params": {

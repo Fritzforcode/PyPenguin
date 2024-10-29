@@ -7,6 +7,11 @@
                 "X#fH=/ZM.T|B;rKrmG[s": [
                     "my variable",
                     -15
+                ],
+                "NNNNNNNNNNNNNNNNNNNN": [
+                    "mycloudVar",
+                    0,
+                    true
                 ]
             },
             "lists": {},

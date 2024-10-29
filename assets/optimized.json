@@ -71,6 +71,27 @@
                 }
             ],
             "volume": 100,
+            "localVariables": [
+                {
+                    "name": "var",
+                    "currentValue": 0,
+                    "monitor": {
+                        "visible": true,
+                        "size": [
+                            0,
+                            0
+                        ],
+                        "position": [
+                            5,
+                            5
+                        ],
+                        "sliderMin": 0,
+                        "sliderMax": 100,
+                        "onlyIntegers": true
+                    }
+                }
+            ],
+            "localLists": [],
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -83,16 +104,34 @@
             "rotationStyle": "all around"
         }
     ],
-    "variables": [
+    "globalVariables": [
         {
-            "name": "var",
-            "currentValue": 33,
-            "mode": "local",
-            "sprite": null,
-            "monitor": null
+            "name": "my variable",
+            "currentValue": -15,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    3
+                ],
+                "position": [
+                    47,
+                    219
+                ],
+                "sliderMin": -77,
+                "sliderMax": 3,
+                "onlyIntegers": true
+            },
+            "isCloudVariable": false
+        },
+        {
+            "name": "☁ mycloudVar",
+            "currentValue": 0,
+            "monitor": null,
+            "isCloudVariable": true
         }
     ],
-    "lists": [],
+    "globalLists": [],
     "tempo": 60,
     "videoTransparency": 50,
     "videoState": "on",
