@@ -23,57 +23,26 @@
         {
             "isStage": false,
             "name": "Sprite1",
-            "scripts": [
-                {
-                    "position": [
-                        440,
-                        233
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "var"
-                            },
-                            "comment": null
-                        }
-                    ]
-                }
-            ],
+            "scripts": [],
             "comments": [],
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "costume1",
+                    "name": "costume2",
                     "bitmapResolution": 1,
                     "dataFormat": "svg",
-                    "fileStem": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
                     "rotationCenter": [
-                        26,
-                        46
+                        0,
+                        0
                     ]
                 }
             ],
-            "sounds": [
-                {
-                    "name": "Squawk",
-                    "dataFormat": "wav",
-                    "fileStem": "e140d7ff07de8fa35c3d1595bba835ac",
-                    "rate": 48000,
-                    "sampleCount": 17867
-                }
-            ],
+            "sounds": [],
             "volume": 100,
             "localVariables": [
                 {
-                    "name": "var",
+                    "name": "localVar",
                     "currentValue": 0,
                     "monitor": {
                         "visible": true,
@@ -83,7 +52,7 @@
                         ],
                         "position": [
                             5,
-                            5
+                            31
                         ],
                         "sliderMin": 0,
                         "sliderMax": 100,
@@ -91,7 +60,59 @@
                     }
                 }
             ],
-            "localLists": [],
+            "localLists": [
+                {
+                    "name": "globalList",
+                    "currentValue": [],
+                    "mode": "global",
+                    "sprite": null,
+                    "monitor": {
+                        "visible": true,
+                        "size": [
+                            0,
+                            0
+                        ],
+                        "position": [
+                            205,
+                            5
+                        ]
+                    }
+                },
+                {
+                    "name": "localList",
+                    "currentValue": [],
+                    "mode": "local",
+                    "sprite": "Sprite1",
+                    "monitor": {
+                        "visible": true,
+                        "size": [
+                            0,
+                            0
+                        ],
+                        "position": [
+                            155,
+                            212
+                        ]
+                    }
+                },
+                {
+                    "name": "localList",
+                    "currentValue": [],
+                    "mode": "local",
+                    "sprite": "Sprite2",
+                    "monitor": {
+                        "visible": true,
+                        "size": [
+                            0,
+                            0
+                        ],
+                        "position": [
+                            5,
+                            112
+                        ]
+                    }
+                }
+            ],
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -102,36 +123,205 @@
             "direction": 90,
             "draggable": false,
             "rotationStyle": "all around"
+        },
+        {
+            "isStage": false,
+            "name": "Sprite2",
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "fileStem": "3339a2953a3bf62bb80e54ff575dbced",
+                    "rotationCenter": [
+                        0,
+                        0
+                    ]
+                }
+            ],
+            "sounds": [],
+            "volume": 100,
+            "localVariables": [
+                {
+                    "name": "localVar",
+                    "currentValue": 0,
+                    "monitor": {
+                        "visible": true,
+                        "size": [
+                            0,
+                            0
+                        ],
+                        "position": [
+                            5,
+                            86
+                        ],
+                        "sliderMin": 0,
+                        "sliderMax": 100,
+                        "onlyIntegers": true
+                    }
+                }
+            ],
+            "localLists": [
+                {
+                    "name": "globalList",
+                    "currentValue": [],
+                    "mode": "global",
+                    "sprite": null,
+                    "monitor": {
+                        "visible": true,
+                        "size": [
+                            0,
+                            0
+                        ],
+                        "position": [
+                            205,
+                            5
+                        ]
+                    }
+                },
+                {
+                    "name": "localList",
+                    "currentValue": [],
+                    "mode": "local",
+                    "sprite": "Sprite1",
+                    "monitor": {
+                        "visible": true,
+                        "size": [
+                            0,
+                            0
+                        ],
+                        "position": [
+                            155,
+                            212
+                        ]
+                    }
+                },
+                {
+                    "name": "localList",
+                    "currentValue": [],
+                    "mode": "local",
+                    "sprite": "Sprite2",
+                    "monitor": {
+                        "visible": true,
+                        "size": [
+                            0,
+                            0
+                        ],
+                        "position": [
+                            5,
+                            112
+                        ]
+                    }
+                }
+            ],
+            "layerOrder": 2,
+            "visible": true,
+            "position": [
+                36,
+                28
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
         }
     ],
     "globalVariables": [
         {
-            "name": "my variable",
-            "currentValue": -15,
+            "name": "globalVar",
+            "currentValue": 0,
             "monitor": {
                 "visible": true,
                 "size": [
                     0,
-                    3
+                    0
                 ],
                 "position": [
-                    47,
-                    219
+                    5,
+                    5
                 ],
-                "sliderMin": -77,
-                "sliderMax": 3,
+                "sliderMin": 0,
+                "sliderMax": 100,
                 "onlyIntegers": true
             },
             "isCloudVariable": false
         },
         {
-            "name": "☁ mycloudVar",
+            "name": "\u2601 cloudVar",
             "currentValue": 0,
-            "monitor": null,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    5,
+                    57
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            },
             "isCloudVariable": true
         }
     ],
-    "globalLists": [],
+    "globalLists": [
+        {
+            "name": "globalList",
+            "currentValue": [],
+            "mode": "global",
+            "sprite": null,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    205,
+                    5
+                ]
+            }
+        },
+        {
+            "name": "localList",
+            "currentValue": [],
+            "mode": "local",
+            "sprite": "Sprite1",
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    155,
+                    212
+                ]
+            }
+        },
+        {
+            "name": "localList",
+            "currentValue": [],
+            "mode": "local",
+            "sprite": "Sprite2",
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    5,
+                    112
+                ]
+            }
+        }
+    ],
     "tempo": 60,
     "videoTransparency": 50,
     "videoState": "on",
