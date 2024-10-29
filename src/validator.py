@@ -26,6 +26,27 @@ def formatError(path, message):
 # if you find an error cause that is not detected by this this script, tell me on Github        #
 #################################################################################################
 
+def validateVariable(path, data, isGlobal):
+    # Check variable format
+    validateSchema(pathToData=path, data=data, schema=variableSchema)
+    validateSchema(pathToData=path+["monitor"], data=data["monitor"], schema=variableMonitorSchema)
+    if isGlobal and "isCloudVariable" not in data:
+        raise formatError(path=path, message="Global variables must have the 'isCloudVariable' attribute.")
+    monitor = data["monitor"]
+    if monitor != None:
+        if not monitor["sliderMin"] <= monitor["sliderMax"]:
+            raise formatError(path=path, message="'sliderMin' must be below 'sliderMax'.")
+        if monitor["onlyIntegers"]:
+            if not isinstance(monitor["sliderMin"], int):
+                raise formatError(path=path+["monitor"]+["sliderMin"], message="Must be an integer because 'onlyIntegers' is true.")
+            if not isinstance(monitor["sliderMax"], int):
+                raise formatError(path=path+["monitor"]+["sliderMax"], message="Must be an integer because 'onlyIntegers' is true.")
+        
+def validateList(path, data):
+    # Check list format
+    validateSchema(pathToData=path, data=data, schema=listSchema)
+    validateSchema(pathToData=path+["monitor"], data=data["monitor"], schema=listMonitorSchema)
+
 def validateInputs(path, data, opcode, opcodeData, context):
     allowedInputIDs = list(opcodeData["inputTypes"].keys()) # List of inputs which are defined for the specific opcode
     for i, inputID, inputValue in ikv(data):
@@ -155,6 +176,9 @@ def validateSprite(path, data, context):
     for j, script in enumerate(data["scripts"]):
         validateScript(path=path+["scripts"]+[j], data=script, context=context)
     
+    for j, costume in enumerate(data["costumes"]):
+        validateCostume(path=path+["costumes"]+[j], data=costume)
+    
 def validateProject(data):
     # Check project format
     validateSchema(pathToData=[], data=data, schema=projectSchema)
@@ -222,27 +246,7 @@ def validateProject(data):
         if spriteName in spriteNames: # If there is the same sprite name twice
             raise formatError(path=["sprites"]+[i]+["name"], message="Sprite names mustn't be the same.")
         spriteNames.append(spriteName)
-
-def validateVariable(path, data, isGlobal):
-    # Check variable format
-    validateSchema(pathToData=path, data=data, schema=variableSchema)
-    validateSchema(pathToData=path+["monitor"], data=data["monitor"], schema=variableMonitorSchema)
-    if isGlobal and "isCloudVariable" not in data:
-        raise formatError(path=path, message="Global variables must have the 'isCloudVariable' attribute.")
-    monitor = data["monitor"]
-    if monitor != None:
-        if not monitor["sliderMin"] <= monitor["sliderMax"]:
-            raise formatError(path=path, message="'sliderMin' must be below 'sliderMax'.")
-        if monitor["onlyIntegers"]:
-            if not isinstance(monitor["sliderMin"], int):
-                raise formatError(path=path+["monitor"]+["sliderMin"], message="Must be an integer because 'onlyIntegers' is true.")
-            if not isinstance(monitor["sliderMax"], int):
-                raise formatError(path=path+["monitor"]+["sliderMax"], message="Must be an integer because 'onlyIntegers' is true.")
-        
-def validateList(path, data):
-    # Check list format
-    validateSchema(pathToData=path, data=data, schema=listSchema)
-    validateSchema(pathToData=path+["monitor"], data=data["monitor"], schema=listMonitorSchema)
+    
 
 ###################################################
 # validate costumes, sounds
