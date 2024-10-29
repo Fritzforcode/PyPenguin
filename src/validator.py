@@ -47,6 +47,9 @@ def validateList(path, data):
     validateSchema(pathToData=path, data=data, schema=listSchema)
     validateSchema(pathToData=path+["monitor"], data=data["monitor"], schema=listMonitorSchema)
 
+def validateCostume(path, data):
+    pp(data)
+
 def validateInputs(path, data, opcode, opcodeData, context):
     allowedInputIDs = list(opcodeData["inputTypes"].keys()) # List of inputs which are defined for the specific opcode
     for i, inputID, inputValue in ikv(data):
