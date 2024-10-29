@@ -23,3 +23,5 @@ test variable overlapping detection
 can var "currentValue" be boolean too?
 
 move cloud emoji validation into validator.py from deoptimize/varables_lists.py
+
+update documentation
