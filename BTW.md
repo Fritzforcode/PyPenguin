@@ -20,8 +20,10 @@ direction into range 180 to -180
 
 test variable overlapping detection
 
-can var "currentValue" be boolean too?
+can var "currentValue" be boolean or null too?
 
 move cloud emoji validation into validator.py from deoptimize/varables_lists.py
 
 update documentation
+
+maybe validate json files before reading them
