@@ -62,27 +62,8 @@
             ],
             "localLists": [
                 {
-                    "name": "globalList",
-                    "currentValue": [],
-                    "mode": "global",
-                    "sprite": null,
-                    "monitor": {
-                        "visible": true,
-                        "size": [
-                            0,
-                            0
-                        ],
-                        "position": [
-                            205,
-                            5
-                        ]
-                    }
-                },
-                {
                     "name": "localList",
                     "currentValue": [],
-                    "mode": "local",
-                    "sprite": "Sprite1",
                     "monitor": {
                         "visible": true,
                         "size": [
@@ -92,23 +73,6 @@
                         "position": [
                             155,
                             212
-                        ]
-                    }
-                },
-                {
-                    "name": "localList",
-                    "currentValue": [],
-                    "mode": "local",
-                    "sprite": "Sprite2",
-                    "monitor": {
-                        "visible": true,
-                        "size": [
-                            0,
-                            0
-                        ],
-                        "position": [
-                            5,
-                            112
                         ]
                     }
                 }
@@ -166,44 +130,8 @@
             ],
             "localLists": [
                 {
-                    "name": "globalList",
-                    "currentValue": [],
-                    "mode": "global",
-                    "sprite": null,
-                    "monitor": {
-                        "visible": true,
-                        "size": [
-                            0,
-                            0
-                        ],
-                        "position": [
-                            205,
-                            5
-                        ]
-                    }
-                },
-                {
                     "name": "localList",
                     "currentValue": [],
-                    "mode": "local",
-                    "sprite": "Sprite1",
-                    "monitor": {
-                        "visible": true,
-                        "size": [
-                            0,
-                            0
-                        ],
-                        "position": [
-                            155,
-                            212
-                        ]
-                    }
-                },
-                {
-                    "name": "localList",
-                    "currentValue": [],
-                    "mode": "local",
-                    "sprite": "Sprite2",
                     "monitor": {
                         "visible": true,
                         "size": [
@@ -273,8 +201,6 @@
         {
             "name": "globalList",
             "currentValue": [],
-            "mode": "global",
-            "sprite": null,
             "monitor": {
                 "visible": true,
                 "size": [
@@ -284,40 +210,6 @@
                 "position": [
                     205,
                     5
-                ]
-            }
-        },
-        {
-            "name": "localList",
-            "currentValue": [],
-            "mode": "local",
-            "sprite": "Sprite1",
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    155,
-                    212
-                ]
-            }
-        },
-        {
-            "name": "localList",
-            "currentValue": [],
-            "mode": "local",
-            "sprite": "Sprite2",
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    5,
-                    112
                 ]
             }
         }

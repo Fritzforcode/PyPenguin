@@ -5,16 +5,21 @@
             "name": "Stage",
             "variables": {
                 "X#fH=/ZM.T|B;rKrmG[s": [
-                    "my variable",
-                    -15
+                    "globalVar",
+                    0
                 ],
                 "NmjQ-_mT(OA^.)?Hh^bl": [
-                    "\u2601 mycloudVar",
+                    "\u2601 cloudVar",
                     0,
                     true
                 ]
             },
-            "lists": {},
+            "lists": {
+                "xeH-ilqtek]Y@J?EB}#|": [
+                    "globalList",
+                    []
+                ]
+            },
             "broadcasts": {},
             "customVars": [],
             "blocks": {},
@@ -31,8 +36,9 @@
                 }
             ],
             "sounds": [],
-            "id": "M^Lp^Q]A^}K)lXO{ELxy",
+            "id": "xp.Ahc]%mHiCjMS(xh;,",
             "volume": 100,
+            "layerOrder": 0,
             "tempo": 60,
             "videoTransparency": 50,
             "videoState": "on",
@@ -43,64 +49,34 @@
             "name": "Sprite1",
             "variables": {
                 "Za:QFPiy`CEs]*lkO=/n": [
-                    "var",
+                    "localVar",
                     0
                 ]
             },
-            "lists": {},
+            "lists": {
+                "J*:TkPo/}QyFcIoCVvQ%": [
+                    "localList",
+                    []
+                ]
+            },
             "broadcasts": {},
             "customVars": [],
-            "blocks": {
-                "a:a#b": {
-                    "opcode": "data_setvariableto",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "VARIABLE": [
-                            "var",
-                            "Za:QFPiy`CEs]*lkO=/n",
-                            ""
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 440,
-                    "y": 233
-                }
-            },
+            "blocks": {},
             "comments": {},
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "costume1",
+                    "name": "costume2",
                     "bitmapResolution": 1,
-                    "assetId": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
                     "dataFormat": "svg",
-                    "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
-                    "rotationCenterX": 26,
-                    "rotationCenterY": 46
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 0,
+                    "rotationCenterY": 0
                 }
             ],
-            "sounds": [
-                {
-                    "name": "Squawk",
-                    "assetId": "e140d7ff07de8fa35c3d1595bba835ac",
-                    "dataFormat": "wav",
-                    "rate": 48000,
-                    "sampleCount": 17867,
-                    "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
-                }
-            ],
-            "id": "xeH-ilqtek]Y@J?EB}#|",
+            "sounds": [],
+            "id": "fmYzHT-`vAhuuR@Gp)wb",
             "volume": 100,
             "visible": true,
             "x": 0,
@@ -110,6 +86,49 @@
             "draggable": false,
             "rotationStyle": "all around",
             "layerOrder": 1
+        },
+        {
+            "isStage": false,
+            "name": "Sprite2",
+            "variables": {
+                "M^Lp^Q]A^}K)lXO{ELxy": [
+                    "localVar",
+                    0
+                ]
+            },
+            "lists": {
+                "hmsCf{[jdpy{pYlVoecy": [
+                    "localList",
+                    []
+                ]
+            },
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "assetId": "3339a2953a3bf62bb80e54ff575dbced",
+                    "dataFormat": "svg",
+                    "md5ext": "3339a2953a3bf62bb80e54ff575dbced.svg",
+                    "rotationCenterX": 0,
+                    "rotationCenterY": 0
+                }
+            ],
+            "sounds": [],
+            "id": "-!`=NTXGt_b+kQf]JrE.",
+            "volume": 100,
+            "visible": true,
+            "x": 36,
+            "y": 28,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around",
+            "layerOrder": 2
         }
     ],
     "monitors": [
@@ -118,27 +137,9 @@
             "mode": "default",
             "opcode": "data_variable",
             "params": {
-                "VARIABLE": "my variable"
+                "VARIABLE": "globalVar"
             },
             "spriteName": null,
-            "value": -15,
-            "width": 0,
-            "height": 3,
-            "x": 47,
-            "y": 219,
-            "visible": true,
-            "sliderMin": -77,
-            "sliderMax": 3,
-            "isDiscrete": true
-        },
-        {
-            "id": "Za:QFPiy`CEs]*lkO=/n",
-            "mode": "default",
-            "opcode": "data_variable",
-            "params": {
-                "VARIABLE": "var"
-            },
-            "spriteName": "Sprite1",
             "value": 0,
             "width": 0,
             "height": 0,
@@ -148,6 +149,105 @@
             "sliderMin": 0,
             "sliderMax": 100,
             "isDiscrete": true
+        },
+        {
+            "id": "NmjQ-_mT(OA^.)?Hh^bl",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "\u2601 cloudVar"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 57,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "Za:QFPiy`CEs]*lkO=/n",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "localVar"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 31,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "M^Lp^Q]A^}K)lXO{ELxy",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "localVar"
+            },
+            "spriteName": "Sprite2",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 86,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "xeH-ilqtek]Y@J?EB}#|",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "globalList"
+            },
+            "spriteName": null,
+            "value": [],
+            "width": 0,
+            "height": 0,
+            "x": 205,
+            "y": 5,
+            "visible": true
+        },
+        {
+            "id": "J*:TkPo/}QyFcIoCVvQ%",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "localList"
+            },
+            "spriteName": "Sprite1",
+            "value": [],
+            "width": 0,
+            "height": 0,
+            "x": 155,
+            "y": 212,
+            "visible": true
+        },
+        {
+            "id": "hmsCf{[jdpy{pYlVoecy",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "localList"
+            },
+            "spriteName": "Sprite2",
+            "value": [],
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 112,
+            "visible": true
         }
     ],
     "extensionData": {},
