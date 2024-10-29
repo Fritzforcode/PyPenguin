@@ -34,7 +34,7 @@ def extract(
     
     # Delete temporary files
     os.remove(zip_file_path)
-    #shutil.rmtree(extract_dir)
+    shutil.rmtree(extract_dir)
 
 
 if __name__ == "__main__":
