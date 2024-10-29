@@ -5,15 +5,26 @@
             "name": "Stage",
             "scripts": [],
             "comments": [],
-            "currentCostume": 0,
+            "currentCostume": 1,
             "costumes": [
                 {
                     "name": "backdrop1",
+                    "bitmapResolution": 1,
                     "dataFormat": "svg",
-                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "fileStem": "4a3b9c4908d5692d253729f47272c55c",
                     "rotationCenter": [
-                        240,
-                        180
+                        93.66665649414062,
+                        51.33332824707031
+                    ]
+                },
+                {
+                    "name": "Screenshot 2024-10-14 195328",
+                    "bitmapResolution": 2,
+                    "dataFormat": "png",
+                    "fileStem": "01dca01f44b4a88b4c55bec6af4dbb04",
+                    "rotationCenter": [
+                        17,
+                        20
                     ]
                 }
             ],
@@ -28,55 +39,35 @@
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "costume2",
+                    "name": "costume1",
                     "bitmapResolution": 1,
                     "dataFormat": "svg",
-                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "fileStem": "c434b674f2da18ba13cdfe51dbc05ecc",
                     "rotationCenter": [
-                        0,
-                        0
+                        26,
+                        46
                     ]
                 }
             ],
-            "sounds": [],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "dataFormat": "wav",
+                    "fileStem": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "rate": 48000,
+                    "sampleCount": 17867
+                },
+                {
+                    "name": "art-of-samples-buzz-120-bpm-audio-logo-245396",
+                    "dataFormat": "mp3",
+                    "fileStem": "64ff5535a3f758aec5ae068a6bdbaa5b",
+                    "rate": 48000,
+                    "sampleCount": 388702
+                }
+            ],
             "volume": 100,
-            "localVariables": [
-                {
-                    "name": "localVar",
-                    "currentValue": 0,
-                    "monitor": {
-                        "visible": true,
-                        "size": [
-                            0,
-                            0
-                        ],
-                        "position": [
-                            5,
-                            31
-                        ],
-                        "sliderMin": 0,
-                        "sliderMax": 100,
-                        "onlyIntegers": true
-                    }
-                }
-            ],
-            "localLists": [
-                {
-                    "name": "localList",
-                    "currentValue": [],
-                    "monitor": {
-                        "visible": true,
-                        "size": [
-                            0,
-                            0
-                        ],
-                        "position": [
-                            155,
-                            212
-                        ]
-                    }
-                }
-            ],
+            "localVariables": [],
+            "localLists": [],
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -87,133 +78,17 @@
             "direction": 90,
             "draggable": false,
             "rotationStyle": "all around"
-        },
-        {
-            "isStage": false,
-            "name": "Sprite2",
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "costume1",
-                    "bitmapResolution": 1,
-                    "dataFormat": "svg",
-                    "fileStem": "3339a2953a3bf62bb80e54ff575dbced",
-                    "rotationCenter": [
-                        0,
-                        0
-                    ]
-                }
-            ],
-            "sounds": [],
-            "volume": 100,
-            "localVariables": [
-                {
-                    "name": "localVar",
-                    "currentValue": 0,
-                    "monitor": {
-                        "visible": true,
-                        "size": [
-                            0,
-                            0
-                        ],
-                        "position": [
-                            5,
-                            86
-                        ],
-                        "sliderMin": 0,
-                        "sliderMax": 100,
-                        "onlyIntegers": true
-                    }
-                }
-            ],
-            "localLists": [
-                {
-                    "name": "localList",
-                    "currentValue": [],
-                    "monitor": {
-                        "visible": true,
-                        "size": [
-                            0,
-                            0
-                        ],
-                        "position": [
-                            5,
-                            112
-                        ]
-                    }
-                }
-            ],
-            "layerOrder": 2,
-            "visible": true,
-            "position": [
-                36,
-                28
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": false,
-            "rotationStyle": "all around"
         }
     ],
     "globalVariables": [
         {
-            "name": "globalVar",
+            "name": "my variable",
             "currentValue": 0,
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    5,
-                    5
-                ],
-                "sliderMin": 0,
-                "sliderMax": 100,
-                "onlyIntegers": true
-            },
+            "monitor": null,
             "isCloudVariable": false
-        },
-        {
-            "name": "\u2601 cloudVar",
-            "currentValue": 0,
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    5,
-                    57
-                ],
-                "sliderMin": 0,
-                "sliderMax": 100,
-                "onlyIntegers": true
-            },
-            "isCloudVariable": true
         }
     ],
-    "globalLists": [
-        {
-            "name": "globalList",
-            "currentValue": [],
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    205,
-                    5
-                ]
-            }
-        }
-    ],
+    "globalLists": [],
     "tempo": 60,
     "videoTransparency": 50,
     "videoState": "on",
