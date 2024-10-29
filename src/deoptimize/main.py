@@ -91,6 +91,7 @@ def deoptimizeProject(sourcePath, targetPath):
         if spriteData["isStage"]:
             newSpriteData["broadcasts"] = flipKeysAndValues(tokens["broadcasts"][None])
             newSpriteData |= {
+                "layerOrder"          : 0,
                 "tempo"               : data["tempo"],
                 "videoTransparency"   : data["videoTransparency"],
                 "videoState"          : data["videoState"],

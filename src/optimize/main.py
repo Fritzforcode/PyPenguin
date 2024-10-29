@@ -36,7 +36,7 @@ def optimizeProject(sourcePath, targetPath):
             monitorDatas=dataSource["monitors"]
         )
         translatedListDatas = translateLists(
-            data=dataSource["targets"],
+            data=spriteData,
             monitorDatas=dataSource["monitors"],
         )
         #pp(spriteData)
@@ -69,9 +69,9 @@ def optimizeProject(sourcePath, targetPath):
         newSpriteDatas.append(newSpriteData)
     stageData = dataSource["targets"][0]
     newData = {
-        "sprites"        : newSpriteDatas,
-        "globalVariables": globalVariableDatas,
-        "globalLists"    : globalListDatas,
+        "sprites"             : newSpriteDatas,
+        "globalVariables"     : globalVariableDatas,
+        "globalLists"         : globalListDatas,
         "tempo"               : stageData["tempo"], # I moved these from the stage to the project because they influence the whole project
         "videoTransparency"   : stageData["videoTransparency"],
         "videoState"          : stageData["videoState"],
