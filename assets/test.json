@@ -1,0 +1,108 @@
+{
+    "sprites": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 1,
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "fileStem": "4a3b9c4908d5692d253729f47272c55c",
+                    "rotationCenter": [
+                        93.66665649414062,
+                        51.33332824707031
+                    ]
+                },
+                {
+                    "name": "Screenshot 2024-10-14 195328",
+                    "bitmapResolution": 2,
+                    "dataFormat": "png",
+                    "fileStem": "01dca01f44b4a88b4c55bec6af4dbb04",
+                    "rotationCenter": [
+                        17,
+                        20
+                    ]
+                }
+            ],
+            "sounds": [],
+            "volume": 100
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "fileStem": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "rotationCenter": [
+                        26,
+                        46
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "dataFormat": "wav",
+                    "fileStem": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "rate": 48000,
+                    "sampleCount": 17867
+                },
+                {
+                    "name": "art-of-samples-buzz-120-bpm-audio-logo-245396",
+                    "dataFormat": "mp3",
+                    "fileStem": "64ff5535a3f758aec5ae068a6bdbaa5b",
+                    "rate": 48000,
+                    "sampleCount": 388702
+                }
+            ],
+            "volume": 100,
+            "localVariables": [],
+            "localLists": [],
+            "layerOrder": 1,
+            "visible": true,
+            "position": [
+                0,
+                0
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "globalVariables": [
+        {
+            "name": "my variable",
+            "currentValue": 0,
+            "monitor": null,
+            "isCloudVariable": false
+        }
+    ],
+    "globalLists": [],
+    "tempo": 60,
+    "videoTransparency": 50,
+    "videoState": "on",
+    "textToSpeechLanguage": null,
+    "extensionData": {},
+    "extensions": [],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": "",
+        "platform": {
+            "name": "PenguinMod",
+            "url": "https://penguinmod.com/",
+            "version": "stable"
+        }
+    }
+}

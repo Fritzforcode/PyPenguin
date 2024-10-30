@@ -9,8 +9,8 @@ from helper_functions import readJSONFile, pp
 
 directory = "projectAssets/"
 temporaryDirectory = "temporary/"
-jsonPath = "assets/studies/assetTest.json"
-optimizedPath = "assets/optimized.json"
+jsonPath = "assets/studies/test.json"
+optimizedPath = "assets/test.json"
 extract(
     pmp_file_path="assets/studies/assetTest.pmp",
     json_file_path=jsonPath,
