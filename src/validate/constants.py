@@ -1,4 +1,5 @@
 from helper_functions import readJSONFile
+from errors import ValidationError
 
 opcodeDatabase = readJSONFile(filePath="assets/opcode_database.jsonc")
 allowedOpcodes = [data["newOpcode"] for data in opcodeDatabase.values()]
@@ -316,11 +317,6 @@ def formatError(path, message):
     path = [str(i) for i in path] # Convert all indexes to string
     return ValidationError(f"{('at [' + '/'.join(path) + '] - ') if path != [] else ''}{message}")
 
-class ValidationError(Exception):
-    pass
-
-
-from helper_functions import readJSONFile
 
 opcodeDatabase = readJSONFile(filePath="assets/opcode_database.jsonc")
 allowedOpcodes = [data["newOpcode"] for data in opcodeDatabase.values()]
