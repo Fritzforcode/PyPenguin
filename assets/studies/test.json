@@ -1,0 +1,111 @@
+{
+    "targets": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "variables": {
+                "`jEk@4|i[#Fk?(8x)AV.-my variable": [
+                    "my variable",
+                    0
+                ]
+            },
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 1,
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "assetId": "4a3b9c4908d5692d253729f47272c55c",
+                    "md5ext": "4a3b9c4908d5692d253729f47272c55c.svg",
+                    "rotationCenterX": 93.66665649414062,
+                    "rotationCenterY": 51.33332824707031
+                },
+                {
+                    "name": "Screenshot 2024-10-14 195328",
+                    "bitmapResolution": 2,
+                    "dataFormat": "png",
+                    "assetId": "01dca01f44b4a88b4c55bec6af4dbb04",
+                    "md5ext": "01dca01f44b4a88b4c55bec6af4dbb04.png",
+                    "rotationCenterX": 17,
+                    "rotationCenterY": 20
+                }
+            ],
+            "sounds": [],
+            "id": "p]_uD8#0^Q=ryfqeQLud",
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 50,
+            "videoState": "on",
+            "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "assetId": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
+                    "rotationCenterX": 26,
+                    "rotationCenterY": 46
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "assetId": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "dataFormat": "wav",
+                    "rate": 48000,
+                    "sampleCount": 17867,
+                    "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
+                },
+                {
+                    "name": "art-of-samples-buzz-120-bpm-audio-logo-245396",
+                    "assetId": "64ff5535a3f758aec5ae068a6bdbaa5b",
+                    "dataFormat": "mp3",
+                    "rate": 48000,
+                    "sampleCount": 388702,
+                    "md5ext": "64ff5535a3f758aec5ae068a6bdbaa5b.mp3"
+                }
+            ],
+            "id": "5I9nI;7P)jdiR-_X;/%l",
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "monitors": [],
+    "extensionData": {},
+    "extensions": [],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": "",
+        "platform": {
+            "name": "PenguinMod",
+            "url": "https://penguinmod.com/",
+            "version": "stable"
+        }
+    }
+}
