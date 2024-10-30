@@ -1,7 +1,6 @@
 from helper_functions import ikv
-from validate.constants import validateSchema, formatError, blockSchema, scriptSchema, opcodeDatabase, allowedOpcodes
-from validate.comments import validateComment
-from validate.constants import validateSchema, formatError, inputSchema
+from validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema, opcodeDatabase, allowedOpcodes
+from validate.comments import validateComment 
 
 
 def validateBlock(path, data, context):
