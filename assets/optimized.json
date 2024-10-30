@@ -28,15 +28,7 @@
                     ]
                 }
             ],
-            "sounds": [
-                {
-                    "name": "Squawk",
-                    "dataFormat": "",
-                    "fileStem": "",
-                    "rate": 10000,
-                    "sampleCount": 10000
-                }
-            ],
+            "sounds": [],
             "volume": 100
         },
         {
