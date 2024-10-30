@@ -1,6 +1,6 @@
 from helper_functions import ikv, WhatIsGoingOnError, readJSONFile
 
-from comments import translateComment
+from optimize.comments import translateComment
 
 opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
 

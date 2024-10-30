@@ -11,3 +11,4 @@ def validateCostume(path, data, isStage):
 def validateSound(path, data):
     # Check sound format
     validateSchema(pathToData=path, data=data, schema=soundSchema)
+
