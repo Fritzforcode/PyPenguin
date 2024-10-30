@@ -1,8 +1,5 @@
 from helper_functions import readJSONFile, ikv, pp
 
-class ValidationError(Exception):
-    pass
-
 opcodeDatabase = readJSONFile(filePath="assets/opcode_database.jsonc")
 allowedOpcodes = [data["newOpcode"] for data in opcodeDatabase.values()]
 textToSpeechLanguages = [
@@ -158,8 +155,8 @@ soundSchema = {
     "name"       : { "type": "string" },
     "dataFormat" : { "type": "string" },
     "fileStem"   : { "type": "string" },
-    "rate"       : { "type": "integer" },
-    "sampleCount": { "type": "integer" }
+    "rate"       : { "type": "integer", "minimum": 0 },
+    "sampleCount": { "type": "integer", "minimum": 0 }
   },
   "required": ["name", "dataFormat", "fileStem", "rate", "sampleCount"]
 }

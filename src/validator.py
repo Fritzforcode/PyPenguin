@@ -1,11 +1,15 @@
-import jsonschema
-from jsonschema import validate, exceptions
-
-
-from helper_functions import readJSONFile, ikv, pp
-from validator_constants import *
+##############################################################################################
+# This script is supposed to check if given data is valid according to  my "optimzed format" #
+# (https://github.com/Fritzforcode/PyPenguin/Optimized%20Format%20Documentation.md).         #
+# I do NOT guarantee, that this script is able to detect every possible szenario,            #
+# where the data is invalid but it does detect many.                                         #
+# If you find an error szenario, which this script does not detect please tell me on Github. #
+# (https://github.com/Fritzforcode/PyPenguin/issues/).                                       #
+##############################################################################################f
 
 def validateSchema(pathToData, data, schema):
+    from jsonschema import validate, exceptions
+    
     try:
         validate(instance=data, schema=schema)
         error = None
@@ -20,13 +24,13 @@ def formatError(path, message):
     path = [str(i) for i in path] # Convert all indexes to string
     return ValidationError(f"{('at [' + '/'.join(path) + '] - ') if path != [] else ''}{message}")
 
-#################################################################################################
-# the following functions detect some error causes (which i think can happen)                   #
-# which can't be detected with jsonschema                                                        #
-# if you find an error cause that is not detected by this this script, tell me on Github        #
-#################################################################################################
+class ValidationError(Exception):
+    pass
+
 
 def validateVariable(path, data, isGlobal):
+    from validator_constants import variableSchema, variableMonitorSchema
+    
     # Check variable format
     validateSchema(pathToData=path, data=data, schema=variableSchema)
     validateSchema(pathToData=path+["monitor"], data=data["monitor"], schema=variableMonitorSchema)
@@ -43,14 +47,27 @@ def validateVariable(path, data, isGlobal):
                 raise formatError(path=path+["monitor"]+["sliderMax"], message="Must be an integer because 'onlyIntegers' is true.")
         
 def validateList(path, data):
+    from validator_constants import listSchema, listMonitorSchema
+    
     # Check list format
     validateSchema(pathToData=path, data=data, schema=listSchema)
     validateSchema(pathToData=path+["monitor"], data=data["monitor"], schema=listMonitorSchema)
 
-def validateCostume(path, data):
-    pp(data)
+def validateCostume(path, data, isStage):
+    # Check costume format
+    validateSchema(pathToData=path, data=data, schema=costumeSchema)
+    if "bitmapResolution" not in data:
+        ###if not(isStage and data["dataFormat"] == "svg"):
+        ###    raise formatError(path=path, message="Unless the costume is a backdrop and a .svg, the 'bitmapResolution' attribute is required.")
+        raise formatError(path=path, message="'bitmapResolution' is a required attribute.")
+    
+def validateSound(path, data):
+    # Check sound format
+    validateSchema(pathToData=path, data=data, schema=soundSchema)
 
 def validateInputs(path, data, opcode, opcodeData, context):
+    from helper_functions import ikv
+    
     allowedInputIDs = list(opcodeData["inputTypes"].keys()) # List of inputs which are defined for the specific opcode
     for i, inputID, inputValue in ikv(data):
         if inputID not in allowedInputIDs:
@@ -84,6 +101,8 @@ def validateInputs(path, data, opcode, opcodeData, context):
                     raise formatError(path+[inputID]+["mode"], f"Must be 'block-and-text' in this case.")
 
 def validateOptions(path, data, opcode, opcodeData, context):
+    from helper_functions import ikv
+    
     allowedOptionIDs = list(opcodeData["optionTypes"].keys()) # List of options which are defined for the specific opcode
     for i, optionID, optionValue in ikv(data):
         if optionID not in allowedOptionIDs:
@@ -127,6 +146,7 @@ def validateComment(path, data):
             raise formatError(path+["size"]+[0], f"Must be at least 52.")
         if data["size"][1] < 32:
             raise formatError(path+["size"]+[1], f"Must be at least 32.")
+    
 
 def validateBlock(path, data, context):
     # Check block format
@@ -179,8 +199,26 @@ def validateSprite(path, data, context):
     for j, script in enumerate(data["scripts"]):
         validateScript(path=path+["scripts"]+[j], data=script, context=context)
     
+    # Check costume formats
+    costumeNames = []
     for j, costume in enumerate(data["costumes"]):
-        validateCostume(path=path+["costumes"]+[j], data=costume)
+        validateCostume(path=path+["costumes"]+[j], data=costume, isStage=i==0)
+        if costume["name"] in costumeNames: # If a costume with the same name alredy exists
+            raise formatError(path=path+["costumes"]+[j]+["name"], message= "Costume names mustn't be the same.")
+        costumeNames.append(costume["name"])
+    
+    # Check sound formats
+    soundNames = []
+    for j, sound in enumerate(data["sounds"]):
+        validateSound(path=path+["sounds"]+[j], data=sound)
+        if sound["name"] in soundNames: # If a sound with the same name alredy exists
+            raise formatError(path=path+["sounds"]+[j]+["name"], message= "Sound names mustn't be the same.")
+        soundNames.append(sound["name"])
+    
+    
+    # Make sure that currentCostume refers to an existing costume
+    if data["currentCostume"] >= len(data["costumes"]):
+        raise formatError(path=path+["currentCostume"], message=f"Is out of range. There are only {len(data['costumes'])} costumes in this sprite, so 'currentCostume' could be at most {len(data['costumes']) - 1}.")
     
 def validateProject(data):
     # Check project format
@@ -251,18 +289,9 @@ def validateProject(data):
         spriteNames.append(spriteName)
     
 
-###################################################
-# validate costumes, sounds
-
-#ALSO CHECK dataFormat???
-#ONLY ALLOW bitmapResolution to be removed when stage and its svg#
-#NO OVERLAPPING NAMES IN SOUNDS, COSTUMES, SPRITES?
-#ALSO CHECK currentCOSTUME IN RANGE
-#validate extension names?
-# maybe hide input when in block-only mode? needs research
-###################################################
-
-data = readJSONFile("assets/optimized.json")
-validateProject(data=data)
-print("Validation succeeded")
+if __name__ == "__main__":
+    from helper_functions import readJSONFile
+    data = readJSONFile("assets/optimized.json")
+    validateProject(data=data)
+    print("Validation succeeded") # When the data is invalid this will not be reached
 

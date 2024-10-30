@@ -10,11 +10,16 @@
 - more block opcodes
 
 # TODO
-EXPLORE AND MAYBE TRANSLATE EXTENSIONDATA
+explore and possibly translate extensionData
+
 maybe rename assets and put into folder structure
+ - use url representation for file names (e.g. %20 for SPACE)
+
 maybe remove "sampleCount"
+
 maybe translate currentValue for cetain types
-ADD OTHER MONITOR TYPES
+
+add other monitor types
 
 direction into range 180 to -180
 
@@ -22,8 +27,19 @@ test variable overlapping detection
 
 can var "currentValue" be boolean or null too?
 
-move cloud emoji validation into validator.py from deoptimize/varables_lists.py
+move cloud emoji validation from deoptimize/varables_lists.py into validator.py
 
 update documentation
 
 maybe validate json files before reading them
+
+research bitmapResolution further
+
+explore other text input fields (if they require a min length of 1)
+
+maybe hide input when in block-only mode? needs research
+
+maybe validate:
+- dataFormat
+- extension names
+- layerOrder to be at most 4 - needs research 

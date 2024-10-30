@@ -81,7 +81,6 @@ def optimizeProject(sourcePath, targetPath):
         "extensions"          : dataSource["extensions"],
         "meta"                : dataSource["meta"],
     }
-    pp(newData)
     writeJSONFile(targetPath, newData)
 
 optimizeProject(

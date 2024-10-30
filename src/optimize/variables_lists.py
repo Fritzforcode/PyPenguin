@@ -11,8 +11,10 @@ def translateVariables(data, monitorDatas):
                 mode = "cloud"
             else:
                 mode = "global"
+            sprite = None
         else:
             mode = "local"
+            sprite = data["name"]
         if data["customVars"] != []:
             raise WhatIsGoingOnError("Wow! I have been trying to find out what 'customVars' is used for. Can you explain how you did that? Please contact me on GitHub.")
         
@@ -44,19 +46,21 @@ def translateVariables(data, monitorDatas):
             pass
         newData.append(newVariableData)
     return newData
-
+    
 def translateLists(data, monitorDatas):
     newData = []
     for i,listID,listData in ikv(data["lists"]):
         name = listData[0]
         currentValue = listData[1]
-        if data["isStage"]:
+        if spriteData["isStage"]:
             mode = "global"
+            sprite = None
         else:
             mode = "local"
+            sprite = spriteData["name"]
         
         monitorIDs = [i["id"] for i in monitorDatas]
-        # if there is no monitor for that liat
+        # if there is no monitor for that variable
         if listID not in monitorIDs:
             newMonitorData = None
         else:
@@ -70,8 +74,9 @@ def translateLists(data, monitorDatas):
         newListData = {
             "name"        : name,
             "currentValue": currentValue,
+            "mode"        : mode,
+            "sprite"      : sprite,
             "monitor"     : newMonitorData,
         }
         newData.append(newListData)
     return newData
-    
