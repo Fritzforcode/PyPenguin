@@ -1,5 +1,5 @@
 from helper_functions import readJSONFile
-from errors import ValidationError
+from validate.errors import ValidationError
 
 opcodeDatabase = readJSONFile(filePath="assets/opcode_database.jsonc")
 allowedOpcodes = [data["newOpcode"] for data in opcodeDatabase.values()]
