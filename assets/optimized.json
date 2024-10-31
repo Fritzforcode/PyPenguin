@@ -78,6 +78,28 @@
             "direction": 90,
             "draggable": false,
             "rotationStyle": "all around"
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [],
+            "sounds": [],
+            "volume": 100,
+            "localVariables": [],
+            "localLists": [],
+            "layerOrder": 1,
+            "visible": true,
+            "position": [
+                0,
+                0
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
         }
     ],
     "globalVariables": [

@@ -7,5 +7,5 @@
 # (https://github.com/Fritzforcode/PyPenguin/issues/).                                         #
 ################################################################################################
 
-from .main import validateProject as validate
+from .main import validateProject
 

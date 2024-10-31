@@ -69,7 +69,6 @@ def validateProject(data):
         if spriteName in spriteNames: # If there is the same sprite name twice
             raise formatError(path=["sprites"]+[i]+["name"], message="Sprite names mustn't be the same.")
         spriteNames.append(spriteName)
-    
 
 from helper_functions import readJSONFile, ikv, pp
 
