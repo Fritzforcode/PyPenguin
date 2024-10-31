@@ -2,11 +2,11 @@ exec("import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname
 
 from helper_functions import readJSONFile, writeJSONFile, generateRandomToken, generateSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
 
-from variables_lists import translateVariables, translateLists
-from broadcasts import generateBroadcastTokens
-from blocks_scripts import linkBlocksToScript, unnestScript
-from costumes_sounds import translateCostumes, translateSounds
-from comments import translateComment
+from deoptimize.variables_lists import translateVariables, translateLists
+from deoptimize.broadcasts import generateBroadcastTokens
+from deoptimize.blocks_scripts import linkBlocksToScript, unnestScript
+from deoptimize.costumes_sounds import translateCostumes, translateSounds
+from deoptimize.comments import translateComment
 
 opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
 
@@ -119,5 +119,3 @@ def deoptimizeProject(sourcePath, targetPath):
     #pp(newProjectData)
     writeJSONFile(targetPath, newProjectData)    
 
-
-deoptimizeProject(sourcePath="assets/optimized.json", targetPath="assets/deoptimized.json")

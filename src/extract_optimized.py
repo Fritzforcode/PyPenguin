@@ -1,13 +1,14 @@
 from validate import validateProject
 from source_extractor import extractProject
 from optimize import optimizeProject
+from deoptimize import deoptimizeProject
 
 import urllib.parse
 import os, shutil
 
-from helper_functions import readJSONFile, pp
+from helper_functions import readJSONFile, writeJSONFile, pp
 
-projectFilePath    = "assets/studies/assetTest.pmp"
+projectFilePath    = "assets/studies/test.pmp"
 jsonPath           = "assets/studies/test.json"
 optimizedPath      = "assets/optimized.json"
 directory          = "projectAssets/"
@@ -21,13 +22,15 @@ unoptimizedData = extractProject(
 optimizedData = optimizeProject(
     projectData=unoptimizedData
 )
+writeJSONFile(filePath=optimizedPath, data=optimizedData)
+
 validateProject(
     projectData=optimizedData
 )
 
 # Clear the directory
 os.makedirs(directory, exist_ok=True)
-shutil.rmtree(path=directory)
+#shutil.rmtree(path=directory)
 
 
 for sprite in optimizedData["sprites"]:
@@ -56,3 +59,9 @@ for sprite in optimizedData["sprites"]:
 
 # Remove the temporary directory
 shutil.rmtree(temporaryDirectory)
+
+#
+#deoptimizeProject(
+#    sourcePath=optimizedPath,
+#    targetPath="assets/deoptimized.json"
+#)

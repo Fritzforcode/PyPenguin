@@ -12,30 +12,21 @@
 # TODO
 explore and possibly translate extensionData
 
-maybe rename assets and put into folder structure
- - use url representation for file names (e.g. %20 for SPACE)
-
-maybe remove "sampleCount"
-
-maybe translate currentValue for cetain types
-
 add other monitor types
 
 direction into range 180 to -180
-
-test variable overlapping detection
-
-can var "currentValue" be boolean or null too?
 
 move cloud emoji validation from deoptimize/varables_lists.py into validator.py
 
 update documentation
 
-maybe validate json files before reading them
-
-research bitmapResolution further
-
 explore other text input fields (if they require a min length of 1)
+
+maybe remove "sampleCount"
+
+maybe translate currentValue for cetain types
+
+maybe validate json files before reading them
 
 maybe hide input when in block-only mode? needs research
 

@@ -52,15 +52,9 @@ def translateLists(data, monitorDatas):
     for i,listID,listData in ikv(data["lists"]):
         name = listData[0]
         currentValue = listData[1]
-        if spriteData["isStage"]:
-            mode = "global"
-            sprite = None
-        else:
-            mode = "local"
-            sprite = spriteData["name"]
         
         monitorIDs = [i["id"] for i in monitorDatas]
-        # if there is no monitor for that variable
+        # if there is no monitor for that list
         if listID not in monitorIDs:
             newMonitorData = None
         else:
@@ -74,8 +68,6 @@ def translateLists(data, monitorDatas):
         newListData = {
             "name"        : name,
             "currentValue": currentValue,
-            "mode"        : mode,
-            "sprite"      : sprite,
             "monitor"     : newMonitorData,
         }
         newData.append(newListData)

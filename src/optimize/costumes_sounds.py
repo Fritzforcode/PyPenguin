@@ -11,7 +11,7 @@ def translateCostumes(data):
         if "bitmapResolution" in costumeData:
             newCostumeData["bitmapResolution"] = costumeData["bitmapResolution"]
         else:
-            del newCostumeData["bitmapResolution"]
+            newCostumeData["bitmapResolution"] = 1
         newCostumeDatas.append(newCostumeData)
     return newCostumeDatas
 

@@ -1,6 +1,7 @@
 from helper_functions import ikv, pp, WhatIsGoingOnError, generateSelector, readJSONFile
-from options import translateOptions
-from comments import translateComment
+
+from deoptimize.options import translateOptions
+from deoptimize.comments import translateComment
 
 opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
 

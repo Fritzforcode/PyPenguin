@@ -6,9 +6,9 @@ Properties of objects are always required except when labeled differently
 The Project data must be an object with the following properties:
 * `"sprites"`: [Stage and Sprites Format](#format-of-sprites)
 
-* `"variables"`: [Variable Format](#format-of-variables-and-lists)
+* `"globalVariables"`: [Variable Format](#format-of-variables-and-lists)
 
-* `"lists"`:  [List Format](#format-of-variables-and-lists)
+* `"globalLists"`:  [List Format](#format-of-variables-and-lists)
 
 * `"tempo"`: The tempo from the **Music** extension. Must be an integer between 20 and 500.
 
@@ -19,7 +19,9 @@ The Project data must be an object with the following properties:
 * `"textToSpeechLanguage"`: The language of the **Text to Speech** Extension. Must be either `null` or one of [Possible Values](#supported-text-to-speech-languages)
 
 * `"extensionData"`: An object containing additional information about extensions. (Let me know if you wish more research.)
+
 * `"extensions"`: An array of extension acronyms, which were added to the project.
+
 * `"meta"`: [Meta Format](#format-of-the-metadata)
 
 
@@ -28,11 +30,11 @@ The Project data must be an object with the following properties:
 Must be an array of sprites. The first sprite is always the stage. Then the other sprites follow in the same order as in the editor. A sprite must be an object with the following properties:
 * `"isStage"`: Wether the sprite is the stage. Must be `true` for the stage(the first sprite) and `false` for all other sprites.
 
-* `"name"`: Must be "Stage" for the stage(the first sprite). For all other sprites it can be any string.
+* `"name"`: Must be "Stage" for the stage(the first sprite). For all other sprites this can be any string.
 
 * `"scripts"`: The scripts of the sprite. [Script Format](#format-of-scripts)
 
-* `"comments"`: The comments that are not attached to a block. [Comment Format](#format-of-comments)
+* `"comments"`: The comments that are not attached to a block.  Must be either `null` or an object following the [Comment Format](#format-of-comments)
 
 * `"currentCostume"`: The costume number of the sprite. Must be an integer and at least `0`.
 
@@ -40,7 +42,11 @@ Must be an array of sprites. The first sprite is always the stage. Then the othe
 
 * `"sounds"`: [Sound Format](#format-of-costumes-and-sounds)
 
-* `"volume"`: Must be a number between `0` and `100`.
+* `"volume"`: The volume(applies to sounds). Must be a number between `0` and `100`.
+
+* `"localVariables"`: The `"For this sprite only"` variables of this sprite. [Variable Format](#format-of-variables-and-lists)
+
+* `"localLists"`: The `"For this sprite only"` lists of this sprite. [List Format](#format-of-variables-and-lists)
 
 * `"layerOrder"(*)`: The layer the sprite is on. Must be an integer and at least `1`.
 
@@ -103,11 +109,14 @@ Must be an object of block-specific keys and values. Currently there is only one
 #### Example
 
 
+
 ## Defined Block Opcodes
 You can find the currently defined block opcodes [HERE](assets/opcode_database.jsonc)
 
 
+
 ## Format of Comments
+Must be either `null` or an object with these properties:
 
 
 

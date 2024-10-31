@@ -5,38 +5,65 @@
             "name": "Stage",
             "variables": {
                 "X#fH=/ZM.T|B;rKrmG[s": [
-                    "globalVar",
+                    "my variable",
                     0
-                ],
-                "NmjQ-_mT(OA^.)?Hh^bl": [
-                    "\u2601 cloudVar",
-                    0,
-                    true
                 ]
             },
-            "lists": {
-                "xeH-ilqtek]Y@J?EB}#|": [
-                    "globalList",
-                    []
-                ]
-            },
+            "lists": {},
             "broadcasts": {},
             "customVars": [],
             "blocks": {},
             "comments": {},
-            "currentCostume": 0,
+            "currentCostume": 4,
             "costumes": [
                 {
+                    "name": "Screenshot 2024-10-14 195328",
+                    "bitmapResolution": 2,
+                    "assetId": "01dca01f44b4a88b4c55bec6af4dbb04",
+                    "dataFormat": "png",
+                    "md5ext": "01dca01f44b4a88b4c55bec6af4dbb04.png",
+                    "rotationCenterX": 17,
+                    "rotationCenterY": 20
+                },
+                {
                     "name": "backdrop1",
+                    "bitmapResolution": 1,
                     "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
                     "dataFormat": "svg",
                     "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
                     "rotationCenterX": 240,
                     "rotationCenterY": 180
+                },
+                {
+                    "name": "backdrop2",
+                    "bitmapResolution": 1,
+                    "assetId": "5292f86c81fe2a880714823577275f8a",
+                    "dataFormat": "svg",
+                    "md5ext": "5292f86c81fe2a880714823577275f8a.svg",
+                    "rotationCenterX": 99.66665649414062,
+                    "rotationCenterY": -2.6666717529296875
+                },
+                {
+                    "name": "backdrop3",
+                    "bitmapResolution": 1,
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "dataFormat": "svg",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 0,
+                    "rotationCenterY": 0
+                },
+                {
+                    "name": "backdrop4",
+                    "bitmapResolution": 1,
+                    "assetId": "14e46ec3e2ba471c2adfe8f119052307",
+                    "dataFormat": "svg",
+                    "md5ext": "14e46ec3e2ba471c2adfe8f119052307.svg",
+                    "rotationCenterX": 0,
+                    "rotationCenterY": 0
                 }
             ],
             "sounds": [],
-            "id": "xp.Ahc]%mHiCjMS(xh;,",
+            "id": "NmjQ-_mT(OA^.)?Hh^bl",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,
@@ -46,19 +73,9 @@
         },
         {
             "isStage": false,
-            "name": "Sprite1",
-            "variables": {
-                "Za:QFPiy`CEs]*lkO=/n": [
-                    "localVar",
-                    0
-                ]
-            },
-            "lists": {
-                "J*:TkPo/}QyFcIoCVvQ%": [
-                    "localList",
-                    []
-                ]
-            },
+            "name": "Stage",
+            "variables": {},
+            "lists": {},
             "broadcasts": {},
             "customVars": [],
             "blocks": {},
@@ -66,17 +83,26 @@
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "costume2",
+                    "name": "costume1",
                     "bitmapResolution": 1,
-                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "assetId": "c434b674f2da18ba13cdfe51dbc05ecc",
                     "dataFormat": "svg",
-                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
-                    "rotationCenterX": 0,
-                    "rotationCenterY": 0
+                    "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
+                    "rotationCenterX": 26,
+                    "rotationCenterY": 46
                 }
             ],
-            "sounds": [],
-            "id": "fmYzHT-`vAhuuR@Gp)wb",
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "assetId": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "dataFormat": "wav",
+                    "rate": 48000,
+                    "sampleCount": 17867,
+                    "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
+                }
+            ],
+            "id": "Za:QFPiy`CEs]*lkO=/n",
             "volume": 100,
             "visible": true,
             "x": 0,
@@ -89,19 +115,9 @@
         },
         {
             "isStage": false,
-            "name": "Sprite2",
-            "variables": {
-                "M^Lp^Q]A^}K)lXO{ELxy": [
-                    "localVar",
-                    0
-                ]
-            },
-            "lists": {
-                "hmsCf{[jdpy{pYlVoecy": [
-                    "localList",
-                    []
-                ]
-            },
+            "name": "Stage2",
+            "variables": {},
+            "lists": {},
             "broadcasts": {},
             "customVars": [],
             "blocks": {},
@@ -119,7 +135,7 @@
                 }
             ],
             "sounds": [],
-            "id": "-!`=NTXGt_b+kQf]JrE.",
+            "id": "M^Lp^Q]A^}K)lXO{ELxy",
             "volume": 100,
             "visible": true,
             "x": 36,
@@ -129,127 +145,60 @@
             "draggable": false,
             "rotationStyle": "all around",
             "layerOrder": 2
-        }
-    ],
-    "monitors": [
-        {
-            "id": "X#fH=/ZM.T|B;rKrmG[s",
-            "mode": "default",
-            "opcode": "data_variable",
-            "params": {
-                "VARIABLE": "globalVar"
-            },
-            "spriteName": null,
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 5,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
         },
         {
-            "id": "NmjQ-_mT(OA^.)?Hh^bl",
-            "mode": "default",
-            "opcode": "data_variable",
-            "params": {
-                "VARIABLE": "\u2601 cloudVar"
-            },
-            "spriteName": null,
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 57,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "Za:QFPiy`CEs]*lkO=/n",
-            "mode": "default",
-            "opcode": "data_variable",
-            "params": {
-                "VARIABLE": "localVar"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 31,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "M^Lp^Q]A^}K)lXO{ELxy",
-            "mode": "default",
-            "opcode": "data_variable",
-            "params": {
-                "VARIABLE": "localVar"
-            },
-            "spriteName": "Sprite2",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 86,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
+            "isStage": false,
+            "name": "Stage\ud83d\ude00",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 2,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "assetId": "419acd3e658ba31fa808f29f99dbadaa",
+                    "dataFormat": "svg",
+                    "md5ext": "419acd3e658ba31fa808f29f99dbadaa.svg",
+                    "rotationCenterX": 67.91665649414062,
+                    "rotationCenterY": 8.916662216186523
+                },
+                {
+                    "name": "Screenshot 2024-10-14 195328",
+                    "bitmapResolution": 2,
+                    "assetId": "01dca01f44b4a88b4c55bec6af4dbb04",
+                    "dataFormat": "png",
+                    "md5ext": "01dca01f44b4a88b4c55bec6af4dbb04.png",
+                    "rotationCenterX": 17,
+                    "rotationCenterY": 20
+                },
+                {
+                    "name": "costume2",
+                    "bitmapResolution": 1,
+                    "assetId": "c15221f1c313bff38bdee4c4b8b859a7",
+                    "dataFormat": "svg",
+                    "md5ext": "c15221f1c313bff38bdee4c4b8b859a7.svg",
+                    "rotationCenterX": 77.99999295748205,
+                    "rotationCenterY": 28.87178978553186
+                }
+            ],
+            "sounds": [],
             "id": "xeH-ilqtek]Y@J?EB}#|",
-            "mode": "list",
-            "opcode": "data_listcontents",
-            "params": {
-                "LIST": "globalList"
-            },
-            "spriteName": null,
-            "value": [],
-            "width": 0,
-            "height": 0,
-            "x": 205,
-            "y": 5,
-            "visible": true
-        },
-        {
-            "id": "J*:TkPo/}QyFcIoCVvQ%",
-            "mode": "list",
-            "opcode": "data_listcontents",
-            "params": {
-                "LIST": "localList"
-            },
-            "spriteName": "Sprite1",
-            "value": [],
-            "width": 0,
-            "height": 0,
-            "x": 155,
-            "y": 212,
-            "visible": true
-        },
-        {
-            "id": "hmsCf{[jdpy{pYlVoecy",
-            "mode": "list",
-            "opcode": "data_listcontents",
-            "params": {
-                "LIST": "localList"
-            },
-            "spriteName": "Sprite2",
-            "value": [],
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 112,
-            "visible": true
+            "volume": 100,
+            "visible": true,
+            "x": 36,
+            "y": 28,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around",
+            "layerOrder": 3
         }
     ],
+    "monitors": [],
     "extensionData": {},
     "extensions": [],
     "meta": {
