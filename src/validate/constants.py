@@ -39,7 +39,24 @@ projectSchema = {
     },
     "extensionData": { "type": "object" },
     "extensions"   : { "type": "array"  },
-    "meta"         : { "type": "object" } # Details in metaSchema
+    "meta"         : {
+      "type": "object",
+      "properties": {
+        "semver"  : { "type": "string" },
+        "vm"      : { "type": "string" },
+        "agent"   : { "type": "string" },
+        "platform": {
+          "type"      : "object",
+          "properties": {
+            "name"    : { "type": "string" },
+            "url"     : { "type": "string" },
+            "version" : { "type": "string" }
+          },
+        "required": ["name", "url", "version"],
+        }
+      },
+      "required": ["semver", "vm", "agent", "platform"]
+    }
   },
   "required": [
     "sprites",
@@ -281,24 +298,8 @@ listMonitorSchema = {
   "required": ["visible", "size", "position"]
 }
 
-metaSchema = {
-  "type": "object",
-  "properties": {
-    "semver"  : { "type": "string" },
-    "vm"      : { "type": "string" },
-    "agent"   : { "type": "string" },
-    "platform": {
-      "type"      : "object",
-      "properties": {
-        "name"    : { "type": "string" },
-        "url"     : { "type": "string" },
-        "version" : { "type": "string" }
-      },
-    "required": ["name", "url", "version"],
-    }
-  },
-  "required": ["semver", "vm", "agent", "platform"]
-}
+import time
+from jsonschema import validate, exceptions
 
 def validateSchema(pathToData, data, schema):
     from jsonschema import validate, exceptions
@@ -312,6 +313,7 @@ def validateSchema(pathToData, data, schema):
         error = formatError(path=error_path, message=err.message)
     if error != None:
         raise error
+
 
 def formatError(path, message):
     path = [str(i) for i in path] # Convert all indexes to string
@@ -356,7 +358,24 @@ projectSchema = {
     },
     "extensionData": { "type": "object" },
     "extensions"   : { "type": "array"  },
-    "meta"         : { "type": "object" } # Details in metaSchema
+    "meta"         : {
+      "type": "object",
+      "properties": {
+        "semver"  : { "type": "string" },
+        "vm"      : { "type": "string" },
+        "agent"   : { "type": "string" },
+        "platform": {
+          "type"      : "object",
+          "properties": {
+            "name"    : { "type": "string" },
+            "url"     : { "type": "string" },
+            "version" : { "type": "string" }
+          },
+        "required": ["name", "url", "version"],
+        }
+      },
+      "required": ["semver", "vm", "agent", "platform"]
+    }
   },
   "required": [
     "sprites",
@@ -597,24 +616,3 @@ listMonitorSchema = {
   },
   "required": ["visible", "size", "position"]
 }
-
-
-metaSchema = {
-  "type": "object",
-  "properties": {
-    "semver"  : { "type": "string" },
-    "vm"      : { "type": "string" },
-    "agent"   : { "type": "string" },
-    "platform": {
-      "type"      : "object",
-      "properties": {
-        "name"    : { "type": "string" },
-        "url"     : { "type": "string" },
-        "version" : { "type": "string" }
-      },
-    "required": ["name", "url", "version"],
-    }
-  },
-  "required": ["semver", "vm", "agent", "platform"]
-}
-

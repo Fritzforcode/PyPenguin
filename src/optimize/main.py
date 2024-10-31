@@ -10,10 +10,9 @@ from optimize.comments import translateComment
 opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
 
 
-def optimizeProject(sourcePath, targetPath):
-    dataSource = readJSONFile(sourcePath)
+def optimizeProject(projectData):
     newSpriteDatas = []
-    for i, spriteData in enumerate(dataSource["targets"]):
+    for i, spriteData in enumerate(projectData["targets"]):
         commentDatas = spriteData["comments"]
         floatingCommentDatas = [] # The comments that aren't connected to any blocks
         for commentData in commentDatas.values():
@@ -33,11 +32,11 @@ def optimizeProject(sourcePath, targetPath):
         translatedSoundDatas   = translateSounds  (data=spriteData["sounds"])
         translatedVariableDatas = translateVariables(
             data=spriteData, 
-            monitorDatas=dataSource["monitors"]
+            monitorDatas=projectData["monitors"]
         )
         translatedListDatas = translateLists(
             data=spriteData,
-            monitorDatas=dataSource["monitors"],
+            monitorDatas=projectData["monitors"],
         )
         #pp(spriteData)
         #pp(translatedVariableDatas)
@@ -67,7 +66,7 @@ def optimizeProject(sourcePath, targetPath):
                 "rotationStyle" : spriteData["rotationStyle"],
             }
         newSpriteDatas.append(newSpriteData)
-    stageData = dataSource["targets"][0]
+    stageData = projectData["targets"][0]
     newData = {
         "sprites"             : newSpriteDatas,
         "globalVariables"     : globalVariableDatas,
@@ -77,13 +76,8 @@ def optimizeProject(sourcePath, targetPath):
         "videoState"          : stageData["videoState"],
         "textToSpeechLanguage": stageData["textToSpeechLanguage"],
 
-        "extensionData"       : dataSource["extensionData"],
-        "extensions"          : dataSource["extensions"],
-        "meta"                : dataSource["meta"],
+        "extensionData"       : projectData["extensionData"],
+        "extensions"          : projectData["extensions"],
+        "meta"                : projectData["meta"],
     }
-    writeJSONFile(targetPath, newData)
-
-optimizeProject(
-    sourcePath="assets/studies/assetTest.json", 
-    targetPath="assets/optimized.json",
-)
+    return newData

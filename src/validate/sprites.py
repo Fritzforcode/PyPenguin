@@ -21,6 +21,8 @@ def validateSprite(path, data, context):
         validateScript(path=path+["scripts"]+[j], data=script, context=context)
     
     # Check costume formats
+    if len(data["costumes"]) < 1:
+        raise formatError(path=path+["costumes"], message="Each sprite must have at least one costume.")
     costumeNames = []
     for j, costume in enumerate(data["costumes"]):
         validateCostume(path=path+["costumes"]+[j], data=costume, isStage=i==0)

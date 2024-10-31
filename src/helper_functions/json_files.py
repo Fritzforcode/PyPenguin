@@ -6,7 +6,6 @@ def readJSONFile(filePath):
     def read(filePath):
         with open(filePath, "r", encoding="utf-8") as file:
             string = file.read()
-        print(string)
         return parser.loads(string)
     try:
         return read(filePath)

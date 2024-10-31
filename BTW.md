@@ -39,6 +39,8 @@ explore other text input fields (if they require a min length of 1)
 
 maybe hide input when in block-only mode? needs research
 
+maybe add a standard costume when a sprite has no costumes
+
 maybe validate:
 - dataFormat
 - extension names

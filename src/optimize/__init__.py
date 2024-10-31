@@ -1,1 +1,1 @@
-from .main import optimizeProject as optimize
+from .main import optimizeProject
