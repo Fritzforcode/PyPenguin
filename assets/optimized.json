@@ -14,7 +14,7 @@
                         350,
                         170
                     ],
-                    "minimized": false,
+                    "isMinimized": false,
                     "text": "Configuration for https://penguinmod.com/\nYou can move, resize, and minimize this comment, but don't edit it by hand. This comment can be deleted to remove the stored settings.\n{} // _twconfig_"
                 }
             ],
@@ -22,9 +22,9 @@
             "costumes": [
                 {
                     "name": "backdrop1",
-                    "bitmapResolution": 1,
                     "dataFormat": "svg",
                     "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "bitmapResolution": 1,
                     "rotationCenter": [
                         240,
                         180
@@ -32,9 +32,9 @@
                 },
                 {
                     "name": "minecraft-skin-yellow-flower-girl",
-                    "bitmapResolution": 2,
                     "dataFormat": "png",
                     "fileStem": "434d1bd27432262c2d4e3e882533f254",
+                    "bitmapResolution": 2,
                     "rotationCenter": [
                         64,
                         64
@@ -88,7 +88,7 @@
                                     200,
                                     200
                                 ],
-                                "minimized": false,
+                                "isMinimized": false,
                                 "text": "bev\u00f6lkerung * eff * c = gold\nc = 0.00003350055\n\n447100 * 9.14 * 0.00003350055 = 1.41"
                             }
                         }
@@ -141,7 +141,7 @@
                         200,
                         200
                     ],
-                    "minimized": false,
+                    "isMinimized": false,
                     "text": "x"
                 },
                 {
@@ -153,7 +153,7 @@
                         200,
                         200
                     ],
-                    "minimized": false,
+                    "isMinimized": false,
                     "text": "wirtschaft * c = gold\nc = 0.02705314009\n"
                 },
                 {
@@ -165,7 +165,7 @@
                         200,
                         200
                     ],
-                    "minimized": false,
+                    "isMinimized": false,
                     "text": "19.6\n0.034"
                 }
             ],
@@ -173,9 +173,9 @@
             "costumes": [
                 {
                     "name": "costume1",
-                    "bitmapResolution": 1,
                     "dataFormat": "svg",
                     "fileStem": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "bitmapResolution": 1,
                     "rotationCenter": [
                         26,
                         46
@@ -183,9 +183,9 @@
                 },
                 {
                     "name": "minecraft-skin-yellow-flower-girl",
-                    "bitmapResolution": 2,
                     "dataFormat": "png",
                     "fileStem": "434d1bd27432262c2d4e3e882533f254",
+                    "bitmapResolution": 2,
                     "rotationCenter": [
                         64,
                         64

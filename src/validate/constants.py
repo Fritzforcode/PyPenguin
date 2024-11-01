@@ -170,8 +170,8 @@ soundSchema = {
     "name"       : { "type": "string" },
     "dataFormat" : { "type": "string" },
     "fileStem"   : { "type": "string" },
-    "rate"       : { "type": "integer", "minimum": 0 },
-    "sampleCount": { "type": "integer", "minimum": 0 }
+    "rate"       : { "type": "integer", "minimum": 1 },
+    "sampleCount": { "type": "integer", "minimum": 1 }
   },
   "required": ["name", "dataFormat", "fileStem", "rate", "sampleCount"]
 }
@@ -220,7 +220,7 @@ commentSchema = {
     "isMinimized": { "type": "boolean" },
     "text"       : { "type": "string" }
   },
-  "required": ["position", "size", "minimized", "text"]
+  "required": ["position", "size", "isMinimized", "text"]
 }
 
 inputSchema = {
@@ -247,7 +247,7 @@ variableSchema = {
 listSchema = {
   "type": "object",
   "properties": {
-    "name"        : { "type": "string" },
+    "name"        : { "type": "string", "minLength": 1 },
     "currentValue": { "type" : "array", "items": {"type": ["string", "number"]} },
     "monitor"     : { "type": ["object", "null"] }
   },

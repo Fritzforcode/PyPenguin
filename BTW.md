@@ -32,7 +32,11 @@ maybe hide input when in block-only mode? needs research
 
 maybe add a standard costume when a sprite has no costumes
 
+maybe reseatch monitor size
+
 can comments really be positioned at float coordinates and be float size?
+
+research rotationCenter for different costume types
 
 maybe validate:
 - dataFormat

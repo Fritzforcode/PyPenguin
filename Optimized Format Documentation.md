@@ -111,7 +111,16 @@ Must be an object of block-specific keys and values. Currently there is only one
 
 
 ## Defined Block Opcodes
-You can find the currently defined block opcodes [HERE](assets/opcode_database.jsonc).
+Here is a list of opcodes currently defined:
+* `"when [KEY_OPTION] key pressed"`
+* `"when i receive [BROADCAST_OPTION]"`
+* `"broadcast [BROADCAST_INPUT]"`
+* `"(NUM1) + (NUM2)"`
+* `"(NUM1) * (NUM2)"`
+* `"join (STRING1) (STRING2)"`
+* `"set [VARIABLE] to (VALUE)"`
+* `"change [VARIABLE] by (VALUE)"`
+* `"add (ITEM) to [LIST]"`
 
 
 
@@ -137,13 +146,49 @@ Must be an object with the following properties:
 * `"fileStem"`: The file name (without extension) of the asset. (Does not allow folders.) Must be a string.
 
 For a costume the following properties are required additionally:
-* `"bitmapResolution"`: The resolution of the bitmap. (Is usually `1`.) Must be an integer and al least `1`.
+* `"bitmapResolution"`: The resolution of the bitmap. Must be an integer and at least `1`.
+
+* `"rotationCenter"`: The point the costume can be rotated around. 
 
 For a sound the following properties are required additionally:
+
+* `"rate"`: The sample rate of the sound. Must be an integer and at least `1`. Seems to always be `48000`.
+
+* `"sampleCount"`: The number of samples in the sound.
+#### Example (Costume)
+#### Example (Sound)
 
 
 
 ## Format of Variables and Lists
+Must be an object with the following properties:
+* `"name"`: The name of the variable/list. Must be a non-empty string.
+
+* `"currentValue"`: The value the variable/list currently has. For a variable this must be a string or a number. For a list this must be an array. Each item must be either a string or a number.
+
+* `"monitor"`: Must be either null or an object following the [Monitor Format](#format-of-variable-and-list-monitors)
+
+* `"isCloudVariable"(*)`: Wether the variable is a cloud variable. Must be a boolean.
+
+\* only exists for variables in the `"globalVariables"` array.
+
+
+
+## Format of Variable and List Monitors
+Must be either null or an object with the following properties:
+* `"visible"`: Wether the monitor is shown on the stage. Must be a boolean.
+
+* `"size"`: The size of the monitor. Must be a two-long array of integers.
+
+* `"position"`: The position of the monitor on the stage.
+
+* `"sliderMin"(*)`: The minimum of the slider. (when the monitor is in the slider mode.) Must be an integer when `"onlyIntegers"` is `true` otherwise a number.
+
+* `"sliderMax"(*)`: The maximum of the slider. (when the monitor is in the slider mode.) Must be an integer when `"onlyIntegers"` is `true` otherwise a number.
+
+* `"onlyIntegers"(*)`: If `true` only integers are allowed in the slider.
+
+\* only exists for variables.
 
 
 
