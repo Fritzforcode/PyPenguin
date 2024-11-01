@@ -32,7 +32,10 @@ maybe hide input when in block-only mode? needs research
 
 maybe add a standard costume when a sprite has no costumes
 
+can comments really be positioned at float coordinates and be float size?
+
 maybe validate:
 - dataFormat
 - extension names
+- fileStem (no folders allowed and the file existing)
 - layerOrder to be at most 4 - needs research 

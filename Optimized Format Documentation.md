@@ -1,14 +1,14 @@
-Properties of objects are always required except when labeled differently
+Properties of objects are always required except when labeled differently.
 
 
 
 ## Format of the Project
 The Project data must be an object with the following properties:
-* `"sprites"`: [Stage and Sprites Format](#format-of-sprites)
+* `"sprites"`: [Stage and Sprites Format](#format-of-sprites).
 
-* `"globalVariables"`: [Variable Format](#format-of-variables-and-lists)
+* `"globalVariables"`: [Variable Format](#format-of-variables-and-lists).
 
-* `"globalLists"`:  [List Format](#format-of-variables-and-lists)
+* `"globalLists"`:  [List Format](#format-of-variables-and-lists).
 
 * `"tempo"`: The tempo from the **Music** extension. Must be an integer between 20 and 500.
 
@@ -16,13 +16,13 @@ The Project data must be an object with the following properties:
 
 * `"videoState"`: The state of the "Video Sensing" Extension. Must be either `"on"`, `"on flipped"` or `"off"`.
 
-* `"textToSpeechLanguage"`: The language of the **Text to Speech** Extension. Must be either `null` or one of [Possible Values](#supported-text-to-speech-languages)
+* `"textToSpeechLanguage"`: The language of the **Text to Speech** Extension. Must be either `null` or one of [Possible Values](#supported-text-to-speech-languages).
 
 * `"extensionData"`: An object containing additional information about extensions. (Let me know if you wish more research.)
 
 * `"extensions"`: An array of extension acronyms, which were added to the project.
 
-* `"meta"`: [Meta Format](#format-of-the-metadata)
+* `"meta"`: [Meta Format](#format-of-the-metadata).
 
 
 
@@ -32,21 +32,21 @@ Must be an array of sprites. The first sprite is always the stage. Then the othe
 
 * `"name"`: Must be "Stage" for the stage(the first sprite). For all other sprites this can be any string.
 
-* `"scripts"`: The scripts of the sprite. [Script Format](#format-of-scripts)
+* `"scripts"`: The scripts of the sprite. [Script Format](#format-of-scripts).
 
-* `"comments"`: The comments that are not attached to a block.  Must be either `null` or an object following the [Comment Format](#format-of-comments)
+* `"comments"`: The comments that are not attached to a block. A comment must be either `null` or an object following the [Comment Format](#format-of-comments).
 
 * `"currentCostume"`: The costume number of the sprite. Must be an integer and at least `0`.
 
-* `"costumes"`: [Costume Format](#format-of-costumes-and-sounds)
+* `"costumes"`: [Costume Format](#format-of-costumes-and-sounds).
 
-* `"sounds"`: [Sound Format](#format-of-costumes-and-sounds)
+* `"sounds"`: [Sound Format](#format-of-costumes-and-sounds).
 
 * `"volume"`: The volume(applies to sounds). Must be a number between `0` and `100`.
 
-* `"localVariables"`: The `"For this sprite only"` variables of this sprite. [Variable Format](#format-of-variables-and-lists)
+* `"localVariables"`: The `"For this sprite only"` variables of this sprite. [Variable Format](#format-of-variables-and-lists).
 
-* `"localLists"`: The `"For this sprite only"` lists of this sprite. [List Format](#format-of-variables-and-lists)
+* `"localLists"`: The `"For this sprite only"` lists of this sprite. [List Format](#format-of-variables-and-lists).
 
 * `"layerOrder"(*)`: The layer the sprite is on. Must be an integer and at least `1`.
 
@@ -70,19 +70,19 @@ Must be an array of sprites. The first sprite is always the stage. Then the othe
 Must be an array of scripts. A script must be an object with the following properties:
 * `"position"`: The position of a block reporter or the first block in a script. Must be a two-long array of integers.
 
-* `"blocks"`: The blocks of the script in an array (even for a (single) block reporter). They are in order from top of the script to bottom of the script. [Block Format](#format-of-a-block)
+* `"blocks"`: The blocks of the script in an array (even for a (single) block reporter). They are in order from top of the script to bottom of the script. [Block Format](#format-of-a-block).
 
 
 
 ## Format of a Block
 Must be an object with the following properties:
-* `"opcode"`: The operation code of the block. [Block Opcodes](#defined-block-opcodes)
+* `"opcode"`: The operation code of the block. [Block Opcodes](#defined-block-opcodes).
 
-* `"inputs"`: The inputs of the block. [Input Format](#format-of-inputs)
+* `"inputs"`: The inputs of the block. [Input Format](#format-of-inputs).
 
-* `"options"`: The options of the block. [Option Format](#format-of-options)
+* `"options"`: The options of the block. [Option Format](#format-of-options).
 
-* `"comment"`: The comment attached to the block. Must be either `null` or an object following the [Comment Format](#format-of-comments)
+* `"comment"`: The comment attached to the block. Must be either `null` or an object following the [Comment Format](#format-of-comments).
 #### Example
 
 
@@ -92,14 +92,14 @@ Must be an object of block-specific keys and values. Each value must follow one 
 * **Block and Text Mode**: Allows text and optionally a block in the input field. Used in the `"broadcast"`, `"number"` and `"text"` input types. 
 * **Block Only Mode**: Allows only text in the input field.
 
-You can see the input types of blocks [HERE](assets/opcode_database.jsonc)
+You can see the input types of blocks [HERE](assets/opcode_database.jsonc).
 
 An input value must be an object with the following properties:
-* `"mode"`: must be `"block-and-text"` for **Block and Text Mode** and `"block-only"` for **Block Only Mode**
+* `"mode"`: must be `"block-and-text"` for **Block and Text Mode** and `"block-only"` for **Block Only Mode**.
 
-* `"block"`: Only exists in **Block and Text Mode**. The block that is in the input field. Must be either `null` for no block or a block following the [Block Format](#format-of-a-block)
+* `"block"`: Only exists in **Block and Text Mode**. The block that is in the input field. Must be either `null` for no block or a block following the [Block Format](#format-of-a-block).
 
-* `"text"`: The text of the input field.
+* `"text"`: The text of the input field. Must be a string.
 #### Example
 
 
@@ -111,16 +111,35 @@ Must be an object of block-specific keys and values. Currently there is only one
 
 
 ## Defined Block Opcodes
-You can find the currently defined block opcodes [HERE](assets/opcode_database.jsonc)
+You can find the currently defined block opcodes [HERE](assets/opcode_database.jsonc).
 
 
 
 ## Format of Comments
-Must be either `null` or an object with these properties:
+Must be either `null` or an object with the following properties:
+* `"position"`: The position of the comment in the sprite. Must be a two-long array of numbers.
+
+* `"size"`: The size of the comment when it isn't minimized. Must be a two long array of numbers.
+
+* `"isMinimzed"`: Wether the comment is folded (when `true`) in or expanded (when `false`). Must be a boolean. 
+
+* `"text"`: The text of the comment. Must be a string.
+#### Example
 
 
 
 ## Format of Costumes and Sounds 
+Must be an object with the following properties:
+* `"name"`: The name of the costume or sound. Must be a string.
+
+* `"dataFormat"`: The file extension of the asset. (Let me know if you wish a detailed list of supported file types.)
+
+* `"fileStem"`: The file name (without extension) of the asset. (Does not allow folders.) Must be a string.
+
+For a costume the following properties are required additionally:
+* `"bitmapResolution"`: The resolution of the bitmap. (Is usually `1`.) Must be an integer and al least `1`.
+
+For a sound the following properties are required additionally:
 
 
 

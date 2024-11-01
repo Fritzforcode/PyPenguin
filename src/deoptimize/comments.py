@@ -5,6 +5,6 @@ def translateComment(data, id):
         "y"        : data["position"][1],
         "width"    : data["size"][0],
         "height"   : data["size"][1],
-        "minimized": data["minimized"],
+        "minimized": data["isMinimized"],
         "text"     : data["text"],
     }

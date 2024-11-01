@@ -3,9 +3,9 @@ def translateCostumes(data):
     for costumeData in data:
         newCostumeData = {
             "name"            : costumeData["name"],
-            "bitmapResolution": None,
             "dataFormat"      : costumeData["dataFormat"],
             "fileStem"        : costumeData["assetId"],
+            "bitmapResolution": None,
             "rotationCenter"  : [costumeData["rotationCenterX"], costumeData["rotationCenterY"]],
         }
         if "bitmapResolution" in costumeData:
