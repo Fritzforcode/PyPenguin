@@ -93,6 +93,7 @@
                     },
                     "shadow": false,
                     "topLevel": true,
+                    "comment": "a:a#c",
                     "x": 0,
                     "y": 0
                 },
