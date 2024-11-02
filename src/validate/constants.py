@@ -297,11 +297,9 @@ listMonitorSchema = {
   "required": ["visible", "size", "position"]
 }
 
-import time
 from jsonschema import validate, exceptions
 
 def validateSchema(pathToData, data, schema):
-    from jsonschema import validate, exceptions
     
     try:
         validate(instance=data, schema=schema)
