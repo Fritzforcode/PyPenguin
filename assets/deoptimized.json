@@ -5,26 +5,43 @@
             "name": "Stage",
             "variables": {
                 "X#fH=/ZM.T|B;rKrmG[s": [
-                    "my variable",
+                    "var2",
                     0
+                ],
+                "NmjQ-_mT(OA^.)?Hh^bl": [
+                    "\u2601 cloud",
+                    0,
+                    true
                 ]
             },
-            "lists": {},
-            "broadcasts": {},
+            "lists": {
+                "M^Lp^Q]A^}K)lXO{ELxy": [
+                    "glob",
+                    []
+                ],
+                "xeH-ilqtek]Y@J?EB}#|": [
+                    "loc",
+                    []
+                ]
+            },
+            "broadcasts": {
+                "J*:TkPo/}QyFcIoCVvQ%": "message1"
+            },
             "customVars": [],
             "blocks": {},
-            "comments": {},
-            "currentCostume": 4,
+            "comments": {
+                "a#c": {
+                    "blockId": null,
+                    "x": 50,
+                    "y": 50,
+                    "width": 350,
+                    "height": 170,
+                    "minimized": false,
+                    "text": "Configuration for https://penguinmod.com/\nYou can move, resize, and minimize this comment, but don't edit it by hand. This comment can be deleted to remove the stored settings.\n{} // _twconfig_"
+                }
+            },
+            "currentCostume": 0,
             "costumes": [
-                {
-                    "name": "Screenshot 2024-10-14 195328",
-                    "bitmapResolution": 2,
-                    "assetId": "01dca01f44b4a88b4c55bec6af4dbb04",
-                    "dataFormat": "png",
-                    "md5ext": "01dca01f44b4a88b4c55bec6af4dbb04.png",
-                    "rotationCenterX": 17,
-                    "rotationCenterY": 20
-                },
                 {
                     "name": "backdrop1",
                     "bitmapResolution": 1,
@@ -35,35 +52,34 @@
                     "rotationCenterY": 180
                 },
                 {
-                    "name": "backdrop2",
-                    "bitmapResolution": 1,
-                    "assetId": "5292f86c81fe2a880714823577275f8a",
-                    "dataFormat": "svg",
-                    "md5ext": "5292f86c81fe2a880714823577275f8a.svg",
-                    "rotationCenterX": 99.66665649414062,
-                    "rotationCenterY": -2.6666717529296875
-                },
-                {
-                    "name": "backdrop3",
-                    "bitmapResolution": 1,
-                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
-                    "dataFormat": "svg",
-                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
-                    "rotationCenterX": 0,
-                    "rotationCenterY": 0
-                },
-                {
-                    "name": "backdrop4",
-                    "bitmapResolution": 1,
-                    "assetId": "14e46ec3e2ba471c2adfe8f119052307",
-                    "dataFormat": "svg",
-                    "md5ext": "14e46ec3e2ba471c2adfe8f119052307.svg",
-                    "rotationCenterX": 0,
-                    "rotationCenterY": 0
+                    "name": "minecraft-skin-yellow-flower-girl",
+                    "bitmapResolution": 2,
+                    "assetId": "434d1bd27432262c2d4e3e882533f254",
+                    "dataFormat": "png",
+                    "md5ext": "434d1bd27432262c2d4e3e882533f254.png",
+                    "rotationCenterX": 64,
+                    "rotationCenterY": 64
                 }
             ],
-            "sounds": [],
-            "id": "NmjQ-_mT(OA^.)?Hh^bl",
+            "sounds": [
+                {
+                    "name": "Alien Creak1",
+                    "assetId": "0377a7476136e5e8c780c64a4828922d",
+                    "dataFormat": "wav",
+                    "rate": 48000,
+                    "sampleCount": 35025,
+                    "md5ext": "0377a7476136e5e8c780c64a4828922d.wav"
+                },
+                {
+                    "name": "art-of-samples-buzz-120-bpm-audio-logo-245396",
+                    "assetId": "64ff5535a3f758aec5ae068a6bdbaa5b",
+                    "dataFormat": "mp3",
+                    "rate": 48000,
+                    "sampleCount": 388702,
+                    "md5ext": "64ff5535a3f758aec5ae068a6bdbaa5b.mp3"
+                }
+            ],
+            "id": "hmsCf{[jdpy{pYlVoecy",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,
@@ -73,14 +89,124 @@
         },
         {
             "isStage": false,
-            "name": "Stage",
-            "variables": {},
+            "name": "Sprite1",
+            "variables": {
+                "Za:QFPiy`CEs]*lkO=/n": [
+                    "locVar",
+                    0
+                ]
+            },
             "lists": {},
             "broadcasts": {},
             "customVars": [],
-            "blocks": {},
-            "comments": {},
-            "currentCostume": 0,
+            "blocks": {
+                "a:a#b": {
+                    "opcode": "event_broadcast",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "BROADCAST_INPUT": [
+                            1,
+                            [
+                                11,
+                                "message1"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 93,
+                    "y": 525
+                },
+                "b:a#b": {
+                    "opcode": "data_setvariableto",
+                    "next": "b:b#b",
+                    "parent": null,
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "var2",
+                            "X#fH=/ZM.T|B;rKrmG[s",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 728,
+                    "y": 238
+                },
+                "b:b#b": {
+                    "opcode": "data_changevariableby",
+                    "next": null,
+                    "parent": "b:a#c",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "var2",
+                            "X#fH=/ZM.T|B;rKrmG[s",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                }
+            },
+            "comments": {
+                "a:a#c": {
+                    "blockId": "a:a#b",
+                    "x": 335.22222222222223,
+                    "y": 532.5185185185185,
+                    "width": 200,
+                    "height": 200,
+                    "minimized": false,
+                    "text": "bev\u00f6lkerung * eff * c = gold\nc = 0.00003350055\n\n447100 * 9.14 * 0.00003350055 = 1.41"
+                },
+                "a#c": {
+                    "blockId": null,
+                    "x": 185,
+                    "y": 271,
+                    "width": 200,
+                    "height": 200,
+                    "minimized": false,
+                    "text": "x"
+                },
+                "b#c": {
+                    "blockId": null,
+                    "x": 320.45225893155424,
+                    "y": 783.5396244024346,
+                    "width": 200,
+                    "height": 200,
+                    "minimized": false,
+                    "text": "wirtschaft * c = gold\nc = 0.02705314009\n"
+                },
+                "c#c": {
+                    "blockId": null,
+                    "x": 329.99374200616097,
+                    "y": 1012.1991392961702,
+                    "width": 200,
+                    "height": 200,
+                    "minimized": false,
+                    "text": "19.6\n0.034"
+                }
+            },
+            "currentCostume": 1,
             "costumes": [
                 {
                     "name": "costume1",
@@ -90,6 +216,15 @@
                     "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
                     "rotationCenterX": 26,
                     "rotationCenterY": 46
+                },
+                {
+                    "name": "minecraft-skin-yellow-flower-girl",
+                    "bitmapResolution": 2,
+                    "assetId": "434d1bd27432262c2d4e3e882533f254",
+                    "dataFormat": "png",
+                    "md5ext": "434d1bd27432262c2d4e3e882533f254.png",
+                    "rotationCenterX": 64,
+                    "rotationCenterY": 64
                 }
             ],
             "sounds": [
@@ -100,9 +235,17 @@
                     "rate": 48000,
                     "sampleCount": 17867,
                     "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
+                },
+                {
+                    "name": "art-of-samples-buzz-120-bpm-audio-logo-245396",
+                    "assetId": "64ff5535a3f758aec5ae068a6bdbaa5b",
+                    "dataFormat": "mp3",
+                    "rate": 48000,
+                    "sampleCount": 388702,
+                    "md5ext": "64ff5535a3f758aec5ae068a6bdbaa5b.mp3"
                 }
             ],
-            "id": "Za:QFPiy`CEs]*lkO=/n",
+            "id": "xp.Ahc]%mHiCjMS(xh;,",
             "volume": 100,
             "visible": true,
             "x": 0,
@@ -112,93 +255,94 @@
             "draggable": false,
             "rotationStyle": "all around",
             "layerOrder": 1
-        },
-        {
-            "isStage": false,
-            "name": "Stage2",
-            "variables": {},
-            "lists": {},
-            "broadcasts": {},
-            "customVars": [],
-            "blocks": {},
-            "comments": {},
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "costume1",
-                    "bitmapResolution": 1,
-                    "assetId": "3339a2953a3bf62bb80e54ff575dbced",
-                    "dataFormat": "svg",
-                    "md5ext": "3339a2953a3bf62bb80e54ff575dbced.svg",
-                    "rotationCenterX": 0,
-                    "rotationCenterY": 0
-                }
-            ],
-            "sounds": [],
-            "id": "M^Lp^Q]A^}K)lXO{ELxy",
-            "volume": 100,
-            "visible": true,
-            "x": 36,
-            "y": 28,
-            "size": 100,
-            "direction": 90,
-            "draggable": false,
-            "rotationStyle": "all around",
-            "layerOrder": 2
-        },
-        {
-            "isStage": false,
-            "name": "Stage\ud83d\ude00",
-            "variables": {},
-            "lists": {},
-            "broadcasts": {},
-            "customVars": [],
-            "blocks": {},
-            "comments": {},
-            "currentCostume": 2,
-            "costumes": [
-                {
-                    "name": "costume1",
-                    "bitmapResolution": 1,
-                    "assetId": "419acd3e658ba31fa808f29f99dbadaa",
-                    "dataFormat": "svg",
-                    "md5ext": "419acd3e658ba31fa808f29f99dbadaa.svg",
-                    "rotationCenterX": 67.91665649414062,
-                    "rotationCenterY": 8.916662216186523
-                },
-                {
-                    "name": "Screenshot 2024-10-14 195328",
-                    "bitmapResolution": 2,
-                    "assetId": "01dca01f44b4a88b4c55bec6af4dbb04",
-                    "dataFormat": "png",
-                    "md5ext": "01dca01f44b4a88b4c55bec6af4dbb04.png",
-                    "rotationCenterX": 17,
-                    "rotationCenterY": 20
-                },
-                {
-                    "name": "costume2",
-                    "bitmapResolution": 1,
-                    "assetId": "c15221f1c313bff38bdee4c4b8b859a7",
-                    "dataFormat": "svg",
-                    "md5ext": "c15221f1c313bff38bdee4c4b8b859a7.svg",
-                    "rotationCenterX": 77.99999295748205,
-                    "rotationCenterY": 28.87178978553186
-                }
-            ],
-            "sounds": [],
-            "id": "xeH-ilqtek]Y@J?EB}#|",
-            "volume": 100,
-            "visible": true,
-            "x": 36,
-            "y": 28,
-            "size": 100,
-            "direction": 90,
-            "draggable": false,
-            "rotationStyle": "all around",
-            "layerOrder": 3
         }
     ],
-    "monitors": [],
+    "monitors": [
+        {
+            "id": "X#fH=/ZM.T|B;rKrmG[s",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "var2"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 5,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "NmjQ-_mT(OA^.)?Hh^bl",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "\u2601 cloud"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 264,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "Za:QFPiy`CEs]*lkO=/n",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "locVar"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 31,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "M^Lp^Q]A^}K)lXO{ELxy",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "glob"
+            },
+            "spriteName": null,
+            "value": [],
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 57,
+            "visible": true
+        },
+        {
+            "id": "xeH-ilqtek]Y@J?EB}#|",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "loc"
+            },
+            "spriteName": null,
+            "value": [],
+            "width": 0,
+            "height": 0,
+            "x": 155,
+            "y": 57,
+            "visible": true
+        }
+    ],
     "extensionData": {},
     "extensions": [],
     "meta": {
