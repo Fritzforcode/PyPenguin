@@ -6,7 +6,7 @@ from deoptimize.comments import translateComment
 opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
 
 
-def prepareBlock(data, spriteName, tokens):
+def prepareBlock(data, spriteName, tokens, commentID):
     opcode = None
     for i,oldOpcode,opcodeData in ikv(opcodeDatabase):
         if opcodeData["newOpcode"] == data["opcode"]:
@@ -27,6 +27,8 @@ def prepareBlock(data, spriteName, tokens):
         "shadow"  : False,
         "topLevel": False,
     }
+    if data["comment"] != None:
+        newBlockData["comment"] = commentID
     return newBlockData
 
 def linkBlocksToScript(data, spriteName, tokens, scriptID):
@@ -38,13 +40,14 @@ def linkBlocksToScript(data, spriteName, tokens, scriptID):
     newData = {}
     newCommentDatas = {}
     for i, blockData in enumerate(data):
+        ownID = generateSelector(scriptID=scriptID, index=i, isComment=False)
+        commentID = generateSelector(scriptID=scriptID, index=i, isComment=True)
         newBlockData = prepareBlock(
             data=blockData, 
             spriteName=spriteName, 
             tokens=tokens,
+            commentID=commentID,
         )
-        ownID = generateSelector(scriptID=scriptID, index=i, isComment=False)
-        commentID = generateSelector(scriptID=scriptID, index=i, isComment=True)
         if i == 0:
             newBlockData |= {"x": scriptPosition[0], "y": scriptPosition[1]}
             newBlockData["topLevel"] = True
@@ -88,14 +91,15 @@ def unnestScript(data, spriteName, tokens, scriptID):
                             if inputData["block"] == None:
                                 newInputData = [1, [magicNumber, inputData["text"]]]
                             else:
+                                newBlockID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=False)
+                                newCommentID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=True)
                                 newBlockData = prepareBlock(
                                     data=inputData["block"],
                                     spriteName=spriteName,
                                     tokens=tokens,
+                                    commentID=newCommentID,
                                 )
                                 newBlockData["parent"] = blockID
-                                newBlockID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=False)
-                                newCommentID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=True)
                                 blockCounter += 1
                                 newBlockDatas[newBlockID] = newBlockData
                                 
