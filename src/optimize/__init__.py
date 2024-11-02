@@ -1,1 +1,1 @@
-from .main import optimizeProject
+from .main import optimizeProjectJSON

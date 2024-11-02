@@ -9,7 +9,14 @@
                     "test123test"
                 ]
             },
-            "lists": {},
+            "lists": {
+                "Za:QFPiy`CEs]*lkO=/n": [
+                    "global list",
+                    [
+                        789
+                    ]
+                ]
+            },
             "broadcasts": {},
             "customVars": [],
             "blocks": {},
@@ -36,7 +43,7 @@
                     "md5ext": "ded064067963e912e985745cf0fec86a.mp3"
                 }
             ],
-            "id": "Za:QFPiy`CEs]*lkO=/n",
+            "id": "xeH-ilqtek]Y@J?EB}#|",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,
@@ -53,7 +60,14 @@
                     456
                 ]
             },
-            "lists": {},
+            "lists": {
+                "M^Lp^Q]A^}K)lXO{ELxy": [
+                    "local list",
+                    [
+                        "ABC"
+                    ]
+                ]
+            },
             "broadcasts": {},
             "customVars": [],
             "blocks": {
@@ -84,7 +98,7 @@
                 },
                 "a:b#b": {
                     "opcode": "data_setvariableto",
-                    "next": null,
+                    "next": "a:c#b",
                     "parent": "a:a#c",
                     "inputs": {
                         "VALUE": [
@@ -100,6 +114,52 @@
                             "local variable",
                             "NmjQ-_mT(OA^.)?Hh^bl",
                             ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a:c#b": {
+                    "opcode": "data_addtolist",
+                    "next": "a:d#b",
+                    "parent": "a:b#c",
+                    "inputs": {
+                        "ITEM": [
+                            1,
+                            [
+                                10,
+                                "789"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "global list",
+                            "Za:QFPiy`CEs]*lkO=/n",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a:d#b": {
+                    "opcode": "data_addtolist",
+                    "next": null,
+                    "parent": "a:c#c",
+                    "inputs": {
+                        "ITEM": [
+                            1,
+                            [
+                                10,
+                                "ABC"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "local list",
+                            "M^Lp^Q]A^}K)lXO{ELxy",
+                            "list"
                         ]
                     },
                     "shadow": false,
@@ -148,7 +208,7 @@
                     "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
                 }
             ],
-            "id": "M^Lp^Q]A^}K)lXO{ELxy",
+            "id": "J*:TkPo/}QyFcIoCVvQ%",
             "volume": 100,
             "visible": true,
             "x": 0,
@@ -196,6 +256,40 @@
             "sliderMin": -100,
             "sliderMax": 500,
             "isDiscrete": true
+        },
+        {
+            "id": "Za:QFPiy`CEs]*lkO=/n",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "global list"
+            },
+            "spriteName": null,
+            "value": [
+                789
+            ],
+            "width": 0,
+            "height": 0,
+            "x": 15,
+            "y": 7,
+            "visible": true
+        },
+        {
+            "id": "M^Lp^Q]A^}K)lXO{ELxy",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "local list"
+            },
+            "spriteName": "Sprite1",
+            "value": [
+                "ABC"
+            ],
+            "width": 0,
+            "height": 0,
+            "x": 361,
+            "y": 92,
+            "visible": true
         }
     ],
     "extensionData": {},

@@ -12,7 +12,10 @@
                     "dataFormat": "svg",
                     "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
                     "bitmapResolution": 1,
-                    "rotationCenter": [240, 180]
+                    "rotationCenter": [
+                        240,
+                        180
+                    ]
                 }
             ],
             "sounds": [
@@ -31,7 +34,10 @@
             "name": "Sprite1",
             "scripts": [
                 {
-                    "position": [0, 0],
+                    "position": [
+                        0,
+                        0
+                    ],
                     "blocks": [
                         {
                             "opcode": "set [VARIABLE] to (VALUE)",
@@ -46,8 +52,14 @@
                                 "VARIABLE": "global variable"
                             },
                             "comment": {
-                                "position": [362.81296730041504, 8],
-                                "size": [200, 200],
+                                "position": [
+                                    362.81296730041504,
+                                    8
+                                ],
+                                "size": [
+                                    200,
+                                    200
+                                ],
                                 "isMinimized": false,
                                 "text": "setting variables"
                             }
@@ -99,8 +111,14 @@
             ],
             "comments": [
                 {
-                    "position": [149.68792330747857, -327.12618351331304],
-                    "size": [200, 200],
+                    "position": [
+                        149.68792330747857,
+                        -327.12618351331304
+                    ],
+                    "size": [
+                        200,
+                        200
+                    ],
                     "isMinimized": false,
                     "text": "free floating comment"
                 }
@@ -112,7 +130,10 @@
                     "dataFormat": "png",
                     "fileStem": "b86efb7f23387300cf9037a61f328ab9",
                     "bitmapResolution": 2,
-                    "rotationCenter": [158, 146]
+                    "rotationCenter": [
+                        158,
+                        146
+                    ]
                 }
             ],
             "sounds": [
@@ -131,8 +152,14 @@
                     "currentValue": 456,
                     "monitor": {
                         "visible": true,
-                        "size": [0, 0],
-                        "position": [155, 268],
+                        "size": [
+                            0,
+                            0
+                        ],
+                        "position": [
+                            155,
+                            268
+                        ],
                         "sliderMin": -100,
                         "sliderMax": 500,
                         "onlyIntegers": true
@@ -147,14 +174,23 @@
                     ],
                     "monitor": {
                         "visible": true,
-                        "size": [0, 0],
-                        "position": [361, 92]
+                        "size": [
+                            0,
+                            0
+                        ],
+                        "position": [
+                            361,
+                            92
+                        ]
                     }
                 }
             ],
             "layerOrder": 1,
             "visible": true,
-            "position": [0, 0],
+            "position": [
+                0,
+                0
+            ],
             "size": 100,
             "direction": 90,
             "draggable": false,
@@ -167,8 +203,14 @@
             "currentValue": "test123test",
             "monitor": {
                 "visible": true,
-                "size": [0, 0],
-                "position": [159, 75],
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    159,
+                    75
+                ],
                 "sliderMin": 0,
                 "sliderMax": 100,
                 "onlyIntegers": true
@@ -184,8 +226,14 @@
             ],
             "monitor": {
                 "visible": true,
-                "size": [0, 0],
-                "position": [15, 7]
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    15,
+                    7
+                ]
             }
         }
     ],

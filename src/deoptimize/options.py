@@ -1,4 +1,4 @@
-from helper_functions import ikv,  WhatIsGoingOnError, generateRandomToken,  readJSONFile
+from helper_functions import ikv,  WhatIsGoingOnError, generateRandomToken,  readJSONFile, pp
 
 opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
 
@@ -27,7 +27,7 @@ def translateOptions(optionDatas, opcode, spriteName, tokens):
                 if spriteName == "Stage":
                     nameKey = None
                 else: raise WhatIsGoingOnError()
-            elif optionData in variableTokens[spriteName]:
+            elif optionData in tokens[spriteName]:
                 nameKey = spriteName
             else:
                 nameKey = None

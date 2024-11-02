@@ -10,7 +10,7 @@ from optimize.comments import translateComment
 opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
 
 
-def optimizeProject(projectData):
+def optimizeProjectJSON(projectData):
     newSpriteDatas = []
     for i, spriteData in enumerate(projectData["targets"]):
         commentDatas = spriteData["comments"]
