@@ -32,6 +32,8 @@ maybe add a standard costume when a sprite has no costumes
 
 maybe reseatch monitor size
 
+maybe remove fileStem
+
 can comments really be positioned at float coordinates and be float size?
 
 research rotationCenter for different costume types
@@ -41,3 +43,4 @@ maybe validate:
 - extension names
 - fileStem (no folders allowed and the file existing)
 - layerOrder to be at most 4 - needs research 
+- meta
