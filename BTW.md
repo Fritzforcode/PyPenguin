@@ -18,8 +18,6 @@ direction into range 180 to -180
 
 move cloud emoji validation from deoptimize/varables_lists.py into validator.py
 
-update documentation
-
 explore other text input fields (if they require a min length of 1)
 
 maybe remove "sampleCount"
