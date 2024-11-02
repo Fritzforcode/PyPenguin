@@ -38,6 +38,8 @@ can comments really be positioned at float coordinates and be float size?
 
 research rotationCenter for different costume types
 
+research monitor values being wrong
+
 maybe validate:
 - dataFormat
 - extension names
