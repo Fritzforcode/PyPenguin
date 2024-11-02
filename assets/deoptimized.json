@@ -5,41 +5,15 @@
             "name": "Stage",
             "variables": {
                 "X#fH=/ZM.T|B;rKrmG[s": [
-                    "var2",
-                    0
-                ],
-                "NmjQ-_mT(OA^.)?Hh^bl": [
-                    "\u2601 cloud",
-                    0,
-                    true
+                    "global variable",
+                    "test123test"
                 ]
             },
-            "lists": {
-                "M^Lp^Q]A^}K)lXO{ELxy": [
-                    "glob",
-                    []
-                ],
-                "xeH-ilqtek]Y@J?EB}#|": [
-                    "loc",
-                    []
-                ]
-            },
-            "broadcasts": {
-                "J*:TkPo/}QyFcIoCVvQ%": "message1"
-            },
+            "lists": {},
+            "broadcasts": {},
             "customVars": [],
             "blocks": {},
-            "comments": {
-                "a#c": {
-                    "blockId": null,
-                    "x": 50,
-                    "y": 50,
-                    "width": 350,
-                    "height": 170,
-                    "minimized": false,
-                    "text": "Configuration for https://penguinmod.com/\nYou can move, resize, and minimize this comment, but don't edit it by hand. This comment can be deleted to remove the stored settings.\n{} // _twconfig_"
-                }
-            },
+            "comments": {},
             "currentCostume": 0,
             "costumes": [
                 {
@@ -50,36 +24,19 @@
                     "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
                     "rotationCenterX": 240,
                     "rotationCenterY": 180
-                },
-                {
-                    "name": "minecraft-skin-yellow-flower-girl",
-                    "bitmapResolution": 2,
-                    "assetId": "434d1bd27432262c2d4e3e882533f254",
-                    "dataFormat": "png",
-                    "md5ext": "434d1bd27432262c2d4e3e882533f254.png",
-                    "rotationCenterX": 64,
-                    "rotationCenterY": 64
                 }
             ],
             "sounds": [
                 {
-                    "name": "Alien Creak1",
-                    "assetId": "0377a7476136e5e8c780c64a4828922d",
-                    "dataFormat": "wav",
-                    "rate": 48000,
-                    "sampleCount": 35025,
-                    "md5ext": "0377a7476136e5e8c780c64a4828922d.wav"
-                },
-                {
-                    "name": "art-of-samples-buzz-120-bpm-audio-logo-245396",
-                    "assetId": "64ff5535a3f758aec5ae068a6bdbaa5b",
+                    "name": "Hello there",
+                    "assetId": "ded064067963e912e985745cf0fec86a",
                     "dataFormat": "mp3",
                     "rate": 48000,
-                    "sampleCount": 388702,
-                    "md5ext": "64ff5535a3f758aec5ae068a6bdbaa5b.mp3"
+                    "sampleCount": 65201,
+                    "md5ext": "ded064067963e912e985745cf0fec86a.mp3"
                 }
             ],
-            "id": "hmsCf{[jdpy{pYlVoecy",
+            "id": "Za:QFPiy`CEs]*lkO=/n",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,
@@ -91,9 +48,9 @@
             "isStage": false,
             "name": "Sprite1",
             "variables": {
-                "Za:QFPiy`CEs]*lkO=/n": [
-                    "locVar",
-                    0
+                "NmjQ-_mT(OA^.)?Hh^bl": [
+                    "local variable",
+                    456
                 ]
             },
             "lists": {},
@@ -101,66 +58,47 @@
             "customVars": [],
             "blocks": {
                 "a:a#b": {
-                    "opcode": "event_broadcast",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "BROADCAST_INPUT": [
-                            1,
-                            [
-                                11,
-                                "message1"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 93,
-                    "y": 525
-                },
-                "b:a#b": {
                     "opcode": "data_setvariableto",
-                    "next": "b:b#b",
+                    "next": "a:b#b",
                     "parent": null,
                     "inputs": {
                         "VALUE": [
                             1,
                             [
                                 10,
-                                "0"
+                                "test123test"
                             ]
                         ]
                     },
                     "fields": {
                         "VARIABLE": [
-                            "var2",
+                            "global variable",
                             "X#fH=/ZM.T|B;rKrmG[s",
                             ""
                         ]
                     },
                     "shadow": false,
                     "topLevel": true,
-                    "x": 728,
-                    "y": 238
+                    "x": 0,
+                    "y": 0
                 },
-                "b:b#b": {
-                    "opcode": "data_changevariableby",
+                "a:b#b": {
+                    "opcode": "data_setvariableto",
                     "next": null,
-                    "parent": "b:a#c",
+                    "parent": "a:a#c",
                     "inputs": {
                         "VALUE": [
                             1,
                             [
-                                4,
-                                "1"
+                                10,
+                                "456"
                             ]
                         ]
                     },
                     "fields": {
                         "VARIABLE": [
-                            "var2",
-                            "X#fH=/ZM.T|B;rKrmG[s",
+                            "local variable",
+                            "NmjQ-_mT(OA^.)?Hh^bl",
                             ""
                         ]
                     },
@@ -171,60 +109,33 @@
             "comments": {
                 "a:a#c": {
                     "blockId": "a:a#b",
-                    "x": 335.22222222222223,
-                    "y": 532.5185185185185,
+                    "x": 362.81296730041504,
+                    "y": 8,
                     "width": 200,
                     "height": 200,
                     "minimized": false,
-                    "text": "bev\u00f6lkerung * eff * c = gold\nc = 0.00003350055\n\n447100 * 9.14 * 0.00003350055 = 1.41"
+                    "text": "setting variables"
                 },
                 "a#c": {
                     "blockId": null,
-                    "x": 185,
-                    "y": 271,
+                    "x": 149.68792330747857,
+                    "y": -327.12618351331304,
                     "width": 200,
                     "height": 200,
                     "minimized": false,
-                    "text": "x"
-                },
-                "b#c": {
-                    "blockId": null,
-                    "x": 320.45225893155424,
-                    "y": 783.5396244024346,
-                    "width": 200,
-                    "height": 200,
-                    "minimized": false,
-                    "text": "wirtschaft * c = gold\nc = 0.02705314009\n"
-                },
-                "c#c": {
-                    "blockId": null,
-                    "x": 329.99374200616097,
-                    "y": 1012.1991392961702,
-                    "width": 200,
-                    "height": 200,
-                    "minimized": false,
-                    "text": "19.6\n0.034"
+                    "text": "free floating comment"
                 }
             },
-            "currentCostume": 1,
+            "currentCostume": 0,
             "costumes": [
                 {
                     "name": "costume1",
-                    "bitmapResolution": 1,
-                    "assetId": "c434b674f2da18ba13cdfe51dbc05ecc",
-                    "dataFormat": "svg",
-                    "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
-                    "rotationCenterX": 26,
-                    "rotationCenterY": 46
-                },
-                {
-                    "name": "minecraft-skin-yellow-flower-girl",
                     "bitmapResolution": 2,
-                    "assetId": "434d1bd27432262c2d4e3e882533f254",
+                    "assetId": "b86efb7f23387300cf9037a61f328ab9",
                     "dataFormat": "png",
-                    "md5ext": "434d1bd27432262c2d4e3e882533f254.png",
-                    "rotationCenterX": 64,
-                    "rotationCenterY": 64
+                    "md5ext": "b86efb7f23387300cf9037a61f328ab9.png",
+                    "rotationCenterX": 158,
+                    "rotationCenterY": 146
                 }
             ],
             "sounds": [
@@ -235,17 +146,9 @@
                     "rate": 48000,
                     "sampleCount": 17867,
                     "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
-                },
-                {
-                    "name": "art-of-samples-buzz-120-bpm-audio-logo-245396",
-                    "assetId": "64ff5535a3f758aec5ae068a6bdbaa5b",
-                    "dataFormat": "mp3",
-                    "rate": 48000,
-                    "sampleCount": 388702,
-                    "md5ext": "64ff5535a3f758aec5ae068a6bdbaa5b.mp3"
                 }
             ],
-            "id": "xp.Ahc]%mHiCjMS(xh;,",
+            "id": "M^Lp^Q]A^}K)lXO{ELxy",
             "volume": 100,
             "visible": true,
             "x": 0,
@@ -263,14 +166,14 @@
             "mode": "default",
             "opcode": "data_variable",
             "params": {
-                "VARIABLE": "var2"
+                "VARIABLE": "global variable"
             },
             "spriteName": null,
-            "value": 0,
+            "value": "test123test",
             "width": 0,
             "height": 0,
-            "x": 5,
-            "y": 5,
+            "x": 159,
+            "y": 75,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -281,66 +184,18 @@
             "mode": "default",
             "opcode": "data_variable",
             "params": {
-                "VARIABLE": "\u2601 cloud"
-            },
-            "spriteName": null,
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 264,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "Za:QFPiy`CEs]*lkO=/n",
-            "mode": "default",
-            "opcode": "data_variable",
-            "params": {
-                "VARIABLE": "locVar"
+                "VARIABLE": "local variable"
             },
             "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 31,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "M^Lp^Q]A^}K)lXO{ELxy",
-            "mode": "list",
-            "opcode": "data_listcontents",
-            "params": {
-                "LIST": "glob"
-            },
-            "spriteName": null,
-            "value": [],
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 57,
-            "visible": true
-        },
-        {
-            "id": "xeH-ilqtek]Y@J?EB}#|",
-            "mode": "list",
-            "opcode": "data_listcontents",
-            "params": {
-                "LIST": "loc"
-            },
-            "spriteName": null,
-            "value": [],
+            "value": 456,
             "width": 0,
             "height": 0,
             "x": 155,
-            "y": 57,
-            "visible": true
+            "y": 268,
+            "visible": true,
+            "sliderMin": -100,
+            "sliderMax": 500,
+            "isDiscrete": true
         }
     ],
     "extensionData": {},
