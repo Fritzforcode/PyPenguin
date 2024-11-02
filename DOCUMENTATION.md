@@ -1,8 +1,30 @@
-Properties of objects are always required except when labeled differently.
+# PyPenguin Documentation
+This is the documentation for **PyPenguin**. 
+
+The file structure of **PyPenguin Project** should look like this:
+
+```
+My PyPenguin Project (can be anything)
+├─ project.json
+├─ #Stage
+│  ├─ costumes
+│  │  └─ backdrop1.svg
+│  └─ sounds
+│     └─ Hello%20World.mp3
+└─ Sprite1
+   ├─ costumes
+   │  └─ costume1.png
+   └─ sounds
+      └─ Squawk.wav
+```
+#### Notes:
+* `project.json` is documented [below](#format-of-the-project-projectjson).
+* `sprite`, `costume` and `sound` names have to [percent encoded](https://en.wikipedia.org/wiki/Percent-encoding).
+* `#Stage` is used for the stage to avoid overlapping with sprite names.
+* PenguinMod seems to only support `48kHz` sounds. For a safe usage convert your sounds. 
 
 
-
-## Format of the Project
+## Format of the Project (`project.json`)
 The Project data must be an object with the following properties:
 * `"sprites"`: [Stage and Sprites Format](#format-of-sprites).
 
@@ -231,7 +253,7 @@ Must be an object with the following properties:
 * `"agent"`: The User Agent. Must be `""` for PenguinMod.
 
 * `"platform"`: Some information about the platform used to edit your project.
-#### Example (for PenguinMod)
+#### Example
 ```
 {
     "semver": "3.0.0",
