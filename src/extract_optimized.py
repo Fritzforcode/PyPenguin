@@ -8,8 +8,7 @@ import os, shutil
 
 from helper_functions import readJSONFile, writeJSONFile, pp
 
-projectFilePath    = "assets/studies/test.pmp"
-jsonPath           = "assets/studies/test.json"
+projectFilePath    = "assets/studies/example.pmp"
 optimizedPath      = "assets/optimized.json"
 directory          = "projectAssets/"
 temporaryDirectory = "temporary/"
@@ -30,7 +29,7 @@ validateProject(
 
 # Clear the directory
 os.makedirs(directory, exist_ok=True)
-#shutil.rmtree(path=directory)
+shutil.rmtree(path=directory)
 
 
 for sprite in optimizedData["sprites"]:
@@ -60,8 +59,8 @@ for sprite in optimizedData["sprites"]:
 # Remove the temporary directory
 shutil.rmtree(temporaryDirectory)
 
-#
-#deoptimizeProject(
-#    sourcePath=optimizedPath,
-#    targetPath="assets/deoptimized.json"
-#)
+
+deoptimizeProject(
+    sourcePath=optimizedPath,
+    targetPath="assets/deoptimized.json"
+)
