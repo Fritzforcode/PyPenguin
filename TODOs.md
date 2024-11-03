@@ -38,6 +38,10 @@ research rotationCenter for different costume types
 
 research monitor values being wrong
 
+add testing
+
+research bug: comment becomming parent of block
+
 maybe validate:
 - dataFormat
 - extension names
