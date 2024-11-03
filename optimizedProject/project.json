@@ -18,15 +18,7 @@
                     ]
                 }
             ],
-            "sounds": [
-                {
-                    "name": "Hello there",
-                    "dataFormat": "mp3",
-                    "fileStem": "ded064067963e912e985745cf0fec86a",
-                    "rate": 48000,
-                    "sampleCount": 65201
-                }
-            ],
+            "sounds": [],
             "volume": 100
         },
         {
@@ -35,8 +27,8 @@
             "scripts": [
                 {
                     "position": [
-                        0,
-                        0
+                        140,
+                        155
                     ],
                     "blocks": [
                         {
@@ -45,24 +37,49 @@
                                 "VALUE": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "test123test"
+                                    "text": "0"
                                 }
                             },
                             "options": {
-                                "VARIABLE": "global variable"
+                                "VARIABLE": "my variable"
                             },
-                            "comment": {
-                                "position": [
-                                    362.81296730041504,
-                                    8
-                                ],
-                                "size": [
-                                    200,
-                                    200
-                                ],
-                                "isMinimized": false,
-                                "text": "setting variables"
-                            }
+                            "comment": null
+                        },
+                        {
+                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "my variable"
+                            },
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        658,
+                        105
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-1"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "my variable"
+                            },
+                            "comment": null
                         },
                         {
                             "opcode": "set [VARIABLE] to (VALUE)",
@@ -70,69 +87,67 @@
                                 "VALUE": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "456"
+                                    "text": "0"
                                 }
                             },
                             "options": {
-                                "VARIABLE": "local variable"
+                                "VARIABLE": "my variable"
+                            },
+                            "comment": {
+                                "position": [
+                                    1043.1481481481483,
+                                    37
+                                ],
+                                "size": [
+                                    226.74896240234375,
+                                    244.23867797851562
+                                ],
+                                "isMinimized": false,
+                                "text": ""
+                            }
+                        },
+                        {
+                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "my variable"
                             },
                             "comment": null
                         },
                         {
-                            "opcode": "add (ITEM) to [LIST]",
+                            "opcode": "change [VARIABLE] by (VALUE)",
                             "inputs": {
-                                "ITEM": {
+                                "VALUE": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "789"
+                                    "text": "2"
                                 }
                             },
                             "options": {
-                                "LIST": "global list"
-                            },
-                            "comment": null
-                        },
-                        {
-                            "opcode": "add (ITEM) to [LIST]",
-                            "inputs": {
-                                "ITEM": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "ABC"
-                                }
-                            },
-                            "options": {
-                                "LIST": "local list"
+                                "VARIABLE": "my variable"
                             },
                             "comment": null
                         }
                     ]
                 }
             ],
-            "comments": [
-                {
-                    "position": [
-                        149.68792330747857,
-                        -327.12618351331304
-                    ],
-                    "size": [
-                        200,
-                        200
-                    ],
-                    "isMinimized": false,
-                    "text": "free floating comment"
-                }
-            ],
+            "comments": [],
             "currentCostume": 0,
             "costumes": [
                 {
                     "name": "costume1",
-                    "dataFormat": "png",
-                    "fileStem": "b86efb7f23387300cf9037a61f328ab9",
-                    "bitmapResolution": 2,
+                    "dataFormat": "svg",
+                    "fileStem": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "bitmapResolution": 1,
                     "rotationCenter": [
-                        158,
-                        146
+                        26,
+                        46
                     ]
                 }
             ],
@@ -146,45 +161,8 @@
                 }
             ],
             "volume": 100,
-            "localVariables": [
-                {
-                    "name": "local variable",
-                    "currentValue": 456,
-                    "monitor": {
-                        "visible": true,
-                        "size": [
-                            0,
-                            0
-                        ],
-                        "position": [
-                            155,
-                            268
-                        ],
-                        "sliderMin": -100,
-                        "sliderMax": 500,
-                        "onlyIntegers": true
-                    }
-                }
-            ],
-            "localLists": [
-                {
-                    "name": "local list",
-                    "currentValue": [
-                        "ABC"
-                    ],
-                    "monitor": {
-                        "visible": true,
-                        "size": [
-                            0,
-                            0
-                        ],
-                        "position": [
-                            361,
-                            92
-                        ]
-                    }
-                }
-            ],
+            "localVariables": [],
+            "localLists": [],
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -199,44 +177,13 @@
     ],
     "globalVariables": [
         {
-            "name": "global variable",
-            "currentValue": "test123test",
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    159,
-                    75
-                ],
-                "sliderMin": 0,
-                "sliderMax": 100,
-                "onlyIntegers": true
-            },
+            "name": "my variable",
+            "currentValue": 0,
+            "monitor": null,
             "isCloudVariable": false
         }
     ],
-    "globalLists": [
-        {
-            "name": "global list",
-            "currentValue": [
-                789
-            ],
-            "monitor": {
-                "visible": true,
-                "size": [
-                    0,
-                    0
-                ],
-                "position": [
-                    15,
-                    7
-                ]
-            }
-        }
-    ],
+    "globalLists": [],
     "tempo": 60,
     "videoTransparency": 50,
     "videoState": "on",
