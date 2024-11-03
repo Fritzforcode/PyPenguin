@@ -1,0 +1,252 @@
+{
+    "sprites": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "dataFormat": "svg",
+                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        240,
+                        180
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Hello there",
+                    "dataFormat": "mp3",
+                    "fileStem": "ded064067963e912e985745cf0fec86a",
+                    "rate": 48000,
+                    "sampleCount": 65201
+                }
+            ],
+            "volume": 100
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "scripts": [
+                {
+                    "position": [
+                        223,
+                        429
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "123test123"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "global variable"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "456"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "local variable"
+                            },
+                            "comment": {
+                                "position": [
+                                    604.512547653889,
+                                    472.5514403292181
+                                ],
+                                "size": [
+                                    200,
+                                    200
+                                ],
+                                "isMinimized": false,
+                                "text": "this is a comment on a block"
+                            }
+                        },
+                        {
+                            "opcode": "add (ITEM) to [LIST]",
+                            "inputs": {
+                                "ITEM": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "789"
+                                }
+                            },
+                            "options": {
+                                "LIST": "global list"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "add (ITEM) to [LIST]",
+                            "inputs": {
+                                "ITEM": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "ABC"
+                                }
+                            },
+                            "options": {
+                                "LIST": "local list"
+                            },
+                            "comment": null
+                        }
+                    ]
+                }
+            ],
+            "comments": [
+                {
+                    "position": [
+                        269,
+                        82
+                    ],
+                    "size": [
+                        200,
+                        200
+                    ],
+                    "isMinimized": false,
+                    "text": "free floating comment"
+                }
+            ],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "dataFormat": "png",
+                    "fileStem": "b86efb7f23387300cf9037a61f328ab9",
+                    "bitmapResolution": 2,
+                    "rotationCenter": [
+                        158,
+                        146
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "dataFormat": "wav",
+                    "fileStem": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "rate": 48000,
+                    "sampleCount": 17867
+                }
+            ],
+            "volume": 100,
+            "localVariables": [
+                {
+                    "name": "local variable",
+                    "currentValue": 0,
+                    "monitor": {
+                        "visible": true,
+                        "size": [
+                            0,
+                            0
+                        ],
+                        "position": [
+                            246,
+                            37
+                        ],
+                        "sliderMin": 0,
+                        "sliderMax": 100,
+                        "onlyIntegers": true
+                    }
+                }
+            ],
+            "localLists": [
+                {
+                    "name": "local list",
+                    "currentValue": [],
+                    "monitor": {
+                        "visible": true,
+                        "size": [
+                            0,
+                            0
+                        ],
+                        "position": [
+                            327,
+                            79
+                        ]
+                    }
+                }
+            ],
+            "layerOrder": 1,
+            "visible": true,
+            "position": [
+                0,
+                0
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "globalVariables": [
+        {
+            "name": "global variable",
+            "currentValue": 0,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    17,
+                    49
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            },
+            "isCloudVariable": false
+        }
+    ],
+    "globalLists": [
+        {
+            "name": "global list",
+            "currentValue": [],
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    31,
+                    94
+                ]
+            }
+        }
+    ],
+    "tempo": 60,
+    "videoTransparency": 50,
+    "videoState": "on",
+    "textToSpeechLanguage": null,
+    "extensionData": {},
+    "extensions": [],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": "",
+        "platform": {
+            "name": "PenguinMod",
+            "url": "https://penguinmod.com/",
+            "version": "stable"
+        }
+    }
+}
