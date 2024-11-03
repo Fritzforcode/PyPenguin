@@ -45,15 +45,10 @@ def extractProject(
         shutil.rmtree(temporaryDir)
     return json
 
-
-projectFilePath           = "../assets/studies/example.pmp"
-optimizedProjectDirectory = "../optimizedProject/"
-temporaryDirectory        = "../temporary/"
-
 def extractAndOptimizeProject(
-    projectFilePath,
-    optimizedProjectDirectory,
-    temporaryDirectory,
+    projectFilePath: str,
+    optimizedProjectDirectory: str,
+    temporaryDirectory: str,
 ):
     # Extract the PenguinMod project
     deoptimizedData = extractProject(
@@ -61,6 +56,8 @@ def extractAndOptimizeProject(
         jsonFilePath=None, # Dont write the unoptimized version to a file
         temporaryDir=temporaryDirectory,
     )
+    writeJSONFile("temp.json", deoptimizedData)
+
     # Optimize project.json
     optimizedData = optimizeProjectJSON(
         projectData=deoptimizedData,
@@ -145,3 +142,8 @@ def extractAndOptimizeProject(
     # Remove the temporary directory
     shutil.rmtree(temporaryDirectory)
     
+extractAndOptimizeProject(
+    projectFilePath           = "assets/studies/example.pmp",
+    optimizedProjectDirectory = "optimizedProject/",
+    temporaryDirectory        = "temporary/",
+)
