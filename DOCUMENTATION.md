@@ -18,6 +18,7 @@ My PyPenguin Project
       └─ Squawk.wav
 ```
 ### Notes:
+* You can find the example [here](examples/).
 * `project.json` is documented [below](#format-of-the-project-projectjson).
 * `sprite`, `costume` and `sound` names have to [percent encoded](https://en.wikipedia.org/wiki/Percent-encoding) and match their names in `project.json`, where they should not be encoded.
 * `#Stage` is used for the stage to avoid overlapping with sprite names.
