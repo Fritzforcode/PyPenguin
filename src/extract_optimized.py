@@ -1,66 +1,147 @@
-from validate import validateProject
-from source_extractor import extractProject
+from validate import validateProject, ValidationError
 from optimize import optimizeProjectJSON
-from deoptimize import deoptimizeProject
 
 import urllib.parse
-import os, shutil
+import os, shutil, zipfile
 
 from helper_functions import readJSONFile, writeJSONFile, pp
 
-projectFilePath    = "assets/studies/example.pmp"
-optimizedPath      = "assets/optimized.json"
-assetDirectory     = "projectAssets/"
-temporaryDirectory = "temporary/"
-
-unoptimizedData = extractProject(
-    pmpFilePath=projectFilePath,
-    jsonFilePath=None, # Dont write the unoptimized version to a file
-    temporaryDir=temporaryDirectory,
-)
-optimizedData = optimizeProjectJSON(
-    projectData=unoptimizedData
-)
-writeJSONFile(filePath=optimizedPath, data=optimizedData)
-
-validateProject(
-    projectData=optimizedData
-)
-
-# Clear the directory
-os.makedirs(assetDirectory, exist_ok=True)
-shutil.rmtree(path=assetDirectory)
-
-
-for sprite in optimizedData["sprites"]:
-    if sprite["isStage"]:
-        encodedSpriteName = "#Stage"
-    else:
-        encodedSpriteName = urllib.parse.quote(sprite["name"])
-
-    os.makedirs(assetDirectory+encodedSpriteName+"/costumes", exist_ok=True)
-    for costume in sprite["costumes"]:
-        oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
-        encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
-        shutil.copy(
-            src=temporaryDirectory + oldCostumeName,
-            dst=assetDirectory + encodedSpriteName + "/costumes/" + encodedCostumeName,
-        )
+def extractProject(
+    pmpFilePath       : str, # Path to your .pmp file
+    jsonFilePath      : None|str, # Path to your final .json file,
+    temporaryDir      : str, # Where the zip will be extracted
+    prettyFormat      : bool = True,
+    deleteTemporaryDir: bool = False
+):
+    # Directory where you want to extract files
+    # Path to your .zip file
+    zip_file_path = "source.zip"
     
-    os.makedirs(assetDirectory+encodedSpriteName+"/sounds", exist_ok=True)
-    for costume in sprite["sounds"]:
-        oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
-        encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
-        shutil.copy(
-            src=temporaryDirectory + oldCostumeName,
-            dst=assetDirectory + encodedSpriteName + "/sounds/" + encodedCostumeName,
+    # Copy the .pmp to file and rename it .zip
+    shutil.copy(pmpFilePath, zip_file_path)
+    
+    # Ensure the extraction directory exists
+    os.makedirs(temporaryDir, exist_ok=True)
+    shutil.rmtree(temporaryDir)
+    os.makedirs(temporaryDir, exist_ok=True)
+    
+    # Open and extract the zip file
+    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+        zip_ref.extractall(temporaryDir)
+    
+    
+    json = readJSONFile(os.path.join(temporaryDir, "project.json"))
+    if jsonFilePath != None:
+        # Copy project.json to your folder and rename it to [json_file_path] 
+        if prettyFormat:
+            writeJSONFile(jsonFilePath, json)
+        else:
+            shutil.copy(os.path.join(temporaryDir, "project.json"), jsonFilePath)
+    
+    
+    # Delete temporary files
+    os.remove(zip_file_path)
+    if deleteTemporaryDir:
+        shutil.rmtree(temporaryDir)
+    return json
+
+
+projectFilePath           = "../assets/studies/example.pmp"
+optimizedProjectDirectory = "../optimizedProject/"
+temporaryDirectory        = "../temporary/"
+
+def extractAndOptimizeProject(
+    projectFilePath,
+    optimizedProjectDirectory,
+    temporaryDirectory,
+):
+    # Extract the PenguinMod project
+    deoptimizedData = extractProject(
+        pmpFilePath=projectFilePath,
+        jsonFilePath=None, # Dont write the unoptimized version to a file
+        temporaryDir=temporaryDirectory,
+    )
+    # Optimize project.json
+    optimizedData = optimizeProjectJSON(
+        projectData=deoptimizedData,
+    )
+    
+    # Make sure the project directory exists
+    os.makedirs(optimizedProjectDirectory, exist_ok=True)
+    
+    # Validate the optimized project.json and halde errors
+    try:
+        validateProject(
+            projectData=optimizedData,
         )
-
-# Remove the temporary directory
-shutil.rmtree(temporaryDirectory)
-
-
-deoptimizeProject(
-    sourcePath=optimizedPath,
-    targetPath="assets/deoptimized.json"
-)
+    except ValidationError as error:
+        print(error)
+        print("This error is likely the fault of the developer. Please report this.")
+    
+    # Clear the project directory
+    os.makedirs(optimizedProjectDirectory, exist_ok=True)
+    shutil.rmtree(path=optimizedProjectDirectory)
+    
+    # Reorganize Assets
+    for sprite in optimizedData["sprites"]:
+        # Encode the sprite name
+        if sprite["isStage"]:
+            encodedSpriteName = "#Stage"
+        else:
+            encodedSpriteName = urllib.parse.quote(sprite["name"])
+    
+        # Make sure the sprite dir has the costume dir
+        os.makedirs(
+            os.path.join(
+                optimizedProjectDirectory,
+                encodedSpriteName,
+                "costumes",
+            ), 
+            exist_ok=True
+        )
+        # Copy and rename costumes
+        for costume in sprite["costumes"]:
+            oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
+            encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
+            shutil.copy(
+                src=os.path.join(temporaryDirectory, oldCostumeName),
+                dst=os.path.join(
+                    optimizedProjectDirectory, 
+                    encodedSpriteName, 
+                    "costumes", 
+                    encodedCostumeName
+                ),
+            )
+        
+        # Make sure the sprite dir has the sounds dir
+        os.makedirs(
+            os.path.join(
+                optimizedProjectDirectory,
+                encodedSpriteName,
+                "sounds",
+            ), 
+            exist_ok=True
+        )
+        # Copy and rename sounds
+        for costume in sprite["sounds"]:
+            oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
+            encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
+            shutil.copy(
+                src=os.path.join(temporaryDirectory, oldCostumeName),
+                dst=os.path.join(
+                    optimizedProjectDirectory, 
+                    encodedSpriteName, 
+                    "sounds", 
+                    encodedCostumeName
+                ),
+            )
+    
+    # Add the optimized project.json
+    writeJSONFile(
+        filePath=os.path.join(optimizedProjectDirectory, "project.json"), 
+        data=optimizedData,
+    )
+    
+    # Remove the temporary directory
+    shutil.rmtree(temporaryDirectory)
+    

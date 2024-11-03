@@ -7,7 +7,7 @@ from optimize.variables_lists import translateVariables, translateLists
 from optimize.blocks_scripts import translateScript, generateBlockChildrenPs
 from optimize.comments import translateComment
 
-opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
+from database import opcodeDatabase
 
 
 def optimizeProjectJSON(projectData):

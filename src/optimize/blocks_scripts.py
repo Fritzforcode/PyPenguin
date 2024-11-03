@@ -2,7 +2,7 @@ from helper_functions import ikv, WhatIsGoingOnError, readJSONFile
 
 from optimize.comments import translateComment
 
-opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
+from database import opcodeDatabase
 
 
 def translateInputs(data):

@@ -1,6 +1,6 @@
 from helper_functions import ikv, WhatIsGoingOnError, generateRandomToken, readJSONFile, removeStringDuplicates
 
-opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
+from database import opcodeDatabase
 
 
 def findBlockBroadcastMessages(data):

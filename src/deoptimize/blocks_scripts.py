@@ -3,8 +3,7 @@ from helper_functions import ikv, pp, WhatIsGoingOnError, generateSelector, read
 from deoptimize.options import translateOptions
 from deoptimize.comments import translateComment
 
-opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
-
+from database import opcodeDatabase
 
 def prepareBlock(data, spriteName, tokens, commentID):
     opcode = None

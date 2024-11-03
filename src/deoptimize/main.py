@@ -1,6 +1,6 @@
 exec("import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))")
 
-from helper_functions import readJSONFile, writeJSONFile, generateRandomToken, generateSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
+from helper_functions import generateRandomToken, generateSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
 
 from deoptimize.variables_lists import translateVariables, translateLists
 from deoptimize.broadcasts import generateBroadcastTokens
@@ -8,7 +8,7 @@ from deoptimize.blocks_scripts import linkBlocksToScript, unnestScript
 from deoptimize.costumes_sounds import translateCostumes, translateSounds
 from deoptimize.comments import translateComment
 
-opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
+from database import opcodeDatabase
 
 def generateTokens(data):
     spriteNames = [sprite["name"] for sprite in data["sprites"]][1:]
@@ -32,12 +32,11 @@ def generateTokens(data):
     }
     return tokens, translatedVariableDatas, translatedListDatas, monitorDatas
 
-def deoptimizeProject(sourcePath, targetPath):
-    data = readJSONFile(sourcePath)
-    tokens, translatedVariableDatas, translatedListDatas, monitorDatas = generateTokens(data=data)    
+def deoptimizeProject(projectData):
+    tokens, translatedVariableDatas, translatedListDatas, monitorDatas = generateTokens(data=projectData)    
     
     newSpriteDatas = []
-    for spriteData in data["sprites"]:
+    for spriteData in projectData["sprites"]:
         newCommentDatas = {}
         newSpriteBlocks = {}
         for scriptID, scriptData in enumerate(spriteData["scripts"]):
@@ -92,10 +91,10 @@ def deoptimizeProject(sourcePath, targetPath):
             newSpriteData["broadcasts"] = flipKeysAndValues(tokens["broadcasts"][None])
             newSpriteData |= {
                 "layerOrder"          : 0,
-                "tempo"               : data["tempo"],
-                "videoTransparency"   : data["videoTransparency"],
-                "videoState"          : data["videoState"],
-                "textToSpeechLanguage": data["textToSpeechLanguage"],
+                "tempo"               : projectData["tempo"],
+                "videoTransparency"   : projectData["videoTransparency"],
+                "videoState"          : projectData["videoState"],
+                "textToSpeechLanguage": projectData["textToSpeechLanguage"],
             }
         else:
             newSpriteData |= {
@@ -112,10 +111,9 @@ def deoptimizeProject(sourcePath, targetPath):
     newProjectData = {
         "targets"      : newSpriteDatas,
         "monitors"     : monitorDatas,
-        "extensionData": data["extensionData"],
-        "extensions"   : data["extensions"],
-        "meta"         : data["meta"],
+        "extensionData": projectData["extensionData"],
+        "extensions"   : projectData["extensions"],
+        "meta"         : projectData["meta"],
     }
-    #pp(newProjectData)
-    writeJSONFile(targetPath, newProjectData)    
-
+    return newProjectData
+    

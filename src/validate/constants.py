@@ -1,7 +1,7 @@
 from helper_functions import readJSONFile
 from validate.errors import ValidationError
 
-opcodeDatabase = readJSONFile(filePath="assets/opcode_database.jsonc")
+from database import opcodeDatabase
 allowedOpcodes = [data["newOpcode"] for data in opcodeDatabase.values()]
 textToSpeechLanguages = [
     None,

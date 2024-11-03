@@ -1,6 +1,6 @@
 from helper_functions import ikv,  WhatIsGoingOnError, generateRandomToken,  readJSONFile, pp
 
-opcodeDatabase = readJSONFile("assets/opcode_database.jsonc")
+from database import opcodeDatabase
 
 
 def translateOptions(optionDatas, opcode, spriteName, tokens):

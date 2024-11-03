@@ -70,18 +70,3 @@ def validateProject(projectData):
 
 from helper_functions import readJSONFile, ikv, pp
 
-opcodeDatabase = readJSONFile(filePath="assets/opcode_database.jsonc")
-allowedOpcodes = [data["newOpcode"] for data in opcodeDatabase.values()]
-textToSpeechLanguages = [
-    None,
-    "ar", "zh-cn", "da", "nl", "en", 
-    "fr", "de", "hi", "is", "it", 
-    "ja", "ko", "nb", "pl", "pt-br",
-    "pt", "ro", "ru", "es", "es-419", 
-    "sv", "tr", "cy",
-] # language abbreviations
-
-
-
-
-
