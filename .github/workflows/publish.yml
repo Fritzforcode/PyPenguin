@@ -1,0 +1,33 @@
+name: Publish Package to Test PyPI
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger on version tags, e.g., v0.1, v1.0.0
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Specify your desired Python version
+
+      - name: Install dependencies
+        run: |
+          pip install setuptools wheel twine
+
+      - name: Build package
+        run: python setup.py sdist bdist_wheel
+
+      - name: Upload to Test PyPI
+        uses: pypa/gh-action-pypi-publish@v1.0.0
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          username: ${{ secrets.TEST_PYPI_USERNAME }}  # Use the secret for the username
+          password: ${{ secrets.TEST_PYPI_PASSWORD }}  # Use the secret for the password
