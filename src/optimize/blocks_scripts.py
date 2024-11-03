@@ -105,7 +105,6 @@ def generateBlockChildrenPs(data):
     for i,childP,parentP in ikv(blockParentPs):
         if parentP != None:
             blockChildrenPs[parentP].append(childP)
-        opcodeData = opcodeDatabase[data[childP]["opcode"]]
         if parentP == None:
             ancestorPs.append(childP)
     return ancestorPs, blockChildrenPs
