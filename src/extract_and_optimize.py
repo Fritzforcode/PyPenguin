@@ -56,7 +56,6 @@ def extractAndOptimizeProject(
         jsonFilePath=None, # Dont write the unoptimized version to a file
         temporaryDir=temporaryDirectory,
     )
-    writeJSONFile("temp.json", deoptimizedData)
 
     # Optimize project.json
     optimizedData = optimizeProjectJSON(
