@@ -34,8 +34,6 @@ maybe reseatch monitor size
 
 maybe remove fileStem
 
-can comments really be positioned at float coordinates and be float size?
-
 research rotationCenter for different costume types
 
 research monitor values being wrong
