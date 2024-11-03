@@ -140,9 +140,10 @@ def extractAndOptimizeProject(
     
     # Remove the temporary directory
     shutil.rmtree(temporaryDirectory)
-    
-extractAndOptimizeProject(
-    projectFilePath           = "assets/studies/example.pmp",
-    optimizedProjectDirectory = "optimizedProject/",
-    temporaryDirectory        = "temporary/",
-)
+
+if __name__ == "__main__":
+    extractAndOptimizeProject(
+        projectFilePath           = "assets/studies/example.pmp",
+        optimizedProjectDirectory = "optimizedProject/",
+        temporaryDirectory        = "temporary/",
+    )

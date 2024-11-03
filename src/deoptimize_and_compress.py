@@ -83,8 +83,9 @@ def deoptimizeAndCompressProject(
     # Remove the temporary dir
     shutil.rmtree(temporaryDirectory)
 
-deoptimizeAndCompressProject(
-    projectFilePath           = "assets/studies/example.pmp",
-    optimizedProjectDirectory = "optimizedProject/",
-    temporaryDirectory        = "temporary/",
-)
+if __name__ == "__main__":
+    deoptimizeAndCompressProject(
+        projectFilePath           = "assets/studies/example.pmp",
+        optimizedProjectDirectory = "optimizedProject/",
+        temporaryDirectory        = "temporary/",
+    )
