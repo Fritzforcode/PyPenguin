@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "pypenguin_projects"
+name = "pypenguin-projects"  # Make sure the name matches your package directory
 version = "0.1"
 description = "Python tool for creating, editing, and inspecting Penguinmod (.pmp) files"
 readme = "README.md"
-authors = ["Fritzforcode <your_email@example.com>"]  # Add your email if necessary
-license = "GPL-3.0"  # Specify your license here
+authors = ["Fritzforcode <your_email@example.com>"]  # Optionally include your email
+license = "GPL-3.0"  # Specify your license if applicable
 homepage = "https://github.com/Fritzforcode/PyPenguin"
 repository = "https://github.com/Fritzforcode/PyPenguin"
 keywords = ["penguin", "tool", "pmp"]
@@ -12,14 +12,9 @@ keywords = ["penguin", "tool", "pmp"]
 [tool.poetry.dependencies]
 python = ">=3.6"
 
-[tool.poetry.dev-dependencies]
-# Add any development dependencies here, e.g.
-# pytest = "^6.0"
-
-[tool.poetry.urls]
-issues = "https://github.com/Fritzforcode/PyPenguin/issues"
-format_documentation = "https://github.com/Fritzforcode/PyPenguin/blob/main/Optimized%%20Format%%20Documentation.md"
-
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.packages]
+include = [{ include = "src/pypenguin", from = "src" }]  # Specify package directory
