@@ -1,7 +1,7 @@
-from ..helper_functions import readJSONFile
-from ..validate.errors import ValidationError
+from src.pypenguin.helper_functions import readJSONFile
+from src.pypenguin.validate.errors import ValidationError
 
-from ..database import opcodeDatabase
+from src.pypenguin.database import opcodeDatabase
 allowedOpcodes = [data["newOpcode"] for data in opcodeDatabase.values()]
 textToSpeechLanguages = [
     None,

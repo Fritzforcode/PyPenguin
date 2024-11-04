@@ -71,7 +71,35 @@ opcodeDatabase = {
         "newOpcode": "add (ITEM) to [LIST]",
         "inputTypes": {"ITEM": "text"},
         "optionTypes": {"LIST": "list"}
-    }   
+    },
 # EXTENSIONS
-    
+    # JSON (jgJSON)
+    "jgJSON_getValueFromJSON": {
+        "type": "textReporter",
+        "category": "json",
+        "newOpcode": "get (VALUE) from (JSON)",
+        "inputTypes": {"VALUE": "text", "JSON": "text"},
+        "optionTypes": {}
+    },
+    "jgJSON_setValueToKeyInJSON": {
+        "type": "textReporter",
+        "category": "json",
+        "newOpcode": "set (KEY) to (VALUE) in (JSON)",
+        "inputTypes": {"KEY": "text", "VALUE": "text", "JSON": "text"},
+        "optionTypes": {}
+    },
+    "jgJSON_json_array_push": {
+        "type": "textReporter",
+        "category": "json",
+        "newOpcode": "in array (array) add (item)",
+        "inputTypes": {"array": "text", "item": "text"},
+        "optionTypes": {}
+    },
+    "jgJSON_json_array_get": {
+        "type": "textReporter",
+        "category": "json",
+        "newOpcode": "in array (array) get (index)",
+        "inputTypes": {"array": "text", "index": "text"},
+        "optionTypes": {}
+    },
 }

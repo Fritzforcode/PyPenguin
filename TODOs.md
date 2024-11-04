@@ -1,5 +1,7 @@
 # TODO
 
+add blocks requirering their extensions
+
 add more blocks
 
 add procedures
