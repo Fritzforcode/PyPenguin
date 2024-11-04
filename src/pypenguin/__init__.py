@@ -1,3 +1,3 @@
-from extract_and_optimize import extractAndOptimizeProject
-from validate import validateProject
-from deoptimize_and_compress import deoptimizeAndCompressProject
+from .extract_and_optimize import extractAndOptimizeProject
+from .validate import validateProject
+from .deoptimize_and_compress import deoptimizeAndCompressProject

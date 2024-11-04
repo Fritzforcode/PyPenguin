@@ -1,10 +1,10 @@
-from validate import validateProject, ValidationError
-from optimize import optimizeProjectJSON
+from .validate import validateProject, ValidationError
+from .optimize import optimizeProjectJSON
 
 import urllib.parse
 import os, shutil, zipfile
 
-from helper_functions import readJSONFile, writeJSONFile, pp
+from .helper_functions import readJSONFile, writeJSONFile, pp
 
 def extractProject(
     pmpFilePath       : str, # Path to your .pmp file

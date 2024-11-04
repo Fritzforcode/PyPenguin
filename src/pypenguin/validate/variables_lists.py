@@ -1,4 +1,4 @@
-from validate.constants import validateSchema, formatError, variableSchema, variableMonitorSchema, listSchema, listMonitorSchema
+from .constants import validateSchema, formatError, variableSchema, variableMonitorSchema, listSchema, listMonitorSchema
 
 def validateVariable(path, data, isGlobal):    
     # Check variable format
