@@ -48,3 +48,4 @@ maybe validate:
 - fileStem (no folders allowed and the file existing)
 - layerOrder to be at most 4 - needs research 
 - meta
+- asset names matching
