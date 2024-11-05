@@ -2,9 +2,13 @@
 
 add blocks requirering their extensions
 
+add var and list blocks to validation and documentation
+
 add more blocks
 
 add procedures
+
+what happens, when a comment is attached to a variable/list block
 
 explore and possibly translate extensionData
 
@@ -29,6 +33,8 @@ maybe add a standard costume when a sprite has no costumes
 maybe reseatch monitor size
 
 maybe remove fileStem
+
+maybe show multiple errors when validating
 
 research rotationCenter for different costume types
 
