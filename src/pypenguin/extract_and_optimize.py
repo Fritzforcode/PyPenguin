@@ -62,6 +62,7 @@ def extractAndOptimizeProject(
     optimizedData = optimizeProjectJSON(
         projectData=deoptimizedData,
     )
+    writeJSONFile("temp2.json", data=optimizedData)
     
     # Make sure the project directory exists
     os.makedirs(optimizedProjectDirectory, exist_ok=True)

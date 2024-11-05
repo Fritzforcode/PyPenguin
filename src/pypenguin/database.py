@@ -102,4 +102,20 @@ opcodeDatabase = {
         "inputTypes": {"array": "text", "index": "text"},
         "optionTypes": {}
     },
+# SPECIAL
+    "special_variable_value": {
+        "type": "textReporter",
+        "category": "variables",
+        "newOpcode": "VARIABLE",
+        "inputTypes": {},
+        "optionTypes": {"VARIABLE": "variable"}
+    },
+    "special_list_value": {
+        "type": "textReporter",
+        "category": "lists",
+        "newOpcode": "LIST",
+        "inputTypes": {},
+        "optionTypes": {"LIST": "list"}
+    },
+
 }
