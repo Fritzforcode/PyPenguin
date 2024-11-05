@@ -1,8 +1,9 @@
-from src.pypenguin import extractAndOptimizeProject
+from src.pypenguin import extractAndOptimizeProject, validateProject
 import os, sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'src/pypenguin')))
-extractAndOptimizeProject(
+optimizedData = extractAndOptimizeProject(
         projectFilePath           = "assets/studies/varBlockTest.pmp",
         optimizedProjectDirectory = "optimizedProject/",
         temporaryDirectory        = "temporary/",
     )
+validateProject(projectData=optimizedData)

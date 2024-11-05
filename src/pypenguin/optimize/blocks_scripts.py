@@ -1,4 +1,4 @@
-from helper_functions import ikv, WhatIsGoingOnError, readJSONFile, pp
+from helper_functions import ikv, WhatIsGoingOnError
 
 from optimize.comments import translateComment
 
@@ -92,7 +92,6 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
             commentDatas=commentDatas
         )
     blockData = data[ancestorP] # Get the block's own data
-    pp(blockData)
     if isinstance(blockData, dict): # A normal block
         inputs = translateInputs(blockData["inputs"])
         for i,inputID,inputData in ikv(inputs):

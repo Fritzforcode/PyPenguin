@@ -142,6 +142,7 @@ def extractAndOptimizeProject(
     
     # Remove the temporary directory
     shutil.rmtree(temporaryDirectory)
+    return optimizedData
 
 if __name__ == "__main__":
     extractAndOptimizeProject(
