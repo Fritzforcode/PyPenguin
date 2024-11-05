@@ -1,4 +1,4 @@
-from helper_functions import ikv, WhatIsGoingOnError, readJSONFile
+from helper_functions import ikv, WhatIsGoingOnError, readJSONFile, pp
 
 from optimize.comments import translateComment
 
@@ -98,7 +98,14 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
         return newDatas
 
 def generateBlockChildrenPs(data):
-    blockParentPs = {k:v["parent"] for i,k,v in ikv(data)} # Get all block's parents
+    blockParentPs = {}
+    for i,k,v in ikv(data):
+        if isinstance(data, dict):
+            print("--")
+            pp(data)
+            blockParentPs[k] = v["parent"]
+        elif isinstance(data, list):
+            blockParentPs[k] = None
     blockChildrenPs = {k:[] for k in data.keys()} # Create an empty dict which records each block's children
     # Add each block to their parent's children list
     ancestorPs = []

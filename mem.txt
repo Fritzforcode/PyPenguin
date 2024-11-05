@@ -1,0 +1,66 @@
+"y": [
+                    12,
+                    "my variable",
+                    "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                    117,
+                    127
+                ]
+"z": [
+                    13,
+                    "my list",
+                    "Ir0eiz?G,OEZCvS{yUP%",
+                    85,
+                    477
+                ]
+
+"A": {
+                    "opcode": "motion_movesteps",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "STEPS": [
+                            3,
+                            [
+                                12,
+                                "my variable",
+                                "`jEk@4|i[#Fk?(8x)AV.-my variable"
+                            ],
+                            [
+                                4,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 111,
+                    "y": 65
+                },
+                "B": {
+                    "opcode": "motion_movesteps",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "STEPS": [
+                            3,
+                            [
+                                13,
+                                "my list",
+                                "Ir0eiz?G,OEZCvS{yUP%"
+                            ],
+                            [
+                                4,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 463,
+                    "y": 380
+                }
+
+
+

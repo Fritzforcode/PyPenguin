@@ -15,7 +15,273 @@
                             "inputs": {
                                 "VALUE": {
                                     "mode": "block-and-text",
-                                    "block": null,
+                                    "block": {
+                                        "opcode": "set (KEY) to (VALUE) in (JSON)",
+                                        "inputs": {
+                                            "KEY": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "Gandalf"
+                                            },
+                                            "VALUE": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "Indiana JONES"
+                                            },
+                                            "JSON": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "set (KEY) to (VALUE) in (JSON)",
+                                                    "inputs": {
+                                                        "KEY": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "Bilbo"
+                                                        },
+                                                        "VALUE": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "Frodo"
+                                                        },
+                                                        "JSON": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "{}"
+                                                        }
+                                                    },
+                                                    "options": {},
+                                                    "comment": null
+                                                },
+                                                "text": "MoinThisValue"
+                                            }
+                                        },
+                                        "options": {},
+                                        "comment": null
+                                    },
+                                    "text": "MoinThisValue"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "var"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "set (KEY) to (VALUE) in (JSON)",
+                                        "inputs": {
+                                            "KEY": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "Gandalf"
+                                            },
+                                            "VALUE": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "Indiana JONES"
+                                            },
+                                            "JSON": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "set (KEY) to (VALUE) in (JSON)",
+                                                    "inputs": {
+                                                        "KEY": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "Bilbo"
+                                                        },
+                                                        "VALUE": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "Frodo"
+                                                        },
+                                                        "JSON": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "{}"
+                                                        }
+                                                    },
+                                                    "options": {},
+                                                    "comment": null
+                                                },
+                                                "text": "MoinThisValue"
+                                            }
+                                        },
+                                        "options": {},
+                                        "comment": null
+                                    },
+                                    "text": "MoinThisValue"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "var"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "set (KEY) to (VALUE) in (JSON)",
+                                        "inputs": {
+                                            "KEY": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "Gandalf"
+                                            },
+                                            "VALUE": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "Indiana JONES"
+                                            },
+                                            "JSON": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "set (KEY) to (VALUE) in (JSON)",
+                                                    "inputs": {
+                                                        "KEY": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "Bilbo"
+                                                        },
+                                                        "VALUE": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "Frodo"
+                                                        },
+                                                        "JSON": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "{}"
+                                                        }
+                                                    },
+                                                    "options": {},
+                                                    "comment": null
+                                                },
+                                                "text": "MoinThisValue"
+                                            }
+                                        },
+                                        "options": {},
+                                        "comment": null
+                                    },
+                                    "text": "MoinThisValue"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "var"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "set (KEY) to (VALUE) in (JSON)",
+                                        "inputs": {
+                                            "KEY": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "Gandalf"
+                                            },
+                                            "VALUE": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "Indiana JONES"
+                                            },
+                                            "JSON": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "set (KEY) to (VALUE) in (JSON)",
+                                                    "inputs": {
+                                                        "KEY": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "Bilbo"
+                                                        },
+                                                        "VALUE": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "Frodo"
+                                                        },
+                                                        "JSON": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "{}"
+                                                        }
+                                                    },
+                                                    "options": {},
+                                                    "comment": null
+                                                },
+                                                "text": "MoinThisValue"
+                                            }
+                                        },
+                                        "options": {},
+                                        "comment": null
+                                    },
+                                    "text": "MoinThisValue"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "var"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "set (KEY) to (VALUE) in (JSON)",
+                                        "inputs": {
+                                            "KEY": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "Gandalf"
+                                            },
+                                            "VALUE": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "Indiana JONES"
+                                            },
+                                            "JSON": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "set (KEY) to (VALUE) in (JSON)",
+                                                    "inputs": {
+                                                        "KEY": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "Bilbo"
+                                                        },
+                                                        "VALUE": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "Frodo"
+                                                        },
+                                                        "JSON": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "{}"
+                                                        }
+                                                    },
+                                                    "options": {},
+                                                    "comment": null
+                                                },
+                                                "text": "MoinThisValue"
+                                            }
+                                        },
+                                        "options": {},
+                                        "comment": null
+                                    },
                                     "text": "MoinThisValue"
                                 }
                             },
@@ -59,7 +325,9 @@
     "videoState": "off",
     "textToSpeechLanguage": null,
     "extensionData": {},
-    "extensions": [],
+    "extensions": [
+        "jgJSON"
+    ],
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",
