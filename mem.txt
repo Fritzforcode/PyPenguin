@@ -24,6 +24,18 @@
     "options": {"LIST": "my list"},
     "comment": None
 }
+[
+    3,
+    [
+        12,
+        "my variable",
+        "`jEk@4|i[#Fk?(8x)AV.-my variable"
+    ],
+    [
+        4,
+        "10"
+    ]
+]
 "A": {
                     "opcode": "motion_movesteps",
                     "next": null,

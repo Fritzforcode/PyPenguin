@@ -12,22 +12,43 @@ def prepareBlock(data, spriteName, tokens, commentID):
             opcode = oldOpcode
     if opcode == None:
         raise WhatIsGoingOnError(data["opcode"])
-    newBlockData = {
-        "opcode"  : opcode,
-        "next"    : None,
-        "parent"  : None,
-        "inputs"  : data["inputs"],
-        "fields"  : translateOptions(
-            optionDatas=data["options"], 
-            opcode=opcode, 
-            spriteName=spriteName,
-            tokens=tokens,
-        ),
-        "shadow"  : False,
-        "topLevel": False,
-    }
-    if data["comment"] != None:
-        newBlockData["comment"] = commentID
+    if opcode in ["special_variable_value", "special_list_value"]:
+        if opcode == "special_variable_value":
+            magicValue = 12
+            name = data["options"]["VARIABLE"]
+            if name in tokens["variables"][spriteName]:
+                token = tokens["variables"][spriteName][name]
+            elif name in tokens["variables"][None]:
+                token = tokens["variables"][None][name]
+        elif opcode == "special_list_value":
+            magicValue = 13
+            name = data["options"]["LIST"]
+            if name in tokens["lists"][spriteName]:
+                token = tokens["lists"][spriteName][name]
+            elif name in tokens["lists"][None]:
+                token = tokens["lists"][None][name]
+        newBlockData = [
+            magicValue,
+            name,
+            token,
+        ]
+    else:
+        newBlockData = {
+            "opcode"  : opcode,
+            "next"    : None,
+            "parent"  : None,
+            "inputs"  : data["inputs"],
+            "fields"  : translateOptions(
+                optionDatas=data["options"], 
+                opcode=opcode, 
+                spriteName=spriteName,
+                tokens=tokens,
+            ),
+            "shadow"  : False,
+            "topLevel": False,
+        }
+        if data["comment"] != None:
+            newBlockData["comment"] = commentID
     return newBlockData
 
 def linkBlocksToScript(data, spriteName, tokens, scriptID):
@@ -47,15 +68,19 @@ def linkBlocksToScript(data, spriteName, tokens, scriptID):
             tokens=tokens,
             commentID=commentID,
         )
-        if i == 0:
-            newBlockData |= {"x": scriptPosition[0], "y": scriptPosition[1]}
-            newBlockData["topLevel"] = True
-        if i + 1 in range(len(data)):
-            nextID = generateSelector(scriptID=scriptID, index=i+1, isComment=False)
-            newBlockData["next"] = nextID
-        if i - 1 in range(len(data)):
-            parentID = generateSelector(scriptID=scriptID, index=i-1, isComment=True)
-            newBlockData["parent"] = parentID
+        if isinstance(newBlockData, dict):
+            if i == 0:
+                newBlockData |= {"x": scriptPosition[0], "y": scriptPosition[1]}
+                newBlockData["topLevel"] = True
+            if i + 1 in range(len(data)):
+                nextID = generateSelector(scriptID=scriptID, index=i+1, isComment=False)
+                newBlockData["next"] = nextID
+            if i - 1 in range(len(data)):
+                parentID = generateSelector(scriptID=scriptID, index=i-1, isComment=True)
+                newBlockData["parent"] = parentID
+        elif isinstance(newBlockData, list):
+            pp(blockData)
+            newBlockData += scriptPosition
 
         newData[ownID] = newBlockData
                 
@@ -76,45 +101,58 @@ def unnestScript(data, spriteName, tokens, scriptID):
     while not finished:
         newBlockDatas = {}
         for i,blockID,blockData in ikv(data):
-            opcodeData = opcodeDatabase[blockData["opcode"]]
+            if isinstance(blockData, list):
+                if   blockData[0] == 12: opcode = "special_variable_value"
+                elif blockData[1] == 13: opcode = "special_list_value"
+            else:
+                opcode = blockData["opcode"]
+            opcodeData = opcodeDatabase[opcode]
             newInputDatas = {}
             for j,inputID,inputData in ikv(blockData["inputs"]):
-                if isinstance(inputData, dict):
-                    match opcodeData["inputTypes"][inputID]:
-                        case "broadcast": magicNumber = 11
-                        case "text"     : magicNumber = 10
-                        case "number"   : magicNumber =  4
-                        case "boolean"  : magicNumber =  2
-                    match inputData["mode"]:
-                        case "block-and-text":
-                            if inputData["block"] == None:
-                                newInputData = [1, [magicNumber, inputData["text"]]]
-                            else:
-                                newBlockID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=False)
-                                newCommentID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=True)
-                                newBlockData = prepareBlock(
-                                    data=inputData["block"],
-                                    spriteName=spriteName,
-                                    tokens=tokens,
-                                    commentID=newCommentID,
+                #if isinstance(inputData, dict):
+                match opcodeData["inputTypes"][inputID]:
+                    case "broadcast": magicNumber = 11
+                    case "text"     : magicNumber = 10
+                    case "number"   : magicNumber =  4
+                    case "boolean"  : magicNumber =  2
+                if isinstance(inputData, list) or inputData["mode"] == "block-and-text":
+                    if isinstance(inputData, dict):
+                        if inputData["block"] == None: hasBlock = False
+                        else: hasBlock = True
+                    else: hasBlock = True
+                    if not hasBlock:
+                        newInputData = [1, [magicNumber, inputData["text"]]]
+                    else:
+                        newBlockID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=False)
+                        newCommentID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=True)
+                        newBlockData = prepareBlock(
+                            data=inputData["block"],
+                            spriteName=spriteName,
+                            tokens=tokens,
+                            commentID=newCommentID,
+                        )
+                        if isinstance(newBlockData, list):
+                            newBlockID = newBlockData
+                        elif isinstance(newBlockData, dict):
+                            newBlockData["parent"] = blockID
+                            blockCounter += 1
+                            newBlockDatas[newBlockID] = newBlockData
+                        
+                            commentData = inputData["block"]["comment"]
+                            if commentData != None:
+                                newCommentDatas[newCommentID] = translateComment(
+                                    data=commentData,
+                                    id=newBlockID,
                                 )
-                                newBlockData["parent"] = blockID
-                                blockCounter += 1
-                                newBlockDatas[newBlockID] = newBlockData
-                                
-                                commentData = inputData["block"]["comment"]
-                                if commentData != None:
-                                    newCommentDatas[newCommentID] = translateComment(
-                                        data=commentData,
-                                        id=newBlockID,
-                                    )
-                                newInputData = [3, newBlockID, [magicNumber, inputData["text"]]]
-                        case _:
-                            raise WhatIsGoingOnError(inputData)
+                        newInputData = [3, newBlockID, [magicNumber, inputData["text"]]]
                 else:
-                    newInputData = inputData
+                    raise WhatIsGoingOnError(inputData)
+                #else:
+                #    newInputData = inputData
                 newInputDatas[inputID] = newInputData
             blockData["inputs"] = newInputDatas
+            print("x")
+            pp(blockData)
             newBlockDatas[blockID] = blockData
         data = newBlockDatas
         finished = blockCounter == previousBlockCount
