@@ -5,6 +5,12 @@
                     117,
                     127
                 ]
+"y" : {
+    "opcode": "VARIABLE",
+    "inputs": {},
+    "options": {"VARIABLE": "my variable"},
+    "comment": None
+}
 "z": [
                     13,
                     "my list",
@@ -12,7 +18,12 @@
                     85,
                     477
                 ]
-
+"y" : {
+    "opcode": "LIST",
+    "inputs": {},
+    "options": {"LIST": "my list"},
+    "comment": None
+}
 "A": {
                     "opcode": "motion_movesteps",
                     "next": null,
