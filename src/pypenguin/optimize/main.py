@@ -1,7 +1,5 @@
 exec("import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))")
 
-from helper_functions import readJSONFile, writeJSONFile
-
 from optimize.costumes_sounds import translateCostumes, translateSounds
 from optimize.variables_lists import translateVariables, translateLists
 from optimize.blocks_scripts import translateScript, generateBlockChildrenPs
@@ -38,8 +36,6 @@ def optimizeProjectJSON(projectData):
             data=spriteData,
             monitorDatas=projectData["monitors"],
         )
-        #pp(spriteData)
-        #pp(translatedVariableDatas)
         newSpriteData = {
             "isStage"       : i == 0,
             "name"          : spriteData["name"],
