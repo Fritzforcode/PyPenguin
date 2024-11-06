@@ -95,7 +95,8 @@ def unnestScript(data, spriteName, tokens, scriptID):
                                     data=inputData["block"],
                                     spriteName=spriteName,
                                     tokens=tokens,
-                                    commentID=newCommentID,)
+                                    commentID=newCommentID,
+                                )
                                 newBlockData["parent"] = blockID
                                 blockCounter += 1
                                 newBlockDatas[newBlockID] = newBlockData
@@ -121,5 +122,18 @@ def unnestScript(data, spriteName, tokens, scriptID):
         data = newBlockDatas
         finished = blockCounter == previousBlockCount
         previousBlockCount = blockCounter
-
+    dataCopy = data.copy()
+    for i, blockID, blockData in ikv(dataCopy):
+        if blockData["opcode"] in ["special_variable_value", "special_list_value"]:
+            if   blockData["opcode"] == "special_variable_value": magicNumber = 12; key = "VARIABLE"
+            elif blockData["opcode"] == "special_list_value":     magicNumber = 13; key = "LIST"
+            core = [magicNumber, blockData["fields"][key][0], blockData["fields"][key][1]]
+            if blockData["parent"] == None: # If the block is independent
+                data[blockID] = core + [blockData["x"], blockData["y"]]
+            else:
+                parentBlockData = data[blockData["parent"]]
+                for j, inputID, inputData in ikv(parentBlockData["inputs"]):
+                    if inputData[1] == blockID:
+                        data[blockData["parent"]]["inputs"][inputID][1] = core
+                del data[blockID]
     return data, newCommentDatas

@@ -4,7 +4,7 @@ from validate.comments import validateComment
 
 
 def validateBlock(path, data, context):
-
+    print(path)
     # Check block format
     validateSchema(pathToData=path, data=data, schema=blockSchema)
 
