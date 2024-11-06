@@ -74,6 +74,22 @@
                             "comment": null
                         }
                     ]
+                },
+                {
+                    "position": [
+                        50,
+                        50
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "VARIABLE",
+                            "inputs": {},
+                            "options": {
+                                "VARIABLE": "var"
+                            },
+                            "comment": null
+                        }
+                    ]
                 }
             ],
             "comments": [],
