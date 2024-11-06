@@ -22,11 +22,11 @@ projectData = {
                                         "inputs": {
                                             "KEY": {"mode": "block-and-text", "block": None, "text": "Gandalf"},
                                             "VALUE": {"mode": "block-and-text", "block": {
-                            "opcode": "VARIABLE",
-                            "inputs": {},
-                            "options": {"VARIABLE": "var"},
-                            "comment": None,
-                        }, "text": "Indiana JONES"},
+                                                "opcode": "VARIABLE",
+                                                "inputs": {},
+                                                "options": {"VARIABLE": "var"},
+                                                "comment": None,
+                                            }, "text": "Indiana JONES"},
                                             "JSON": {
                                     "mode": "block-and-text",
                                     "block": {
@@ -52,6 +52,17 @@ projectData = {
                             "comment": None,
                         },
                     ],
+                },
+                {
+                    "position": [50, 50],
+                    "blocks": [
+                        {
+                            "opcode": "VARIABLE",
+                            "inputs": {},
+                            "options": {"VARIABLE": "var"},
+                            "comment": None,
+                        },
+                    ]
                 },
             ],
             "comments": [],
