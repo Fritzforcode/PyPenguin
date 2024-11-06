@@ -51,3 +51,4 @@ maybe validate:
 - layerOrder to be at most 4 - needs research 
 - meta
 - asset names matching
+- reporter blocks to not have neighbours
