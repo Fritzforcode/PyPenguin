@@ -4,7 +4,6 @@ from validate.comments import validateComment
 
 
 def validateBlock(path, data, context):
-    print(path)
     # Check block format
     validateSchema(pathToData=path, data=data, schema=blockSchema)
 
@@ -36,6 +35,12 @@ def validateScript(path, data, context):
     # Check block formats
     for i, block in enumerate(data["blocks"]):
         validateBlock(path=path+["blocks"]+[i], data=block, context=context)
+        newOpcode = block["opcode"]
+        for i, oldOpcode, opcodeData in ikv(opcodeDatabase):
+            if opcodeData["newOpcode"] == newOpcode:
+                break
+        if (opcodeData["type"] in ["textReporter"]) and (len(data["blocks"]) > 1):
+            raise formatError(path, "A script whose first block is a reporter mustn't have more than one block.")
 
 def validateInputs(path, data, opcode, opcodeData, context):
     allowedInputIDs = list(opcodeData["inputTypes"].keys()) # List of inputs which are defined for the specific opcode
