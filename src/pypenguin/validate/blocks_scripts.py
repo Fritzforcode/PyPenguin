@@ -39,7 +39,7 @@ def validateScript(path, data, context):
         for i, oldOpcode, opcodeData in ikv(opcodeDatabase):
             if opcodeData["newOpcode"] == newOpcode:
                 break
-        if (opcodeData["type"] in ["textReporter"]) and (len(data["blocks"]) > 1):
+        if (opcodeData["type"] in ["textReporter", "booleanReporter"]) and (len(data["blocks"]) > 1):
             raise formatError(path, "A script whose first block is a reporter mustn't have more than one block.")
 
 def validateInputs(path, data, opcode, opcodeData, context):
@@ -49,6 +49,8 @@ def validateInputs(path, data, opcode, opcodeData, context):
             raise formatError(path, f"Input '{inputID}' is not defined for a block with opcode '{opcode}'.")
     # Check input formats
     for inputID in allowedInputIDs:
+        if opcodeData["inputTypes"][inputID] in ["boolean", "instruction"]:
+            continue
         if inputID not in data:
             raise formatError(path, f"A block with opcode '{opcode}' must have the input '{inputID}'.")
 
@@ -74,6 +76,9 @@ def validateInputs(path, data, opcode, opcodeData, context):
             case "text":
                 if inputValue["mode"] != "block-and-text":
                     raise formatError(path+[inputID]+["mode"], f"Must be 'block-and-text' in this case.")
+            case "boolean"|"instruction":
+                if inputValue["mode"] != "block-only":
+                    raise formatError(path+[inputID]+["mode"], f"Must be 'block-only' in this case.")
 
 def validateOptions(path, data, opcode, opcodeData, context):    
     allowedOptionIDs = list(opcodeData["optionTypes"].keys()) # List of options which are defined for the specific opcode

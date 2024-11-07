@@ -36,6 +36,10 @@ maybe remove fileStem
 
 maybe show multiple errors when validating
 
+maybe make a new block property for children scripts
+
+maybe unite true and false booleans into one opcode
+
 research rotationCenter for different costume types
 
 research monitor values being wrong

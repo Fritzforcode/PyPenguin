@@ -80,36 +80,39 @@ def unnestScript(data, spriteName, tokens, scriptID):
             for j,inputID,inputData in ikv(blockData["inputs"]):
                 if isinstance(inputData, dict):
                     match opcodeData["inputTypes"][inputID]:
-                        case "broadcast": magicNumber = 11
-                        case "text"     : magicNumber = 10
-                        case "number"   : magicNumber =  4
-                        case "boolean"  : magicNumber =  2
-                    match inputData["mode"]:
-                        case "block-and-text":
-                            if inputData["block"] == None:
-                                newInputData = [1, [magicNumber, inputData["text"]]]
-                            else:
-                                newBlockID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=False)
-                                newCommentID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=True)
-                                newBlockData = prepareBlock(
-                                    data=inputData["block"],
-                                    spriteName=spriteName,
-                                    tokens=tokens,
-                                    commentID=newCommentID,
-                                )
-                                newBlockData["parent"] = blockID
-                                blockCounter += 1
-                                newBlockDatas[newBlockID] = newBlockData
-                                
-                                commentData = inputData["block"]["comment"]
-                                if commentData != None:
-                                    newCommentDatas[newCommentID] = translateComment(
-                                        data=commentData,
-                                        id=newBlockID,
-                                    )
-                                newInputData = [3, newBlockID, [magicNumber, inputData["text"]]]
-                        case _:
-                            raise WhatIsGoingOnError(inputData)
+                        case "broadcast"  : magicNumber = 11
+                        case "text"       : magicNumber = 10
+                        case "number"     : magicNumber =  4
+                        case "boolean"    : magicNumber =  2
+                        case "instruction": magicNumber =  2
+                    if inputData["block"] == None:
+                        if inputData["mode"] == "block-and-text":
+                            newInputData = [1, [magicNumber, inputData["text"]]]
+                        elif inputData["mode"] == "block-only":
+                            newInputData = None
+                    else:
+                        newBlockID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=False)
+                        newCommentID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=True)
+                        newBlockData = prepareBlock(
+                            data=inputData["block"],
+                            spriteName=spriteName,
+                            tokens=tokens,
+                            commentID=newCommentID,
+                        )
+                        newBlockData["parent"] = blockID
+                        blockCounter += 1
+                        newBlockDatas[newBlockID] = newBlockData
+                        
+                        commentData = inputData["block"]["comment"]
+                        if commentData != None:
+                            newCommentDatas[newCommentID] = translateComment(
+                                data=commentData,
+                                id=newBlockID,
+                            )
+                        if inputData["mode"] == "block-and-text":
+                            newInputData = [3, newBlockID, [magicNumber, inputData["text"]]]
+                        elif inputData["mode"] == "block-only":
+                            newInputData = [2, newBlockID]
                 else:
                     newInputData = inputData
 

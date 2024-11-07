@@ -26,6 +26,13 @@ opcodeDatabase = {
         "optionTypes": {}
     },
     # Control
+    "control_if": {
+        "type": "instruction",
+        "category": "control",
+        "newOpcode": "if <CONDITION> then {SUBSTACK}",
+        "inputTypes": {"CONDITION": "boolean", "SUBSTACK": "instruction"},
+        "optionTypes": {}
+    },
     # Sensing
     # Operators
     "operator_add": {
@@ -47,6 +54,13 @@ opcodeDatabase = {
         "category": "operators",
         "newOpcode": "join (STRING1) (STRING2)",
         "inputTypes": {"STRING1": "text", "STRING2": "text"},
+        "optionTypes": {}
+    },
+    "operator_trueBoolean": {
+        "type": "booleanReporter",
+        "category": "operators",
+        "newOpcode": "true",
+        "inputTypes": {},
         "optionTypes": {}
     },
     # Variables
