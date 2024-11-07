@@ -1,5 +1,7 @@
 # TODO
 
+both empty script and None as input should amek the input value empty
+
 add blocks requirering their extensions
 
 add var and list blocks to validation and documentation

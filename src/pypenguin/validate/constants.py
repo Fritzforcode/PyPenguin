@@ -226,11 +226,12 @@ commentSchema = {
 inputSchema = {
   "type": "object",
   "properties": {
-    "mode": { "type": "string", "enum": ["block-only", "block-and-text"] },
+    "mode": { "type": "string", "enum": ["block-only", "block-and-text", "script"] },
     "block": { "type": ["null", "object"] },
-    "text": { "type": "string" }
+    "text": { "type": "string" },
+    "blocks": { "type": "array", "items": {"type": "object"} }
   },
-  "required": ["mode", "block"]
+  "required": ["mode"]
 }
 
 variableSchema = {

@@ -11,82 +11,33 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "opcode": "if <CONDITION> then {SUBSTACK}",
                             "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": {
-                                        "opcode": "set (KEY) to (VALUE) in (JSON)",
-                                        "inputs": {
-                                            "KEY": {
-                                                "mode": "block-and-text",
-                                                "block": null,
-                                                "text": "Gandalf"
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": null
+                                },
+                                "SUBSTACK": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "mode": "block-and-text",
+                                                    "block": null,
+                                                    "text": "123"
+                                                }
                                             },
-                                            "VALUE": {
-                                                "mode": "block-and-text",
-                                                "block": {
-                                                    "opcode": "VARIABLE",
-                                                    "inputs": {},
-                                                    "options": {
-                                                        "VARIABLE": "var"
-                                                    },
-                                                    "comment": null
-                                                },
-                                                "text": "Indiana JONES"
+                                            "options": {
+                                                "VARIABLE": "var"
                                             },
-                                            "JSON": {
-                                                "mode": "block-and-text",
-                                                "block": {
-                                                    "opcode": "set (KEY) to (VALUE) in (JSON)",
-                                                    "inputs": {
-                                                        "KEY": {
-                                                            "mode": "block-and-text",
-                                                            "block": null,
-                                                            "text": "Bilbo"
-                                                        },
-                                                        "VALUE": {
-                                                            "mode": "block-and-text",
-                                                            "block": null,
-                                                            "text": "Frodo"
-                                                        },
-                                                        "JSON": {
-                                                            "mode": "block-and-text",
-                                                            "block": null,
-                                                            "text": "{}"
-                                                        }
-                                                    },
-                                                    "options": {},
-                                                    "comment": null
-                                                },
-                                                "text": "MoinThisValue"
-                                            }
-                                        },
-                                        "options": {},
-                                        "comment": null
-                                    },
-                                    "text": "MoinThisValue"
+                                            "comment": null
+                                        }
+                                    ]
                                 }
                             },
-                            "options": {
-                                "VARIABLE": "var"
-                            },
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        50,
-                        50
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "VARIABLE",
-                            "inputs": {},
-                            "options": {
-                                "VARIABLE": "var"
-                            },
+                            "options": {},
                             "comment": null
                         }
                     ]

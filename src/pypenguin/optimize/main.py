@@ -5,8 +5,6 @@ from optimize.variables_lists import translateVariables, translateLists
 from optimize.blocks_scripts import translateScript, generateBlockChildrenPs
 from optimize.comments import translateComment
 
-from database import opcodeDatabase
-
 
 def optimizeProjectJSON(projectData):
     newSpriteDatas = []

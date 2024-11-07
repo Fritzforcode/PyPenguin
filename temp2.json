@@ -68,6 +68,20 @@
                 },
                 {
                     "position": [
+                        440,
+                        309
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "if <CONDITION> then {SUBSTACK}",
+                            "inputs": {},
+                            "options": {},
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
                         130,
                         319
                     ],
@@ -117,20 +131,6 @@
                                     }
                                 }
                             },
-                            "options": {},
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        440,
-                        309
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "if <CONDITION> then {SUBSTACK}",
-                            "inputs": {},
                             "options": {},
                             "comment": null
                         }

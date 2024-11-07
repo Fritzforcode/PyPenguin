@@ -10,59 +10,37 @@ projectData = {
             "isStage": True,
             "scripts": [
                 {
-                    "position": [0,0],
+                    "position": [0, 0],
                     "blocks": [
                         {
-                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "opcode": "if <CONDITION> then {SUBSTACK}",
                             "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": {
-                                        "opcode": "set (KEY) to (VALUE) in (JSON)",
-                                        "inputs": {
-                                            "KEY": {"mode": "block-and-text", "block": None, "text": "Gandalf"},
-                                            "VALUE": {"mode": "block-and-text", "block": {
-                                                "opcode": "VARIABLE",
-                                                "inputs": {},
-                                                "options": {"VARIABLE": "var"},
-                                                "comment": None,
-                                            }, "text": "Indiana JONES"},
-                                            "JSON": {
-                                    "mode": "block-and-text",
-                                    "block": {
-                                        "opcode": "set (KEY) to (VALUE) in (JSON)",
-                                        "inputs": {
-                                            "KEY": {"mode": "block-and-text", "block": None, "text": "Bilbo"},
-                                            "VALUE": {"mode": "block-and-text", "block": None, "text": "Frodo"},
-                                            "JSON": {"mode": "block-and-text", "block": None, "text": "{}"},  
-                                        },
-                                        "options": {},
-                                        "comment": None,
-                                    },
-                                    "text": "MoinThisValue"
-                                },  
-                                        },
-                                        "options": {},
-                                        "comment": None,
-                                    },
-                                    "text": "MoinThisValue"
-                                }
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": None,
+                                },
+                                "SUBSTACK": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "mode": "block-and-text",
+                                                    "block": None,
+                                                    "text": "123"
+                                                },
+                                            },
+                                            "options": {"VARIABLE": "var"},
+                                            "comment": None,
+                                        }
+                                    ],
+                                },
                             },
-                            "options": {"VARIABLE": "var"},
+                            "options": {},
                             "comment": None,
-                        },
+                        }
                     ],
-                },
-                {
-                    "position": [50, 50],
-                    "blocks": [
-                        {
-                            "opcode": "VARIABLE",
-                            "inputs": {},
-                            "options": {"VARIABLE": "var"},
-                            "comment": None,
-                        },
-                    ]
                 },
             ],
             "comments": [],
@@ -111,9 +89,9 @@ writeJSONFile(
     data=projectData
 )
 
-deoptimizeAndCompressProject(
-    optimizedProjectDirectory="project",
-    projectFilePath="export.pmp",
-    temporaryDirectory="temporary"
-)
+#deoptimizeAndCompressProject(
+#    optimizedProjectDirectory="project",
+#    projectFilePath="export.pmp",
+#    temporaryDirectory="temporary"
+#)
 

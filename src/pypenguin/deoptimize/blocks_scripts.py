@@ -85,13 +85,18 @@ def unnestScript(data, spriteName, tokens, scriptID):
                         case "number"     : magicNumber =  4
                         case "boolean"    : magicNumber =  2
                         case "instruction": magicNumber =  2
-                    if inputData["block"] == None:
+                    if "blocks" in inputData:
+                        scriptData = {"position": [0,0], "blocks": inputData["blocks"]}
+                        print("child")
+                        pp(inputData["blocks"])
+                        temporary = unnestScript(data=scriptData, spriteName=spriteName, tokens=tokens, scriptID=99) 
+                    if inputData.get("block", True) == None:
                         if inputData["mode"] == "block-and-text":
                             newInputData = [1, [magicNumber, inputData["text"]]]
                         elif inputData["mode"] == "block-only":
                             newInputData = None
                     else:
-                        newBlockID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=False)
+                        newBlockID   = generateSelector(scriptID=scriptID, index=blockCounter, isComment=False)
                         newCommentID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=True)
                         newBlockData = prepareBlock(
                             data=inputData["block"],

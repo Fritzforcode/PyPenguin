@@ -30,7 +30,7 @@ opcodeDatabase = {
         "type": "instruction",
         "category": "control",
         "newOpcode": "if <CONDITION> then {SUBSTACK}",
-        "inputTypes": {"CONDITION": "boolean", "SUBSTACK": "instruction"},
+        "inputTypes": {"CONDITION": "boolean", "SUBSTACK": "script"},
         "optionTypes": {}
     },
     # Sensing

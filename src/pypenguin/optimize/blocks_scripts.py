@@ -1,4 +1,4 @@
-from helper_functions import ikv, WhatIsGoingOnError
+from helper_functions import ikv, WhatIsGoingOnError, pp
 
 from optimize.comments import translateComment
 
@@ -24,12 +24,13 @@ def translateVariableListBlock(data):
         raise WhatIsGoingOnError(data)
     return newData
 
-def translateInputs(data):
+def translateInputs(data, opcode, scriptData):
     newData = {}
     for i,inputID,inputData in ikv(data):   
         if len(inputData) == 2:
             if   isinstance(inputData[1], str): # e.g. "CONDITION": [2, "b"]
-                mode = "block-only"
+                inputType = opcodeDatabase[opcode]["inputTypes"]
+                mode = "block-only" if inputType=="boolean" else ("script" if inputType=="script" else None)
                 pointer = inputData[1]
                 text = None
             elif isinstance(inputData[1], list): # e.g. "MESSAGE": [1, [10, "Bye!"]]
@@ -60,12 +61,20 @@ def translateInputs(data):
                 "block": pointer,
                 "text" : text, 
             }
+        elif mode == "script":
+            newInputData = {
+                "mode": mode,
+                "blocks": translateScript(
+                    data=scriptData,
+                    ancestorP=55
+                )
+            }
         else: raise WhatIsGoingOnError()
 
         newData[inputID] = newInputData
     return newData
 
-def translateOptions(opcode, data):
+def translateOptions(data, opcode):
     newData = {}
     for i,fieldID,fieldData in ikv(data):
         opcodeData = opcodeDatabase[opcode]
@@ -83,6 +92,8 @@ def translateOptions(opcode, data):
     return newData
 
 def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
+    print(100*"#")
+    print(ancestorP, data)
     childrenDatas = {}
     for pointer in blockChildrenPs[ancestorP]:
         childrenDatas[pointer] = translateScript(
@@ -93,7 +104,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
         )
     blockData = data[ancestorP] # Get the block's own data
     if isinstance(blockData, dict): # A normal block
-        inputs = translateInputs(blockData["inputs"])
+        inputs = translateInputs(data=blockData["inputs"], opcode=blockData["opcode"], scriptData=data)
         for i,inputID,inputData in ikv(inputs):
             if "block" in inputData:
                 if inputData["block"] != None:
@@ -101,7 +112,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
                         inputs[inputID]["block"] = childrenDatas[inputData["block"]][0]
                     elif isinstance(inputData["block"], dict):
                         pass
-        options = translateOptions(opcode=blockData["opcode"], data=blockData["fields"])
+        options = translateOptions(data=blockData["fields"], opcode=blockData["opcode"])
         newOpcode = opcodeDatabase[blockData["opcode"]]["newOpcode"]
         comment = None
         for commentData in commentDatas.values():
