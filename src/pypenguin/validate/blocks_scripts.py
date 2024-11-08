@@ -63,7 +63,6 @@ def validateInputs(path, data, opcode, opcodeData, context):
                 required = ["block"]
             elif inputValue["mode"] == "script":
                 required = ["blocks"]
-            print(inputValue["mode"], required)
             for attribute in required:
                 if attribute not in inputValue:
                     raise formatError(path+[inputID], f"An input of the '{inputValue['mode']}' mode must have the '{attribute}' attribute.")

@@ -94,8 +94,6 @@ def translateOptions(data, opcode):
     return newData
 
 def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
-    print(100*"#")
-    print(ancestorP, data)
     childrenDatas = {}
     for pointer in blockChildrenPs[ancestorP]:
         childrenDatas[pointer] = translateScript(
