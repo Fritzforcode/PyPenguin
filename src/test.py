@@ -129,11 +129,6 @@ projectData = {
     },
 }
 
-del projectData["sprites"][0]["scripts"][0]["blocks"][0]["inputs"]["CONDITION"]
-del projectData["sprites"][0]["scripts"][0]["blocks"][0]["inputs"]["SUBSTACK"]
-del projectData["sprites"][0]["scripts"][0]["blocks"][0]["inputs"]["SUBSTACK2"]
-
-
 validateProject(projectData=projectData)
 
 writeJSONFile(
