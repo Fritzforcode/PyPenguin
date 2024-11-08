@@ -44,21 +44,37 @@
                                     }
                                 },
                                 "SUBSTACK": {
-                                    "mode": "block-only",
-                                    "block": {
-                                        "opcode": "set [VARIABLE] to (VALUE)",
-                                        "inputs": {
-                                            "VALUE": {
-                                                "mode": "block-and-text",
-                                                "block": null,
-                                                "text": "0"
-                                            }
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "mode": "block-and-text",
+                                                    "block": null,
+                                                    "text": "0"
+                                                }
+                                            },
+                                            "options": {
+                                                "VARIABLE": "my variable"
+                                            },
+                                            "comment": null
                                         },
-                                        "options": {
-                                            "VARIABLE": "my variable"
-                                        },
-                                        "comment": null
-                                    }
+                                        {
+                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "mode": "block-and-text",
+                                                    "block": null,
+                                                    "text": "1"
+                                                }
+                                            },
+                                            "options": {
+                                                "VARIABLE": "my variable"
+                                            },
+                                            "comment": null
+                                        }
+                                    ]
                                 }
                             },
                             "options": {},
@@ -90,21 +106,23 @@
                             "opcode": "if <CONDITION> then {SUBSTACK}",
                             "inputs": {
                                 "SUBSTACK": {
-                                    "mode": "block-only",
-                                    "block": {
-                                        "opcode": "set [VARIABLE] to (VALUE)",
-                                        "inputs": {
-                                            "VALUE": {
-                                                "mode": "block-and-text",
-                                                "block": null,
-                                                "text": "0"
-                                            }
-                                        },
-                                        "options": {
-                                            "VARIABLE": "my variable"
-                                        },
-                                        "comment": null
-                                    }
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "mode": "block-and-text",
+                                                    "block": null,
+                                                    "text": "0"
+                                                }
+                                            },
+                                            "options": {
+                                                "VARIABLE": "my variable"
+                                            },
+                                            "comment": null
+                                        }
+                                    ]
                                 }
                             },
                             "options": {},

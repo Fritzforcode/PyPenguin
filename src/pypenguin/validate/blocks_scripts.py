@@ -53,47 +53,48 @@ def validateInputs(path, data, opcode, opcodeData, context):
             if inputID not in data:
                 raise formatError(path, f"A block with opcode '{opcode}' must have the input '{inputID}'.")
 
-        inputValue = data[inputID]
-        # Check input value format
-        validateSchema(pathToData=path+[inputID], data=inputValue, schema=inputSchema)
-        if   inputValue["mode"] == "block-and-text":
-            required = ["block", "text"]
-        elif inputValue["mode"] == "block-only":
-            required = ["block"]
-        elif inputValue["mode"] == "script":
-            required = ["blocks"]
-        print(inputValue["mode"], required)
-        for attribute in required:
-            if attribute not in inputValue:
-                raise formatError(path+[inputID], f"An input of the '{inputValue['mode']}' mode must have the '{attribute}' attribute.")
+        if inputID in data:
+            inputValue = data[inputID]
+            # Check input value format
+            validateSchema(pathToData=path+[inputID], data=inputValue, schema=inputSchema)
+            if   inputValue["mode"] == "block-and-text":
+                required = ["block", "text"]
+            elif inputValue["mode"] == "block-only":
+                required = ["block"]
+            elif inputValue["mode"] == "script":
+                required = ["blocks"]
+            print(inputValue["mode"], required)
+            for attribute in required:
+                if attribute not in inputValue:
+                    raise formatError(path+[inputID], f"An input of the '{inputValue['mode']}' mode must have the '{attribute}' attribute.")
 
-        if "block" in inputValue and inputValue["block"] != None: # When the input has a block, check the block format
-           validateBlock(path=path+[inputID]+["block"], data=inputValue["block"], context=context)
-        
-        if inputValue.get("blocks", []) != []:
-            preparedData = {"position": [0,0], "blocks": inputValue["blocks"]}
-            validateScript(path=path+[inputID], data=preparedData, context=context)
+            if inputValue.get("block") != None: # When the input has a block and it isn't None, check the block format
+               validateBlock(path=path+[inputID]+["block"], data=inputValue["block"], context=context)
             
-        match opcodeData["inputTypes"][inputID]: # type of the input
-            case "broadcast":
-                if inputValue["mode"] != "block-and-text":
-                    raise formatError(path+[inputID]+["mode"], f"Must be 'block-and-text' in this case.")
-            case "number":
-                if inputValue["mode"] != "block-and-text":
-                    raise formatError(path+[inputID]+["mode"], f"Must be 'block-and-text' in this case.")
-                allowedChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-"]
-                for char in inputValue["text"]:
-                    if char not in allowedChars:
-                        raise formatError(path+[inputID], f"The 'text' attribute must be a combination of these characters: {allowedChars}.")
-            case "text":
-                if inputValue["mode"] != "block-and-text":
-                    raise formatError(path+[inputID]+["mode"], f"Must be 'block-and-text' in this case.")
-            case "boolean":
-                if inputValue["mode"] != "block-only":
-                    raise formatError(path+[inputID]+["mode"], f"Must be 'block-only' in this case.")
-            case "script":
-                if inputValue["mode"] != "script":
-                    raise formatError(path+[inputID]+["mode"], f"Must be 'script' in this case.")
+            if inputValue.get("blocks", []) != []:
+                preparedData = {"position": [0,0], "blocks": inputValue["blocks"]}
+                validateScript(path=path+[inputID], data=preparedData, context=context)
+            
+            match opcodeData["inputTypes"][inputID]: # type of the input
+                case "broadcast":
+                    if inputValue["mode"] != "block-and-text":
+                        raise formatError(path+[inputID]+["mode"], f"Must be 'block-and-text' in this case.")
+                case "number":
+                    if inputValue["mode"] != "block-and-text":
+                        raise formatError(path+[inputID]+["mode"], f"Must be 'block-and-text' in this case.")
+                    allowedChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-"]
+                    for char in inputValue["text"]:
+                        if char not in allowedChars:
+                            raise formatError(path+[inputID], f"The 'text' attribute must be a combination of these characters: {allowedChars}.")
+                case "text":
+                    if inputValue["mode"] != "block-and-text":
+                        raise formatError(path+[inputID]+["mode"], f"Must be 'block-and-text' in this case.")
+                case "boolean":
+                    if inputValue["mode"] != "block-only":
+                        raise formatError(path+[inputID]+["mode"], f"Must be 'block-only' in this case.")
+                case "script":
+                    if inputValue["mode"] != "script":
+                        raise formatError(path+[inputID]+["mode"], f"Must be 'script' in this case.")
 
 def validateOptions(path, data, opcode, opcodeData, context):    
     allowedOptionIDs = list(opcodeData["optionTypes"].keys()) # List of options which are defined for the specific opcode
