@@ -47,40 +47,20 @@
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "CONDITION": [
-                            2,
-                            "c"
-                        ],
                         "SUBSTACK": [
                             2,
                             "b"
+                        ],
+                        "CONDITION": [
+                            2,
+                            "c"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 121,
-                    "y": 109
-                },
-                "c": {
-                    "opcode": "operator_trueBoolean",
-                    "next": null,
-                    "parent": "a",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "i": {
-                    "opcode": "control_if",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 440,
-                    "y": 309
+                    "x": 130,
+                    "y": 231
                 },
                 "b": {
                     "opcode": "data_setvariableto",
@@ -128,65 +108,10 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "e": {
-                    "opcode": "control_if",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "SUBSTACK": [
-                            2,
-                            "f"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 130,
-                    "y": 319
-                },
-                "f": {
-                    "opcode": "data_setvariableto",
-                    "next": null,
-                    "parent": "e",
-                    "inputs": {
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "VARIABLE": [
-                            "my variable",
-                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
-                            ""
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "g": {
-                    "opcode": "control_if",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "CONDITION": [
-                            2,
-                            "h"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 454,
-                    "y": 98
-                },
-                "h": {
+                "c": {
                     "opcode": "operator_trueBoolean",
                     "next": null,
-                    "parent": "g",
+                    "parent": "a",
                     "inputs": {},
                     "fields": {},
                     "shadow": false,

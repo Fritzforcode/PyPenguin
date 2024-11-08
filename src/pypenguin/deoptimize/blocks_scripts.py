@@ -54,7 +54,7 @@ def linkBlocksToScript(data, spriteName, tokens, scriptID):
             nextID = generateSelector(scriptID=scriptID, index=i+1, isComment=False)
             newBlockData["next"] = nextID
         if i - 1 in range(len(data)):
-            parentID = generateSelector(scriptID=scriptID, index=i-1, isComment=True)
+            parentID = generateSelector(scriptID=scriptID, index=i-1, isComment=False)
             newBlockData["parent"] = parentID
         newData[ownID] = newBlockData
                 
@@ -64,7 +64,6 @@ def linkBlocksToScript(data, spriteName, tokens, scriptID):
                 data=commentData,
                 id=ownID,
             )
-            
     return newData, newCommentDatas
 
 def unnestScript(data, spriteName, tokens, scriptID):
@@ -83,14 +82,33 @@ def unnestScript(data, spriteName, tokens, scriptID):
                         case "broadcast"  : magicNumber = 11
                         case "text"       : magicNumber = 10
                         case "number"     : magicNumber =  4
-                        case "boolean"    : magicNumber =  2
-                        case "instruction": magicNumber =  2
+                        case "boolean"    : pass
+                        case "instruction": pass
                     if "blocks" in inputData:
                         scriptData = {"position": [0,0], "blocks": inputData["blocks"]}
-                        print("child")
-                        pp(inputData["blocks"])
-                        temporary = unnestScript(data=scriptData, spriteName=spriteName, tokens=tokens, scriptID=99) 
-                    if inputData.get("block", True) == None:
+                        linkedScriptData, scriptCommentDatasA = linkBlocksToScript(
+                            data=scriptData,
+                            spriteName=spriteName,
+                            tokens=tokens,
+                            scriptID=99
+                        )
+                        unnestedScriptData, scriptCommentDatasB = unnestScript(
+                            data=linkedScriptData,
+                            spriteName=spriteName,
+                            tokens=tokens,
+                            scriptID=99
+                        )
+                        newCommentDatas |= scriptCommentDatasA | scriptCommentDatasB
+                        for i,subBlockID,subBlockData in ikv(unnestedScriptData):
+                            if "x" in subBlockData:
+                                del subBlockData["x"]
+                                del subBlockData["y"]
+                                subBlockData["parent"] = blockID
+                                subBlockData["topLevel"] = False
+                            break
+                        newBlockDatas |= unnestedScriptData
+                        newInputData = [2, subBlockID]
+                    elif inputData["block"] == None:
                         if inputData["mode"] == "block-and-text":
                             newInputData = [1, [magicNumber, inputData["text"]]]
                         elif inputData["mode"] == "block-only":

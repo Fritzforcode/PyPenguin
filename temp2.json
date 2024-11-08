@@ -27,22 +27,13 @@
             "scripts": [
                 {
                     "position": [
-                        121,
-                        109
+                        130,
+                        231
                     ],
                     "blocks": [
                         {
                             "opcode": "if <CONDITION> then {SUBSTACK}",
                             "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": {
-                                        "opcode": "true",
-                                        "inputs": {},
-                                        "options": {},
-                                        "comment": null
-                                    }
-                                },
                                 "SUBSTACK": {
                                     "mode": "script",
                                     "blocks": [
@@ -75,70 +66,7 @@
                                             "comment": null
                                         }
                                     ]
-                                }
-                            },
-                            "options": {},
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        440,
-                        309
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "if <CONDITION> then {SUBSTACK}",
-                            "inputs": {},
-                            "options": {},
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        130,
-                        319
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "if <CONDITION> then {SUBSTACK}",
-                            "inputs": {
-                                "SUBSTACK": {
-                                    "mode": "script",
-                                    "blocks": [
-                                        {
-                                            "opcode": "set [VARIABLE] to (VALUE)",
-                                            "inputs": {
-                                                "VALUE": {
-                                                    "mode": "block-and-text",
-                                                    "block": null,
-                                                    "text": "0"
-                                                }
-                                            },
-                                            "options": {
-                                                "VARIABLE": "my variable"
-                                            },
-                                            "comment": null
-                                        }
-                                    ]
-                                }
-                            },
-                            "options": {},
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        454,
-                        98
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "if <CONDITION> then {SUBSTACK}",
-                            "inputs": {
+                                },
                                 "CONDITION": {
                                     "mode": "block-only",
                                     "block": {

@@ -17,4 +17,3 @@ def removeStringDuplicates(array):
 
 class WhatIsGoingOnError(Exception): # Just means its likely the dev's fault 
     pass
-
