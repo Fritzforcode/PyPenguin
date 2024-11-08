@@ -11,9 +11,25 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+                            "opcode": "when [KEY_OPTION] key pressed",
                             "inputs": {},
-                            "options": {},
+                            "options": {
+                                "KEY_OPTION": "escape"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "123"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "var"
+                            },
                             "comment": null
                         }
                     ]
