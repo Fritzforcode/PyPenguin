@@ -1,5 +1,5 @@
-from src.pypenguin import validateProject, deoptimizeAndCompressProject
-from src.pypenguin.helper_functions import writeJSONFile
+from pypenguin import validateProject, deoptimizeAndCompressProject
+from pypenguin.helper_functions import writeJSONFile
 import os, sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'src/pypenguin')))
 
@@ -10,84 +10,28 @@ projectData = {
             "isStage": True,
             "scripts": [
                 {
-                    "position": [0, 0],
+                    "position": [0,0],
                     "blocks": [
                         {
-                            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": {
-                                        "opcode": "false",
-                                        "inputs": {},
-                                        "options": {},
-                                        "comment": None,
-                                    },
-                                },
-                                "SUBSTACK": {
-                                    "mode": "script",
-                                    "blocks": [
-                                        {
-                                            "opcode": "change [VARIABLE] by (VALUE)",
-                                            "inputs": {
-                                                "VALUE": {
-                                                    "mode": "block-and-text",
-                                                    "block": None,
-                                                    "text": "123",
-                                                },
-                                            },
-                                            "options": {"VARIABLE": "var"},
-                                            "comment": None,
-                                        },
-                                        {
-                                            "opcode": "set [VARIABLE] to (VALUE)",
-                                            "inputs": {
-                                                "VALUE": {
-                                                    "mode": "block-and-text",
-                                                    "block": None,
-                                                    "text": "456",
-                                                },
-                                            },
-                                            "options": {"VARIABLE": "var"},
-                                            "comment": None,
-                                        },
-                                    ],
-                                },
-                                "SUBSTACK2": {
-                                    "mode": "script",
-                                    "blocks": [
-                                        {
-                                            "opcode": "change [VARIABLE] by (VALUE)",
-                                            "inputs": {
-                                                "VALUE": {
-                                                    "mode": "block-and-text",
-                                                    "block": None,
-                                                    "text": "91011",
-                                                },
-                                            },
-                                            "options": {"VARIABLE": "var"},
-                                            "comment": None,
-                                        },
-                                        {
-                                            "opcode": "set [VARIABLE] to (VALUE)",
-                                            "inputs": {
-                                                "VALUE": {
-                                                    "mode": "block-and-text",
-                                                    "block": None,
-                                                    "text": "121314",
-                                                },
-                                            },
-                                            "options": {"VARIABLE": "var"},
-                                            "comment": None,
-                                        },
-                                    ],
-                                },
+                            "opcode": "when [KEY_OPTION] key pressed",
+                            "inputs": {},
+                            "options": {
+                                "KEY_OPTION": "escape"
                             },
-                            "options": {},
-                            "comment": None,
+                            "comment": None
                         },
-                    ],
-                },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {"mode": "block-and-text", "block": None, "text": "123"},
+                            },
+                            "options": {
+                                "VARIABLE": "var"
+                            },
+                            "comment": None
+                        }
+                    ]
+                }
             ],
             "comments": [],
             "currentCostume": 0,
