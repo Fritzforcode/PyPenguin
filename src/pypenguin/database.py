@@ -145,5 +145,11 @@ opcodeDatabase = {
         "inputTypes": {},
         "optionTypes": {"LIST": "list"}
     },
-
+    "special_define": {
+        "type": "textReporter",
+        "category": "My Blocks",
+        "newOpcode": "define ...",
+        "inputTypes": {},
+        "optionTypes": {}
+    },
 }
