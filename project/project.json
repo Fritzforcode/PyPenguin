@@ -11,32 +11,8 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "if <CONDITION> then {SUBSTACK}",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": null
-                                },
-                                "SUBSTACK": {
-                                    "mode": "script",
-                                    "blocks": [
-                                        {
-                                            "opcode": "change [VARIABLE] by (VALUE)",
-                                            "inputs": {
-                                                "VALUE": {
-                                                    "mode": "block-and-text",
-                                                    "block": null,
-                                                    "text": "123"
-                                                }
-                                            },
-                                            "options": {
-                                                "VARIABLE": "var"
-                                            },
-                                            "comment": null
-                                        }
-                                    ]
-                                }
-                            },
+                            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+                            "inputs": {},
                             "options": {},
                             "comment": null
                         }

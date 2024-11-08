@@ -30,7 +30,7 @@ def prepareBlock(data, spriteName, tokens, commentID):
         newBlockData["comment"] = commentID
     return newBlockData
 
-def linkBlocksToScript(data, spriteName, tokens, scriptID):
+def linkBlocksToScript(data, spriteName, tokens, scriptIDs):
     if "opcode" not in data:
         scriptPosition = data["position"]
         data = data["blocks"]
@@ -39,8 +39,8 @@ def linkBlocksToScript(data, spriteName, tokens, scriptID):
     newData = {}
     newCommentDatas = {}
     for i, blockData in enumerate(data):
-        ownID = generateSelector(scriptID=scriptID, index=i, isComment=False)
-        commentID = generateSelector(scriptID=scriptID, index=i, isComment=True)
+        ownID = generateSelector(scriptIDs=scriptIDs, index=i, isComment=False)
+        commentID = generateSelector(scriptIDs=scriptIDs, index=i, isComment=True)
         newBlockData = prepareBlock(
             data=blockData, 
             spriteName=spriteName, 
@@ -51,10 +51,10 @@ def linkBlocksToScript(data, spriteName, tokens, scriptID):
             newBlockData |= {"x": scriptPosition[0], "y": scriptPosition[1]}
             newBlockData["topLevel"] = True
         if i + 1 in range(len(data)):
-            nextID = generateSelector(scriptID=scriptID, index=i+1, isComment=False)
+            nextID = generateSelector(scriptIDs=scriptIDs, index=i+1, isComment=False)
             newBlockData["next"] = nextID
         if i - 1 in range(len(data)):
-            parentID = generateSelector(scriptID=scriptID, index=i-1, isComment=False)
+            parentID = generateSelector(scriptIDs=scriptIDs, index=i-1, isComment=False)
             newBlockData["parent"] = parentID
         newData[ownID] = newBlockData
                 
@@ -66,7 +66,7 @@ def linkBlocksToScript(data, spriteName, tokens, scriptID):
             )
     return newData, newCommentDatas
 
-def unnestScript(data, spriteName, tokens, scriptID):
+def unnestScript(data, spriteName, tokens, scriptIDs):
     previousBlockCount = 0
     blockCounter = len(data)
     finished = False
@@ -86,17 +86,18 @@ def unnestScript(data, spriteName, tokens, scriptID):
                         case "instruction": pass
                     if "blocks" in inputData:
                         scriptData = {"position": [0,0], "blocks": inputData["blocks"]}
+                        newScriptIDs = scriptIDs + [i] + [j]
                         linkedScriptData, scriptCommentDatasA = linkBlocksToScript(
                             data=scriptData,
                             spriteName=spriteName,
                             tokens=tokens,
-                            scriptID=99
+                            scriptIDs=newScriptIDs,
                         )
                         unnestedScriptData, scriptCommentDatasB = unnestScript(
                             data=linkedScriptData,
                             spriteName=spriteName,
                             tokens=tokens,
-                            scriptID=99
+                            scriptIDs=newScriptIDs,
                         )
                         newCommentDatas |= scriptCommentDatasA | scriptCommentDatasB
                         for i,subBlockID,subBlockData in ikv(unnestedScriptData):
@@ -114,8 +115,8 @@ def unnestScript(data, spriteName, tokens, scriptID):
                         elif inputData["mode"] == "block-only":
                             newInputData = None
                     else:
-                        newBlockID   = generateSelector(scriptID=scriptID, index=blockCounter, isComment=False)
-                        newCommentID = generateSelector(scriptID=scriptID, index=blockCounter, isComment=True)
+                        newBlockID   = generateSelector(scriptIDs=scriptIDs, index=blockCounter, isComment=False)
+                        newCommentID = generateSelector(scriptIDs=scriptIDs, index=blockCounter, isComment=True)
                         newBlockData = prepareBlock(
                             data=inputData["block"],
                             spriteName=spriteName,
@@ -139,8 +140,8 @@ def unnestScript(data, spriteName, tokens, scriptID):
                 else:
                     newInputData = inputData
 
-
-                newInputDatas[inputID] = newInputData
+                if newInputData != None:
+                    newInputDatas[inputID] = newInputData
             blockData["inputs"] = newInputDatas
 
 

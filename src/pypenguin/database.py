@@ -33,6 +33,13 @@ opcodeDatabase = {
         "inputTypes": {"CONDITION": "boolean", "SUBSTACK": "script"},
         "optionTypes": {}
     },
+    "control_if_else": {
+        "type": "instruction",
+        "category": "control",
+        "newOpcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+        "inputTypes": {"CONDITION": "boolean", "SUBSTACK": "script", "SUBSTACK2": "script"},
+        "optionTypes": {}
+    },
     # Sensing
     # Operators
     "operator_add": {
@@ -60,6 +67,13 @@ opcodeDatabase = {
         "type": "booleanReporter",
         "category": "operators",
         "newOpcode": "true",
+        "inputTypes": {},
+        "optionTypes": {}
+    },
+    "operator_falseBoolean": {
+        "type": "booleanReporter",
+        "category": "operators",
+        "newOpcode": "false",
         "inputTypes": {},
         "optionTypes": {}
     },

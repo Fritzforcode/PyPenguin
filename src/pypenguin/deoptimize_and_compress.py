@@ -7,8 +7,9 @@ from helper_functions import readJSONFile, writeJSONFile
 
 def deoptimizeAndCompressProject(
     optimizedProjectDirectory: str,
-    projectFilePath: str,
-    temporaryDirectory: str,
+    projectFilePath          : str,
+    temporaryDirectory       : str,
+    writeDebugFiles          : bool = False,
 ):
     # Read the optimized project.json
     optimizedData = readJSONFile(
@@ -18,7 +19,8 @@ def deoptimizeAndCompressProject(
     deoptimizedData = deoptimizeProject(
         projectData=optimizedData,
     )
-    writeJSONFile("temp3.json", data=deoptimizedData)
+    if writeDebugFiles:
+        writeJSONFile("temp3.json", data=deoptimizedData)
     # Make sure the temporary directory exists
     os.makedirs(temporaryDirectory, exist_ok=True)
 

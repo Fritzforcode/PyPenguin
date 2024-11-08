@@ -11,7 +11,8 @@ def extractProject(
     jsonFilePath      : None|str, # Path to your final .json file,
     temporaryDir      : str, # Where the zip will be extracted
     prettyFormat      : bool = True,
-    deleteTemporaryDir: bool = False
+    deleteTemporaryDir: bool = False,
+    writeDebugFiles   : bool = False,
 ):
     # Directory where you want to extract files
     # Path to your .zip file

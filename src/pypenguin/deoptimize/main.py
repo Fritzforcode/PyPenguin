@@ -44,21 +44,21 @@ def deoptimizeProject(projectData):
                 data=scriptData, 
                 spriteName=spriteData["name"],
                 tokens=tokens,
-                scriptID=scriptID,
+                scriptIDs=[scriptID],
             )
             
             unnestedScriptData, scriptCommentDatasB = unnestScript(
                 data=linkedScriptData, 
                 spriteName=spriteData["name"],
                 tokens=tokens,
-                scriptID=scriptID,
+                scriptIDs=[scriptID],
             )
             scriptCommentDatas = scriptCommentDatasA | scriptCommentDatasB
             newCommentDatas |= scriptCommentDatas
             newSpriteBlocks |= unnestedScriptData
         nameKey = None if spriteData["isStage"] else spriteData["name"]
         for i, commentData in enumerate(spriteData["comments"]):
-            commentID = generateSelector(scriptID=None, index=i, isComment=True)
+            commentID = generateSelector(scriptIDs=[], index=i, isComment=True)
             newCommentDatas[commentID] = translateComment(
                 data=commentData,
                 id=None,
