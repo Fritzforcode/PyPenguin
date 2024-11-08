@@ -12,7 +12,6 @@ def extractProject(
     temporaryDir      : str, # Where the zip will be extracted
     prettyFormat      : bool = True,
     deleteTemporaryDir: bool = False,
-    writeDebugFiles   : bool = False,
 ):
     # Directory where you want to extract files
     # Path to your .zip file
@@ -50,6 +49,7 @@ def extractAndOptimizeProject(
     projectFilePath: str,
     optimizedProjectDirectory: str,
     temporaryDirectory: str,
+    writeDebugFiles   : bool = False,
 ):
     # Extract the PenguinMod project
     deoptimizedData = extractProject(
@@ -57,13 +57,13 @@ def extractAndOptimizeProject(
         jsonFilePath=None, # Dont write the unoptimized version to a file
         temporaryDir=temporaryDirectory,
     )
-    writeJSONFile("temp.json", data=deoptimizedData)
+    if writeDebugFiles: writeJSONFile("temp.json", data=deoptimizedData)
 
     # Optimize project.json
     optimizedData = optimizeProjectJSON(
         projectData=deoptimizedData,
     )
-    writeJSONFile("temp2.json", data=optimizedData)
+    if writeDebugFiles: writeJSONFile("temp2.json", data=optimizedData)
     
     # Make sure the project directory exists
     os.makedirs(optimizedProjectDirectory, exist_ok=True)
