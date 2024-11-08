@@ -1,3 +1,5 @@
+import json
+
 from helper_functions import ikv, WhatIsGoingOnError, pp
 
 from optimize.comments import translateComment
@@ -103,23 +105,31 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
             commentDatas=commentDatas
         )
     blockData = data[ancestorP] # Get the block's own data
+    mutation = None
     if isinstance(blockData, dict): # A normal block
-        inputs = translateInputs(
-            data=blockData["inputs"], 
-            opcode=blockData["opcode"], 
-            scriptData=data,
-            blockChildrenPs=blockChildrenPs,
-            commentDatas=commentDatas,
-        )
-        for i,inputID,inputData in ikv(inputs):
-            if "block" in inputData:
-                if inputData["block"] != None:
-                    if isinstance(inputData["block"], str):
-                        inputs[inputID]["block"] = childrenDatas[inputData["block"]][0]
-                    elif isinstance(inputData["block"], dict):
-                        pass
-        options = translateOptions(data=blockData["fields"], opcode=blockData["opcode"])
-        newOpcode = opcodeDatabase[blockData["opcode"]]["newOpcode"]
+        if blockData["opcode"] in ["procedures_definition", "procedures_prototype", "argument_reporter_string_number", "argument_reporter_boolean"]:
+            newOpcode = blockData["opcode"]
+            inputs = blockData["inputs"]
+            options = blockData["fields"]
+            if blockData["opcode"] == "procedures_prototype":
+                mutation = blockData["mutation"]
+        else:
+            inputs = translateInputs(
+                data=blockData["inputs"], 
+                opcode=blockData["opcode"], 
+                scriptData=data,
+                blockChildrenPs=blockChildrenPs,
+                commentDatas=commentDatas,
+            )
+            for i,inputID,inputData in ikv(inputs):
+                if "block" in inputData:
+                    if inputData["block"] != None:
+                        if isinstance(inputData["block"], str):
+                            inputs[inputID]["block"] = childrenDatas[inputData["block"]][0]
+                        elif isinstance(inputData["block"], dict):
+                            pass
+            options = translateOptions(data=blockData["fields"], opcode=blockData["opcode"])
+            newOpcode = opcodeDatabase[blockData["opcode"]]["newOpcode"]
         comment = None
         for commentData in commentDatas.values():
             if commentData["blockId"] == ancestorP:
@@ -130,14 +140,65 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
             "options"     : options,
             "comment"     : comment,
         }
+        if mutation != None:
+            newData["mutation"] = mutation
     elif isinstance(blockData, list): # A variable or list block
         newData = translateVariableListBlock(blockData)
 
-    newDatas = [newData]
+    newDatas = None
+    if newData["opcode"] == "procedures_definition":
+        newDatas = translateScript(
+            data=data,
+            ancestorP=newData["inputs"]["custom_block"][1],
+            blockChildrenPs=blockChildrenPs,
+            commentDatas=commentDatas,
+        )
+    elif newData["opcode"] == "procedures_prototype":
+        mutationData = newData["mutation"]
+        proccode = mutationData["proccode"]
+        argumentNames = json.loads(mutationData["argumentnames"])
+        segments = []
+        segmentText = ""
+        i = 0
+        j = 0
+        while i in range(len(proccode)):
+            char  = proccode[i]
+            char2 = proccode[i + 1] if i + 1 in range(len(proccode)) else None
+            char3 = proccode[i + 2] if i + 2 in range(len(proccode)) else None
+            if char==" " and char2=="%" and (char3=="s" or char3=="b"): # if the next chars are either ' %s' or ' %b'
+                if segmentText != "":
+                    segments.append({
+                        "type": "label", 
+                        "text": segmentText
+                    })
+                    segmentText = ""
+                segments.append({
+                    "type": "textInput" if char3=="s" else "booleanInput", 
+                    "name": argumentNames[j]
+                })
+                i += 2
+                j += 1
+            else:
+                segmentText += char
+            i += 1
+        if segmentText != "":
+            segments.append({
+                "type": "label", 
+                "text": segmentText
+            })
+        newData = {
+            "opcode": "define ...",
+            "inputs": {},
+            "options": {},
+            "segments": segments,
+            "comment": newData["comment"],
+        }
+    
+    newDatas = [newData] if newDatas == None else newDatas
     if isinstance(blockData, dict):
         if blockData["next"] != None: #if the block does have a neighbour
             newDatas += childrenDatas[blockData["next"]]
-    
+
     if isinstance(blockData, list):
         return {"position": [blockData[3], blockData[4]], "blocks": newDatas} 
     elif blockData["topLevel"] == True:

@@ -1,5 +1,5 @@
 from helper_functions import ikv
-from validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema, opcodeDatabase, allowedOpcodes
+from validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema, segmentsSchema, opcodeDatabase, allowedOpcodes
 from validate.comments import validateComment 
 
 
@@ -12,6 +12,16 @@ def validateBlock(path, data, context):
     opcode = data["opcode"]
     opcodeData = list(opcodeDatabase.values())[allowedOpcodes.index(opcode)]
 
+    if "segments" in data:
+        validateSchema(path+["segments"], data=data["segments"], schema=segmentsSchema)
+        for i, segment in enumerate(data["segments"]):
+            match segment["type"]:
+                case "label":
+                    if "text" not in segment:
+                        raise formatError(path+["segments"]+[i], "Must have the 'text' attribute in this case.")
+                case "textInput"|"booleanInput":
+                    if "name" not in segment:
+                        raise formatError(path+["segments"]+[i], "Must have the 'name' attribute in this case.")
     
     validateInputs(
         path=path+["inputs"], 

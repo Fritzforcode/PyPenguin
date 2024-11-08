@@ -1,7 +1,7 @@
-from src.pypenguin.helper_functions import readJSONFile
-from src.pypenguin.validate.errors import ValidationError
+from pypenguin.helper_functions import readJSONFile
+from pypenguin.validate.errors import ValidationError
 
-from src.pypenguin.database import opcodeDatabase
+from pypenguin.database import opcodeDatabase
 allowedOpcodes = [data["newOpcode"] for data in opcodeDatabase.values()]
 textToSpeechLanguages = [
     None,
@@ -200,6 +200,20 @@ blockSchema = {
     "comment": { "type": ["null", "object"] }
   },
   "required": ["opcode", "inputs", "options", "comment"]
+}
+
+segmentsSchema = {
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "type": { "type": "string", "enum": ["label", "textInput", "booleanInput"] },
+      "text": { "type": "string", "minLength": 1 },
+      "name": { "type": "string", "minLength": 1 }
+    },
+    "required": ["type"]
+  },
+  "minItems": 1,
 }
 
 commentSchema = {
