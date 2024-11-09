@@ -13,7 +13,10 @@
                         {
                             "opcode": "define ...",
                             "inputs": {},
-                            "options": {},
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "instruction"
+                            },
                             "segments": [
                                 {
                                     "type": "label",
@@ -27,9 +30,125 @@
                             "comment": null
                         },
                         {
-                            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "123"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "var"
+                            },
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        100,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
                             "inputs": {},
-                            "options": {},
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "lastInstruction"
+                            },
+                            "segments": [
+                                {
+                                    "type": "label",
+                                    "text": "wasd"
+                                },
+                                {
+                                    "type": "textInput",
+                                    "name": "nnm"
+                                }
+                            ],
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        200,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "inputs": {},
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "stringReporter"
+                            },
+                            "segments": [
+                                {
+                                    "type": "label",
+                                    "text": "wasd"
+                                },
+                                {
+                                    "type": "textInput",
+                                    "name": "nnm"
+                                }
+                            ],
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        300,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "inputs": {},
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "numberReporter"
+                            },
+                            "segments": [
+                                {
+                                    "type": "label",
+                                    "text": "wasd"
+                                },
+                                {
+                                    "type": "textInput",
+                                    "name": "nnm"
+                                }
+                            ],
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        400,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "inputs": {},
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "booleanReporter"
+                            },
+                            "segments": [
+                                {
+                                    "type": "label",
+                                    "text": "wasd"
+                                },
+                                {
+                                    "type": "textInput",
+                                    "name": "nnm"
+                                }
+                            ],
                             "comment": null
                         }
                     ]

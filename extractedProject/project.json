@@ -27,26 +27,159 @@
             "scripts": [
                 {
                     "position": [
-                        19,
-                        -184
+                        38,
+                        -69
                     ],
                     "blocks": [
                         {
                             "opcode": "define ...",
                             "inputs": {},
-                            "options": {},
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "instruction"
+                            },
                             "segments": [
                                 {
                                     "type": "label",
-                                    "text": "wasd"
-                                },
+                                    "text": "normal no warp"
+                                }
+                            ],
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        51,
+                        252
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "inputs": {},
+                            "options": {
+                                "noScreenRefresh": true,
+                                "blockType": "instruction"
+                            },
+                            "segments": [
                                 {
-                                    "type": "textInput",
-                                    "name": "number or text#"
-                                },
+                                    "type": "label",
+                                    "text": "normal warp"
+                                }
+                            ],
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        370,
+                        95
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "inputs": {},
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "lastInstruction"
+                            },
+                            "segments": [
                                 {
-                                    "type": "booleanInput",
-                                    "name": "boolean#"
+                                    "type": "label",
+                                    "text": "end"
+                                }
+                            ],
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        624,
+                        -129
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "inputs": {},
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "stringReporter"
+                            },
+                            "segments": [
+                                {
+                                    "type": "label",
+                                    "text": "ret text no warp"
+                                }
+                            ],
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        572,
+                        268
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "inputs": {},
+                            "options": {
+                                "noScreenRefresh": true,
+                                "blockType": "stringReporter"
+                            },
+                            "segments": [
+                                {
+                                    "type": "label",
+                                    "text": "ret text warp+in"
+                                }
+                            ],
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -280,
+                        -25
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "inputs": {},
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "numberReporter"
+                            },
+                            "segments": [
+                                {
+                                    "type": "label",
+                                    "text": "ret num"
+                                }
+                            ],
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        316,
+                        350
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "inputs": {},
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "booleanReporter"
+                            },
+                            "segments": [
+                                {
+                                    "type": "label",
+                                    "text": "ret bool"
                                 }
                             ],
                             "comment": null
