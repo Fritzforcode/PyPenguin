@@ -2,6 +2,8 @@
 
 add procedure calls
 
+make a better custom hash function
+
 add other procedure types
 
 update documentation

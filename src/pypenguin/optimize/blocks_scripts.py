@@ -1,6 +1,6 @@
 import json
 
-from helper_functions import ikv, WhatIsGoingOnError, pp
+from helper_functions import ikv, WhatIsGoingOnError, pp, customHash
 
 from optimize.comments import translateComment
 
@@ -186,23 +186,33 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
                 "type": "label", 
                 "text": segmentText
             })
-        match mutationData["optype"]:
-            case '"statement"': blockType = "instruction"
-            case '"end"'      : blockType = "lastInstruction"
-            case '"string"'   : blockType = "stringReporter"
-            case '"number"'   : blockType = "numberReporter"
-            case '"boolean"'  : blockType = "booleanReporter"
+        match json.loads(mutationData["optype"]):
+            #case "statement": blockType = "instruction"
+            case None       : blockType = "instruction"
+            case "end"      : blockType = "lastInstruction"
+            case "string"   : blockType = "stringReporter"
+            case "number"   : blockType = "numberReporter"
+            case "boolean"  : blockType = "booleanReporter"
+            case _: raise Exception(mutationData["optype"], mutationData["returns"])
         newData = {
             "opcode": "define ...",
             "inputs": {},
             "options": {
                 "noScreenRefresh": json.loads(mutationData["warp"]),
-                "blockType": blockType,
+                "blockType"      : blockType,
             },
-            "segments": segments,
-            "comment": newData["comment"],
+            "segments"  : segments,
+            "identifier": customHash(mutationData["proccode"]), 
+            "comment"   : newData["comment"],
         }
-    
+    elif newData["opcode"] == "procedures_call":
+        newData = {
+            "opcode" : newData["opcode"],
+            "inputs" : {},
+            "options": {},
+            "comment": newData["comment"]
+        }
+        
     newDatas = [newData] if newDatas == None else newDatas
     if isinstance(blockData, dict):
         if blockData["next"] != None: #if the block does have a neighbour

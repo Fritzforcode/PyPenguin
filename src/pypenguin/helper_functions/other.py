@@ -15,5 +15,8 @@ def flipKeysAndValues(obj: dict): # self explanatory
 def removeStringDuplicates(array):
     return dict.fromkeys(array).keys()
 
+def customHash(obj):
+    return hash(obj) % 1000
+
 class WhatIsGoingOnError(Exception): # Just means its likely the dev's fault 
     pass

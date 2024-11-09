@@ -42,7 +42,92 @@
             "broadcasts": {},
             "customVars": [],
             "blocks": {
+                "d": {
+                    "opcode": "procedures_definition",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "a"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 44,
+                    "y": 44
+                },
                 "a": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {
+                        "DwA-4KLnMLUi^9P1=c]S": [
+                            1,
+                            "e"
+                        ],
+                        "9!;tE*2xY#R84Nkc.xho": [
+                            1,
+                            "f"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "inst %s %b",
+                        "argumentids": "[\"DwA-4KLnMLUi^9P1=c]S\",\"9!;tE*2xY#R84Nkc.xho\"]",
+                        "argumentnames": "[\"num\",\"bool\"]",
+                        "argumentdefaults": "[\"\",\"false\"]",
+                        "warp": "false",
+                        "returns": "null",
+                        "edited": "true",
+                        "optype": "null",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "e": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "num",
+                            "7~a~|~1f]T`}h61=?Mb%"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "f": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "bool",
+                            "iIZwlDT!W:amvfM*fNLu"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "g": {
                     "opcode": "procedures_definition",
                     "next": null,
                     "parent": null,
@@ -55,100 +140,33 @@
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 38,
-                    "y": -69
+                    "x": 5,
+                    "y": -96
                 },
                 "b": {
                     "opcode": "procedures_prototype",
                     "next": null,
-                    "parent": "a",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "proccode": "normal no warp",
-                        "argumentids": "[]",
-                        "argumentnames": "[]",
-                        "argumentdefaults": "[]",
-                        "warp": "false",
-                        "returns": "false",
-                        "edited": "true",
-                        "optype": "\"statement\"",
-                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
-                    }
-                },
-                "c": {
-                    "opcode": "procedures_definition",
-                    "next": null,
-                    "parent": null,
+                    "parent": "g",
                     "inputs": {
-                        "custom_block": [
+                        "y5.iyFDUSD8?T;@sT/mZ": [
                             1,
-                            "d"
+                            "h"
+                        ],
+                        "%i]B(P_g6aCf!L%e8)?;": [
+                            1,
+                            "i"
                         ]
                     },
                     "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 51,
-                    "y": 252
-                },
-                "d": {
-                    "opcode": "procedures_prototype",
-                    "next": null,
-                    "parent": "c",
-                    "inputs": {},
-                    "fields": {},
                     "shadow": true,
                     "topLevel": false,
                     "mutation": {
                         "tagName": "mutation",
                         "children": [],
-                        "proccode": "normal warp",
-                        "argumentids": "[]",
-                        "argumentnames": "[]",
-                        "argumentdefaults": "[]",
-                        "warp": "true",
-                        "returns": "false",
-                        "edited": "true",
-                        "optype": "\"statement\"",
-                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
-                    }
-                },
-                "e": {
-                    "opcode": "procedures_definition",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "custom_block": [
-                            1,
-                            "f"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 370,
-                    "y": 95
-                },
-                "f": {
-                    "opcode": "procedures_prototype",
-                    "next": null,
-                    "parent": "e",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "proccode": "end",
-                        "argumentids": "[]",
-                        "argumentnames": "[]",
-                        "argumentdefaults": "[]",
+                        "proccode": "end %s %b",
+                        "argumentids": "[\"y5.iyFDUSD8?T;@sT/mZ\",\"%i]B(P_g6aCf!L%e8)?;\"]",
+                        "argumentnames": "[\"num\",\"bool\"]",
+                        "argumentdefaults": "[\"\",\"false\"]",
                         "warp": "false",
                         "returns": "null",
                         "edited": "true",
@@ -156,76 +174,85 @@
                         "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
                     }
                 },
-                "g": {
-                    "opcode": "procedures_definition_return",
+                "h": {
+                    "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "custom_block": [
-                            1,
-                            "h"
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "num",
+                            "`Ihp^]bTld[Fv5!A8oik"
                         ]
                     },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 624,
-                    "y": -129
-                },
-                "h": {
-                    "opcode": "procedures_prototype",
-                    "next": null,
-                    "parent": "g",
-                    "inputs": {},
-                    "fields": {},
                     "shadow": true,
                     "topLevel": false,
                     "mutation": {
                         "tagName": "mutation",
                         "children": [],
-                        "proccode": "ret text no warp",
-                        "argumentids": "[]",
-                        "argumentnames": "[]",
-                        "argumentdefaults": "[]",
-                        "warp": "false",
-                        "returns": "true",
-                        "edited": "true",
-                        "optype": "\"string\"",
                         "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
                     }
                 },
                 "i": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "bool",
+                            "rf)M]A:HEncv(E?q9#lf"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "j": {
                     "opcode": "procedures_definition_return",
                     "next": null,
                     "parent": null,
                     "inputs": {
                         "custom_block": [
                             1,
-                            "j"
+                            "c"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 572,
-                    "y": 268
+                    "x": 38,
+                    "y": 217
                 },
-                "j": {
+                "c": {
                     "opcode": "procedures_prototype",
                     "next": null,
-                    "parent": "i",
-                    "inputs": {},
+                    "parent": "j",
+                    "inputs": {
+                        "3/)yG5,1i)U*tFxqs7u5": [
+                            1,
+                            "k"
+                        ],
+                        "zTC*(b[O,x.$|S{O{/Lz": [
+                            1,
+                            "l"
+                        ]
+                    },
                     "fields": {},
                     "shadow": true,
                     "topLevel": false,
                     "mutation": {
                         "tagName": "mutation",
                         "children": [],
-                        "proccode": "ret text warp+in",
-                        "argumentids": "[]",
-                        "argumentnames": "[]",
-                        "argumentdefaults": "[\"\"]",
-                        "warp": "true",
+                        "proccode": "call %s %b",
+                        "argumentids": "[\"3/)yG5,1i)U*tFxqs7u5\",\"zTC*(b[O,x.$|S{O{/Lz\"]",
+                        "argumentnames": "[\"num\",\"bool\"]",
+                        "argumentdefaults": "[\"\",\"false\"]",
+                        "warp": "false",
                         "returns": "true",
                         "edited": "true",
                         "optype": "\"string\"",
@@ -233,78 +260,130 @@
                     }
                 },
                 "k": {
-                    "opcode": "procedures_definition_return",
+                    "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "custom_block": [
-                            1,
-                            "l"
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "num",
+                            "+PgOVTreC75@pm_Tne=="
                         ]
                     },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": -280,
-                    "y": -25
-                },
-                "l": {
-                    "opcode": "procedures_prototype",
-                    "next": null,
-                    "parent": "k",
-                    "inputs": {},
-                    "fields": {},
                     "shadow": true,
                     "topLevel": false,
                     "mutation": {
                         "tagName": "mutation",
                         "children": [],
-                        "proccode": "ret num",
-                        "argumentids": "[]",
-                        "argumentnames": "[]",
-                        "argumentdefaults": "[]",
-                        "warp": "false",
-                        "returns": "true",
-                        "edited": "true",
-                        "optype": "\"number\"",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "l": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "bool",
+                            "]HirkEV7XZX3sK)4M+G^"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
                         "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
                     }
                 },
                 "m": {
-                    "opcode": "procedures_definition_return",
+                    "opcode": "procedures_call",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "custom_block": [
+                        "3/)yG5,1i)U*tFxqs7u5": [
                             1,
-                            "n"
+                            [
+                                10,
+                                ""
+                            ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 316,
-                    "y": 350
-                },
-                "n": {
-                    "opcode": "procedures_prototype",
-                    "next": null,
-                    "parent": "m",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": true,
-                    "topLevel": false,
+                    "x": 446,
+                    "y": -93,
                     "mutation": {
                         "tagName": "mutation",
                         "children": [],
-                        "proccode": "ret bool",
-                        "argumentids": "[]",
-                        "argumentnames": "[]",
-                        "argumentdefaults": "[]",
+                        "proccode": "call %s %b",
+                        "argumentids": "[\"3/)yG5,1i)U*tFxqs7u5\",\"zTC*(b[O,x.$|S{O{/Lz\"]",
                         "warp": "false",
                         "returns": "true",
                         "edited": "true",
-                        "optype": "\"boolean\"",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "n": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "y5.iyFDUSD8?T;@sT/mZ": [
+                            1,
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 427,
+                    "y": 110,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "end %s %b",
+                        "argumentids": "[\"y5.iyFDUSD8?T;@sT/mZ\",\"%i]B(P_g6aCf!L%e8)?;\"]",
+                        "warp": "false",
+                        "returns": "null",
+                        "edited": "true",
+                        "optype": "\"end\"",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "o": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "DwA-4KLnMLUi^9P1=c]S": [
+                            1,
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 368,
+                    "y": 17,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "inst %s %b",
+                        "argumentids": "[\"DwA-4KLnMLUi^9P1=c]S\",\"9!;tE*2xY#R84Nkc.xho\"]",
+                        "warp": "false",
+                        "returns": "null",
+                        "edited": "true",
+                        "optype": "null",
                         "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
                     }
                 }
@@ -346,9 +425,7 @@
     ],
     "monitors": [],
     "extensionData": {},
-    "extensions": [
-        "jgJSON"
-    ],
+    "extensions": [],
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",

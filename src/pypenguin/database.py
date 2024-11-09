@@ -152,4 +152,11 @@ opcodeDatabase = {
         "inputTypes": {},
         "optionTypes": {"noScreenRefresh": "boolean", "blockType": "blockType"}
     },
+    "procedures_call": {
+        "type": "dynamic",
+        "category": "My Blocks",
+        "newOpcode": "call ...",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
 }
