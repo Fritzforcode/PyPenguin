@@ -14,6 +14,22 @@
                             "opcode": "define ...",
                             "inputs": {},
                             "options": {},
+                            "segments": [
+                                {
+                                    "type": "label",
+                                    "text": "wasd"
+                                },
+                                {
+                                    "type": "textInput",
+                                    "name": "nnm"
+                                }
+                            ],
+                            "comment": null
+                        },
+                        {
+                            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+                            "inputs": {},
+                            "options": {},
                             "comment": null
                         }
                     ]
