@@ -49,7 +49,7 @@ def validateScript(path, data, context):
         for i, oldOpcode, opcodeData in ikv(opcodeDatabase):
             if opcodeData["newOpcode"] == newOpcode:
                 break
-        if (opcodeData["type"] in ["textReporter", "booleanReporter"]) and (len(data["blocks"]) > 1):
+        if (opcodeData["type"] in ["stringReporter", "numberReporter", "booleanReporter"]) and (len(data["blocks"]) > 1):
             raise formatError(path, "A script whose first block is a reporter mustn't have more than one block.")
 
 def validateInputs(path, data, opcode, opcodeData, context):
@@ -141,3 +141,10 @@ def validateOptions(path, data, opcode, opcodeData, context):
             case "list":
                 if optionValue not in [list_["name"] for list_ in context["scopeLists"]]:
                     raise formatError(path+[optionID], f"Must be a defined list.")
+            case "boolean":
+                if not isinstance(optionValue, bool):
+                    raise formatError(path+[optionID], f"Must be a boolean.")
+            case "blockType":
+                possibleValues = ["instruction", "lastInstruction", "stringReporter", "numberReporter", "booleanReporter"]
+                if optionValue not in possibleValues:
+                    raise formatError(path+[optionID], f"Must be one of {possibleValues}.")

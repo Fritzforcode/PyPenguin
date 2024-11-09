@@ -155,7 +155,6 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
     dataCopy = data.copy()
     for i, blockID, blockData in ikv(dataCopy):
         if   blockData["opcode"] == "special_define":
-            pp(blockData)
             proccode = ""
             blockCounter = 2
             argumentIDs      = []
@@ -179,10 +178,18 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                     argumentNames   .append( segment["name"] )
                     argumentDefaults.append( False )
                     argumentBlockIDs.append( generateSelector(blockID, blockCounter, False) )
+           
+            match blockData["fields"]["blockType"]:
+                case "instruction"    : returns, optype, opcode = False, "statement", "procedures_definition"
+                case "lastInstruction": returns, optype, opcode = None , "end"      , "procedures_definition"
+                case "stringReporter" : returns, optype, opcode = True , "string"   , "procedures_definition_return" 
+                case "numberReporter" : returns, optype, opcode = True , "number"   , "procedures_definition_return"
+                case "booleanReporter": returns, optype, opcode = True , "boolean"  , "procedures_definition_return"
+            
             definitionID = blockID
             prototypeID = generateSelector(blockID, 1, False)
             definitionData = {
-                "opcode": "procedures_definition",
+                "opcode": opcode,
                 "next": blockData["next"],
                 "parent": None,
                 "inputs": {"custom_block": [1, prototypeID]},
@@ -193,29 +200,27 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                 "y": blockData["y"],
             }
             prototypeData = {
-                "opcode": "procedures_prototype",
-                "next": None,
-                "parent": definitionID,
-                "inputs": { argumentIDs[j]: [1, argumentBlockIDs[j]] for j in range(len(argumentIDs)) }, 
-                "fields": {},
-                "shadow": True,
+                "opcode"  : "procedures_prototype",
+                "next"    : None,
+                "parent"  : definitionID,
+                "inputs"  : { argumentIDs[j]: [1, argumentBlockIDs[j]] for j in range(len(argumentIDs)) }, 
+                "fields"  : {},
+                "shadow"  : True,
                 "topLevel": False,
                 "mutation": {
-                    "tagName": "mutation",
-                    "children": [],
-                    "proccode": proccode,
-                    "argumentids": json.dumps(argumentIDs),
-                    "argumentnames": json.dumps(argumentNames),
+                    "tagName"         : "mutation",
+                    "children"        : [],
+                    "proccode"        : proccode,
+                    "argumentids"     : json.dumps(argumentIDs),
+                    "argumentnames"   : json.dumps(argumentNames),
                     "argumentdefaults": json.dumps(argumentDefaults),
-                    "warp": "false",
-                    "returns": "null",
-                    "edited": "true",
-                    "optype": "null",
-                    "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    "warp"            : json.dumps(blockData["fields"]["noScreenRefresh"]),
+                    "returns"         : json.dumps(returns),
+                    "edited"          : json.dumps(True),
+                    "optype"          : json.dumps(optype),
+                    "color"           : json.dumps(["#FF6680", "#eb3d5b", "#df2847"]),
                 }
             }
-            pp(definitionData)
-            pp(prototypeData)
             data[definitionID] = definitionData
             data[prototypeID] = prototypeData
             for j in range(len(argumentIDs)):

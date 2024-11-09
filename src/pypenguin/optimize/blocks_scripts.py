@@ -106,8 +106,8 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
         )
     blockData = data[ancestorP] # Get the block's own data
     mutation = None
-    if isinstance(blockData, dict): # A normal block
-        if blockData["opcode"] in ["procedures_definition", "procedures_prototype", "argument_reporter_string_number", "argument_reporter_boolean"]:
+    if isinstance(blockData, dict):
+        if blockData["opcode"] in ["procedures_definition", "procedures_definition_return", "procedures_prototype", "argument_reporter_string_number", "argument_reporter_boolean"]:
             newOpcode = blockData["opcode"]
             inputs = blockData["inputs"]
             options = blockData["fields"]
@@ -146,7 +146,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
         newData = translateVariableListBlock(blockData)
 
     newDatas = None
-    if newData["opcode"] == "procedures_definition":
+    if newData["opcode"] in ["procedures_definition", "procedures_definition_return"]:
         newDatas = translateScript(
             data=data,
             ancestorP=newData["inputs"]["custom_block"][1],
@@ -186,10 +186,19 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
                 "type": "label", 
                 "text": segmentText
             })
+        match mutationData["optype"]:
+            case '"statement"': blockType = "instruction"
+            case '"end"'      : blockType = "lastInstruction"
+            case '"string"'   : blockType = "stringReporter"
+            case '"number"'   : blockType = "numberReporter"
+            case '"boolean"'  : blockType = "booleanReporter"
         newData = {
             "opcode": "define ...",
             "inputs": {},
-            "options": {},
+            "options": {
+                "noScreenRefresh": json.loads(mutationData["warp"]),
+                "blockType": blockType,
+            },
             "segments": segments,
             "comment": newData["comment"],
         }

@@ -150,6 +150,6 @@ opcodeDatabase = {
         "category": "My Blocks",
         "newOpcode": "define ...",
         "inputTypes": {},
-        "optionTypes": {}
+        "optionTypes": {"noScreenRefresh": "boolean", "blockType": "blockType"}
     },
 }

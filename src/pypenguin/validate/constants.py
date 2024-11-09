@@ -193,7 +193,7 @@ blockSchema = {
     "options": { 
       "type": "object",
       "patternProperties": {
-        "^[a-zA-Z0-9_]+$": { "type": "string" }
+        "^[a-zA-Z0-9_]+$": { "any": True }
       },
       "additionalProperties": False
     },

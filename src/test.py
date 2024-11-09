@@ -1,7 +1,5 @@
 from pypenguin import validateProject, deoptimizeAndCompressProject
 from pypenguin.helper_functions import writeJSONFile
-import os, sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'src/pypenguin')))
 
 projectData = {
     "sprites": [
@@ -11,25 +9,55 @@ projectData = {
             "scripts": [
                 {
                     "position": [0,0],
-                    "blocks": [
-                        {
-                            "opcode": "define ...",
-                            "inputs": {},
-                            "options": {},
-                            "segments": [
-                                {
-                                    "type": "label",
-                                    "text": "wasd"
-                                },
-                                {
-                                    "type": "textInput",
-                                    "name": "nnm"
-                                }
-                            ],
-                            "comment": None
-                        }
-                    ]
-                }
+                    "blocks": [{
+                        "opcode": "define ...",
+                        "inputs": {},
+                        "options": {"noScreenRefresh": False, "blockType": "instruction"},
+                        "segments": [{"type": "label", "text": "wasd"}, {"type": "textInput", "name": "nnm"}],
+                        "comment": None
+                    }, {
+                        "opcode": "set [VARIABLE] to (VALUE)",
+                        "inputs": {"VALUE": {"mode":"block-and-text", "block": None, "text": "123"}},
+                        "options": {"VARIABLE": "var"},
+                        "comment": None
+                    }]},
+                {
+                    "position": [100,0],
+                    "blocks": [{
+                        "opcode": "define ...",
+                        "inputs": {},
+                        "options": {"noScreenRefresh": False, "blockType": "lastInstruction"},
+                        "segments": [{"type": "label", "text": "wasd"}, {"type": "textInput", "name": "nnm"}],
+                        "comment": None
+                    }]},
+                {
+                    "position": [200,0],
+                    "blocks": [{
+                        "opcode": "define ...",
+                        "inputs": {},
+                        "options": {"noScreenRefresh": False, "blockType": "stringReporter"},
+                        "segments": [{"type": "label", "text": "wasd"}, {"type": "textInput", "name": "nnm"}],
+                        "comment": None
+                    }]},
+                {
+                    "position": [300,0],
+                    "blocks": [{
+                        "opcode": "define ...",
+                        "inputs": {},
+                        "options": {"noScreenRefresh": False, "blockType": "numberReporter"},
+                        "segments": [{"type": "label", "text": "wasd"}, {"type": "textInput", "name": "nnm"}],
+                        "comment": None
+                    }]},
+                {
+                    "position": [400,0],
+                    "blocks": [{
+                        "opcode": "define ...",
+                        "inputs": {},
+                        "options": {"noScreenRefresh": False, "blockType": "booleanReporter"},
+                        "segments": [{"type": "label", "text": "wasd"}, {"type": "textInput", "name": "nnm"}],
+                        "comment": None
+                    }]},
+                
             ],
             "comments": [],
             "currentCostume": 0,
