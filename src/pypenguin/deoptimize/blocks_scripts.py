@@ -1,4 +1,6 @@
-from helper_functions import ikv, pp, WhatIsGoingOnError, generateSelector, readJSONFile
+import json
+
+from helper_functions import ikv, pp, WhatIsGoingOnError, generateSelector, generateRandomToken, readJSONFile
 
 from deoptimize.options import translateOptions
 from deoptimize.comments import translateComment
@@ -28,6 +30,8 @@ def prepareBlock(data, spriteName, tokens, commentID):
     }
     if data["comment"] != None:
         newBlockData["comment"] = commentID
+    if opcode == "special_define":
+        newBlockData["segments"] = data["segments"]
     return newBlockData
 
 def linkBlocksToScript(data, spriteName, tokens, scriptIDs):
@@ -144,14 +148,94 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                     newInputDatas[inputID] = newInputData
             blockData["inputs"] = newInputDatas
 
-
             newBlockDatas[blockID] = blockData
         data = newBlockDatas
         finished = blockCounter == previousBlockCount
         previousBlockCount = blockCounter
     dataCopy = data.copy()
     for i, blockID, blockData in ikv(dataCopy):
-        if blockData["opcode"] in ["special_variable_value", "special_list_value"]:
+        if   blockData["opcode"] == "special_define":
+            pp(blockData)
+            proccode = ""
+            blockCounter = 2
+            argumentIDs      = []
+            argumentNames    = []
+            argumentDefaults = []
+            argumentBlockIDs = []
+            for segment in blockData["segments"]:
+                if   segment["type"] == "label":
+                    if proccode != "": proccode += " "
+                    proccode += segment["text"]
+                elif segment["type"] == "textInput":
+                    proccode += " %s"
+                    argumentIDs     .append( generateRandomToken() )
+                    argumentNames   .append( segment["name"] )
+                    argumentDefaults.append( "" )
+                    argumentBlockIDs.append( generateSelector(blockID, blockCounter, False) )
+                    blockCounter += 1
+                elif segment["type"] == "booleanInput":
+                    proccode += " %b"
+                    argumentIDs     .append( generateRandomToken() )
+                    argumentNames   .append( segment["name"] )
+                    argumentDefaults.append( False )
+                    argumentBlockIDs.append( generateSelector(blockID, blockCounter, False) )
+            definitionID = blockID
+            prototypeID = generateSelector(blockID, 1, False)
+            definitionData = {
+                "opcode": "procedures_definition",
+                "next": blockData["next"],
+                "parent": None,
+                "inputs": {"custom_block": [1, prototypeID]},
+                "fields": {},
+                "shadow": False,
+                "topLevel": True,
+                "x": blockData["x"],
+                "y": blockData["y"],
+            }
+            prototypeData = {
+                "opcode": "procedures_prototype",
+                "next": None,
+                "parent": definitionID,
+                "inputs": { argumentIDs[j]: [1, argumentBlockIDs[j]] for j in range(len(argumentIDs)) }, 
+                "fields": {},
+                "shadow": True,
+                "topLevel": False,
+                "mutation": {
+                    "tagName": "mutation",
+                    "children": [],
+                    "proccode": proccode,
+                    "argumentids": json.dumps(argumentIDs),
+                    "argumentnames": json.dumps(argumentNames),
+                    "argumentdefaults": json.dumps(argumentDefaults),
+                    "warp": "false",
+                    "returns": "null",
+                    "edited": "true",
+                    "optype": "null",
+                    "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                }
+            }
+            pp(definitionData)
+            pp(prototypeData)
+            data[definitionID] = definitionData
+            data[prototypeID] = prototypeData
+            for j in range(len(argumentIDs)):
+                data[argumentBlockIDs[j]] = {
+                    "opcode": "argument_reporter_string_number" if argumentDefaults[j] == "" else "argument_reporter_boolean",
+                    "next": None,
+                    "parent": prototypeID,
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [argumentNames[j], generateRandomToken()]
+                    },
+                    "shadow": True,
+                    "topLevel": False,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                }
+        elif blockData["opcode"] in ["special_variable_value", "special_list_value"]:
             if   blockData["opcode"] == "special_variable_value": magicNumber = 12; key = "VARIABLE"
             elif blockData["opcode"] == "special_list_value":     magicNumber = 13; key = "LIST"
             core = [magicNumber, blockData["fields"][key][0], blockData["fields"][key][1]]

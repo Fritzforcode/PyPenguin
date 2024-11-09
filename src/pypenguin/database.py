@@ -146,7 +146,7 @@ opcodeDatabase = {
         "optionTypes": {"LIST": "list"}
     },
     "special_define": {
-        "type": "textReporter",
+        "type": "hat",
         "category": "My Blocks",
         "newOpcode": "define ...",
         "inputTypes": {},

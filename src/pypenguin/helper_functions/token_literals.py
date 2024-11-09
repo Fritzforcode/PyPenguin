@@ -32,7 +32,10 @@ def generateNextKeyInDict(obj:dict, offset=0):
     biggest = max([0] + ints)
     return numberToLiteral(biggest + 1 + offset)
 
-def generateSelector(scriptIDs:list[int], index:int, isComment:bool):
+def generateSelector(scriptIDs:list[int]|str, index:int, isComment:bool):
+    if isinstance(scriptIDs, str):
+        scriptIDs = [literalToNumber(i) for i in scriptIDs.split(":")]
+    
     items = []
     for scriptID in scriptIDs:
         items.append(numberToLiteral(scriptID))
@@ -40,3 +43,4 @@ def generateSelector(scriptIDs:list[int], index:int, isComment:bool):
     if isComment:
         items.append("c")
     return ":".join(items)
+

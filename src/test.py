@@ -13,21 +13,19 @@ projectData = {
                     "position": [0,0],
                     "blocks": [
                         {
-                            "opcode": "when [KEY_OPTION] key pressed",
+                            "opcode": "define ...",
                             "inputs": {},
-                            "options": {
-                                "KEY_OPTION": "escape"
-                            },
-                            "comment": None
-                        },
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {"mode": "block-and-text", "block": None, "text": "123"},
-                            },
-                            "options": {
-                                "VARIABLE": "var"
-                            },
+                            "options": {},
+                            "segments": [
+                                {
+                                    "type": "label",
+                                    "text": "wasd"
+                                },
+                                {
+                                    "type": "textInput",
+                                    "name": "nnm"
+                                }
+                            ],
                             "comment": None
                         }
                     ]
@@ -76,13 +74,13 @@ projectData = {
 validateProject(projectData=projectData)
 
 writeJSONFile(
-    filePath="project/project.json",
+    filePath="../project/project.json",
     data=projectData
 )
 
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory="project",
-    projectFilePath="export.pmp",
-    temporaryDirectory="temporary"
+    optimizedProjectDirectory="../project",
+    projectFilePath="../export.pmp",
+    temporaryDirectory="../temporary"
 )
 
