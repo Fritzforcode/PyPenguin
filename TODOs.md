@@ -6,11 +6,9 @@ add other procedure types
 
 update documentation
 
-both empty script and None as input should amek the input value empty
+both empty script and None as input should make the input value empty
 
 add blocks requirering their extensions
-
-add var and list blocks to validation and documentation
 
 add more blocks
 
@@ -63,3 +61,4 @@ maybe validate:
 - layerOrder to be at most 4 - needs research 
 - meta
 - asset names matching
+- block types being in the correct place in script or input
