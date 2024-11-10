@@ -4,7 +4,7 @@ from helper_functions import generateRandomToken, generateSelector, pp, ikv, fli
 
 from deoptimize.variables_lists import translateVariables, translateLists
 from deoptimize.broadcasts import generateBroadcastTokens
-from deoptimize.blocks_scripts import getCustomBlockInfo, linkBlocksToScript, unnestScript
+from deoptimize.blocks_scripts import getCustomBlockInfo, linkBlocksToScript, unnestScript, finishBlocks
 from deoptimize.costumes_sounds import translateCostumes, translateSounds
 from deoptimize.comments import translateComment
 
@@ -51,6 +51,8 @@ def deoptimizeProject(projectData):
                 tokens=tokens,
                 scriptIDs=[scriptID],
             )
+            print("linked", 100*"#")
+            pp(linkedScriptData)
             
             unnestedScriptData, scriptCommentDatasB = unnestScript(
                 data=linkedScriptData, 
@@ -58,9 +60,15 @@ def deoptimizeProject(projectData):
                 tokens=tokens,
                 scriptIDs=[scriptID],
             )
+
             scriptCommentDatas = scriptCommentDatasA | scriptCommentDatasB
             newCommentDatas |= scriptCommentDatas
             newSpriteBlocks |= unnestedScriptData
+        newSpriteBlocks = finishBlocks(
+            data=newSpriteBlocks,
+            spriteName=spriteData["name"],
+            tokens=tokens,
+        )
         nameKey = None if spriteData["isStage"] else spriteData["name"]
         for i, commentData in enumerate(spriteData["comments"]):
             commentID = generateSelector(scriptIDs=[], index=i, isComment=True)

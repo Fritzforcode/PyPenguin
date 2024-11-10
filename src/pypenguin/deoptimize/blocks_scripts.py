@@ -273,21 +273,23 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                     if inputData[1] == blockID:
                         data[blockData["parent"]]["inputs"][inputID][1] = core
                 del data[blockID]
-    
-    # Gather all mutation datas for the next step
+    return data, newCommentDatas
+
+def finishBlocks(data, spriteName, tokens):
     mutationDatas = {}
-    for i, blockID, blockData in ikv(data):
+    for j, blockID, blockData in ikv(data):
         if blockData["opcode"] == "procedures_prototype":
             mutationData = blockData["mutation"]
             mutationDatas[mutationData["proccode"]] = mutationData
-    print("mut")
-    pp(mutationDatas)
-    
     customBlockInfo = tokens["customBlocks"]
     for i, blockID, blockData in ikv(data):
         if blockData["opcode"] == "procedures_call":
             customBlockId = blockData["fields"]["blockDef"]
             proccode = customBlockInfo[spriteName][customBlockId]
             mutationData = mutationDatas[proccode]
+            del mutationData["argumentnames"]
+            del mutationData["argumentdefaults"]
             blockData["mutation"] = mutationDatas[proccode]
-    return data, newCommentDatas
+            del blockData["fields"]["blockDef"]
+    
+    return data

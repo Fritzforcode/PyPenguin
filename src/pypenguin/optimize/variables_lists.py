@@ -1,4 +1,4 @@
-from helper_functions import ikv, WhatIsGoingOnError, pp
+from pypenguin.helper_functions import ikv, WhatIsGoingOnError, pp
 
 
 def translateVariables(data, monitorDatas):

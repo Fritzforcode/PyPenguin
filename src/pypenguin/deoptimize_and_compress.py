@@ -1,9 +1,9 @@
 import os, shutil
 import urllib.parse
 
-from deoptimize import deoptimizeProject
+from pypenguin.deoptimize import deoptimizeProject
 
-from helper_functions import readJSONFile, writeJSONFile
+from pypenguin.helper_functions import readJSONFile, writeJSONFile
 
 def deoptimizeAndCompressProject(
     optimizedProjectDirectory: str,

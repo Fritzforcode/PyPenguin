@@ -1,14 +1,12 @@
-exec("import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))")
-
-from optimize.costumes_sounds import translateCostumes, translateSounds
-from optimize.variables_lists import translateVariables, translateLists
-from optimize.blocks_scripts import translateScript, generateBlockChildrenPs
-from optimize.comments import translateComment
-
+from pypenguin.optimize.costumes_sounds import translateCostumes, translateSounds
+from pypenguin.optimize.variables_lists import translateVariables, translateLists
+from pypenguin.optimize.blocks_scripts import translateScript, generateBlockChildrenPs, getCustomBlockMutations
+from pypenguin.optimize.comments import translateComment
 
 def optimizeProjectJSON(projectData):
     newSpriteDatas = []
     for i, spriteData in enumerate(projectData["targets"]):
+        mutationDatas = getCustomBlockMutations(data=spriteData["blocks"])
         commentDatas = spriteData["comments"]
         floatingCommentDatas = [] # The comments that aren't connected to any blocks
         for commentData in commentDatas.values():
@@ -22,6 +20,7 @@ def optimizeProjectJSON(projectData):
                 ancestorP=ancestorP, 
                 blockChildrenPs=blockChildrenPs,
                 commentDatas=commentDatas,
+                mutationDatas=mutationDatas,
             )
             newScriptDatas.append(newScriptData)
         translatedCostumeDatas = translateCostumes(data=spriteData["costumes"])

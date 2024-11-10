@@ -1,10 +1,10 @@
 import json
 
-from helper_functions import ikv, WhatIsGoingOnError, pp, customHash
+from pypenguin.helper_functions import ikv, WhatIsGoingOnError, pp, customHash
 
-from optimize.comments import translateComment
+from pypenguin.optimize.comments import translateComment
 
-from database import opcodeDatabase
+from pypenguin.database import opcodeDatabase
 
 def translateVariableListBlock(data):
     # A variable or list block
@@ -95,21 +95,31 @@ def translateOptions(data, opcode):
         newData[fieldID] = newFieldData
     return newData
 
-def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
+def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationDatas):
     childrenDatas = {}
     for pointer in blockChildrenPs[ancestorP]:
         childrenDatas[pointer] = translateScript(
             data=data, 
             ancestorP=pointer, 
             blockChildrenPs=blockChildrenPs,
-            commentDatas=commentDatas
+            commentDatas=commentDatas,
+            mutationDatas=mutationDatas,
         )
     blockData = data[ancestorP] # Get the block's own data
     mutation = None
     if isinstance(blockData, dict):
         if blockData["opcode"] in ["procedures_definition", "procedures_definition_return", "procedures_prototype", "argument_reporter_string_number", "argument_reporter_boolean", "procedures_call"]:
             newOpcode = blockData["opcode"]
-            inputs = blockData["inputs"]
+            if blockData["opcode"] == "procedures_call":
+                inputs = translateInputs(
+                    data=blockData["inputs"], 
+                    opcode=blockData["opcode"], 
+                    scriptData=data,
+                    blockChildrenPs=blockChildrenPs,
+                    commentDatas=commentDatas,
+                )
+            else:
+                inputs = blockData["inputs"]
             options = blockData["fields"]
             if blockData["opcode"] in ["procedures_prototype", "procedures_call"]:
                 mutation = blockData["mutation"]
@@ -152,6 +162,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
             ancestorP=newData["inputs"]["custom_block"][1],
             blockChildrenPs=blockChildrenPs,
             commentDatas=commentDatas,
+            mutationDatas=mutationDatas
         )
     elif newData["opcode"] == "procedures_prototype":
         mutationData = newData["mutation"]
@@ -207,9 +218,11 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
         }
     elif newData["opcode"] == "procedures_call":
         mutationData = newData["mutation"]
+        print("call")
+        print(mutation["proccode"])
         newData = {
             "opcode" : "call ...",
-            "inputs" : {},
+            "inputs" : newData["inputs"],
             "options": {"blockDef": customHash(mutationData["proccode"])},
             "comment": newData["comment"]
         }
@@ -243,3 +256,11 @@ def generateBlockChildrenPs(data):
         if parentP == None:
             ancestorPs.append(childP)
     return ancestorPs, blockChildrenPs
+
+def getCustomBlockMutations(data):
+    mutationDatas = {}
+    for j, blockID, blockData in ikv(data):
+        if blockData["opcode"] == "procedures_prototype":
+            mutationData = blockData["mutation"]
+            mutationDatas[mutationData["proccode"]] = mutationData
+    return mutationDatas

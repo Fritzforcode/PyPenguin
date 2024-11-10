@@ -65,3 +65,4 @@ maybe validate:
 - asset names matching
 - block types being in the correct place in script or input
 - custom block ids matching
+- no duplicate custom block input names
