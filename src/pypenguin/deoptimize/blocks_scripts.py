@@ -7,6 +7,30 @@ from deoptimize.comments import translateComment
 
 from database import opcodeDatabase
 
+def generateProccodeFromSegments(data):
+    proccode = ""
+    for segment in data:
+        if   segment["type"] == "label":
+            if proccode != "": proccode += " "
+            proccode += segment["text"]
+        elif segment["type"] == "textInput":
+            proccode += " %s"
+        elif segment["type"] == "booleanInput":
+            proccode += " %b"
+    return proccode
+
+def getCustomBlockInfo(data, spriteNames):
+    info = {k:{} for k in spriteNames+[None]}
+    for spriteData in data:
+        spriteName = None if spriteData["isStage"] else spriteData["name"]
+        for scriptData in spriteData["scripts"]:
+            firstBlockData = scriptData["blocks"][0]
+            if firstBlockData["opcode"] == "define ...":
+                customBlockId = firstBlockData["options"]["id"]
+                info[spriteName][customBlockId] = generateProccodeFromSegments(firstBlockData["segments"])
+    return info
+                
+
 def prepareBlock(data, spriteName, tokens, commentID):
     opcode = None
     for i,oldOpcode,opcodeData in ikv(opcodeDatabase):
@@ -155,7 +179,7 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
     dataCopy = data.copy()
     for i, blockID, blockData in ikv(dataCopy):
         if   blockData["opcode"] == "special_define":
-            proccode = ""
+            proccode = generateProccodeFromSegments(blockData["segments"])
             blockCounter = 2
             argumentIDs      = []
             argumentNames    = []
@@ -163,22 +187,19 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
             argumentBlockIDs = []
             for segment in blockData["segments"]:
                 if   segment["type"] == "label":
-                    if proccode != "": proccode += " "
-                    proccode += segment["text"]
+                    pass
                 elif segment["type"] == "textInput":
-                    proccode += " %s"
                     argumentIDs     .append( generateRandomToken() )
                     argumentNames   .append( segment["name"] )
                     argumentDefaults.append( "" )
                     argumentBlockIDs.append( generateSelector(blockID, blockCounter, False) )
                     blockCounter += 1
                 elif segment["type"] == "booleanInput":
-                    proccode += " %b"
                     argumentIDs     .append( generateRandomToken() )
                     argumentNames   .append( segment["name"] )
                     argumentDefaults.append( False )
                     argumentBlockIDs.append( generateSelector(blockID, blockCounter, False) )
-           
+            
             match blockData["fields"]["blockType"]:
                 case "instruction"    : returns, optype, opcode = False, "statement", "procedures_definition"
                 case "lastInstruction": returns, optype, opcode = None , "end"      , "procedures_definition"
@@ -252,4 +273,21 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                     if inputData[1] == blockID:
                         data[blockData["parent"]]["inputs"][inputID][1] = core
                 del data[blockID]
+    
+    # Gather all mutation datas for the next step
+    mutationDatas = {}
+    for i, blockID, blockData in ikv(data):
+        if blockData["opcode"] == "procedures_prototype":
+            mutationData = blockData["mutation"]
+            mutationDatas[mutationData["proccode"]] = mutationData
+    print("mut")
+    pp(mutationDatas)
+    
+    customBlockInfo = tokens["customBlocks"]
+    for i, blockID, blockData in ikv(data):
+        if blockData["opcode"] == "procedures_call":
+            customBlockId = blockData["fields"]["blockDef"]
+            proccode = customBlockInfo[spriteName][customBlockId]
+            mutationData = mutationDatas[proccode]
+            blockData["mutation"] = mutationDatas[proccode]
     return data, newCommentDatas

@@ -64,3 +64,4 @@ maybe validate:
 - meta
 - asset names matching
 - block types being in the correct place in script or input
+- custom block ids matching

@@ -107,11 +107,11 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
     blockData = data[ancestorP] # Get the block's own data
     mutation = None
     if isinstance(blockData, dict):
-        if blockData["opcode"] in ["procedures_definition", "procedures_definition_return", "procedures_prototype", "argument_reporter_string_number", "argument_reporter_boolean"]:
+        if blockData["opcode"] in ["procedures_definition", "procedures_definition_return", "procedures_prototype", "argument_reporter_string_number", "argument_reporter_boolean", "procedures_call"]:
             newOpcode = blockData["opcode"]
             inputs = blockData["inputs"]
             options = blockData["fields"]
-            if blockData["opcode"] == "procedures_prototype":
+            if blockData["opcode"] in ["procedures_prototype", "procedures_call"]:
                 mutation = blockData["mutation"]
         else:
             inputs = translateInputs(
@@ -200,19 +200,21 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas):
             "options": {
                 "noScreenRefresh": json.loads(mutationData["warp"]),
                 "blockType"      : blockType,
+                "id"             : customHash(mutationData["proccode"])
             },
             "segments"  : segments,
-            "identifier": customHash(mutationData["proccode"]), 
             "comment"   : newData["comment"],
         }
     elif newData["opcode"] == "procedures_call":
+        mutationData = newData["mutation"]
         newData = {
-            "opcode" : newData["opcode"],
+            "opcode" : "call ...",
             "inputs" : {},
-            "options": {},
+            "options": {"blockDef": customHash(mutationData["proccode"])},
             "comment": newData["comment"]
         }
-        
+
+        pp(newData)        
     newDatas = [newData] if newDatas == None else newDatas
     if isinstance(blockData, dict):
         if blockData["next"] != None: #if the block does have a neighbour

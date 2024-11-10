@@ -36,7 +36,8 @@
                             "inputs": {},
                             "options": {
                                 "noScreenRefresh": false,
-                                "blockType": "instruction"
+                                "blockType": "instruction",
+                                "id": 999
                             },
                             "segments": [
                                 {
@@ -52,7 +53,6 @@
                                     "name": "bool"
                                 }
                             ],
-                            "identifier": 604,
                             "comment": null
                         }
                     ]
@@ -68,7 +68,8 @@
                             "inputs": {},
                             "options": {
                                 "noScreenRefresh": false,
-                                "blockType": "lastInstruction"
+                                "blockType": "lastInstruction",
+                                "id": 673
                             },
                             "segments": [
                                 {
@@ -84,7 +85,6 @@
                                     "name": "bool"
                                 }
                             ],
-                            "identifier": 220,
                             "comment": null
                         }
                     ]
@@ -100,7 +100,8 @@
                             "inputs": {},
                             "options": {
                                 "noScreenRefresh": false,
-                                "blockType": "stringReporter"
+                                "blockType": "stringReporter",
+                                "id": 681
                             },
                             "segments": [
                                 {
@@ -116,7 +117,6 @@
                                     "name": "bool"
                                 }
                             ],
-                            "identifier": 970,
                             "comment": null
                         }
                     ]
@@ -129,14 +129,10 @@
                     "blocks": [
                         {
                             "opcode": "call ...",
-                            "inputs": {
-                                "3/)yG5,1i)U*tFxqs7u5": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": ""
-                                }
+                            "inputs": {},
+                            "options": {
+                                "blockDef": 681
                             },
-                            "options": {},
                             "comment": null
                         }
                     ]
@@ -149,14 +145,10 @@
                     "blocks": [
                         {
                             "opcode": "call ...",
-                            "inputs": {
-                                "y5.iyFDUSD8?T;@sT/mZ": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": ""
-                                }
+                            "inputs": {},
+                            "options": {
+                                "blockDef": 673
                             },
-                            "options": {},
                             "comment": null
                         }
                     ]
@@ -169,14 +161,10 @@
                     "blocks": [
                         {
                             "opcode": "call ...",
-                            "inputs": {
-                                "DwA-4KLnMLUi^9P1=c]S": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": ""
-                                }
+                            "inputs": {},
+                            "options": {
+                                "blockDef": 999
                             },
-                            "options": {},
                             "comment": null
                         }
                     ]

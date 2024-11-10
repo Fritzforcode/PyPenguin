@@ -4,7 +4,7 @@ from helper_functions import generateRandomToken, generateSelector, pp, ikv, fli
 
 from deoptimize.variables_lists import translateVariables, translateLists
 from deoptimize.broadcasts import generateBroadcastTokens
-from deoptimize.blocks_scripts import linkBlocksToScript, unnestScript
+from deoptimize.blocks_scripts import getCustomBlockInfo, linkBlocksToScript, unnestScript
 from deoptimize.costumes_sounds import translateCostumes, translateSounds
 from deoptimize.comments import translateComment
 
@@ -25,10 +25,15 @@ def generateTokens(data):
         data=data["sprites"],
         spriteNames=spriteNames,
     )
+    customBlockInfo = getCustomBlockInfo(
+        data=data["sprites"],
+        spriteNames=spriteNames,
+    )
     tokens = {
-        "variables" : variableTokens,
-        "lists"     : listTokens,
-        "broadcasts": broadcastTokens,
+        "variables"   : variableTokens,
+        "lists"       : listTokens,
+        "broadcasts"  : broadcastTokens,
+        "customBlocks": customBlockInfo,
     }
     return tokens, translatedVariableDatas, translatedListDatas, monitorDatas
 
