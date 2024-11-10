@@ -36,8 +36,7 @@
                             "inputs": {},
                             "options": {
                                 "noScreenRefresh": false,
-                                "blockType": "instruction",
-                                "id": 999
+                                "blockType": "instruction"
                             },
                             "segments": [
                                 {
@@ -53,6 +52,7 @@
                                     "name": "bool"
                                 }
                             ],
+                            "identifier": 762,
                             "comment": null
                         }
                     ]
@@ -68,8 +68,7 @@
                             "inputs": {},
                             "options": {
                                 "noScreenRefresh": false,
-                                "blockType": "lastInstruction",
-                                "id": 673
+                                "blockType": "lastInstruction"
                             },
                             "segments": [
                                 {
@@ -85,6 +84,7 @@
                                     "name": "bool"
                                 }
                             ],
+                            "identifier": 964,
                             "comment": null
                         }
                     ]
@@ -100,8 +100,7 @@
                             "inputs": {},
                             "options": {
                                 "noScreenRefresh": false,
-                                "blockType": "stringReporter",
-                                "id": 681
+                                "blockType": "stringReporter"
                             },
                             "segments": [
                                 {
@@ -117,6 +116,7 @@
                                     "name": "bool"
                                 }
                             ],
+                            "identifier": 532,
                             "comment": null
                         }
                     ]
@@ -131,7 +131,7 @@
                             "opcode": "call ...",
                             "inputs": {},
                             "options": {
-                                "blockDef": 681
+                                "blockDef": 532
                             },
                             "comment": null
                         }
@@ -147,7 +147,7 @@
                             "opcode": "call ...",
                             "inputs": {},
                             "options": {
-                                "blockDef": 673
+                                "blockDef": 964
                             },
                             "comment": null
                         }
@@ -163,7 +163,7 @@
                             "opcode": "call ...",
                             "inputs": {},
                             "options": {
-                                "blockDef": 999
+                                "blockDef": 762
                             },
                             "comment": null
                         }
