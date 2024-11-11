@@ -1,4 +1,16 @@
 from pprint import pprint
+import re
+
+def escape_chars(input_string: str, chars_to_escape: list) -> str:
+    # Escape backslashes first by doubling them up
+    escaped_string = re.sub(r'\\', r'\\\\', input_string)
+    
+    # Escape each character in chars_to_escape by adding a backslash before it
+    for char in chars_to_escape:
+        escaped_string = re.sub(re.escape(char), r'\\' + char, escaped_string)
+    
+    return escaped_string
+
 def ikv(data:dict): # Iterate through a dict with i(ndex of the pair), k(ey) and v(alue)
     return zip(
         range(len(data)),
