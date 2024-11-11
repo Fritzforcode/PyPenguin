@@ -66,3 +66,4 @@ maybe validate:
 - block types being in the correct place in script or input
 - custom block ids matching
 - no duplicate custom block input names
+- custom opcodes
