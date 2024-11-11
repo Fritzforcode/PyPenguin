@@ -121,6 +121,13 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                     blockChildrenPs=blockChildrenPs,
                     commentDatas=commentDatas,
                 )
+                for i,inputID,inputData in ikv(inputs):
+                    if "block" in inputData:
+                        if inputData["block"] != None:
+                            if isinstance(inputData["block"], str):
+                                inputs[inputID]["block"] = childrenDatas[inputData["block"]][0]
+                            elif isinstance(inputData["block"], dict):
+                                pass
             else:
                 inputs = blockData["inputs"]
             options = blockData["fields"]
