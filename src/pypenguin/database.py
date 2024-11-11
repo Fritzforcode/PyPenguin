@@ -157,6 +157,6 @@ opcodeDatabase = {
         "category": "My Blocks",
         "newOpcode": "call ...",
         "inputTypes": {},
-        "optionTypes": {"blockDef": "customBlockId"},
+        "optionTypes": {"customOpcode": "opcode"},
     },
 }

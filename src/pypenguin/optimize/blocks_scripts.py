@@ -125,7 +125,6 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                 inputs = blockData["inputs"]
             options = blockData["fields"]
             if blockData["opcode"] in ["procedures_prototype", "procedures_call"]:
-                pp(blockData)
                 mutation = blockData["mutation"]
         else:
             inputs = translateInputs(

@@ -1,6 +1,6 @@
-from helper_functions import ikv
-from validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema, segmentsSchema, opcodeDatabase, allowedOpcodes
-from validate.comments import validateComment 
+from pypenguin.helper_functions import ikv
+from pypenguin.validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema, opcodeDatabase, allowedOpcodes
+from pypenguin.validate.comments import validateComment 
 
 
 def validateBlock(path, data, context):
@@ -11,17 +11,6 @@ def validateBlock(path, data, context):
     
     opcode = data["opcode"]
     opcodeData = list(opcodeDatabase.values())[allowedOpcodes.index(opcode)]
-
-    if "segments" in data:
-        validateSchema(path+["segments"], data=data["segments"], schema=segmentsSchema)
-        for i, segment in enumerate(data["segments"]):
-            match segment["type"]:
-                case "label":
-                    if "text" not in segment:
-                        raise formatError(path+["segments"]+[i], "Must have the 'text' attribute in this case.")
-                case "textInput"|"booleanInput":
-                    if "name" not in segment:
-                        raise formatError(path+["segments"]+[i], "Must have the 'name' attribute in this case.")
     
     validateInputs(
         path=path+["inputs"], 
@@ -54,9 +43,10 @@ def validateScript(path, data, context):
 
 def validateInputs(path, data, opcode, opcodeData, context):
     allowedInputIDs = list(opcodeData["inputTypes"].keys()) # List of inputs which are defined for the specific opcode
-    for i, inputID, inputValue in ikv(data):
-        if inputID not in allowedInputIDs:
-            raise formatError(path, f"Input '{inputID}' is not defined for a block with opcode '{opcode}'.")
+    if opcode != "call ...": # Inputs in the call block type are custom
+        for i, inputID, inputValue in ikv(data):
+            if inputID not in allowedInputIDs:
+                raise formatError(path, f"Input '{inputID}' is not defined for a block with opcode '{opcode}'.")
     # Check input formats
     for inputID in allowedInputIDs:
         if opcodeData["inputTypes"][inputID] not in ["boolean", "script"]:

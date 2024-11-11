@@ -186,34 +186,20 @@ blockSchema = {
     "inputs": {
       "type": "object",
       "patternProperties": {
-        "^[a-zA-Z0-9_]+$": { "type": "object" }
+        ".+": { "type": "object" }
       },
       "additionalProperties": False
     },
     "options": { 
       "type": "object",
       "patternProperties": {
-        "^[a-zA-Z0-9_]+$": { "any": True }
+        ".+": { "any": True }
       },
       "additionalProperties": False
     },
     "comment": { "type": ["null", "object"] }
   },
   "required": ["opcode", "inputs", "options", "comment"]
-}
-
-segmentsSchema = {
-  "type": "array",
-  "items": {
-    "type": "object",
-    "properties": {
-      "type": { "type": "string", "enum": ["label", "textInput", "booleanInput"] },
-      "text": { "type": "string", "minLength": 1 },
-      "name": { "type": "string", "minLength": 1 }
-    },
-    "required": ["type"]
-  },
-  "minItems": 1,
 }
 
 commentSchema = {
