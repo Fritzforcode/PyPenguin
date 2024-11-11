@@ -1,6 +1,6 @@
 import json
 
-from pypenguin.helper_functions import ikv, WhatIsGoingOnError, pp, customHash
+from pypenguin.helper_functions import ikv, WhatIsGoingOnError, pp, customHash, escape_chars, generateCustomOpcode
 
 from pypenguin.optimize.comments import translateComment
 
@@ -31,7 +31,10 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas):
     for i,inputID,inputData in ikv(data):   
         if len(inputData) == 2:
             if   isinstance(inputData[1], str): # e.g. "CONDITION": [2, "b"]
-                inputType = opcodeDatabase[opcode]["inputTypes"][inputID]
+                if opcode == "procedures_call":
+                    inputType = "boolean"
+                else:
+                    inputType = opcodeDatabase[opcode]["inputTypes"][inputID]
                 mode = "block-only" if inputType=="boolean" else ("script" if inputType=="script" else None)
                 pointer = inputData[1]
                 text = None
@@ -122,6 +125,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                 inputs = blockData["inputs"]
             options = blockData["fields"]
             if blockData["opcode"] in ["procedures_prototype", "procedures_call"]:
+                pp(blockData)
                 mutation = blockData["mutation"]
         else:
             inputs = translateInputs(
@@ -168,38 +172,11 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
         mutationData = newData["mutation"]
         proccode = mutationData["proccode"]
         argumentNames = json.loads(mutationData["argumentnames"])
-        segments = []
-        segmentText = ""
-        i = 0
-        j = 0
-        while i in range(len(proccode)):
-            char  = proccode[i]
-            char2 = proccode[i + 1] if i + 1 in range(len(proccode)) else None
-            char3 = proccode[i + 2] if i + 2 in range(len(proccode)) else None
-            if char==" " and char2=="%" and (char3=="s" or char3=="b"): # if the next chars are either ' %s' or ' %b'
-                if segmentText != "":
-                    segments.append({
-                        "type": "label", 
-                        "text": segmentText
-                    })
-                    segmentText = ""
-                segments.append({
-                    "type": "textInput" if char3=="s" else "booleanInput", 
-                    "name": argumentNames[j]
-                })
-                i += 2
-                j += 1
-            else:
-                segmentText += char
-            i += 1
-        if segmentText != "":
-            segments.append({
-                "type": "label", 
-                "text": segmentText
-            })
+        customOpcode = generateCustomOpcode(proccode=proccode, argumentNames=argumentNames)
+
         match json.loads(mutationData["optype"]):
-            #case "statement": blockType = "instruction"
             case None       : blockType = "instruction"
+            case "statement": blockType = "instruction"
             case "end"      : blockType = "lastInstruction"
             case "string"   : blockType = "stringReporter"
             case "number"   : blockType = "numberReporter"
@@ -209,25 +186,33 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
             "opcode": "define ...",
             "inputs": {},
             "options": {
+                "customOpcode"   : customOpcode,
                 "noScreenRefresh": json.loads(mutationData["warp"]),
                 "blockType"      : blockType,
-                "id"             : customHash(mutationData["proccode"])
             },
-            "segments"  : segments,
             "comment"   : newData["comment"],
         }
     elif newData["opcode"] == "procedures_call":
-        mutationData = newData["mutation"]
-        print("call")
-        print(mutation["proccode"])
+        proccode = newData["mutation"]["proccode"]
+        mutationData = mutationDatas[proccode] # Get the full mutation data
+        argumentNames = json.loads(mutationData["argumentnames"])
+        argumentIDs = json.loads(mutationData["argumentids"])
+        customOpcode = generateCustomOpcode(proccode=proccode, argumentNames=argumentNames)
+
+        inputDatas = {}
+        for i, inputID, inputData in ikv(newData["inputs"]):
+            newInputID = argumentNames[argumentIDs.index(inputID)]
+            inputDatas[newInputID] = inputData
         newData = {
             "opcode" : "call ...",
-            "inputs" : newData["inputs"],
-            "options": {"blockDef": customHash(mutationData["proccode"])},
+            "inputs" : inputDatas,
+            "options": {
+                "customOpcode": customOpcode,
+            },
             "comment": newData["comment"]
         }
 
-        pp(newData)        
+        #pp(newData)        
     newDatas = [newData] if newDatas == None else newDatas
     if isinstance(blockData, dict):
         if blockData["next"] != None: #if the block does have a neighbour

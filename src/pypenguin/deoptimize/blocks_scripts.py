@@ -286,7 +286,7 @@ def finishBlocks(data, spriteName, tokens):
         if blockData["opcode"] == "procedures_call":
             customBlockId = blockData["fields"]["blockDef"]
             proccode = customBlockInfo[spriteName][customBlockId]
-            mutationData = mutationDatas[proccode]
+            mutationData = mutationDatas[proccode].copy()
             del mutationData["argumentnames"]
             del mutationData["argumentdefaults"]
             blockData["mutation"] = mutationDatas[proccode]

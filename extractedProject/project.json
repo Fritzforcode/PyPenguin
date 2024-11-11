@@ -35,7 +35,7 @@
                             "opcode": "define ...",
                             "inputs": {},
                             "options": {
-                                "customOpcode": "inst (MESSAGE) <ADDRESSANT>",
+                                "customOpcode": "pre: (s\\(tr:) mid <bool:> end:",
                                 "noScreenRefresh": false,
                                 "blockType": "instruction"
                             },
@@ -45,101 +45,25 @@
                 },
                 {
                     "position": [
-                        5,
-                        -96
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define ...",
-                            "inputs": {},
-                            "options": {
-                                "customOpcode": "end (MESSAGE) <ADDRESSANT>",
-                                "noScreenRefresh": false,
-                                "blockType": "lastInstruction"
-                            },
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        38,
-                        217
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define ...",
-                            "inputs": {},
-                            "options": {
-                                "customOpcode": "call (MESSAGE) <ADDRESSANT>",
-                                "noScreenRefresh": false,
-                                "blockType": "stringReporter"
-                            },
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        446,
-                        -93
+                        252,
+                        298
                     ],
                     "blocks": [
                         {
                             "opcode": "call ...",
                             "inputs": {
-                                "3/)yG5,1i)U*tFxqs7u5": {
+                                "s(tr:": {
                                     "mode": "block-and-text",
-                                    "block": null,
+                                    "block": "f",
                                     "text": ""
+                                },
+                                "bool:": {
+                                    "mode": "block-only",
+                                    "block": "g"
                                 }
                             },
                             "options": {
-                                "blockDef": 72
-                            },
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        427,
-                        110
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "call ...",
-                            "inputs": {
-                                "y5.iyFDUSD8?T;@sT/mZ": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": ""
-                                }
-                            },
-                            "options": {
-                                "blockDef": 959
-                            },
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        368,
-                        17
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "call ...",
-                            "inputs": {
-                                "DwA-4KLnMLUi^9P1=c]S": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": ""
-                                }
-                            },
-                            "options": {
-                                "blockDef": 542
+                                "customOpcode": "pre: (s\\(tr:) mid <bool:> end:"
                             },
                             "comment": null
                         }

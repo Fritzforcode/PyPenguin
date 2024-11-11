@@ -34,6 +34,30 @@ def parseCustomOpcode(customOpcode: str):
 
     return result
 
+def generateCustomOpcode(proccode: str, argumentNames: list[str]):
+    customOpcode = ""
+    i = 0
+    j = 0
+    chars_to_escape = ["(", ")", "<", ">"]
+    while i in range(len(proccode)):
+        char  = proccode[i]
+        char2 = proccode[i + 1] if i + 1 in range(len(proccode)) else None
+        char3 = proccode[i + 2] if i + 2 in range(len(proccode)) else None
+        if   char==" " and char2=="%" and char3=="s": # if the next chars are ' %s '
+            argumentName = escape_chars(argumentNames[j], chars_to_escape)
+            customOpcode += " (" + argumentName + ")"
+            j += 1
+            i += 2
+        elif char==" " and char2=="%" and char3=="b": # if the next chars are ' %b '
+            argumentName = escape_chars(argumentNames[j], chars_to_escape)
+            customOpcode += " <" + argumentName + ">"
+            j += 1
+            i += 2
+        else:
+            customOpcode += escape_chars(char, chars_to_escape)
+        i += 1
+    return customOpcode.removesuffix(" ")
+
 def ikv(data:dict): # Iterate through a dict with i(ndex of the pair), k(ey) and v(alue)
     return zip(
         range(len(data)),

@@ -1,3 +1,3 @@
 from .json_files import readJSONFile, writeJSONFile
 from .token_literals import generateRandomToken, generateSelector
-from .other import pp, ikv, flipKeysAndValues, removeStringDuplicates, customHash, escape_chars, parseCustomOpcode, WhatIsGoingOnError
+from .other import pp, ikv, flipKeysAndValues, removeStringDuplicates, customHash, escape_chars, parseCustomOpcode, generateCustomOpcode, WhatIsGoingOnError

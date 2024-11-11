@@ -150,7 +150,7 @@ opcodeDatabase = {
         "category": "My Blocks",
         "newOpcode": "define ...",
         "inputTypes": {},
-        "optionTypes": {"noScreenRefresh": "boolean", "blockType": "blockType", "id": "integer"}
+        "optionTypes": {"noScreenRefresh": "boolean", "blockType": "blockType", "customOpcode": "opcode"}
     },
     "procedures_call": {
         "type": "dynamic",
