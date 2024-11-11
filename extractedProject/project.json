@@ -54,12 +54,22 @@
                             "inputs": {
                                 "s(tr:": {
                                     "mode": "block-and-text",
-                                    "block": "f",
+                                    "block": {
+                                        "opcode": "true",
+                                        "inputs": {},
+                                        "options": {},
+                                        "comment": null
+                                    },
                                     "text": ""
                                 },
                                 "bool:": {
                                     "mode": "block-only",
-                                    "block": "g"
+                                    "block": {
+                                        "opcode": "true",
+                                        "inputs": {},
+                                        "options": {},
+                                        "comment": null
+                                    }
                                 }
                             },
                             "options": {

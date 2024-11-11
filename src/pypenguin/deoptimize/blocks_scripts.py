@@ -104,6 +104,7 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
         for i,blockID,blockData in ikv(data):
             opcodeData = opcodeDatabase[blockData["opcode"]]
             newInputDatas = {}
+            print("-", blockData["opcode"])
             for j,inputID,inputData in ikv(blockData["inputs"]):
                 if isinstance(inputData, dict):
                     match opcodeData["inputTypes"][inputID]:

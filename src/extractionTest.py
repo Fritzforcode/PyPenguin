@@ -7,7 +7,7 @@ optimizedData = extractAndOptimizeProject(
     writeDebugFiles=True,
 )
 
-#validateProject(projectData=optimizedData)
+validateProject(projectData=optimizedData)
 
 #deoptimizeAndCompressProject(
 #    projectFilePath="export.pmp",

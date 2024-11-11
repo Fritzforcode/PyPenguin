@@ -1,9 +1,11 @@
-from helper_functions import ikv, WhatIsGoingOnError, generateRandomToken, readJSONFile, removeStringDuplicates
+from helper_functions import ikv, WhatIsGoingOnError, generateRandomToken, readJSONFile, removeStringDuplicates, pp
 
 from database import opcodeDatabase
 
 
 def findBlockBroadcastMessages(data):
+    print("fbbm")
+    pp(data)
     for i,opcode,opcodeData in ikv(opcodeDatabase):
         if opcodeData["newOpcode"] == data["opcode"]:
             break
@@ -11,10 +13,11 @@ def findBlockBroadcastMessages(data):
     
     broadcastMessages = []
     for i,inputID,inputData in  ikv(data["inputs"]):
-        if opcodeData["inputTypes"][inputID] == "broadcast":
-            if inputData["text"] not in broadcastMessages:
-                broadcastMessages.append(inputData["text"])
-        
+        if opcode != "procedures_call":
+            if opcodeData["inputTypes"][inputID] == "broadcast":
+                if inputData["text"] not in broadcastMessages:
+                    broadcastMessages.append(inputData["text"])
+            
         if "block" in inputData:
             if inputData["block"] != None:
                 broadcastMessages += findBlockBroadcastMessages(data=inputData["block"])
