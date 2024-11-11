@@ -35,24 +35,10 @@
                             "opcode": "define ...",
                             "inputs": {},
                             "options": {
+                                "customOpcode": "inst (MESSAGE) <ADDRESSANT>",
                                 "noScreenRefresh": false,
-                                "blockType": "instruction",
-                                "id": 864
+                                "blockType": "instruction"
                             },
-                            "segments": [
-                                {
-                                    "type": "label",
-                                    "text": "inst"
-                                },
-                                {
-                                    "type": "textInput",
-                                    "name": "num"
-                                },
-                                {
-                                    "type": "booleanInput",
-                                    "name": "bool"
-                                }
-                            ],
                             "comment": null
                         }
                     ]
@@ -67,24 +53,10 @@
                             "opcode": "define ...",
                             "inputs": {},
                             "options": {
+                                "customOpcode": "end (MESSAGE) <ADDRESSANT>",
                                 "noScreenRefresh": false,
-                                "blockType": "lastInstruction",
-                                "id": 716
+                                "blockType": "lastInstruction"
                             },
-                            "segments": [
-                                {
-                                    "type": "label",
-                                    "text": "end"
-                                },
-                                {
-                                    "type": "textInput",
-                                    "name": "num"
-                                },
-                                {
-                                    "type": "booleanInput",
-                                    "name": "bool"
-                                }
-                            ],
                             "comment": null
                         }
                     ]
@@ -99,24 +71,10 @@
                             "opcode": "define ...",
                             "inputs": {},
                             "options": {
+                                "customOpcode": "call (MESSAGE) <ADDRESSANT>",
                                 "noScreenRefresh": false,
-                                "blockType": "stringReporter",
-                                "id": 341
+                                "blockType": "stringReporter"
                             },
-                            "segments": [
-                                {
-                                    "type": "label",
-                                    "text": "call"
-                                },
-                                {
-                                    "type": "textInput",
-                                    "name": "num"
-                                },
-                                {
-                                    "type": "booleanInput",
-                                    "name": "bool"
-                                }
-                            ],
                             "comment": null
                         }
                     ]
@@ -137,7 +95,7 @@
                                 }
                             },
                             "options": {
-                                "blockDef": 341
+                                "blockDef": 72
                             },
                             "comment": null
                         }
@@ -159,7 +117,7 @@
                                 }
                             },
                             "options": {
-                                "blockDef": 716
+                                "blockDef": 959
                             },
                             "comment": null
                         }
@@ -181,7 +139,7 @@
                                 }
                             },
                             "options": {
-                                "blockDef": 864
+                                "blockDef": 542
                             },
                             "comment": null
                         }
