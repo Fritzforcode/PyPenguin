@@ -10,54 +10,12 @@ projectData = {
                 {
                     "position": [0,0],
                     "blocks": [{
-                        "opcode": "define ...",
+                        "opcode": "value of text argument (VALUE)",
                         "inputs": {},
-                        "options": {"noScreenRefresh": False, "blockType": "instruction"},
-                        "segments": [{"type": "label", "text": "wasd"}, {"type": "textInput", "name": "nnm"}],
-                        "comment": None
-                    }, {
-                        "opcode": "set [VARIABLE] to (VALUE)",
-                        "inputs": {"VALUE": {"mode":"block-and-text", "block": None, "text": "123"}},
-                        "options": {"VARIABLE": "var"},
-                        "comment": None
-                    }]},
-                {
-                    "position": [100,0],
-                    "blocks": [{
-                        "opcode": "define ...",
-                        "inputs": {},
-                        "options": {"noScreenRefresh": False, "blockType": "lastInstruction"},
-                        "segments": [{"type": "label", "text": "wasd"}, {"type": "textInput", "name": "nnm"}],
-                        "comment": None
-                    }]},
-                {
-                    "position": [200,0],
-                    "blocks": [{
-                        "opcode": "define ...",
-                        "inputs": {},
-                        "options": {"noScreenRefresh": False, "blockType": "stringReporter"},
-                        "segments": [{"type": "label", "text": "wasd"}, {"type": "textInput", "name": "nnm"}],
-                        "comment": None
-                    }]},
-                {
-                    "position": [300,0],
-                    "blocks": [{
-                        "opcode": "define ...",
-                        "inputs": {},
-                        "options": {"noScreenRefresh": False, "blockType": "numberReporter"},
-                        "segments": [{"type": "label", "text": "wasd"}, {"type": "textInput", "name": "nnm"}],
-                        "comment": None
-                    }]},
-                {
-                    "position": [400,0],
-                    "blocks": [{
-                        "opcode": "define ...",
-                        "inputs": {},
-                        "options": {"noScreenRefresh": False, "blockType": "booleanReporter"},
-                        "segments": [{"type": "label", "text": "wasd"}, {"type": "textInput", "name": "nnm"}],
-                        "comment": None
-                    }]},
-                
+                        "options": {"VALUE": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."},
+                        "comment": None,
+                    }],
+                }
             ],
             "comments": [],
             "currentCostume": 0,
@@ -75,6 +33,12 @@ projectData = {
     "globalVariables": [
         {
             "name": "var",
+            "currentValue": 33,
+            "monitor": None,
+            "isCloudVariable": False,
+        },
+        {
+            "name": "var2",
             "currentValue": 33,
             "monitor": None,
             "isCloudVariable": False,
@@ -102,13 +66,14 @@ projectData = {
 validateProject(projectData=projectData)
 
 writeJSONFile(
-    filePath="../project/project.json",
+    filePath="project/project.json",
     data=projectData
 )
 
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory="../project",
-    projectFilePath="../export.pmp",
-    temporaryDirectory="../temporary"
+    optimizedProjectDirectory="project",
+    projectFilePath="export.pmp",
+    temporaryDirectory="temporary",
+    writeDebugFiles=True,
 )
 

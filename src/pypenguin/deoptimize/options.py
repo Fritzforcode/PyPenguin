@@ -34,7 +34,7 @@ def translateOptions(optionDatas, opcode, spriteName, tokens):
                 nameKey = None
             token = tokens[nameKey][optionData]
             newOptionData = [optionData, token, magicString]
-        elif mode == "key":
+        elif mode == "key" or mode == "string":
             newOptionData = [optionData, generateRandomToken()]
         elif mode in ["boolean", "blockType", "opcode", "customBlockId"]:
             newOptionData = optionData

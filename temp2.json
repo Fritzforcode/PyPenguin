@@ -27,6 +27,22 @@
             "scripts": [
                 {
                     "position": [
+                        418,
+                        171
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "value of text argument (VALUE)",
+                            "inputs": {},
+                            "options": {
+                                "VALUE": "number or text"
+                            },
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
                         44,
                         44
                     ],
@@ -35,45 +51,9 @@
                             "opcode": "define ...",
                             "inputs": {},
                             "options": {
-                                "customOpcode": "pre: (s\\(tr:) mid <bool:> end:",
+                                "customOpcode": "block name (number or text)",
                                 "noScreenRefresh": false,
                                 "blockType": "instruction"
-                            },
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        252,
-                        298
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "call ...",
-                            "inputs": {
-                                "s(tr:": {
-                                    "mode": "block-and-text",
-                                    "block": {
-                                        "opcode": "true",
-                                        "inputs": {},
-                                        "options": {},
-                                        "comment": null
-                                    },
-                                    "text": ""
-                                },
-                                "bool:": {
-                                    "mode": "block-only",
-                                    "block": {
-                                        "opcode": "true",
-                                        "inputs": {},
-                                        "options": {},
-                                        "comment": null
-                                    }
-                                }
-                            },
-                            "options": {
-                                "customOpcode": "pre: (s\\(tr:) mid <bool:> end:"
                             },
                             "comment": null
                         }
@@ -132,7 +112,9 @@
     "videoState": "on",
     "textToSpeechLanguage": null,
     "extensionData": {},
-    "extensions": [],
+    "extensions": [
+        "jgJSON"
+    ],
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",

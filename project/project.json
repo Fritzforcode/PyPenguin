@@ -11,144 +11,11 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "define ...",
+                            "opcode": "value of text argument (VALUE)",
                             "inputs": {},
                             "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "instruction"
+                                "VALUE": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
                             },
-                            "segments": [
-                                {
-                                    "type": "label",
-                                    "text": "wasd"
-                                },
-                                {
-                                    "type": "textInput",
-                                    "name": "nnm"
-                                }
-                            ],
-                            "comment": null
-                        },
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "123"
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "var"
-                            },
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        100,
-                        0
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define ...",
-                            "inputs": {},
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "lastInstruction"
-                            },
-                            "segments": [
-                                {
-                                    "type": "label",
-                                    "text": "wasd"
-                                },
-                                {
-                                    "type": "textInput",
-                                    "name": "nnm"
-                                }
-                            ],
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        200,
-                        0
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define ...",
-                            "inputs": {},
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "stringReporter"
-                            },
-                            "segments": [
-                                {
-                                    "type": "label",
-                                    "text": "wasd"
-                                },
-                                {
-                                    "type": "textInput",
-                                    "name": "nnm"
-                                }
-                            ],
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        300,
-                        0
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define ...",
-                            "inputs": {},
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "numberReporter"
-                            },
-                            "segments": [
-                                {
-                                    "type": "label",
-                                    "text": "wasd"
-                                },
-                                {
-                                    "type": "textInput",
-                                    "name": "nnm"
-                                }
-                            ],
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        400,
-                        0
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define ...",
-                            "inputs": {},
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "booleanReporter"
-                            },
-                            "segments": [
-                                {
-                                    "type": "label",
-                                    "text": "wasd"
-                                },
-                                {
-                                    "type": "textInput",
-                                    "name": "nnm"
-                                }
-                            ],
                             "comment": null
                         }
                     ]
@@ -175,6 +42,12 @@
     "globalVariables": [
         {
             "name": "var",
+            "currentValue": 33,
+            "monitor": null,
+            "isCloudVariable": false
+        },
+        {
+            "name": "var2",
             "currentValue": 33,
             "monitor": null,
             "isCloudVariable": false

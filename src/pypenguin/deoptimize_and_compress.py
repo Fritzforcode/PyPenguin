@@ -23,7 +23,7 @@ def deoptimizeAndCompressProject(
         writeJSONFile("temp3.json", data=deoptimizedData)
     # Make sure the temporary directory exists
     os.makedirs(temporaryDirectory, exist_ok=True)
-
+    
     # Write the deoptimized project.json
     writeJSONFile(
         filePath=os.path.join(temporaryDirectory, "project.json"),

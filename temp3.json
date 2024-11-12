@@ -5,358 +5,33 @@
             "name": "Stage",
             "variables": {
                 "X#fH=/ZM.T|B;rKrmG[s": [
-                    "my variable",
-                    0
+                    "var",
+                    33
+                ],
+                "NmjQ-_mT(OA^.)?Hh^bl": [
+                    "var2",
+                    33
                 ]
             },
             "lists": {},
             "broadcasts": {},
             "customVars": [],
-            "blocks": {},
-            "comments": {},
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "backdrop1",
-                    "bitmapResolution": 1,
-                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
-                    "dataFormat": "svg",
-                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
-                    "rotationCenterX": 240,
-                    "rotationCenterY": 180
-                }
-            ],
-            "sounds": [],
-            "id": "NmjQ-_mT(OA^.)?Hh^bl",
-            "volume": 100,
-            "layerOrder": 0,
-            "tempo": 60,
-            "videoTransparency": 50,
-            "videoState": "on",
-            "textToSpeechLanguage": null
-        },
-        {
-            "isStage": false,
-            "name": "Sprite1",
-            "variables": {},
-            "lists": {},
-            "broadcasts": {},
-            "customVars": [],
             "blocks": {
                 ":": {
-                    "opcode": "procedures_definition",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "custom_block": [
-                            1,
-                            "::a"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 44,
-                    "y": 44
-                },
-                "::a": {
-                    "opcode": "procedures_prototype",
-                    "next": null,
-                    "parent": ":",
-                    "inputs": {
-                        "Za:QFPiy`CEs]*lkO=/n": [
-                            1,
-                            "::b"
-                        ],
-                        "M^Lp^Q]A^}K)lXO{ELxy": [
-                            1,
-                            "::c"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "proccode": "inst %s %b",
-                        "argumentids": "[\"Za:QFPiy`CEs]*lkO=/n\", \"M^Lp^Q]A^}K)lXO{ELxy\"]",
-                        "warp": "false",
-                        "returns": "false",
-                        "edited": "true",
-                        "optype": "\"statement\"",
-                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
-                    }
-                },
-                "::b": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "::a",
-                    "inputs": {},
-                    "fields": {
-                        "VALUE": [
-                            "num",
-                            "xeH-ilqtek]Y@J?EB}#|"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
-                    }
-                },
-                "::c": {
-                    "opcode": "argument_reporter_boolean",
-                    "next": null,
-                    "parent": "::a",
-                    "inputs": {},
-                    "fields": {
-                        "VALUE": [
-                            "bool",
-                            "J*:TkPo/}QyFcIoCVvQ%"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
-                    }
-                },
-                "a:": {
-                    "opcode": "procedures_definition",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "custom_block": [
-                            1,
-                            "a::a"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 5,
-                    "y": -96
-                },
-                "a::a": {
-                    "opcode": "procedures_prototype",
-                    "next": null,
-                    "parent": "a:",
-                    "inputs": {
-                        "hmsCf{[jdpy{pYlVoecy": [
-                            1,
-                            "a::b"
-                        ],
-                        "xp.Ahc]%mHiCjMS(xh;,": [
-                            1,
-                            "a::c"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "proccode": "end %s %b",
-                        "argumentids": "[\"hmsCf{[jdpy{pYlVoecy\", \"xp.Ahc]%mHiCjMS(xh;,\"]",
-                        "warp": "false",
-                        "returns": "null",
-                        "edited": "true",
-                        "optype": "\"end\"",
-                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
-                    }
-                },
-                "a::b": {
-                    "opcode": "argument_reporter_string_number",
-                    "next": null,
-                    "parent": "a::a",
-                    "inputs": {},
-                    "fields": {
-                        "VALUE": [
-                            "num",
-                            "fmYzHT-`vAhuuR@Gp)wb"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
-                    }
-                },
-                "a::c": {
-                    "opcode": "argument_reporter_boolean",
-                    "next": null,
-                    "parent": "a::a",
-                    "inputs": {},
-                    "fields": {
-                        "VALUE": [
-                            "bool",
-                            "-!`=NTXGt_b+kQf]JrE."
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
-                    }
-                },
-                "b:": {
-                    "opcode": "procedures_definition_return",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "custom_block": [
-                            1,
-                            "b::a"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 38,
-                    "y": 217
-                },
-                "b::a": {
-                    "opcode": "procedures_prototype",
-                    "next": null,
-                    "parent": "b:",
-                    "inputs": {
-                        "TKT}qNX#kayQuEC*W`#e": [
-                            1,
-                            "b::b"
-                        ],
-                        "Z`#fv*iHu*@/_ae:PN,g": [
-                            1,
-                            "b::c"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "proccode": "call %s %b",
-                        "argumentids": "[\"TKT}qNX#kayQuEC*W`#e\", \"Z`#fv*iHu*@/_ae:PN,g\"]",
-                        "warp": "false",
-                        "returns": "true",
-                        "edited": "true",
-                        "optype": "\"string\"",
-                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
-                    }
-                },
-                "b::b": {
-                    "opcode": "argument_reporter_string_number",
-                    "next": null,
-                    "parent": "b::a",
-                    "inputs": {},
-                    "fields": {
-                        "VALUE": [
-                            "num",
-                            "#y^kqbZ#OaBba@mypzMJ"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
-                    }
-                },
-                "b::c": {
-                    "opcode": "argument_reporter_boolean",
-                    "next": null,
-                    "parent": "b::a",
-                    "inputs": {},
-                    "fields": {
-                        "VALUE": [
-                            "bool",
-                            "xm-YkcJ*oGr?SotJcffA"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
-                    }
-                },
-                "c:": {
-                    "opcode": "procedures_call",
-                    "next": null,
                     "parent": null,
                     "inputs": {},
-                    "fields": {},
+                    "fields": {
+                        "VALUE": [
+                            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+                            "Za:QFPiy`CEs]*lkO=/n"
+                        ]
+                    },
                     "shadow": false,
                     "topLevel": true,
-                    "x": 446,
-                    "y": -93,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "proccode": "call %s %b",
-                        "argumentids": "[\"TKT}qNX#kayQuEC*W`#e\", \"Z`#fv*iHu*@/_ae:PN,g\"]",
-                        "warp": "false",
-                        "returns": "true",
-                        "edited": "true",
-                        "optype": "\"string\"",
-                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
-                    }
-                },
-                "d:": {
-                    "opcode": "procedures_call",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 427,
-                    "y": 110,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "proccode": "end %s %b",
-                        "argumentids": "[\"hmsCf{[jdpy{pYlVoecy\", \"xp.Ahc]%mHiCjMS(xh;,\"]",
-                        "warp": "false",
-                        "returns": "null",
-                        "edited": "true",
-                        "optype": "\"end\"",
-                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
-                    }
-                },
-                "e:": {
-                    "opcode": "procedures_call",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 368,
-                    "y": 17,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "proccode": "inst %s %b",
-                        "argumentids": "[\"Za:QFPiy`CEs]*lkO=/n\", \"M^Lp^Q]A^}K)lXO{ELxy\"]",
-                        "warp": "false",
-                        "returns": "false",
-                        "edited": "true",
-                        "optype": "\"statement\"",
-                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
-                    }
+                    "x": 0,
+                    "y": 0
                 }
             },
             "comments": {},
@@ -364,39 +39,29 @@
             "costumes": [
                 {
                     "name": "costume1",
-                    "bitmapResolution": 1,
-                    "assetId": "c434b674f2da18ba13cdfe51dbc05ecc",
-                    "dataFormat": "svg",
-                    "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
-                    "rotationCenterX": 26,
-                    "rotationCenterY": 46
+                    "bitmapResolution": 2,
+                    "assetId": "b86efb7f23387300cf9037a61f328ab9",
+                    "dataFormat": "png",
+                    "md5ext": "b86efb7f23387300cf9037a61f328ab9.png",
+                    "rotationCenterX": 158,
+                    "rotationCenterY": 146
                 }
             ],
-            "sounds": [
-                {
-                    "name": "Squawk",
-                    "assetId": "e140d7ff07de8fa35c3d1595bba835ac",
-                    "dataFormat": "wav",
-                    "rate": 48000,
-                    "sampleCount": 17867,
-                    "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
-                }
-            ],
-            "id": "H_OU`f:+(V[wAW}LbrtI",
+            "sounds": [],
+            "id": "M^Lp^Q]A^}K)lXO{ELxy",
             "volume": 100,
-            "visible": true,
-            "x": 0,
-            "y": 0,
-            "size": 100,
-            "direction": 90,
-            "draggable": false,
-            "rotationStyle": "all around",
-            "layerOrder": 1
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 0,
+            "videoState": "off",
+            "textToSpeechLanguage": null
         }
     ],
     "monitors": [],
     "extensionData": {},
-    "extensions": [],
+    "extensions": [
+        "jgJSON"
+    ],
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",

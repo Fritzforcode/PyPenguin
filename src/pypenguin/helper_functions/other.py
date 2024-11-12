@@ -19,8 +19,8 @@ def parseCustomOpcode(customOpcode: str):
     part = ""
     mode = None
     arguments = {}
-    lastChar = None
     isEscaped = False
+    proccode = ""
     for i, char in enumerate(customOpcode):
         if char == "\\":
             if isEscaped:
@@ -32,13 +32,8 @@ def parseCustomOpcode(customOpcode: str):
                 part += char
             else:
                 mode = str
-                part = ""
-        elif char == ")":
-            if isEscaped:
-                part += char
-            else:
-                if mode != str: raise Exception()
-                arguments[part] = str
+                proccode += part
+                proccode += "%s"
                 part = ""
         elif char == "<":
             if isEscaped:
@@ -46,6 +41,15 @@ def parseCustomOpcode(customOpcode: str):
                 part += char
             else:
                 mode = bool
+                proccode += part
+                proccode += "%b"
+                part = ""
+        elif char == ")":
+            if isEscaped:
+                part += char
+            else:
+                if mode != str: raise Exception()
+                arguments[part] = str
                 part = ""
         elif char == ">":
             if isEscaped:
@@ -57,7 +61,8 @@ def parseCustomOpcode(customOpcode: str):
         else:
             isEscaped = False
             part += char
-    return arguments
+    proccode += part
+    return proccode, arguments
 
 def generateCustomOpcode(proccode: str, argumentNames: list[str]):
     customOpcode = ""
@@ -82,9 +87,6 @@ def generateCustomOpcode(proccode: str, argumentNames: list[str]):
             customOpcode += escape_chars(char, chars_to_escape)
         i += 1
     return customOpcode.removesuffix(" ")
-
-print(generateCustomOpcode("moin< (", []))
-print()
 
 def ikv(data:dict): # Iterate through a dict with i(ndex of the pair), k(ey) and v(alue)
     return zip(

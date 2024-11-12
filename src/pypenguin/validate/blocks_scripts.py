@@ -1,6 +1,6 @@
-from pypenguin.helper_functions import ikv
+from pypenguin.helper_functions import ikv, parseCustomOpcode
 from pypenguin.validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema, opcodeDatabase, allowedOpcodes
-from pypenguin.validate.comments import validateComment 
+from pypenguin.validate.comments import validateComment
 
 
 def validateBlock(path, data, context):
@@ -12,19 +12,20 @@ def validateBlock(path, data, context):
     opcode = data["opcode"]
     opcodeData = list(opcodeDatabase.values())[allowedOpcodes.index(opcode)]
     
-    validateInputs(
-        path=path+["inputs"], 
-        data=data["inputs"],
-        opcode=opcode, 
-        opcodeData=opcodeData,
-        context=context, 
-    )
     validateOptions(
         path=path+["options"], 
         data=data["options"], 
         opcode=opcode, 
         opcodeData=opcodeData, 
         context=context,
+    )
+    validateInputs(
+        path=path+["inputs"], 
+        data=data["inputs"],
+        opcode=opcode, 
+        opcodeData=opcodeData,
+        context=context, 
+        optionDatas=data["options"],
     )
 
 def validateScript(path, data, context):
@@ -41,17 +42,29 @@ def validateScript(path, data, context):
         if (opcodeData["type"] in ["stringReporter", "numberReporter", "booleanReporter"]) and (len(data["blocks"]) > 1):
             raise formatError(path, "A script whose first block is a reporter mustn't have more than one block.")
 
-def validateInputs(path, data, opcode, opcodeData, context):
+def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
     allowedInputIDs = list(opcodeData["inputTypes"].keys()) # List of inputs which are defined for the specific opcode
-    if opcode != "call ...": # Inputs in the call block type are custom
+    if opcode == "call ...": # Inputs in the call block type are custom
+        proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"])
+        inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
+        for i, inputID, inputType in ikv(inputTypes):
+            if inputType == "text" and inputID not in data:
+                raise formatError(path, f"A custom block with custom opcode '{optionDatas["customOpcode"]}' must have the input '{inputID}'.")
+    else:
         for i, inputID, inputValue in ikv(data):
             if inputID not in allowedInputIDs:
                 raise formatError(path, f"Input '{inputID}' is not defined for a block with opcode '{opcode}'.")
     # Check input formats
-    for inputID in allowedInputIDs:
-        if opcodeData["inputTypes"][inputID] not in ["boolean", "script"]:
-            if inputID not in data:
-                raise formatError(path, f"A block with opcode '{opcode}' must have the input '{inputID}'.")
+    for inputID in data:
+        if opcode == "call ...":
+            if inputID not in inputTypes:
+                raise formatError(path, f"Input '{inputID}' is not defined for a custom block with custom opcode '{optionDatas["customOpcode"]}'.")
+            inputType = inputTypes[inputID]
+        else:
+            inputType = opcodeData["inputTypes"][inputID]
+            if inputType not in ["boolean", "script"]:
+                if inputID not in data:
+                    raise formatError(path, f"A block with opcode '{opcode}' must have the input '{inputID}'.")
 
         if inputID in data:
             inputValue = data[inputID]
@@ -74,7 +87,7 @@ def validateInputs(path, data, opcode, opcodeData, context):
                 preparedData = {"position": [0,0], "blocks": inputValue["blocks"]}
                 validateScript(path=path+[inputID], data=preparedData, context=context)
             
-            match opcodeData["inputTypes"][inputID]: # type of the input
+            match inputType: # type of the input
                 case "broadcast":
                     if inputValue["mode"] != "block-and-text":
                         raise formatError(path+[inputID]+["mode"], f"Must be 'block-and-text' in this case.")
@@ -122,7 +135,7 @@ def validateOptions(path, data, opcode, opcodeData, context):
                 ]
                 if optionValue not in possibleValues:
                     raise formatError(path+[optionID], f"Must be one of {possibleValues}.")
-            case "broadcast":
+            case "broadcast"|"string":
                 if not isinstance(optionValue, str):
                     raise formatError(path+[optionID], f"Must be a string.")
             case "variable":

@@ -1,6 +1,6 @@
-from .constants import validateSchema, formatError, projectSchema
-from .variables_lists import validateVariable, validateList
-from .sprites import validateSprite
+from pypenguin.validate.constants import validateSchema, formatError, projectSchema
+from pypenguin.validate.variables_lists import validateVariable, validateList
+from pypenguin.validate.sprites import validateSprite
 
 def validateProject(projectData):
     # Check project format

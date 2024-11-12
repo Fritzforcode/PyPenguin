@@ -94,6 +94,8 @@ def translateOptions(data, opcode):
                 newFieldData = fieldData[0]
             case "key":
                 newFieldData = fieldData[0]
+            case "string":
+                newFieldData = fieldData[0]
             case _: raise WhatIsGoingOnError(opcodeData["optionTypes"][fieldID])
         newData[fieldID] = newFieldData
     return newData
@@ -111,7 +113,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
     blockData = data[ancestorP] # Get the block's own data
     mutation = None
     if isinstance(blockData, dict):
-        if blockData["opcode"] in ["procedures_definition", "procedures_definition_return", "procedures_prototype", "argument_reporter_string_number", "argument_reporter_boolean", "procedures_call"]:
+        if blockData["opcode"] in ["procedures_definition", "procedures_definition_return", "procedures_prototype", "procedures_call"]:
             newOpcode = blockData["opcode"]
             if blockData["opcode"] == "procedures_call":
                 inputs = translateInputs(
@@ -217,8 +219,6 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
             },
             "comment": newData["comment"]
         }
-
-        #pp(newData)        
     newDatas = [newData] if newDatas == None else newDatas
     if isinstance(blockData, dict):
         if blockData["next"] != None: #if the block does have a neighbour

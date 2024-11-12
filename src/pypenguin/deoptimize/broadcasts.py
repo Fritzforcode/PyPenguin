@@ -4,8 +4,6 @@ from database import opcodeDatabase
 
 
 def findBlockBroadcastMessages(data):
-    print("fbbm")
-    pp(data)
     for i,opcode,opcodeData in ikv(opcodeDatabase):
         if opcodeData["newOpcode"] == data["opcode"]:
             break

@@ -1,8 +1,8 @@
-def validateSprite(path, data, context):
-    from validate.constants import validateSchema, formatError, stageSchema, spriteSchema
-    from validate.costumes_sounds import validateCostume, validateSound
-    from validate.blocks_scripts import validateScript
+from pypenguin.validate.constants import validateSchema, formatError, stageSchema, spriteSchema
+from pypenguin.validate.costumes_sounds import validateCostume, validateSound
+from pypenguin.validate.blocks_scripts import validateScript
 
+def validateSprite(path, data, context):
     i = path[-1]
     if i == 0: # If it should be the stage
         # Check stage format

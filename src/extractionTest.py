@@ -1,17 +1,18 @@
 from pypenguin import extractAndOptimizeProject, deoptimizeAndCompressProject, validateProject
-from pypenguin.helper_functions import readJSONFile
+from pypenguin.helper_functions import readJSONFile, pp
 optimizedData = extractAndOptimizeProject(
-    projectFilePath="../assets/studies/procedureInputs.pmp",
-    optimizedProjectDirectory="../extractedProject",
-    temporaryDirectory="../temporary",
-    writeDebugFiles=True,
+    projectFilePath           = "assets/studies/procedureArgReporters.pmp",
+    optimizedProjectDirectory = "extractedProject",
+    temporaryDirectory        = "temporary",
+    writeDebugFiles           = True,
 )
+pp(optimizedData)
+#validateProject(projectData=optimizedData)
 
-validateProject(projectData=optimizedData)
 #deoptimizeAndCompressProject(
-#    projectFilePath="export.pmp",
-#    optimizedProjectDirectory="extractedProject",
-#    temporaryDirectory="temporary",
-#    writeDebugFiles=True,
+#    projectFilePath           = "export.pmp",
+#    optimizedProjectDirectory = "extractedProject",
+#    temporaryDirectory        = "temporary",
+#    writeDebugFiles           = True,
 #)
 

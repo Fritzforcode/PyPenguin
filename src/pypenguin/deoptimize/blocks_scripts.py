@@ -1,11 +1,11 @@
 import json
 
-from helper_functions import ikv, pp, WhatIsGoingOnError, generateSelector, generateRandomToken, readJSONFile
+from pypenguin.helper_functions import ikv, pp, WhatIsGoingOnError, generateSelector, generateRandomToken, parseCustomOpcode
 
-from deoptimize.options import translateOptions
-from deoptimize.comments import translateComment
+from pypenguin.deoptimize.options import translateOptions
+from pypenguin.deoptimize.comments import translateComment
 
-from database import opcodeDatabase
+from pypenguin.database import opcodeDatabase
 
 def generateProccodeFromSegments(data):
     proccode = ""
@@ -21,13 +21,13 @@ def generateProccodeFromSegments(data):
 
 def getCustomBlockInfo(data, spriteNames):
     info = {k:{} for k in spriteNames+[None]}
-    for spriteData in data:
-        spriteName = None if spriteData["isStage"] else spriteData["name"]
-        for scriptData in spriteData["scripts"]:
-            firstBlockData = scriptData["blocks"][0]
-            if firstBlockData["opcode"] == "define ...":
-                customBlockId = firstBlockData["options"]["id"]
-                info[spriteName][customBlockId] = generateProccodeFromSegments(firstBlockData["segments"])
+    #for spriteData in data:
+    #    spriteName = None if spriteData["isStage"] else spriteData["name"]
+    #    for scriptData in spriteData["scripts"]:
+    #        firstBlockData = scriptData["blocks"][0]
+    #        if firstBlockData["opcode"] == "define ...":
+    #            customOpcode = firstBlockData["options"]["id"]
+    #            info[spriteName][customOpcode] = generateProccodeFromSegments(firstBlockData["segments"])
     return info
                 
 
@@ -54,8 +54,6 @@ def prepareBlock(data, spriteName, tokens, commentID):
     }
     if data["comment"] != None:
         newBlockData["comment"] = commentID
-    if opcode == "special_define":
-        newBlockData["segments"] = data["segments"]
     return newBlockData
 
 def linkBlocksToScript(data, spriteName, tokens, scriptIDs):
@@ -104,15 +102,23 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
         for i,blockID,blockData in ikv(data):
             opcodeData = opcodeDatabase[blockData["opcode"]]
             newInputDatas = {}
-            print("-", blockData["opcode"])
+            if blockData["opcode"] == "procedures_call":
+                customOpcode        = blockData["fields"]["customOpcode"]
+                proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
             for j,inputID,inputData in ikv(blockData["inputs"]):
                 if isinstance(inputData, dict):
-                    match opcodeData["inputTypes"][inputID]:
-                        case "broadcast"  : magicNumber = 11
-                        case "text"       : magicNumber = 10
-                        case "number"     : magicNumber =  4
-                        case "boolean"    : pass
-                        case "instruction": pass
+                    if blockData["opcode"] == "procedures_call":
+                        if arguments[inputID] == str:
+                            magicNumber = 10 # use the value for a text input type
+                        elif arguments[inputID] == bool:
+                            pass
+                    else:
+                        match opcodeData["inputTypes"][inputID]:
+                            case "broadcast"  : magicNumber = 11
+                            case "text"       : magicNumber = 10
+                            case "number"     : magicNumber =  4
+                            case "boolean"    : pass
+                            case "instruction": pass
                     if "blocks" in inputData:
                         scriptData = {"position": [0,0], "blocks": inputData["blocks"]}
                         newScriptIDs = scriptIDs + [i] + [j]
@@ -180,26 +186,18 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
     dataCopy = data.copy()
     for i, blockID, blockData in ikv(dataCopy):
         if   blockData["opcode"] == "special_define":
-            proccode = generateProccodeFromSegments(blockData["segments"])
-            blockCounter = 2
+            customOpcode        = blockData["fields"]["customOpcode"]
+            proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
             argumentIDs      = []
             argumentNames    = []
             argumentDefaults = []
             argumentBlockIDs = []
-            for segment in blockData["segments"]:
-                if   segment["type"] == "label":
-                    pass
-                elif segment["type"] == "textInput":
-                    argumentIDs     .append( generateRandomToken() )
-                    argumentNames   .append( segment["name"] )
-                    argumentDefaults.append( "" )
-                    argumentBlockIDs.append( generateSelector(blockID, blockCounter, False) )
-                    blockCounter += 1
-                elif segment["type"] == "booleanInput":
-                    argumentIDs     .append( generateRandomToken() )
-                    argumentNames   .append( segment["name"] )
-                    argumentDefaults.append( False )
-                    argumentBlockIDs.append( generateSelector(blockID, blockCounter, False) )
+            for i, argumentName, argumentType in ikv(arguments):
+                argumentIDs     .append(generateRandomToken())
+                argumentNames   .append(argumentName)
+                # The argument reporter defaults
+                argumentDefaults.append("" if argumentType==str else json.dumps(False))
+                argumentBlockIDs.append(generateSelector(blockID, i+2, False)) # i+2: account for the prototype taking index 1
             
             match blockData["fields"]["blockType"]:
                 case "instruction"    : returns, optype, opcode = False, "statement", "procedures_definition"
@@ -282,15 +280,22 @@ def finishBlocks(data, spriteName, tokens):
         if blockData["opcode"] == "procedures_prototype":
             mutationData = blockData["mutation"]
             mutationDatas[mutationData["proccode"]] = mutationData
-    customBlockInfo = tokens["customBlocks"]
     for i, blockID, blockData in ikv(data):
         if blockData["opcode"] == "procedures_call":
-            customBlockId = blockData["fields"]["blockDef"]
-            proccode = customBlockInfo[spriteName][customBlockId]
-            mutationData = mutationDatas[proccode].copy()
-            del mutationData["argumentnames"]
-            del mutationData["argumentdefaults"]
-            blockData["mutation"] = mutationDatas[proccode]
-            del blockData["fields"]["blockDef"]
+            customOpcode = blockData["fields"]["customOpcode"]
+            del blockData["fields"]["customOpcode"]
+            proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
+            mutationData = mutationDatas[proccode]
+            modifiedMutationData = mutationData.copy()
+            del modifiedMutationData["argumentnames"]
+            del modifiedMutationData["argumentdefaults"]
+            blockData["mutation"] = modifiedMutationData
+
+            argumentIDs   = json.loads(mutationData["argumentids"])
+            argumentNames = json.loads(mutationData["argumentnames"])
+            blockData["inputs"] = {
+                argumentIDs[argumentNames.index(inputID)]: 
+                inputValue for j,inputID,inputValue in ikv(blockData["inputs"]) 
+            }
     
     return data

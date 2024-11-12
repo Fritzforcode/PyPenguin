@@ -1,10 +1,12 @@
 # TODO
 
+investigate optype and returns
+
 add procedure calls
 
 make a better custom hash function
 
-add other procedure types
+possibly change null to None ...
 
 update documentation
 

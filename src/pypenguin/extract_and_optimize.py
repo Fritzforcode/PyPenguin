@@ -69,13 +69,13 @@ def extractAndOptimizeProject(
     os.makedirs(optimizedProjectDirectory, exist_ok=True)
     
     # Validate the optimized project.json and halde errors
-    try:
-        validateProject(
-            projectData=optimizedData,
-        )
-    except ValidationError as error:
-        print(error)
-        print("This error is likely the fault of the developer. Please report this.")
+    #try:
+    #validateProject(
+    #    projectData=optimizedData,
+    #)
+    #except ValidationError as error:
+    #    print(repr(error))
+    #    print("This error is likely the fault of the developer. Please report this.")
     
     # Clear the project directory
     os.makedirs(optimizedProjectDirectory, exist_ok=True)

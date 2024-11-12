@@ -1,4 +1,4 @@
-from validate.constants import validateSchema, formatError, commentSchema
+from pypenguin.validate.constants import validateSchema, formatError, commentSchema
 
 def validateComment(path, data):
     validateSchema(pathToData=path, data=data, schema=commentSchema)
