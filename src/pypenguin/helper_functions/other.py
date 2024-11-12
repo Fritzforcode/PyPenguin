@@ -11,28 +11,53 @@ def escape_chars(input_string: str, chars_to_escape: list) -> str:
     
     return escaped_string
 
+def unescape_chars(input_string: str) -> str:
+    # Use regex to replace any backslash followed by a character with the character itself
+    return re.sub(r"\\(.)", r"\1", input_string)
+
 def parseCustomOpcode(customOpcode: str):
-    result = {}
-
-    # Pattern to match string arguments, enclosed in (...) with escaped content
-    # Matches `(ARG_NAME)` where ARG_NAME could contain escaped parentheses
-    string_arg_pattern = re.compile(r"\(([^<>]+?)\)")
-    
-    # Pattern to match boolean arguments, enclosed in <...> with escaped content
-    # Matches `<ARG_NAME>` where ARG_NAME could contain escaped angle brackets
-    bool_arg_pattern = re.compile(r"<([^()]+?)>")
-
-    # Extract all string arguments
-    for match in string_arg_pattern.finditer(customOpcode):
-        arg_name = match.group(1)  # Capture the full argument name inside (...)
-        result[arg_name] = str  # Assign str as the type for string arguments
-
-    # Extract all boolean arguments
-    for match in bool_arg_pattern.finditer(customOpcode):
-        arg_name = match.group(1)  # Capture the full argument name inside <...>
-        result[arg_name] = bool  # Assign bool as the type for boolean arguments
-
-    return result
+    part = ""
+    mode = None
+    arguments = {}
+    lastChar = None
+    isEscaped = False
+    for i, char in enumerate(customOpcode):
+        if char == "\\":
+            if isEscaped:
+                part += "\\"
+            isEscaped = not isEscaped
+        elif char == "(":
+            if isEscaped:
+                isEscaped = False
+                part += char
+            else:
+                mode = str
+                part = ""
+        elif char == ")":
+            if isEscaped:
+                part += char
+            else:
+                if mode != str: raise Exception()
+                arguments[part] = str
+                part = ""
+        elif char == "<":
+            if isEscaped:
+                isEscaped = False
+                part += char
+            else:
+                mode = bool
+                part = ""
+        elif char == ">":
+            if isEscaped:
+                part += char
+            else:
+                if mode != bool: raise Exception()
+                arguments[part] = bool
+                part = ""
+        else:
+            isEscaped = False
+            part += char
+    return arguments
 
 def generateCustomOpcode(proccode: str, argumentNames: list[str]):
     customOpcode = ""
@@ -57,6 +82,9 @@ def generateCustomOpcode(proccode: str, argumentNames: list[str]):
             customOpcode += escape_chars(char, chars_to_escape)
         i += 1
     return customOpcode.removesuffix(" ")
+
+print(generateCustomOpcode("moin< (", []))
+print()
 
 def ikv(data:dict): # Iterate through a dict with i(ndex of the pair), k(ey) and v(alue)
     return zip(
