@@ -9,13 +9,85 @@ projectData = {
             "scripts": [
                 {
                     "position": [0,0],
-                    "blocks": [{
-                        "opcode": "value of text argument (VALUE)",
-                        "inputs": {},
-                        "options": {"VALUE": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."},
-                        "comment": None,
-                    }],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "inputs": {},
+                            "options": {"blockType": "instruction", "noScreenRefresh": False, "customOpcode": "interpret (node)"},
+                            "comment": None,
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text", 
+                                    "block": {
+                                        "opcode": "value of text argument (VALUE)",
+                                        "inputs": {},
+                                        "options": {"VALUE": "node"},
+                                        "comment": None,
+                                    }, 
+                                    "text": ""}
+                                },
+                            "options": {"VARIABLE": "node"},
+                            "comment": None,
+                        },
+                        {
+                            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-only", 
+                                    "block": {
+                                        "opcode": "(OPERAND1) = (OPERAND2)", 
+                                        "inputs": {
+                                            "OPERAND1": {
+                                                "mode": "block-and-text", 
+                                                "block": {
+                                                    "opcode": "value of (VARIABLE)",
+                                                    "inputs": {},
+                                                    "options": {"VARIABLE": "node"},
+                                                    "comment": None,
+                                                }, 
+                                                "text": ""
+                                            },
+                                            "OPERAND2": {"mode": "block-and-text", "block": None, "text": "Module"}, 
+                                        }, 
+                                        "options":{}, 
+                                        "comment":None
+                                    }
+                                },
+                                
+                            },
+                            "options": {},
+                            "comment": None,
+                        },
+                        
+                    ],
+                },
+                {
+                    "position": [0, 800],
+                    "blocks": [
+                        {
+                            "opcode": "case (CONDITION) {SUBSTACK}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-and-text",
+                                    "block": None,
+                                    "text": "belloHello",
+                                },
+                                "SUBSTACK": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        7
+                                    ],
+                                },
+                            },
+                            "options": {},
+                            "comment": None,
+                        },
+                    ],
                 }
+                
             ],
             "comments": [],
             "currentCostume": 0,
@@ -38,7 +110,7 @@ projectData = {
             "isCloudVariable": False,
         },
         {
-            "name": "var2",
+            "name": "node",
             "currentValue": 33,
             "monitor": None,
             "isCloudVariable": False,
@@ -66,14 +138,14 @@ projectData = {
 validateProject(projectData=projectData)
 
 writeJSONFile(
-    filePath="project/project.json",
+    filePath="../project/project.json",
     data=projectData
 )
 
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory="project",
-    projectFilePath="export.pmp",
-    temporaryDirectory="temporary",
+    optimizedProjectDirectory="../project",
+    projectFilePath="../export.pmp",
+    temporaryDirectory="../temporary",
     writeDebugFiles=True,
 )
 

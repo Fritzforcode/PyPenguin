@@ -49,7 +49,7 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
         inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
         for i, inputID, inputType in ikv(inputTypes):
             if inputType == "text" and inputID not in data:
-                raise formatError(path, f"A custom block with custom opcode '{optionDatas["customOpcode"]}' must have the input '{inputID}'.")
+                raise formatError(path, f"A custom block with custom opcode '{optionDatas['customOpcode']}' must have the input '{inputID}'.")
     else:
         for i, inputID, inputValue in ikv(data):
             if inputID not in allowedInputIDs:
@@ -58,7 +58,7 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
     for inputID in data:
         if opcode == "call ...":
             if inputID not in inputTypes:
-                raise formatError(path, f"Input '{inputID}' is not defined for a custom block with custom opcode '{optionDatas["customOpcode"]}'.")
+                raise formatError(path, f"Input '{inputID}' is not defined for a custom block with custom opcode '{optionDatas['customOpcode']}'.")
             inputType = inputTypes[inputID]
         else:
             inputType = opcodeData["inputTypes"][inputID]
