@@ -26,7 +26,7 @@ def translateVariableListBlock(data):
         raise WhatIsGoingOnError(data)
     return newData
 
-def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas):
+def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mutationDatas):
     newData = {}
     for i,inputID,inputData in ikv(data):   
         if len(inputData) == 2:
@@ -74,6 +74,7 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas):
                     ancestorP=inputData[1],
                     blockChildrenPs=blockChildrenPs,
                     commentDatas=commentDatas,
+                    mutationDatas=mutationDatas,
                 )
             }
         else: raise WhatIsGoingOnError(mode, inputType)
@@ -122,6 +123,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                     scriptData=data,
                     blockChildrenPs=blockChildrenPs,
                     commentDatas=commentDatas,
+                    mutationDatas=mutationDatas,
                 )
                 for i,inputID,inputData in ikv(inputs):
                     if "block" in inputData:
@@ -142,6 +144,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                 scriptData=data,
                 blockChildrenPs=blockChildrenPs,
                 commentDatas=commentDatas,
+                mutationDatas=mutationDatas
             )
             for i,inputID,inputData in ikv(inputs):
                 if "block" in inputData:

@@ -1,93 +1,107 @@
 from pypenguin import validateProject, deoptimizeAndCompressProject
 from pypenguin.helper_functions import writeJSONFile
 
-projectData = {
-    "sprites": [
+interpretDef = {
+    "position": [0,0],
+    "blocks": [
         {
-            "name": "Stage",
-            "isStage": True,
-            "scripts": [
-                {
-                    "position": [0,0],
-                    "blocks": [
-                        {
-                            "opcode": "define ...",
-                            "inputs": {},
-                            "options": {"blockType": "instruction", "noScreenRefresh": False, "customOpcode": "interpret (node)"},
-                            "comment": None,
-                        },
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text", 
-                                    "block": {
-                                        "opcode": "value of text argument (VALUE)",
-                                        "inputs": {},
-                                        "options": {"VALUE": "node"},
-                                        "comment": None,
-                                    }, 
-                                    "text": ""}
-                                },
-                            "options": {"VARIABLE": "node"},
-                            "comment": None,
-                        },
-                        {
-                            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only", 
-                                    "block": {
-                                        "opcode": "(OPERAND1) = (OPERAND2)", 
-                                        "inputs": {
-                                            "OPERAND1": {
-                                                "mode": "block-and-text", 
-                                                "block": {
-                                                    "opcode": "value of (VARIABLE)",
-                                                    "inputs": {},
-                                                    "options": {"VARIABLE": "node"},
-                                                    "comment": None,
-                                                }, 
-                                                "text": ""
-                                            },
-                                            "OPERAND2": {"mode": "block-and-text", "block": None, "text": "Module"}, 
-                                        }, 
-                                        "options":{}, 
-                                        "comment":None
-                                    }
-                                },
-                                
-                            },
-                            "options": {},
-                            "comment": None,
-                        },
-                        
-                    ],
+            "opcode": "define ...",
+            "inputs": {},
+            "options": {"blockType": "stringReporter", "noScreenRefresh": False, "customOpcode": "interpret (node)"},
+            "comment": None,
+        },
+        {
+            "opcode": "set [VARIABLE] to (VALUE)",
+            "inputs": {
+                "VALUE": {
+                    "mode": "block-and-text", 
+                    "block": {
+                        "opcode": "value of text argument (VALUE)",
+                        "inputs": {},
+                        "options": {"VALUE": "node"},
+                        "comment": None,
+                    }, 
+                    "text": ""}
                 },
-                {
-                    "position": [0, 800],
+            "options": {"VARIABLE": "interpret: node"},
+            "comment": None,
+        },
+        {
+            "opcode": "switch (CONDITION) {SUBSTACK}",
+            "inputs": {
+                "CONDITION": {
+                    "mode": "block-and-text",
+                    "block": {
+                        "opcode": "get (VALUE) from (JSON)",
+                        "inputs": {
+                            "VALUE": {
+                                "mode": "block-and-text",
+                                "block": None,
+                                "text": "_type",
+                            },
+                            "JSON": {
+                                "mode": "block-and-text",
+                                "block": {
+                                    "opcode": "value of (VARIABLE)", 
+                                    "inputs": {}, 
+                                    "options": {"VARIABLE": "interpret: node"}, 
+                                    "comment": None,
+                                },
+                                "text": "",
+                            },
+                        },
+                        "options": {},
+                        "comment": None,
+                    },
+                    "text": "",
+                },
+                "SUBSTACK": {
+                    "mode": "script",
                     "blocks": [
                         {
                             "opcode": "case (CONDITION) {SUBSTACK}",
                             "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-and-text",
-                                    "block": None,
-                                    "text": "belloHello",
-                                },
+                                "CONDITION": {"mode": "block-and-text", "block": None, "text": "Module"},
                                 "SUBSTACK": {
                                     "mode": "script",
                                     "blocks": [
-                                        7
+                                        {
+                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                            "inputs": {"VALUE": {"mode": "block-and-text", "block": None, "text": "0"}},
+                                            "options": {"VARIABLE": "interpret: i"},
+                                            "comment": None,
+                                        }
                                     ],
                                 },
                             },
                             "options": {},
                             "comment": None,
                         },
+                        {
+                            "opcode": "repeat (TIMES) {SUBSTACK}",
+                            "inputs": {
+                                "TIMES": {"mode": "block-and-text", "block": None, "text": "44"},
+                            },
+                            "options": {},
+                            "comment": None,
+                        }
                     ],
-                }
+                },
                 
+            },
+            "options": {},
+            "comment": None,
+        },
+    ],
+}
+
+projectData = {
+    "sprites": [
+        {
+            "name": "Stage",
+            "isStage": True,
+            "scripts": [
+                interpretDef,   
             ],
             "comments": [],
             "currentCostume": 0,
@@ -110,8 +124,14 @@ projectData = {
             "isCloudVariable": False,
         },
         {
-            "name": "node",
-            "currentValue": 33,
+            "name": "interpret: node",
+            "currentValue": 0,
+            "monitor": None,
+            "isCloudVariable": False,
+        },
+        {
+            "name": "interpret: i",
+            "currentValue": 0,
             "monitor": None,
             "isCloudVariable": False,
         },
@@ -138,14 +158,14 @@ projectData = {
 validateProject(projectData=projectData)
 
 writeJSONFile(
-    filePath="../project/project.json",
-    data=projectData
+    filePath = "project/project.json",
+    data     = projectData
 )
 
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory="../project",
-    projectFilePath="../export.pmp",
-    temporaryDirectory="../temporary",
-    writeDebugFiles=True,
+    optimizedProjectDirectory = "project",
+    projectFilePath           = "export.pmp",
+    temporaryDirectory        = "temporary",
+    writeDebugFiles           = True,
 )
 

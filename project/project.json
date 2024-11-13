@@ -14,7 +14,7 @@
                             "opcode": "define ...",
                             "inputs": {},
                             "options": {
-                                "blockType": "instruction",
+                                "blockType": "stringReporter",
                                 "noScreenRefresh": false,
                                 "customOpcode": "interpret (node)"
                             },
@@ -37,39 +37,88 @@
                                 }
                             },
                             "options": {
-                                "VARIABLE": "node"
+                                "VARIABLE": "interpret: node"
                             },
                             "comment": null
                         },
                         {
-                            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+                            "opcode": "switch (CONDITION) {SUBSTACK}",
                             "inputs": {
                                 "CONDITION": {
-                                    "mode": "block-only",
+                                    "mode": "block-and-text",
                                     "block": {
-                                        "opcode": "(OPERAND1) != (OPERAND2)",
+                                        "opcode": "get (VALUE) from (JSON)",
                                         "inputs": {
-                                            "OPERAND1": {
+                                            "VALUE": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "_type"
+                                            },
+                                            "JSON": {
                                                 "mode": "block-and-text",
                                                 "block": {
                                                     "opcode": "value of (VARIABLE)",
                                                     "inputs": {},
                                                     "options": {
-                                                        "VARIABLE": "node"
+                                                        "VARIABLE": "interpret: node"
                                                     },
                                                     "comment": null
                                                 },
                                                 "text": ""
-                                            },
-                                            "OPERAND2": {
-                                                "mode": "block-and-text",
-                                                "block": null,
-                                                "text": "Module"
                                             }
                                         },
                                         "options": {},
                                         "comment": null
-                                    }
+                                    },
+                                    "text": ""
+                                },
+                                "SUBSTACK": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "case (CONDITION) {SUBSTACK}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-and-text",
+                                                    "block": null,
+                                                    "text": "Module"
+                                                },
+                                                "SUBSTACK": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "mode": "block-and-text",
+                                                                    "block": null,
+                                                                    "text": "0"
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "VARIABLE": "interpret: i"
+                                                            },
+                                                            "comment": null
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {},
+                                            "comment": null
+                                        },
+                                        {
+                                            "opcode": "repeat (TIMES) {SUBSTACK}",
+                                            "inputs": {
+                                                "TIMES": {
+                                                    "mode": "block-and-text",
+                                                    "block": null,
+                                                    "text": "44"
+                                                }
+                                            },
+                                            "options": {},
+                                            "comment": null
+                                        }
+                                    ]
                                 }
                             },
                             "options": {},
@@ -104,8 +153,14 @@
             "isCloudVariable": false
         },
         {
-            "name": "node",
-            "currentValue": 33,
+            "name": "interpret: node",
+            "currentValue": 0,
+            "monitor": null,
+            "isCloudVariable": false
+        },
+        {
+            "name": "interpret: i",
+            "currentValue": 0,
             "monitor": null,
             "isCloudVariable": false
         }

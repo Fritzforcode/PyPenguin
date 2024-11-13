@@ -1,6 +1,6 @@
 exec("import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))")
 
-from helper_functions import generateRandomToken, generateSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
+from helper_functions import generateRandomToken, generateSelector, tempSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
 
 from deoptimize.variables_lists import translateVariables, translateLists
 from deoptimize.broadcasts import generateBroadcastTokens
@@ -71,7 +71,7 @@ def deoptimizeProject(projectData):
         )
         nameKey = None if spriteData["isStage"] else spriteData["name"]
         for i, commentData in enumerate(spriteData["comments"]):
-            commentID = generateSelector(scriptIDs=[], index=i, isComment=True)
+            commentID = tempSelector(path=[i]+["c"])
             newCommentDatas[commentID] = translateComment(
                 data=commentData,
                 id=None,

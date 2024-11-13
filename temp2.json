@@ -3,58 +3,105 @@
         {
             "isStage": true,
             "name": "Stage",
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "backdrop1",
-                    "dataFormat": "svg",
-                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        240,
-                        180
-                    ]
-                }
-            ],
-            "sounds": [],
-            "volume": 100
-        },
-        {
-            "isStage": false,
-            "name": "Sprite1",
             "scripts": [
                 {
                     "position": [
-                        418,
-                        171
+                        90,
+                        164
                     ],
                     "blocks": [
                         {
-                            "opcode": "value of text argument (VALUE)",
-                            "inputs": {},
-                            "options": {
-                                "VALUE": "number or text"
+                            "opcode": "switch (CONDITION) {SUBSTACK}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "VARIABLE",
+                                        "inputs": {},
+                                        "options": {
+                                            "VARIABLE": "node"
+                                        },
+                                        "comment": null
+                                    },
+                                    "text": ""
+                                },
+                                "SUBSTACK": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "case (CONDITION) {SUBSTACK}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-and-text",
+                                                    "block": null,
+                                                    "text": "belloHello"
+                                                },
+                                                "SUBSTACK": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "mode": "block-and-text",
+                                                                    "block": null,
+                                                                    "text": "1"
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "VARIABLE": "var"
+                                                            },
+                                                            "comment": null
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {},
+                                            "comment": null
+                                        }
+                                    ]
+                                }
                             },
+                            "options": {},
                             "comment": null
                         }
                     ]
                 },
                 {
                     "position": [
-                        44,
-                        44
+                        0,
+                        800
                     ],
                     "blocks": [
                         {
-                            "opcode": "define ...",
-                            "inputs": {},
-                            "options": {
-                                "customOpcode": "block name (number or text)",
-                                "noScreenRefresh": false,
-                                "blockType": "instruction"
+                            "opcode": "case (CONDITION) {SUBSTACK}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "belloHello"
+                                },
+                                "SUBSTACK": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "mode": "block-and-text",
+                                                    "block": null,
+                                                    "text": "1"
+                                                }
+                                            },
+                                            "options": {
+                                                "VARIABLE": "var"
+                                            },
+                                            "comment": null
+                                        }
+                                    ]
+                                }
                             },
+                            "options": {},
                             "comment": null
                         }
                     ]
@@ -65,51 +112,37 @@
             "costumes": [
                 {
                     "name": "costume1",
-                    "dataFormat": "svg",
-                    "fileStem": "c434b674f2da18ba13cdfe51dbc05ecc",
-                    "bitmapResolution": 1,
+                    "dataFormat": "png",
+                    "fileStem": "b86efb7f23387300cf9037a61f328ab9",
+                    "bitmapResolution": 2,
                     "rotationCenter": [
-                        26,
-                        46
+                        158,
+                        146
                     ]
                 }
             ],
-            "sounds": [
-                {
-                    "name": "Squawk",
-                    "dataFormat": "wav",
-                    "fileStem": "e140d7ff07de8fa35c3d1595bba835ac",
-                    "rate": 48000,
-                    "sampleCount": 17867
-                }
-            ],
-            "volume": 100,
-            "localVariables": [],
-            "localLists": [],
-            "layerOrder": 1,
-            "visible": true,
-            "position": [
-                0,
-                0
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": false,
-            "rotationStyle": "all around"
+            "sounds": [],
+            "volume": 100
         }
     ],
     "globalVariables": [
         {
-            "name": "my variable",
-            "currentValue": 0,
+            "name": "var",
+            "currentValue": 33,
+            "monitor": null,
+            "isCloudVariable": false
+        },
+        {
+            "name": "node",
+            "currentValue": 33,
             "monitor": null,
             "isCloudVariable": false
         }
     ],
     "globalLists": [],
     "tempo": 60,
-    "videoTransparency": 50,
-    "videoState": "on",
+    "videoTransparency": 0,
+    "videoState": "off",
     "textToSpeechLanguage": null,
     "extensionData": {},
     "extensions": [

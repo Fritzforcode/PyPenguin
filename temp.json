@@ -42,88 +42,504 @@
             "broadcasts": {},
             "customVars": [],
             "blocks": {
-                "d": {
-                    "opcode": "argument_reporter_string_number",
+                "o": {
+                    "opcode": "control_wait",
+                    "next": "e",
+                    "parent": null,
+                    "inputs": {
+                        "DURATION": [
+                            1,
+                            [
+                                5,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 251,
+                    "y": 111
+                },
+                "e": {
+                    "opcode": "control_waitsecondsoruntil",
+                    "next": "f",
+                    "parent": "o",
+                    "inputs": {
+                        "DURATION": [
+                            1,
+                            [
+                                5,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "f": {
+                    "opcode": "control_repeat",
+                    "next": "p",
+                    "parent": "e",
+                    "inputs": {
+                        "TIMES": [
+                            1,
+                            [
+                                6,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "p": {
+                    "opcode": "control_forever",
+                    "next": null,
+                    "parent": "f",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "E": {
+                    "opcode": "control_exitLoop",
                     "next": null,
                     "parent": null,
                     "inputs": {},
-                    "fields": {
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 228,
+                    "y": 513
+                },
+                "F": {
+                    "opcode": "control_continueLoop",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 238,
+                    "y": 608
+                },
+                "q": {
+                    "opcode": "control_switch",
+                    "next": "g",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 248,
+                    "y": 694
+                },
+                "g": {
+                    "opcode": "control_switch_default",
+                    "next": "r",
+                    "parent": "q",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "r": {
+                    "opcode": "control_exitCase",
+                    "next": null,
+                    "parent": "g",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "s": {
+                    "opcode": "control_case_next",
+                    "next": "t",
+                    "parent": null,
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "ello"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 236,
+                    "y": 1054
+                },
+                "t": {
+                    "opcode": "control_case",
+                    "next": null,
+                    "parent": "s",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "ello"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            1,
+                            null
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "u": {
+                    "opcode": "control_if",
+                    "next": "h",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 284,
+                    "y": 1254
+                },
+                "h": {
+                    "opcode": "control_if_else",
+                    "next": "i",
+                    "parent": "u",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "i": {
+                    "opcode": "control_wait_until",
+                    "next": "j",
+                    "parent": "h",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "j": {
+                    "opcode": "control_repeat_until",
+                    "next": "k",
+                    "parent": "i",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "k": {
+                    "opcode": "control_while",
+                    "next": "l",
+                    "parent": "j",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "l": {
+                    "opcode": "control_for_each",
+                    "next": "m",
+                    "parent": "k",
+                    "inputs": {
                         "VALUE": [
-                            "number or text",
-                            "@}n2xh6rsFo@7{S7kB~J"
+                            1,
+                            [
+                                6,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "my variable",
+                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                            ""
                         ]
                     },
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 418,
-                    "y": 171,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
-                    }
+                    "topLevel": false
                 },
-                "b": {
-                    "opcode": "procedures_definition",
+                "G": {
+                    "opcode": "control_if_return_else_return",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "custom_block": [
+                        "TEXT1": [
                             1,
-                            "a"
+                            [
+                                10,
+                                "foo"
+                            ]
+                        ],
+                        "TEXT2": [
+                            1,
+                            [
+                                10,
+                                "bar"
+                            ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 44,
-                    "y": 44
+                    "x": 610,
+                    "y": 1798
+                },
+                "m": {
+                    "opcode": "control_all_at_once",
+                    "next": "a",
+                    "parent": "l",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
                 },
                 "a": {
-                    "opcode": "procedures_prototype",
-                    "next": null,
-                    "parent": "b",
+                    "opcode": "control_run_as_sprite",
+                    "next": "n",
+                    "parent": "m",
                     "inputs": {
-                        "*I?L#S(NHD*,%E6wavbo": [
+                        "RUN_AS_OPTION": [
                             1,
-                            "c"
+                            "v"
                         ]
                     },
                     "fields": {},
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "proccode": "block name %s",
-                        "argumentids": "[\"*I?L#S(NHD*,%E6wavbo\"]",
-                        "argumentnames": "[\"number or text\"]",
-                        "argumentdefaults": "[\"\"]",
-                        "warp": "false",
-                        "returns": "null",
-                        "edited": "true",
-                        "optype": "null",
-                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
-                    }
+                    "shadow": false,
+                    "topLevel": false
                 },
-                "c": {
-                    "opcode": "argument_reporter_string_number",
+                "v": {
+                    "opcode": "control_run_as_sprite_menu",
                     "next": null,
                     "parent": "a",
                     "inputs": {},
                     "fields": {
-                        "VALUE": [
-                            "number or text",
-                            "{W7)drFE}0!IYyILY4:i"
+                        "RUN_AS_OPTION": [
+                            "_stage_",
+                            "U.zwOX{||=p{Do;P=F*D"
                         ]
                     },
                     "shadow": true,
+                    "topLevel": false
+                },
+                "n": {
+                    "opcode": "control_try_catch",
+                    "next": "w",
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "w": {
+                    "opcode": "control_throw_error",
+                    "next": null,
+                    "parent": "n",
+                    "inputs": {
+                        "ERROR": [
+                            1,
+                            [
+                                10,
+                                "Hello!"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "H": {
+                    "opcode": "control_error",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 543,
+                    "y": 2228
+                },
+                "x": {
+                    "opcode": "control_backToGreenFlag",
+                    "next": "b",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 305,
+                    "y": 2318
+                },
+                "b": {
+                    "opcode": "control_stop_sprite",
+                    "next": "y",
+                    "parent": "x",
+                    "inputs": {
+                        "STOP_OPTION": [
+                            1,
+                            "z"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "z": {
+                    "opcode": "control_stop_sprite_menu",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "STOP_OPTION": [
+                            "_stage_",
+                            "|m+jfaf]0R=j:sW6%[;j"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "y": {
+                    "opcode": "control_stop",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "STOP_OPTION": [
+                            "all",
+                            "M6s3ag*lF5Q~C4xX,!?!"
+                        ]
+                    },
+                    "shadow": false,
                     "topLevel": false,
                     "mutation": {
                         "tagName": "mutation",
                         "children": [],
-                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                        "hasnext": "false"
                     }
+                },
+                "I": {
+                    "opcode": "control_stop",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "STOP_OPTION": [
+                            "this script",
+                            "F-T{U@%b}`a[v_)LE|2}"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 494,
+                    "y": 2391,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "hasnext": "false"
+                    }
+                },
+                "J": {
+                    "opcode": "control_stop",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "STOP_OPTION": [
+                            "other scripts in sprite",
+                            "Q.RVbm~=wai|oc5N.K8_"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 703,
+                    "y": 2378,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "hasnext": "true"
+                    }
+                },
+                "A": {
+                    "opcode": "control_start_as_clone",
+                    "next": "c",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 303,
+                    "y": 2514
+                },
+                "c": {
+                    "opcode": "control_create_clone_of",
+                    "next": "d",
+                    "parent": "A",
+                    "inputs": {
+                        "CLONE_OPTION": [
+                            1,
+                            "B"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "B": {
+                    "opcode": "control_create_clone_of_menu",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "CLONE_OPTION": [
+                            "_myself_",
+                            "Xp{@GU%;SBf78D89;(Vp"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "d": {
+                    "opcode": "control_delete_clones_of",
+                    "next": "C",
+                    "parent": "c",
+                    "inputs": {
+                        "CLONE_OPTION": [
+                            1,
+                            "D"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "D": {
+                    "opcode": "control_create_clone_of_menu",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {
+                        "CLONE_OPTION": [
+                            "_myself_",
+                            "r-Lp|IA;4yF|5c=le4BD"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "C": {
+                    "opcode": "control_delete_this_clone",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
                 }
             },
             "comments": {},
@@ -163,9 +579,7 @@
     ],
     "monitors": [],
     "extensionData": {},
-    "extensions": [
-        "jgJSON"
-    ],
+    "extensions": [],
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",

@@ -9,29 +9,229 @@
                     33
                 ],
                 "NmjQ-_mT(OA^.)?Hh^bl": [
-                    "var2",
-                    33
+                    "interpret: node",
+                    0
+                ],
+                "Za:QFPiy`CEs]*lkO=/n": [
+                    "interpret: i",
+                    0
                 ]
             },
             "lists": {},
             "broadcasts": {},
             "customVars": [],
             "blocks": {
-                ":": {
-                    "opcode": "argument_reporter_string_number",
-                    "next": null,
+                "a": {
+                    "opcode": "procedures_definition_return",
+                    "next": "b",
                     "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "VALUE": [
-                            "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-                            "Za:QFPiy`CEs]*lkO=/n"
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "c"
                         ]
                     },
+                    "fields": {},
                     "shadow": false,
                     "topLevel": true,
                     "x": 0,
                     "y": 0
+                },
+                "d": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "node",
+                            "M^Lp^Q]A^}K)lXO{ELxy"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "b": {
+                    "opcode": "data_setvariableto",
+                    "next": "e",
+                    "parent": "a",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "d",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "interpret: node",
+                            "NmjQ-_mT(OA^.)?Hh^bl",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "f": {
+                    "opcode": "jgJSON_getValueFromJSON",
+                    "next": null,
+                    "parent": "e",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "_type"
+                            ]
+                        ],
+                        "JSON": [
+                            3,
+                            [
+                                12,
+                                "interpret: node",
+                                "NmjQ-_mT(OA^.)?Hh^bl"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "g": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "h",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "interpret: i",
+                            "Za:QFPiy`CEs]*lkO=/n",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "h": {
+                    "opcode": "control_case",
+                    "next": "i",
+                    "parent": "e",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "Module"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "g"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "i": {
+                    "opcode": "control_repeat",
+                    "next": null,
+                    "parent": "h",
+                    "inputs": {
+                        "TIMES": [
+                            1,
+                            [
+                                4,
+                                "44"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "e": {
+                    "opcode": "control_switch",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {
+                        "CONDITION": [
+                            3,
+                            "f",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "h"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "c": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {
+                        "xeH-ilqtek]Y@J?EB}#|": [
+                            1,
+                            "j"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "interpret %s",
+                        "argumentids": "[\"xeH-ilqtek]Y@J?EB}#|\"]",
+                        "argumentnames": "[\"node\"]",
+                        "argumentdefaults": "[\"\"]",
+                        "warp": "false",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "j": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "node",
+                            "J*:TkPo/}QyFcIoCVvQ%"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
                 }
             },
             "comments": {},
@@ -48,7 +248,7 @@
                 }
             ],
             "sounds": [],
-            "id": "M^Lp^Q]A^}K)lXO{ELxy",
+            "id": "hmsCf{[jdpy{pYlVoecy",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,

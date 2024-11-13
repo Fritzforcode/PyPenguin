@@ -41,14 +41,26 @@ opcodeDatabase = {
             "inputTypes": {"CONDITION": "boolean", "SUBSTACK": "script", "SUBSTACK2": "script"},
             "optionTypes": {},
         },
-        #"control_switch": {
-        #
-        #},
+        "control_switch": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "switch (CONDITION) {SUBSTACK}",
+            "inputTypes": {"CONDITION": "text", "SUBSTACK": "script"},
+            "optionTypes": {},
+        },
         "control_case": {
             "type": "instruction",
             "category": "Control",
             "newOpcode": "case (CONDITION) {SUBSTACK}",
             "inputTypes": {"CONDITION": "text", "SUBSTACK": "script"},
+            "optionTypes": {},
+        },
+        "control_repeat": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "repeat (TIMES) {SUBSTACK}",
+            "inputTypes": {"TIMES": "number", "SUBSTACK": "script"},
+            "optionTypes": {},
         },
     # Sensing
     # Operators

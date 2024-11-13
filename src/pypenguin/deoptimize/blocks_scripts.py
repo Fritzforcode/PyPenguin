@@ -1,6 +1,6 @@
 import json
 
-from pypenguin.helper_functions import ikv, pp, WhatIsGoingOnError, generateSelector, generateRandomToken, parseCustomOpcode
+from pypenguin.helper_functions import ikv, pp, WhatIsGoingOnError, numberToLiteral, tempSelector, generateRandomToken, parseCustomOpcode
 
 from pypenguin.deoptimize.options import translateOptions
 from pypenguin.deoptimize.comments import translateComment
@@ -65,8 +65,8 @@ def linkBlocksToScript(data, spriteName, tokens, scriptIDs):
     newData = {}
     newCommentDatas = {}
     for i, blockData in enumerate(data):
-        ownID = generateSelector(scriptIDs=scriptIDs, index=i, isComment=False)
-        commentID = generateSelector(scriptIDs=scriptIDs, index=i, isComment=True)
+        ownID = tempSelector(path=scriptIDs+[i])
+        commentID = tempSelector(path=scriptIDs+[i]+["c"])
         newBlockData = prepareBlock(
             data=blockData, 
             spriteName=spriteName, 
@@ -77,10 +77,10 @@ def linkBlocksToScript(data, spriteName, tokens, scriptIDs):
             newBlockData |= {"x": scriptPosition[0], "y": scriptPosition[1]}
             newBlockData["topLevel"] = True
         if i + 1 in range(len(data)):
-            nextID = generateSelector(scriptIDs=scriptIDs, index=i+1, isComment=False)
+            nextID = tempSelector(path=scriptIDs+[i+1])
             newBlockData["next"] = nextID
         if i - 1 in range(len(data)):
-            parentID = generateSelector(scriptIDs=scriptIDs, index=i-1, isComment=False)
+            parentID = tempSelector(path=scriptIDs+[i-1])
             newBlockData["parent"] = parentID
         newData[ownID] = newBlockData
                 
@@ -100,6 +100,8 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
     while not finished:
         newBlockDatas = {}
         for i,blockID,blockData in ikv(data):
+            print("block")
+            pp(blockData)
             opcodeData = opcodeDatabase[blockData["opcode"]]
             newInputDatas = {}
             if blockData["opcode"] == "procedures_call":
@@ -141,17 +143,23 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                                 del subBlockData["y"]
                                 subBlockData["parent"] = blockID
                                 subBlockData["topLevel"] = False
-                            break
+                                break
                         newBlockDatas |= unnestedScriptData
-                        newInputData = [2, subBlockID]
+                        if inputData["blocks"] == []:
+                            newInputData = None
+                        else:
+                            print(100*"_")
+                            print(inputData["blocks"])
+                            print(blockID, subBlockID)
+                            newInputData = [2, subBlockID]
                     elif inputData["block"] == None:
                         if inputData["mode"] == "block-and-text":
                             newInputData = [1, [magicNumber, inputData["text"]]]
                         elif inputData["mode"] == "block-only":
                             newInputData = None
                     else:
-                        newBlockID   = generateSelector(scriptIDs=scriptIDs, index=blockCounter, isComment=False)
-                        newCommentID = generateSelector(scriptIDs=scriptIDs, index=blockCounter, isComment=True)
+                        newBlockID   = tempSelector(path=scriptIDs+[blockCounter])
+                        newCommentID = tempSelector(path=scriptIDs+[blockCounter]+["c"])
                         newBlockData = prepareBlock(
                             data=inputData["block"],
                             spriteName=spriteName,
@@ -197,7 +205,9 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                 argumentNames   .append(argumentName)
                 # The argument reporter defaults
                 argumentDefaults.append("" if argumentType==str else json.dumps(False))
-                argumentBlockIDs.append(generateSelector(blockID, i+2, False)) # i+2: account for the prototype taking index 1
+                argumentBlockIDs.append(
+                    tempSelector(path=blockID+[i+2])
+                ) # i+2: account for the prototype taking index 1
             
             match blockData["fields"]["blockType"]:
                 case "instruction"    : returns, optype, opcode = False, "statement", "procedures_definition"
@@ -207,7 +217,7 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                 case "booleanReporter": returns, optype, opcode = True , "boolean"  , "procedures_definition_return"
             
             definitionID = blockID
-            prototypeID = generateSelector(blockID, 1, False)
+            prototypeID = tempSelector(path=blockID+[1])
             definitionData = {
                 "opcode": opcode,
                 "next": blockData["next"],
@@ -297,5 +307,45 @@ def finishBlocks(data, spriteName, tokens):
                 argumentIDs[argumentNames.index(inputID)]: 
                 inputValue for j,inputID,inputValue in ikv(blockData["inputs"]) 
             }
-    
+    def getSelectors(obj):
+        selectors = []
+        if isinstance(obj, dict):
+            for i,k,v in ikv(obj):
+                if isinstance(k, tempSelector):
+                    selectors.append(k)
+                if isinstance(v, tempSelector):
+                    selectors.append(v)
+                else:
+                    selectors += getSelectors(v)
+        elif isinstance(obj, list):
+            for v in obj:
+                if isinstance(v, tempSelector):
+                    selectors.append(v)
+                else:
+                    selectors += getSelectors(v)
+        return selectors
+    def replaceSelectors(obj, table):
+        if isinstance(obj, dict):
+            newObj = {}
+            for i,k,v in ikv(obj):
+                if isinstance(v, tempSelector): newV = table[v]
+                else                          : newV = replaceSelectors(v, table=table)
+                if isinstance(k, tempSelector): newObj[table[k]] = newV
+                else                          : newObj[k] = newV
+        elif isinstance(obj, list):
+            newObj = []
+            for i,v in enumerate(obj):
+                if isinstance(v, tempSelector): newObj.append(table[v])
+                else                          : newObj.append(replaceSelectors(v, table=table))
+        else:
+            newObj = obj
+        return newObj
+    selectors = getSelectors(data)
+    cutSelectors = []
+    for selector in selectors:
+        if selector not in cutSelectors:
+            cutSelectors.append(selector)
+    # Translation table from selector object to literal
+    table = {selector: numberToLiteral(i+1) for i,selector in enumerate(cutSelectors)}
+    data = replaceSelectors(data, table=table)
     return data

@@ -32,15 +32,39 @@ def generateNextKeyInDict(obj:dict, offset=0):
     biggest = max([0] + ints)
     return numberToLiteral(biggest + 1 + offset)
 
-def generateSelector(scriptIDs:list[int]|str, index:int, isComment:bool):
+def generateSelector(scriptIDs:list[int]|str, isComment:bool):
     if isinstance(scriptIDs, str):
         scriptIDs = [literalToNumber(i) for i in scriptIDs.split(":")]
     
     items = []
     for scriptID in scriptIDs:
         items.append(numberToLiteral(scriptID))
-    items.append(numberToLiteral(index))
     if isComment:
         items.append("c")
     return ":".join(items)
 
+
+class tempSelector:
+    def __init__(self, path):
+        if isinstance(path, tempSelector):
+            self.path = path.path
+        else:
+            self.path = path
+
+    def __eq__(self, other):
+        if isinstance(other, tempSelector):
+            return self.path == other.path
+        return False
+
+    def __hash__(self):
+        # Use a tuple of the attributes to create a unique hash
+        return hash(tuple(self.path))
+
+    def __add__(self, other):
+        if isinstance(other, list):
+            return tempSelector(path=self.path+other)
+        else:
+            raise Exception()
+
+    def __repr__(self):
+        return f"tS<{self.path}>"
