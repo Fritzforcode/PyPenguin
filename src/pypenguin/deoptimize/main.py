@@ -1,14 +1,10 @@
-exec("import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))")
+from pypenguin.helper_functions import generateRandomToken,  tempSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
 
-from helper_functions import generateRandomToken, generateSelector, tempSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
-
-from deoptimize.variables_lists import translateVariables, translateLists
-from deoptimize.broadcasts import generateBroadcastTokens
-from deoptimize.blocks_scripts import getCustomBlockInfo, linkBlocksToScript, unnestScript, finishBlocks
-from deoptimize.costumes_sounds import translateCostumes, translateSounds
-from deoptimize.comments import translateComment
-
-from database import opcodeDatabase
+from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
+from pypenguin.deoptimize.broadcasts import generateBroadcastTokens
+from pypenguin.deoptimize.blocks_scripts import linkBlocksToScript, unnestScript, finishBlocks
+from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
+from pypenguin.deoptimize.comments import translateComment
 
 def generateTokens(data):
     spriteNames = [sprite["name"] for sprite in data["sprites"]][1:]
@@ -25,15 +21,10 @@ def generateTokens(data):
         data=data["sprites"],
         spriteNames=spriteNames,
     )
-    customBlockInfo = getCustomBlockInfo(
-        data=data["sprites"],
-        spriteNames=spriteNames,
-    )
     tokens = {
         "variables"   : variableTokens,
         "lists"       : listTokens,
         "broadcasts"  : broadcastTokens,
-        "customBlocks": customBlockInfo,
     }
     return tokens, translatedVariableDatas, translatedListDatas, monitorDatas
 
@@ -51,8 +42,6 @@ def deoptimizeProject(projectData):
                 tokens=tokens,
                 scriptIDs=[scriptID],
             )
-            print("linked", 100*"#")
-            pp(linkedScriptData)
             
             unnestedScriptData, scriptCommentDatasB = unnestScript(
                 data=linkedScriptData, 

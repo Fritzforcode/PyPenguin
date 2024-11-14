@@ -1,6 +1,6 @@
-from helper_functions import ikv, WhatIsGoingOnError, generateRandomToken, readJSONFile, removeStringDuplicates, pp
+from pypenguin.helper_functions import ikv, WhatIsGoingOnError, generateRandomToken, readJSONFile, removeStringDuplicates, pp
 
-from database import opcodeDatabase
+from pypenguin.database import opcodeDatabase
 
 
 def findBlockBroadcastMessages(data):

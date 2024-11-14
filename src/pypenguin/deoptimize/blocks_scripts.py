@@ -19,18 +19,6 @@ def generateProccodeFromSegments(data):
             proccode += " %b"
     return proccode
 
-def getCustomBlockInfo(data, spriteNames):
-    info = {k:{} for k in spriteNames+[None]}
-    #for spriteData in data:
-    #    spriteName = None if spriteData["isStage"] else spriteData["name"]
-    #    for scriptData in spriteData["scripts"]:
-    #        firstBlockData = scriptData["blocks"][0]
-    #        if firstBlockData["opcode"] == "define ...":
-    #            customOpcode = firstBlockData["options"]["id"]
-    #            info[spriteName][customOpcode] = generateProccodeFromSegments(firstBlockData["segments"])
-    return info
-                
-
 def prepareBlock(data, spriteName, tokens, commentID):
     opcode = None
     for i,oldOpcode,opcodeData in ikv(opcodeDatabase):
@@ -38,6 +26,13 @@ def prepareBlock(data, spriteName, tokens, commentID):
             opcode = oldOpcode
     if opcode == None:
         raise WhatIsGoingOnError(data["opcode"])
+    
+    if "inputs" not in data:
+        data["inputs"] = {}
+    if "options" not in data:
+        data["options"] = {}
+    if "comment" not in data:
+        data["comment"] = None
     newBlockData = {
         "opcode"  : opcode,
         "next"    : None,
@@ -93,6 +88,22 @@ def linkBlocksToScript(data, spriteName, tokens, scriptIDs):
     return newData, newCommentDatas
 
 def unnestScript(data, spriteName, tokens, scriptIDs):
+    def lookupInputMode(opcode, inputID):
+        opcodeData = opcodeDatabase[opcode]
+        inputType = opcodeData["inputTypes"][inputID]
+        match inputType:
+            case "broadcast":
+                inputMode = "block-and-text"
+            case "number":
+                inputMode = "block-and-text"
+            case "text":
+                inputMode = "block-and-text"
+            case "boolean":
+                inputMode = "block-only"
+            case "script":
+                inputMode = "script"
+        return inputMode
+        
     previousBlockCount = 0
     blockCounter = len(data)
     finished = False
@@ -100,14 +111,22 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
     while not finished:
         newBlockDatas = {}
         for i,blockID,blockData in ikv(data):
-            print("block")
-            pp(blockData)
             opcodeData = opcodeDatabase[blockData["opcode"]]
             newInputDatas = {}
+            opcode = blockData["opcode"]
             if blockData["opcode"] == "procedures_call":
                 customOpcode        = blockData["fields"]["customOpcode"]
                 proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
+                inputModes = {}
+                for i,inputID,inputData in ikv(arguments):
+                    if inputData == str:
+                        inputModes[inputID] = "block-and-text"
+                    elif inputData == bool:
+                        inputModes[inputID] = "block-only"
+            else:
+                inputModes = {inputID: lookupInputMode(opcode, inputID) for inputID in blockData["inputs"]}
             for j,inputID,inputData in ikv(blockData["inputs"]):
+                inputMode = inputModes[inputID]
                 if isinstance(inputData, dict):
                     if blockData["opcode"] == "procedures_call":
                         if arguments[inputID] == str:
@@ -148,14 +167,11 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                         if inputData["blocks"] == []:
                             newInputData = None
                         else:
-                            print(100*"_")
-                            print(inputData["blocks"])
-                            print(blockID, subBlockID)
                             newInputData = [2, subBlockID]
                     elif inputData["block"] == None:
-                        if inputData["mode"] == "block-and-text":
+                        if inputMode == "block-and-text":
                             newInputData = [1, [magicNumber, inputData["text"]]]
-                        elif inputData["mode"] == "block-only":
+                        elif inputMode == "block-only":
                             newInputData = None
                     else:
                         newBlockID   = tempSelector(path=scriptIDs+[blockCounter])
@@ -176,9 +192,9 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                                 data=commentData,
                                 id=newBlockID,
                             )
-                        if inputData["mode"] == "block-and-text":
+                        if inputMode == "block-and-text":
                             newInputData = [3, newBlockID, [magicNumber, inputData["text"]]]
-                        elif inputData["mode"] == "block-only":
+                        elif inputMode == "block-only":
                             newInputData = [2, newBlockID]
                 else:
                     newInputData = inputData

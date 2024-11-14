@@ -1,4 +1,4 @@
-from helper_functions import generateRandomToken, WhatIsGoingOnError, pp
+from pypenguin.helper_functions import generateRandomToken, WhatIsGoingOnError, pp
 
 
 def translateVariables(data, spriteNames):

@@ -48,6 +48,13 @@ opcodeDatabase = {
             "inputTypes": {"CONDITION": "text", "SUBSTACK": "script"},
             "optionTypes": {},
         },
+        "control_switch_default": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "switch (CONDITION) {SUBSTACK1} default {SUBSTACK2}",
+            "inputTypes": {"CONDITION": "text", "SUBSTACK1": "script", "SUBSTACK2": "script"},
+            "optionTypes": {},
+        },
         "control_case": {
             "type": "instruction",
             "category": "Control",

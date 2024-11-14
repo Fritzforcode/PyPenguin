@@ -12,43 +12,43 @@
                     "blocks": [
                         {
                             "opcode": "define ...",
-                            "inputs": {},
                             "options": {
                                 "noScreenRefresh": true,
                                 "blockType": "instruction",
                                 "customOpcode": "hanoi (n) (source) (aux) (target)"
                             },
+                            "inputs": {},
                             "comment": null
                         },
                         {
                             "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
                             "inputs": {
                                 "CONDITION": {
-                                    "mode": "block-only",
                                     "block": {
                                         "opcode": "(OPERAND1) = (OPERAND2)",
                                         "inputs": {
                                             "OPERAND1": {
-                                                "mode": "block-and-text",
                                                 "block": {
                                                     "opcode": "value of text argument [VALUE]",
-                                                    "inputs": {},
                                                     "options": {
                                                         "VALUE": "n"
                                                     },
+                                                    "inputs": {},
                                                     "comment": null
                                                 },
+                                                "mode": "block-and-text",
                                                 "text": ""
                                             },
                                             "OPERAND2": {
+                                                "text": "1",
                                                 "mode": "block-and-text",
-                                                "block": null,
-                                                "text": "1"
+                                                "block": null
                                             }
                                         },
                                         "options": {},
                                         "comment": null
-                                    }
+                                    },
+                                    "mode": "block-only"
                                 },
                                 "SUBSTACK": {
                                     "mode": "script",
@@ -57,27 +57,27 @@
                                             "opcode": "call ...",
                                             "inputs": {
                                                 "source": {
-                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "value of text argument [VALUE]",
-                                                        "inputs": {},
                                                         "options": {
                                                             "VALUE": "source"
                                                         },
+                                                        "inputs": {},
                                                         "comment": null
                                                     },
+                                                    "mode": "block-and-text",
                                                     "text": ""
                                                 },
                                                 "target": {
-                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "value of text argument [VALUE]",
-                                                        "inputs": {},
                                                         "options": {
                                                             "VALUE": "target"
                                                         },
+                                                        "inputs": {},
                                                         "comment": null
                                                     },
+                                                    "mode": "block-and-text",
                                                     "text": ""
                                                 }
                                             },
@@ -95,67 +95,67 @@
                                             "opcode": "call ...",
                                             "inputs": {
                                                 "n": {
-                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "(NUM1) - (NUM2)",
                                                         "inputs": {
                                                             "NUM1": {
-                                                                "mode": "block-and-text",
                                                                 "block": {
                                                                     "opcode": "value of text argument [VALUE]",
-                                                                    "inputs": {},
                                                                     "options": {
                                                                         "VALUE": "n"
                                                                     },
+                                                                    "inputs": {},
                                                                     "comment": null
                                                                 },
+                                                                "mode": "block-and-text",
                                                                 "text": ""
                                                             },
                                                             "NUM2": {
+                                                                "text": "1",
                                                                 "mode": "block-and-text",
-                                                                "block": null,
-                                                                "text": "1"
+                                                                "block": null
                                                             }
                                                         },
                                                         "options": {},
                                                         "comment": null
                                                     },
+                                                    "mode": "block-and-text",
                                                     "text": ""
                                                 },
                                                 "source": {
-                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "value of text argument [VALUE]",
-                                                        "inputs": {},
                                                         "options": {
                                                             "VALUE": "source"
                                                         },
+                                                        "inputs": {},
                                                         "comment": null
                                                     },
+                                                    "mode": "block-and-text",
                                                     "text": ""
                                                 },
                                                 "aux": {
-                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "value of text argument [VALUE]",
-                                                        "inputs": {},
                                                         "options": {
                                                             "VALUE": "target"
                                                         },
+                                                        "inputs": {},
                                                         "comment": null
                                                     },
+                                                    "mode": "block-and-text",
                                                     "text": ""
                                                 },
                                                 "target": {
-                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "value of text argument [VALUE]",
-                                                        "inputs": {},
                                                         "options": {
                                                             "VALUE": "aux"
                                                         },
+                                                        "inputs": {},
                                                         "comment": null
                                                     },
+                                                    "mode": "block-and-text",
                                                     "text": ""
                                                 }
                                             },
@@ -168,27 +168,27 @@
                                             "opcode": "call ...",
                                             "inputs": {
                                                 "source": {
-                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "value of text argument [VALUE]",
-                                                        "inputs": {},
                                                         "options": {
                                                             "VALUE": "source"
                                                         },
+                                                        "inputs": {},
                                                         "comment": null
                                                     },
+                                                    "mode": "block-and-text",
                                                     "text": ""
                                                 },
                                                 "target": {
-                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "value of text argument [VALUE]",
-                                                        "inputs": {},
                                                         "options": {
                                                             "VALUE": "target"
                                                         },
+                                                        "inputs": {},
                                                         "comment": null
                                                     },
+                                                    "mode": "block-and-text",
                                                     "text": ""
                                                 }
                                             },
@@ -201,67 +201,67 @@
                                             "opcode": "call ...",
                                             "inputs": {
                                                 "n": {
-                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "(NUM1) - (NUM2)",
                                                         "inputs": {
                                                             "NUM1": {
-                                                                "mode": "block-and-text",
                                                                 "block": {
                                                                     "opcode": "value of text argument [VALUE]",
-                                                                    "inputs": {},
                                                                     "options": {
                                                                         "VALUE": "n"
                                                                     },
+                                                                    "inputs": {},
                                                                     "comment": null
                                                                 },
+                                                                "mode": "block-and-text",
                                                                 "text": ""
                                                             },
                                                             "NUM2": {
+                                                                "text": "1",
                                                                 "mode": "block-and-text",
-                                                                "block": null,
-                                                                "text": "1"
+                                                                "block": null
                                                             }
                                                         },
                                                         "options": {},
                                                         "comment": null
                                                     },
+                                                    "mode": "block-and-text",
                                                     "text": ""
                                                 },
                                                 "source": {
-                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "value of text argument [VALUE]",
-                                                        "inputs": {},
                                                         "options": {
                                                             "VALUE": "aux"
                                                         },
+                                                        "inputs": {},
                                                         "comment": null
                                                     },
+                                                    "mode": "block-and-text",
                                                     "text": ""
                                                 },
                                                 "aux": {
-                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "value of text argument [VALUE]",
-                                                        "inputs": {},
                                                         "options": {
                                                             "VALUE": "source"
                                                         },
+                                                        "inputs": {},
                                                         "comment": null
                                                     },
+                                                    "mode": "block-and-text",
                                                     "text": ""
                                                 },
                                                 "target": {
-                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "value of text argument [VALUE]",
-                                                        "inputs": {},
                                                         "options": {
                                                             "VALUE": "target"
                                                         },
+                                                        "inputs": {},
                                                         "comment": null
                                                     },
+                                                    "mode": "block-and-text",
                                                     "text": ""
                                                 }
                                             },
@@ -286,55 +286,55 @@
                     "blocks": [
                         {
                             "opcode": "define ...",
-                            "inputs": {},
                             "options": {
                                 "noScreenRefresh": true,
                                 "blockType": "instruction",
                                 "customOpcode": "move disk from (source) to (target)"
                             },
+                            "inputs": {},
                             "comment": null
                         },
                         {
                             "opcode": "add (ITEM) to [LIST]",
                             "inputs": {
                                 "ITEM": {
-                                    "mode": "block-and-text",
                                     "block": {
                                         "opcode": "join (STRING1) (STRING2) (STRING3)",
                                         "inputs": {
                                             "STRING1": {
-                                                "mode": "block-and-text",
                                                 "block": {
                                                     "opcode": "value of text argument [VALUE]",
-                                                    "inputs": {},
                                                     "options": {
                                                         "VALUE": "source"
                                                     },
+                                                    "inputs": {},
                                                     "comment": null
                                                 },
+                                                "mode": "block-and-text",
                                                 "text": ""
                                             },
                                             "STRING2": {
+                                                "text": " --> ",
                                                 "mode": "block-and-text",
-                                                "block": null,
-                                                "text": " --> "
+                                                "block": null
                                             },
                                             "STRING3": {
-                                                "mode": "block-and-text",
                                                 "block": {
                                                     "opcode": "value of text argument [VALUE]",
-                                                    "inputs": {},
                                                     "options": {
                                                         "VALUE": "target"
                                                     },
+                                                    "inputs": {},
                                                     "comment": null
                                                 },
+                                                "mode": "block-and-text",
                                                 "text": ""
                                             }
                                         },
                                         "options": {},
                                         "comment": null
                                     },
+                                    "mode": "block-and-text",
                                     "text": ""
                                 }
                             },
