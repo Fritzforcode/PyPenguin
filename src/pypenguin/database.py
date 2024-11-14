@@ -72,10 +72,24 @@ opcodeDatabase = {
             "inputTypes": {"NUM1": "number", "NUM2": "number"},
             "optionTypes": {},
         },
+        "operator_subtract": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "(NUM1) - (NUM2)",
+            "inputTypes": {"NUM1": "number", "NUM2": "number"},
+            "optionTypes": {},
+        },
         "operator_multiply": {
             "type": "textReporter",
             "category": "Operators",
             "newOpcode": "(NUM1) * (NUM2)",
+            "inputTypes": {"NUM1": "number", "NUM2": "number"},
+            "optionTypes": {},
+        },
+        "operator_divide": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "(NUM1) / (NUM2)",
             "inputTypes": {"NUM1": "number", "NUM2": "number"},
             "optionTypes": {},
         },
@@ -145,6 +159,13 @@ opcodeDatabase = {
             "inputTypes": {"STRING1": "text", "STRING2": "text"},
             "optionTypes": {},
         },
+        "operator_join3": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "join (STRING1) (STRING2) (STRING3)",
+            "inputTypes": {"STRING1": "text", "STRING2": "text", "STRING3": "text"},
+            "optionTypes": {},
+        },
     # Variables
         "data_setvariableto": {
             "type": "instruction",
@@ -200,6 +221,13 @@ opcodeDatabase = {
             "inputTypes": {"array": "text", "index": "text"},
             "optionTypes": {},
         },
+        "jgJSON_json_array_length": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "length of array (array)",
+            "inputTypes": {"array": "text"},
+            "optionTypes": {},
+        },
     # SPECIAL
         "special_variable_value": {
             "type": "textReporter",
@@ -232,14 +260,14 @@ opcodeDatabase = {
         "argument_reporter_string_number": {
             "type": "textReporter",
             "category": None,
-            "newOpcode": "value of text argument (VALUE)",
+            "newOpcode": "value of text argument [VALUE]",
             "inputTypes": {},
             "optionTypes": {"VALUE": "string"},
         },
         "argument_reporter_boolean": {
             "type": "booleanReporter",
             "category": None,
-            "newOpcode": "value of boolean argument (VALUE)",
+            "newOpcode": "value of boolean argument [VALUE]",
             "inputTypes": {},
             "optionTypes": {"VALUE": "string"},
         },

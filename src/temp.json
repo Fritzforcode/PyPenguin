@@ -1,0 +1,791 @@
+{
+    "targets": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "variables": {
+                "`jEk@4|i[#Fk?(8x)AV.-my variable": [
+                    "my variable",
+                    0
+                ]
+            },
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "dataFormat": "svg",
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 240,
+                    "rotationCenterY": 180
+                }
+            ],
+            "sounds": [],
+            "id": "p]_uD8#0^Q=ryfqeQLud",
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 50,
+            "videoState": "on",
+            "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {
+                "a": {
+                    "opcode": "jgJSON_json_validate",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "json": [
+                            1,
+                            [
+                                10,
+                                "{}"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 15,
+                    "y": -8
+                },
+                "b": {
+                    "opcode": "jgJSON_getValueFromJSON",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "key"
+                            ]
+                        ],
+                        "JSON": [
+                            1,
+                            [
+                                10,
+                                "{\"key\": \"value\"}"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 18,
+                    "y": 73
+                },
+                "c": {
+                    "opcode": "jgJSON_getTreeValueFromJSON",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "first/second"
+                            ]
+                        ],
+                        "JSON": [
+                            1,
+                            [
+                                10,
+                                "{\"first\": {\"second\": 2, \"third\": 3}}"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": -10,
+                    "y": 145
+                },
+                "d": {
+                    "opcode": "jgJSON_setValueToKeyInJSON",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "KEY": [
+                            1,
+                            [
+                                10,
+                                "key"
+                            ]
+                        ],
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "value"
+                            ]
+                        ],
+                        "JSON": [
+                            1,
+                            [
+                                10,
+                                "{}"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 31,
+                    "y": 208
+                },
+                "e": {
+                    "opcode": "jgJSON_json_delete",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "json": [
+                            1,
+                            [
+                                10,
+                                "{}"
+                            ]
+                        ],
+                        "key": [
+                            1,
+                            [
+                                10,
+                                "key"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 34,
+                    "y": 270
+                },
+                "f": {
+                    "opcode": "jgJSON_json_values",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "json": [
+                            1,
+                            [
+                                10,
+                                "{}"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 50,
+                    "y": 331
+                },
+                "g": {
+                    "opcode": "jgJSON_json_keys",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "json": [
+                            1,
+                            [
+                                10,
+                                "{}"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 57,
+                    "y": 384
+                },
+                "h": {
+                    "opcode": "jgJSON_json_has",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "json": [
+                            1,
+                            [
+                                10,
+                                "{}"
+                            ]
+                        ],
+                        "key": [
+                            1,
+                            [
+                                10,
+                                "key"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 43,
+                    "y": 444
+                },
+                "i": {
+                    "opcode": "jgJSON_json_combine",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "one": [
+                            1,
+                            [
+                                10,
+                                "{}"
+                            ]
+                        ],
+                        "two": [
+                            1,
+                            [
+                                10,
+                                "{}"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 48,
+                    "y": 496
+                },
+                "j": {
+                    "opcode": "jgJSON_json_array_validate",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[]"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 78,
+                    "y": 558
+                },
+                "k": {
+                    "opcode": "jgJSON_json_array_split",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "text": [
+                            1,
+                            [
+                                10,
+                                "A, B, C"
+                            ]
+                        ],
+                        "delimeter": [
+                            1,
+                            [
+                                10,
+                                ", "
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 36,
+                    "y": 619
+                },
+                "l": {
+                    "opcode": "jgJSON_json_array_join",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ],
+                        "delimeter": [
+                            1,
+                            [
+                                10,
+                                ", "
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 35,
+                    "y": 671
+                },
+                "m": {
+                    "opcode": "jgJSON_json_array_push",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ],
+                        "item": [
+                            1,
+                            [
+                                10,
+                                "value"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 55,
+                    "y": 728
+                },
+                "n": {
+                    "opcode": "jgJSON_json_array_concatLayer1",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array2": [
+                            1,
+                            [
+                                10,
+                                "[\"D\", \"E\", \"F\"]"
+                            ]
+                        ],
+                        "array1": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 17,
+                    "y": 790
+                },
+                "o": {
+                    "opcode": "jgJSON_json_array_concatLayer2",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array2": [
+                            1,
+                            [
+                                10,
+                                "[\"D\", \"E\", \"F\"]"
+                            ]
+                        ],
+                        "array3": [
+                            1,
+                            [
+                                10,
+                                "[\"G\", \"H\", \"I\"]"
+                            ]
+                        ],
+                        "array1": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": -8,
+                    "y": 843
+                },
+                "p": {
+                    "opcode": "jgJSON_json_array_delete",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "2"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 81,
+                    "y": 903
+                },
+                "q": {
+                    "opcode": "jgJSON_json_array_reverse",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 93,
+                    "y": 955
+                },
+                "r": {
+                    "opcode": "jgJSON_json_array_insert",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ],
+                        "value": [
+                            1,
+                            [
+                                10,
+                                "value"
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "2"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 47,
+                    "y": 1005
+                },
+                "s": {
+                    "opcode": "jgJSON_json_array_set",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "2"
+                            ]
+                        ],
+                        "value": [
+                            1,
+                            [
+                                10,
+                                "value"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 67,
+                    "y": 1061
+                },
+                "t": {
+                    "opcode": "jgJSON_json_array_get",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "2"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 88,
+                    "y": 1120
+                },
+                "u": {
+                    "opcode": "jgJSON_json_array_indexofNostart",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ],
+                        "value": [
+                            1,
+                            [
+                                10,
+                                "value"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 46,
+                    "y": 1171
+                },
+                "v": {
+                    "opcode": "jgJSON_json_array_indexof",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ],
+                        "number": [
+                            1,
+                            [
+                                4,
+                                "2"
+                            ]
+                        ],
+                        "value": [
+                            1,
+                            [
+                                10,
+                                "value"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 17,
+                    "y": 1231
+                },
+                "w": {
+                    "opcode": "jgJSON_json_array_length",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 66,
+                    "y": 1282
+                },
+                "x": {
+                    "opcode": "jgJSON_json_array_contains",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ],
+                        "value": [
+                            1,
+                            [
+                                10,
+                                "value"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 33,
+                    "y": 1330
+                },
+                "y": {
+                    "opcode": "jgJSON_json_array_flat",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[[\"A\", \"B\"], [\"C\", \"D\"]]"
+                            ]
+                        ],
+                        "layer": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 11,
+                    "y": 1386
+                },
+                "z": {
+                    "opcode": "jgJSON_json_array_getrange",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ],
+                        "index1": [
+                            1,
+                            [
+                                4,
+                                "2"
+                            ]
+                        ],
+                        "index2": [
+                            1,
+                            [
+                                4,
+                                "2"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 29,
+                    "y": 1435
+                },
+                "A": {
+                    "opcode": "jgJSON_json_array_isempty",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"A\", \"B\", \"C\"]"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 71,
+                    "y": 1489
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "assetId": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
+                    "rotationCenterX": 26,
+                    "rotationCenterY": 46
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "assetId": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "dataFormat": "wav",
+                    "rate": 48000,
+                    "sampleCount": 17867,
+                    "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
+                }
+            ],
+            "id": "5I9nI;7P)jdiR-_X;/%l",
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "monitors": [],
+    "extensionData": {},
+    "extensions": [
+        "jgJSON"
+    ],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": "",
+        "platform": {
+            "name": "PenguinMod",
+            "url": "https://penguinmod.com/",
+            "version": "stable"
+        }
+    }
+}
