@@ -59,20 +59,21 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
             if inputType == "text" and inputID not in data:
                 raise formatError(path, f"A custom block with custom opcode '{optionDatas['customOpcode']}' must have the input '{inputID}'.")
     else:
+        inputTypes = opcodeData["inputTypes"]
         for i, inputID, inputValue in ikv(data):
             if inputID not in allowedInputIDs:
                 raise formatError(path, f"Input '{inputID}' is not defined for a block with opcode '{opcode}'.")
+        for inputID in allowedInputIDs:
+            inputType = inputTypes[inputID]
+            if inputType not in ["boolean", "script"]:
+                if inputID not in data:
+                    raise formatError(path, f"A block with opcode '{opcode}' must have the input '{inputID}'.")
     # Check input formats
     for inputID in data:
         if opcode == "call ...":
             if inputID not in inputTypes:
                 raise formatError(path, f"Input '{inputID}' is not defined for a custom block with custom opcode '{optionDatas['customOpcode']}'.")
-            inputType = inputTypes[inputID]
-        else:
-            inputType = opcodeData["inputTypes"][inputID]
-            if inputType not in ["boolean", "script"]:
-                if inputID not in data:
-                    raise formatError(path, f"A block with opcode '{opcode}' must have the input '{inputID}'.")
+        inputType = inputTypes[inputID]
 
         if inputID in data:
             match inputType: # type of the input
@@ -107,7 +108,7 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
                         case "text":
                             inputValue["text"] = ""
                         case "blocks":
-                            raise formatError(path+[inputID], f"An input of the 'script' mode must have the 'blocks' attribute.")
+                            inputValue["blocks"] = []
 
             if inputValue.get("block") != None: # When the input has a block and it isn't None, check the block format
                validateBlock(path=path+[inputID]+["block"], data=inputValue["block"], context=context)

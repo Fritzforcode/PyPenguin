@@ -6,7 +6,7 @@
             "scripts": [
                 {
                     "position": [
-                        0,
+                        500,
                         0
                     ],
                     "blocks": [
@@ -15,332 +15,22 @@
                             "options": {
                                 "noScreenRefresh": true,
                                 "blockType": "instruction",
-                                "customOpcode": "hanoi (n) (source) (aux) (target)"
+                                "customOpcode": "execute alu instr (instr)"
                             },
                             "inputs": {},
                             "comment": null
                         },
                         {
-                            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+                            "opcode": "switch (CONDITION) {SUBSTACK1} default {SUBSTACK2}",
                             "inputs": {
                                 "CONDITION": {
-                                    "block": {
-                                        "opcode": "(OPERAND1) = (OPERAND2)",
-                                        "inputs": {
-                                            "OPERAND1": {
-                                                "block": {
-                                                    "opcode": "value of text argument [VALUE]",
-                                                    "options": {
-                                                        "VALUE": "n"
-                                                    },
-                                                    "inputs": {},
-                                                    "comment": null
-                                                },
-                                                "mode": "block-and-text",
-                                                "text": ""
-                                            },
-                                            "OPERAND2": {
-                                                "text": "1",
-                                                "mode": "block-and-text",
-                                                "block": null
-                                            }
-                                        },
-                                        "options": {},
-                                        "comment": null
-                                    },
-                                    "mode": "block-only"
-                                },
-                                "SUBSTACK": {
-                                    "mode": "script",
-                                    "blocks": [
-                                        {
-                                            "opcode": "call ...",
-                                            "inputs": {
-                                                "source": {
-                                                    "block": {
-                                                        "opcode": "value of text argument [VALUE]",
-                                                        "options": {
-                                                            "VALUE": "source"
-                                                        },
-                                                        "inputs": {},
-                                                        "comment": null
-                                                    },
-                                                    "mode": "block-and-text",
-                                                    "text": ""
-                                                },
-                                                "target": {
-                                                    "block": {
-                                                        "opcode": "value of text argument [VALUE]",
-                                                        "options": {
-                                                            "VALUE": "target"
-                                                        },
-                                                        "inputs": {},
-                                                        "comment": null
-                                                    },
-                                                    "mode": "block-and-text",
-                                                    "text": ""
-                                                }
-                                            },
-                                            "options": {
-                                                "customOpcode": "move disk from (source) to (target)"
-                                            },
-                                            "comment": null
-                                        }
-                                    ]
-                                },
-                                "SUBSTACK2": {
-                                    "mode": "script",
-                                    "blocks": [
-                                        {
-                                            "opcode": "call ...",
-                                            "inputs": {
-                                                "n": {
-                                                    "block": {
-                                                        "opcode": "(NUM1) - (NUM2)",
-                                                        "inputs": {
-                                                            "NUM1": {
-                                                                "block": {
-                                                                    "opcode": "value of text argument [VALUE]",
-                                                                    "options": {
-                                                                        "VALUE": "n"
-                                                                    },
-                                                                    "inputs": {},
-                                                                    "comment": null
-                                                                },
-                                                                "mode": "block-and-text",
-                                                                "text": ""
-                                                            },
-                                                            "NUM2": {
-                                                                "text": "1",
-                                                                "mode": "block-and-text",
-                                                                "block": null
-                                                            }
-                                                        },
-                                                        "options": {},
-                                                        "comment": null
-                                                    },
-                                                    "mode": "block-and-text",
-                                                    "text": ""
-                                                },
-                                                "source": {
-                                                    "block": {
-                                                        "opcode": "value of text argument [VALUE]",
-                                                        "options": {
-                                                            "VALUE": "source"
-                                                        },
-                                                        "inputs": {},
-                                                        "comment": null
-                                                    },
-                                                    "mode": "block-and-text",
-                                                    "text": ""
-                                                },
-                                                "aux": {
-                                                    "block": {
-                                                        "opcode": "value of text argument [VALUE]",
-                                                        "options": {
-                                                            "VALUE": "target"
-                                                        },
-                                                        "inputs": {},
-                                                        "comment": null
-                                                    },
-                                                    "mode": "block-and-text",
-                                                    "text": ""
-                                                },
-                                                "target": {
-                                                    "block": {
-                                                        "opcode": "value of text argument [VALUE]",
-                                                        "options": {
-                                                            "VALUE": "aux"
-                                                        },
-                                                        "inputs": {},
-                                                        "comment": null
-                                                    },
-                                                    "mode": "block-and-text",
-                                                    "text": ""
-                                                }
-                                            },
-                                            "options": {
-                                                "customOpcode": "hanoi (n) (source) (aux) (target)"
-                                            },
-                                            "comment": null
-                                        },
-                                        {
-                                            "opcode": "call ...",
-                                            "inputs": {
-                                                "source": {
-                                                    "block": {
-                                                        "opcode": "value of text argument [VALUE]",
-                                                        "options": {
-                                                            "VALUE": "source"
-                                                        },
-                                                        "inputs": {},
-                                                        "comment": null
-                                                    },
-                                                    "mode": "block-and-text",
-                                                    "text": ""
-                                                },
-                                                "target": {
-                                                    "block": {
-                                                        "opcode": "value of text argument [VALUE]",
-                                                        "options": {
-                                                            "VALUE": "target"
-                                                        },
-                                                        "inputs": {},
-                                                        "comment": null
-                                                    },
-                                                    "mode": "block-and-text",
-                                                    "text": ""
-                                                }
-                                            },
-                                            "options": {
-                                                "customOpcode": "move disk from (source) to (target)"
-                                            },
-                                            "comment": null
-                                        },
-                                        {
-                                            "opcode": "call ...",
-                                            "inputs": {
-                                                "n": {
-                                                    "block": {
-                                                        "opcode": "(NUM1) - (NUM2)",
-                                                        "inputs": {
-                                                            "NUM1": {
-                                                                "block": {
-                                                                    "opcode": "value of text argument [VALUE]",
-                                                                    "options": {
-                                                                        "VALUE": "n"
-                                                                    },
-                                                                    "inputs": {},
-                                                                    "comment": null
-                                                                },
-                                                                "mode": "block-and-text",
-                                                                "text": ""
-                                                            },
-                                                            "NUM2": {
-                                                                "text": "1",
-                                                                "mode": "block-and-text",
-                                                                "block": null
-                                                            }
-                                                        },
-                                                        "options": {},
-                                                        "comment": null
-                                                    },
-                                                    "mode": "block-and-text",
-                                                    "text": ""
-                                                },
-                                                "source": {
-                                                    "block": {
-                                                        "opcode": "value of text argument [VALUE]",
-                                                        "options": {
-                                                            "VALUE": "aux"
-                                                        },
-                                                        "inputs": {},
-                                                        "comment": null
-                                                    },
-                                                    "mode": "block-and-text",
-                                                    "text": ""
-                                                },
-                                                "aux": {
-                                                    "block": {
-                                                        "opcode": "value of text argument [VALUE]",
-                                                        "options": {
-                                                            "VALUE": "source"
-                                                        },
-                                                        "inputs": {},
-                                                        "comment": null
-                                                    },
-                                                    "mode": "block-and-text",
-                                                    "text": ""
-                                                },
-                                                "target": {
-                                                    "block": {
-                                                        "opcode": "value of text argument [VALUE]",
-                                                        "options": {
-                                                            "VALUE": "target"
-                                                        },
-                                                        "inputs": {},
-                                                        "comment": null
-                                                    },
-                                                    "mode": "block-and-text",
-                                                    "text": ""
-                                                }
-                                            },
-                                            "options": {
-                                                "customOpcode": "hanoi (n) (source) (aux) (target)"
-                                            },
-                                            "comment": null
-                                        }
-                                    ]
-                                }
-                            },
-                            "options": {},
-                            "comment": null
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        1000
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define ...",
-                            "options": {
-                                "noScreenRefresh": true,
-                                "blockType": "instruction",
-                                "customOpcode": "move disk from (source) to (target)"
-                            },
-                            "inputs": {},
-                            "comment": null
-                        },
-                        {
-                            "opcode": "add (ITEM) to [LIST]",
-                            "inputs": {
-                                "ITEM": {
-                                    "block": {
-                                        "opcode": "join (STRING1) (STRING2) (STRING3)",
-                                        "inputs": {
-                                            "STRING1": {
-                                                "block": {
-                                                    "opcode": "value of text argument [VALUE]",
-                                                    "options": {
-                                                        "VALUE": "source"
-                                                    },
-                                                    "inputs": {},
-                                                    "comment": null
-                                                },
-                                                "mode": "block-and-text",
-                                                "text": ""
-                                            },
-                                            "STRING2": {
-                                                "text": " --> ",
-                                                "mode": "block-and-text",
-                                                "block": null
-                                            },
-                                            "STRING3": {
-                                                "block": {
-                                                    "opcode": "value of text argument [VALUE]",
-                                                    "options": {
-                                                        "VALUE": "target"
-                                                    },
-                                                    "inputs": {},
-                                                    "comment": null
-                                                },
-                                                "mode": "block-and-text",
-                                                "text": ""
-                                            }
-                                        },
-                                        "options": {},
-                                        "comment": null
-                                    },
+                                    "opcode": "value of text argumssent [VALUE]",
                                     "mode": "block-and-text",
+                                    "block": null,
                                     "text": ""
                                 }
                             },
-                            "options": {
-                                "LIST": "LOG"
-                            },
+                            "options": {},
                             "comment": null
                         }
                     ]
@@ -364,33 +54,8 @@
             "volume": 100
         }
     ],
-    "globalVariables": [
-        {
-            "name": "var",
-            "currentValue": 33,
-            "monitor": null,
-            "isCloudVariable": false
-        },
-        {
-            "name": "interpret: node",
-            "currentValue": 0,
-            "monitor": null,
-            "isCloudVariable": false
-        },
-        {
-            "name": "interpret: i",
-            "currentValue": 0,
-            "monitor": null,
-            "isCloudVariable": false
-        }
-    ],
-    "globalLists": [
-        {
-            "name": "LOG",
-            "currentValue": [],
-            "monitor": null
-        }
-    ],
+    "globalVariables": [],
+    "globalLists": [],
     "tempo": 60,
     "videoTransparency": 0,
     "videoState": "off",
