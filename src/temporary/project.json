@@ -3,26 +3,13 @@
         {
             "isStage": true,
             "name": "Stage",
-            "variables": {
-                "X#fH=/ZM.T|B;rKrmG[s": [
-                    "var",
-                    33
-                ],
-                "NmjQ-_mT(OA^.)?Hh^bl": [
-                    "interpret: node",
-                    0
-                ],
-                "Za:QFPiy`CEs]*lkO=/n": [
-                    "interpret: i",
-                    0
-                ]
-            },
+            "variables": {},
             "lists": {},
             "broadcasts": {},
             "customVars": [],
             "blocks": {
                 "a": {
-                    "opcode": "procedures_definition_return",
+                    "opcode": "procedures_definition",
                     "next": "b",
                     "parent": null,
                     "inputs": {
@@ -34,153 +21,20 @@
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 0,
+                    "x": 500,
                     "y": 0
                 },
-                "d": {
-                    "opcode": "argument_reporter_string_number",
-                    "next": null,
-                    "parent": "b",
-                    "inputs": {},
-                    "fields": {
-                        "VALUE": [
-                            "node",
-                            "M^Lp^Q]A^}K)lXO{ELxy"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
                 "b": {
-                    "opcode": "data_setvariableto",
-                    "next": "e",
+                    "opcode": "control_switch_default",
+                    "next": null,
                     "parent": "a",
                     "inputs": {
-                        "VALUE": [
-                            3,
-                            "d",
-                            [
-                                10,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "VARIABLE": [
-                            "interpret: node",
-                            "NmjQ-_mT(OA^.)?Hh^bl",
-                            ""
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "f": {
-                    "opcode": "jgJSON_getValueFromJSON",
-                    "next": null,
-                    "parent": "e",
-                    "inputs": {
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "_type"
-                            ]
-                        ],
-                        "JSON": [
-                            3,
-                            [
-                                12,
-                                "interpret: node",
-                                "NmjQ-_mT(OA^.)?Hh^bl"
-                            ],
-                            [
-                                10,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "g": {
-                    "opcode": "data_setvariableto",
-                    "next": null,
-                    "parent": "h",
-                    "inputs": {
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "VARIABLE": [
-                            "interpret: i",
-                            "Za:QFPiy`CEs]*lkO=/n",
-                            ""
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "h": {
-                    "opcode": "control_case",
-                    "next": "i",
-                    "parent": "e",
-                    "inputs": {
                         "CONDITION": [
                             1,
                             [
                                 10,
-                                "Module"
-                            ]
-                        ],
-                        "SUBSTACK": [
-                            2,
-                            "g"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "i": {
-                    "opcode": "control_repeat",
-                    "next": null,
-                    "parent": "h",
-                    "inputs": {
-                        "TIMES": [
-                            1,
-                            [
-                                4,
-                                "44"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "e": {
-                    "opcode": "control_switch",
-                    "next": null,
-                    "parent": "b",
-                    "inputs": {
-                        "CONDITION": [
-                            3,
-                            "f",
-                            [
-                                10,
                                 ""
                             ]
-                        ],
-                        "SUBSTACK": [
-                            2,
-                            "h"
                         ]
                     },
                     "fields": {},
@@ -192,9 +46,9 @@
                     "next": null,
                     "parent": "a",
                     "inputs": {
-                        "xeH-ilqtek]Y@J?EB}#|": [
+                        "X#fH=/ZM.T|B;rKrmG[s": [
                             1,
-                            "j"
+                            "d"
                         ]
                     },
                     "fields": {},
@@ -203,26 +57,26 @@
                     "mutation": {
                         "tagName": "mutation",
                         "children": [],
-                        "proccode": "interpret %s",
-                        "argumentids": "[\"xeH-ilqtek]Y@J?EB}#|\"]",
-                        "argumentnames": "[\"node\"]",
+                        "proccode": "execute alu instr %s",
+                        "argumentids": "[\"X#fH=/ZM.T|B;rKrmG[s\"]",
+                        "argumentnames": "[\"instr\"]",
                         "argumentdefaults": "[\"\"]",
-                        "warp": "false",
-                        "returns": "true",
+                        "warp": "true",
+                        "returns": "false",
                         "edited": "true",
-                        "optype": "\"string\"",
+                        "optype": "\"statement\"",
                         "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
                     }
                 },
-                "j": {
+                "d": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
                     "parent": "c",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
-                            "node",
-                            "J*:TkPo/}QyFcIoCVvQ%"
+                            "instr",
+                            "NmjQ-_mT(OA^.)?Hh^bl"
                         ]
                     },
                     "shadow": true,
@@ -248,7 +102,7 @@
                 }
             ],
             "sounds": [],
-            "id": "hmsCf{[jdpy{pYlVoecy",
+            "id": "Za:QFPiy`CEs]*lkO=/n",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,

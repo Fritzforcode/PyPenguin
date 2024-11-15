@@ -1,3 +1,69 @@
+instructions = {
+    "opcode": "switch (CONDITION) {SUBSTACK}",
+    "inputs": {
+        "CONDITION": {"block": {
+            "opcode": "value of text argument [VALUE]",
+            "options": {"VALUE": "instr"},
+        }},
+        "SUBSTACK": {"blocks": [
+            {
+                "opcode": "case (CONDITION) {SUBSTACK}",
+                "inputs": {
+                    "CONDITION":{"text": "add"},
+                    "SUBSTACK": {"blocks": [
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "options": {"VARIABLE": "[ALU] return value"},
+                            "inputs": {
+                                "VALUE": {"block": {
+                                    "opcode": "(NUM1) + (NUM2)",
+                                    "inputs": {
+                                        "NUM1": {"block": {
+                                            "opcode": "value of [VARIABLE]",
+                                            "options": {"VARIABLE": "[ALU] Arg A"},
+                                        }},
+                                        "NUM2": {"block": {
+                                            "opcode": "value of [VARIABLE]",
+                                            "options": {"VARIABLE": "[ALU] Arg B"},
+                                        }},
+                                    },
+                                }},
+                            },
+                        },
+                    ]},
+                },
+            },
+            {
+                "opcode": "case (CONDITION) {SUBSTACK}",
+                "inputs": {
+                    "CONDITION":{"text": "mul"},
+                    "SUBSTACK": {"blocks": [
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "options": {"VARIABLE": "[ALU] return value"},
+                            "inputs": {
+                                "VALUE": {"block": {
+                                    "opcode": "(NUM1) * (NUM2)",
+                                    "inputs": {
+                                        "NUM1": {"block": {
+                                            "opcode": "value of [VARIABLE]",
+                                            "options": {"VARIABLE": "[ALU] Arg A"},
+                                        }},
+                                        "NUM2": {"block": {
+                                            "opcode": "value of [VARIABLE]",
+                                            "options": {"VARIABLE": "[ALU] Arg B"},
+                                        }},
+                                    },
+                                }},
+                            },
+                        },
+                    ]},
+                },
+            },
+        ]},
+    },
+}
+
 excecuteAluInstrDef = {
     "position": [500,0],
     "blocks": [
@@ -6,15 +72,88 @@ excecuteAluInstrDef = {
             "options": {
                 "noScreenRefresh": True,
                 "blockType": "instruction",
-                "customOpcode": "execute alu instr (instr)",
+                "customOpcode": "execute alu instr (instr) (A) (B) (C)",
             }
         },
         {
-            "opcode": "switch (CONDITION) {SUBSTACK1} default {SUBSTACK2}",
+            "opcode": "if <CONDITION> then {SUBSTACK}",
             "inputs": {
-                "CONDITION": {
-                    "opcode": "value of text argument [VALUE]",
-                },
+                "CONDITION": {"block": {
+                    "opcode": "array (array) contains (value) ?",
+                    "inputs": {
+                        "array": {"text": '["add", "mul"]'},
+                        "value": {"block": {
+                            "opcode": "value of text argument [VALUE]",
+                            "options": {"VALUE": "instr"},
+                        }},
+                    },
+                }},
+                "SUBSTACK": {"blocks":[
+                    {
+                        "opcode": "set [VARIABLE] to (VALUE)",
+                        "inputs": {
+                            "VALUE": {"block": {
+                                "opcode": "call ...",
+                                "inputs": {
+                                    "reg": {"block": {
+                                        "opcode": "value of text argument [VALUE]",
+                                        "options": {"VALUE": "A"},
+                                    }},
+                                },
+                                "options": {"customOpcode": "read register (reg)"},
+                            }},
+                        },
+                        "options": {"VARIABLE": "[ALU] Arg A"},
+                    },
+                    {
+                        "opcode": "set [VARIABLE] to (VALUE)",
+                        "inputs": {
+                            "VALUE": {"block": {
+                                "opcode": "call ...",
+                                "inputs": {
+                                    "reg": {"block": {
+                                        "opcode": "value of text argument [VALUE]",
+                                        "options": {"VALUE": "B"},
+                                    }},
+                                },
+                                "options": {"customOpcode": "read register (reg)"},
+                            }},
+                        },
+                        "options": {"VARIABLE": "[ALU] Arg B"},
+                    },
+                ]},
+            },
+        },
+        instructions,
+        {
+            "opcode": "if <CONDITION> then {SUBSTACK}",
+            "inputs": {
+                "CONDITION": {"block": {
+                    "opcode": "array (array) contains (value) ?",
+                    "inputs": {
+                        "array": {"text": '["add", "mul"]'},
+                        "value": {"block": {
+                            "opcode": "value of text argument [VALUE]",
+                            "options": {"VALUE": "instr"},
+                        }},
+                    },
+                }},
+                "SUBSTACK": {"blocks": [
+                    {
+                        "opcode": "call ...",
+                        "inputs": {
+                            "reg": {"block": {
+                                "opcode": "value of text argument [VALUE]",
+                                "options": {"VALUE": "C"},
+                            }},
+                            "value": {"block": {
+                                "opcode": "value of [VARIABLE]",
+                                "options": {"VARIABLE": "[ALU] return value"},
+                            }},
+                        },
+                        "options": {"customOpcode": "set register (reg) to (value)"},
+                    },
+                ]},
             },
         },
     ],

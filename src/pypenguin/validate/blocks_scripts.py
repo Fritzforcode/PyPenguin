@@ -65,7 +65,7 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
                 raise formatError(path, f"Input '{inputID}' is not defined for a block with opcode '{opcode}'.")
         for inputID in allowedInputIDs:
             inputType = inputTypes[inputID]
-            if inputType not in ["boolean", "script"]:
+            if inputType not in ["boolean", "round", "script"]:
                 if inputID not in data:
                     raise formatError(path, f"A block with opcode '{opcode}' must have the input '{inputID}'.")
     # Check input formats
@@ -84,6 +84,8 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
                 case "text":
                     inputMode = "block-and-text"
                 case "boolean":
+                    inputMode = "block-only"
+                case "round":
                     inputMode = "block-only"
                 case "script":
                     inputMode = "script"
@@ -128,6 +130,8 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
                 case "text":
                     pass
                 case "boolean":
+                    pass
+                case "round":
                     pass
                 case "script":
                     pass

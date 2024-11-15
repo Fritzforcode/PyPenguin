@@ -100,6 +100,8 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                 inputMode = "block-and-text"
             case "boolean":
                 inputMode = "block-only"
+            case "round":
+                inputMode = "block-only"
             case "script":
                 inputMode = "script"
         return inputMode

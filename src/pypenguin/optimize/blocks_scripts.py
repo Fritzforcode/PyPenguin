@@ -35,7 +35,7 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
                     inputType = "boolean"
                 else:
                     inputType = opcodeDatabase[opcode]["inputTypes"][inputID]
-                mode = "block-only" if inputType=="boolean" else ("script" if inputType=="script" else None)
+                mode = "block-only" if inputType in ["boolean", "round"] else ("script" if inputType=="script" else None)
                 pointer = inputData[1]
                 text = None
             elif isinstance(inputData[1], list): # e.g. "MESSAGE": [1, [10, "Bye!"]]

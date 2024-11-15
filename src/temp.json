@@ -1,0 +1,687 @@
+{
+    "targets": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "variables": {
+                "`jEk@4|i[#Fk?(8x)AV.-my variable": [
+                    "my variable",
+                    0
+                ]
+            },
+            "lists": {
+                "Ir0eiz?G,OEZCvS{yUP%": [
+                    "my list",
+                    []
+                ]
+            },
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "dataFormat": "svg",
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 240,
+                    "rotationCenterY": 180
+                }
+            ],
+            "sounds": [],
+            "id": "p]_uD8#0^Q=ryfqeQLud",
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 50,
+            "videoState": "on",
+            "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {
+                "k": {
+                    "opcode": "data_setvariableto",
+                    "next": "a",
+                    "parent": null,
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "my variable",
+                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 41,
+                    "y": 205
+                },
+                "a": {
+                    "opcode": "data_changevariableby",
+                    "next": "b",
+                    "parent": "k",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "my variable",
+                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "b": {
+                    "opcode": "data_showvariable",
+                    "next": "l",
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "VARIABLE": [
+                            "my variable",
+                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "l": {
+                    "opcode": "data_hidevariable",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VARIABLE": [
+                            "my variable",
+                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "m": {
+                    "opcode": "data_addtolist",
+                    "next": "c",
+                    "parent": null,
+                    "inputs": {
+                        "ITEM": [
+                            1,
+                            [
+                                10,
+                                "thing"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 69,
+                    "y": 540
+                },
+                "c": {
+                    "opcode": "data_deleteoflist",
+                    "next": "d",
+                    "parent": "m",
+                    "inputs": {
+                        "INDEX": [
+                            1,
+                            [
+                                7,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "d": {
+                    "opcode": "data_deletealloflist",
+                    "next": "e",
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "e": {
+                    "opcode": "data_shiftlist",
+                    "next": "f",
+                    "parent": "d",
+                    "inputs": {
+                        "INDEX": [
+                            1,
+                            [
+                                7,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "f": {
+                    "opcode": "data_insertatlist",
+                    "next": "g",
+                    "parent": "e",
+                    "inputs": {
+                        "ITEM": [
+                            1,
+                            [
+                                10,
+                                "thing"
+                            ]
+                        ],
+                        "INDEX": [
+                            1,
+                            [
+                                7,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "g": {
+                    "opcode": "data_replaceitemoflist",
+                    "next": "h",
+                    "parent": "f",
+                    "inputs": {
+                        "INDEX": [
+                            1,
+                            [
+                                7,
+                                "1"
+                            ]
+                        ],
+                        "ITEM": [
+                            1,
+                            [
+                                10,
+                                "thing"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "h": {
+                    "opcode": "data_listforeachitem",
+                    "next": "n",
+                    "parent": "g",
+                    "inputs": {},
+                    "fields": {
+                        "VARIABLE": [
+                            "my variable",
+                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                            ""
+                        ],
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "n": {
+                    "opcode": "data_listforeachnum",
+                    "next": null,
+                    "parent": "h",
+                    "inputs": {},
+                    "fields": {
+                        "VARIABLE": [
+                            "my variable",
+                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                            ""
+                        ],
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "q": {
+                    "opcode": "data_itemoflist",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "INDEX": [
+                            1,
+                            [
+                                7,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 109,
+                    "y": 1024
+                },
+                "r": {
+                    "opcode": "data_itemnumoflist",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "ITEM": [
+                            1,
+                            [
+                                10,
+                                "thing"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 105,
+                    "y": 1075
+                },
+                "s": {
+                    "opcode": "data_amountinlist",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "foo"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 107,
+                    "y": 1138
+                },
+                "t": {
+                    "opcode": "data_lengthoflist",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 132,
+                    "y": 1192
+                },
+                "u": {
+                    "opcode": "data_listcontainsitem",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "ITEM": [
+                            1,
+                            [
+                                10,
+                                "thing"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 55,
+                    "y": 1244
+                },
+                "v": {
+                    "opcode": "data_itemexistslist",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "INDEX": [
+                            1,
+                            [
+                                7,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 37,
+                    "y": 1307
+                },
+                "w": {
+                    "opcode": "data_listisempty",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 65,
+                    "y": 1362
+                },
+                "o": {
+                    "opcode": "data_reverselist",
+                    "next": "i",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 90,
+                    "y": 1446
+                },
+                "i": {
+                    "opcode": "data_arraylist",
+                    "next": "j",
+                    "parent": "o",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "[\"a\", \"b\", \"c\"]"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "x": {
+                    "opcode": "data_listarray",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 372,
+                    "y": 1426
+                },
+                "j": {
+                    "opcode": "data_showlist",
+                    "next": "p",
+                    "parent": "i",
+                    "inputs": {},
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "p": {
+                    "opcode": "data_hidelist",
+                    "next": null,
+                    "parent": "j",
+                    "inputs": {},
+                    "fields": {
+                        "LIST": [
+                            "my list",
+                            "Ir0eiz?G,OEZCvS{yUP%",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "y": [
+                    12,
+                    "my variable",
+                    "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                    117,
+                    127
+                ],
+                "z": [
+                    13,
+                    "my list",
+                    "Ir0eiz?G,OEZCvS{yUP%",
+                    85,
+                    477
+                ],
+                "A": {
+                    "opcode": "motion_movesteps",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "STEPS": [
+                            3,
+                            [
+                                12,
+                                "my variable",
+                                "`jEk@4|i[#Fk?(8x)AV.-my variable"
+                            ],
+                            [
+                                4,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 111,
+                    "y": 65
+                },
+                "B": {
+                    "opcode": "motion_movesteps",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "STEPS": [
+                            3,
+                            [
+                                13,
+                                "my list",
+                                "Ir0eiz?G,OEZCvS{yUP%"
+                            ],
+                            [
+                                4,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 463,
+                    "y": 380
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "assetId": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
+                    "rotationCenterX": 26,
+                    "rotationCenterY": 46
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "assetId": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "dataFormat": "wav",
+                    "rate": 48000,
+                    "sampleCount": 17867,
+                    "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
+                }
+            ],
+            "id": "5I9nI;7P)jdiR-_X;/%l",
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "monitors": [
+        {
+            "id": "Ir0eiz?G,OEZCvS{yUP%",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "my list"
+            },
+            "spriteName": null,
+            "value": [],
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 5,
+            "visible": true
+        }
+    ],
+    "extensionData": {},
+    "extensions": [],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": "",
+        "platform": {
+            "name": "PenguinMod",
+            "url": "https://penguinmod.com/",
+            "version": "stable"
+        }
+    }
+}

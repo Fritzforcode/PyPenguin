@@ -71,7 +71,7 @@ opcodeDatabase = {
         },
     # Sensing
     # Operators
-        # Operators: Math
+        # Operators: Math Part 1
         "operator_add": {
             "type": "textReporter",
             "category": "Operators",
@@ -173,6 +173,14 @@ opcodeDatabase = {
             "inputTypes": {"STRING1": "text", "STRING2": "text", "STRING3": "text"},
             "optionTypes": {},
         },
+        # Operators: Math Part 2
+        "operator_mod": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "(NUM1) mod (NUM2)",
+            "inputTypes": {"NUM1": "text", "NUM2": "text"},
+            "optionTypes": {},
+        },
     # Variables
         "data_setvariableto": {
             "type": "instruction",
@@ -194,6 +202,20 @@ opcodeDatabase = {
             "category": "Lists",
             "newOpcode": "add (ITEM) to [LIST]",
             "inputTypes": {"ITEM": "text"},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_replaceitemoflist": {
+            "type": "instruction",
+            "category": "Lists",
+            "newOpcode": "replace item (INDEX) of [LIST] with (ITEM)",
+            "inputTypes": {"INDEX": "text", "ITEM": "text"},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_itemoflist": {
+            "type": "textReporter",
+            "category": "Lists",
+            "newOpcode": "item (INDEX) of [LIST]",
+            "inputTypes": {"INDEX": "text"},
             "optionTypes": {"LIST": "list"},
         },
 # EXTENSIONS
@@ -235,21 +257,30 @@ opcodeDatabase = {
             "inputTypes": {"array": "text"},
             "optionTypes": {},
         },
+        "jgJSON_json_array_contains": {
+            "type": "booleanReporter",
+            "category": "JSON",
+            "newOpcode": "array (array) contains (value) ?",
+            "inputTypes": {"array": "text", "value": "text"},
+            "optionTypes": {},
+        },
     # SPECIAL
+        # SPECIAL: Varibles and Lists
         "special_variable_value": {
             "type": "textReporter",
             "category": "Variables",
-            "newOpcode": "value of (VARIABLE)",
+            "newOpcode": "value of [VARIABLE]",
             "inputTypes": {},
             "optionTypes": {"VARIABLE": "variable"},
         },
         "special_list_value": {
             "type": "textReporter",
             "category": "Lists",
-            "newOpcode": "value of (LIST)",
+            "newOpcode": "value of [LIST]",
             "inputTypes": {},
             "optionTypes": {"LIST": "list"},
         },
+        # SPECIAL: Custom Blocks
         "special_define": {
             "type": "hat",
             "category": "My Blocks",
@@ -263,6 +294,20 @@ opcodeDatabase = {
             "newOpcode": "call ...",
             "inputTypes": {},
             "optionTypes": {"customOpcode": "opcode"},
+        },
+        "procedures_return": {
+            "type": "lastInstruction",
+            "category": "My Blocks",
+            "newOpcode": "return (return)",
+            "inputTypes": {"return": "text"},
+            "optionTypes": {},
+        },
+        "procedures_set": {
+            "type": "instruction",
+            "category": "My Blocks",
+            "newOpcode": "set (PARAM) to (VALUE)",
+            "inputTypes": {"PARAM": "round", "VALUE": "text"},
+            "optionTypes": {},
         },
         "argument_reporter_string_number": {
             "type": "textReporter",

@@ -15,22 +15,507 @@
                             "options": {
                                 "noScreenRefresh": true,
                                 "blockType": "instruction",
-                                "customOpcode": "execute alu instr (instr)"
+                                "customOpcode": "execute alu instr (instr) (A) (B) (C)"
                             },
                             "inputs": {},
                             "comment": null
                         },
                         {
-                            "opcode": "switch (CONDITION) {SUBSTACK1} default {SUBSTACK2}",
+                            "opcode": "if <CONDITION> then {SUBSTACK}",
                             "inputs": {
                                 "CONDITION": {
-                                    "opcode": "value of text argumssent [VALUE]",
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": ""
+                                    "block": {
+                                        "opcode": "array (array) contains (value) ?",
+                                        "inputs": {
+                                            "array": {
+                                                "text": "[\"add\", \"mul\"]",
+                                                "mode": "block-and-text",
+                                                "block": null
+                                            },
+                                            "value": {
+                                                "block": {
+                                                    "opcode": "value of text argument [VALUE]",
+                                                    "options": {
+                                                        "VALUE": "instr"
+                                                    },
+                                                    "inputs": {},
+                                                    "comment": null
+                                                },
+                                                "mode": "block-and-text",
+                                                "text": ""
+                                            }
+                                        },
+                                        "options": {},
+                                        "comment": null
+                                    },
+                                    "mode": "block-only"
+                                },
+                                "SUBSTACK": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "block": {
+                                                        "opcode": "call ...",
+                                                        "inputs": {
+                                                            "reg": {
+                                                                "block": {
+                                                                    "opcode": "value of text argument [VALUE]",
+                                                                    "options": {
+                                                                        "VALUE": "A"
+                                                                    },
+                                                                    "inputs": {},
+                                                                    "comment": null
+                                                                },
+                                                                "mode": "block-and-text",
+                                                                "text": ""
+                                                            }
+                                                        },
+                                                        "options": {
+                                                            "customOpcode": "read register (reg)"
+                                                        },
+                                                        "comment": null
+                                                    },
+                                                    "mode": "block-and-text",
+                                                    "text": ""
+                                                }
+                                            },
+                                            "options": {
+                                                "VARIABLE": "[ALU] Arg A"
+                                            },
+                                            "comment": null
+                                        },
+                                        {
+                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "block": {
+                                                        "opcode": "call ...",
+                                                        "inputs": {
+                                                            "reg": {
+                                                                "block": {
+                                                                    "opcode": "value of text argument [VALUE]",
+                                                                    "options": {
+                                                                        "VALUE": "B"
+                                                                    },
+                                                                    "inputs": {},
+                                                                    "comment": null
+                                                                },
+                                                                "mode": "block-and-text",
+                                                                "text": ""
+                                                            }
+                                                        },
+                                                        "options": {
+                                                            "customOpcode": "read register (reg)"
+                                                        },
+                                                        "comment": null
+                                                    },
+                                                    "mode": "block-and-text",
+                                                    "text": ""
+                                                }
+                                            },
+                                            "options": {
+                                                "VARIABLE": "[ALU] Arg B"
+                                            },
+                                            "comment": null
+                                        }
+                                    ],
+                                    "mode": "script"
                                 }
                             },
                             "options": {},
+                            "comment": null
+                        },
+                        {
+                            "opcode": "switch (CONDITION) {SUBSTACK}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "block": {
+                                        "opcode": "value of text argument [VALUE]",
+                                        "options": {
+                                            "VALUE": "instr"
+                                        },
+                                        "inputs": {},
+                                        "comment": null
+                                    },
+                                    "mode": "block-and-text",
+                                    "text": ""
+                                },
+                                "SUBSTACK": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "case (CONDITION) {SUBSTACK}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "text": "add",
+                                                    "mode": "block-and-text",
+                                                    "block": null
+                                                },
+                                                "SUBSTACK": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                            "options": {
+                                                                "VARIABLE": "[ALU] return value"
+                                                            },
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "block": {
+                                                                        "opcode": "(NUM1) + (NUM2)",
+                                                                        "inputs": {
+                                                                            "NUM1": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": "[ALU] Arg A"
+                                                                                    },
+                                                                                    "inputs": {},
+                                                                                    "comment": null
+                                                                                },
+                                                                                "mode": "block-and-text",
+                                                                                "text": ""
+                                                                            },
+                                                                            "NUM2": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": "[ALU] Arg B"
+                                                                                    },
+                                                                                    "inputs": {},
+                                                                                    "comment": null
+                                                                                },
+                                                                                "mode": "block-and-text",
+                                                                                "text": ""
+                                                                            }
+                                                                        },
+                                                                        "options": {},
+                                                                        "comment": null
+                                                                    },
+                                                                    "mode": "block-and-text",
+                                                                    "text": ""
+                                                                }
+                                                            },
+                                                            "comment": null
+                                                        }
+                                                    ],
+                                                    "mode": "script"
+                                                }
+                                            },
+                                            "options": {},
+                                            "comment": null
+                                        },
+                                        {
+                                            "opcode": "case (CONDITION) {SUBSTACK}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "text": "mul",
+                                                    "mode": "block-and-text",
+                                                    "block": null
+                                                },
+                                                "SUBSTACK": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                            "options": {
+                                                                "VARIABLE": "[ALU] return value"
+                                                            },
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "block": {
+                                                                        "opcode": "(NUM1) * (NUM2)",
+                                                                        "inputs": {
+                                                                            "NUM1": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": "[ALU] Arg A"
+                                                                                    },
+                                                                                    "inputs": {},
+                                                                                    "comment": null
+                                                                                },
+                                                                                "mode": "block-and-text",
+                                                                                "text": ""
+                                                                            },
+                                                                            "NUM2": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": "[ALU] Arg B"
+                                                                                    },
+                                                                                    "inputs": {},
+                                                                                    "comment": null
+                                                                                },
+                                                                                "mode": "block-and-text",
+                                                                                "text": ""
+                                                                            }
+                                                                        },
+                                                                        "options": {},
+                                                                        "comment": null
+                                                                    },
+                                                                    "mode": "block-and-text",
+                                                                    "text": ""
+                                                                }
+                                                            },
+                                                            "comment": null
+                                                        }
+                                                    ],
+                                                    "mode": "script"
+                                                }
+                                            },
+                                            "options": {},
+                                            "comment": null
+                                        }
+                                    ],
+                                    "mode": "script"
+                                }
+                            },
+                            "options": {},
+                            "comment": null
+                        },
+                        {
+                            "opcode": "if <CONDITION> then {SUBSTACK}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "block": {
+                                        "opcode": "array (array) contains (value) ?",
+                                        "inputs": {
+                                            "array": {
+                                                "text": "[\"add\", \"mul\"]",
+                                                "mode": "block-and-text",
+                                                "block": null
+                                            },
+                                            "value": {
+                                                "block": {
+                                                    "opcode": "value of text argument [VALUE]",
+                                                    "options": {
+                                                        "VALUE": "instr"
+                                                    },
+                                                    "inputs": {},
+                                                    "comment": null
+                                                },
+                                                "mode": "block-and-text",
+                                                "text": ""
+                                            }
+                                        },
+                                        "options": {},
+                                        "comment": null
+                                    },
+                                    "mode": "block-only"
+                                },
+                                "SUBSTACK": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "call ...",
+                                            "inputs": {
+                                                "reg": {
+                                                    "block": {
+                                                        "opcode": "value of text argument [VALUE]",
+                                                        "options": {
+                                                            "VALUE": "C"
+                                                        },
+                                                        "inputs": {},
+                                                        "comment": null
+                                                    },
+                                                    "mode": "block-and-text",
+                                                    "text": ""
+                                                },
+                                                "value": {
+                                                    "block": {
+                                                        "opcode": "value of [VARIABLE]",
+                                                        "options": {
+                                                            "VARIABLE": "[ALU] return value"
+                                                        },
+                                                        "inputs": {},
+                                                        "comment": null
+                                                    },
+                                                    "mode": "block-and-text",
+                                                    "text": ""
+                                                }
+                                            },
+                                            "options": {
+                                                "customOpcode": "set register (reg) to (value)"
+                                            },
+                                            "comment": null
+                                        }
+                                    ],
+                                    "mode": "script"
+                                }
+                            },
+                            "options": {},
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        1000,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "options": {
+                                "noScreenRefresh": true,
+                                "blockType": "numberReporter",
+                                "customOpcode": "read register (reg)"
+                            },
+                            "inputs": {},
+                            "comment": null
+                        },
+                        {
+                            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "block": {
+                                        "opcode": "(OPERAND1) = (OPERAND2)",
+                                        "inputs": {
+                                            "OPERAND1": {
+                                                "block": {
+                                                    "opcode": "value of text argument [VALUE]",
+                                                    "options": {
+                                                        "VALUE": "reg"
+                                                    },
+                                                    "inputs": {},
+                                                    "comment": null
+                                                },
+                                                "mode": "block-and-text",
+                                                "text": ""
+                                            },
+                                            "OPERAND2": {
+                                                "text": "r0",
+                                                "mode": "block-and-text",
+                                                "block": null
+                                            }
+                                        },
+                                        "options": {},
+                                        "comment": null
+                                    },
+                                    "mode": "block-only"
+                                },
+                                "SUBSTACK": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "return (return)",
+                                            "inputs": {
+                                                "return": {
+                                                    "text": "0",
+                                                    "mode": "block-and-text",
+                                                    "block": null
+                                                }
+                                            },
+                                            "options": {},
+                                            "comment": null
+                                        }
+                                    ],
+                                    "mode": "script"
+                                },
+                                "SUBSTACK2": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "return (return)",
+                                            "inputs": {
+                                                "return": {
+                                                    "block": {
+                                                        "opcode": "item (INDEX) of [LIST]",
+                                                        "options": {
+                                                            "LIST": "REGISTERS"
+                                                        },
+                                                        "inputs": {
+                                                            "INDEX": {
+                                                                "block": {
+                                                                    "opcode": "value of text argument [VALUE]",
+                                                                    "options": {
+                                                                        "VALUE": "reg"
+                                                                    },
+                                                                    "inputs": {},
+                                                                    "comment": null
+                                                                },
+                                                                "mode": "block-and-text",
+                                                                "text": ""
+                                                            }
+                                                        },
+                                                        "comment": null
+                                                    },
+                                                    "mode": "block-and-text",
+                                                    "text": ""
+                                                }
+                                            },
+                                            "options": {},
+                                            "comment": null
+                                        }
+                                    ],
+                                    "mode": "script"
+                                }
+                            },
+                            "options": {},
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        1500,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "options": {
+                                "noScreenRefresh": true,
+                                "blockType": "instruction",
+                                "customOpcode": "set register (reg) to (value)"
+                            },
+                            "inputs": {},
+                            "comment": null
+                        },
+                        {
+                            "opcode": "replace item (INDEX) of [LIST] with (ITEM)",
+                            "inputs": {
+                                "INDEX": {
+                                    "block": {
+                                        "opcode": "value of text argument [VALUE]",
+                                        "options": {
+                                            "VALUE": "reg"
+                                        },
+                                        "inputs": {},
+                                        "comment": null
+                                    },
+                                    "mode": "block-and-text",
+                                    "text": ""
+                                },
+                                "ITEM": {
+                                    "block": {
+                                        "opcode": "(NUM1) mod (NUM2)",
+                                        "inputs": {
+                                            "NUM1": {
+                                                "block": {
+                                                    "opcode": "value of text argument [VALUE]",
+                                                    "options": {
+                                                        "VALUE": "value"
+                                                    },
+                                                    "inputs": {},
+                                                    "comment": null
+                                                },
+                                                "mode": "block-and-text",
+                                                "text": ""
+                                            },
+                                            "NUM2": {
+                                                "text": "256",
+                                                "mode": "block-and-text",
+                                                "block": null
+                                            }
+                                        },
+                                        "options": {},
+                                        "comment": null
+                                    },
+                                    "mode": "block-and-text",
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "LIST": "REGISTERS"
+                            },
                             "comment": null
                         }
                     ]
@@ -54,8 +539,90 @@
             "volume": 100
         }
     ],
-    "globalVariables": [],
-    "globalLists": [],
+    "globalVariables": [
+        {
+            "name": "[ALU] return value",
+            "currentValue": 0,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    20,
+                    10
+                ],
+                "position": [
+                    5,
+                    5
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            },
+            "isCloudVariable": false
+        },
+        {
+            "name": "[ALU] Arg A",
+            "currentValue": 0,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    20,
+                    10
+                ],
+                "position": [
+                    5,
+                    50
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            },
+            "isCloudVariable": false
+        },
+        {
+            "name": "[ALU] Arg B",
+            "currentValue": 0,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    20,
+                    10
+                ],
+                "position": [
+                    5,
+                    50
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            },
+            "isCloudVariable": false
+        }
+    ],
+    "globalLists": [
+        {
+            "name": "REGISTERS",
+            "currentValue": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+            ],
+            "monitor": {
+                "visible": true,
+                "size": [
+                    100,
+                    250
+                ],
+                "position": [
+                    200,
+                    100
+                ]
+            }
+        }
+    ],
     "tempo": 60,
     "videoTransparency": 0,
     "videoState": "off",

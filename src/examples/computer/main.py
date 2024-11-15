@@ -1,4 +1,5 @@
 from alu import excecuteAluInstrDef
+from utility import readRegisterDef, setRegisterDef
 
 projectData = {
     "sprites": [
@@ -6,7 +7,9 @@ projectData = {
             "name": "Stage",
             "isStage": True,
             "scripts": [
-                excecuteAluInstrDef
+                excecuteAluInstrDef,
+                readRegisterDef,
+                setRegisterDef,
             ],
             "comments": [],
             "currentCostume": 0,
@@ -22,8 +25,56 @@ projectData = {
         },
     ],
     "globalVariables": [
+        {
+            "name": "[ALU] return value",
+            "currentValue": 0,
+            "monitor": {
+                "visible": True,
+                "size": [20,10],
+                "position": [5,5],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": True,
+            },
+            "isCloudVariable": False,
+        },
+        {
+            "name": "[ALU] Arg A",
+            "currentValue": 0,
+            "monitor": {
+                "visible": True,
+                "size": [20,10],
+                "position": [5,50],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": True,
+            },
+            "isCloudVariable": False,
+        },
+        {
+            "name": "[ALU] Arg B",
+            "currentValue": 0,
+            "monitor": {
+                "visible": True,
+                "size": [20,10],
+                "position": [5,50],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": True,
+            },
+            "isCloudVariable": False,
+        },
     ],
     "globalLists": [
+        {
+            "name": "REGISTERS",
+            "currentValue": 7*["0"],
+            "monitor": {
+                "visible": True,
+                "size": [100,250],
+                "position": [200,100],
+            },
+        }
     ],
     "tempo": 60,
     "videoTransparency": 0,
@@ -50,13 +101,13 @@ from pypenguin.helper_functions import writeJSONFile
 validateProject(projectData=projectData)
 
 writeJSONFile(
-    filePath = "project/project.json",
+    filePath = "../../../project/project.json",
     data     = projectData
 )
 
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory = "project",
-    projectFilePath           = "export.pmp",
-    temporaryDirectory        = "temporary",
-    writeDebugFiles           = True,
+    optimizedProjectDirectory = "../../../project",
+    projectFilePath           = "../../../export.pmp",
+    temporaryDirectory        = "../../../temporary",
+    writeDebugFiles           = False,
 )
