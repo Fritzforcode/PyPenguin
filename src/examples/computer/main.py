@@ -1,5 +1,6 @@
 from alu import excecuteAluInstrDef
 from utility import readRegisterDef, setRegisterDef
+from control import executeCurrentInstrDef, programm, executeControlInstrDef
 
 projectData = {
     "sprites": [
@@ -7,7 +8,9 @@ projectData = {
             "name": "Stage",
             "isStage": True,
             "scripts": [
+                executeCurrentInstrDef,
                 excecuteAluInstrDef,
+                executeControlInstrDef,
                 readRegisterDef,
                 setRegisterDef,
             ],
@@ -25,6 +28,45 @@ projectData = {
         },
     ],
     "globalVariables": [
+        {
+            "name": "current instr",
+            "currentValue": "",
+            "monitor": {
+                "visible": True,
+                "size": [20,10],
+                "position": [5,200],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": True,
+            },
+            "isCloudVariable": False,
+        },
+        {
+            "name": "PROGRAMM COUNTER",
+            "currentValue": 1,
+            "monitor": {
+                "visible": True,
+                "size": [20,10],
+                "position": [5,100],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": True,
+            },
+            "isCloudVariable": False,
+        },
+        {
+            "name": "NEW PC",
+            "currentValue": 1,
+            "monitor": {
+                "visible": True,
+                "size": [20,70],
+                "position": [5,100],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": True,
+            },
+            "isCloudVariable": False,
+        },
         {
             "name": "[ALU] return value",
             "currentValue": 0,
@@ -57,7 +99,7 @@ projectData = {
             "monitor": {
                 "visible": True,
                 "size": [20,10],
-                "position": [5,50],
+                "position": [5,150],
                 "sliderMin": 0,
                 "sliderMax": 100,
                 "onlyIntegers": True,
@@ -67,6 +109,15 @@ projectData = {
     ],
     "globalLists": [
         {
+            "name": "PROGRAMM",
+            "currentValue": programm,
+            "monitor": {
+                "visible": True,
+                "size": [100,250],
+                "position": [300,100],
+            },
+        },
+        {
             "name": "REGISTERS",
             "currentValue": 7*["0"],
             "monitor": {
@@ -74,7 +125,7 @@ projectData = {
                 "size": [100,250],
                 "position": [200,100],
             },
-        }
+        },
     ],
     "tempo": 60,
     "videoTransparency": 0,
@@ -101,13 +152,12 @@ from pypenguin.helper_functions import writeJSONFile
 validateProject(projectData=projectData)
 
 writeJSONFile(
-    filePath = "../../../project/project.json",
+    filePath = "project/project.json",
     data     = projectData
 )
-
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory = "../../../project",
-    projectFilePath           = "../../../export.pmp",
-    temporaryDirectory        = "../../../temporary",
+    optimizedProjectDirectory = "project",
+    projectFilePath           = "export.pmp",
+    temporaryDirectory        = "temporary",
     writeDebugFiles           = False,
 )

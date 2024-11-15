@@ -6,6 +6,456 @@
             "scripts": [
                 {
                     "position": [
+                        -1500,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "options": {
+                                "noScreenRefresh": true,
+                                "blockType": "instruction",
+                                "customOpcode": "execute current instr"
+                            },
+                            "inputs": {},
+                            "comment": null
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "block": {
+                                        "opcode": "item (INDEX) of [LIST]",
+                                        "inputs": {
+                                            "INDEX": {
+                                                "block": {
+                                                    "opcode": "value of [VARIABLE]",
+                                                    "options": {
+                                                        "VARIABLE": "PROGRAMM COUNTER"
+                                                    },
+                                                    "inputs": {},
+                                                    "comment": null
+                                                },
+                                                "mode": "block-and-text",
+                                                "text": ""
+                                            }
+                                        },
+                                        "options": {
+                                            "LIST": "PROGRAMM"
+                                        },
+                                        "comment": null
+                                    },
+                                    "mode": "block-and-text",
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "current instr"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "block": {
+                                        "opcode": "(NUM1) + (NUM2)",
+                                        "inputs": {
+                                            "NUM1": {
+                                                "block": {
+                                                    "opcode": "value of [VARIABLE]",
+                                                    "options": {
+                                                        "VARIABLE": "PROGRAMM COUNTER"
+                                                    },
+                                                    "inputs": {},
+                                                    "comment": null
+                                                },
+                                                "mode": "block-and-text",
+                                                "text": ""
+                                            },
+                                            "NUM2": {
+                                                "text": "1",
+                                                "mode": "block-and-text",
+                                                "block": null
+                                            }
+                                        },
+                                        "options": {},
+                                        "comment": null
+                                    },
+                                    "mode": "block-and-text",
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "NEW PC"
+                            },
+                            "comment": null
+                        },
+                        {
+                            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "block": {
+                                        "opcode": "array (array) contains (value) ?",
+                                        "inputs": {
+                                            "array": {
+                                                "text": "[\"add\", \"mul\"]",
+                                                "mode": "block-and-text",
+                                                "block": null
+                                            },
+                                            "value": {
+                                                "block": {
+                                                    "opcode": "in array (array) get (index)",
+                                                    "inputs": {
+                                                        "array": {
+                                                            "block": {
+                                                                "opcode": "value of [VARIABLE]",
+                                                                "options": {
+                                                                    "VARIABLE": "current instr"
+                                                                },
+                                                                "inputs": {},
+                                                                "comment": null
+                                                            },
+                                                            "mode": "block-and-text",
+                                                            "text": ""
+                                                        },
+                                                        "index": {
+                                                            "text": "0",
+                                                            "mode": "block-and-text",
+                                                            "block": null
+                                                        }
+                                                    },
+                                                    "options": {},
+                                                    "comment": null
+                                                },
+                                                "mode": "block-and-text",
+                                                "text": ""
+                                            }
+                                        },
+                                        "options": {},
+                                        "comment": null
+                                    },
+                                    "mode": "block-only"
+                                },
+                                "SUBSTACK": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "call ...",
+                                            "options": {
+                                                "customOpcode": "execute alu instr (instr) (A) (B) (C)"
+                                            },
+                                            "inputs": {
+                                                "instr": {
+                                                    "block": {
+                                                        "opcode": "in array (array) get (index)",
+                                                        "inputs": {
+                                                            "array": {
+                                                                "block": {
+                                                                    "opcode": "value of [VARIABLE]",
+                                                                    "options": {
+                                                                        "VARIABLE": "current instr"
+                                                                    },
+                                                                    "inputs": {},
+                                                                    "comment": null
+                                                                },
+                                                                "mode": "block-and-text",
+                                                                "text": ""
+                                                            },
+                                                            "index": {
+                                                                "text": "0",
+                                                                "mode": "block-and-text",
+                                                                "block": null
+                                                            }
+                                                        },
+                                                        "options": {},
+                                                        "comment": null
+                                                    },
+                                                    "mode": "block-and-text",
+                                                    "text": ""
+                                                },
+                                                "A": {
+                                                    "block": {
+                                                        "opcode": "in array (array) get (index)",
+                                                        "inputs": {
+                                                            "array": {
+                                                                "block": {
+                                                                    "opcode": "value of [VARIABLE]",
+                                                                    "options": {
+                                                                        "VARIABLE": "current instr"
+                                                                    },
+                                                                    "inputs": {},
+                                                                    "comment": null
+                                                                },
+                                                                "mode": "block-and-text",
+                                                                "text": ""
+                                                            },
+                                                            "index": {
+                                                                "text": "1",
+                                                                "mode": "block-and-text",
+                                                                "block": null
+                                                            }
+                                                        },
+                                                        "options": {},
+                                                        "comment": null
+                                                    },
+                                                    "mode": "block-and-text",
+                                                    "text": ""
+                                                },
+                                                "B": {
+                                                    "block": {
+                                                        "opcode": "in array (array) get (index)",
+                                                        "inputs": {
+                                                            "array": {
+                                                                "block": {
+                                                                    "opcode": "value of [VARIABLE]",
+                                                                    "options": {
+                                                                        "VARIABLE": "current instr"
+                                                                    },
+                                                                    "inputs": {},
+                                                                    "comment": null
+                                                                },
+                                                                "mode": "block-and-text",
+                                                                "text": ""
+                                                            },
+                                                            "index": {
+                                                                "text": "2",
+                                                                "mode": "block-and-text",
+                                                                "block": null
+                                                            }
+                                                        },
+                                                        "options": {},
+                                                        "comment": null
+                                                    },
+                                                    "mode": "block-and-text",
+                                                    "text": ""
+                                                },
+                                                "C": {
+                                                    "block": {
+                                                        "opcode": "in array (array) get (index)",
+                                                        "inputs": {
+                                                            "array": {
+                                                                "block": {
+                                                                    "opcode": "value of [VARIABLE]",
+                                                                    "options": {
+                                                                        "VARIABLE": "current instr"
+                                                                    },
+                                                                    "inputs": {},
+                                                                    "comment": null
+                                                                },
+                                                                "mode": "block-and-text",
+                                                                "text": ""
+                                                            },
+                                                            "index": {
+                                                                "text": "3",
+                                                                "mode": "block-and-text",
+                                                                "block": null
+                                                            }
+                                                        },
+                                                        "options": {},
+                                                        "comment": null
+                                                    },
+                                                    "mode": "block-and-text",
+                                                    "text": ""
+                                                }
+                                            },
+                                            "comment": null
+                                        }
+                                    ],
+                                    "mode": "script"
+                                },
+                                "SUBSTACK2": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "block": {
+                                                        "opcode": "array (array) contains (value) ?",
+                                                        "inputs": {
+                                                            "array": {
+                                                                "text": "[\"j\"]",
+                                                                "mode": "block-and-text",
+                                                                "block": null
+                                                            },
+                                                            "value": {
+                                                                "block": {
+                                                                    "opcode": "in array (array) get (index)",
+                                                                    "inputs": {
+                                                                        "array": {
+                                                                            "block": {
+                                                                                "opcode": "value of [VARIABLE]",
+                                                                                "options": {
+                                                                                    "VARIABLE": "current instr"
+                                                                                },
+                                                                                "inputs": {},
+                                                                                "comment": null
+                                                                            },
+                                                                            "mode": "block-and-text",
+                                                                            "text": ""
+                                                                        },
+                                                                        "index": {
+                                                                            "text": "0",
+                                                                            "mode": "block-and-text",
+                                                                            "block": null
+                                                                        }
+                                                                    },
+                                                                    "options": {},
+                                                                    "comment": null
+                                                                },
+                                                                "mode": "block-and-text",
+                                                                "text": ""
+                                                            }
+                                                        },
+                                                        "options": {},
+                                                        "comment": null
+                                                    },
+                                                    "mode": "block-only"
+                                                },
+                                                "SUBSTACK": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "call ...",
+                                                            "options": {
+                                                                "customOpcode": "execute control instr (instr) (A) (B) (C)"
+                                                            },
+                                                            "inputs": {
+                                                                "instr": {
+                                                                    "block": {
+                                                                        "opcode": "in array (array) get (index)",
+                                                                        "inputs": {
+                                                                            "array": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": "current instr"
+                                                                                    },
+                                                                                    "inputs": {},
+                                                                                    "comment": null
+                                                                                },
+                                                                                "mode": "block-and-text",
+                                                                                "text": ""
+                                                                            },
+                                                                            "index": {
+                                                                                "text": "0",
+                                                                                "mode": "block-and-text",
+                                                                                "block": null
+                                                                            }
+                                                                        },
+                                                                        "options": {},
+                                                                        "comment": null
+                                                                    },
+                                                                    "mode": "block-and-text",
+                                                                    "text": ""
+                                                                },
+                                                                "A": {
+                                                                    "block": {
+                                                                        "opcode": "in array (array) get (index)",
+                                                                        "inputs": {
+                                                                            "array": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": "current instr"
+                                                                                    },
+                                                                                    "inputs": {},
+                                                                                    "comment": null
+                                                                                },
+                                                                                "mode": "block-and-text",
+                                                                                "text": ""
+                                                                            },
+                                                                            "index": {
+                                                                                "text": "1",
+                                                                                "mode": "block-and-text",
+                                                                                "block": null
+                                                                            }
+                                                                        },
+                                                                        "options": {},
+                                                                        "comment": null
+                                                                    },
+                                                                    "mode": "block-and-text",
+                                                                    "text": ""
+                                                                },
+                                                                "B": {
+                                                                    "block": {
+                                                                        "opcode": "in array (array) get (index)",
+                                                                        "inputs": {
+                                                                            "array": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": "current instr"
+                                                                                    },
+                                                                                    "inputs": {},
+                                                                                    "comment": null
+                                                                                },
+                                                                                "mode": "block-and-text",
+                                                                                "text": ""
+                                                                            },
+                                                                            "index": {
+                                                                                "text": "2",
+                                                                                "mode": "block-and-text",
+                                                                                "block": null
+                                                                            }
+                                                                        },
+                                                                        "options": {},
+                                                                        "comment": null
+                                                                    },
+                                                                    "mode": "block-and-text",
+                                                                    "text": ""
+                                                                },
+                                                                "C": {
+                                                                    "block": {
+                                                                        "opcode": "in array (array) get (index)",
+                                                                        "inputs": {
+                                                                            "array": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": "current instr"
+                                                                                    },
+                                                                                    "inputs": {},
+                                                                                    "comment": null
+                                                                                },
+                                                                                "mode": "block-and-text",
+                                                                                "text": ""
+                                                                            },
+                                                                            "index": {
+                                                                                "text": "3",
+                                                                                "mode": "block-and-text",
+                                                                                "block": null
+                                                                            }
+                                                                        },
+                                                                        "options": {},
+                                                                        "comment": null
+                                                                    },
+                                                                    "mode": "block-and-text",
+                                                                    "text": ""
+                                                                }
+                                                            },
+                                                            "comment": null
+                                                        }
+                                                    ],
+                                                    "mode": "script"
+                                                },
+                                                "SUBSTACK2": {
+                                                    "mode": "script",
+                                                    "blocks": []
+                                                }
+                                            },
+                                            "options": {},
+                                            "comment": null
+                                        }
+                                    ],
+                                    "mode": "script"
+                                }
+                            },
+                            "options": {},
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
                         500,
                         0
                     ],
@@ -349,6 +799,24 @@
                 },
                 {
                     "position": [
+                        0,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define ...",
+                            "options": {
+                                "noScreenRefresh": true,
+                                "blockType": "instruction",
+                                "customOpcode": "execute control instr (instr) (A) (B) (C)"
+                            },
+                            "inputs": {},
+                            "comment": null
+                        }
+                    ]
+                },
+                {
+                    "position": [
                         1000,
                         0
                     ],
@@ -541,6 +1009,63 @@
     ],
     "globalVariables": [
         {
+            "name": "current instr",
+            "currentValue": "",
+            "monitor": {
+                "visible": true,
+                "size": [
+                    20,
+                    10
+                ],
+                "position": [
+                    5,
+                    200
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            },
+            "isCloudVariable": false
+        },
+        {
+            "name": "PROGRAMM COUNTER",
+            "currentValue": 1,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    20,
+                    10
+                ],
+                "position": [
+                    5,
+                    100
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            },
+            "isCloudVariable": false
+        },
+        {
+            "name": "NEW PC",
+            "currentValue": 1,
+            "monitor": {
+                "visible": true,
+                "size": [
+                    20,
+                    70
+                ],
+                "position": [
+                    5,
+                    100
+                ],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": true
+            },
+            "isCloudVariable": false
+        },
+        {
             "name": "[ALU] return value",
             "currentValue": 0,
             "monitor": {
@@ -589,7 +1114,7 @@
                 ],
                 "position": [
                     5,
-                    50
+                    150
                 ],
                 "sliderMin": 0,
                 "sliderMax": 100,
@@ -599,6 +1124,25 @@
         }
     ],
     "globalLists": [
+        {
+            "name": "PROGRAMM",
+            "currentValue": [
+                "[\"add\", \"1\", \"0\", \"2\"]",
+                "[\"add\", \"1\", \"2\", \"3\"]",
+                "[\"add\", \"2\", \"3\", \"4\"]"
+            ],
+            "monitor": {
+                "visible": true,
+                "size": [
+                    100,
+                    250
+                ],
+                "position": [
+                    300,
+                    100
+                ]
+            }
+        },
         {
             "name": "REGISTERS",
             "currentValue": [
