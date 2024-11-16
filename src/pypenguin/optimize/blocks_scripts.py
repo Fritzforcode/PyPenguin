@@ -89,17 +89,8 @@ def translateOptions(data, opcode):
     for i,fieldID,fieldData in ikv(data):
         opcodeData = opcodeDatabase[opcode]
         match opcodeData["optionTypes"][fieldID]:
-            case "variable":
+            case "variable"|"list"|"broadcast"|"key"|"math operation"|"string":
                 newFieldData = fieldData[0]
-            case "list":
-                newFieldData = fieldData[0]
-            case "broadcast":
-                newFieldData = fieldData[0]
-            case "key":
-                newFieldData = fieldData[0]
-            case "string":
-                newFieldData = fieldData[0]
-            case _: raise WhatIsGoingOnError(opcodeData["optionTypes"][fieldID])
         newData[fieldID] = newFieldData
     return newData
 
