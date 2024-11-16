@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import pp
+from pypenguin.helper_functions import pp, ikv, parseCustomOpcode
 from pypenguin.database import opcodeDatabase
 
 import copy
@@ -18,7 +18,7 @@ def completeBlock(blockData):
     if "comment" not in blockData:
         blockData["comment"] = None
 
-def completeInput(inputData, opcode):
+def completeInputs(inputData, inputID, opcode):
     opcodeData = opcodeDatabase[opcode]
     if opcode == "call ...": # Inputs in the call block type are custom
         proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"])
@@ -35,7 +35,7 @@ def completeInput(inputData, opcode):
         case "script":
             inputMode = "script"
     
-    if "mode" not in inputValue:
-        inputValue["mode"] = inputMode
+    if "mode" not in inputData:
+        inputData["mode"] = inputMode
     
     

@@ -2,10 +2,11 @@ A = {
     "position": [0,0],
     "blocks": [
         {
-            "opcode": "broadcast [BROADCAST]",
-            "inputs": {"BROADCAST": {
-            
-            }},
+            "opcode": "not <OPERAND>",
+            "inputs": {
+                "OPERAND": {"block": {"opcode": "false"}},
+            },
+            "options": {},
         },
     ],
 }
@@ -77,25 +78,17 @@ projectData = {
 
 from pypenguin import validateProject, deoptimizeAndCompressProject
 from pypenguin.helper_functions import writeJSONFile, pp
-from pypenguin.auto_complete import autoCompleteProject
 
-pp(projectData)
+validateProject(projectData=projectData)
 
-completedProjectData = autoCompleteProject(projectData=projectData)
+writeJSONFile(
+    filePath = "project/project.json",
+    data     = projectData
+)
 
-pp(completedProjectData)
-
-#validateProject(projectData=projectData)
-#pp(projectData)
-
-#writeJSONFile(
-#    filePath = "../project/project.json",
-#    data     = projectData
-#)
-
-#deoptimizeAndCompressProject(
-#    optimizedProjectDirectory = "../project",
-#    projectFilePath           = "../export.pmp",
-#    temporaryDirectory        = "../temporary",
-#    writeDebugFiles           = True,
-#)
+deoptimizeAndCompressProject(
+    optimizedProjectDirectory = "project",
+    projectFilePath           = "export.pmp",
+    temporaryDirectory        = "temporary",
+    writeDebugFiles           = True,
+)

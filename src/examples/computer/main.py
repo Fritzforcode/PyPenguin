@@ -68,6 +68,19 @@ projectData = {
             "isCloudVariable": False,
         },
         {
+            "name": "[CRTL] condition met?",
+            "currentValue": 0,
+            "monitor": {
+                "visible": True,
+                "size": [20,10],
+                "position": [5,5],
+                "sliderMin": 0,
+                "sliderMax": 100,
+                "onlyIntegers": True,
+            },
+            "isCloudVariable": False,
+        },
+        {
             "name": "[ALU] return value",
             "currentValue": 0,
             "monitor": {
@@ -152,12 +165,12 @@ from pypenguin.helper_functions import writeJSONFile
 validateProject(projectData=projectData)
 
 writeJSONFile(
-    filePath = "../../../project/project.json",
+    filePath = "project/project.json",
     data     = projectData
 )
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory = "../../../project",
-    projectFilePath           = "../../../export.pmp",
-    temporaryDirectory        = "../../../temporary",
-    writeDebugFiles           = False,
+    optimizedProjectDirectory = "project",
+    projectFilePath           = "export.pmp",
+    temporaryDirectory        = "temporary",
+    writeDebugFiles           = True,
 )

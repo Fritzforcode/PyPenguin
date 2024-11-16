@@ -43,7 +43,7 @@ executeCurrentInstrDef = {
             "options": {"VARIABLE": "NEW PC"},
         },
         {
-            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+            "opcode": "if <CONDITION> then {THEN} else {ELSE}",
             "inputs": {
                 "CONDITION": {"block": {
                     "opcode": "array (array) contains (value) ?",
@@ -61,7 +61,7 @@ executeCurrentInstrDef = {
                         }},
                     },
                 }},
-                "SUBSTACK": {"blocks": [
+                "THEN": {"blocks": [
                     {
                         "opcode": "call ...",
                         "options": {"customOpcode": "execute alu instr (instr) (A) (B) (C)"},
@@ -109,9 +109,9 @@ executeCurrentInstrDef = {
                         },
                     },
                 ]},
-                "SUBSTACK2": {"blocks": [
+                "ELSE": {"blocks": [
                     {
-                        "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+                        "opcode": "if <CONDITION> then {THEN} else {ELSE}",
                         "inputs": {
                             "CONDITION": {"block": {
                                 "opcode": "array (array) contains (value) ?",
@@ -129,7 +129,7 @@ executeCurrentInstrDef = {
                                     }},
                                 },
                             }},
-                            "SUBSTACK": {"blocks": [
+                            "THEN": {"blocks": [
                                 {
                                     "opcode": "call ...",
                                     "options": {"customOpcode": "execute control instr (instr) (A) (B) (C)"},
@@ -177,7 +177,7 @@ executeCurrentInstrDef = {
                                     },
                                 },
                             ]},
-                            "SUBSTACK2": {},
+                            "ELSE": {},
                         },
                     },
                 ]},
@@ -191,8 +191,37 @@ programm = [json.dumps(item) for item in [
     ["add", "2", "3", "4"],
 ]]
 
+instructions = {
+    "opcode": "switch (CONDITION) {CASES}",
+    "inputs": {
+        "CONDITION": {"block": {
+            "opcode": "value of text argument [VALUE]",
+            "options": {"VALUE": "instr"},
+        }},
+        "CASES": {"blocks": [
+            {
+                "opcode": "case (CONDITION) {BODY}",
+                "inputs": {
+                    "CONDITION":{"text": "j"},
+                    "BODY": {"blocks": [
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {"block": {
+                                    "opcode": "true"
+                                }},
+                            },
+                            "options": {"VARIABLE": "[CRTL] condition met?"},
+                        }
+                    ]},
+                },
+            },
+        ]},
+    },
+}
+
 executeControlInstrDef = {
-    "position": [0,0],
+    "position": [-200,0],
     "blocks": [
         {
             "opcode": "define ...",
@@ -201,6 +230,11 @@ executeControlInstrDef = {
                 "blockType": "instruction",
                 "customOpcode": "execute control instr (instr) (A) (B) (C)",
             }, 
+        },
+        instructions,
+        {
+            "opcode": "if <CONDITION> then {THEN}",
+            "inputs": {},
         },
     ],
 }

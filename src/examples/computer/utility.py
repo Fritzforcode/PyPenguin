@@ -10,7 +10,7 @@ readRegisterDef = {
             },
         },
         {
-            "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
+            "opcode": "if <CONDITION> then {THEN} else {ELSE}",
             "inputs": {
                 "CONDITION": {"block": {
                     "opcode": "(OPERAND1) = (OPERAND2)",
@@ -22,7 +22,7 @@ readRegisterDef = {
                         "OPERAND2": {"text": "r0"},
                     },
                 }},
-                "SUBSTACK": {"blocks": [
+                "THEN": {"blocks": [
                     {
                         "opcode": "return (return)",
                         "inputs": {
@@ -30,7 +30,7 @@ readRegisterDef = {
                         },
                     },
                 ]},
-                "SUBSTACK2": {"blocks": [
+                "ELSE": {"blocks": [
                     {
                         "opcode": "return (return)",
                         "inputs": {

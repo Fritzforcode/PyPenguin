@@ -31,22 +31,25 @@ opcodeDatabase = {
         "control_if": {
             "type": "instruction",
             "category": "Control",
-            "newOpcode": "if <CONDITION> then {SUBSTACK}",
-            "inputTypes": {"CONDITION": "boolean", "SUBSTACK": "script"},
+            "newOpcode": "if <CONDITION> then {THEN}",
+            "inputTypes": {"CONDITION": "boolean", "THEN": "script"},
+            "inputTranslation": {"SUBSTACK": "THEN"},
             "optionTypes": {},
         },
         "control_if_else": {
             "type": "instruction",
             "category": "Control",
-            "newOpcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
-            "inputTypes": {"CONDITION": "boolean", "SUBSTACK": "script", "SUBSTACK2": "script"},
+            "newOpcode": "if <CONDITION> then {THEN} else {ELSE}",
+            "inputTypes": {"CONDITION": "boolean", "THEN": "script", "ELSE": "script"},
+            "inputTranslation": {"SUBSTACK": "THEN", "SUBSTACK2": "ELSE"},
             "optionTypes": {},
         },
         "control_switch": {
             "type": "instruction",
             "category": "Control",
-            "newOpcode": "switch (CONDITION) {SUBSTACK}",
-            "inputTypes": {"CONDITION": "text", "SUBSTACK": "script"},
+            "newOpcode": "switch (CONDITION) {CASES}",
+            "inputTypes": {"CONDITION": "text", "CASES": "script"},
+            "inputTranslation": {"SUBSTACK": "CASES"},
             "optionTypes": {},
         },
         "control_switch_default": {
@@ -59,8 +62,9 @@ opcodeDatabase = {
         "control_case": {
             "type": "instruction",
             "category": "Control",
-            "newOpcode": "case (CONDITION) {SUBSTACK}",
-            "inputTypes": {"CONDITION": "text", "SUBSTACK": "script"},
+            "newOpcode": "case (CONDITION) {BODY}",
+            "inputTypes": {"CONDITION": "text", "BODY": "script"},
+            "inputTranslation": {"SUBSTACK": "BODY"},
             "optionTypes": {},
         },
         "control_repeat": {
@@ -99,6 +103,39 @@ opcodeDatabase = {
             "category": "Operators",
             "newOpcode": "(NUM1) / (NUM2)",
             "inputTypes": {"NUM1": "number", "NUM2": "number"},
+            "optionTypes": {},
+        },
+#TODO: add option translation: OPTION -> OPERATION
+        "operator_advMath": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "(NUM1) [OPTION] (NUM2)",
+            "inputTypes": {"NUM1": "number", "NUM2": "number"},
+            "inputTranslation": {"ONE": "NUM1", "TWO": "NUM2"},
+            "optionTypes": {"OPTION": "math operation"},
+        },
+        "operator_random": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "pick random (NUM1) to (NUM2)",
+            "inputTypes": {"NUM1": "number", "NUM2": "number"},
+            "inputTranslation": {"FROM": "NUM1", "TO": "NUM2"},
+            "optionTypes": {},
+        },
+        "operator_constrainnumber": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "constrain (NUM) min (MIN) max (MAX)",
+            "inputTypes": {"NUM": "number", "MIN": "number", "MAX": "number"},
+            "inputTranslation": {"inp": "NUM", "min": "MIN", "max": "MAX"},
+            "optionTypes": {},
+        },
+        "operator_lerpFunc": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "interpolate (NUM1) to (NUM2) by (WEIGHT)",
+            "inputTypes": {"NUM1": "number", "NUM2": "number", "WEIGHT": "number"},
+            "inputTranslation": {"ONE": "NUM1", "TWO": "NUM2", "AMOUNT": "WEIGHT"},
             "optionTypes": {},
         },
         # Operators: Comparators
@@ -144,7 +181,7 @@ opcodeDatabase = {
             "inputTypes": {"OPERAND1": "text", "OPERAND2": "text"},
             "optionTypes": {},
         },        
-        # Operators: Constants
+        # Operators: True and False
         "operator_trueBoolean": {
             "type": "booleanReporter",
             "category": "Operators",
@@ -156,6 +193,43 @@ opcodeDatabase = {
             "type": "booleanReporter",
             "category": "Operators",
             "newOpcode": "false",
+            "inputTypes": {},
+            "optionTypes": {},
+        },
+        # Operators: Boolean Algebra
+        "operator_and": {
+            "type": "booleanReporter",
+            "category": "Operators",
+            "newOpcode": "<OPERAND1> and <OPERAND2>",
+            "inputTypes": {"OPERAND1": "boolean", "OPERAND2": "boolean"},
+            "optionTypes": {},
+        },
+        "operator_or": {
+            "type": "booleanReporter",
+            "category": "Operators",
+            "newOpcode": "<OPERAND1> or <OPERAND2>",
+            "inputTypes": {"OPERAND1": "boolean", "OPERAND2": "boolean"},
+            "optionTypes": {},
+        },
+        "operator_not": {
+            "type": "booleanReporter",
+            "category": "Operators",
+            "newOpcode": "not <OPERAND>",
+            "inputTypes": {"OPERAND": "boolean"},
+            "optionTypes": {},
+        },
+        # Operators: Newline and Tab
+        "operator_newLine": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "new line",
+            "inputTypes": {},
+            "optionTypes": {},
+        },
+        "operator_tabCharacter": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "tab character",
             "inputTypes": {},
             "optionTypes": {},
         },
@@ -174,11 +248,35 @@ opcodeDatabase = {
             "inputTypes": {"STRING1": "text", "STRING2": "text", "STRING3": "text"},
             "optionTypes": {},
         },
+        "operator_indexOfTextInText": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "index of (SUBSTRING) in (TEXT)",
+            "inputTypes": {"SUBSTRING": "text", "STRING": "text"},
+            "inputTranslation": {"TEXT1": "SUBSTRING", "TEXT2": "TEXT"},
+            "optionTypes": {},
+        },
+        "operator_lastIndexOfTextInText": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "last index of (SUBSTRING) in (TEXT)",
+            "inputTypes": {"SUBSTRING": "text", "STRING": "text"},
+            "inputTranslation": {"TEXT1": "SUBSTRING", "TEXT2": "TEXT"},
+            "optionTypes": {},
+        },
         "operator_letter_of": {
             "type": "textReporter",
             "category": "Operators",
             "newOpcode": "letter (LETTER) of (STRING)",
             "inputTypes": {"LETTER": "positive integer", "STRING": "text"},
+            "optionTypes": {},
+        },
+        "operator_getLettersFromIndexToIndexInText": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "letters from (START) to (STOP) in (TEXT)",
+            "inputTypes": {"START": "positive integer", "STOP": "text", "TEXT": "text"},
+            "inputTranslation": {"INDEX1": "START", "INDEX2": "STOP"},
             "optionTypes": {},
         },
         # Operators: Math Part 2
@@ -466,6 +564,23 @@ opcodeDatabase = {
             "newOpcode": "value of boolean argument [VALUE]",
             "inputTypes": {},
             "optionTypes": {"VALUE": "string"},
-        },
-        
+        },       
+}
+
+inputDefault = {}
+inputBlockDefault = None
+inputTextDefault = ""
+inputBlocksDefault = []
+optionDefault = {}
+commentDefault = None
+
+inputModes = {
+    "broadcast"       : "block-and-text",
+    "integer"         : "block-and-text",
+    "positive integer": "block-and-text",
+    "number"          : "block-and-text",
+    "text"            : "block-and-text",
+    "boolean"         : "block-only",
+    "round"           : "block-only",
+    "script"          : "script",
 }

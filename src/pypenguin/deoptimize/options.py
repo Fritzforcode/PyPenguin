@@ -11,7 +11,6 @@ def translateOptions(optionDatas, opcode, spriteName, tokens):
     newData = {}
     opcodeData = opcodeDatabase[opcode]
     for i,optionID,optionData in ikv(optionDatas):
-        print(optionID, optionData)
         mode = opcodeData["optionTypes"][optionID]
         if mode in ["variable", "list", "broadcast"]:
             if mode == "variable":
@@ -34,11 +33,10 @@ def translateOptions(optionDatas, opcode, spriteName, tokens):
                 nameKey = None
             token = tokens[nameKey][optionData]
             newOptionData = [optionData, token, magicString]
-        elif mode == "key" or mode == "string":
+        elif mode == "key" or mode == "math operation" or mode == "string":
             newOptionData = [optionData, generateRandomToken()]
         elif mode in ["boolean", "round", "blockType", "opcode", "customBlockId"]:
             newOptionData = optionData
         else: raise WhatIsGoingOnError(mode)
         newData[optionID] = newOptionData
-        print("-->", newOptionData)
     return newData

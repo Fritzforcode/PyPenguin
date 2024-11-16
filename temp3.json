@@ -23,22 +23,26 @@
                     []
                 ]
             },
-            "broadcasts": {
-                "xeH-ilqtek]Y@J?EB}#|": ""
-            },
+            "broadcasts": {},
             "customVars": [],
             "blocks": {
                 "a": {
-                    "opcode": "event_broadcast",
+                    "opcode": "operator_falseBoolean",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "b": {
+                    "opcode": "operator_not",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "BROADCAST_INPUT": [
-                            1,
-                            [
-                                11,
-                                ""
-                            ]
+                        "OPERAND": [
+                            2,
+                            "a"
                         ]
                     },
                     "fields": {},
@@ -62,7 +66,7 @@
                 }
             ],
             "sounds": [],
-            "id": "J*:TkPo/}QyFcIoCVvQ%",
+            "id": "xeH-ilqtek]Y@J?EB}#|",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,

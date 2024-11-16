@@ -1,11 +1,10 @@
 import json
 
 from pypenguin.helper_functions import ikv, pp, WhatIsGoingOnError, numberToLiteral, tempSelector, generateRandomToken, parseCustomOpcode
-
 from pypenguin.deoptimize.options import translateOptions
 from pypenguin.deoptimize.comments import translateComment
+from pypenguin.database import opcodeDatabase, inputDefault, optionDefault, commentDefault, inputModes, inputBlockDefault, inputTextDefault, inputBlocksDefault
 
-from pypenguin.database import opcodeDatabase
 
 def generateProccodeFromSegments(data):
     proccode = ""
@@ -20,19 +19,19 @@ def generateProccodeFromSegments(data):
     return proccode
 
 def prepareBlock(data, spriteName, tokens, commentID):
+    if "inputs" not in data:
+        data["inputs"] = inputDefault
+    if "options" not in data:
+        data["options"] = optionDefault
+    if "comment" not in data:
+        data["comment"] = commentDefault
+    
     opcode = None
     for i,oldOpcode,opcodeData in ikv(opcodeDatabase):
         if opcodeData["newOpcode"] == data["opcode"]:
             opcode = oldOpcode
     if opcode == None:
         raise WhatIsGoingOnError(data["opcode"])
-    
-    if "inputs" not in data:
-        data["inputs"] = {}
-    if "options" not in data:
-        data["options"] = {}
-    if "comment" not in data:
-        data["comment"] = None
     
     newBlockData = {
         "opcode"  : opcode,
@@ -91,15 +90,8 @@ def linkBlocksToScript(data, spriteName, tokens, scriptIDs):
 def unnestScript(data, spriteName, tokens, scriptIDs):
     def lookupInputMode(opcode, inputID):
         opcodeData = opcodeDatabase[opcode]
-        print(opcodeData)
         inputType = opcodeData["inputTypes"][inputID]
-        match inputType: # type of the input
-            case "broadcast"|"integer"|"positive integer"|"number"|"text":
-                inputMode = "block-and-text"
-            case "boolean"|"round":
-                inputMode = "block-only"
-            case "script":
-                inputMode = "script"
+        inputMode = inputModes[inputType]
         return inputMode
         
     previousBlockCount = 0
@@ -109,25 +101,43 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
     while not finished:
         newBlockDatas = {}
         for i,blockID,blockData in ikv(data):
-            print(100*"?")
-            pp(blockData)
             opcodeData = opcodeDatabase[blockData["opcode"]]
             newInputDatas = {}
             opcode = blockData["opcode"]
             if blockData["opcode"] == "procedures_call":
                 customOpcode        = blockData["fields"]["customOpcode"]
                 proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
-                inputModes = {}
+                blockInputModes = {}
                 for i,inputID,inputData in ikv(arguments):
                     if inputData == str:
-                        inputModes[inputID] = "block-and-text"
+                        blockInputModes[inputID] = "block-and-text"
                     elif inputData == bool:
-                        inputModes[inputID] = "block-only"
+                        blockInputModes[inputID] = "block-only"
             else:
-                inputModes = {inputID: lookupInputMode(opcode, inputID) for inputID in blockData["inputs"]}
+                blockInputModes = {inputID: lookupInputMode(opcode, inputID) for inputID in blockData["inputs"]}
             for j,inputID,inputData in ikv(blockData["inputs"]):
-                inputMode = inputModes[inputID]
+                inputMode = blockInputModes[inputID]
+
                 if isinstance(inputData, dict):
+                    if "mode" not in inputData:
+                        inputData["mode"] = inputMode
+                
+                    if   inputMode == "block-and-text":
+                        required = ["block", "text"]
+                    elif inputMode == "block-only":
+                        required = ["block"]
+                    elif inputMode == "script":
+                        required = ["blocks"]
+                    
+                    for attribute in required:
+                        if attribute not in inputData:
+                            match attribute:
+                                case "block":
+                                    inputData["block"] = inputBlockDefault
+                                case "text":
+                                    inputData["text"] = inputTextDefault
+                                case "blocks":
+                                    inputData["blocks"] = inputBlocksDefault
                     if blockData["opcode"] == "procedures_call":
                         if arguments[inputID] == str:
                             magicNumber = 10 # use the value for a text input type
@@ -327,18 +337,20 @@ def finishBlocks(data, spriteName, tokens):
                     inputValue for j,inputID,inputValue in ikv(blockData["inputs"]) 
                 }
             
-            opcodeData = opcodeDatabase[blockData["opcode"]]
-            if "inputTranslation" in opcodeData:
-                # Replace the optmized with the unoptizimzed input ids
-                newInputDatas = {}
-                newIDs = list(opcodeData["inputTranslation"].keys())
-                oldIDs = list(opcodeData["inputTranslation"].values())
-                print("odata", opcodeData)
-                print(newIDs, oldIDs)
-                for j,inputID,inputData in ikv(blockData["inputs"]):
-                    newInputID = newIDs[oldIDs.index(inputID)]
-                    newInputDatas[newInputID] = inputData
-                blockData["inputs"] = newInputDatas
+            if blockData["opcode"] not in ["procedures_definition", "procedures_definition_return" ,"procedures_prototype"]:
+                opcodeData = opcodeDatabase[blockData["opcode"]]
+                if "inputTranslation" in opcodeData:
+                    # Replace the optmized with the unoptizimzed input ids
+                    newInputDatas = {}
+                    newIDs = list(opcodeData["inputTranslation"].keys())
+                    oldIDs = list(opcodeData["inputTranslation"].values())
+                    for j,inputID,inputData in ikv(blockData["inputs"]):
+                        if inputID in oldIDs:
+                            newInputID = newIDs[oldIDs.index(inputID)]
+                        else:
+                            newInputID = inputID
+                        newInputDatas[newInputID] = inputData
+                    blockData["inputs"] = newInputDatas
     def getSelectors(obj):
         selectors = []
         if isinstance(obj, dict):

@@ -1,16 +1,16 @@
 instructions = {
-    "opcode": "switch (CONDITION) {SUBSTACK}",
+    "opcode": "switch (CONDITION) {CASES}",
     "inputs": {
         "CONDITION": {"block": {
             "opcode": "value of text argument [VALUE]",
             "options": {"VALUE": "instr"},
         }},
-        "SUBSTACK": {"blocks": [
+        "CASES": {"blocks": [
             {
-                "opcode": "case (CONDITION) {SUBSTACK}",
+                "opcode": "case (CONDITION) {BODY}",
                 "inputs": {
                     "CONDITION":{"text": "add"},
-                    "SUBSTACK": {"blocks": [
+                    "BODY": {"blocks": [
                         {
                             "opcode": "set [VARIABLE] to (VALUE)",
                             "options": {"VARIABLE": "[ALU] return value"},
@@ -34,10 +34,10 @@ instructions = {
                 },
             },
             {
-                "opcode": "case (CONDITION) {SUBSTACK}",
+                "opcode": "case (CONDITION) {BODY}",
                 "inputs": {
                     "CONDITION":{"text": "mul"},
-                    "SUBSTACK": {"blocks": [
+                    "BODY": {"blocks": [
                         {
                             "opcode": "set [VARIABLE] to (VALUE)",
                             "options": {"VARIABLE": "[ALU] return value"},
@@ -76,7 +76,7 @@ excecuteAluInstrDef = {
             }
         },
         {
-            "opcode": "if <CONDITION> then {SUBSTACK}",
+            "opcode": "if <CONDITION> then {THEN}",
             "inputs": {
                 "CONDITION": {"block": {
                     "opcode": "array (array) contains (value) ?",
@@ -88,7 +88,7 @@ excecuteAluInstrDef = {
                         }},
                     },
                 }},
-                "SUBSTACK": {"blocks":[
+                "THEN": {"blocks":[
                     {
                         "opcode": "set [VARIABLE] to (VALUE)",
                         "inputs": {
@@ -126,7 +126,7 @@ excecuteAluInstrDef = {
         },
         instructions,
         {
-            "opcode": "if <CONDITION> then {SUBSTACK}",
+            "opcode": "if <CONDITION> then {THEN}",
             "inputs": {
                 "CONDITION": {"block": {
                     "opcode": "array (array) contains (value) ?",
@@ -138,7 +138,7 @@ excecuteAluInstrDef = {
                         }},
                     },
                 }},
-                "SUBSTACK": {"blocks": [
+                "THEN": {"blocks": [
                     {
                         "opcode": "call ...",
                         "inputs": {

@@ -1,15 +1,16 @@
 from pypenguin.helper_functions import ikv, parseCustomOpcode
 from pypenguin.validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema, opcodeDatabase, allowedOpcodes
 from pypenguin.validate.comments import validateComment
+from pypenguin.database import inputDefault, optionDefault, commentDefault, inputModes, inputBlockDefault, inputTextDefault, inputBlocksDefault
 
 
 def validateBlock(path, data, context):
     if "inputs" not in data:
-        data["inputs"] = {}
+        data["inputs"] = inputDefault
     if "options" not in data:
-        data["options"] = {}
+        data["options"] = optionDefault
     if "comment" not in data:
-        data["comment"] = None
+        data["comment"] = commentDefault
     
     # Check block format
     validateSchema(pathToData=path, data=data, schema=blockSchema)
@@ -76,13 +77,7 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
         inputType = inputTypes[inputID]
 
         if inputID in data:
-            match inputType: # type of the input
-                case "broadcast"|"integer"|"positive integer"|"number"|"text":
-                    inputMode = "block-and-text"
-                case "boolean"|"round":
-                    inputMode = "block-only"
-                case "script":
-                    inputMode = "script"
+            inputMode = inputModes[inputType]
 
             inputValue = data[inputID]
             if "mode" not in inputValue:
@@ -100,11 +95,11 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
                 if attribute not in inputValue:
                     match attribute:
                         case "block":
-                            inputValue["block"] = None
+                            inputValue["block"] = inputBlockDefault
                         case "text":
-                            inputValue["text"] = ""
+                            inputValue["text"] = inputTextDefault
                         case "blocks":
-                            inputValue["blocks"] = []
+                            inputValue["blocks"] = inputBlocksDefault
 
             if inputValue.get("block") != None: # When the input has a block and it isn't None, check the block format
                validateBlock(path=path+[inputID]+["block"], data=inputValue["block"], context=context)
@@ -138,17 +133,21 @@ def validateOptions(path, data, opcode, opcodeData, context):
         # validateSchema(pathToData=path+[optionID], data=optionValue, schema=optionSchema)
         
         match opcodeData["optionTypes"][optionID]: # type of the option
-            case "key":
-                possibleValues = [
-                    "space", "up arrow", "down arrow", "right arrow", "left arrow", 
-                    "enter", "any", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", 
-                    "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", 
-                    "x", "y", "z", "-", ",", ".", "`", "=", "[", "]", "\\", ";", "'", 
-                    "/", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", 
-                    "{", "}", "|", ":", '"', "?", "<", ">", "~", "backspace", "delete", 
-                    "shift", "caps lock", "scroll lock", "control", "escape", "insert", 
-                    "home", "end", "page up", "page down"
-                ]
+            case "key"|"math operation":
+                match opcodeData["optionTypes"][optionID]:
+                    case "key":
+                        possibleValues = [
+                            "space", "up arrow", "down arrow", "right arrow", "left arrow", 
+                            "enter", "any", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", 
+                            "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", 
+                            "x", "y", "z", "-", ",", ".", "`", "=", "[", "]", "\\", ";", "'", 
+                            "/", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", 
+                            "{", "}", "|", ":", '"', "?", "<", ">", "~", "backspace", "delete", 
+                            "shift", "caps lock", "scroll lock", "control", "escape", "insert", 
+                            "home", "end", "page up", "page down"
+                        ]
+                    case "math operation":
+                        possibleValues = ["^", "root", "log"]
                 if optionValue not in possibleValues:
                     raise formatError(path+[optionID], f"Must be one of {possibleValues}.")
             case "broadcast"|"string":
