@@ -10,14 +10,14 @@ def translateVariableListBlock(data):
     # A variable or list block
     if data[0] == 12: # A magic value
         newData = {
-            "opcode": "VARIABLE",
+            "opcode": "value of [VARIABLE]",
             "inputs": {},
             "options": {"VARIABLE": data[1]},
             "comment": None
         }
     elif data[0] == 13: # A magic value
         newData = {
-            "opcode": "LIST",
+            "opcode": "value of [LIST]",
             "inputs": {},
             "options": {"LIST": data[1]},
             "comment": None
@@ -28,13 +28,18 @@ def translateVariableListBlock(data):
 
 def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mutationDatas):
     newData = {}
-    for i,inputID,inputData in ikv(data):   
+    opcodeData = opcodeDatabase[opcode]
+    for i,inputID,inputData in ikv(data):
+        if "inputTranslation" in opcodeData:
+            newInputID = opcodeData["inputTranslation"][inputID]
+        else:
+            newInputID = inputID
         if len(inputData) == 2:
             if   isinstance(inputData[1], str): # e.g. "CONDITION": [2, "b"]
                 if opcode == "procedures_call":
                     inputType = "boolean"
                 else:
-                    inputType = opcodeDatabase[opcode]["inputTypes"][inputID]
+                    inputType = opcodeData["inputTypes"][newInputID]
                 mode = "block-only" if inputType in ["boolean", "round"] else ("script" if inputType=="script" else None)
                 pointer = inputData[1]
                 text = None
@@ -57,18 +62,15 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
             raise WhatIsGoingOnError(inputData)
         if mode == "block-only":
             newInputData = {
-                "mode": mode,
                 "block": pointer,
             }
         elif mode == "block-and-text":
             newInputData = {
-                "mode" : mode,
                 "block": pointer,
                 "text" : text, 
             }
         elif mode == "script":
             newInputData = {
-                "mode": mode,
                 "blocks": translateScript(
                     data=scriptData,
                     ancestorP=inputData[1],
@@ -79,7 +81,7 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
             }
         else: raise WhatIsGoingOnError(mode, inputType)
 
-        newData[inputID] = newInputData
+        newData[newInputID] = newInputData
     return newData
 
 def translateOptions(data, opcode):
@@ -163,8 +165,9 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
             "opcode"      : newOpcode,
             "inputs"      : inputs,
             "options"     : options,
-            "comment"     : comment,
         }
+        if comment != None:
+            newData["comment"] = comment
         if mutation != None:
             newData["mutation"] = mutation
     elif isinstance(blockData, list): # A variable or list block
@@ -254,7 +257,8 @@ def generateBlockChildrenPs(data):
 def getCustomBlockMutations(data):
     mutationDatas = {}
     for j, blockID, blockData in ikv(data):
-        if blockData["opcode"] == "procedures_prototype":
-            mutationData = blockData["mutation"]
-            mutationDatas[mutationData["proccode"]] = mutationData
+        if isinstance(blockData, dict):
+            if blockData["opcode"] == "procedures_prototype":
+                mutationData = blockData["mutation"]
+                mutationDatas[mutationData["proccode"]] = mutationData
     return mutationDatas

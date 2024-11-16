@@ -77,15 +77,9 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
 
         if inputID in data:
             match inputType: # type of the input
-                case "broadcast":
+                case "broadcast"|"integer"|"positive integer"|"number"|"text":
                     inputMode = "block-and-text"
-                case "number":
-                    inputMode = "block-and-text"
-                case "text":
-                    inputMode = "block-and-text"
-                case "boolean":
-                    inputMode = "block-only"
-                case "round":
+                case "boolean"|"round":
                     inputMode = "block-only"
                 case "script":
                     inputMode = "script"
@@ -119,22 +113,16 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
                 preparedData = {"position": [0,0], "blocks": inputValue["blocks"]}
                 validateScript(path=path+[inputID], data=preparedData, context=context)
             
+            # Specific value controls(None currently)
             match inputType: # type of the input
-                case "broadcast":
-                    pass
-                case "number":
-                    allowedChars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-"]
-                    for char in inputValue["text"]:
-                        if char not in allowedChars:
-                            raise formatError(path+[inputID], f"The 'text' attribute must be a combination of these characters: {allowedChars}.")
-                case "text":
-                    pass
-                case "boolean":
-                    pass
-                case "round":
-                    pass
-                case "script":
-                    pass
+                case "broadcast"       : pass
+                case "integer"         : pass
+                case "positive integer": pass
+                case "number"          : pass
+                case "text"            : pass
+                case "boolean"         : pass
+                case "round"           : pass
+                case "script"          : pass
 
 def validateOptions(path, data, opcode, opcodeData, context):    
     allowedOptionIDs = list(opcodeData["optionTypes"].keys()) # List of options which are defined for the specific opcode

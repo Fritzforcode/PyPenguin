@@ -27,19 +27,67 @@
             "scripts": [
                 {
                     "position": [
-                        19,
-                        -184
+                        237,
+                        144
                     ],
                     "blocks": [
                         {
-                            "opcode": "define ...",
-                            "inputs": {},
-                            "options": {
-                                "customOpcode": "wasd (number or text#) <boolean#>",
-                                "noScreenRefresh": false,
-                                "blockType": "instruction"
+                            "opcode": "For each item [VARIABLE] in [LIST] {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "add (ITEM) to [LIST]",
+                                            "inputs": {
+                                                "ITEM": {
+                                                    "block": null,
+                                                    "text": "thing"
+                                                }
+                                            },
+                                            "options": {
+                                                "LIST": "li"
+                                            }
+                                        }
+                                    ]
+                                }
                             },
-                            "comment": null
+                            "options": {
+                                "VARIABLE": "my variable",
+                                "LIST": "li"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        247,
+                        501
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "For each item # [VARIABLE] in [LIST] {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "delete (INDEX) of [LIST]",
+                                            "inputs": {
+                                                "INDEX": {
+                                                    "block": null,
+                                                    "text": "1"
+                                                }
+                                            },
+                                            "options": {
+                                                "LIST": "li"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "my variable",
+                                "LIST": "li"
+                            }
                         }
                     ]
                 }
@@ -90,15 +138,29 @@
             "isCloudVariable": false
         }
     ],
-    "globalLists": [],
+    "globalLists": [
+        {
+            "name": "li",
+            "currentValue": [],
+            "monitor": {
+                "visible": true,
+                "size": [
+                    0,
+                    0
+                ],
+                "position": [
+                    5,
+                    5
+                ]
+            }
+        }
+    ],
     "tempo": 60,
     "videoTransparency": 50,
     "videoState": "on",
     "textToSpeechLanguage": null,
     "extensionData": {},
-    "extensions": [
-        "jgJSON"
-    ],
+    "extensions": [],
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",

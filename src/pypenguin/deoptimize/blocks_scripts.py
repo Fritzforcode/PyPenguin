@@ -33,6 +33,7 @@ def prepareBlock(data, spriteName, tokens, commentID):
         data["options"] = {}
     if "comment" not in data:
         data["comment"] = None
+    
     newBlockData = {
         "opcode"  : opcode,
         "next"    : None,
@@ -90,17 +91,12 @@ def linkBlocksToScript(data, spriteName, tokens, scriptIDs):
 def unnestScript(data, spriteName, tokens, scriptIDs):
     def lookupInputMode(opcode, inputID):
         opcodeData = opcodeDatabase[opcode]
+        print(opcodeData)
         inputType = opcodeData["inputTypes"][inputID]
-        match inputType:
-            case "broadcast":
+        match inputType: # type of the input
+            case "broadcast"|"integer"|"positive integer"|"number"|"text":
                 inputMode = "block-and-text"
-            case "number":
-                inputMode = "block-and-text"
-            case "text":
-                inputMode = "block-and-text"
-            case "boolean":
-                inputMode = "block-only"
-            case "round":
+            case "boolean"|"round":
                 inputMode = "block-only"
             case "script":
                 inputMode = "script"
@@ -113,6 +109,8 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
     while not finished:
         newBlockDatas = {}
         for i,blockID,blockData in ikv(data):
+            print(100*"?")
+            pp(blockData)
             opcodeData = opcodeDatabase[blockData["opcode"]]
             newInputDatas = {}
             opcode = blockData["opcode"]
@@ -137,11 +135,12 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                             pass
                     else:
                         match opcodeData["inputTypes"][inputID]:
-                            case "broadcast"  : magicNumber = 11
-                            case "text"       : magicNumber = 10
-                            case "number"     : magicNumber =  4
-                            case "boolean"    : pass
-                            case "instruction": pass
+                            case "broadcast"       : magicNumber = 11
+                            case "text"            : magicNumber = 10
+                            case "integer"         : magicNumber =  7
+                            case "positive integer": magicNumber =  6
+                            case "number"          : magicNumber =  4
+                            case "boolean"         : pass
                     if "blocks" in inputData:
                         scriptData = {"position": [0,0], "blocks": inputData["blocks"]}
                         newScriptIDs = scriptIDs + [i] + [j]
@@ -305,26 +304,41 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
 def finishBlocks(data, spriteName, tokens):
     mutationDatas = {}
     for j, blockID, blockData in ikv(data):
-        if blockData["opcode"] == "procedures_prototype":
-            mutationData = blockData["mutation"]
-            mutationDatas[mutationData["proccode"]] = mutationData
+        if isinstance(blockData, dict):
+            if blockData["opcode"] == "procedures_prototype":
+                mutationData = blockData["mutation"]
+                mutationDatas[mutationData["proccode"]] = mutationData
     for i, blockID, blockData in ikv(data):
-        if blockData["opcode"] == "procedures_call":
-            customOpcode = blockData["fields"]["customOpcode"]
-            del blockData["fields"]["customOpcode"]
-            proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
-            mutationData = mutationDatas[proccode]
-            modifiedMutationData = mutationData.copy()
-            del modifiedMutationData["argumentnames"]
-            del modifiedMutationData["argumentdefaults"]
-            blockData["mutation"] = modifiedMutationData
-
-            argumentIDs   = json.loads(mutationData["argumentids"])
-            argumentNames = json.loads(mutationData["argumentnames"])
-            blockData["inputs"] = {
-                argumentIDs[argumentNames.index(inputID)]: 
-                inputValue for j,inputID,inputValue in ikv(blockData["inputs"]) 
-            }
+        if isinstance(blockData, dict):
+            if blockData["opcode"] == "procedures_call":
+                customOpcode = blockData["fields"]["customOpcode"]
+                del blockData["fields"]["customOpcode"]
+                proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
+                mutationData = mutationDatas[proccode]
+                modifiedMutationData = mutationData.copy()
+                del modifiedMutationData["argumentnames"]
+                del modifiedMutationData["argumentdefaults"]
+                blockData["mutation"] = modifiedMutationData
+        
+                argumentIDs   = json.loads(mutationData["argumentids"])
+                argumentNames = json.loads(mutationData["argumentnames"])
+                blockData["inputs"] = {
+                    argumentIDs[argumentNames.index(inputID)]: 
+                    inputValue for j,inputID,inputValue in ikv(blockData["inputs"]) 
+                }
+            
+            opcodeData = opcodeDatabase[blockData["opcode"]]
+            if "inputTranslation" in opcodeData:
+                # Replace the optmized with the unoptizimzed input ids
+                newInputDatas = {}
+                newIDs = list(opcodeData["inputTranslation"].keys())
+                oldIDs = list(opcodeData["inputTranslation"].values())
+                print("odata", opcodeData)
+                print(newIDs, oldIDs)
+                for j,inputID,inputData in ikv(blockData["inputs"]):
+                    newInputID = newIDs[oldIDs.index(inputID)]
+                    newInputDatas[newInputID] = inputData
+                blockData["inputs"] = newInputDatas
     def getSelectors(obj):
         selectors = []
         if isinstance(obj, dict):

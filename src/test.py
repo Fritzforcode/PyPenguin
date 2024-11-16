@@ -1,212 +1,21 @@
-moveDiskDef = {"position": [0,1000], "blocks":[
-    {
-        "opcode": "define ...",
-        "options": {
-            "noScreenRefresh": True, 
-            "blockType": "instruction", 
-            "customOpcode": "move disk from (source) to (target)"
-        },
-    },
-    {
-        "opcode": "add (ITEM) to [LIST]",
-        "inputs": {"ITEM":{
-            "block": {
-                "opcode": "join (STRING1) (STRING2) (STRING3)",
-                "inputs": {
-                    "STRING1": {
-                        "block": {
-                            "opcode": "value of text argument [VALUE]",
-                            "options": {"VALUE": "source"},
-                        },
-                    },
-                    "STRING2": {"text": " --> "},
-                    "STRING3": {
-                        "block": {
-                            "opcode": "value of text argument [VALUE]",
-                            "options": {"VALUE": "target"},
-                        },
-                    },
-                },
-            },
-        }},
-        "options": {"LIST": "LOG"},
-    },
-]}
-
-nEqualsOne = {
-    "block": {
-        "opcode": "(OPERAND1) = (OPERAND2)",
-        "inputs": {
-            "OPERAND1": {
-                "block": {
-                    "opcode": "value of text argument [VALUE]",
-                    "options": {"VALUE": "n"},
-                },
-            },
-            "OPERAND2": {"text": "1"},
-        },
-    },
-}
-
-caseOne = {
-    "mode": "script",
+A = {
+    "position": [0,0],
     "blocks": [
         {
-            "opcode": "call ...",
-            "inputs": {
-                "source": {
-                    "block": {
-                        "opcode": "value of text argument [VALUE]",
-                        "options": {"VALUE": "source"},
-                    },
-                },
-                "target": {
-                    "block": {
-                        "opcode": "value of text argument [VALUE]",
-                        "options": {"VALUE": "target"},
-                    },
-                },
-            },
-            "options": {"customOpcode": "move disk from (source) to (target)"},
+            "opcode": "broadcast [BROADCAST]",
+            "inputs": {"BROADCAST": {
+            
+            }},
         },
     ],
 }
-
-callOne = {
-    "opcode": "call ...",
-    "inputs": {
-        "n": {
-            "block": {
-                "opcode": "(NUM1) - (NUM2)",
-                "inputs": {
-                    "NUM1": {
-                        "block": {
-                            "opcode": "value of text argument [VALUE]",
-                            "options": {"VALUE": "n"},
-                        },
-                    },
-                    "NUM2": {
-                        "text": "1",
-                    },
-                },
-            },
-        },
-        "source": {
-            "block": {
-                "opcode": "value of text argument [VALUE]",
-                "options": {"VALUE": "source"},
-            },
-        },
-        "aux": {
-            "block": {
-                "opcode": "value of text argument [VALUE]",
-                "options": {"VALUE": "target"},
-            },
-        },
-        "target": {
-            "block": {
-                "opcode": "value of text argument [VALUE]",
-                "options": {"VALUE": "aux"},
-            },
-        },
-    },
-    "options": {"customOpcode": "hanoi (n) (source) (aux) (target)"},
-}
-
-callTwo = {
-    "opcode": "call ...",
-    "inputs": {
-        "source": {
-            "block": {
-                "opcode": "value of text argument [VALUE]",
-                "options": {"VALUE": "source"},
-            },
-        },
-        "target": {
-            "block": {
-                "opcode": "value of text argument [VALUE]",
-                "options": {"VALUE": "target"},
-            },
-        },
-    },
-    "options": {"customOpcode": "move disk from (source) to (target)"},
-}
-
-callThree = {
-    "opcode": "call ...",
-    "inputs": {
-        "n": {
-            "block": {
-                "opcode": "(NUM1) - (NUM2)",
-                "inputs": {
-                    "NUM1": {
-                        "block": {
-                            "opcode": "value of text argument [VALUE]",
-                            "options": {"VALUE": "n"},
-                        },
-                    },
-                    "NUM2": {"text": "1"},
-                },
-            },
-        },
-        "source": {
-            "block": {
-                "opcode": "value of text argument [VALUE]",
-                "options": {"VALUE": "aux"},
-            },
-        },
-        "aux": {
-            "block": {
-                "opcode": "value of text argument [VALUE]",
-                "options": {"VALUE": "source"},
-            },
-        },
-        "target": {
-            "block": {
-                "opcode": "value of text argument [VALUE]",
-                "options": {"VALUE": "target"},
-            },
-        },
-    },
-    "options": {"customOpcode": "hanoi (n) (source) (aux) (target)"},
-}
-
-caseTwo = {
-    "mode": "script",
-    "blocks": [
-        callOne,
-        callTwo,
-        callThree, 
-    ],
-}
-
-hanoiDef = {"position": [0,0], "blocks": [
-    {
-        "opcode": "define ...",
-        "options": {
-            "noScreenRefresh": True, 
-            "blockType": "instruction", 
-            "customOpcode": "hanoi (n) (source) (aux) (target)"
-        },
-    },
-    {
-        "opcode": "if <CONDITION> then {SUBSTACK} else {SUBSTACK2}",
-        "inputs": {
-            "CONDITION": nEqualsOne,
-            "SUBSTACK": caseOne,
-            "SUBSTACK2": caseTwo,
-        },
-    },
-]}
-
 projectData = {
     "sprites": [
         {
             "name": "Stage",
             "isStage": True,
             "scripts": [
-                hanoiDef,
-                moveDiskDef,   
+                A,   
             ],
             "comments": [],
             "currentCostume": 0,
@@ -267,18 +76,26 @@ projectData = {
 }
 
 from pypenguin import validateProject, deoptimizeAndCompressProject
-from pypenguin.helper_functions import writeJSONFile
+from pypenguin.helper_functions import writeJSONFile, pp
+from pypenguin.auto_complete import autoCompleteProject
 
-validateProject(projectData=projectData)
+pp(projectData)
 
-writeJSONFile(
-    filePath = "project/project.json",
-    data     = projectData
-)
+completedProjectData = autoCompleteProject(projectData=projectData)
 
-deoptimizeAndCompressProject(
-    optimizedProjectDirectory = "project",
-    projectFilePath           = "export.pmp",
-    temporaryDirectory        = "temporary",
-    writeDebugFiles           = True,
-)
+pp(completedProjectData)
+
+#validateProject(projectData=projectData)
+#pp(projectData)
+
+#writeJSONFile(
+#    filePath = "../project/project.json",
+#    data     = projectData
+#)
+
+#deoptimizeAndCompressProject(
+#    optimizedProjectDirectory = "../project",
+#    projectFilePath           = "../export.pmp",
+#    temporaryDirectory        = "../temporary",
+#    writeDebugFiles           = True,
+#)

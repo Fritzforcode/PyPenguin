@@ -1,9 +1,9 @@
 opcodeDatabase = {
 # CATEGORIES
-    # Motion
-    # Looks
-    # Sound
-    # Events
+    # Motion (Incomplete)
+    # Looks (Incomplete)
+    # Sound (Incomplete)
+    # Events (Incomplete)
         # Events: Keys
         "event_whenkeypressed": {
             "type": "hat",
@@ -22,11 +22,12 @@ opcodeDatabase = {
         "event_broadcast": {
             "type": "instruction",
             "category": "Events",
-            "newOpcode": "broadcast [BROADCAST_INPUT]",
-            "inputTypes": {"BROADCAST_INPUT": "broadcast"},
+            "newOpcode": "broadcast [BROADCAST]",
+            "inputTypes": {"BROADCAST": "broadcast"},
+            "inputTranslation": {"BROADCAST_INPUT": "BROADCAST"},
             "optionTypes": {},
         },
-    # Control
+    # Control (Incomplete)
         "control_if": {
             "type": "instruction",
             "category": "Control",
@@ -69,8 +70,8 @@ opcodeDatabase = {
             "inputTypes": {"TIMES": "number", "SUBSTACK": "script"},
             "optionTypes": {},
         },
-    # Sensing
-    # Operators
+    # Sensing (Incomplete)
+    # Operators (Incomplete)
         # Operators: Math Part 1
         "operator_add": {
             "type": "textReporter",
@@ -173,6 +174,13 @@ opcodeDatabase = {
             "inputTypes": {"STRING1": "text", "STRING2": "text", "STRING3": "text"},
             "optionTypes": {},
         },
+        "operator_letter_of": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "letter (LETTER) of (STRING)",
+            "inputTypes": {"LETTER": "positive integer", "STRING": "text"},
+            "optionTypes": {},
+        },
         # Operators: Math Part 2
         "operator_mod": {
             "type": "textReporter",
@@ -196,30 +204,166 @@ opcodeDatabase = {
             "inputTypes": {"VALUE": "number"},
             "optionTypes": {"VARIABLE": "variable"},
         },
+        "data_showvariable": {
+            "type": "instruction",
+            "category": "Variables",
+            "newOpcode": "show variable [VARIABLE]",
+            "inputTypes": {},
+            "optionTypes": {"VARIABLE": "variable"},
+        },
+        "data_hidevariable": {
+            "type": "instruction",
+            "category": "Variables",
+            "newOpcode": "hide variable [VARIABLE]",
+            "inputTypes": {},
+            "optionTypes": {"VARIABLE": "variable"},
+        },
     # Lists
-        "data_addtolist" : {
+        "data_addtolist": {
             "type": "instruction",
             "category": "Lists",
             "newOpcode": "add (ITEM) to [LIST]",
             "inputTypes": {"ITEM": "text"},
             "optionTypes": {"LIST": "list"},
         },
+        "data_deleteoflist": {
+            "type": "instruction",
+            "category": "Lists",
+            "newOpcode": "delete (INDEX) of [LIST]",
+            "inputTypes": {"INDEX": "integer"},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_deletealloflist": {
+            "type": "instruction",
+            "category": "Lists",
+            "newOpcode": "delete all of [LIST]",
+            "inputTypes": {},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_shiftlist": {
+            "type": "instruction",
+            "category": "Lists",
+            "newOpcode": "shift [LIST] by (INDEX)",
+            "inputTypes": {"INDEX": "integer"},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_insertatlist": {
+            "type": "instruction",
+            "category": "Lists",
+            "newOpcode": "insert (ITEM) at (INDEX) of [LIST]",
+            "inputTypes": {"ITEM": "text", "INDEX": "integer"},
+            "optionTypes": {"LIST": "list"},
+        },
         "data_replaceitemoflist": {
             "type": "instruction",
             "category": "Lists",
             "newOpcode": "replace item (INDEX) of [LIST] with (ITEM)",
-            "inputTypes": {"INDEX": "text", "ITEM": "text"},
+            "inputTypes": {"INDEX": "integer", "ITEM": "text"},
             "optionTypes": {"LIST": "list"},
+        },
+        "data_listforeachitem": {
+            "type": "instruction",
+            "category": "Lists",
+            "newOpcode": "For each item [VARIABLE] in [LIST] {BODY}",
+            "inputTypes": {"BODY": "script"},
+            "inputTranslation": {"SUBSTACK": "BODY"},
+            "optionTypes": {"VARIABLE": "variable", "LIST": "list"},
+        },
+        "data_listforeachnum": {
+            "type": "instruction",
+            "category": "Lists",
+            "newOpcode": "For each item # [VARIABLE] in [LIST] {BODY}",
+            "inputTypes": {"BODY": "script"},
+            "inputTranslation": {"SUBSTACK": "BODY"},
+            "optionTypes": {"VARIABLE": "variable", "LIST": "list"},
         },
         "data_itemoflist": {
             "type": "textReporter",
             "category": "Lists",
             "newOpcode": "item (INDEX) of [LIST]",
-            "inputTypes": {"INDEX": "text"},
+            "inputTypes": {"INDEX": "integer"},
             "optionTypes": {"LIST": "list"},
         },
-# EXTENSIONS
-    # JSON (jgJSON)
+        "data_itemnumoflist": {
+            "type": "textReporter",
+            "category": "Lists",
+            "newOpcode": "item # of (ITEM) in [LIST]",
+            "inputTypes": {"ITEM": "text"},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_amountinlist": {
+            "type": "textReporter",
+            "category": "Lists",
+            "newOpcode": "amount of (VALUE) of [LIST]",
+            "inputTypes": {"VALUE": "text"},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_lengthoflist": {
+            "type": "textReporter",
+            "category": "Lists",
+            "newOpcode": "length of [LIST]",
+            "inputTypes": {},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_listcontainsitem": {
+            "type": "booleanReporter",
+            "category": "Lists",
+            "newOpcode": "[LIST] contains (ITEM) ?",
+            "inputTypes": {"ITEM": "text"},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_itemexistslist": {
+            "type": "booleanReporter",
+            "category": "Lists",
+            "newOpcode": "item (INDEX) exists in [LIST] ?",
+            "inputTypes": {"INDEX": "integer"},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_listisempty": {
+            "type": "booleanReporter",
+            "category": "Lists",
+            "newOpcode": "is [LIST] empty?",
+            "inputTypes": {},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_reverselist": {
+            "type": "instruction",
+            "category": "Lists",
+            "newOpcode": "reverse [LIST]",
+            "inputTypes": {},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_arraylist": {
+            "type": "instruction",
+            "category": "Lists",
+            "newOpcode": "set [LIST] to array (VALUE)",
+            "inputTypes": {"VALUE": "text"},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_listarray": {
+            "type": "instruction",
+            "category": "Lists",
+            "newOpcode": "get list [LIST] as an array",
+            "inputTypes": {},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_showlist": {
+            "type": "instruction",
+            "category": "Lists",
+            "newOpcode": "show list [LIST]",
+            "inputTypes": {},
+            "optionTypes": {"LIST": "list"},
+        },
+        "data_hidelist": {
+            "type": "instruction",
+            "category": "Lists",
+            "newOpcode": "hide list [LIST]",
+            "inputTypes": {},
+            "optionTypes": {"LIST": "list"},
+        },
+        
+# EXTENSIONS (Incomplete)
+    # JSON (jgJSON) (Incomplete)
         # JSON: Objects
         "jgJSON_getValueFromJSON": {
             "type": "textReporter",
@@ -247,7 +391,7 @@ opcodeDatabase = {
             "type": "textReporter",
             "category": "JSON",
             "newOpcode": "in array (array) get (index)",
-            "inputTypes": {"array": "text", "index": "text"},
+            "inputTypes": {"array": "text", "index": "number"},
             "optionTypes": {},
         },
         "jgJSON_json_array_length": {

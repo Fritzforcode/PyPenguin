@@ -1,22 +1,24 @@
 from pypenguin.validate.constants import validateSchema, formatError, projectSchema
 from pypenguin.validate.variables_lists import validateVariable, validateList
 from pypenguin.validate.sprites import validateSprite
+import copy
 
 def validateProject(projectData):
+    projectDataCopy = copy.deepcopy(projectData)
     # Check project format
-    validateSchema(pathToData=[], data=projectData, schema=projectSchema)
+    validateSchema(pathToData=[], data=projectDataCopy, schema=projectSchema)
     
     # Check variable formats
     errorMessage = "Variable names mustn't be the same. Please check 'globalVariables' and 'localVariables' of the same sprite."
     globalVariableNames = []
-    for j, variable in enumerate(projectData["globalVariables"]):
+    for j, variable in enumerate(projectDataCopy["globalVariables"]):
         validateVariable(path=["globalVariables"]+[j], data=variable, isGlobal=True)
         variableName = variable["name"]
         if variableName in globalVariableNames: # if var name alredy exists globally
             raise formatError(path=["globalVariables"]+[j]+["name"], message=errorMessage)
     
-    localVariableNames = [[] for i in range(  len( projectData["sprites"][1:] )  )]
-    for i, sprite in enumerate(projectData["sprites"][1:]):
+    localVariableNames = [[] for i in range(  len( projectDataCopy["sprites"][1:] )  )]
+    for i, sprite in enumerate(projectDataCopy["sprites"][1:]):
         if "localVariables" not in sprite:
             raise formatError(path=["sprites"]+[i], message="Each sprite (but not the stage) must have the 'localVariables' attribute.")
         if not isinstance(sprite["localVariables"], list):
@@ -31,14 +33,14 @@ def validateProject(projectData):
     
     errorMessage = "List names mustn't be the same. Please check 'globalLists' and 'localLists' of the same sprite."
     globalListNames = []
-    for j, list_ in enumerate(projectData["globalLists"]):
+    for j, list_ in enumerate(projectDataCopy["globalLists"]):
         validateList(path=["globalLists"]+[j], data=list_)
         listName = list_["name"]
         if listName in globalListNames: # if list name alredy exists globally
             raise formatError(path=["globalLists"]+[j]+["name"], message=errorMessage)
     
-    localListNames = [[] for i in range(  len( projectData["sprites"][1:] )  )]
-    for i, sprite in enumerate(projectData["sprites"][1:]):
+    localListNames = [[] for i in range(  len( projectDataCopy["sprites"][1:] )  )]
+    for i, sprite in enumerate(projectDataCopy["sprites"][1:]):
         if "localLists" not in sprite:
             raise formatError(path=["sprites"]+[i], message="Each sprite (but not the stage) must have the 'localLists' attribute.")
         if not isinstance(sprite["localLists"], list):
@@ -53,13 +55,13 @@ def validateProject(projectData):
 
     # Check sprite formats
     spriteNames = []
-    for i, sprite in enumerate(projectData["sprites"]):
+    for i, sprite in enumerate(projectDataCopy["sprites"]):
         if i == 0:
-            scopeVariables = projectData["globalVariables"]
-            scopeLists     = projectData["globalLists"]
+            scopeVariables = projectDataCopy["globalVariables"]
+            scopeLists     = projectDataCopy["globalLists"]
         else:
-            scopeVariables = sprite["localVariables"] + projectData["globalVariables"]
-            scopeLists     = sprite["localLists"]     + projectData["globalLists"]
+            scopeVariables = sprite["localVariables"] + projectDataCopy["globalVariables"]
+            scopeLists     = sprite["localLists"]     + projectDataCopy["globalLists"]
         
         context = {"scopeVariables": scopeVariables, "scopeLists": scopeLists}
         validateSprite(path=["sprites"]+[i], data=sprite, context=context)
