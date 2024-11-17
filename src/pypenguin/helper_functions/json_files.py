@@ -1,3 +1,4 @@
+import platform
 from json import dump
 from jsoncomment import JsonComment
 parser = JsonComment()
@@ -39,5 +40,10 @@ def writeJSONFile(filePath, data, beautiful:bool=True):
             filePath = "../" + filePath # Go up a directory
             return write(filePath=filePath, data=data)
         except FileNotFoundError:
-            filePath = "../" + filePath # Go up a second directory
-            return write(filePath=filePath, data=data)
+            try:
+                filePath = "../" + filePath # Go up a second directory
+                return write(filePath=filePath, data=data)
+            except FileNotFoundError:
+                filePath = "../" + filePath # Go up a third directory
+                return write(filePath=filePath, data=data)
+
