@@ -37,9 +37,11 @@
                 "xp.Ahc]%mHiCjMS(xh;,": [
                     "PROGRAMM",
                     [
-                        "[\"add\", \"1\", \"0\", \"2\"]",
+                        "[\"addi\", \"0\", \"1\", \"1\"]",
+                        "[\"add\", \"0\", \"1\", \"2\"]",
                         "[\"add\", \"1\", \"2\", \"3\"]",
-                        "[\"add\", \"2\", \"3\", \"4\"]"
+                        "[\"add\", \"2\", \"3\", \"4\"]",
+                        "[\"add\", \"3\", \"4\", \"5\"]"
                     ]
                 ],
                 "fmYzHT-`vAhuuR@Gp)wb": [
@@ -217,7 +219,7 @@
                             1,
                             [
                                 10,
-                                "[\"add\", \"mul\"]"
+                                "[\"add\", \"mul\", \"addi\"]"
                             ]
                         ],
                         "value": [
@@ -354,7 +356,7 @@
                     "next": null,
                     "parent": "g",
                     "inputs": {
-                        "QRVlRefIut|LUY^qLo.E": [
+                        "gNw?jMZQM#nm_.-RRp.o": [
                             3,
                             "j",
                             [
@@ -362,7 +364,7 @@
                                 ""
                             ]
                         ],
-                        "gNw?jMZQM#nm_.-RRp.o": [
+                        ":%eMQtv`WlikzChXbmY_": [
                             3,
                             "l",
                             [
@@ -370,7 +372,7 @@
                                 ""
                             ]
                         ],
-                        ":%eMQtv`WlikzChXbmY_": [
+                        "?L*/|B%kVCH|v(yToid@": [
                             3,
                             "m",
                             [
@@ -378,7 +380,7 @@
                                 ""
                             ]
                         ],
-                        "?L*/|B%kVCH|v(yToid@": [
+                        "*zp:YGAfBsnz+WU]tn/s": [
                             3,
                             "n",
                             [
@@ -394,7 +396,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "execute alu instr %s %s %s %s",
-                        "argumentids": "[\"QRVlRefIut|LUY^qLo.E\", \"gNw?jMZQM#nm_.-RRp.o\", \":%eMQtv`WlikzChXbmY_\", \"?L*/|B%kVCH|v(yToid@\"]",
+                        "argumentids": "[\"gNw?jMZQM#nm_.-RRp.o\", \":%eMQtv`WlikzChXbmY_\", \"?L*/|B%kVCH|v(yToid@\", \"*zp:YGAfBsnz+WU]tn/s\"]",
                         "warp": "true",
                         "returns": "false",
                         "edited": "true",
@@ -577,7 +579,7 @@
                     "next": null,
                     "parent": "q",
                     "inputs": {
-                        "e.#s/ktT!e,X+gm-tceq": [
+                        "Y)Vy+Tjff/Gd?`{BDl;@": [
                             3,
                             "r",
                             [
@@ -585,7 +587,7 @@
                                 ""
                             ]
                         ],
-                        "Pn^SyX/oh,RpLqXLp?ye": [
+                        "#;Nos%`%kn#im#td*(#d": [
                             3,
                             "t",
                             [
@@ -593,7 +595,7 @@
                                 ""
                             ]
                         ],
-                        "Y)Vy+Tjff/Gd?`{BDl;@": [
+                        ":PGkTjpTdSSwbDUjsAaA": [
                             3,
                             "u",
                             [
@@ -601,7 +603,7 @@
                                 ""
                             ]
                         ],
-                        "#;Nos%`%kn#im#td*(#d": [
+                        "paLVdDsx+o.SHqdAUQ-L": [
                             3,
                             "v",
                             [
@@ -617,7 +619,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "execute control instr %s %s %s %s",
-                        "argumentids": "[\"e.#s/ktT!e,X+gm-tceq\", \"Pn^SyX/oh,RpLqXLp?ye\", \"Y)Vy+Tjff/Gd?`{BDl;@\", \"#;Nos%`%kn#im#td*(#d\"]",
+                        "argumentids": "[\"Y)Vy+Tjff/Gd?`{BDl;@\", \"#;Nos%`%kn#im#td*(#d\", \":PGkTjpTdSSwbDUjsAaA\", \"paLVdDsx+o.SHqdAUQ-L\"]",
                         "warp": "true",
                         "returns": "false",
                         "edited": "true",
@@ -645,7 +647,7 @@
                 },
                 "g": {
                     "opcode": "control_if_else",
-                    "next": null,
+                    "next": "w",
                     "parent": "e",
                     "inputs": {
                         "CONDITION": [
@@ -662,6 +664,34 @@
                         ]
                     },
                     "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "w": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "g",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            [
+                                12,
+                                "NEW PC",
+                                "Za:QFPiy`CEs]*lkO=/n"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "PROGRAMM COUNTER",
+                            "NmjQ-_mT(OA^.)?Hh^bl",
+                            ""
+                        ]
+                    },
                     "shadow": false,
                     "topLevel": false
                 },
@@ -687,14 +717,14 @@
                         "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
                     }
                 },
-                "w": {
+                "x": {
                     "opcode": "procedures_definition",
-                    "next": "x",
+                    "next": "y",
                     "parent": null,
                     "inputs": {
                         "custom_block": [
                             1,
-                            "y"
+                            "z"
                         ]
                     },
                     "fields": {},
@@ -703,67 +733,28 @@
                     "x": 500,
                     "y": 0
                 },
-                "z": {
+                "A": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "A",
+                    "parent": "B",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
-                            "instr",
+                            "A",
                             "xm-YkcJ*oGr?SotJcffA"
                         ]
                     },
                     "shadow": false,
                     "topLevel": false
                 },
-                "A": {
-                    "opcode": "jgJSON_json_array_contains",
-                    "next": null,
-                    "parent": "x",
-                    "inputs": {
-                        "array": [
-                            1,
-                            [
-                                10,
-                                "[\"add\", \"mul\"]"
-                            ]
-                        ],
-                        "value": [
-                            3,
-                            "z",
-                            [
-                                10,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
                 "B": {
-                    "opcode": "argument_reporter_string_number",
-                    "next": null,
-                    "parent": "C",
-                    "inputs": {},
-                    "fields": {
-                        "VALUE": [
-                            "A",
-                            "-!`=NTXGt_b+kQf]JrE."
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "C": {
                     "opcode": "procedures_call",
                     "next": null,
-                    "parent": "D",
+                    "parent": "y",
                     "inputs": {
-                        "*,aBMoM]t%-l:D]ZJcpI": [
+                        "p@Fui#LK?r{?A[n!]ZJL": [
                             3,
-                            "B",
+                            "A",
                             [
                                 10,
                                 ""
@@ -777,7 +768,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "read register %s",
-                        "argumentids": "[\"*,aBMoM]t%-l:D]ZJcpI\"]",
+                        "argumentids": "[\"p@Fui#LK?r{?A[n!]ZJL\"]",
                         "warp": "true",
                         "returns": "true",
                         "edited": "true",
@@ -785,14 +776,14 @@
                         "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
                     }
                 },
-                "D": {
+                "y": {
                     "opcode": "data_setvariableto",
-                    "next": "E",
+                    "next": "C",
                     "parent": "x",
                     "inputs": {
                         "VALUE": [
                             3,
-                            "C",
+                            "B",
                             [
                                 10,
                                 ""
@@ -809,6 +800,45 @@
                     "shadow": false,
                     "topLevel": false
                 },
+                "D": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "E",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            "H_OU`f:+(V[wAW}LbrtI"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "E": {
+                    "opcode": "jgJSON_json_array_contains",
+                    "next": null,
+                    "parent": "C",
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"add\", \"mul\"]"
+                            ]
+                        ],
+                        "value": [
+                            3,
+                            "D",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
                 "F": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
@@ -817,7 +847,7 @@
                     "fields": {
                         "VALUE": [
                             "B",
-                            "TKT}qNX#kayQuEC*W`#e"
+                            "-!`=NTXGt_b+kQf]JrE."
                         ]
                     },
                     "shadow": false,
@@ -826,9 +856,9 @@
                 "G": {
                     "opcode": "procedures_call",
                     "next": null,
-                    "parent": "E",
+                    "parent": "H",
                     "inputs": {
-                        "*,aBMoM]t%-l:D]ZJcpI": [
+                        "p@Fui#LK?r{?A[n!]ZJL": [
                             3,
                             "F",
                             [
@@ -844,7 +874,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "read register %s",
-                        "argumentids": "[\"*,aBMoM]t%-l:D]ZJcpI\"]",
+                        "argumentids": "[\"p@Fui#LK?r{?A[n!]ZJL\"]",
                         "warp": "true",
                         "returns": "true",
                         "edited": "true",
@@ -852,10 +882,10 @@
                         "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
                     }
                 },
-                "E": {
+                "H": {
                     "opcode": "data_setvariableto",
                     "next": null,
-                    "parent": "D",
+                    "parent": "C",
                     "inputs": {
                         "VALUE": [
                             3,
@@ -876,28 +906,70 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "x": {
-                    "opcode": "control_if",
-                    "next": "H",
-                    "parent": "w",
+                "I": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "J",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "B",
+                            "TKT}qNX#kayQuEC*W`#e"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "J": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "C",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "I",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "[ALU] Arg B",
+                            "hmsCf{[jdpy{pYlVoecy",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "C": {
+                    "opcode": "control_if_else",
+                    "next": "K",
+                    "parent": "y",
                     "inputs": {
                         "CONDITION": [
                             2,
-                            "A"
+                            "E"
                         ],
                         "SUBSTACK": [
                             2,
-                            "D"
+                            "H"
+                        ],
+                        "SUBSTACK2": [
+                            2,
+                            "J"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
-                "I": {
+                "L": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "H",
+                    "parent": "K",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
@@ -908,10 +980,10 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "J": {
+                "M": {
                     "opcode": "operator_add",
                     "next": null,
-                    "parent": "K",
+                    "parent": "N",
                     "inputs": {
                         "NUM1": [
                             3,
@@ -942,14 +1014,14 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "K": {
+                "N": {
                     "opcode": "data_setvariableto",
                     "next": null,
-                    "parent": "L",
+                    "parent": "O",
                     "inputs": {
                         "VALUE": [
                             3,
-                            "J",
+                            "M",
                             [
                                 10,
                                 ""
@@ -966,10 +1038,10 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "L": {
+                "O": {
                     "opcode": "control_case",
-                    "next": "M",
-                    "parent": "H",
+                    "next": "P",
+                    "parent": "K",
                     "inputs": {
                         "CONDITION": [
                             1,
@@ -980,17 +1052,17 @@
                         ],
                         "SUBSTACK": [
                             2,
-                            "K"
+                            "N"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
-                "N": {
+                "Q": {
                     "opcode": "operator_multiply",
                     "next": null,
-                    "parent": "O",
+                    "parent": "R",
                     "inputs": {
                         "NUM1": [
                             3,
@@ -1021,14 +1093,14 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "O": {
+                "R": {
                     "opcode": "data_setvariableto",
                     "next": null,
-                    "parent": "M",
+                    "parent": "P",
                     "inputs": {
                         "VALUE": [
                             3,
-                            "N",
+                            "Q",
                             [
                                 10,
                                 ""
@@ -1045,16 +1117,117 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "M": {
+                "P": {
                     "opcode": "control_case",
-                    "next": null,
-                    "parent": "L",
+                    "next": "S",
+                    "parent": "O",
                     "inputs": {
                         "CONDITION": [
                             1,
                             [
                                 10,
                                 "mul"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "R"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "T": {
+                    "opcode": "operator_add",
+                    "next": null,
+                    "parent": "U",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            [
+                                12,
+                                "[ALU] Arg A",
+                                "J*:TkPo/}QyFcIoCVvQ%"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "NUM2": [
+                            3,
+                            [
+                                12,
+                                "[ALU] Arg B",
+                                "hmsCf{[jdpy{pYlVoecy"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "U": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "S",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "T",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "[ALU] return value",
+                            "xeH-ilqtek]Y@J?EB}#|",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "S": {
+                    "opcode": "control_case",
+                    "next": null,
+                    "parent": "P",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "addi"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "U"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "K": {
+                    "opcode": "control_switch",
+                    "next": "V",
+                    "parent": "C",
+                    "inputs": {
+                        "CONDITION": [
+                            3,
+                            "L",
+                            [
+                                10,
+                                ""
                             ]
                         ],
                         "SUBSTACK": [
@@ -1066,46 +1239,24 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "H": {
-                    "opcode": "control_switch",
-                    "next": "P",
-                    "parent": "x",
-                    "inputs": {
-                        "CONDITION": [
-                            3,
-                            "I",
-                            [
-                                10,
-                                ""
-                            ]
-                        ],
-                        "SUBSTACK": [
-                            2,
-                            "L"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "Q": {
+                "W": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "R",
+                    "parent": "X",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
                             "instr",
-                            "H_OU`f:+(V[wAW}LbrtI"
+                            "QRVlRefIut|LUY^qLo.E"
                         ]
                     },
                     "shadow": false,
                     "topLevel": false
                 },
-                "R": {
+                "X": {
                     "opcode": "jgJSON_json_array_contains",
                     "next": null,
-                    "parent": "P",
+                    "parent": "V",
                     "inputs": {
                         "array": [
                             1,
@@ -1116,7 +1267,7 @@
                         ],
                         "value": [
                             3,
-                            "Q",
+                            "W",
                             [
                                 10,
                                 ""
@@ -1127,10 +1278,10 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "S": {
+                "Y": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "T",
+                    "parent": "Z",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
@@ -1141,20 +1292,20 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "T": {
+                "Z": {
                     "opcode": "procedures_call",
                     "next": null,
-                    "parent": "P",
+                    "parent": "V",
                     "inputs": {
-                        ";O:h)Ms:gBdT-Yb@ikYa": [
+                        "s*s@OqAx)SX%/XCz)A}g": [
                             3,
-                            "S",
+                            "Y",
                             [
                                 10,
                                 ""
                             ]
                         ],
-                        "UfoaILDs{Kyn(+QXvQ#(": [
+                        "XeDkxUhwDMl=KT!+g?^(": [
                             3,
                             [
                                 12,
@@ -1174,7 +1325,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "set register %s to %s",
-                        "argumentids": "[\";O:h)Ms:gBdT-Yb@ikYa\", \"UfoaILDs{Kyn(+QXvQ#(\"]",
+                        "argumentids": "[\"s*s@OqAx)SX%/XCz)A}g\", \"XeDkxUhwDMl=KT!+g?^(\"]",
                         "warp": "true",
                         "returns": "false",
                         "edited": "true",
@@ -1182,44 +1333,44 @@
                         "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
                     }
                 },
-                "P": {
+                "V": {
                     "opcode": "control_if",
                     "next": null,
-                    "parent": "H",
+                    "parent": "K",
                     "inputs": {
                         "CONDITION": [
                             2,
-                            "R"
+                            "X"
                         ],
                         "SUBSTACK": [
                             2,
-                            "T"
+                            "Z"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
-                "y": {
+                "z": {
                     "opcode": "procedures_prototype",
                     "next": null,
-                    "parent": "w",
+                    "parent": "x",
                     "inputs": {
-                        "QRVlRefIut|LUY^qLo.E": [
-                            1,
-                            "U"
-                        ],
                         "gNw?jMZQM#nm_.-RRp.o": [
                             1,
-                            "V"
+                            "!"
                         ],
                         ":%eMQtv`WlikzChXbmY_": [
                             1,
-                            "W"
+                            "#"
                         ],
                         "?L*/|B%kVCH|v(yToid@": [
                             1,
-                            "X"
+                            "%"
+                        ],
+                        "*zp:YGAfBsnz+WU]tn/s": [
+                            1,
+                            "("
                         ]
                     },
                     "fields": {},
@@ -1229,7 +1380,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "execute alu instr %s %s %s %s",
-                        "argumentids": "[\"QRVlRefIut|LUY^qLo.E\", \"gNw?jMZQM#nm_.-RRp.o\", \":%eMQtv`WlikzChXbmY_\", \"?L*/|B%kVCH|v(yToid@\"]",
+                        "argumentids": "[\"gNw?jMZQM#nm_.-RRp.o\", \":%eMQtv`WlikzChXbmY_\", \"?L*/|B%kVCH|v(yToid@\", \"*zp:YGAfBsnz+WU]tn/s\"]",
                         "argumentnames": "[\"instr\", \"A\", \"B\", \"C\"]",
                         "argumentdefaults": "[\"\", \"\", \"\", \"\"]",
                         "warp": "true",
@@ -1239,33 +1390,14 @@
                         "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
                     }
                 },
-                "U": {
+                "!": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "y",
+                    "parent": "z",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
                             "instr",
-                            "*zp:YGAfBsnz+WU]tn/s"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
-                    }
-                },
-                "V": {
-                    "opcode": "argument_reporter_string_number",
-                    "next": null,
-                    "parent": "y",
-                    "inputs": {},
-                    "fields": {
-                        "VALUE": [
-                            "A",
                             "`Z%?:P::z]CbROPe@sGt"
                         ]
                     },
@@ -1277,14 +1409,14 @@
                         "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
                     }
                 },
-                "W": {
+                "#": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "y",
+                    "parent": "z",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
-                            "B",
+                            "A",
                             "W|L-ik?fiCqfMb*Qut+V"
                         ]
                     },
@@ -1296,14 +1428,14 @@
                         "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
                     }
                 },
-                "X": {
+                "%": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "y",
+                    "parent": "z",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
-                            "C",
+                            "B",
                             ";W@;e{l?j%AL[#.X}Dca"
                         ]
                     },
@@ -1315,14 +1447,33 @@
                         "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
                     }
                 },
-                "Y": {
+                "(": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "z",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "C",
+                            "xM;`GQi:HM!XXhuqEKQh"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                ")": {
                     "opcode": "procedures_definition",
-                    "next": "Z",
+                    "next": "*",
                     "parent": null,
                     "inputs": {
                         "custom_block": [
                             1,
-                            "!"
+                            "+"
                         ]
                     },
                     "fields": {},
@@ -1331,37 +1482,37 @@
                     "x": -200,
                     "y": 0
                 },
-                "#": {
+                ",": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "Z",
+                    "parent": "*",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
                             "instr",
-                            "xM;`GQi:HM!XXhuqEKQh"
+                            "e.#s/ktT!e,X+gm-tceq"
                         ]
                     },
                     "shadow": false,
                     "topLevel": false
                 },
-                "%": {
+                "-": {
                     "opcode": "operator_trueBoolean",
                     "next": null,
-                    "parent": "(",
+                    "parent": ".",
                     "inputs": {},
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
-                "(": {
+                ".": {
                     "opcode": "data_setvariableto",
                     "next": null,
-                    "parent": ")",
+                    "parent": "/",
                     "inputs": {
                         "VALUE": [
                             3,
-                            "%",
+                            "-",
                             [
                                 10,
                                 ""
@@ -1378,10 +1529,10 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                ")": {
+                "/": {
                     "opcode": "control_case",
                     "next": null,
-                    "parent": "Z",
+                    "parent": "*",
                     "inputs": {
                         "CONDITION": [
                             1,
@@ -1392,21 +1543,21 @@
                         ],
                         "SUBSTACK": [
                             2,
-                            "("
+                            "."
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
-                "Z": {
+                "*": {
                     "opcode": "control_switch",
-                    "next": "*",
-                    "parent": "Y",
+                    "next": ":",
+                    "parent": ")",
                     "inputs": {
                         "CONDITION": [
                             3,
-                            "#",
+                            ",",
                             [
                                 10,
                                 ""
@@ -1414,17 +1565,17 @@
                         ],
                         "SUBSTACK": [
                             2,
-                            ")"
+                            "/"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
-                "+": {
+                ";": {
                     "opcode": "operator_boolify",
                     "next": null,
-                    "parent": "*",
+                    "parent": ":",
                     "inputs": {
                         "ONE": [
                             3,
@@ -1443,40 +1594,82 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "*": {
+                "=": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "?",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "C",
+                            "Pn^SyX/oh,RpLqXLp?ye"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "?": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": ":",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "=",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "NEW PC",
+                            "Za:QFPiy`CEs]*lkO=/n",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                ":": {
                     "opcode": "control_if",
                     "next": null,
-                    "parent": "Z",
+                    "parent": "*",
                     "inputs": {
                         "CONDITION": [
                             2,
-                            "+"
+                            ";"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "?"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
-                "!": {
+                "+": {
                     "opcode": "procedures_prototype",
                     "next": null,
-                    "parent": "Y",
+                    "parent": ")",
                     "inputs": {
-                        "e.#s/ktT!e,X+gm-tceq": [
-                            1,
-                            ","
-                        ],
-                        "Pn^SyX/oh,RpLqXLp?ye": [
-                            1,
-                            "-"
-                        ],
                         "Y)Vy+Tjff/Gd?`{BDl;@": [
                             1,
-                            "."
+                            "@"
                         ],
                         "#;Nos%`%kn#im#td*(#d": [
                             1,
-                            "/"
+                            "["
+                        ],
+                        ":PGkTjpTdSSwbDUjsAaA": [
+                            1,
+                            "]"
+                        ],
+                        "paLVdDsx+o.SHqdAUQ-L": [
+                            1,
+                            "^"
                         ]
                     },
                     "fields": {},
@@ -1486,7 +1679,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "execute control instr %s %s %s %s",
-                        "argumentids": "[\"e.#s/ktT!e,X+gm-tceq\", \"Pn^SyX/oh,RpLqXLp?ye\", \"Y)Vy+Tjff/Gd?`{BDl;@\", \"#;Nos%`%kn#im#td*(#d\"]",
+                        "argumentids": "[\"Y)Vy+Tjff/Gd?`{BDl;@\", \"#;Nos%`%kn#im#td*(#d\", \":PGkTjpTdSSwbDUjsAaA\", \"paLVdDsx+o.SHqdAUQ-L\"]",
                         "argumentnames": "[\"instr\", \"A\", \"B\", \"C\"]",
                         "argumentdefaults": "[\"\", \"\", \"\", \"\"]",
                         "warp": "true",
@@ -1496,52 +1689,14 @@
                         "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
                     }
                 },
-                ",": {
+                "@": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "!",
+                    "parent": "+",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
                             "instr",
-                            ":PGkTjpTdSSwbDUjsAaA"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
-                    }
-                },
-                "-": {
-                    "opcode": "argument_reporter_string_number",
-                    "next": null,
-                    "parent": "!",
-                    "inputs": {},
-                    "fields": {
-                        "VALUE": [
-                            "A",
-                            "paLVdDsx+o.SHqdAUQ-L"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
-                    }
-                },
-                ".": {
-                    "opcode": "argument_reporter_string_number",
-                    "next": null,
-                    "parent": "!",
-                    "inputs": {},
-                    "fields": {
-                        "VALUE": [
-                            "B",
                             "L^Px}kn[|NuWsqCO=FEx"
                         ]
                     },
@@ -1553,14 +1708,14 @@
                         "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
                     }
                 },
-                "/": {
+                "[": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "!",
+                    "parent": "+",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
-                            "C",
+                            "A",
                             "LV#fqcYjjq#M^#s}%MTk"
                         ]
                     },
@@ -1572,14 +1727,52 @@
                         "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
                     }
                 },
-                ":": {
+                "]": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "+",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "B",
+                            "F)V@hW!b#P)AVL-lxnJo"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "^": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "+",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "C",
+                            "_t*Zx#(wF+R?sT,l.ALa"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "_": {
                     "opcode": "procedures_definition_return",
-                    "next": ";",
+                    "next": "`",
                     "parent": null,
                     "inputs": {
                         "custom_block": [
                             1,
-                            "="
+                            "{"
                         ]
                     },
                     "fields": {},
@@ -1588,28 +1781,28 @@
                     "x": 1000,
                     "y": 0
                 },
-                "?": {
+                "|": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "@",
+                    "parent": "}",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
                             "reg",
-                            "_t*Zx#(wF+R?sT,l.ALa"
+                            "faGY@|Y)nGTKzkejHN[R"
                         ]
                     },
                     "shadow": false,
                     "topLevel": false
                 },
-                "@": {
+                "}": {
                     "opcode": "operator_equals",
                     "next": null,
-                    "parent": ";",
+                    "parent": "`",
                     "inputs": {
                         "OPERAND1": [
                             3,
-                            "?",
+                            "|",
                             [
                                 10,
                                 ""
@@ -1619,7 +1812,7 @@
                             1,
                             [
                                 10,
-                                "r0"
+                                "0"
                             ]
                         ]
                     },
@@ -1627,10 +1820,10 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "[": {
+                "~": {
                     "opcode": "procedures_return",
                     "next": null,
-                    "parent": ";",
+                    "parent": "`",
                     "inputs": {
                         "return": [
                             1,
@@ -1644,28 +1837,28 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "]": {
+                "aa": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "^",
+                    "parent": "ab",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
                             "reg",
-                            "F)V@hW!b#P)AVL-lxnJo"
+                            "*,aBMoM]t%-l:D]ZJcpI"
                         ]
                     },
                     "shadow": false,
                     "topLevel": false
                 },
-                "^": {
+                "ab": {
                     "opcode": "data_itemoflist",
                     "next": null,
-                    "parent": "_",
+                    "parent": "ac",
                     "inputs": {
                         "INDEX": [
                             3,
-                            "]",
+                            "aa",
                             [
                                 7,
                                 ""
@@ -1682,14 +1875,14 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "_": {
+                "ac": {
                     "opcode": "procedures_return",
                     "next": null,
-                    "parent": ";",
+                    "parent": "`",
                     "inputs": {
                         "return": [
                             3,
-                            "^",
+                            "ab",
                             [
                                 10,
                                 ""
@@ -1700,36 +1893,36 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                ";": {
+                "`": {
                     "opcode": "control_if_else",
                     "next": null,
-                    "parent": ":",
+                    "parent": "_",
                     "inputs": {
                         "CONDITION": [
                             2,
-                            "@"
+                            "}"
                         ],
                         "SUBSTACK": [
                             2,
-                            "["
+                            "~"
                         ],
                         "SUBSTACK2": [
                             2,
-                            "_"
+                            "ac"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
-                "=": {
+                "{": {
                     "opcode": "procedures_prototype",
                     "next": null,
-                    "parent": ":",
+                    "parent": "_",
                     "inputs": {
-                        "*,aBMoM]t%-l:D]ZJcpI": [
+                        "p@Fui#LK?r{?A[n!]ZJL": [
                             1,
-                            "`"
+                            "ad"
                         ]
                     },
                     "fields": {},
@@ -1739,7 +1932,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "read register %s",
-                        "argumentids": "[\"*,aBMoM]t%-l:D]ZJcpI\"]",
+                        "argumentids": "[\"p@Fui#LK?r{?A[n!]ZJL\"]",
                         "argumentnames": "[\"reg\"]",
                         "argumentdefaults": "[\"\"]",
                         "warp": "true",
@@ -1749,15 +1942,15 @@
                         "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
                     }
                 },
-                "`": {
+                "ad": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "=",
+                    "parent": "{",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
                             "reg",
-                            "faGY@|Y)nGTKzkejHN[R"
+                            ")V`ruppWZ},r_MT-#B./"
                         ]
                     },
                     "shadow": true,
@@ -1768,14 +1961,14 @@
                         "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
                     }
                 },
-                "{": {
+                "ae": {
                     "opcode": "procedures_definition",
-                    "next": "|",
+                    "next": "af",
                     "parent": null,
                     "inputs": {
                         "custom_block": [
                             1,
-                            "}"
+                            "ag"
                         ]
                     },
                     "fields": {},
@@ -1784,42 +1977,42 @@
                     "x": 1500,
                     "y": 0
                 },
-                "~": {
+                "ah": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "|",
+                    "parent": "af",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
                             "reg",
-                            "p@Fui#LK?r{?A[n!]ZJL"
+                            ";O:h)Ms:gBdT-Yb@ikYa"
                         ]
                     },
                     "shadow": false,
                     "topLevel": false
                 },
-                "aa": {
+                "ai": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "ab",
+                    "parent": "aj",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
                             "value",
-                            ")V`ruppWZ},r_MT-#B./"
+                            "UfoaILDs{Kyn(+QXvQ#("
                         ]
                     },
                     "shadow": false,
                     "topLevel": false
                 },
-                "ab": {
+                "aj": {
                     "opcode": "operator_mod",
                     "next": null,
-                    "parent": "|",
+                    "parent": "af",
                     "inputs": {
                         "NUM1": [
                             3,
-                            "aa",
+                            "ai",
                             [
                                 10,
                                 ""
@@ -1837,14 +2030,14 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "|": {
+                "af": {
                     "opcode": "data_replaceitemoflist",
                     "next": null,
-                    "parent": "{",
+                    "parent": "ae",
                     "inputs": {
                         "INDEX": [
                             3,
-                            "~",
+                            "ah",
                             [
                                 7,
                                 ""
@@ -1852,7 +2045,7 @@
                         ],
                         "ITEM": [
                             3,
-                            "ab",
+                            "aj",
                             [
                                 10,
                                 ""
@@ -1869,18 +2062,18 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "}": {
+                "ag": {
                     "opcode": "procedures_prototype",
                     "next": null,
-                    "parent": "{",
+                    "parent": "ae",
                     "inputs": {
-                        ";O:h)Ms:gBdT-Yb@ikYa": [
+                        "s*s@OqAx)SX%/XCz)A}g": [
                             1,
-                            "ac"
+                            "ak"
                         ],
-                        "UfoaILDs{Kyn(+QXvQ#(": [
+                        "XeDkxUhwDMl=KT!+g?^(": [
                             1,
-                            "ad"
+                            "al"
                         ]
                     },
                     "fields": {},
@@ -1890,7 +2083,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "set register %s to %s",
-                        "argumentids": "[\";O:h)Ms:gBdT-Yb@ikYa\", \"UfoaILDs{Kyn(+QXvQ#(\"]",
+                        "argumentids": "[\"s*s@OqAx)SX%/XCz)A}g\", \"XeDkxUhwDMl=KT!+g?^(\"]",
                         "argumentnames": "[\"reg\", \"value\"]",
                         "argumentdefaults": "[\"\", \"\"]",
                         "warp": "true",
@@ -1900,15 +2093,15 @@
                         "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
                     }
                 },
-                "ac": {
+                "ak": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "}",
+                    "parent": "ag",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
                             "reg",
-                            "s*s@OqAx)SX%/XCz)A}g"
+                            "|+/G-BRIffguSaLari%C"
                         ]
                     },
                     "shadow": true,
@@ -1919,15 +2112,15 @@
                         "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
                     }
                 },
-                "ad": {
+                "al": {
                     "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "}",
+                    "parent": "ag",
                     "inputs": {},
                     "fields": {
                         "VALUE": [
                             "value",
-                            "XeDkxUhwDMl=KT!+g?^("
+                            "Y_C+yRnkOP[+PGd?fyVk"
                         ]
                     },
                     "shadow": true,
@@ -1953,7 +2146,7 @@
                 }
             ],
             "sounds": [],
-            "id": "|+/G-BRIffguSaLari%C",
+            "id": "A@SyzGMN?XG.SEfN^jb+",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,
@@ -1974,8 +2167,8 @@
             "value": "",
             "width": 20,
             "height": 10,
-            "x": 5,
-            "y": 200,
+            "x": 215,
+            "y": 0,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -1992,8 +2185,8 @@
             "value": 1,
             "width": 20,
             "height": 10,
-            "x": 5,
-            "y": 100,
+            "x": 0,
+            "y": 0,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -2010,8 +2203,8 @@
             "value": 1,
             "width": 20,
             "height": 70,
-            "x": 5,
-            "y": 100,
+            "x": 0,
+            "y": 20,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -2028,8 +2221,8 @@
             "value": 0,
             "width": 20,
             "height": 10,
-            "x": 5,
-            "y": 5,
+            "x": 0,
+            "y": 145,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -2046,8 +2239,8 @@
             "value": 0,
             "width": 20,
             "height": 10,
-            "x": 5,
-            "y": 5,
+            "x": 0,
+            "y": 95,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -2064,8 +2257,8 @@
             "value": 0,
             "width": 20,
             "height": 10,
-            "x": 5,
-            "y": 50,
+            "x": 0,
+            "y": 55,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -2082,8 +2275,8 @@
             "value": 0,
             "width": 20,
             "height": 10,
-            "x": 5,
-            "y": 150,
+            "x": 0,
+            "y": 75,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -2098,11 +2291,13 @@
             },
             "spriteName": null,
             "value": [
-                "[\"add\", \"1\", \"0\", \"2\"]",
+                "[\"addi\", \"0\", \"1\", \"1\"]",
+                "[\"add\", \"0\", \"1\", \"2\"]",
                 "[\"add\", \"1\", \"2\", \"3\"]",
-                "[\"add\", \"2\", \"3\", \"4\"]"
+                "[\"add\", \"2\", \"3\", \"4\"]",
+                "[\"add\", \"3\", \"4\", \"5\"]"
             ],
-            "width": 100,
+            "width": 150,
             "height": 250,
             "x": 300,
             "y": 100,

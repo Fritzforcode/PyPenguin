@@ -31,7 +31,10 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
     opcodeData = opcodeDatabase[opcode]
     for i,inputID,inputData in ikv(data):
         if "inputTranslation" in opcodeData:
-            newInputID = opcodeData["inputTranslation"][inputID]
+            if inputID in opcodeData["inputTranslation"]:
+                newInputID = opcodeData["inputTranslation"][inputID]
+            else:
+                newInputID = inputID
         else:
             newInputID = inputID
         if len(inputData) == 2:
@@ -187,6 +190,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
             case "number"   : blockType = "numberReporter"
             case "boolean"  : blockType = "booleanReporter"
             case _: raise Exception(mutationData["optype"], mutationData["returns"])
+        oldData = newData
         newData = {
             "opcode": "define ...",
             "inputs": {},
@@ -195,8 +199,9 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                 "noScreenRefresh": json.loads(mutationData["warp"]),
                 "blockType"      : blockType,
             },
-            "comment"   : newData["comment"],
         }
+        if "comment" in oldData:
+            newData["comment"] = oldData["comment"]
     elif newData["opcode"] == "procedures_call":
         proccode = newData["mutation"]["proccode"]
         mutationData = mutationDatas[proccode] # Get the full mutation data
@@ -208,14 +213,16 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
         for i, inputID, inputData in ikv(newData["inputs"]):
             newInputID = argumentNames[argumentIDs.index(inputID)]
             inputDatas[newInputID] = inputData
+        oldData = newData
         newData = {
             "opcode" : "call ...",
             "inputs" : inputDatas,
             "options": {
                 "customOpcode": customOpcode,
             },
-            "comment": newData["comment"]
         }
+        if "comment" in oldData:
+            newData["comment"] = oldData["comment"]
     newDatas = [newData] if newDatas == None else newDatas
     if isinstance(blockData, dict):
         if blockData["next"] != None: #if the block does have a neighbour

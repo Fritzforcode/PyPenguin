@@ -60,6 +60,33 @@ instructions = {
                     ]},
                 },
             },
+            {
+                "opcode": "case (CONDITION) {BODY}",
+                "inputs": {
+                    "CONDITION":{"text": "addi"},
+                    "BODY": {"blocks": [
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "options": {"VARIABLE": "[ALU] return value"},
+                            "inputs": {
+                                "VALUE": {"block": {
+                                    "opcode": "(NUM1) + (NUM2)",
+                                    "inputs": {
+                                        "NUM1": {"block": {
+                                            "opcode": "value of [VARIABLE]",
+                                            "options": {"VARIABLE": "[ALU] Arg A"},
+                                        }},
+                                        "NUM2": {"block": {
+                                            "opcode": "value of [VARIABLE]",
+                                            "options": {"VARIABLE": "[ALU] Arg B"},
+                                        }},
+                                    },
+                                }},
+                            },
+                        },
+                    ]},
+                },
+            },
         ]},
     },
 }
@@ -76,7 +103,23 @@ excecuteAluInstrDef = {
             }
         },
         {
-            "opcode": "if <CONDITION> then {THEN}",
+            "opcode": "set [VARIABLE] to (VALUE)",
+            "inputs": {
+                "VALUE": {"block": {
+                    "opcode": "call ...",
+                    "inputs": {
+                        "reg": {"block": {
+                            "opcode": "value of text argument [VALUE]",
+                            "options": {"VALUE": "A"},
+                        }},
+                    },
+                    "options": {"customOpcode": "read register (reg)"},
+                }},
+            },
+            "options": {"VARIABLE": "[ALU] Arg A"},
+        },
+        {
+            "opcode": "if <CONDITION> then {THEN} else {ELSE}",
             "inputs": {
                 "CONDITION": {"block": {
                     "opcode": "array (array) contains (value) ?",
@@ -97,26 +140,22 @@ excecuteAluInstrDef = {
                                 "inputs": {
                                     "reg": {"block": {
                                         "opcode": "value of text argument [VALUE]",
-                                        "options": {"VALUE": "A"},
+                                        "options": {"VALUE": "B"},
                                     }},
                                 },
                                 "options": {"customOpcode": "read register (reg)"},
                             }},
                         },
-                        "options": {"VARIABLE": "[ALU] Arg A"},
+                        "options": {"VARIABLE": "[ALU] Arg B"},
                     },
+                ]},
+                "ELSE": {"blocks": [
                     {
                         "opcode": "set [VARIABLE] to (VALUE)",
                         "inputs": {
                             "VALUE": {"block": {
-                                "opcode": "call ...",
-                                "inputs": {
-                                    "reg": {"block": {
-                                        "opcode": "value of text argument [VALUE]",
-                                        "options": {"VALUE": "B"},
-                                    }},
-                                },
-                                "options": {"customOpcode": "read register (reg)"},
+                                "opcode": "value of text argument [VALUE]",
+                                "options": {"VALUE": "B"},
                             }},
                         },
                         "options": {"VARIABLE": "[ALU] Arg B"},

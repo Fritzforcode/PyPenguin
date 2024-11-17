@@ -48,7 +48,7 @@ executeCurrentInstrDef = {
                 "CONDITION": {"block": {
                     "opcode": "array (array) contains (value) ?",
                     "inputs": {
-                        "array": {"text": '["add", "mul"]'},
+                        "array": {"text": '["add", "mul", "addi"]'},
                         "value": {"block": {
                             "opcode": "in array (array) get (index)",
                             "inputs": {
@@ -183,12 +183,24 @@ executeCurrentInstrDef = {
                 ]},
             },
         },
+        {
+            "opcode": "set [VARIABLE] to (VALUE)",
+            "inputs": {
+                "VALUE": {"block": {
+                    "opcode": "value of [VARIABLE]",
+                    "options": {"VARIABLE": "NEW PC"},
+                }},
+            },
+            "options": {"VARIABLE": "PROGRAMM COUNTER"},
+        },
     ],
 }
 programm = [json.dumps(item) for item in [
-    ["add", "1", "0", "2"],
+    ["addi", "0", "1", "1"],
+    ["add", "0", "1", "2"],
     ["add", "1", "2", "3"],
     ["add", "2", "3", "4"],
+    ["add", "3", "4", "5"],
 ]]
 
 instructions = {
@@ -244,6 +256,18 @@ executeControlInstrDef = {
                         }},
                     },
                 }},
+                "THEN": {"blocks": [
+                    {
+                        "opcode": "set [VARIABLE] to (VALUE)",
+                        "inputs": {
+                            "VALUE": {"block": {
+                                "opcode": "value of text argument [VALUE]",
+                                "options":  {"VALUE": "C"},
+                            }},
+                        },
+                        "options": {"VARIABLE": "NEW PC"},
+                    },
+                ]},
             },
         },
     ],

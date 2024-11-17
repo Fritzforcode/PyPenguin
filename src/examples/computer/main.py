@@ -34,7 +34,7 @@ projectData = {
             "monitor": {
                 "visible": True,
                 "size": [20,10],
-                "position": [5,200],
+                "position": [215,0],
                 "sliderMin": 0,
                 "sliderMax": 100,
                 "onlyIntegers": True,
@@ -47,7 +47,7 @@ projectData = {
             "monitor": {
                 "visible": True,
                 "size": [20,10],
-                "position": [5,100],
+                "position": [0,0],
                 "sliderMin": 0,
                 "sliderMax": 100,
                 "onlyIntegers": True,
@@ -60,7 +60,7 @@ projectData = {
             "monitor": {
                 "visible": True,
                 "size": [20,70],
-                "position": [5,100],
+                "position": [0,20],
                 "sliderMin": 0,
                 "sliderMax": 100,
                 "onlyIntegers": True,
@@ -73,7 +73,7 @@ projectData = {
             "monitor": {
                 "visible": True,
                 "size": [20,10],
-                "position": [5,5],
+                "position": [0,145],
                 "sliderMin": 0,
                 "sliderMax": 100,
                 "onlyIntegers": True,
@@ -86,7 +86,7 @@ projectData = {
             "monitor": {
                 "visible": True,
                 "size": [20,10],
-                "position": [5,5],
+                "position": [0,95],
                 "sliderMin": 0,
                 "sliderMax": 100,
                 "onlyIntegers": True,
@@ -99,7 +99,7 @@ projectData = {
             "monitor": {
                 "visible": True,
                 "size": [20,10],
-                "position": [5,50],
+                "position": [0,55],
                 "sliderMin": 0,
                 "sliderMax": 100,
                 "onlyIntegers": True,
@@ -112,7 +112,7 @@ projectData = {
             "monitor": {
                 "visible": True,
                 "size": [20,10],
-                "position": [5,150],
+                "position": [0,75],
                 "sliderMin": 0,
                 "sliderMax": 100,
                 "onlyIntegers": True,
@@ -126,7 +126,7 @@ projectData = {
             "currentValue": programm,
             "monitor": {
                 "visible": True,
-                "size": [100,250],
+                "size": [150,250],
                 "position": [300,100],
             },
         },

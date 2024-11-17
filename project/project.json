@@ -78,7 +78,7 @@
                                         "opcode": "array (array) contains (value) ?",
                                         "inputs": {
                                             "array": {
-                                                "text": "[\"add\", \"mul\"]"
+                                                "text": "[\"add\", \"mul\", \"addi\"]"
                                             },
                                             "value": {
                                                 "block": {
@@ -308,6 +308,22 @@
                                     ]
                                 }
                             }
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "block": {
+                                        "opcode": "value of [VARIABLE]",
+                                        "options": {
+                                            "VARIABLE": "NEW PC"
+                                        }
+                                    }
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "PROGRAMM COUNTER"
+                            }
                         }
                     ]
                 },
@@ -326,7 +342,33 @@
                             }
                         },
                         {
-                            "opcode": "if <CONDITION> then {THEN}",
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "block": {
+                                        "opcode": "call ...",
+                                        "inputs": {
+                                            "reg": {
+                                                "block": {
+                                                    "opcode": "value of text argument [VALUE]",
+                                                    "options": {
+                                                        "VALUE": "A"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "options": {
+                                            "customOpcode": "read register (reg)"
+                                        }
+                                    }
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "[ALU] Arg A"
+                            }
+                        },
+                        {
+                            "opcode": "if <CONDITION> then {THEN} else {ELSE}",
                             "inputs": {
                                 "CONDITION": {
                                     "block": {
@@ -359,7 +401,7 @@
                                                                 "block": {
                                                                     "opcode": "value of text argument [VALUE]",
                                                                     "options": {
-                                                                        "VALUE": "A"
+                                                                        "VALUE": "B"
                                                                     }
                                                                 }
                                                             }
@@ -371,27 +413,21 @@
                                                 }
                                             },
                                             "options": {
-                                                "VARIABLE": "[ALU] Arg A"
+                                                "VARIABLE": "[ALU] Arg B"
                                             }
-                                        },
+                                        }
+                                    ]
+                                },
+                                "ELSE": {
+                                    "blocks": [
                                         {
                                             "opcode": "set [VARIABLE] to (VALUE)",
                                             "inputs": {
                                                 "VALUE": {
                                                     "block": {
-                                                        "opcode": "call ...",
-                                                        "inputs": {
-                                                            "reg": {
-                                                                "block": {
-                                                                    "opcode": "value of text argument [VALUE]",
-                                                                    "options": {
-                                                                        "VALUE": "B"
-                                                                    }
-                                                                }
-                                                            }
-                                                        },
+                                                        "opcode": "value of text argument [VALUE]",
                                                         "options": {
-                                                            "customOpcode": "read register (reg)"
+                                                            "VALUE": "B"
                                                         }
                                                     }
                                                 }
@@ -477,6 +513,49 @@
                                                                 "VALUE": {
                                                                     "block": {
                                                                         "opcode": "(NUM1) * (NUM2)",
+                                                                        "inputs": {
+                                                                            "NUM1": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": "[ALU] Arg A"
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "NUM2": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": "[ALU] Arg B"
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "opcode": "case (CONDITION) {BODY}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "text": "addi"
+                                                },
+                                                "BODY": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                            "options": {
+                                                                "VARIABLE": "[ALU] return value"
+                                                            },
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "block": {
+                                                                        "opcode": "(NUM1) + (NUM2)",
                                                                         "inputs": {
                                                                             "NUM1": {
                                                                                 "block": {
@@ -633,6 +712,26 @@
                                             }
                                         }
                                     }
+                                },
+                                "THEN": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "block": {
+                                                        "opcode": "value of text argument [VALUE]",
+                                                        "options": {
+                                                            "VALUE": "C"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "options": {
+                                                "VARIABLE": "NEW PC"
+                                            }
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -668,7 +767,7 @@
                                                 }
                                             },
                                             "OPERAND2": {
-                                                "text": "r0"
+                                                "text": "0"
                                             }
                                         }
                                     }
@@ -796,8 +895,8 @@
                     10
                 ],
                 "position": [
-                    5,
-                    200
+                    215,
+                    0
                 ],
                 "sliderMin": 0,
                 "sliderMax": 100,
@@ -815,8 +914,8 @@
                     10
                 ],
                 "position": [
-                    5,
-                    100
+                    0,
+                    0
                 ],
                 "sliderMin": 0,
                 "sliderMax": 100,
@@ -834,8 +933,8 @@
                     70
                 ],
                 "position": [
-                    5,
-                    100
+                    0,
+                    20
                 ],
                 "sliderMin": 0,
                 "sliderMax": 100,
@@ -853,8 +952,8 @@
                     10
                 ],
                 "position": [
-                    5,
-                    5
+                    0,
+                    145
                 ],
                 "sliderMin": 0,
                 "sliderMax": 100,
@@ -872,8 +971,8 @@
                     10
                 ],
                 "position": [
-                    5,
-                    5
+                    0,
+                    95
                 ],
                 "sliderMin": 0,
                 "sliderMax": 100,
@@ -891,8 +990,8 @@
                     10
                 ],
                 "position": [
-                    5,
-                    50
+                    0,
+                    55
                 ],
                 "sliderMin": 0,
                 "sliderMax": 100,
@@ -910,8 +1009,8 @@
                     10
                 ],
                 "position": [
-                    5,
-                    150
+                    0,
+                    75
                 ],
                 "sliderMin": 0,
                 "sliderMax": 100,
@@ -924,14 +1023,16 @@
         {
             "name": "PROGRAMM",
             "currentValue": [
-                "[\"add\", \"1\", \"0\", \"2\"]",
+                "[\"addi\", \"0\", \"1\", \"1\"]",
+                "[\"add\", \"0\", \"1\", \"2\"]",
                 "[\"add\", \"1\", \"2\", \"3\"]",
-                "[\"add\", \"2\", \"3\", \"4\"]"
+                "[\"add\", \"2\", \"3\", \"4\"]",
+                "[\"add\", \"3\", \"4\", \"5\"]"
             ],
             "monitor": {
                 "visible": true,
                 "size": [
-                    100,
+                    150,
                     250
                 ],
                 "position": [
