@@ -287,6 +287,16 @@ opcodeDatabase = {
             "inputTypes": {"NUM1": "text", "NUM2": "text"},
             "optionTypes": {},
         },
+        
+        
+        "operator_boolify": {
+            "type": "booleanReporter",
+            "category": "Operators",
+            "newOpcode": "(VALUE) as a boolean",
+            "inputTypes": {"VALUE": "text"},
+            "inputTranslation":  {"ONE": "VALUE"},
+            "optionTypes": {},
+        },
     # Variables
         "data_setvariableto": {
             "type": "instruction",

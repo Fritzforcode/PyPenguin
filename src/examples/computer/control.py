@@ -234,7 +234,17 @@ executeControlInstrDef = {
         instructions,
         {
             "opcode": "if <CONDITION> then {THEN}",
-            "inputs": {},
+            "inputs": {
+                "CONDITION": {"block": {
+                    "opcode": "(VALUE) as a boolean",
+                    "inputs": {
+                        "VALUE": {"block": {
+                            "opcode": "value of [VARIABLE]",
+                            "options": {"VARIABLE": "[CRTL] condition met?"},
+                        }},
+                    },
+                }},
+            },
         },
     ],
 }

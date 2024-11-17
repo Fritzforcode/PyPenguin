@@ -1,0 +1,2149 @@
+{
+    "targets": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "variables": {
+                "X#fH=/ZM.T|B;rKrmG[s": [
+                    "current instr",
+                    ""
+                ],
+                "NmjQ-_mT(OA^.)?Hh^bl": [
+                    "PROGRAMM COUNTER",
+                    1
+                ],
+                "Za:QFPiy`CEs]*lkO=/n": [
+                    "NEW PC",
+                    1
+                ],
+                "M^Lp^Q]A^}K)lXO{ELxy": [
+                    "[CRTL] condition met?",
+                    0
+                ],
+                "xeH-ilqtek]Y@J?EB}#|": [
+                    "[ALU] return value",
+                    0
+                ],
+                "J*:TkPo/}QyFcIoCVvQ%": [
+                    "[ALU] Arg A",
+                    0
+                ],
+                "hmsCf{[jdpy{pYlVoecy": [
+                    "[ALU] Arg B",
+                    0
+                ]
+            },
+            "lists": {
+                "xp.Ahc]%mHiCjMS(xh;,": [
+                    "PROGRAMM",
+                    [
+                        "[\"add\", \"1\", \"0\", \"2\"]",
+                        "[\"add\", \"1\", \"2\", \"3\"]",
+                        "[\"add\", \"2\", \"3\", \"4\"]"
+                    ]
+                ],
+                "fmYzHT-`vAhuuR@Gp)wb": [
+                    "REGISTERS",
+                    [
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
+                    ]
+                ]
+            },
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {
+                "a": {
+                    "opcode": "procedures_definition",
+                    "next": "b",
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "c"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": -1500,
+                    "y": 0
+                },
+                "d": {
+                    "opcode": "data_itemoflist",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {
+                        "INDEX": [
+                            3,
+                            [
+                                12,
+                                "PROGRAMM COUNTER",
+                                "NmjQ-_mT(OA^.)?Hh^bl"
+                            ],
+                            [
+                                7,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "PROGRAMM",
+                            "xp.Ahc]%mHiCjMS(xh;,",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "b": {
+                    "opcode": "data_setvariableto",
+                    "next": "e",
+                    "parent": "a",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "d",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "current instr",
+                            "X#fH=/ZM.T|B;rKrmG[s",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "f": {
+                    "opcode": "operator_add",
+                    "next": null,
+                    "parent": "e",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            [
+                                12,
+                                "PROGRAMM COUNTER",
+                                "NmjQ-_mT(OA^.)?Hh^bl"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "NUM2": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "e": {
+                    "opcode": "data_setvariableto",
+                    "next": "g",
+                    "parent": "b",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "f",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "NEW PC",
+                            "Za:QFPiy`CEs]*lkO=/n",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "h": {
+                    "opcode": "jgJSON_json_array_get",
+                    "next": null,
+                    "parent": "i",
+                    "inputs": {
+                        "array": [
+                            3,
+                            [
+                                12,
+                                "current instr",
+                                "X#fH=/ZM.T|B;rKrmG[s"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "i": {
+                    "opcode": "jgJSON_json_array_contains",
+                    "next": null,
+                    "parent": "g",
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"add\", \"mul\"]"
+                            ]
+                        ],
+                        "value": [
+                            3,
+                            "h",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "j": {
+                    "opcode": "jgJSON_json_array_get",
+                    "next": null,
+                    "parent": "k",
+                    "inputs": {
+                        "array": [
+                            3,
+                            [
+                                12,
+                                "current instr",
+                                "X#fH=/ZM.T|B;rKrmG[s"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "l": {
+                    "opcode": "jgJSON_json_array_get",
+                    "next": null,
+                    "parent": "k",
+                    "inputs": {
+                        "array": [
+                            3,
+                            [
+                                12,
+                                "current instr",
+                                "X#fH=/ZM.T|B;rKrmG[s"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "m": {
+                    "opcode": "jgJSON_json_array_get",
+                    "next": null,
+                    "parent": "k",
+                    "inputs": {
+                        "array": [
+                            3,
+                            [
+                                12,
+                                "current instr",
+                                "X#fH=/ZM.T|B;rKrmG[s"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "2"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "n": {
+                    "opcode": "jgJSON_json_array_get",
+                    "next": null,
+                    "parent": "k",
+                    "inputs": {
+                        "array": [
+                            3,
+                            [
+                                12,
+                                "current instr",
+                                "X#fH=/ZM.T|B;rKrmG[s"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "3"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "k": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "g",
+                    "inputs": {
+                        "QRVlRefIut|LUY^qLo.E": [
+                            3,
+                            "j",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "gNw?jMZQM#nm_.-RRp.o": [
+                            3,
+                            "l",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        ":%eMQtv`WlikzChXbmY_": [
+                            3,
+                            "m",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "?L*/|B%kVCH|v(yToid@": [
+                            3,
+                            "n",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "execute alu instr %s %s %s %s",
+                        "argumentids": "[\"QRVlRefIut|LUY^qLo.E\", \"gNw?jMZQM#nm_.-RRp.o\", \":%eMQtv`WlikzChXbmY_\", \"?L*/|B%kVCH|v(yToid@\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "o": {
+                    "opcode": "jgJSON_json_array_get",
+                    "next": null,
+                    "parent": "p",
+                    "inputs": {
+                        "array": [
+                            3,
+                            [
+                                12,
+                                "current instr",
+                                "X#fH=/ZM.T|B;rKrmG[s"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "p": {
+                    "opcode": "jgJSON_json_array_contains",
+                    "next": null,
+                    "parent": "q",
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"j\"]"
+                            ]
+                        ],
+                        "value": [
+                            3,
+                            "o",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "r": {
+                    "opcode": "jgJSON_json_array_get",
+                    "next": null,
+                    "parent": "s",
+                    "inputs": {
+                        "array": [
+                            3,
+                            [
+                                12,
+                                "current instr",
+                                "X#fH=/ZM.T|B;rKrmG[s"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "t": {
+                    "opcode": "jgJSON_json_array_get",
+                    "next": null,
+                    "parent": "s",
+                    "inputs": {
+                        "array": [
+                            3,
+                            [
+                                12,
+                                "current instr",
+                                "X#fH=/ZM.T|B;rKrmG[s"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "u": {
+                    "opcode": "jgJSON_json_array_get",
+                    "next": null,
+                    "parent": "s",
+                    "inputs": {
+                        "array": [
+                            3,
+                            [
+                                12,
+                                "current instr",
+                                "X#fH=/ZM.T|B;rKrmG[s"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "2"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "v": {
+                    "opcode": "jgJSON_json_array_get",
+                    "next": null,
+                    "parent": "s",
+                    "inputs": {
+                        "array": [
+                            3,
+                            [
+                                12,
+                                "current instr",
+                                "X#fH=/ZM.T|B;rKrmG[s"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "index": [
+                            1,
+                            [
+                                4,
+                                "3"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "s": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "q",
+                    "inputs": {
+                        "e.#s/ktT!e,X+gm-tceq": [
+                            3,
+                            "r",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "Pn^SyX/oh,RpLqXLp?ye": [
+                            3,
+                            "t",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "Y)Vy+Tjff/Gd?`{BDl;@": [
+                            3,
+                            "u",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "#;Nos%`%kn#im#td*(#d": [
+                            3,
+                            "v",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "execute control instr %s %s %s %s",
+                        "argumentids": "[\"e.#s/ktT!e,X+gm-tceq\", \"Pn^SyX/oh,RpLqXLp?ye\", \"Y)Vy+Tjff/Gd?`{BDl;@\", \"#;Nos%`%kn#im#td*(#d\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "q": {
+                    "opcode": "control_if_else",
+                    "next": null,
+                    "parent": "g",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "p"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "s"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "g": {
+                    "opcode": "control_if_else",
+                    "next": null,
+                    "parent": "e",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "i"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "k"
+                        ],
+                        "SUBSTACK2": [
+                            2,
+                            "q"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "c": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "execute current instr",
+                        "argumentids": "[]",
+                        "argumentnames": "[]",
+                        "argumentdefaults": "[]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "w": {
+                    "opcode": "procedures_definition",
+                    "next": "x",
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "y"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 500,
+                    "y": 0
+                },
+                "z": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "A",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            "xm-YkcJ*oGr?SotJcffA"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "A": {
+                    "opcode": "jgJSON_json_array_contains",
+                    "next": null,
+                    "parent": "x",
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"add\", \"mul\"]"
+                            ]
+                        ],
+                        "value": [
+                            3,
+                            "z",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "B": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "C",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "A",
+                            "-!`=NTXGt_b+kQf]JrE."
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "C": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "D",
+                    "inputs": {
+                        "*,aBMoM]t%-l:D]ZJcpI": [
+                            3,
+                            "B",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "read register %s",
+                        "argumentids": "[\"*,aBMoM]t%-l:D]ZJcpI\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"number\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "D": {
+                    "opcode": "data_setvariableto",
+                    "next": "E",
+                    "parent": "x",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "C",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "[ALU] Arg A",
+                            "J*:TkPo/}QyFcIoCVvQ%",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "F": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "G",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "B",
+                            "TKT}qNX#kayQuEC*W`#e"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "G": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "E",
+                    "inputs": {
+                        "*,aBMoM]t%-l:D]ZJcpI": [
+                            3,
+                            "F",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "read register %s",
+                        "argumentids": "[\"*,aBMoM]t%-l:D]ZJcpI\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"number\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "E": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "D",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "G",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "[ALU] Arg B",
+                            "hmsCf{[jdpy{pYlVoecy",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "x": {
+                    "opcode": "control_if",
+                    "next": "H",
+                    "parent": "w",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "A"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "D"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "I": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "H",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            "Z`#fv*iHu*@/_ae:PN,g"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "J": {
+                    "opcode": "operator_add",
+                    "next": null,
+                    "parent": "K",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            [
+                                12,
+                                "[ALU] Arg A",
+                                "J*:TkPo/}QyFcIoCVvQ%"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "NUM2": [
+                            3,
+                            [
+                                12,
+                                "[ALU] Arg B",
+                                "hmsCf{[jdpy{pYlVoecy"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "K": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "L",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "J",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "[ALU] return value",
+                            "xeH-ilqtek]Y@J?EB}#|",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "L": {
+                    "opcode": "control_case",
+                    "next": "M",
+                    "parent": "H",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "add"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "K"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "N": {
+                    "opcode": "operator_multiply",
+                    "next": null,
+                    "parent": "O",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            [
+                                12,
+                                "[ALU] Arg A",
+                                "J*:TkPo/}QyFcIoCVvQ%"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "NUM2": [
+                            3,
+                            [
+                                12,
+                                "[ALU] Arg B",
+                                "hmsCf{[jdpy{pYlVoecy"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "O": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "M",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "N",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "[ALU] return value",
+                            "xeH-ilqtek]Y@J?EB}#|",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "M": {
+                    "opcode": "control_case",
+                    "next": null,
+                    "parent": "L",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "mul"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "O"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "H": {
+                    "opcode": "control_switch",
+                    "next": "P",
+                    "parent": "x",
+                    "inputs": {
+                        "CONDITION": [
+                            3,
+                            "I",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "L"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "Q": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "R",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            "H_OU`f:+(V[wAW}LbrtI"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "R": {
+                    "opcode": "jgJSON_json_array_contains",
+                    "next": null,
+                    "parent": "P",
+                    "inputs": {
+                        "array": [
+                            1,
+                            [
+                                10,
+                                "[\"add\", \"mul\"]"
+                            ]
+                        ],
+                        "value": [
+                            3,
+                            "Q",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "S": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "T",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "C",
+                            "#y^kqbZ#OaBba@mypzMJ"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "T": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "P",
+                    "inputs": {
+                        ";O:h)Ms:gBdT-Yb@ikYa": [
+                            3,
+                            "S",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "UfoaILDs{Kyn(+QXvQ#(": [
+                            3,
+                            [
+                                12,
+                                "[ALU] return value",
+                                "xeH-ilqtek]Y@J?EB}#|"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "set register %s to %s",
+                        "argumentids": "[\";O:h)Ms:gBdT-Yb@ikYa\", \"UfoaILDs{Kyn(+QXvQ#(\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "P": {
+                    "opcode": "control_if",
+                    "next": null,
+                    "parent": "H",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "R"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "T"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "y": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "w",
+                    "inputs": {
+                        "QRVlRefIut|LUY^qLo.E": [
+                            1,
+                            "U"
+                        ],
+                        "gNw?jMZQM#nm_.-RRp.o": [
+                            1,
+                            "V"
+                        ],
+                        ":%eMQtv`WlikzChXbmY_": [
+                            1,
+                            "W"
+                        ],
+                        "?L*/|B%kVCH|v(yToid@": [
+                            1,
+                            "X"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "execute alu instr %s %s %s %s",
+                        "argumentids": "[\"QRVlRefIut|LUY^qLo.E\", \"gNw?jMZQM#nm_.-RRp.o\", \":%eMQtv`WlikzChXbmY_\", \"?L*/|B%kVCH|v(yToid@\"]",
+                        "argumentnames": "[\"instr\", \"A\", \"B\", \"C\"]",
+                        "argumentdefaults": "[\"\", \"\", \"\", \"\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "U": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "y",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            "*zp:YGAfBsnz+WU]tn/s"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "V": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "y",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "A",
+                            "`Z%?:P::z]CbROPe@sGt"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "W": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "y",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "B",
+                            "W|L-ik?fiCqfMb*Qut+V"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "X": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "y",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "C",
+                            ";W@;e{l?j%AL[#.X}Dca"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "Y": {
+                    "opcode": "procedures_definition",
+                    "next": "Z",
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "!"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": -200,
+                    "y": 0
+                },
+                "#": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "Z",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            "xM;`GQi:HM!XXhuqEKQh"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "%": {
+                    "opcode": "operator_trueBoolean",
+                    "next": null,
+                    "parent": "(",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "(": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": ")",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "%",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "[CRTL] condition met?",
+                            "M^Lp^Q]A^}K)lXO{ELxy",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                ")": {
+                    "opcode": "control_case",
+                    "next": null,
+                    "parent": "Z",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "j"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "("
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "Z": {
+                    "opcode": "control_switch",
+                    "next": "*",
+                    "parent": "Y",
+                    "inputs": {
+                        "CONDITION": [
+                            3,
+                            "#",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            ")"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "+": {
+                    "opcode": "operator_boolify",
+                    "next": null,
+                    "parent": "*",
+                    "inputs": {
+                        "ONE": [
+                            3,
+                            [
+                                12,
+                                "[CRTL] condition met?",
+                                "M^Lp^Q]A^}K)lXO{ELxy"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "*": {
+                    "opcode": "control_if",
+                    "next": null,
+                    "parent": "Z",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "+"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "!": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "Y",
+                    "inputs": {
+                        "e.#s/ktT!e,X+gm-tceq": [
+                            1,
+                            ","
+                        ],
+                        "Pn^SyX/oh,RpLqXLp?ye": [
+                            1,
+                            "-"
+                        ],
+                        "Y)Vy+Tjff/Gd?`{BDl;@": [
+                            1,
+                            "."
+                        ],
+                        "#;Nos%`%kn#im#td*(#d": [
+                            1,
+                            "/"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "execute control instr %s %s %s %s",
+                        "argumentids": "[\"e.#s/ktT!e,X+gm-tceq\", \"Pn^SyX/oh,RpLqXLp?ye\", \"Y)Vy+Tjff/Gd?`{BDl;@\", \"#;Nos%`%kn#im#td*(#d\"]",
+                        "argumentnames": "[\"instr\", \"A\", \"B\", \"C\"]",
+                        "argumentdefaults": "[\"\", \"\", \"\", \"\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                ",": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "!",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            ":PGkTjpTdSSwbDUjsAaA"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "-": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "!",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "A",
+                            "paLVdDsx+o.SHqdAUQ-L"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                ".": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "!",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "B",
+                            "L^Px}kn[|NuWsqCO=FEx"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "/": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "!",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "C",
+                            "LV#fqcYjjq#M^#s}%MTk"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                ":": {
+                    "opcode": "procedures_definition_return",
+                    "next": ";",
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "="
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 1000,
+                    "y": 0
+                },
+                "?": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "@",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "reg",
+                            "_t*Zx#(wF+R?sT,l.ALa"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "@": {
+                    "opcode": "operator_equals",
+                    "next": null,
+                    "parent": ";",
+                    "inputs": {
+                        "OPERAND1": [
+                            3,
+                            "?",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "OPERAND2": [
+                            1,
+                            [
+                                10,
+                                "r0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "[": {
+                    "opcode": "procedures_return",
+                    "next": null,
+                    "parent": ";",
+                    "inputs": {
+                        "return": [
+                            1,
+                            [
+                                10,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "]": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "^",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "reg",
+                            "F)V@hW!b#P)AVL-lxnJo"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "^": {
+                    "opcode": "data_itemoflist",
+                    "next": null,
+                    "parent": "_",
+                    "inputs": {
+                        "INDEX": [
+                            3,
+                            "]",
+                            [
+                                7,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "REGISTERS",
+                            "fmYzHT-`vAhuuR@Gp)wb",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "_": {
+                    "opcode": "procedures_return",
+                    "next": null,
+                    "parent": ";",
+                    "inputs": {
+                        "return": [
+                            3,
+                            "^",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                ";": {
+                    "opcode": "control_if_else",
+                    "next": null,
+                    "parent": ":",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "@"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "["
+                        ],
+                        "SUBSTACK2": [
+                            2,
+                            "_"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "=": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": ":",
+                    "inputs": {
+                        "*,aBMoM]t%-l:D]ZJcpI": [
+                            1,
+                            "`"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "read register %s",
+                        "argumentids": "[\"*,aBMoM]t%-l:D]ZJcpI\"]",
+                        "argumentnames": "[\"reg\"]",
+                        "argumentdefaults": "[\"\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"number\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "`": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "=",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "reg",
+                            "faGY@|Y)nGTKzkejHN[R"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "{": {
+                    "opcode": "procedures_definition",
+                    "next": "|",
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "}"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 1500,
+                    "y": 0
+                },
+                "~": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "|",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "reg",
+                            "p@Fui#LK?r{?A[n!]ZJL"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aa": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "ab",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "value",
+                            ")V`ruppWZ},r_MT-#B./"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ab": {
+                    "opcode": "operator_mod",
+                    "next": null,
+                    "parent": "|",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            "aa",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "NUM2": [
+                            1,
+                            [
+                                10,
+                                "256"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "|": {
+                    "opcode": "data_replaceitemoflist",
+                    "next": null,
+                    "parent": "{",
+                    "inputs": {
+                        "INDEX": [
+                            3,
+                            "~",
+                            [
+                                7,
+                                ""
+                            ]
+                        ],
+                        "ITEM": [
+                            3,
+                            "ab",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "REGISTERS",
+                            "fmYzHT-`vAhuuR@Gp)wb",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "}": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "{",
+                    "inputs": {
+                        ";O:h)Ms:gBdT-Yb@ikYa": [
+                            1,
+                            "ac"
+                        ],
+                        "UfoaILDs{Kyn(+QXvQ#(": [
+                            1,
+                            "ad"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "set register %s to %s",
+                        "argumentids": "[\";O:h)Ms:gBdT-Yb@ikYa\", \"UfoaILDs{Kyn(+QXvQ#(\"]",
+                        "argumentnames": "[\"reg\", \"value\"]",
+                        "argumentdefaults": "[\"\", \"\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "ac": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "}",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "reg",
+                            "s*s@OqAx)SX%/XCz)A}g"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "ad": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "}",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "value",
+                            "XeDkxUhwDMl=KT!+g?^("
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 2,
+                    "assetId": "b86efb7f23387300cf9037a61f328ab9",
+                    "dataFormat": "png",
+                    "md5ext": "b86efb7f23387300cf9037a61f328ab9.png",
+                    "rotationCenterX": 158,
+                    "rotationCenterY": 146
+                }
+            ],
+            "sounds": [],
+            "id": "|+/G-BRIffguSaLari%C",
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 0,
+            "videoState": "off",
+            "textToSpeechLanguage": null
+        }
+    ],
+    "monitors": [
+        {
+            "id": "X#fH=/ZM.T|B;rKrmG[s",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "current instr"
+            },
+            "spriteName": null,
+            "value": "",
+            "width": 20,
+            "height": 10,
+            "x": 5,
+            "y": 200,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "NmjQ-_mT(OA^.)?Hh^bl",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "PROGRAMM COUNTER"
+            },
+            "spriteName": null,
+            "value": 1,
+            "width": 20,
+            "height": 10,
+            "x": 5,
+            "y": 100,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "Za:QFPiy`CEs]*lkO=/n",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "NEW PC"
+            },
+            "spriteName": null,
+            "value": 1,
+            "width": 20,
+            "height": 70,
+            "x": 5,
+            "y": 100,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "M^Lp^Q]A^}K)lXO{ELxy",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "[CRTL] condition met?"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 20,
+            "height": 10,
+            "x": 5,
+            "y": 5,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "xeH-ilqtek]Y@J?EB}#|",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "[ALU] return value"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 20,
+            "height": 10,
+            "x": 5,
+            "y": 5,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "J*:TkPo/}QyFcIoCVvQ%",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "[ALU] Arg A"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 20,
+            "height": 10,
+            "x": 5,
+            "y": 50,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "hmsCf{[jdpy{pYlVoecy",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "[ALU] Arg B"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 20,
+            "height": 10,
+            "x": 5,
+            "y": 150,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "xp.Ahc]%mHiCjMS(xh;,",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "PROGRAMM"
+            },
+            "spriteName": null,
+            "value": [
+                "[\"add\", \"1\", \"0\", \"2\"]",
+                "[\"add\", \"1\", \"2\", \"3\"]",
+                "[\"add\", \"2\", \"3\", \"4\"]"
+            ],
+            "width": 100,
+            "height": 250,
+            "x": 300,
+            "y": 100,
+            "visible": true
+        },
+        {
+            "id": "fmYzHT-`vAhuuR@Gp)wb",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "REGISTERS"
+            },
+            "spriteName": null,
+            "value": [
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",
+                "0"
+            ],
+            "width": 100,
+            "height": 250,
+            "x": 200,
+            "y": 100,
+            "visible": true
+        }
+    ],
+    "extensionData": {},
+    "extensions": [
+        "jgJSON"
+    ],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": "",
+        "platform": {
+            "name": "PenguinMod",
+            "url": "https://penguinmod.com/",
+            "version": "stable"
+        }
+    }
+}
