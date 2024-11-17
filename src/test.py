@@ -2,11 +2,8 @@ A = {
     "position": [0,0],
     "blocks": [
         {
-            "opcode": "not <OPERAND>",
-            "inputs": {
-                "OPERAND": {"block": {"opcode": "false"}},
-            },
-            "options": {},
+            "opcode": "round (NUM)",
+            "inputs": {"NUM": {"text": "4.5"}},
         },
     ],
 }

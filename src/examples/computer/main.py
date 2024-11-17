@@ -165,12 +165,12 @@ from pypenguin.helper_functions import writeJSONFile
 validateProject(projectData=projectData)
 
 writeJSONFile(
-    filePath = "../../../project/project.json",
+    filePath = "project/project.json",
     data     = projectData
 )
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory = "../../../project",
-    projectFilePath           = "../../../export.pmp",
-    temporaryDirectory        = "../../../temporary",
+    optimizedProjectDirectory = "project",
+    projectFilePath           = "export.pmp",
+    temporaryDirectory        = "temporary",
     writeDebugFiles           = True,
 )

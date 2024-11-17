@@ -89,12 +89,19 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
 
 def translateOptions(data, opcode):
     newData = {}
+    opcodeData = opcodeDatabase[opcode]
     for i,fieldID,fieldData in ikv(data):
-        opcodeData = opcodeDatabase[opcode]
-        match opcodeData["optionTypes"][fieldID]:
-            case "variable"|"list"|"broadcast"|"key"|"math operation"|"string":
+        if "optionTranslation" in opcodeData:
+            if fieldID in opcodeData["optionTranslation"]:
+                optionID = opcodeData["optionTranslation"][fieldID]
+            else:
+                optionID = fieldID
+        else:
+            optionID = fieldID
+        match opcodeData["optionTypes"][optionID]:
+            case "variable"|"list"|"broadcast"|"key"|"binary math operation"|"text case"|"text operation"|"string":
                 newFieldData = fieldData[0]
-        newData[fieldID] = newFieldData
+        newData[optionID] = newFieldData
     return newData
 
 def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationDatas):

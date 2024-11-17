@@ -1,3 +1,23 @@
+add = {
+    "opcode": "set [VARIABLE] to (VALUE)",
+    "options": {"VARIABLE": "[ALU] return value"},
+    "inputs": {
+        "VALUE": {"block": {
+            "opcode": "(NUM1) + (NUM2)",
+            "inputs": {
+                "NUM1": {"block": {
+                    "opcode": "value of [VARIABLE]",
+                    "options": {"VARIABLE": "[ALU] Arg A"},
+                }},
+                "NUM2": {"block": {
+                    "opcode": "value of [VARIABLE]",
+                    "options": {"VARIABLE": "[ALU] Arg B"},
+                }},
+            },
+        }},
+    },
+}
+
 instructions = {
     "opcode": "switch (CONDITION) {CASES}",
     "inputs": {
@@ -11,25 +31,7 @@ instructions = {
                 "inputs": {
                     "CONDITION":{"text": "add"},
                     "BODY": {"blocks": [
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "options": {"VARIABLE": "[ALU] return value"},
-                            "inputs": {
-                                "VALUE": {"block": {
-                                    "opcode": "(NUM1) + (NUM2)",
-                                    "inputs": {
-                                        "NUM1": {"block": {
-                                            "opcode": "value of [VARIABLE]",
-                                            "options": {"VARIABLE": "[ALU] Arg A"},
-                                        }},
-                                        "NUM2": {"block": {
-                                            "opcode": "value of [VARIABLE]",
-                                            "options": {"VARIABLE": "[ALU] Arg B"},
-                                        }},
-                                    },
-                                }},
-                            },
-                        },
+                        add,
                     ]},
                 },
             },
@@ -65,25 +67,7 @@ instructions = {
                 "inputs": {
                     "CONDITION":{"text": "addi"},
                     "BODY": {"blocks": [
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "options": {"VARIABLE": "[ALU] return value"},
-                            "inputs": {
-                                "VALUE": {"block": {
-                                    "opcode": "(NUM1) + (NUM2)",
-                                    "inputs": {
-                                        "NUM1": {"block": {
-                                            "opcode": "value of [VARIABLE]",
-                                            "options": {"VARIABLE": "[ALU] Arg A"},
-                                        }},
-                                        "NUM2": {"block": {
-                                            "opcode": "value of [VARIABLE]",
-                                            "options": {"VARIABLE": "[ALU] Arg B"},
-                                        }},
-                                    },
-                                }},
-                            },
-                        },
+                        add,
                     ]},
                 },
             },
@@ -165,35 +149,18 @@ excecuteAluInstrDef = {
         },
         instructions,
         {
-            "opcode": "if <CONDITION> then {THEN}",
+            "opcode": "call ...",
             "inputs": {
-                "CONDITION": {"block": {
-                    "opcode": "array (array) contains (value) ?",
-                    "inputs": {
-                        "array": {"text": '["add", "mul"]'},
-                        "value": {"block": {
-                            "opcode": "value of text argument [VALUE]",
-                            "options": {"VALUE": "instr"},
-                        }},
-                    },
+                "reg": {"block": {
+                    "opcode": "value of text argument [VALUE]",
+                    "options": {"VALUE": "C"},
                 }},
-                "THEN": {"blocks": [
-                    {
-                        "opcode": "call ...",
-                        "inputs": {
-                            "reg": {"block": {
-                                "opcode": "value of text argument [VALUE]",
-                                "options": {"VALUE": "C"},
-                            }},
-                            "value": {"block": {
-                                "opcode": "value of [VARIABLE]",
-                                "options": {"VARIABLE": "[ALU] return value"},
-                            }},
-                        },
-                        "options": {"customOpcode": "set register (reg) to (value)"},
-                    },
-                ]},
+                "value": {"block": {
+                    "opcode": "value of [VARIABLE]",
+                    "options": {"VARIABLE": "[ALU] return value"},
+                }},
             },
+            "options": {"customOpcode": "set register (reg) to (value)"},
         },
     ],
 }

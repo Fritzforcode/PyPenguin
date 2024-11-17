@@ -351,6 +351,19 @@ def finishBlocks(data, spriteName, tokens):
                             newInputID = inputID
                         newInputDatas[newInputID] = inputData
                     blockData["inputs"] = newInputDatas
+                if "optionTranslation" in opcodeData:
+                    # Replace the optmized with the unoptizimzed option ids
+                    newInputDatas = {}
+                    newIDs = list(opcodeData["optionTranslation"].keys())
+                    oldIDs = list(opcodeData["optionTranslation"].values())
+                    for j,fieldID,optionData in ikv(blockData["fields"]):
+                        if fieldID in oldIDs:
+                            newFieldID = newIDs[oldIDs.index(fieldID)]
+                        else:
+                            newFieldID = fieldID
+                        newInputDatas[newFieldID] = optionData
+                    blockData["fields"] = newInputDatas
+                
     def getSelectors(obj):
         selectors = []
         if isinstance(obj, dict):

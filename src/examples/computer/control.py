@@ -177,7 +177,78 @@ executeCurrentInstrDef = {
                                     },
                                 },
                             ]},
-                            "ELSE": {},
+                            "ELSE": {"blocks": [
+                                {
+                                    "opcode": "if <CONDITION> then {THEN} else {ELSE}",
+                                    "inputs": {
+                                        "CONDITION": {"block": {
+                                            "opcode": "(OPERAND1) = (OPERAND2)",
+                                            "inputs": {
+                                                "OPERAND1": {"block": {
+                                                    "opcode": "in array (array) get (index)",
+                                                    "inputs": {
+                                                        "array": {"block": {
+                                                            "opcode": "value of [VARIABLE]",
+                                                            "options": {"VARIABLE": "current instr"},
+                                                        }},
+                                                        "index": {"text": "0"},
+                                                    },
+                                                }},
+                                                "OPERAND2": {"text": "hlt"},
+                                            },
+                                        }},
+                                        "THEN": {"blocks": [
+                                            {
+                                                "opcode": "call ...",
+                                                "options": {"customOpcode": "execute control instr (instr) (A) (B) (C)"},
+                                                "inputs": {
+                                                    "instr": {"block": {
+                                                        "opcode": "in array (array) get (index)",
+                                                        "inputs": {
+                                                            "array": {"block": {
+                                                                "opcode": "value of [VARIABLE]",
+                                                                "options": {"VARIABLE": "current instr"},
+                                                            }},
+                                                            "index": {"text": "0"},
+                                                        },
+                                                    }},
+                                                    "A": {"block": {
+                                                        "opcode": "in array (array) get (index)",
+                                                        "inputs": {
+                                                            "array": {"block": {
+                                                                "opcode": "value of [VARIABLE]",
+                                                                "options": {"VARIABLE": "current instr"},
+                                                            }},
+                                                            "index": {"text": "1"},
+                                                        },
+                                                    }},
+                                                    "B": {"block": {
+                                                        "opcode": "in array (array) get (index)",
+                                                        "inputs": {
+                                                            "array": {"block": {
+                                                                "opcode": "value of [VARIABLE]",
+                                                                "options": {"VARIABLE": "current instr"},
+                                                            }},
+                                                            "index": {"text": "2"},
+                                                        },
+                                                    }},
+                                                    "C": {"block": {
+                                                        "opcode": "in array (array) get (index)",
+                                                        "inputs": {
+                                                            "array": {"block": {
+                                                                "opcode": "value of [VARIABLE]",
+                                                                "options": {"VARIABLE": "current instr"},
+                                                            }},
+                                                            "index": {"text": "3"},
+                                                        },
+                                                    }},
+                                                },
+                                            },
+                                        ]},
+                                        "ELSE": {},
+                                    },
+                                }
+                            ]},
                         },
                     },
                 ]},
@@ -201,6 +272,9 @@ programm = [json.dumps(item) for item in [
     ["add", "1", "2", "3"],
     ["add", "2", "3", "4"],
     ["add", "3", "4", "5"],
+    ["add", "4", "5", "6"],
+    ["add", "5", "6", "7"],
+    ["hlt"]
 ]]
 
 instructions = {

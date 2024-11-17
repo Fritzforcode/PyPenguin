@@ -27,22 +27,16 @@
             "customVars": [],
             "blocks": {
                 "a": {
-                    "opcode": "operator_falseBoolean",
-                    "next": null,
-                    "parent": "b",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "b": {
-                    "opcode": "operator_not",
+                    "opcode": "operator_round",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "OPERAND": [
-                            2,
-                            "a"
+                        "NUM": [
+                            1,
+                            [
+                                4,
+                                "4.5"
+                            ]
                         ]
                     },
                     "fields": {},
