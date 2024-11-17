@@ -19,7 +19,7 @@ readRegisterDef = {
                             "opcode": "value of text argument [VALUE]",
                             "options": {"VALUE": "reg"},
                         }},
-                        "OPERAND2": {"text": "r0"},
+                        "OPERAND2": {"text": "0"},
                     },
                 }},
                 "THEN": {"blocks": [

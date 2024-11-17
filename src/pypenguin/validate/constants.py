@@ -266,7 +266,7 @@ variableMonitorSchema = {
     },
     "position": {
       "type"    : "array",
-      "items"   : { "type": "integer" },
+      "items"   : { "type": "number" },
       "minItems": 2,
       "maxItems": 2
     },
@@ -289,7 +289,7 @@ listMonitorSchema = {
     },
     "position": {
       "type"    : "array",
-      "items"   : { "type": "integer" },
+      "items"   : { "type": "number" },
       "minItems": 2,
       "maxItems": 2
     }
