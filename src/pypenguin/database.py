@@ -30,6 +30,92 @@ opcodeDatabase = {
             "optionTypes": {},
         },
     # Control (Incomplete)
+        # Control: Timing
+        "control_wait": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "wait (DURATION) seconds",
+            "inputTypes": {"DURATION": "positive number"},
+            "optionTypes": {},
+        },
+        "control_waitsecondsoruntil": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "wait (DURATION) seconds or until <CONDITION>",
+            "inputTypes": {"DURATION": "positive number", "CONDITION": "boolean"},
+            "optionTypes": {},
+        },
+        # Control: Loops
+        "control_repeat": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "repeat (TIMES) {BODY}",
+            "inputTypes": {"TIMES": "number", "BODY": "script"},
+            "inputTranslation": {"SUBSTACK": "BODY"},
+            "optionTypes": {},
+        },
+        "control_forever": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "forever {BODY}",
+            "inputTypes": {"BODY": "script"},
+            "inputTranslation": {"SUBSTACK": "BODY"},
+            "optionTypes": {},
+        },
+        "control_exitLoop": {
+            "type": "lastInstruction",
+            "category": "Control",
+            "newOpcode": "escape loop",
+            "inputTypes": {},
+            "optionTypes": {},
+        },
+        "control_continueLoop": {
+            "type": "lastInstruction",
+            "category": "Control",
+            "newOpcode": "continue loop",
+            "inputTypes": {},
+            "optionTypes": {},
+        },
+        # Control: Switches and Cases
+        "control_switch": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "switch (CONDITION) {CASES}",
+            "inputTypes": {"CONDITION": "text", "CASES": "script"},
+            "inputTranslation": {"SUBSTACK": "CASES"},
+            "optionTypes": {},
+        },
+        "control_switch_default": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "switch (CONDITION) {CASES} default {DEFAULT}",
+            "inputTypes": {"CONDITION": "text", "CASES": "script", "DEFAULT": "script"},
+            "inputTranslation": {"SUBSTACK1": "CASES", "SUBSTACK2": "DEFAULT"},
+            "optionTypes": {},
+        },
+        "control_exitCase": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "exit case",
+            "inputTypes": {},
+            "optionTypes": {},
+        },
+        "control_case_next": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "run next case when (CONDITION)",
+            "inputTypes": {"CONDITION": "text"},
+            "optionTypes": {},
+        },
+        "control_case": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "case (CONDITION) {BODY}",
+            "inputTypes": {"CONDITION": "text", "BODY": "script"},
+            "inputTranslation": {"SUBSTACK": "BODY"},
+            "optionTypes": {},
+        },
+        # Control: Conditionals
         "control_if": {
             "type": "instruction",
             "category": "Control",
@@ -46,34 +132,119 @@ opcodeDatabase = {
             "inputTranslation": {"SUBSTACK": "THEN", "SUBSTACK2": "ELSE"},
             "optionTypes": {},
         },
-        "control_switch": {
+        "control_wait_until": {
             "type": "instruction",
             "category": "Control",
-            "newOpcode": "switch (CONDITION) {CASES}",
-            "inputTypes": {"CONDITION": "text", "CASES": "script"},
-            "inputTranslation": {"SUBSTACK": "CASES"},
+            "newOpcode": "wait until <CONDITION>",
+            "inputTypes": {"CONDITION": "boolean"},
             "optionTypes": {},
         },
-        "control_switch_default": {
+        "control_repeat_until": {
             "type": "instruction",
             "category": "Control",
-            "newOpcode": "switch (CONDITION) {SUBSTACK1} default {SUBSTACK2}",
-            "inputTypes": {"CONDITION": "text", "SUBSTACK1": "script", "SUBSTACK2": "script"},
-            "optionTypes": {},
-        },
-        "control_case": {
-            "type": "instruction",
-            "category": "Control",
-            "newOpcode": "case (CONDITION) {BODY}",
-            "inputTypes": {"CONDITION": "text", "BODY": "script"},
+            "newOpcode": "repeat until <CONDITION> {BODY}",
+            "inputTypes": {"CONDITION": "boolean", "BODY": "script"},
             "inputTranslation": {"SUBSTACK": "BODY"},
             "optionTypes": {},
         },
-        "control_repeat": {
+        "control_while": {
             "type": "instruction",
             "category": "Control",
-            "newOpcode": "repeat (TIMES) {SUBSTACK}",
-            "inputTypes": {"TIMES": "number", "SUBSTACK": "script"},
+            "newOpcode": "while <CONDITION> {BODY}",
+            "inputTypes": {"CONDITION": "boolean", "BODY": "script"},
+            "inputTranslation": {"SUBSTACK": "BODY"},
+            "optionTypes": {},
+        },
+        "control_for_each": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "for each [VARIABLE] in (RANGE) {BODY}",
+            "inputTypes": {"RANGE": "positive integer", "BODY": "script"},
+            "inputTranslation": {"VALUE": "RANGE"},
+            "optionTypes": {"VARIABLE": "variable"},
+        },
+        "control_if_return_else_return": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "if <CONDITION> then (TRUEVALUE) else (FALSEVALUE)",
+            "inputTypes": {"CONDITION": "boolean", "TRUEVALUE": "text", "FALSEVALUE": "text"},
+            "inputTranslation": {"boolean": "CONDITION", "TEXT1": "TRUEVALUE", "TEXT2": "FALSEVALUE"},
+            "optionTypes": {},
+        },
+        "control_all_at_once": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "all at once {BODY}",
+            "inputTypes": {"BODY": "script"},
+            "optionTypes": {},
+        },
+        # Control: Error Management
+        "control_try_catch": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "try to do {TRY} if a block errors {IFERROR}",
+            "inputTypes": {"TRY": "script", "IFERROR": "script"},
+            "inputTranslation": {"SUBSTACK": "TRY", "SUBSTACK2": "IFERROR"},
+            "optionTypes": {},
+        },
+        "control_throw_error": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "throw error (ERROR)",
+            "inputTypes": {"ERROR": "text"},
+            "optionTypes": {},
+        },
+        "control_error": {
+            "type": "textReporter",
+            "category": "Control",
+            "newOpcode": "error", # yes that is correct
+            "inputTypes": {},
+            "optionTypes": {},
+        },
+        # Control: Extras
+        "control_backToGreenFlag": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "run flag", # "run" is not clear enough; so i added "flag"
+            "inputTypes": {},
+            "optionTypes": {},
+        },
+        "control_stop": {
+            "type": "dynamic", # When "other scripts in sprite" is selected it isn't an ending block
+            "category": "Control",
+            "newOpcode": "stop [TARGET]",
+            "inputTypes": {},
+            "optionTypes": {"TARGET": "stop script target"},
+            "optionTranslation": {"STOP_OPTION": "TARGET"},
+        },
+        # TODO: add "control stop sprite" and add sprite dropdown menus to the following blocks:
+        # Control: Clones
+        "control_start_as_clone": {
+            "type": "hat",
+            "category": "Control",
+            "newOpcode": "when I start as a clone",
+            "inputTypes": {},
+            "optionTypes": {},
+        },
+        "control_create_clone_of": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "create clone of ()",
+            "inputTypes": {},
+            "optionTypes": {},
+        },
+        "control_delete_clones_of": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "delete clones of ()",
+            "inputTypes": {},
+            "optionTypes": {},
+        },
+        "control_delete_this_clone": {
+            "type": "lastInstruction",
+            "category": "Control",
+            "newOpcode": "delete this clone",
+            "inputTypes": {},
             "optionTypes": {},
         },
     # Sensing (Incomplete)
@@ -670,6 +841,7 @@ inputModes = {
     "broadcast"       : "block-and-text",
     "integer"         : "block-and-text",
     "positive integer": "block-and-text",
+    "positive number" : "block-and-text",
     "number"          : "block-and-text",
     "text"            : "block-and-text",
     "boolean"         : "block-only",
