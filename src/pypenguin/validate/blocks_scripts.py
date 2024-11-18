@@ -133,7 +133,7 @@ def validateOptions(path, data, opcode, opcodeData, context):
         # validateSchema(pathToData=path+[optionID], data=optionValue, schema=optionSchema)
         
         match opcodeData["optionTypes"][optionID]: # type of the option
-            case "key"|"binary math operation"|"text operation"|"text case":
+            case "key"|"unary math operation"|"binary math operation"|"text operation"|"text case":
                 match opcodeData["optionTypes"][optionID]:
                     case "key":
                         possibleValues = [

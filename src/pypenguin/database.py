@@ -254,7 +254,7 @@ opcodeDatabase = {
             "type": "textReporter",
             "category": "Operators",
             "newOpcode": "index of (SUBSTRING) in (TEXT)",
-            "inputTypes": {"SUBSTRING": "text", "STRING": "text"},
+            "inputTypes": {"SUBSTRING": "text", "TEXT": "text"},
             "inputTranslation": {"TEXT1": "SUBSTRING", "TEXT2": "TEXT"},
             "optionTypes": {},
         },
@@ -262,7 +262,7 @@ opcodeDatabase = {
             "type": "textReporter",
             "category": "Operators",
             "newOpcode": "last index of (SUBSTRING) in (TEXT)",
-            "inputTypes": {"SUBSTRING": "text", "STRING": "text"},
+            "inputTypes": {"SUBSTRING": "text", "TEXT": "text"},
             "inputTranslation": {"TEXT1": "SUBSTRING", "TEXT2": "TEXT"},
             "optionTypes": {},
         },
@@ -353,8 +353,22 @@ opcodeDatabase = {
             "inputTypes": {"NUM": "number"},
             "optionTypes": {},
         },
-        
-        
+        "operator_mathop": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "[OPERATION] of (NUM)",
+            "inputTypes": {"NUM": "number"},
+            "optionTypes": {"OPERATION": "unary math operation"},
+            "optionTranslation": {"OPERATOR": "OPERATION"},
+        },
+        "operator_stringify": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "(VALUE)",
+            "inputTypes": {"VALUE": "text"},
+            "inputTranslation": {"ONE": "VALUE"},
+            "optionTypes": {},
+        },
         "operator_boolify": {
             "type": "booleanReporter",
             "category": "Operators",

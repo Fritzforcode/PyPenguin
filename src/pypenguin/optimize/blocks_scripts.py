@@ -99,7 +99,7 @@ def translateOptions(data, opcode):
         else:
             optionID = fieldID
         match opcodeData["optionTypes"][optionID]:
-            case "variable"|"list"|"broadcast"|"key"|"binary math operation"|"text case"|"text operation"|"string":
+            case "variable"|"list"|"broadcast"|"key"|"unary math operation"|"binary math operation"|"text case"|"text operation"|"string":
                 newFieldData = fieldData[0]
         newData[optionID] = newFieldData
     return newData
