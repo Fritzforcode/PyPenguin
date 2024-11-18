@@ -113,6 +113,7 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
                 case "broadcast"       : pass
                 case "integer"         : pass
                 case "positive integer": pass
+                case "positive number" : pass
                 case "number"          : pass
                 case "text"            : pass
                 case "boolean"         : pass
@@ -133,7 +134,7 @@ def validateOptions(path, data, opcode, opcodeData, context):
         # validateSchema(pathToData=path+[optionID], data=optionValue, schema=optionSchema)
         
         match opcodeData["optionTypes"][optionID]: # type of the option
-            case "key"|"unary math operation"|"binary math operation"|"text operation"|"text case":
+            case "key"|"unary math operation"|"binary math operation"|"text operation"|"text case"|"stop script target":
                 match opcodeData["optionTypes"][optionID]:
                     case "key":
                         possibleValues = [
@@ -154,6 +155,8 @@ def validateOptions(path, data, opcode, opcodeData, context):
                         possibleValues = ["starts", "ends"]
                     case "text case":
                         possibleValues = ["upper", "lower"]
+                    case "stop script target":
+                        possibleValues = ["all", "this script", "other scripts in sprite"]
                 if optionValue not in possibleValues:
                     raise formatError(path+[optionID], f"Must be one of {possibleValues}.")
             case "broadcast"|"string":

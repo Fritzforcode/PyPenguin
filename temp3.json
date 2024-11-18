@@ -7,18 +7,10 @@
                 "X#fH=/ZM.T|B;rKrmG[s": [
                     "var",
                     33
-                ],
-                "NmjQ-_mT(OA^.)?Hh^bl": [
-                    "interpret: node",
-                    0
-                ],
-                "Za:QFPiy`CEs]*lkO=/n": [
-                    "interpret: i",
-                    0
                 ]
             },
             "lists": {
-                "M^Lp^Q]A^}K)lXO{ELxy": [
+                "NmjQ-_mT(OA^.)?Hh^bl": [
                     "LOG",
                     []
                 ]
@@ -27,23 +19,25 @@
             "customVars": [],
             "blocks": {
                 "a": {
-                    "opcode": "operator_round",
+                    "opcode": "control_stop",
                     "next": null,
                     "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                "4.5"
-                            ]
+                    "inputs": {},
+                    "fields": {
+                        "STOP_OPTION": [
+                            "other scripts in sprite",
+                            "Za:QFPiy`CEs]*lkO=/n"
                         ]
                     },
-                    "fields": {},
                     "shadow": false,
                     "topLevel": true,
                     "x": 0,
-                    "y": 0
+                    "y": 0,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "hasnext": "true"
+                    }
                 }
             },
             "comments": {},
@@ -60,7 +54,7 @@
                 }
             ],
             "sounds": [],
-            "id": "xeH-ilqtek]Y@J?EB}#|",
+            "id": "M^Lp^Q]A^}K)lXO{ELxy",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,

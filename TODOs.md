@@ -1,10 +1,8 @@
 # TODO
 
+implement dropdown menus
+
 investigate optype and returns
-
-add procedure calls
-
-make a better custom hash function
 
 possibly change null to None ...
 

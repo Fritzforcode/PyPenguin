@@ -11,43 +11,40 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "(TEXT) [OPERATION] with (SUBSTRING) ?",
-                            "inputs": {
-                                "TEXT": {
-                                    "block": null,
-                                    "text": ""
-                                },
-                                "SUBSTRING": {
-                                    "block": null,
-                                    "text": ""
-                                }
-                            },
+                            "opcode": "stop [TARGET]",
+                            "inputs": {},
                             "options": {
-                                "OPERATION": "starts"
+                                "TARGET": "other scripts in sprite"
                             }
                         }
                     ]
                 },
                 {
                     "position": [
-                        0,
-                        100
+                        -75,
+                        -136
                     ],
                     "blocks": [
                         {
-                            "opcode": "(TEXT) [OPERATION] with (SUBSTRING) ?",
-                            "inputs": {
-                                "TEXT": {
-                                    "block": null,
-                                    "text": ""
-                                },
-                                "SUBSTRING": {
-                                    "block": null,
-                                    "text": ""
-                                }
-                            },
+                            "opcode": "stop [TARGET]",
+                            "inputs": {},
                             "options": {
-                                "OPERATION": "ends"
+                                "TARGET": "all"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -44,
+                        94
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "stop [TARGET]",
+                            "inputs": {},
+                            "options": {
+                                "TARGET": "this script"
                             }
                         }
                     ]
@@ -75,18 +72,6 @@
         {
             "name": "var",
             "currentValue": 33,
-            "monitor": null,
-            "isCloudVariable": false
-        },
-        {
-            "name": "interpret: node",
-            "currentValue": 0,
-            "monitor": null,
-            "isCloudVariable": false
-        },
-        {
-            "name": "interpret: i",
-            "currentValue": 0,
             "monitor": null,
             "isCloudVariable": false
         }

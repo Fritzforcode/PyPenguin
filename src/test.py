@@ -2,11 +2,22 @@ A = {
     "position": [0,0],
     "blocks": [
         {
-            "opcode": "round (NUM)",
-            "inputs": {"NUM": {"text": "4.5"}},
+            "opcode": "stop [TARGET]",
+            "options": {"TARGET": "other scripts in sprite"},
         },
     ],
 }
+"""
+                "TRY": {"blocks": [{
+                    "opcode": "set [VARIABLE] to (VALUE)",
+                    "inputs": {"VALUE": {"text":"stack-try"}},
+                    "options": {"VARIABLE": "var"},
+                }]},
+                "IFERROR": {"blocks": [{
+                    "opcode": "set [VARIABLE] to (VALUE)",
+                    "inputs": {"VALUE": {"text":"stack-catch"}},
+                    "options": {"VARIABLE": "var"},
+                }]},"""
 projectData = {
     "sprites": [
         {
@@ -32,18 +43,6 @@ projectData = {
         {
             "name": "var",
             "currentValue": 33,
-            "monitor": None,
-            "isCloudVariable": False,
-        },
-        {
-            "name": "interpret: node",
-            "currentValue": 0,
-            "monitor": None,
-            "isCloudVariable": False,
-        },
-        {
-            "name": "interpret: i",
-            "currentValue": 0,
             "monitor": None,
             "isCloudVariable": False,
         },
@@ -79,13 +78,13 @@ from pypenguin.helper_functions import writeJSONFile, pp
 validateProject(projectData=projectData)
 
 writeJSONFile(
-    filePath = "../project/project.json",
+    filePath = "project/project.json",
     data     = projectData
 )
 
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory = "../project",
-    projectFilePath           = "../export.pmp",
+    optimizedProjectDirectory = "project",
+    projectFilePath           = "export.pmp",
     temporaryDirectory        = "../temporary",
     writeDebugFiles           = True,
 )

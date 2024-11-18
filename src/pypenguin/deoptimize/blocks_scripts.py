@@ -149,6 +149,7 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                             case "text"            : magicNumber = 10
                             case "integer"         : magicNumber =  7
                             case "positive integer": magicNumber =  6
+                            case "positive number" : magicNumber =  5
                             case "number"          : magicNumber =  4
                             case "boolean"         : pass
                     if "blocks" in inputData:
@@ -363,7 +364,17 @@ def finishBlocks(data, spriteName, tokens):
                             newFieldID = fieldID
                         newInputDatas[newFieldID] = optionData
                     blockData["fields"] = newInputDatas
-                
+            
+            if blockData["opcode"] == "control_stop":
+                match blockData["fields"]["STOP_OPTION"][0]:
+                    case "all" | "this script"    : hasNext = False
+                    case "other scripts in sprite": hasNext = True
+                blockData["mutation"] = {
+                    "tagName": "mutation",
+                    "children": [],
+                    "hasnext": json.dumps(hasNext)
+                }
+
     def getSelectors(obj):
         selectors = []
         if isinstance(obj, dict):
