@@ -134,7 +134,7 @@ def validateOptions(path, data, opcode, opcodeData, context):
         # validateSchema(pathToData=path+[optionID], data=optionValue, schema=optionSchema)
         
         match opcodeData["optionTypes"][optionID]: # type of the option
-            case "key"|"unary math operation"|"binary math operation"|"text operation"|"text case"|"stop script target":
+            case "key"|"unary math operation"|"binary math operation"|"text operation"|"text case"|"stop script target"|"cloning target":
                 match opcodeData["optionTypes"][optionID]:
                     case "key":
                         possibleValues = [
@@ -157,6 +157,8 @@ def validateOptions(path, data, opcode, opcodeData, context):
                         possibleValues = ["upper", "lower"]
                     case "stop script target":
                         possibleValues = ["all", "this script", "other scripts in sprite"]
+                    case "cloning target":
+                        possibleValues = context["cloningTargets"]
                 if optionValue not in possibleValues:
                     raise formatError(path+[optionID], f"Must be one of {possibleValues}.")
             case "broadcast"|"string":
@@ -175,3 +177,4 @@ def validateOptions(path, data, opcode, opcodeData, context):
                 possibleValues = ["instruction", "lastInstruction", "stringReporter", "numberReporter", "booleanReporter"]
                 if optionValue not in possibleValues:
                     raise formatError(path+[optionID], f"Must be one of {possibleValues}.")
+            case _: raise Exception()

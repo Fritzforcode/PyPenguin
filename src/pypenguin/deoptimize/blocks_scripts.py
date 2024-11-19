@@ -312,13 +312,14 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                 del data[blockID]
     return data, newCommentDatas
 
-def finishBlocks(data, spriteName, tokens):
+def finishBlocks(data):
     mutationDatas = {}
     for j, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):
             if blockData["opcode"] == "procedures_prototype":
                 mutationData = blockData["mutation"]
                 mutationDatas[mutationData["proccode"]] = mutationData
+    additionalBlockDatas = {}
     for i, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):
             if blockData["opcode"] == "procedures_call":
@@ -374,6 +375,26 @@ def finishBlocks(data, spriteName, tokens):
                     "children": [],
                     "hasnext": json.dumps(hasNext)
                 }
+            elif blockData["opcode"] == "control_create_clone_of":
+                target = blockData["fields"]["TARGET"]
+                del blockData["fields"]["TARGET"]
+                menuID = tempSelector(path=blockID+[1])
+                menuData = {
+                    "opcode": "control_create_clone_of_menu",
+                    "next": None,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "CLONE_OPTION": target,
+                    },
+                    "shadow": True,
+                    "topLevel": False,
+                }
+                pp(blockData)
+                print(target)
+                print(menuID, blockID)
+                additionalBlockDatas[menuID] = menuData
+    data |= additionalBlockDatas
 
     def getSelectors(obj):
         selectors = []

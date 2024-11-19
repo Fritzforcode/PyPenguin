@@ -8,13 +8,15 @@ def validateSprite(path, data, context):
         # Check stage format
         validateSchema(pathToData=path, data=data, schema=stageSchema)
         if data["name"] != "Stage": 
-            raise formatError(path, "'name' of the stage (the first sprite) must always be 'Stage'.")
+            raise formatError(path+["name"], "'name' of the stage (the first sprite) must always be 'Stage'.")
     else: # If it should be a sprite
         # Check sprite format
         validateSchema(pathToData=path, data=data, schema=spriteSchema)
         
+        if data["name"] == "_myself_":
+            raise formatError(path+["name"], "'_myself_' isn't a valid sprite name. Please pick another name.")
         if data["layerOrder"] < 1:
-            raise formatError(path, "'layerOrder' of a sprite must be at least 1.")
+            raise formatError(path+["layerOrder"], "'layerOrder' of a sprite must be at least 1.")
         
     # Check script formats
     for j, script in enumerate(data["scripts"]):

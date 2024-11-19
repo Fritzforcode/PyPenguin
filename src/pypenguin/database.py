@@ -229,15 +229,23 @@ opcodeDatabase = {
         "control_create_clone_of": {
             "type": "instruction",
             "category": "Control",
-            "newOpcode": "create clone of ()",
+            "newOpcode": "create clone of [TARGET]",
             "inputTypes": {},
-            "optionTypes": {},
+            "optionTypes": {"TARGET": "cloning target"},
+        },
+        "control_create_clone_of_menu": {
+            "type": "textReporter",
+            "category": "Control",
+            "newOpcode": "CREATE CLONE MENU",
+            "inputTypes": {},
+            "optionTypes": {"TARGET": "cloning target"},
+            "optionTranslation": {"CLONE_OPTION": "TARGET"},
         },
         "control_delete_clones_of": {
             "type": "instruction",
             "category": "Control",
             "newOpcode": "delete clones of ()",
-            "inputTypes": {},
+            "inputTypes": {"CLONE_OPTION": "boolean"},
             "optionTypes": {},
         },
         "control_delete_this_clone": {
@@ -768,6 +776,7 @@ opcodeDatabase = {
             "optionTypes": {},
         },
     # SPECIAL
+        # SPECIAL: Control (DO NOT CREATE THESE MANUALLY)
         # SPECIAL: Varibles and Lists
         "special_variable_value": {
             "type": "textReporter",

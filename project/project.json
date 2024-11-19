@@ -11,9 +11,9 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "stop [TARGET]",
+                            "opcode": "create clone of [TARGET]",
                             "options": {
-                                "TARGET": "other scripts in sprite"
+                                "TARGET": ""
                             }
                         }
                     ]

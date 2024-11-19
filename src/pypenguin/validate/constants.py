@@ -18,7 +18,14 @@ projectSchema = {
   "properties": {
     "sprites": {
       "type"    : "array",
-      "minItems": 1
+      "minItems": 1,
+      "items": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+          },
+          "required": ["name"],
+      },
     },
     "globalVariables": {
       "type" : "array",

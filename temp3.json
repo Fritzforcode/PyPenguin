@@ -19,25 +19,29 @@
             "customVars": [],
             "blocks": {
                 "a": {
-                    "opcode": "control_stop",
+                    "opcode": "control_create_clone_of",
                     "next": null,
                     "parent": null,
                     "inputs": {},
-                    "fields": {
-                        "STOP_OPTION": [
-                            "other scripts in sprite",
-                            "Za:QFPiy`CEs]*lkO=/n"
-                        ]
-                    },
+                    "fields": {},
                     "shadow": false,
                     "topLevel": true,
                     "x": 0,
-                    "y": 0,
-                    "mutation": {
-                        "tagName": "mutation",
-                        "children": [],
-                        "hasnext": "true"
-                    }
+                    "y": 0
+                },
+                "b": {
+                    "opcode": "control_create_clone_of_menu",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "CLONE_OPTION": [
+                            "",
+                            "Za:QFPiy`CEs]*lkO=/n"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
                 }
             },
             "comments": {},

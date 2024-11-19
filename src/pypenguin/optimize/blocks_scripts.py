@@ -41,9 +41,11 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
             if   isinstance(inputData[1], str): # e.g. "CONDITION": [2, "b"]
                 if opcode == "procedures_call":
                     inputType = "boolean"
+                elif opcode == "control_create_clone_of":
+                    inputType = "menu"
                 else:
                     inputType = opcodeData["inputTypes"][newInputID]
-                mode = "block-only" if inputType in ["boolean", "round"] else ("script" if inputType=="script" else None)
+                mode = "block-only" if inputType in ["boolean", "round", "menu"] else ("script" if inputType=="script" else None)
                 pointer = inputData[1]
                 text = None
             elif isinstance(inputData[1], list): # e.g. "MESSAGE": [1, [10, "Bye!"]]
@@ -230,6 +232,10 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
         }
         if "comment" in oldData:
             newData["comment"] = oldData["comment"]
+    elif newData["opcode"] == "create clone of [TARGET]":
+        target = newData["inputs"]["CLONE_OPTION"]["block"]["options"]["TARGET"]
+        newData["options"]["TARGET"] = target
+        del newData["inputs"]["CLONE_OPTION"]
     newDatas = [newData] if newDatas == None else newDatas
     if isinstance(blockData, dict):
         if blockData["next"] != None: #if the block does have a neighbour

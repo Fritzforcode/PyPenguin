@@ -54,16 +54,21 @@ def validateProject(projectData):
     
 
     # Check sprite formats
+    cloningTargets = [sprite["name"] for sprite in projectDataCopy["sprites"][1:]]
     spriteNames = []
     for i, sprite in enumerate(projectDataCopy["sprites"]):
         if i == 0:
             scopeVariables = projectDataCopy["globalVariables"]
             scopeLists     = projectDataCopy["globalLists"]
         else:
+            cloningTargets.insert(0, "_myself_")
             scopeVariables = sprite["localVariables"] + projectDataCopy["globalVariables"]
             scopeLists     = sprite["localLists"]     + projectDataCopy["globalLists"]
         
-        context = {"scopeVariables": scopeVariables, "scopeLists": scopeLists}
+        if cloningTargets == []: # When there are no sprites; make " " the fallback value
+            cloningTargets = [""]
+
+        context = {"scopeVariables": scopeVariables, "scopeLists": scopeLists, "cloningTargets": cloningTargets}
         validateSprite(path=["sprites"]+[i], data=sprite, context=context)
         spriteName = None if i == 0 else sprite["name"] # None for the stage
         if spriteName in spriteNames: # If there is the same sprite name twice

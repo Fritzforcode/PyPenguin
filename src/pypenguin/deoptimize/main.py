@@ -55,8 +55,6 @@ def deoptimizeProject(projectData):
             newSpriteBlocks |= unnestedScriptData
         newSpriteBlocks = finishBlocks(
             data=newSpriteBlocks,
-            spriteName=spriteData["name"],
-            tokens=tokens,
         )
         nameKey = None if spriteData["isStage"] else spriteData["name"]
         for i, commentData in enumerate(spriteData["comments"]):

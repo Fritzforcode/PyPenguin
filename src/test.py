@@ -2,22 +2,11 @@ A = {
     "position": [0,0],
     "blocks": [
         {
-            "opcode": "stop [TARGET]",
-            "options": {"TARGET": "other scripts in sprite"},
+            "opcode": "create clone of [TARGET]",
+            "options": {"TARGET": ""},
         },
     ],
 }
-"""
-                "TRY": {"blocks": [{
-                    "opcode": "set [VARIABLE] to (VALUE)",
-                    "inputs": {"VALUE": {"text":"stack-try"}},
-                    "options": {"VARIABLE": "var"},
-                }]},
-                "IFERROR": {"blocks": [{
-                    "opcode": "set [VARIABLE] to (VALUE)",
-                    "inputs": {"VALUE": {"text":"stack-catch"}},
-                    "options": {"VARIABLE": "var"},
-                }]},"""
 projectData = {
     "sprites": [
         {

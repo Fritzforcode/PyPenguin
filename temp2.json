@@ -6,45 +6,15 @@
             "scripts": [
                 {
                     "position": [
-                        0,
-                        0
+                        9,
+                        146
                     ],
                     "blocks": [
                         {
-                            "opcode": "stop [TARGET]",
+                            "opcode": "create clone of [TARGET]",
                             "inputs": {},
                             "options": {
-                                "TARGET": "other scripts in sprite"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        -75,
-                        -136
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "stop [TARGET]",
-                            "inputs": {},
-                            "options": {
-                                "TARGET": "all"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        -44,
-                        94
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "stop [TARGET]",
-                            "inputs": {},
-                            "options": {
-                                "TARGET": "this script"
+                                "TARGET": ""
                             }
                         }
                     ]
@@ -54,13 +24,13 @@
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "costume1",
-                    "dataFormat": "png",
-                    "fileStem": "b86efb7f23387300cf9037a61f328ab9",
-                    "bitmapResolution": 2,
+                    "name": "backdrop1",
+                    "dataFormat": "svg",
+                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "bitmapResolution": 1,
                     "rotationCenter": [
-                        158,
-                        146
+                        240,
+                        180
                     ]
                 }
             ],
@@ -70,27 +40,19 @@
     ],
     "globalVariables": [
         {
-            "name": "var",
-            "currentValue": 33,
+            "name": "my variable",
+            "currentValue": 0,
             "monitor": null,
             "isCloudVariable": false
         }
     ],
-    "globalLists": [
-        {
-            "name": "LOG",
-            "currentValue": [],
-            "monitor": null
-        }
-    ],
+    "globalLists": [],
     "tempo": 60,
-    "videoTransparency": 0,
-    "videoState": "off",
+    "videoTransparency": 50,
+    "videoState": "on",
     "textToSpeechLanguage": null,
     "extensionData": {},
-    "extensions": [
-        "jgJSON"
-    ],
+    "extensions": [],
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",
