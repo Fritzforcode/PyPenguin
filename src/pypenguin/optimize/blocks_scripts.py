@@ -98,9 +98,7 @@ def translateOptions(data, opcode):
                 optionID = fieldID
         else:
             optionID = fieldID
-        match opcodeData["optionTypes"][optionID]:
-            case "variable"|"list"|"broadcast"|"key"|"unary math operation"|"binary math operation"|"text case"|"text operation"|"stop script target"|"string":
-                newFieldData = fieldData[0]
+        newFieldData = fieldData[0]
         newData[optionID] = newFieldData
     return newData
 
@@ -132,7 +130,9 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                     if "block" in inputData:
                         if inputData["block"] != None:
                             if isinstance(inputData["block"], str):
-                                inputs[inputID]["block"] = childrenDatas[inputData["block"]][0]
+                                subBlockData = childrenDatas[inputData["block"]][0]
+                                pp(subBlockData)
+                                inputs[inputID]["block"] = subBlockData
                             elif isinstance(inputData["block"], dict):
                                 pass
             else:
