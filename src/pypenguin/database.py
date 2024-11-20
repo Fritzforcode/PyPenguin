@@ -244,9 +244,17 @@ opcodeDatabase = {
         "control_delete_clones_of": {
             "type": "instruction",
             "category": "Control",
-            "newOpcode": "delete clones of ()",
-            "inputTypes": {"CLONE_OPTION": "boolean"},
-            "optionTypes": {},
+            "newOpcode": "delete clones of [TARGET]",
+            "inputTypes": {},
+            "optionTypes": {"TARGET": "cloning target"},
+        },
+        "control_delete_clones_of_menu": {
+            "type": "textReporter",
+            "category": "Control",
+            "newOpcode": "DELETE CLONES MENU",
+            "inputTypes": {},
+            "optionTypes": {"TARGET": "cloning target"},
+            "optionTranslation": {"CLONE_OPTION": "TARGET"},
         },
         "control_delete_this_clone": {
             "type": "lastInstruction",

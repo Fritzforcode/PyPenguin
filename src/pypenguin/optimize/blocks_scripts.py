@@ -41,7 +41,7 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
             if   isinstance(inputData[1], str): # e.g. "CONDITION": [2, "b"]
                 if opcode == "procedures_call":
                     inputType = "boolean"
-                elif opcode == "control_create_clone_of":
+                elif opcode in ["control_create_clone_of", "control_delete_clones_of"]:
                     inputType = "menu"
                 else:
                     inputType = opcodeData["inputTypes"][newInputID]
@@ -236,6 +236,13 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
         target = newData["inputs"]["CLONE_OPTION"]["block"]["options"]["TARGET"]
         newData["options"]["TARGET"] = target
         del newData["inputs"]["CLONE_OPTION"]
+    elif newData["opcode"] == "delete clones of [TARGET]":
+        print("YAY")
+        pp(newData)
+        target = newData["inputs"]["CLONE_OPTION"]["block"]["options"]["TARGET"]
+        newData["options"]["TARGET"] = target
+        del newData["inputs"]["CLONE_OPTION"]
+    
     newDatas = [newData] if newDatas == None else newDatas
     if isinstance(blockData, dict):
         if blockData["next"] != None: #if the block does have a neighbour

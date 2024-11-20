@@ -382,7 +382,7 @@ def finishBlocks(data):
                 menuData = {
                     "opcode": "control_create_clone_of_menu",
                     "next": None,
-                    "parent": "a",
+                    "parent": blockID,
                     "inputs": {},
                     "fields": {
                         "CLONE_OPTION": target,
@@ -390,10 +390,11 @@ def finishBlocks(data):
                     "shadow": True,
                     "topLevel": False,
                 }
+                additionalBlockDatas[menuID] = menuData
+                blockData["inputs"]["CLONE_OPTION"] = [1, menuID]
                 pp(blockData)
                 print(target)
                 print(menuID, blockID)
-                additionalBlockDatas[menuID] = menuData
     data |= additionalBlockDatas
 
     def getSelectors(obj):

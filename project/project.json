@@ -13,7 +13,7 @@
                         {
                             "opcode": "create clone of [TARGET]",
                             "options": {
-                                "TARGET": ""
+                                "TARGET": "sPrITe"
                             }
                         }
                     ]
@@ -35,6 +35,39 @@
             ],
             "sounds": [],
             "volume": 100
+        },
+        {
+            "name": "sPrITe",
+            "isStage": false,
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "dataFormat": "png",
+                    "fileStem": "b86efb7f23387300cf9037a61f328ab9",
+                    "bitmapResolution": 2,
+                    "rotationCenter": [
+                        158,
+                        146
+                    ]
+                }
+            ],
+            "sounds": [],
+            "volume": 100,
+            "localVariables": [],
+            "localLists": [],
+            "layerOrder": 1,
+            "visible": true,
+            "position": [
+                100,
+                100
+            ],
+            "size": 100,
+            "direction": 0,
+            "draggable": true,
+            "rotationStyle": "all around"
         }
     ],
     "globalVariables": [
