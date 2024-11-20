@@ -1,3 +1,5 @@
+from pypenguin.database import defaultCostumeDeoptimized
+
 def translateCostumes(data):
     newCostumeDatas = []
     for costumeData in data:
@@ -15,6 +17,9 @@ def translateCostumes(data):
         else:
             del newCostumeData["bitmapResolution"]
         newCostumeDatas.append(newCostumeData)
+    if newCostumeDatas == []: # When there are no costumes
+        defaultCostumeModified = defaultCostumeDeoptimized.copy() | {"isDefault": True}
+        newCostumeDatas.append(defaultCostumeModified)
     return newCostumeDatas
 
 def translateSounds(data):

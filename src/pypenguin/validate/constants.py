@@ -165,9 +165,10 @@ costumeSchema = {
       "items": { "type": ["integer", "number"] },
       "minItems": 2,
       "maxItems": 2
-    }
+    },
   },
-  "required": ["name", "dataFormat", "fileStem", "bitmapResolution", "rotationCenter"]
+  "required": ["name", "dataFormat", "fileStem", "bitmapResolution", "rotationCenter"],
+  "additionalProperties": False,
 }
 
 soundSchema = {

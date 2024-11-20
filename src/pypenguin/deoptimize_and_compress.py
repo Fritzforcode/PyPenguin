@@ -3,7 +3,9 @@ import urllib.parse
 
 from pypenguin.deoptimize import deoptimizeProject
 
-from pypenguin.helper_functions import readJSONFile, writeJSONFile
+from pypenguin.helper_functions import readJSONFile, writeJSONFile, pp
+
+from pypenguin.database import defaultCostumeFilePath
 
 def deoptimizeAndCompressProject(
     optimizedProjectDirectory: str,
@@ -31,29 +33,53 @@ def deoptimizeAndCompressProject(
     )
 
     # Reorganize Assets
-    for sprite in optimizedData["sprites"]:
+    for i, sprite in enumerate(optimizedData["sprites"]):
+        deoptimizedSprite = deoptimizedData["targets"][i]
+
         # Encode the sprite name
         if sprite["isStage"]:
             encodedSpriteName = "#Stage"
         else:
             encodedSpriteName = urllib.parse.quote(sprite["name"])
         
+        pp(deoptimizedSprite["costumes"])
         # Copy and rename costumes
-        for costume in sprite["costumes"]:
-            oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
+        for j, costume in enumerate(deoptimizedSprite["costumes"]):
+            #pp(costume)
+            oldCostumeName                        = costume["md5ext"]
             encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
-            shutil.copy(
-                src=os.path.join(
+            if costume.get("isDefault") == True:
+                srcPath = defaultCostumeFilePath
+            else:
+                srcPath = os.path.join(
                     optimizedProjectDirectory, 
                     encodedSpriteName, 
                     "costumes", 
                     encodedCostumeName
-                ),
+                )
+            shutil.copy(
+                src=srcPath,
                 dst=os.path.join(temporaryDirectory, oldCostumeName),
             )
+            print("-->", oldCostumeName, encodedCostumeName, srcPath)
         
         # Copy and rename sounds
-        for costume in sprite["sounds"]:
+        for j, sound in enumerate(deoptimizedSprite["sounds"]):
+            #pp(sound)
+            oldSoundName                        = sound["md5ext"]
+            encodedSoundName = urllib.parse.quote(sound["name"] + "." + sound["dataFormat"])
+            srcPath = os.path.join(
+                optimizedProjectDirectory, 
+                encodedSpriteName, 
+                "sounds", 
+                encodedSoundName
+            )
+            shutil.copy(
+                src=srcPath,
+                dst=os.path.join(temporaryDirectory, oldSoundName),
+            )
+            print("-->", oldSoundName, encodedSoundName, srcPath)
+        """for costume in sprite["sounds"]:
             oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
             encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
             shutil.copy(
@@ -64,7 +90,7 @@ def deoptimizeAndCompressProject(
                     encodedCostumeName
                 ),
                 dst=os.path.join(temporaryDirectory, oldCostumeName),
-            )
+            )"""
 
     # Make sure projectFilePath does not exist
     if os.path.exists(projectFilePath):

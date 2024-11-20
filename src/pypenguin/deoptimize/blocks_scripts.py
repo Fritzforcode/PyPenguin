@@ -312,7 +312,7 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                 del data[blockID]
     return data, newCommentDatas
 
-def finishBlocks(data):
+def finishBlocks(data, commentDatas):
     mutationDatas = {}
     for j, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):
@@ -430,7 +430,7 @@ def finishBlocks(data):
         else:
             newObj = obj
         return newObj
-    selectors = getSelectors(data)
+    selectors = getSelectors(data) + getSelectors(commentDatas)
     cutSelectors = []
     for selector in selectors:
         if selector not in cutSelectors:
@@ -438,4 +438,5 @@ def finishBlocks(data):
     # Translation table from selector object to literal
     table = {selector: numberToLiteral(i+1) for i,selector in enumerate(cutSelectors)}
     data = replaceSelectors(data, table=table)
-    return data
+    commentDatas = replaceSelectors(commentDatas, table=table)
+    return data, commentDatas

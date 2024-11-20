@@ -209,6 +209,22 @@ opcodeDatabase = {
             "inputTypes": {},
             "optionTypes": {},
         },
+        "control_stop_sprite": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "stop [TARGET]",
+            "inputTypes": {},
+            "optionTypes": {"TARGET": "cloning target"},
+            "optionTranslation": {"STOP_OPTION": "TARGET"},
+        },
+        "control_stop_sprite_menu": {
+            "type": "textReporter",
+            "category": "Control",
+            "newOpcode": "STOP SPRITE MENU",
+            "inputTypes": {},
+            "optionTypes": {"TARGET": "cloning target"},
+            "optionTranslation": {"CLONE_OPTION": "TARGET"},
+        },
         "control_stop": {
             "type": "dynamic", # When "other scripts in sprite" is selected it isn't an ending block
             "category": "Control",
@@ -233,28 +249,12 @@ opcodeDatabase = {
             "inputTypes": {},
             "optionTypes": {"TARGET": "cloning target"},
         },
-        "control_create_clone_of_menu": {
-            "type": "textReporter",
-            "category": "Control",
-            "newOpcode": "CREATE CLONE MENU",
-            "inputTypes": {},
-            "optionTypes": {"TARGET": "cloning target"},
-            "optionTranslation": {"CLONE_OPTION": "TARGET"},
-        },
         "control_delete_clones_of": {
             "type": "instruction",
             "category": "Control",
             "newOpcode": "delete clones of [TARGET]",
             "inputTypes": {},
             "optionTypes": {"TARGET": "cloning target"},
-        },
-        "control_delete_clones_of_menu": {
-            "type": "textReporter",
-            "category": "Control",
-            "newOpcode": "DELETE CLONES MENU",
-            "inputTypes": {},
-            "optionTypes": {"TARGET": "cloning target"},
-            "optionTranslation": {"CLONE_OPTION": "TARGET"},
         },
         "control_delete_this_clone": {
             "type": "lastInstruction",
@@ -785,6 +785,22 @@ opcodeDatabase = {
         },
     # SPECIAL
         # SPECIAL: Control (DO NOT CREATE THESE MANUALLY)
+        "control_create_clone_of_menu": {
+            "type": "textReporter",
+            "category": "Control",
+            "newOpcode": "CREATE CLONE MENU",
+            "inputTypes": {},
+            "optionTypes": {"TARGET": "cloning target"},
+            "optionTranslation": {"CLONE_OPTION": "TARGET"},
+        },
+        "control_delete_clones_of_menu": {
+            "type": "textReporter",
+            "category": "Control",
+            "newOpcode": "DELETE CLONES MENU",
+            "inputTypes": {},
+            "optionTypes": {"TARGET": "cloning target"},
+            "optionTranslation": {"CLONE_OPTION": "TARGET"},
+        },
         # SPECIAL: Varibles and Lists
         "special_variable_value": {
             "type": "textReporter",
@@ -865,3 +881,24 @@ inputModes = {
     "round"           : "block-only",
     "script"          : "script",
 }
+
+
+defaultCostume = {
+    "name": "empty costume",
+    "dataFormat": "svg",
+    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
+    "bitmapResolution": 1,
+    "rotationCenter": [0, 0]
+}
+
+defaultCostumeDeoptimized = {
+    "name": "empty costume",
+    "bitmapResolution": 1,
+    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+    "dataFormat": "svg",
+    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+    "rotationCenterX": 0,
+    "rotationCenterY": 0
+}
+
+defaultCostumeFilePath = "assets/defaultCostume.svg"

@@ -3,68 +3,77 @@
         {
             "isStage": true,
             "name": "Stage",
-            "variables": {
-                "X#fH=/ZM.T|B;rKrmG[s": [
-                    "var",
-                    33
-                ]
-            },
-            "lists": {
-                "NmjQ-_mT(OA^.)?Hh^bl": [
-                    "LOG",
-                    []
-                ]
-            },
+            "variables": {},
+            "lists": {},
             "broadcasts": {},
             "customVars": [],
-            "blocks": {
+            "blocks": {},
+            "comments": {
                 "a": {
-                    "opcode": "control_create_clone_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
+                    "blockId": null,
                     "x": 0,
-                    "y": 0
-                },
-                "b": {
-                    "opcode": "control_create_clone_of_menu",
-                    "next": null,
-                    "parent": "a",
-                    "inputs": {},
-                    "fields": {
-                        "CLONE_OPTION": [
-                            "",
-                            "Za:QFPiy`CEs]*lkO=/n"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
+                    "y": 0,
+                    "width": 100,
+                    "height": 100,
+                    "minimized": false,
+                    "text": "123"
                 }
             },
-            "comments": {},
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "costume1",
-                    "bitmapResolution": 2,
-                    "assetId": "b86efb7f23387300cf9037a61f328ab9",
-                    "dataFormat": "png",
-                    "md5ext": "b86efb7f23387300cf9037a61f328ab9.png",
-                    "rotationCenterX": 158,
-                    "rotationCenterY": 146
+                    "name": "empty costume",
+                    "bitmapResolution": 1,
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "dataFormat": "svg",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 0,
+                    "rotationCenterY": 0,
+                    "isDefault": true
                 }
             ],
             "sounds": [],
-            "id": "M^Lp^Q]A^}K)lXO{ELxy",
+            "id": "X#fH=/ZM.T|B;rKrmG[s",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,
             "videoTransparency": 0,
             "videoState": "off",
             "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "Sprite14",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "empty costume",
+                    "bitmapResolution": 1,
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "dataFormat": "svg",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 0,
+                    "rotationCenterY": 0,
+                    "isDefault": true
+                }
+            ],
+            "sounds": [],
+            "id": "NmjQ-_mT(OA^.)?Hh^bl",
+            "volume": 100,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": true,
+            "rotationStyle": "all around",
+            "layerOrder": 1
         }
     ],
     "monitors": [],

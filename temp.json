@@ -12,38 +12,7 @@
             "lists": {},
             "broadcasts": {},
             "customVars": [],
-            "blocks": {
-                "a": {
-                    "opcode": "control_create_clone_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "CLONE_OPTION": [
-                            1,
-                            "b"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 9,
-                    "y": 146
-                },
-                "b": {
-                    "opcode": "control_create_clone_of_menu",
-                    "next": null,
-                    "parent": "a",
-                    "inputs": {},
-                    "fields": {
-                        "CLONE_OPTION": [
-                            "",
-                            "3u|k^|]ty2v#Pv}R5ya/"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                }
-            },
+            "blocks": {},
             "comments": {},
             "currentCostume": 0,
             "costumes": [
@@ -64,11 +33,90 @@
             "videoTransparency": 50,
             "videoState": "on",
             "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {
+                "a": {
+                    "opcode": "control_delete_clones_of",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "CLONE_OPTION": [
+                            1,
+                            "b"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 114,
+                    "y": -4
+                },
+                "b": {
+                    "opcode": "control_create_clone_of_menu",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "CLONE_OPTION": [
+                            "_myself_",
+                            "N~T(6Y4YucB^fWM%v9n#"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "assetId": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
+                    "rotationCenterX": 26,
+                    "rotationCenterY": 46
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "assetId": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "dataFormat": "wav",
+                    "rate": 48000,
+                    "sampleCount": 17867,
+                    "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
+                }
+            ],
+            "id": "5I9nI;7P)jdiR-_X;/%l",
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
         }
     ],
     "monitors": [],
     "extensionData": {},
-    "extensions": [],
+    "extensions": [
+        "jgJSON",
+        "lmsAllMenus"
+    ],
+    "extensionURLs": {
+        "lmsAllMenus": "https://extensions.penguinmod.com/extensions/Lily/AllMenus.js"
+    },
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",

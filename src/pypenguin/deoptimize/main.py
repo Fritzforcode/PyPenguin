@@ -53,9 +53,7 @@ def deoptimizeProject(projectData):
             scriptCommentDatas = scriptCommentDatasA | scriptCommentDatasB
             newCommentDatas |= scriptCommentDatas
             newSpriteBlocks |= unnestedScriptData
-        newSpriteBlocks = finishBlocks(
-            data=newSpriteBlocks,
-        )
+        
         nameKey = None if spriteData["isStage"] else spriteData["name"]
         for i, commentData in enumerate(spriteData["comments"]):
             commentID = tempSelector(path=[i]+["c"])
@@ -63,6 +61,10 @@ def deoptimizeProject(projectData):
                 data=commentData,
                 id=None,
             )
+        newSpriteBlocks, newCommentDatas = finishBlocks(
+            data=newSpriteBlocks,
+            commentDatas=newCommentDatas,
+        )
         
         newCostumeDatas = translateCostumes(
             data=spriteData["costumes"],

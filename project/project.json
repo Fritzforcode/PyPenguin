@@ -3,88 +3,51 @@
         {
             "name": "Stage",
             "isStage": true,
-            "scripts": [
+            "scripts": [],
+            "comments": [
                 {
                     "position": [
                         0,
                         0
                     ],
-                    "blocks": [
-                        {
-                            "opcode": "create clone of [TARGET]",
-                            "options": {
-                                "TARGET": "sPrITe"
-                            }
-                        }
-                    ]
+                    "size": [
+                        100,
+                        100
+                    ],
+                    "isMinimized": false,
+                    "text": "123"
                 }
             ],
-            "comments": [],
             "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "costume1",
-                    "dataFormat": "png",
-                    "fileStem": "b86efb7f23387300cf9037a61f328ab9",
-                    "bitmapResolution": 2,
-                    "rotationCenter": [
-                        158,
-                        146
-                    ]
-                }
-            ],
+            "costumes": [],
             "sounds": [],
             "volume": 100
         },
         {
-            "name": "sPrITe",
+            "name": "Sprite14",
             "isStage": false,
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "costume1",
-                    "dataFormat": "png",
-                    "fileStem": "b86efb7f23387300cf9037a61f328ab9",
-                    "bitmapResolution": 2,
-                    "rotationCenter": [
-                        158,
-                        146
-                    ]
-                }
-            ],
+            "costumes": [],
             "sounds": [],
-            "volume": 100,
             "localVariables": [],
             "localLists": [],
+            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
-                100,
-                100
+                0,
+                0
             ],
             "size": 100,
-            "direction": 0,
+            "direction": 90,
             "draggable": true,
             "rotationStyle": "all around"
         }
     ],
-    "globalVariables": [
-        {
-            "name": "var",
-            "currentValue": 33,
-            "monitor": null,
-            "isCloudVariable": false
-        }
-    ],
-    "globalLists": [
-        {
-            "name": "LOG",
-            "currentValue": [],
-            "monitor": null
-        }
-    ],
+    "globalVariables": [],
+    "globalLists": [],
     "tempo": 60,
     "videoTransparency": 0,
     "videoState": "off",

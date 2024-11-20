@@ -41,7 +41,7 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
             if   isinstance(inputData[1], str): # e.g. "CONDITION": [2, "b"]
                 if opcode == "procedures_call":
                     inputType = "boolean"
-                elif opcode in ["control_create_clone_of", "control_delete_clones_of"]:
+                elif opcode in ["control_create_clone_of", "control_delete_clones_of", "control_stop_sprite"]:
                     inputType = "menu"
                 else:
                     inputType = opcodeData["inputTypes"][newInputID]
@@ -87,6 +87,7 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
         else: raise WhatIsGoingOnError(mode, inputType)
 
         newData[newInputID] = newInputData
+    print("==> inputs ", opcode, newData)
     return newData
 
 def translateOptions(data, opcode):
@@ -100,11 +101,14 @@ def translateOptions(data, opcode):
                 optionID = fieldID
         else:
             optionID = fieldID
-        newFieldData = fieldData[0]
-        newData[optionID] = newFieldData
+        newOptionData = fieldData[0]
+        newData[optionID] = newOptionData
+    print("==> options", opcode, newData)
     return newData
 
 def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationDatas):
+    print(100*"(")
+    pp(data)
     childrenDatas = {}
     for pointer in blockChildrenPs[ancestorP]:
         childrenDatas[pointer] = translateScript(
@@ -247,13 +251,16 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
     if isinstance(blockData, dict):
         if blockData["next"] != None: #if the block does have a neighbour
             newDatas += childrenDatas[blockData["next"]]
-
+    
     if isinstance(blockData, list):
-        return {"position": [blockData[3], blockData[4]], "blocks": newDatas} 
+        returnValue = {"position": [blockData[3], blockData[4]], "blocks": newDatas} 
     elif blockData["topLevel"] == True:
-        return {"position": [blockData["x"], blockData["y"]], "blocks": newDatas} 
+        returnValue = {"position": [blockData["x"], blockData["y"]], "blocks": newDatas} 
     else:
-        return newDatas
+        returnValue = newDatas
+    print(100*")")
+    pp(data)
+    return returnValue
 
 def generateBlockChildrenPs(data):
     blockParentPs = {}

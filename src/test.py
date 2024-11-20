@@ -12,61 +12,43 @@ projectData = {
         {
             "name": "Stage",
             "isStage": True,
-            "scripts": [
-                A,   
+            "scripts": [],
+            "comments": [
+                {
+                    "position": [0, 0],
+                    "size": [100, 100],
+                    "isMinimized": False,
+                    "text": "123",
+                }
             ],
-            "comments": [],
             "currentCostume": 0,
-            "costumes": [{
-                "name": "costume1",
-                "dataFormat": "png",
-                "fileStem": "b86efb7f23387300cf9037a61f328ab9",
-                "bitmapResolution": 2,
-                "rotationCenter": [158, 146],
-                }],
+            "costumes": [],
             "sounds": [],
             "volume": 100,
         },
         {
-            "name": "sPrITe",
+            "name": "Sprite14",
             "isStage": False,
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [{
-                "name": "costume1",
-                "dataFormat": "png",
-                "fileStem": "b86efb7f23387300cf9037a61f328ab9",
-                "bitmapResolution": 2,
-                "rotationCenter": [158, 146],
-            }],
+            "costumes": [],
             "sounds": [],
-            "volume": 100,
             "localVariables": [],
             "localLists": [],
+            "volume": 100,
             "layerOrder": 1,
             "visible": True,
-            "position": [100, 100],
+            "position": [0,0],
             "size": 100,
-            "direction": 0,
+            "direction": 90,
             "draggable": True,
             "rotationStyle": "all around",
         },
     ],
     "globalVariables": [
-        {
-            "name": "var",
-            "currentValue": 33,
-            "monitor": None,
-            "isCloudVariable": False,
-        },
     ],
     "globalLists": [
-        {
-            "name": "LOG",
-            "currentValue": [],
-            "monitor": None
-        },
     ],
     "tempo": 60,
     "videoTransparency": 0,
@@ -90,15 +72,21 @@ from pypenguin import validateProject, deoptimizeAndCompressProject
 from pypenguin.helper_functions import writeJSONFile, pp
 
 validateProject(projectData=projectData)
+#pp(projectData)
 
 writeJSONFile(
-    filePath = "../project/project.json",
+    filePath = "temp2.json",
+    data     = projectData
+)
+
+writeJSONFile(
+    filePath = "project/project.json",
     data     = projectData
 )
 
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory = "../project",
-    projectFilePath           = "../export.pmp",
-    temporaryDirectory        = "../temporary",
+    optimizedProjectDirectory = "project",
+    projectFilePath           = "export.pmp",
+    temporaryDirectory        = "temporary",
     writeDebugFiles           = True,
 )
