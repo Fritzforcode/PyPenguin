@@ -377,27 +377,27 @@ def finishBlocks(data, commentDatas):
                 }
             
             if "menu" in opcodeData:
-                menuFieldID   = opcodeData["menu"]["menu"]
-                childFieldID  = opcodeData["menu"]["child"]
-                parentInputID = opcodeData["menu"]["parent"]
+                newID         = opcodeData["menu"]["new"]
+                oldID         = opcodeData["menu"]["old"]
+                menuOpcode    = opcodeData["menu"]["menuOpcode"]
                 
-                menuValue = blockData["fields"][menuFieldID]
-                del blockData["fields"][menuFieldID]
+                menuValue = blockData["fields"][newID]
+                del blockData["fields"][newID]
                 menuID = tempSelector(path=blockID+[100])
                 
                 menuBlockData = {
-                    "opcode": "control_create_clone_of_menu",
+                    "opcode": menuOpcode,
                     "next"  : None,
                     "parent": blockID,
                     "inputs": {},
                     "fields": {
-                        childFieldID: menuValue,
+                        oldID: menuValue,
                     },
                     "shadow"  : True,
                     "topLevel": False,
                 }
                 additionalBlockDatas[menuID] = menuBlockData
-                blockData["inputs"][parentInputID] = [1, menuID]
+                blockData["inputs"][oldID] = [1, menuID]
     data |= additionalBlockDatas
 
     def getSelectors(obj):

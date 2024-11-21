@@ -3,7 +3,7 @@ import urllib.parse
 
 from pypenguin.deoptimize import deoptimizeProject
 
-from pypenguin.helper_functions import readJSONFile, writeJSONFile, pp
+from pypenguin.helper_functions import readJSONFile, writeJSONFile
 
 from pypenguin.database import defaultCostumeFilePath
 
@@ -42,10 +42,8 @@ def deoptimizeAndCompressProject(
         else:
             encodedSpriteName = urllib.parse.quote(sprite["name"])
         
-        pp(deoptimizedSprite["costumes"])
         # Copy and rename costumes
         for j, costume in enumerate(deoptimizedSprite["costumes"]):
-            #pp(costume)
             oldCostumeName                        = costume["md5ext"]
             encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
             if costume.get("isDefault") == True:
@@ -61,11 +59,9 @@ def deoptimizeAndCompressProject(
                 src=srcPath,
                 dst=os.path.join(temporaryDirectory, oldCostumeName),
             )
-            print("-->", oldCostumeName, encodedCostumeName, srcPath)
         
         # Copy and rename sounds
         for j, sound in enumerate(deoptimizedSprite["sounds"]):
-            #pp(sound)
             oldSoundName                        = sound["md5ext"]
             encodedSoundName = urllib.parse.quote(sound["name"] + "." + sound["dataFormat"])
             srcPath = os.path.join(
@@ -78,7 +74,6 @@ def deoptimizeAndCompressProject(
                 src=srcPath,
                 dst=os.path.join(temporaryDirectory, oldSoundName),
             )
-            print("-->", oldSoundName, encodedSoundName, srcPath)
         """for costume in sprite["sounds"]:
             oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
             encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
@@ -102,6 +97,7 @@ def deoptimizeAndCompressProject(
         "zip",
         temporaryDirectory,
     )
+    print("created", projectFilePath)
 
     # Change its file extension to .pmp
     os.rename(

@@ -27,15 +27,1275 @@
             "scripts": [
                 {
                     "position": [
-                        114,
-                        -4
+                        225,
+                        88
                     ],
                     "blocks": [
                         {
-                            "opcode": "delete clones of [TARGET]",
+                            "opcode": "(NUM1) + (NUM2)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        227,
+                        143
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(NUM1) - (NUM2)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        215,
+                        203
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(NUM1) * (NUM2)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        212,
+                        261
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(NUM1) / (NUM2)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        176,
+                        391
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "pick random (NUM1) to (NUM2)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": "10"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        120,
+                        455
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "constrain (NUM) min (MIN) max (MAX)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": "50"
+                                },
+                                "MIN": {
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "MAX": {
+                                    "block": null,
+                                    "text": "100"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        110,
+                        516
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "interpolate (NUM1) to (NUM2) by (WEIGHT)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": "3"
+                                },
+                                "WEIGHT": {
+                                    "block": null,
+                                    "text": "0.5"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        181,
+                        578
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(OPERAND1) > (OPERAND2)",
+                            "inputs": {
+                                "OPERAND1": {
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "OPERAND2": {
+                                    "block": null,
+                                    "text": "50"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        185,
+                        644
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(OPERAND1) >= (OPERAND2)",
+                            "inputs": {
+                                "OPERAND1": {
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "OPERAND2": {
+                                    "block": null,
+                                    "text": "50"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        181,
+                        704
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(OPERAND1) < (OPERAND2)",
+                            "inputs": {
+                                "OPERAND1": {
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "OPERAND2": {
+                                    "block": null,
+                                    "text": "50"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        179,
+                        770
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(OPERAND1) <= (OPERAND2)",
+                            "inputs": {
+                                "OPERAND1": {
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "OPERAND2": {
+                                    "block": null,
+                                    "text": "50"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        181,
+                        837
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(OPERAND1) = (OPERAND2)",
+                            "inputs": {
+                                "OPERAND1": {
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "OPERAND2": {
+                                    "block": null,
+                                    "text": "50"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        169,
+                        907
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(OPERAND1) != (OPERAND2)",
+                            "inputs": {
+                                "OPERAND1": {
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "OPERAND2": {
+                                    "block": null,
+                                    "text": "50"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        200,
+                        973
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "true",
                             "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        197,
+                        1025
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "false",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        162,
+                        1091
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "<OPERAND1> and <OPERAND2>",
+                            "inputs": {
+                                "OPERAND1": {
+                                    "block": {
+                                        "opcode": "true",
+                                        "inputs": {},
+                                        "options": {}
+                                    }
+                                },
+                                "OPERAND2": {
+                                    "block": {
+                                        "opcode": "true",
+                                        "inputs": {},
+                                        "options": {}
+                                    }
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        171,
+                        1162
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "<OPERAND1> or <OPERAND2>",
+                            "inputs": {
+                                "OPERAND1": {
+                                    "block": {
+                                        "opcode": "false",
+                                        "inputs": {},
+                                        "options": {}
+                                    }
+                                },
+                                "OPERAND2": {
+                                    "block": {
+                                        "opcode": "false",
+                                        "inputs": {},
+                                        "options": {}
+                                    }
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        196,
+                        1233
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "not <OPERAND>",
+                            "inputs": {
+                                "OPERAND": {
+                                    "block": {
+                                        "opcode": "true",
+                                        "inputs": {},
+                                        "options": {}
+                                    }
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        205,
+                        1303
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "new line",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        190,
+                        1374
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "tab character",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        172,
+                        1440
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "join (STRING1) (STRING2)",
+                            "inputs": {
+                                "STRING1": {
+                                    "block": null,
+                                    "text": "apple "
+                                },
+                                "STRING2": {
+                                    "block": null,
+                                    "text": "banana"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        156,
+                        1509
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "join (STRING1) (STRING2) (STRING3)",
+                            "inputs": {
+                                "STRING1": {
+                                    "block": null,
+                                    "text": "apple "
+                                },
+                                "STRING2": {
+                                    "block": null,
+                                    "text": "banana "
+                                },
+                                "STRING3": {
+                                    "block": null,
+                                    "text": "pear"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        144,
+                        1579
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "index of (SUBSTRING) in (TEXT)",
+                            "inputs": {
+                                "SUBSTRING": {
+                                    "block": null,
+                                    "text": "world"
+                                },
+                                "TEXT": {
+                                    "block": null,
+                                    "text": "Hello world!"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        138,
+                        1637
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "last index of (SUBSTRING) in (TEXT)",
+                            "inputs": {
+                                "SUBSTRING": {
+                                    "block": null,
+                                    "text": "world"
+                                },
+                                "TEXT": {
+                                    "block": null,
+                                    "text": "Hello world!"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        187,
+                        1713
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "letter (LETTER) of (STRING)",
+                            "inputs": {
+                                "LETTER": {
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "STRING": {
+                                    "block": null,
+                                    "text": "apple"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        128,
+                        1775
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "letters from (START) to (STOP) in (TEXT)",
+                            "inputs": {
+                                "START": {
+                                    "block": null,
+                                    "text": "2"
+                                },
+                                "STOP": {
+                                    "block": null,
+                                    "text": "3"
+                                },
+                                "TEXT": {
+                                    "block": null,
+                                    "text": "Hello!"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        203,
+                        1839
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "length of (TEXT)",
+                            "inputs": {
+                                "TEXT": {
+                                    "block": null,
+                                    "text": "apple"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        156,
+                        1901
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(TEXT) contains (SUBSTRING) ?",
+                            "inputs": {
+                                "TEXT": {
+                                    "block": null,
+                                    "text": "apple"
+                                },
+                                "SUBSTRING": {
+                                    "block": null,
+                                    "text": "a"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        125,
+                        1965
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(TEXT) [OPERATION] with (SUBSTRING) ?",
+                            "inputs": {
+                                "TEXT": {
+                                    "block": null,
+                                    "text": "abcdef"
+                                },
+                                "SUBSTRING": {
+                                    "block": null,
+                                    "text": "abc"
+                                }
+                            },
                             "options": {
-                                "TARGET": "_myself_"
+                                "OPERATION": "starts"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        116,
+                        2037
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(TEXT) [OPERATION] with (SUBSTRING) ?",
+                            "inputs": {
+                                "TEXT": {
+                                    "block": null,
+                                    "text": "abcdef"
+                                },
+                                "SUBSTRING": {
+                                    "block": null,
+                                    "text": "abc"
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "ends"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        98,
+                        2097
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "in (TEXT) replace all (OLDVALUE) with (NEWVALUE)",
+                            "inputs": {
+                                "TEXT": {
+                                    "block": null,
+                                    "text": "foo bar"
+                                },
+                                "OLDVALUE": {
+                                    "block": null,
+                                    "text": "foo"
+                                },
+                                "NEWVALUE": {
+                                    "block": null,
+                                    "text": "bar"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        74,
+                        2164
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "in (TEXT) replace first (OLDVALUE) with (NEWVALUE)",
+                            "inputs": {
+                                "TEXT": {
+                                    "block": null,
+                                    "text": "bar bar doo"
+                                },
+                                "OLDVALUE": {
+                                    "block": null,
+                                    "text": "bar"
+                                },
+                                "NEWVALUE": {
+                                    "block": null,
+                                    "text": "foo"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        74,
+                        2241
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "match (TEXT) with regex (REGEX) (MODIFIER)",
+                            "inputs": {
+                                "TEXT": {
+                                    "block": null,
+                                    "text": "foo bar"
+                                },
+                                "REGEX": {
+                                    "block": null,
+                                    "text": "foo"
+                                },
+                                "MODIFIER": {
+                                    "block": null,
+                                    "text": "g"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        135,
+                        2307
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(TEXT) to [CASE]",
+                            "inputs": {
+                                "TEXT": {
+                                    "block": null,
+                                    "text": "ello"
+                                }
+                            },
+                            "options": {
+                                "CASE": "upper"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        128,
+                        2369
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(TEXT) to [CASE]",
+                            "inputs": {
+                                "TEXT": {
+                                    "block": null,
+                                    "text": "ello"
+                                }
+                            },
+                            "options": {
+                                "CASE": "lower"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        169,
+                        2433
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(NUM1) mod (NUM2)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        182,
+                        2500
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "round (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        163,
+                        2565
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "abs"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        436,
+                        317
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(NUM1) [OPERATION] (NUM2)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": "2"
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "root"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        627,
+                        313
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(NUM1) [OPERATION] (NUM2)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": "2"
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "log"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        159,
+                        2629
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "floor"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        167,
+                        2689
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "ceiling"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        162,
+                        2752
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "sqrt"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        156,
+                        2826
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "sin"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        160,
+                        2884
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "cos"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        138,
+                        2938
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "tan"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        157,
+                        3009
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "asin"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        136,
+                        3091
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "acos"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        142,
+                        3155
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "atan"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        129,
+                        3220
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "ln"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        135,
+                        3278
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "log"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        142,
+                        3332
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "e ^"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        135,
+                        3393
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[OPERATION] of (NUM)",
+                            "inputs": {
+                                "NUM": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "10 ^"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        157,
+                        3456
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "block": null,
+                                    "text": "foo"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        125,
+                        3521
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(VALUE) as a boolean",
+                            "inputs": {
+                                "VALUE": {
+                                    "block": null,
+                                    "text": "true"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        493,
+                        402
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(NUM1) * (NUM2) [OPERATION] (NUM3)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": "3"
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": "2"
+                                },
+                                "NUM3": {
+                                    "block": null,
+                                    "text": "16"
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "root"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        507,
+                        493
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(NUM1) * (NUM2) [OPERATION] (NUM3)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": "3"
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": "2"
+                                },
+                                "NUM3": {
+                                    "block": null,
+                                    "text": "16"
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "log"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        211,
+                        318
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(NUM1) ^ (NUM2)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": ""
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        394,
+                        208
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "(NUM1) [OPERATION] (NUM2)",
+                            "inputs": {
+                                "NUM1": {
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "NUM2": {
+                                    "block": null,
+                                    "text": "2"
+                                }
+                            },
+                            "options": {
+                                "OPERATION": "^"
                             }
                         }
                     ]
@@ -94,8 +1354,7 @@
     "textToSpeechLanguage": null,
     "extensionData": {},
     "extensions": [
-        "jgJSON",
-        "lmsAllMenus"
+        "jgJSON"
     ],
     "meta": {
         "semver": "3.0.0",

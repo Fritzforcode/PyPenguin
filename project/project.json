@@ -11,16 +11,7 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "create clone of [TARGET]",
-                            "options": {
-                                "TARGET": "Sprite14"
-                            }
-                        },
-                        {
-                            "opcode": "delete clones of [TARGET]",
-                            "options": {
-                                "TARGET": "Sprite14"
-                            }
+                            "opcode": "delete this clone"
                         }
                     ]
                 }
@@ -54,7 +45,14 @@
             "rotationStyle": "all around"
         }
     ],
-    "globalVariables": [],
+    "globalVariables": [
+        {
+            "name": "var",
+            "currentValue": "",
+            "monitor": null,
+            "isCloudVariable": false
+        }
+    ],
     "globalLists": [],
     "tempo": 60,
     "videoTransparency": 0,

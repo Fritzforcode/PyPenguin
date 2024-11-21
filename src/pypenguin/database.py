@@ -29,7 +29,7 @@ opcodeDatabase = {
             "inputTranslation": {"BROADCAST_INPUT": "BROADCAST"},
             "optionTypes": {},
         },
-    # Control (Incomplete)
+    # Control
         # Control: Timing
         "control_wait": {
             "type": "instruction",
@@ -62,6 +62,14 @@ opcodeDatabase = {
             "inputTranslation": {"SUBSTACK": "BODY"},
             "optionTypes": {},
         },
+        "control_for_each": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "for each [VARIABLE] in (RANGE) {BODY}",
+            "inputTypes": {"RANGE": "positive integer", "BODY": "script"},
+            "inputTranslation": {"VALUE": "RANGE"},
+            "optionTypes": {"VARIABLE": "variable"},
+        },
         "control_exitLoop": {
             "type": "lastInstruction",
             "category": "Control",
@@ -81,7 +89,7 @@ opcodeDatabase = {
             "type": "instruction",
             "category": "Control",
             "newOpcode": "switch (CONDITION) {CASES}",
-            "inputTypes": {"CONDITION": "text", "CASES": "script"},
+            "inputTypes": {"CONDITION": "round", "CASES": "script"},
             "inputTranslation": {"SUBSTACK": "CASES"},
             "optionTypes": {},
         },
@@ -89,7 +97,7 @@ opcodeDatabase = {
             "type": "instruction",
             "category": "Control",
             "newOpcode": "switch (CONDITION) {CASES} default {DEFAULT}",
-            "inputTypes": {"CONDITION": "text", "CASES": "script", "DEFAULT": "script"},
+            "inputTypes": {"CONDITION": "round", "CASES": "script", "DEFAULT": "script"},
             "inputTranslation": {"SUBSTACK1": "CASES", "SUBSTACK2": "DEFAULT"},
             "optionTypes": {},
         },
@@ -155,14 +163,6 @@ opcodeDatabase = {
             "inputTranslation": {"SUBSTACK": "BODY"},
             "optionTypes": {},
         },
-        "control_for_each": {
-            "type": "instruction",
-            "category": "Control",
-            "newOpcode": "for each [VARIABLE] in (RANGE) {BODY}",
-            "inputTypes": {"RANGE": "positive integer", "BODY": "script"},
-            "inputTranslation": {"VALUE": "RANGE"},
-            "optionTypes": {"VARIABLE": "variable"},
-        },
         "control_if_return_else_return": {
             "type": "instruction",
             "category": "Control",
@@ -176,7 +176,17 @@ opcodeDatabase = {
             "category": "Control",
             "newOpcode": "all at once {BODY}",
             "inputTypes": {"BODY": "script"},
+            "inputTranslation": {"SUBSTACK": "BODY"},
             "optionTypes": {},
+        },
+        "control_run_as_sprite": {
+            "type": "instruction",
+            "category": "Control",
+            "newOpcode": "as [TARGET] {BODY}",
+            "inputTypes": {"BODY": "script"},
+            "inputTranslation": {"SUBSTACK": "BODY"},
+            "optionTypes": {"TARGET": "other sprite or stage"},
+            "menu": {"new": "TARGET", "old": "RUN_AS_OPTION", "menuOpcode": "control_run_as_sprite_menu"},
         },
         # Control: Error Management
         "control_try_catch": {
@@ -212,23 +222,15 @@ opcodeDatabase = {
         "control_stop_sprite": {
             "type": "instruction",
             "category": "Control",
-            "newOpcode": "stop [TARGET]",
+            "newOpcode": "stop sprite [TARGET]", # changed for uniqueness
             "inputTypes": {},
-            "optionTypes": {"TARGET": "cloning target"},
-            "optionTranslation": {"STOP_OPTION": "TARGET"},
-        },
-        "control_stop_sprite_menu": {
-            "type": "textReporter",
-            "category": "Control",
-            "newOpcode": "STOP SPRITE MENU",
-            "inputTypes": {},
-            "optionTypes": {"TARGET": "cloning target"},
-            "optionTranslation": {"CLONE_OPTION": "TARGET"},
+            "optionTypes": {"TARGET": "other sprite or stage"},
+            "menu": {"new": "TARGET", "old": "STOP_OPTION", "menuOpcode": "control_stop_sprite_menu"},
         },
         "control_stop": {
             "type": "dynamic", # When "other scripts in sprite" is selected it isn't an ending block
             "category": "Control",
-            "newOpcode": "stop [TARGET]",
+            "newOpcode": "stop script [TARGET]", # changed for uniqueness
             "inputTypes": {},
             "optionTypes": {"TARGET": "stop script target"},
             "optionTranslation": {"STOP_OPTION": "TARGET"},
@@ -248,7 +250,7 @@ opcodeDatabase = {
             "newOpcode": "create clone of [TARGET]",
             "inputTypes": {},
             "optionTypes": {"TARGET": "cloning target"},
-            "menu": {"menu": "TARGET", "child": "CLONE_OPTION", "parent": "CLONE_OPTION"},
+            "menu": {"new": "TARGET", "old": "CLONE_OPTION", "menuOpcode": "control_create_clone_of_menu"},
         },
         "control_delete_clones_of": {
             "type": "instruction",
@@ -256,12 +258,19 @@ opcodeDatabase = {
             "newOpcode": "delete clones of [TARGET]",
             "inputTypes": {},
             "optionTypes": {"TARGET": "cloning target"},
-            "menu": {"menu": "TARGET", "child": "CLONE_OPTION", "parent": "CLONE_OPTION"},
+            "menu": {"new": "TARGET", "old": "CLONE_OPTION", "menuOpcode": "control_create_clone_of_menu"},
         },
         "control_delete_this_clone": {
             "type": "lastInstruction",
             "category": "Control",
             "newOpcode": "delete this clone",
+            "inputTypes": {},
+            "optionTypes": {},
+        },
+        "control_is_clone": {
+            "type": "booleanReporter",
+            "category": "Control",
+            "newOpcode": "is clone?",
             "inputTypes": {},
             "optionTypes": {},
         },
@@ -296,13 +305,29 @@ opcodeDatabase = {
             "inputTypes": {"NUM1": "number", "NUM2": "number"},
             "optionTypes": {},
         },
+        "operator_power": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "(NUM1) ^ (NUM2)",
+            "inputTypes": {"NUM1": "number", "NUM2": "number"},
+            "optionTypes": {},
+        },
+        "operator_advMathExpanded": {
+            "type": "textReporter",
+            "category": "Operators",
+            "newOpcode": "(NUM1) * (NUM2) [OPERATION] (NUM3)",
+            "inputTypes": {"NUM1": "number", "NUM2": "number", "NUM3": "number"},
+            "inputTranslation": {"ONE": "NUM1", "TWO": "NUM2", "THREE": "NUM3"},
+            "optionTypes": {"OPERATION": "binary math operation small"},
+            "optionTranslation": {"OPTION": "OPERATION"},
+        },
         "operator_advMath": {
             "type": "textReporter",
             "category": "Operators",
             "newOpcode": "(NUM1) [OPERATION] (NUM2)",
             "inputTypes": {"NUM1": "number", "NUM2": "number"},
             "inputTranslation": {"ONE": "NUM1", "TWO": "NUM2"},
-            "optionTypes": {"OPERATION": "binary math operation"},
+            "optionTypes": {"OPERATION": "binary math operation large"},
             "optionTranslation": {"OPTION": "OPERATION"},
         },
         "operator_random": {
@@ -333,7 +358,7 @@ opcodeDatabase = {
         "operator_gt": {
             "type": "booleanReporter",
             "category": "Operators",
-            "newOpcode": "(OPERAND1) = (OPERAND2)",
+            "newOpcode": "(OPERAND1) > (OPERAND2)",
             "inputTypes": {"OPERAND1": "text", "OPERAND2": "text"},
             "optionTypes": {},
         },
@@ -787,13 +812,26 @@ opcodeDatabase = {
         },
     # SPECIAL
         # SPECIAL: Menus (DO NOT CREATE THESE MANUALLY; use their parent blocks)
+        "control_stop_sprite_menu": {
+            "type": "textReporter",
+            "category": "Control",
+            "newOpcode": "STOP SPRITE MENU",
+            "inputTypes": {},
+            "optionTypes": {"TARGET": "cloning target"},
+        },
         "control_create_clone_of_menu": { # menu for clone creation and deletion
             "type": "textReporter",
             "category": "Control",
             "newOpcode": "CLONE TARGET MENU",
             "inputTypes": {},
             "optionTypes": {"TARGET": "cloning target"},
-            "optionTranslation": {"CLONE_OPTION": "TARGET"},
+        },
+        "control_run_as_sprite_menu": {
+            "type": "textReporter",
+            "category": "Control",
+            "newOpcode": "",
+            "inputTypes": {},
+            "optionTypes": {"TARGET": ""},
         },
         # SPECIAL: Varibles and Lists
         "special_variable_value": {
@@ -895,4 +933,4 @@ defaultCostumeDeoptimized = {
     "rotationCenterY": 0
 }
 
-defaultCostumeFilePath = "../assets/defaultCostume.svg"
+defaultCostumeFilePath = "assets/defaultCostume.svg"

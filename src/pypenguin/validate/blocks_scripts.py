@@ -134,7 +134,7 @@ def validateOptions(path, data, opcode, opcodeData, context):
         # validateSchema(pathToData=path+[optionID], data=optionValue, schema=optionSchema)
         
         match opcodeData["optionTypes"][optionID]: # type of the option
-            case "key"|"unary math operation"|"binary math operation"|"text operation"|"text case"|"stop script target"|"cloning target":
+            case "key"|"unary math operation"|"binary math operation large"|"binary math operation small"|"text operation"|"text case"|"stop script target"|"other sprite or stage"|"cloning target":
                 match opcodeData["optionTypes"][optionID]:
                     case "key":
                         possibleValues = [
@@ -149,14 +149,18 @@ def validateOptions(path, data, opcode, opcodeData, context):
                         ]
                     case "unary math operation":
                         possibleValues = ["abs", "floor", "ceiling", "sqrt", "sin", "cos", "tan", "asin", "acos", "atan", "ln", "log", "e ^", "10 ^"]
-                    case "binary math operation":
+                    case "binary math operation large":
                         possibleValues = ["^", "root", "log"]
+                    case "binary math operation small":
+                        possibleValues = ["root", "log"]
                     case "text operation":
                         possibleValues = ["starts", "ends"]
                     case "text case":
                         possibleValues = ["upper", "lower"]
                     case "stop script target":
                         possibleValues = ["all", "this script", "other scripts in sprite"]
+                    case "other sprite or stage":
+                        possibleValues = context["otherSpriteOrStageTarget"]
                     case "cloning target":
                         possibleValues = context["cloningTargets"]
                 if optionValue not in possibleValues:

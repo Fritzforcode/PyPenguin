@@ -33,7 +33,7 @@ def translateOptions(optionDatas, opcode, spriteName, tokens):
                 nameKey = None
             token = tokens[nameKey][optionData]
             newOptionData = [optionData, token, magicString]
-        elif mode in ["key", "unary math operation", "binary math operation", "text operation", "text case", "stop script target", "cloning target", "string"]:
+        elif mode in ["key", "unary math operation", "binary math operation large", "binary math operation small", "text operation", "text case", "stop script target", "other sprite or stage", "cloning target", "string"]:
             newOptionData = [optionData, generateRandomToken()]
         elif mode in ["boolean", "round", "blockType", "opcode", "customBlockId"]:
             newOptionData = optionData

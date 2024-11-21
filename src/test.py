@@ -2,15 +2,29 @@ A = {
     "position": [0,0],
     "blocks": [
         {
-            "opcode": "create clone of [TARGET]",
-            "options": {"TARGET": "Sprite14"},
-        },
-        {
-            "opcode": "delete clones of [TARGET]",
-            "options": {"TARGET": "Sprite14"},
+            "opcode": "delete this clone",
         },
     ],
 }
+"""        {
+            "opcode": "try to do {TRY} if a block errors {IFERROR}",
+            "inputs": {
+                "TRY": {"blocks": [
+                    {
+                        "opcode": "wait (DURATION) seconds", 
+                        "inputs": {"DURATION": {"text": "53"}},
+                    },
+                    {"opcode": "escape loop"},
+                ]},
+                "IFERROR": {"blocks": [
+                    {
+                        "opcode": "wait (DURATION) seconds", 
+                        "inputs": {"DURATION": {"text": "fg"}},
+                    },
+                    {"opcode": "escape loop"},
+                ]},
+            },
+        },"""
 projectData = {
     "sprites": [
         {
@@ -44,6 +58,12 @@ projectData = {
         },
     ],
     "globalVariables": [
+        {
+            "name": "var",
+            "currentValue": "",
+            "monitor": None,
+            "isCloudVariable": False,
+        },
     ],
     "globalLists": [
     ],
@@ -77,13 +97,13 @@ writeJSONFile(
 )
 
 writeJSONFile(
-    filePath = "../project/project.json",
+    filePath = "project/project.json",
     data     = projectData
 )
 
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory = "../project",
-    projectFilePath           = "../export.pmp",
-    temporaryDirectory        = "../temporary",
+    optimizedProjectDirectory = "project",
+    projectFilePath           = "export.pmp",
+    temporaryDirectory        = "temporary",
     writeDebugFiles           = True,
 )

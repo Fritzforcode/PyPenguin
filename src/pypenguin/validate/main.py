@@ -54,8 +54,22 @@ def validateProject(projectData):
     
 
     # Check sprite formats
-    cloningTargets = [sprite["name"] for sprite in projectDataCopy["sprites"][1:]]
     spriteNames = []
+    cloningTargets    = []
+    otherSpriteOrStageTargets = []
+    for i, sprite in enumerate(projectDataCopy["sprites"]):
+        spriteName = None if i == 0 else sprite["name"] # None for the stage
+        if spriteName in spriteNames: # If there is the same sprite name twice
+            raise formatError(path=["sprites"]+[i]+["name"], message="Sprite names mustn't be the same.")
+        spriteNames.append(spriteName)
+        
+
+        if i == 0:
+            otherSpriteOrStageTargets.append("_stage_")
+        else:
+            cloningTargets.append(spriteName)
+            otherSpriteOrStageTargets.append(spriteName)
+    
     for i, sprite in enumerate(projectDataCopy["sprites"]):
         if i == 0:
             scopeVariables = projectDataCopy["globalVariables"]
@@ -64,14 +78,14 @@ def validateProject(projectData):
             cloningTargets.insert(0, "_myself_")
             scopeVariables = sprite["localVariables"] + projectDataCopy["globalVariables"]
             scopeLists     = sprite["localLists"]     + projectDataCopy["globalLists"]
-        
-        if cloningTargets == []: # When there are no sprites; make " " the fallback value
-            cloningTargets = [""]
 
-        context = {"scopeVariables": scopeVariables, "scopeLists": scopeLists, "cloningTargets": cloningTargets}
+        context = {
+            "scopeVariables": scopeVariables, 
+            "scopeLists": scopeLists, 
+            "cloningTargets": [""] if cloningTargets == [] else cloningTargets, # When there are no sprites; make " " the fallback value
+            "otherSpriteOrStageTarget": [
+                target for target in otherSpriteOrStageTargets if target != sprite["name"]
+            ],
+        }
         validateSprite(path=["sprites"]+[i], data=sprite, context=context)
-        spriteName = None if i == 0 else sprite["name"] # None for the stage
-        if spriteName in spriteNames: # If there is the same sprite name twice
-            raise formatError(path=["sprites"]+[i]+["name"], message="Sprite names mustn't be the same.")
-        spriteNames.append(spriteName)
 

@@ -3,22 +3,29 @@
         {
             "isStage": true,
             "name": "Stage",
-            "variables": {},
+            "variables": {
+                "X#fH=/ZM.T|B;rKrmG[s": [
+                    "var",
+                    ""
+                ]
+            },
             "lists": {},
             "broadcasts": {},
             "customVars": [],
-            "blocks": {},
-            "comments": {
+            "blocks": {
                 "a": {
-                    "blockId": null,
+                    "opcode": "control_delete_this_clone",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
                     "x": 0,
-                    "y": 0,
-                    "width": 100,
-                    "height": 100,
-                    "minimized": false,
-                    "text": "123"
+                    "y": 0
                 }
             },
+            "comments": {},
             "currentCostume": 0,
             "costumes": [
                 {
@@ -33,7 +40,7 @@
                 }
             ],
             "sounds": [],
-            "id": "X#fH=/ZM.T|B;rKrmG[s",
+            "id": "NmjQ-_mT(OA^.)?Hh^bl",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,
@@ -64,7 +71,7 @@
                 }
             ],
             "sounds": [],
-            "id": "NmjQ-_mT(OA^.)?Hh^bl",
+            "id": "Za:QFPiy`CEs]*lkO=/n",
             "volume": 100,
             "visible": true,
             "x": 0,

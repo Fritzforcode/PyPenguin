@@ -15,8 +15,8 @@ def validateSprite(path, data, context):
         # Check sprite format
         validateSchema(pathToData=path, data=data, schema=spriteSchema)
         
-        if data["name"] == "_myself_":
-            raise formatError(path+["name"], "'_myself_' isn't a valid sprite name. Please pick another name.")
+        if data["name"] in ["_myself_", "_stage_"]:
+            raise formatError(path+["name"], f"'{data['name']}' isn't a valid sprite name. Please pick another name.")
         if data["layerOrder"] < 1:
             raise formatError(path+["layerOrder"], "'layerOrder' of a sprite must be at least 1.")
         

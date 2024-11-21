@@ -39,12 +39,17 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
             newInputID = inputID
         if len(inputData) == 2:
             if   isinstance(inputData[1], str): # e.g. "CONDITION": [2, "b"]
+                # Exceptions
                 if opcode == "procedures_call":
                     inputType = "boolean"
-                elif opcode in ["control_create_clone_of", "control_delete_clones_of", "control_stop_sprite"]:
-                    inputType = "menu"
-                else:
+                inputType = None
+                if isinstance(opcodeData.get("menu"), dict):
+                    if opcodeData.get("menu").get("old") == inputID:
+                        inputType = "menu"
+                # Otherwise
+                if inputType == None: 
                     inputType = opcodeData["inputTypes"][newInputID]
+                
                 mode = "block-only" if inputType in ["boolean", "round", "menu"] else ("script" if inputType=="script" else None)
                 pointer = inputData[1]
                 text = None
@@ -87,7 +92,6 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
         else: raise WhatIsGoingOnError(mode, inputType)
 
         newData[newInputID] = newInputData
-    print("==> inputs ", opcode, newData)
     return newData
 
 def translateOptions(data, opcode):
@@ -103,12 +107,9 @@ def translateOptions(data, opcode):
             optionID = fieldID
         newOptionData = fieldData[0]
         newData[optionID] = newOptionData
-    print("==> options", opcode, newData)
     return newData
 
 def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationDatas):
-    print(100*"(")
-    pp(data)
     childrenDatas = {}
     for pointer in blockChildrenPs[ancestorP]:
         childrenDatas[pointer] = translateScript(
@@ -137,7 +138,6 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                         if inputData["block"] != None:
                             if isinstance(inputData["block"], str):
                                 subBlockData = childrenDatas[inputData["block"]][0]
-                                pp(subBlockData)
                                 inputs[inputID]["block"] = subBlockData
                             elif isinstance(inputData["block"], dict):
                                 pass
@@ -236,16 +236,13 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
         }
         if "comment" in oldData:
             newData["comment"] = oldData["comment"]
-    elif newData["opcode"] == "create clone of [TARGET]":
-        target = newData["inputs"]["CLONE_OPTION"]["block"]["options"]["TARGET"]
-        newData["options"]["TARGET"] = target
-        del newData["inputs"]["CLONE_OPTION"]
-    elif newData["opcode"] == "delete clones of [TARGET]":
-        print("YAY")
-        pp(newData)
-        target = newData["inputs"]["CLONE_OPTION"]["block"]["options"]["TARGET"]
-        newData["options"]["TARGET"] = target
-        del newData["inputs"]["CLONE_OPTION"]
+    opcodeData = opcodeDatabase[blockData["opcode"]]
+    if "menu" in opcodeData:
+        newID     = opcodeData["menu"]["new"]
+        oldID     = opcodeData["menu"]["old"]
+        menuValue = newData["inputs"][oldID]["block"]["options"][oldID]
+        del newData["inputs"][oldID]
+        newData["options"][newID] = menuValue
     
     newDatas = [newData] if newDatas == None else newDatas
     if isinstance(blockData, dict):
@@ -258,8 +255,6 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
         returnValue = {"position": [blockData["x"], blockData["y"]], "blocks": newDatas} 
     else:
         returnValue = newDatas
-    print(100*")")
-    pp(data)
     return returnValue
 
 def generateBlockChildrenPs(data):
