@@ -3,7 +3,11 @@ A = {
     "blocks": [
         {
             "opcode": "create clone of [TARGET]",
-            "options": {"TARGET": "sPrITe"},
+            "options": {"TARGET": "Sprite14"},
+        },
+        {
+            "opcode": "delete clones of [TARGET]",
+            "options": {"TARGET": "Sprite14"},
         },
     ],
 }
@@ -12,15 +16,8 @@ projectData = {
         {
             "name": "Stage",
             "isStage": True,
-            "scripts": [],
-            "comments": [
-                {
-                    "position": [0, 0],
-                    "size": [100, 100],
-                    "isMinimized": False,
-                    "text": "123",
-                }
-            ],
+            "scripts": [A],
+            "comments": [],
             "currentCostume": 0,
             "costumes": [],
             "sounds": [],
@@ -80,13 +77,13 @@ writeJSONFile(
 )
 
 writeJSONFile(
-    filePath = "project/project.json",
+    filePath = "../project/project.json",
     data     = projectData
 )
 
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory = "project",
-    projectFilePath           = "export.pmp",
-    temporaryDirectory        = "temporary",
+    optimizedProjectDirectory = "../project",
+    projectFilePath           = "../export.pmp",
+    temporaryDirectory        = "../temporary",
     writeDebugFiles           = True,
 )

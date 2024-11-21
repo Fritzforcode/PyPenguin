@@ -248,6 +248,7 @@ opcodeDatabase = {
             "newOpcode": "create clone of [TARGET]",
             "inputTypes": {},
             "optionTypes": {"TARGET": "cloning target"},
+            "menu": {"menu": "TARGET", "child": "CLONE_OPTION", "parent": "CLONE_OPTION"},
         },
         "control_delete_clones_of": {
             "type": "instruction",
@@ -255,6 +256,7 @@ opcodeDatabase = {
             "newOpcode": "delete clones of [TARGET]",
             "inputTypes": {},
             "optionTypes": {"TARGET": "cloning target"},
+            "menu": {"menu": "TARGET", "child": "CLONE_OPTION", "parent": "CLONE_OPTION"},
         },
         "control_delete_this_clone": {
             "type": "lastInstruction",
@@ -784,19 +786,11 @@ opcodeDatabase = {
             "optionTypes": {},
         },
     # SPECIAL
-        # SPECIAL: Control (DO NOT CREATE THESE MANUALLY)
-        "control_create_clone_of_menu": {
+        # SPECIAL: Menus (DO NOT CREATE THESE MANUALLY; use their parent blocks)
+        "control_create_clone_of_menu": { # menu for clone creation and deletion
             "type": "textReporter",
             "category": "Control",
-            "newOpcode": "CREATE CLONE MENU",
-            "inputTypes": {},
-            "optionTypes": {"TARGET": "cloning target"},
-            "optionTranslation": {"CLONE_OPTION": "TARGET"},
-        },
-        "control_delete_clones_of_menu": {
-            "type": "textReporter",
-            "category": "Control",
-            "newOpcode": "DELETE CLONES MENU",
+            "newOpcode": "CLONE TARGET MENU",
             "inputTypes": {},
             "optionTypes": {"TARGET": "cloning target"},
             "optionTranslation": {"CLONE_OPTION": "TARGET"},
@@ -901,4 +895,4 @@ defaultCostumeDeoptimized = {
     "rotationCenterY": 0
 }
 
-defaultCostumeFilePath = "assets/defaultCostume.svg"
+defaultCostumeFilePath = "../assets/defaultCostume.svg"

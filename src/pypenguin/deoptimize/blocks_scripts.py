@@ -339,8 +339,8 @@ def finishBlocks(data, commentDatas):
                     inputValue for j,inputID,inputValue in ikv(blockData["inputs"]) 
                 }
             
+            opcodeData = opcodeDatabase[blockData["opcode"]]
             if blockData["opcode"] not in ["procedures_definition", "procedures_definition_return" ,"procedures_prototype"]:
-                opcodeData = opcodeDatabase[blockData["opcode"]]
                 if "inputTranslation" in opcodeData:
                     # Replace the optmized with the unoptizimzed input ids
                     newInputDatas = {}
@@ -375,26 +375,29 @@ def finishBlocks(data, commentDatas):
                     "children": [],
                     "hasnext": json.dumps(hasNext)
                 }
-            elif blockData["opcode"] == "control_create_clone_of":
-                target = blockData["fields"]["TARGET"]
-                del blockData["fields"]["TARGET"]
-                menuID = tempSelector(path=blockID+[1])
-                menuData = {
+            
+            if "menu" in opcodeData:
+                menuFieldID   = opcodeData["menu"]["menu"]
+                childFieldID  = opcodeData["menu"]["child"]
+                parentInputID = opcodeData["menu"]["parent"]
+                
+                menuValue = blockData["fields"][menuFieldID]
+                del blockData["fields"][menuFieldID]
+                menuID = tempSelector(path=blockID+[100])
+                
+                menuBlockData = {
                     "opcode": "control_create_clone_of_menu",
-                    "next": None,
+                    "next"  : None,
                     "parent": blockID,
                     "inputs": {},
                     "fields": {
-                        "CLONE_OPTION": target,
+                        childFieldID: menuValue,
                     },
-                    "shadow": True,
+                    "shadow"  : True,
                     "topLevel": False,
                 }
-                additionalBlockDatas[menuID] = menuData
-                blockData["inputs"]["CLONE_OPTION"] = [1, menuID]
-                pp(blockData)
-                print(target)
-                print(menuID, blockID)
+                additionalBlockDatas[menuID] = menuBlockData
+                blockData["inputs"][parentInputID] = [1, menuID]
     data |= additionalBlockDatas
 
     def getSelectors(obj):

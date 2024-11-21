@@ -68,7 +68,7 @@ def extractAndOptimizeProject(
     # Make sure the project directory exists
     os.makedirs(optimizedProjectDirectory, exist_ok=True)
     
-    # Validate the optimized project.json and halde errors
+    # Validate the optimized project.json and handle errors
     #try:
     #validateProject(
     #    projectData=optimizedData,
