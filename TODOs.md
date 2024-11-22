@@ -1,9 +1,5 @@
 # TODO
 
-implement dropdown menus
-
-investigate optype and returns
-
 possibly change null to None ...
 
 update documentation
@@ -13,8 +9,6 @@ both empty script and None as input should make the input value empty
 add blocks requirering their extensions
 
 add more blocks
-
-add procedures
 
 what happens, when a comment is attached to a variable/list block
 

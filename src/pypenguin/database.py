@@ -235,7 +235,6 @@ opcodeDatabase = {
             "optionTypes": {"TARGET": "stop script target"},
             "optionTranslation": {"STOP_OPTION": "TARGET"},
         },
-        # TODO: add "control stop sprite" and add sprite dropdown menus to the following blocks:
         # Control: Clones
         "control_start_as_clone": {
             "type": "hat",
@@ -275,7 +274,7 @@ opcodeDatabase = {
             "optionTypes": {},
         },
     # Sensing (Incomplete)
-    # Operators (Incomplete)
+    # Operators
         # Operators: Math Part 1
         "operator_add": {
             "type": "textReporter",
@@ -765,13 +764,30 @@ opcodeDatabase = {
         },
         
 # EXTENSIONS (Incomplete)
-    # JSON (jgJSON) (Incomplete)
+    # JSON (jgJSON)
         # JSON: Objects
+        "jgJSON_json_validate": {
+            "type": "booleanReporter",
+            "category": "JSON",
+            "newOpcode": "is json (JSON) valid?",
+            "inputTypes": {"JSON": "text"},
+            "inputTranslation": {"json": "JSON"},
+            "optionTypes": {},
+        },
         "jgJSON_getValueFromJSON": {
             "type": "textReporter",
             "category": "JSON",
-            "newOpcode": "get (VALUE) from (JSON)",
-            "inputTypes": {"VALUE": "text", "JSON": "text"},
+            "newOpcode": "get (KEY) from (JSON)",
+            "inputTypes": {"KEY": "text", "JSON": "text"},
+            "inputTranslation": {"VALUE": "KEY"},
+            "optionTypes": {},
+        },
+        "jgJSON_getTreeValueFromJSON": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "get path (PATH) from (JSON)",
+            "inputTypes": {"PATH": "text", "JSON": "text"},
+            "inputTranslation": {"VALUE": "PATH"},
             "optionTypes": {},
         },
         "jgJSON_setValueToKeyInJSON": {
@@ -781,26 +797,157 @@ opcodeDatabase = {
             "inputTypes": {"KEY": "text", "VALUE": "text", "JSON": "text"},
             "optionTypes": {},
         },
+        "jgJSON_json_delete": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "in json (JSON) delete key (KEY)",
+            "inputTypes": {"KEY": "text", "JSON": "text"},
+            "inputTranslation": {"key": "KEY", "json": "JSON"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_values": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "get all values from json (JSON)",
+            "inputTypes": {"JSON": "text"},
+            "inputTranslation": {"json": "JSON"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_keys": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "get all keys from json (JSON)",
+            "inputTypes": {"JSON": "text"},
+            "inputTranslation": {"json": "JSON"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_has": {
+            "type": "booleanReporter",
+            "category": "JSON",
+            "newOpcode": "json (JSON) has key (KEY) ?",
+            "inputTypes": {"JSON": "text", "KEY": "text"},
+            "inputTranslation": {"json": "JSON", "key": "KEY"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_combine": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "combine json (JSON1) and json (JSON2)",
+            "inputTypes": {"JSON1": "text", "JSON2": "text"},
+            "inputTranslation": {"one": "JSON1", "two": "JSON2"},
+            "optionTypes": {},
+        },
         # JSON: Arrays
+        "jgJSON_json_array_validate": {
+            "type": "booleanReporter",
+            "category": "JSON",
+            "newOpcode": "is array (ARRAY) valid?",
+            "inputTypes": {"ARRAY": "text"},
+            "inputTranslation": {"array": "ARRAY"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_array_split": {
+            "type": "booleanReporter",
+            "category": "JSON",
+            "newOpcode": "create an array from text (TEXT) with delimeter (DELIMETER)",
+            "inputTypes": {"TEXT": "text", "DELIMETER": "text"},
+            "inputTranslation": {"text": "TEXT", "delimeter": "DELIMETER"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_array_join": {
+            "type": "booleanReporter",
+            "category": "JSON",
+            "newOpcode": "create text from array (ARRAY) with delimeter (DELIMETER)",
+            "inputTypes": {"ARRAY": "text", "DELIMETER": "text"},
+            "inputTranslation": {"array": "ARRAY", "delimeter": "DELIMETER"},
+            "optionTypes": {},
+        },
         "jgJSON_json_array_push": {
             "type": "textReporter",
             "category": "JSON",
-            "newOpcode": "in array (array) add (item)",
-            "inputTypes": {"array": "text", "item": "text"},
+            "newOpcode": "in array (ARRAY) add (ITEM)",
+            "inputTypes": {"ARRAY": "text", "ITEM": "text"},
+            "inputTranslation": {"array": "ARRAY", "item": "ITEM"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_array_concatLayer1": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "add items from array (SOURCEARRAY) to array (TARGETARRAY)",
+            "inputTypes": {"SOURCEARRAY": "text", "TARGETARRAY": "text"},
+            "inputTranslation": {"array2": "SOURCEARRAY", "array1": "TARGETARRAY"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_array_concatLayer2": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "add items from array (SOURCEARRAY1) and array (SOURCEARRAY2) to array (TARGETARRAY)",
+            "inputTypes": {"SOURCEARRAY1": "text", "SOURCEARRAY2": "text", "TARGETARRAY": "text"},
+            "inputTranslation": {"array2": "SOURCEARRAY1", "array3": "SOURCEARRAY2", "array1": "TARGETARRAY"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_array_delete": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "in array (ARRAY) delete (INDEX)",
+            "inputTypes": {"ARRAY": "text", "INDEX": "number"},
+            "inputTranslation": {"array": "ARRAY", "index": "INDEX"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_array_reverse": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "reverse array (ARRAY)",
+            "inputTypes": {"ARRAY": "text"},
+            "inputTranslation": {"array": "ARRAY"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_array_insert": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "in array (ARRAY) insert (VALUE) at (INDEX)",
+            "inputTypes": {"ARRAY": "text", "VALUE": "text", "INDEX": "number"},
+            "inputTranslation": {"array": "ARRAY", "value": "VALUE", "index": "INDEX"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_array_set": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "in array (ARRAY) set (INDEX) to (VALUE)",
+            "inputTypes": {"ARRAY": "text", "INDEX": "number", "VALUE": "text"},
+            "inputTranslation": {"array": "ARRAY", "index": "INDEX", "value": "VALUE"},
             "optionTypes": {},
         },
         "jgJSON_json_array_get": {
             "type": "textReporter",
             "category": "JSON",
-            "newOpcode": "in array (array) get (index)",
-            "inputTypes": {"array": "text", "index": "number"},
+            "newOpcode": "in array (ARRAY) get (INDEX)",
+            "inputTypes": {"ARRAY": "text", "INDEX": "number"},
+            "inputTranslation": {"array": "ARRAY", "index": "INDEX"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_array_indexofNostart": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "in array (ARRAY) get index of (VALUE)",
+            "inputTypes": {"ARRAY": "text", "VALUE": "text"},
+            "inputTranslation": {"array": "ARRAY", "value": "VALUE"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_array_indexof": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "in array (ARRAY) from (START) get index of (VALUE)",
+            "inputTypes": {"ARRAY": "text", "START": "number", "VALUE": "text"},
+            "inputTranslation": {"array": "ARRAY", "number": "START", "value": "VALUE"},
             "optionTypes": {},
         },
         "jgJSON_json_array_length": {
             "type": "textReporter",
             "category": "JSON",
-            "newOpcode": "length of array (array)",
-            "inputTypes": {"array": "text"},
+            "newOpcode": "length of array (ARRAY)",
+            "inputTypes": {"ARRAY": "text"},
+            "inputTranslation": {"array": "ARRAY"},
             "optionTypes": {},
         },
         "jgJSON_json_array_contains": {
@@ -810,8 +957,32 @@ opcodeDatabase = {
             "inputTypes": {"array": "text", "value": "text"},
             "optionTypes": {},
         },
-    # SPECIAL
-        # SPECIAL: Menus (DO NOT CREATE THESE MANUALLY; use their parent blocks)
+        "jgJSON_json_array_flat": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "flatten nested array (ARRAY) by (LAYERS) layers",
+            "inputTypes": {"ARRAY": "text", "LAYERS": "number"},
+            "inputTranslation": {"array": "ARRAY", "layer": "LAYERS"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_array_getrange": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "in array (ARRAY) get all items from (START) to (STOP)",
+            "inputTypes": {"ARRAY": "text", "START": "number", "STOP": "number"},
+            "inputTranslation": {"array": "ARRAY", "index1": "START", "index2": "STOP"},
+            "optionTypes": {},
+        },
+        "jgJSON_json_array_isempty": {
+            "type": "textReporter",
+            "category": "JSON",
+            "newOpcode": "is array (ARRAY) empty?",
+            "inputTypes": {"ARRAY": "text"},
+            "inputTranslation": {"array": "ARRAY"},
+            "optionTypes": {},
+        },
+# SPECIAL
+    # SPECIAL: Menus (DO NOT CREATE THESE MANUALLY; use their parent blocks)
         "control_stop_sprite_menu": {
             "type": "textReporter",
             "category": "Control",
@@ -833,7 +1004,7 @@ opcodeDatabase = {
             "inputTypes": {},
             "optionTypes": {"TARGET": ""},
         },
-        # SPECIAL: Varibles and Lists
+    # SPECIAL: Varibles and Lists
         "special_variable_value": {
             "type": "textReporter",
             "category": "Variables",
@@ -848,7 +1019,7 @@ opcodeDatabase = {
             "inputTypes": {},
             "optionTypes": {"LIST": "list"},
         },
-        # SPECIAL: Custom Blocks
+    # SPECIAL: Custom Blocks
         "special_define": {
             "type": "hat",
             "category": "My Blocks",
@@ -933,4 +1104,4 @@ defaultCostumeDeoptimized = {
     "rotationCenterY": 0
 }
 
-defaultCostumeFilePath = "assets/defaultCostume.svg"
+defaultCostumeFilePath = "../assets/defaultCostume.svg"
