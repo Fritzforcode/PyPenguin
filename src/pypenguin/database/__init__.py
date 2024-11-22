@@ -1,5 +1,6 @@
 from pypenguin.database.events    import opcodes as events
 from pypenguin.database.control   import opcodes as control
+from pypenguin.database.sensing   import opcodes as sensing
 from pypenguin.database.operators import opcodes as operators
 from pypenguin.database.variables import opcodes as variables
 from pypenguin.database.lists     import opcodes as lists
@@ -13,7 +14,7 @@ Category      Status ('.'=some 'x'=all)
     Motion    [ ]
     Looks     [ ]
     Sound     [ ]
-    Events    [.]
+    Events    [x]
     Control   [x]
     Sensing   [ ]
     Operators [x]
@@ -21,16 +22,15 @@ Category      Status ('.'=some 'x'=all)
     Lists     [x]
 Extension     Status ('.'=some 'x'=all)
     (jg)JSON  [x]
-    others aren't implemented
+    others aren't implemented (yet)
 """
 
 opcodeDatabase = (
 # CATEGORIES
     # missing: Motion, Looks, Sound
-    events | control | 
-    # missing: Sensing
-    operators | variables | lists |
-    special |
+    events    | control   | sensing |
+    operators | variables | lists   |
+    special   |
 # EXTENSIONS
     extJSON
 )

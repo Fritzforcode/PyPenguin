@@ -1,6 +1,7 @@
 from pypenguin.validate.constants import validateSchema, formatError, projectSchema
 from pypenguin.validate.variables_lists import validateVariable, validateList
 from pypenguin.validate.sprites import validateSprite
+from pypenguin.database import defaultCostume
 import copy
 
 def validateProject(projectData):
@@ -54,8 +55,8 @@ def validateProject(projectData):
     
 
     # Check sprite formats
-    spriteNames = []
-    cloningTargets    = []
+    spriteNames               = []
+    cloningTargets            = []
     otherSpriteOrStageTargets = []
     for i, sprite in enumerate(projectDataCopy["sprites"]):
         spriteName = None if i == 0 else sprite["name"] # None for the stage
@@ -65,6 +66,12 @@ def validateProject(projectData):
         
 
         if i == 0:
+            if "costumes" not in sprite:
+                raise formatError(path=["sprites"]+[i], message="Must have the 'costumes' attribute.")
+            if sprite["costumes"] == []:
+                backdrops = [defaultCostume["name"]]
+            else:
+                backdrops = [costume["name"] for costume in sprite["costumes"]]
             otherSpriteOrStageTargets.append("_stage_")
         else:
             cloningTargets.append(spriteName)
@@ -86,6 +93,7 @@ def validateProject(projectData):
             "otherSpriteOrStageTarget": [
                 target for target in otherSpriteOrStageTargets if target != sprite["name"]
             ],
+            "backdrops": backdrops,
         }
         validateSprite(path=["sprites"]+[i], data=sprite, context=context)
 

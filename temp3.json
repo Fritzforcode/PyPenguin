@@ -14,11 +14,16 @@
             "customVars": [],
             "blocks": {
                 "a": {
-                    "opcode": "control_delete_this_clone",
+                    "opcode": "event_whenbackdropswitchesto",
                     "next": null,
                     "parent": null,
                     "inputs": {},
-                    "fields": {},
+                    "fields": {
+                        "BACKDROP": [
+                            "empty costume",
+                            "NmjQ-_mT(OA^.)?Hh^bl"
+                        ]
+                    },
                     "shadow": false,
                     "topLevel": true,
                     "x": 0,
@@ -40,7 +45,7 @@
                 }
             ],
             "sounds": [],
-            "id": "NmjQ-_mT(OA^.)?Hh^bl",
+            "id": "Za:QFPiy`CEs]*lkO=/n",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,
@@ -71,7 +76,7 @@
                 }
             ],
             "sounds": [],
-            "id": "Za:QFPiy`CEs]*lkO=/n",
+            "id": "M^Lp^Q]A^}K)lXO{ELxy",
             "volume": 100,
             "visible": true,
             "x": 0,

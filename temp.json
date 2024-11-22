@@ -42,579 +42,142 @@
             "broadcasts": {},
             "customVars": [],
             "blocks": {
-                "i": {
-                    "opcode": "operator_add",
+                "c": {
+                    "opcode": "sensing_touchingobject",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "NUM1": [
+                        "TOUCHINGOBJECTMENU": [
                             1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ],
-                        "NUM2": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 225,
-                    "y": 88
-                },
-                "j": {
-                    "opcode": "operator_subtract",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM1": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ],
-                        "NUM2": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 227,
-                    "y": 143
-                },
-                "k": {
-                    "opcode": "operator_multiply",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM1": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ],
-                        "NUM2": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 215,
-                    "y": 203
-                },
-                "l": {
-                    "opcode": "operator_divide",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM1": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ],
-                        "NUM2": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 212,
-                    "y": 261
-                },
-                "m": {
-                    "opcode": "operator_random",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "FROM": [
-                            1,
-                            [
-                                4,
-                                "1"
-                            ]
-                        ],
-                        "TO": [
-                            1,
-                            [
-                                4,
-                                "10"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 176,
-                    "y": 391
-                },
-                "n": {
-                    "opcode": "operator_constrainnumber",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "inp": [
-                            1,
-                            [
-                                4,
-                                "50"
-                            ]
-                        ],
-                        "min": [
-                            1,
-                            [
-                                4,
-                                "1"
-                            ]
-                        ],
-                        "max": [
-                            1,
-                            [
-                                4,
-                                "100"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 120,
-                    "y": 455
-                },
-                "o": {
-                    "opcode": "operator_lerpFunc",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "ONE": [
-                            1,
-                            [
-                                4,
-                                "1"
-                            ]
-                        ],
-                        "TWO": [
-                            1,
-                            [
-                                4,
-                                "3"
-                            ]
-                        ],
-                        "AMOUNT": [
-                            1,
-                            [
-                                4,
-                                "0.5"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 110,
-                    "y": 516
-                },
-                "p": {
-                    "opcode": "operator_gt",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OPERAND1": [
-                            1,
-                            [
-                                10,
-                                ""
-                            ]
-                        ],
-                        "OPERAND2": [
-                            1,
-                            [
-                                10,
-                                "50"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 181,
-                    "y": 578
-                },
-                "q": {
-                    "opcode": "operator_gtorequal",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OPERAND1": [
-                            1,
-                            [
-                                10,
-                                ""
-                            ]
-                        ],
-                        "OPERAND2": [
-                            1,
-                            [
-                                10,
-                                "50"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 185,
-                    "y": 644
-                },
-                "r": {
-                    "opcode": "operator_lt",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OPERAND1": [
-                            1,
-                            [
-                                10,
-                                ""
-                            ]
-                        ],
-                        "OPERAND2": [
-                            1,
-                            [
-                                10,
-                                "50"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 181,
-                    "y": 704
-                },
-                "s": {
-                    "opcode": "operator_ltorequal",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OPERAND1": [
-                            1,
-                            [
-                                10,
-                                ""
-                            ]
-                        ],
-                        "OPERAND2": [
-                            1,
-                            [
-                                10,
-                                "50"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 179,
-                    "y": 770
-                },
-                "t": {
-                    "opcode": "operator_equals",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OPERAND1": [
-                            1,
-                            [
-                                10,
-                                ""
-                            ]
-                        ],
-                        "OPERAND2": [
-                            1,
-                            [
-                                10,
-                                "50"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 181,
-                    "y": 837
-                },
-                "u": {
-                    "opcode": "operator_notequal",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OPERAND1": [
-                            1,
-                            [
-                                10,
-                                ""
-                            ]
-                        ],
-                        "OPERAND2": [
-                            1,
-                            [
-                                10,
-                                "50"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 169,
-                    "y": 907
-                },
-                "v": {
-                    "opcode": "operator_trueBoolean",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 200,
-                    "y": 973
-                },
-                "w": {
-                    "opcode": "operator_falseBoolean",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 197,
-                    "y": 1025
-                },
-                "a": {
-                    "opcode": "operator_and",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OPERAND1": [
-                            2,
-                            "c"
-                        ],
-                        "OPERAND2": [
-                            2,
                             "d"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 162,
-                    "y": 1091
-                },
-                "c": {
-                    "opcode": "operator_trueBoolean",
-                    "next": null,
-                    "parent": "a",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
+                    "x": 160,
+                    "y": 55
                 },
                 "d": {
-                    "opcode": "operator_trueBoolean",
+                    "opcode": "sensing_touchingobjectmenu",
                     "next": null,
-                    "parent": "a",
+                    "parent": "c",
                     "inputs": {},
-                    "fields": {},
-                    "shadow": false,
+                    "fields": {
+                        "TOUCHINGOBJECTMENU": [
+                            "_mouse_",
+                            "_`T*Ci^potet.OFF7_|-"
+                        ]
+                    },
+                    "shadow": true,
                     "topLevel": false
                 },
-                "b": {
-                    "opcode": "operator_or",
+                "a": {
+                    "opcode": "sensing_objecttouchingobject",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "OPERAND1": [
-                            2,
+                        "FULLTOUCHINGOBJECTMENU": [
+                            1,
                             "e"
                         ],
-                        "OPERAND2": [
-                            2,
+                        "SPRITETOUCHINGOBJECTMENU": [
+                            1,
                             "f"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 171,
-                    "y": 1162
+                    "x": 152,
+                    "y": 137
                 },
                 "e": {
-                    "opcode": "operator_falseBoolean",
+                    "opcode": "sensing_fulltouchingobjectmenu",
                     "next": null,
-                    "parent": "b",
+                    "parent": "a",
                     "inputs": {},
-                    "fields": {},
-                    "shadow": false,
+                    "fields": {
+                        "FULLTOUCHINGOBJECTMENU": [
+                            "_mouse_",
+                            "z?w}u)x6USD=+MmXLx+*"
+                        ]
+                    },
+                    "shadow": true,
                     "topLevel": false
                 },
                 "f": {
-                    "opcode": "operator_falseBoolean",
+                    "opcode": "sensing_touchingobjectmenusprites",
                     "next": null,
-                    "parent": "b",
+                    "parent": "a",
                     "inputs": {},
-                    "fields": {},
-                    "shadow": false,
+                    "fields": {
+                        "SPRITETOUCHINGOBJECTMENU": [
+                            "_myself_",
+                            "tj81~@7cJ/*]XBR~xY7r"
+                        ]
+                    },
+                    "shadow": true,
                     "topLevel": false
                 },
-                "g": {
-                    "opcode": "operator_not",
+                "b": {
+                    "opcode": "sensing_objecttouchingclonesprite",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "OPERAND": [
-                            2,
+                        "FULLTOUCHINGOBJECTMENU": [
+                            1,
+                            "g"
+                        ],
+                        "SPRITETOUCHINGOBJECTMENU": [
+                            1,
                             "h"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 196,
-                    "y": 1233
+                    "x": 114,
+                    "y": 222
                 },
-                "h": {
-                    "opcode": "operator_trueBoolean",
+                "g": {
+                    "opcode": "sensing_fulltouchingobjectmenu",
                     "next": null,
-                    "parent": "g",
+                    "parent": "b",
                     "inputs": {},
-                    "fields": {},
-                    "shadow": false,
+                    "fields": {
+                        "FULLTOUCHINGOBJECTMENU": [
+                            "_mouse_",
+                            "PqElq8ijdj{l^]U3!^YF"
+                        ]
+                    },
+                    "shadow": true,
                     "topLevel": false
                 },
-                "x": {
-                    "opcode": "operator_newLine",
+                "h": {
+                    "opcode": "sensing_touchingobjectmenusprites",
                     "next": null,
-                    "parent": null,
+                    "parent": "b",
                     "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 205,
-                    "y": 1303
-                },
-                "y": {
-                    "opcode": "operator_tabCharacter",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 190,
-                    "y": 1374
-                },
-                "z": {
-                    "opcode": "operator_join",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "STRING1": [
-                            1,
-                            [
-                                10,
-                                "apple "
-                            ]
-                        ],
-                        "STRING2": [
-                            1,
-                            [
-                                10,
-                                "banana"
-                            ]
+                    "fields": {
+                        "SPRITETOUCHINGOBJECTMENU": [
+                            "_myself_",
+                            "}Ft%ediat.,DQQr=b{f;"
                         ]
                     },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 172,
-                    "y": 1440
+                    "shadow": true,
+                    "topLevel": false
                 },
-                "A": {
-                    "opcode": "operator_join3",
+                "m": {
+                    "opcode": "sensing_touchingcolor",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "STRING1": [
+                        "COLOR": [
                             1,
                             [
-                                10,
-                                "apple "
-                            ]
-                        ],
-                        "STRING2": [
-                            1,
-                            [
-                                10,
-                                "banana "
-                            ]
-                        ],
-                        "STRING3": [
-                            1,
-                            [
-                                10,
-                                "pear"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 156,
-                    "y": 1509
-                },
-                "B": {
-                    "opcode": "operator_indexOfTextInText",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "TEXT1": [
-                            1,
-                            [
-                                10,
-                                "world"
-                            ]
-                        ],
-                        "TEXT2": [
-                            1,
-                            [
-                                10,
-                                "Hello world!"
+                                9,
+                                "#e7cf21"
                             ]
                         ]
                     },
@@ -622,960 +185,178 @@
                     "shadow": false,
                     "topLevel": true,
                     "x": 144,
-                    "y": 1579
+                    "y": 276
                 },
-                "C": {
-                    "opcode": "operator_lastIndexOfTextInText",
+                "n": {
+                    "opcode": "sensing_coloristouchingcolor",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "TEXT1": [
+                        "COLOR": [
                             1,
                             [
-                                10,
-                                "world"
+                                9,
+                                "#280a89"
                             ]
                         ],
-                        "TEXT2": [
+                        "COLOR2": [
                             1,
                             [
-                                10,
-                                "Hello world!"
+                                9,
+                                "#f70aaa"
                             ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 138,
-                    "y": 1637
+                    "x": 132,
+                    "y": 349
                 },
-                "D": {
-                    "opcode": "operator_letter_of",
+                "i": {
+                    "opcode": "sensing_getxyoftouchingsprite",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "LETTER": [
+                        "SPRITE": [
                             1,
-                            [
-                                6,
-                                "1"
-                            ]
-                        ],
-                        "STRING": [
-                            1,
-                            [
-                                10,
-                                "apple"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 187,
-                    "y": 1713
-                },
-                "E": {
-                    "opcode": "operator_getLettersFromIndexToIndexInText",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "INDEX1": [
-                            1,
-                            [
-                                4,
-                                "2"
-                            ]
-                        ],
-                        "INDEX2": [
-                            1,
-                            [
-                                4,
-                                "3"
-                            ]
-                        ],
-                        "TEXT": [
-                            1,
-                            [
-                                10,
-                                "Hello!"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 128,
-                    "y": 1775
-                },
-                "F": {
-                    "opcode": "operator_length",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "STRING": [
-                            1,
-                            [
-                                10,
-                                "apple"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 203,
-                    "y": 1839
-                },
-                "G": {
-                    "opcode": "operator_contains",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "STRING1": [
-                            1,
-                            [
-                                10,
-                                "apple"
-                            ]
-                        ],
-                        "STRING2": [
-                            1,
-                            [
-                                10,
-                                "a"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 156,
-                    "y": 1901
-                },
-                "H": {
-                    "opcode": "operator_textStartsOrEndsWith",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "TEXT1": [
-                            1,
-                            [
-                                10,
-                                "abcdef"
-                            ]
-                        ],
-                        "TEXT2": [
-                            1,
-                            [
-                                10,
-                                "abc"
-                            ]
+                            "j"
                         ]
                     },
                     "fields": {
-                        "OPTION": [
-                            "starts",
-                            "0E@8j~-et7tjE0uJ_*!V"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 125,
-                    "y": 1965
-                },
-                "I": {
-                    "opcode": "operator_textStartsOrEndsWith",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "TEXT1": [
-                            1,
-                            [
-                                10,
-                                "abcdef"
-                            ]
-                        ],
-                        "TEXT2": [
-                            1,
-                            [
-                                10,
-                                "abc"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPTION": [
-                            "ends",
-                            "/eYDE88Ui6-(w)A/e/8E"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 116,
-                    "y": 2037
-                },
-                "J": {
-                    "opcode": "operator_replaceAll",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "text": [
-                            1,
-                            [
-                                10,
-                                "foo bar"
-                            ]
-                        ],
-                        "term": [
-                            1,
-                            [
-                                10,
-                                "foo"
-                            ]
-                        ],
-                        "res": [
-                            1,
-                            [
-                                10,
-                                "bar"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 98,
-                    "y": 2097
-                },
-                "K": {
-                    "opcode": "operator_replaceFirst",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "text": [
-                            1,
-                            [
-                                10,
-                                "bar bar doo"
-                            ]
-                        ],
-                        "term": [
-                            1,
-                            [
-                                10,
-                                "bar"
-                            ]
-                        ],
-                        "res": [
-                            1,
-                            [
-                                10,
-                                "foo"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 74,
-                    "y": 2164
-                },
-                "L": {
-                    "opcode": "operator_regexmatch",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "text": [
-                            1,
-                            [
-                                10,
-                                "foo bar"
-                            ]
-                        ],
-                        "reg": [
-                            1,
-                            [
-                                10,
-                                "foo"
-                            ]
-                        ],
-                        "regrule": [
-                            1,
-                            [
-                                10,
-                                "g"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 74,
-                    "y": 2241
-                },
-                "M": {
-                    "opcode": "operator_toUpperLowerCase",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "TEXT": [
-                            1,
-                            [
-                                10,
-                                "ello"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPTION": [
-                            "upper",
-                            "p!f5g*b2}yRe0UE`[%ID"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 135,
-                    "y": 2307
-                },
-                "N": {
-                    "opcode": "operator_toUpperLowerCase",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "TEXT": [
-                            1,
-                            [
-                                10,
-                                "ello"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPTION": [
-                            "lower",
-                            "Avs^JByiYwd)hR/(IN]]"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 128,
-                    "y": 2369
-                },
-                "O": {
-                    "opcode": "operator_mod",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM1": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ],
-                        "NUM2": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 169,
-                    "y": 2433
-                },
-                "P": {
-                    "opcode": "operator_round",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 182,
-                    "y": 2500
-                },
-                "Q": {
-                    "opcode": "operator_mathop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPERATOR": [
-                            "abs",
-                            "M#I!XIU%5#9W1sn+gO]K"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 163,
-                    "y": 2565
-                },
-                "R": {
-                    "opcode": "operator_advMath",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "ONE": [
-                            1,
-                            [
-                                4,
-                                "1"
-                            ]
-                        ],
-                        "TWO": [
-                            1,
-                            [
-                                4,
-                                "2"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPTION": [
-                            "root",
-                            "cT0m,#(Mqi4L@}M(BqGh"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 436,
-                    "y": 317
-                },
-                "S": {
-                    "opcode": "operator_advMath",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "ONE": [
-                            1,
-                            [
-                                4,
-                                "1"
-                            ]
-                        ],
-                        "TWO": [
-                            1,
-                            [
-                                4,
-                                "2"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPTION": [
-                            "log",
-                            "0VTrEz~/y,O*+X|TcGmb"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 627,
-                    "y": 313
-                },
-                "T": {
-                    "opcode": "operator_mathop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPERATOR": [
-                            "floor",
-                            "9lJhm,Fc0|}=E0z3=`=4"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 159,
-                    "y": 2629
-                },
-                "U": {
-                    "opcode": "operator_mathop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPERATOR": [
-                            "ceiling",
-                            "n,Im)-vENez|jjrpnK@w"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 167,
-                    "y": 2689
-                },
-                "V": {
-                    "opcode": "operator_mathop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPERATOR": [
-                            "sqrt",
-                            "T0kcCNbF9B}K`RTMz1,y"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 162,
-                    "y": 2752
-                },
-                "W": {
-                    "opcode": "operator_mathop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPERATOR": [
-                            "sin",
-                            "tM/Q95_-0;6eOW}BWk*,"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 156,
-                    "y": 2826
-                },
-                "X": {
-                    "opcode": "operator_mathop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPERATOR": [
-                            "cos",
-                            "pY;:^kp!YI~|RA@(*c9G"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 160,
-                    "y": 2884
-                },
-                "Y": {
-                    "opcode": "operator_mathop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPERATOR": [
-                            "tan",
-                            "Ls^z+zmN1%IX,;B4YYs%"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 138,
-                    "y": 2938
-                },
-                "Z": {
-                    "opcode": "operator_mathop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPERATOR": [
-                            "asin",
-                            "2UjCEBehhUkx%s*?M62I"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 157,
-                    "y": 3009
-                },
-                "!": {
-                    "opcode": "operator_mathop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPERATOR": [
-                            "acos",
-                            "5s+Nye?9xEw91R?F%?zq"
+                        "XY": [
+                            "x",
+                            "h5!bC+e{0;aiNU;/Xz_%"
                         ]
                     },
                     "shadow": false,
                     "topLevel": true,
                     "x": 136,
-                    "y": 3091
+                    "y": 416
                 },
-                "#": {
-                    "opcode": "operator_mathop",
+                "j": {
+                    "opcode": "sensing_distancetomenu",
+                    "next": null,
+                    "parent": "i",
+                    "inputs": {},
+                    "fields": {
+                        "DISTANCETOMENU": [
+                            "_mouse_",
+                            "Kf)r(c=5!1J[3|X,0D%V"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "k": {
+                    "opcode": "sensing_distanceto",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "NUM": [
+                        "DISTANCETOMENU": [
                             1,
-                            [
-                                4,
-                                ""
-                            ]
+                            "l"
                         ]
                     },
-                    "fields": {
-                        "OPERATOR": [
-                            "atan",
-                            "[AIV^[dA7IFP6SJa;=}e"
-                        ]
-                    },
+                    "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 142,
-                    "y": 3155
+                    "x": 172,
+                    "y": 480
                 },
-                "%": {
-                    "opcode": "operator_mathop",
+                "l": {
+                    "opcode": "sensing_distancetomenu",
+                    "next": null,
+                    "parent": "k",
+                    "inputs": {},
+                    "fields": {
+                        "DISTANCETOMENU": [
+                            "_mouse_",
+                            "pO5o3KB#/*`{71/RP%,?"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "o": {
+                    "opcode": "sensing_distanceTo",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "NUM": [
+                        "x1": [
                             1,
                             [
-                                4,
-                                ""
+                                10,
+                                "10"
+                            ]
+                        ],
+                        "y1": [
+                            1,
+                            [
+                                10,
+                                "-10"
+                            ]
+                        ],
+                        "x2": [
+                            1,
+                            [
+                                10,
+                                "-10"
+                            ]
+                        ],
+                        "y2": [
+                            1,
+                            [
+                                10,
+                                "10"
                             ]
                         ]
                     },
-                    "fields": {
-                        "OPERATOR": [
-                            "ln",
-                            "M:8_T,QlZ.`u6JDHroiR"
-                        ]
-                    },
+                    "fields": {},
                     "shadow": false,
                     "topLevel": true,
                     "x": 129,
-                    "y": 3220
+                    "y": 538
                 },
-                "(": {
-                    "opcode": "operator_mathop",
+                "p": {
+                    "opcode": "sensing_directionTo",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPERATOR": [
-                            "log",
-                            "+W1BASHJQj`/6KyIZPFk"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 135,
-                    "y": 3278
-                },
-                ")": {
-                    "opcode": "operator_mathop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPERATOR": [
-                            "e ^",
-                            "=HJ5zXI{Z6F/qcso({5,"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 142,
-                    "y": 3332
-                },
-                "*": {
-                    "opcode": "operator_mathop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPERATOR": [
-                            "10 ^",
-                            "M-I:QOZ)X9GZfF/}1T;3"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 135,
-                    "y": 3393
-                },
-                "+": {
-                    "opcode": "operator_stringify",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "ONE": [
+                        "x2": [
                             1,
                             [
                                 10,
-                                "foo"
+                                "-10"
                             ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 157,
-                    "y": 3456
-                },
-                ",": {
-                    "opcode": "operator_boolify",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "ONE": [
+                        ],
+                        "y2": [
                             1,
                             [
                                 10,
-                                "true"
+                                "10"
+                            ]
+                        ],
+                        "x1": [
+                            1,
+                            [
+                                10,
+                                "10"
+                            ]
+                        ],
+                        "y1": [
+                            1,
+                            [
+                                10,
+                                "-10"
                             ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 125,
-                    "y": 3521
-                },
-                "-": {
-                    "opcode": "operator_advMathExpanded",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "ONE": [
-                            1,
-                            [
-                                4,
-                                "3"
-                            ]
-                        ],
-                        "TWO": [
-                            1,
-                            [
-                                4,
-                                "2"
-                            ]
-                        ],
-                        "THREE": [
-                            1,
-                            [
-                                4,
-                                "16"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPTION": [
-                            "root",
-                            "fjq:BY;A8+JLrWPM;U)K"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 493,
-                    "y": 402
-                },
-                ".": {
-                    "opcode": "operator_advMathExpanded",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "ONE": [
-                            1,
-                            [
-                                4,
-                                "3"
-                            ]
-                        ],
-                        "TWO": [
-                            1,
-                            [
-                                4,
-                                "2"
-                            ]
-                        ],
-                        "THREE": [
-                            1,
-                            [
-                                4,
-                                "16"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPTION": [
-                            "log",
-                            "^ulhVO^0~jilRyytWFs~"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 507,
-                    "y": 493
-                },
-                "/": {
-                    "opcode": "operator_power",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "NUM1": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ],
-                        "NUM2": [
-                            1,
-                            [
-                                4,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 211,
-                    "y": 318
-                },
-                ":": {
-                    "opcode": "operator_advMath",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "ONE": [
-                            1,
-                            [
-                                4,
-                                "1"
-                            ]
-                        ],
-                        "TWO": [
-                            1,
-                            [
-                                4,
-                                "2"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "OPTION": [
-                            "^",
-                            "rIkfz{[7`K]WZdkAs(Gp"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 394,
-                    "y": 208
+                    "x": 112,
+                    "y": 600
                 }
             },
             "comments": {},
@@ -1615,9 +396,7 @@
     ],
     "monitors": [],
     "extensionData": {},
-    "extensions": [
-        "jgJSON"
-    ],
+    "extensions": [],
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",

@@ -1,6 +1,34 @@
-# Events (Incomplete)
+# Events (Complete)
 opcodes = {
-    # Events: Keys
+    "event_whenflagclicked": {
+        "type": "hat",
+        "category": "Events",
+        "newOpcode": "when flag clicked",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "event_whenstopclicked": {
+        "type": "hat",
+        "category": "Events",
+        "newOpcode": "when stop clicked",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "event_always": {
+        "type": "hat",
+        "category": "Events",
+        "newOpcode": "always",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "event_whenanything": {
+        "type": "hat",
+        "category": "Events",
+        "newOpcode": "when <CONDITION>",
+        "inputTypes": {"CONDITION": "boolean"},
+        "inputTranslation": {"ANYTHING": "CONDITION"},
+        "optionTypes": {},
+    },
     "event_whenkeypressed": {
         "type": "hat",
         "category": "Events",
@@ -8,6 +36,51 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {"KEY": "key"},
         "optionTranslation": {"KEY_OPTION": "KEY"},
+    },
+    "event_whenkeyhit": {
+        "type": "hat",
+        "category": "Events",
+        "newOpcode": "when [KEY] key hit",
+        "inputTypes": {},
+        "optionTypes": {"KEY": "key"},
+        "optionTranslation": {"KEY_OPTION": "KEY"},
+    },
+    "event_whenmousescrolled": {
+        "type": "hat",
+        "category": "Events",
+        "newOpcode": "when mouse is scrolled [DIRECTION]",
+        "inputTypes": {},
+        "optionTypes": {"DIRECTION": "up | down"},
+        "optionTranslation": {"KEY_OPTION": "DIRECTION"},
+    },
+    "event_whenthisspriteclicked": { # for sprites
+        "type": "hat",
+        "category": "Events",
+        "newOpcode": "when this sprite clicked",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "event_whenstageclicked": { # for the stage
+        "type": "hat",
+        "category": "Events",
+        "newOpcode": "when stage clicked",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "event_whenbackdropswitchesto": {
+        "type": "hat",
+        "category": "Events",
+        "newOpcode": "when backdrop switches to [BACKDROP]",
+        "inputTypes": {},
+        "optionTypes": {"BACKDROP": "backdrop"},
+    },
+    "event_whengreaterthan": {
+        "type": "hat",
+        "category": "Events",
+        "newOpcode": "when [OPTION] > (VALUE)",
+        "inputTypes": {"VALUE": "number"},
+        "optionTypes": {"OPTION": "LOUDNESS | TIMER"},
+        "optionTranslation": {"WHENGREATERTHANMENU": "OPTION"},
     },
     "event_whenbroadcastreceived": {
         "type": "hat",
@@ -21,6 +94,14 @@ opcodes = {
         "type": "instruction",
         "category": "Events",
         "newOpcode": "broadcast [BROADCAST]",
+        "inputTypes": {"BROADCAST": "broadcast"},
+        "inputTranslation": {"BROADCAST_INPUT": "BROADCAST"},
+        "optionTypes": {},
+    },
+    "event_broadcastandwait": {
+        "type": "instruction",
+        "category": "Events",
+        "newOpcode": "broadcast [BROADCAST] and wait",
         "inputTypes": {"BROADCAST": "broadcast"},
         "inputTranslation": {"BROADCAST_INPUT": "BROADCAST"},
         "optionTypes": {},

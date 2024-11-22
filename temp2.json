@@ -1,38 +1,295 @@
 {
     "sprites": [
         {
-            "name": "Stage",
             "isStage": true,
+            "name": "Stage",
             "scripts": [
                 {
                     "position": [
-                        0,
-                        0
+                        44,
+                        44
                     ],
                     "blocks": [
                         {
-                            "opcode": "delete this clone"
+                            "opcode": "when stage clicked",
+                            "inputs": {},
+                            "options": {}
                         }
                     ]
                 }
             ],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [],
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "dataFormat": "svg",
+                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        240,
+                        180
+                    ]
+                }
+            ],
             "sounds": [],
             "volume": 100
         },
         {
-            "name": "Sprite14",
             "isStage": false,
-            "scripts": [],
+            "name": "Sprite1",
+            "scripts": [
+                {
+                    "position": [
+                        296,
+                        163
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        295,
+                        256
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when stop clicked",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        293,
+                        352
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "always",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        286,
+                        454
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when <CONDITION>",
+                            "inputs": {
+                                "CONDITION": {
+                                    "block": {
+                                        "opcode": "true",
+                                        "inputs": {},
+                                        "options": {}
+                                    }
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        277,
+                        553
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when [KEY] key pressed",
+                            "inputs": {},
+                            "options": {
+                                "KEY": "space"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        261,
+                        647
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when [KEY] key hit",
+                            "inputs": {},
+                            "options": {
+                                "KEY": "space"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        283,
+                        734
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when mouse is scrolled [DIRECTION]",
+                            "inputs": {},
+                            "options": {
+                                "DIRECTION": "up"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        307,
+                        815
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when this sprite clicked",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        299,
+                        906
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when backdrop switches to [BACKDROP]",
+                            "inputs": {},
+                            "options": {
+                                "BACKDROP": "backdrop1"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        286,
+                        983
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when [OPTION] > (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "block": null,
+                                    "text": "10"
+                                }
+                            },
+                            "options": {
+                                "OPTION": "LOUDNESS"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        280,
+                        1077
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when i receive [BROADCAST]",
+                            "inputs": {},
+                            "options": {
+                                "BROADCAST": "message1"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        286,
+                        1205
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "broadcast [BROADCAST]",
+                            "inputs": {
+                                "BROADCAST": {
+                                    "block": null,
+                                    "text": "message1"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        240,
+                        1323
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "broadcast [BROADCAST] and wait",
+                            "inputs": {
+                                "BROADCAST": {
+                                    "block": null,
+                                    "text": "message1"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        569,
+                        987
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when [OPTION] > (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "block": null,
+                                    "text": "10"
+                                }
+                            },
+                            "options": {
+                                "OPTION": "TIMER"
+                            }
+                        }
+                    ]
+                }
+            ],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [],
-            "sounds": [],
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "dataFormat": "svg",
+                    "fileStem": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        26,
+                        46
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "dataFormat": "wav",
+                    "fileStem": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "rate": 48000,
+                    "sampleCount": 17867
+                }
+            ],
+            "volume": 100,
             "localVariables": [],
             "localLists": [],
-            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -41,27 +298,25 @@
             ],
             "size": 100,
             "direction": 90,
-            "draggable": true,
+            "draggable": false,
             "rotationStyle": "all around"
         }
     ],
     "globalVariables": [
         {
-            "name": "var",
-            "currentValue": "",
+            "name": "my variable",
+            "currentValue": 0,
             "monitor": null,
             "isCloudVariable": false
         }
     ],
     "globalLists": [],
     "tempo": 60,
-    "videoTransparency": 0,
-    "videoState": "off",
+    "videoTransparency": 50,
+    "videoState": "on",
     "textToSpeechLanguage": null,
     "extensionData": {},
-    "extensions": [
-        "jgJSON"
-    ],
+    "extensions": [],
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",

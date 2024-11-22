@@ -236,13 +236,15 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
         }
         if "comment" in oldData:
             newData["comment"] = oldData["comment"]
-    opcodeData = opcodeDatabase[blockData["opcode"]]
-    if "menu" in opcodeData:
-        newID     = opcodeData["menu"]["new"]
-        oldID     = opcodeData["menu"]["old"]
-        menuValue = newData["inputs"][oldID]["block"]["options"][oldID]
-        del newData["inputs"][oldID]
-        newData["options"][newID] = menuValue
+    
+    if isinstance(blockData, dict):
+        opcodeData = opcodeDatabase[blockData["opcode"]]
+        if "menu" in opcodeData:
+            newID     = opcodeData["menu"]["new"]
+            oldID     = opcodeData["menu"]["old"]
+            menuValue = newData["inputs"][oldID]["block"]["options"][oldID]
+            del newData["inputs"][oldID]
+            newData["options"][newID] = menuValue
     
     newDatas = [newData] if newDatas == None else newDatas
     if isinstance(blockData, dict):

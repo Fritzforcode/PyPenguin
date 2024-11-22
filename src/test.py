@@ -2,7 +2,8 @@ A = {
     "position": [0,0],
     "blocks": [
         {
-            "opcode": "delete this clone",
+            "opcode": "when backdrop switches to [BACKDROP]",
+            "options": {"BACKDROP": "empty costume"},
         },
     ],
 }
