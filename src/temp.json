@@ -1,0 +1,379 @@
+{
+    "targets": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "variables": {
+                "`jEk@4|i[#Fk?(8x)AV.-my variable": [
+                    "my variable",
+                    0
+                ]
+            },
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "dataFormat": "svg",
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 240,
+                    "rotationCenterY": 180
+                }
+            ],
+            "sounds": [],
+            "id": "p]_uD8#0^Q=ryfqeQLud",
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 50,
+            "videoState": "on",
+            "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {
+                "e": {
+                    "opcode": "sensing_touchingobject",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "TOUCHINGOBJECTMENU": [
+                            1,
+                            "f"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 24,
+                    "y": -73
+                },
+                "f": {
+                    "opcode": "sensing_touchingobjectmenu",
+                    "next": null,
+                    "parent": "e",
+                    "inputs": {},
+                    "fields": {
+                        "TOUCHINGOBJECTMENU": [
+                            "_mouse_",
+                            "n7E8]3xwuZ{c2M`Sk%Zz"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "g": {
+                    "opcode": "sensing_touchingobject",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "TOUCHINGOBJECTMENU": [
+                            1,
+                            "h"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 93,
+                    "y": 3
+                },
+                "h": {
+                    "opcode": "sensing_touchingobjectmenu",
+                    "next": null,
+                    "parent": "g",
+                    "inputs": {},
+                    "fields": {
+                        "TOUCHINGOBJECTMENU": [
+                            "_edge_",
+                            ":rq{)Ej47J~l3}qH[^eq"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "a": {
+                    "opcode": "sensing_objecttouchingobject",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "FULLTOUCHINGOBJECTMENU": [
+                            1,
+                            "i"
+                        ],
+                        "SPRITETOUCHINGOBJECTMENU": [
+                            1,
+                            "j"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": -3,
+                    "y": 140
+                },
+                "i": {
+                    "opcode": "sensing_fulltouchingobjectmenu",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "FULLTOUCHINGOBJECTMENU": [
+                            "_mouse_",
+                            "D+[l=*5:J)iE**MyniKU"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "j": {
+                    "opcode": "sensing_touchingobjectmenusprites",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "SPRITETOUCHINGOBJECTMENU": [
+                            "Sprite6",
+                            "=M^s:wTgODv8FK(#G4xo"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "b": {
+                    "opcode": "sensing_objecttouchingobject",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "FULLTOUCHINGOBJECTMENU": [
+                            1,
+                            "k"
+                        ],
+                        "SPRITETOUCHINGOBJECTMENU": [
+                            1,
+                            "l"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 14,
+                    "y": 261
+                },
+                "k": {
+                    "opcode": "sensing_fulltouchingobjectmenu",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "FULLTOUCHINGOBJECTMENU": [
+                            "_edge_",
+                            "H#lCF56{k8ssOT@?Ejkf"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "l": {
+                    "opcode": "sensing_touchingobjectmenusprites",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "SPRITETOUCHINGOBJECTMENU": [
+                            "_myself_",
+                            "8(}d`*Etr%/@tWmpcxs?"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "c": {
+                    "opcode": "sensing_objecttouchingobject",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "FULLTOUCHINGOBJECTMENU": [
+                            1,
+                            "m"
+                        ],
+                        "SPRITETOUCHINGOBJECTMENU": [
+                            1,
+                            "n"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 48,
+                    "y": 332
+                },
+                "m": {
+                    "opcode": "sensing_fulltouchingobjectmenu",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "FULLTOUCHINGOBJECTMENU": [
+                            "_myself_",
+                            "xJra~BTTkeG?JFoi~Bjx"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "n": {
+                    "opcode": "sensing_touchingobjectmenusprites",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "SPRITETOUCHINGOBJECTMENU": [
+                            "_myself_",
+                            "GHEV+Sc.C@5NBHxz|74%"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "d": {
+                    "opcode": "sensing_objecttouchingobject",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "FULLTOUCHINGOBJECTMENU": [
+                            1,
+                            "o"
+                        ],
+                        "SPRITETOUCHINGOBJECTMENU": [
+                            1,
+                            "p"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 44,
+                    "y": 398
+                },
+                "o": {
+                    "opcode": "sensing_fulltouchingobjectmenu",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {
+                        "FULLTOUCHINGOBJECTMENU": [
+                            "Sprite6",
+                            "mAL_]NZ^y;=dh^7bGq)~"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "p": {
+                    "opcode": "sensing_touchingobjectmenusprites",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {
+                        "SPRITETOUCHINGOBJECTMENU": [
+                            "_myself_",
+                            "KtspV7)X=qf3U5)UELeo"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "assetId": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
+                    "rotationCenterX": 26,
+                    "rotationCenterY": 46
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "assetId": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "dataFormat": "wav",
+                    "rate": 48000,
+                    "sampleCount": 17867,
+                    "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
+                }
+            ],
+            "id": "5I9nI;7P)jdiR-_X;/%l",
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100,
+            "direction": 0,
+            "draggable": false,
+            "rotationStyle": "all around"
+        },
+        {
+            "isStage": false,
+            "name": "Sprite6",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "dataFormat": "svg",
+                    "assetId": "3339a2953a3bf62bb80e54ff575dbced",
+                    "md5ext": "3339a2953a3bf62bb80e54ff575dbced.svg",
+                    "rotationCenterX": 0,
+                    "rotationCenterY": 0
+                }
+            ],
+            "sounds": [],
+            "id": "uFqn=fXr8wsg`h~iz*V!",
+            "volume": 100,
+            "layerOrder": 2,
+            "visible": true,
+            "x": 36,
+            "y": 28,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "monitors": [],
+    "extensionData": {},
+    "extensions": [],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": "",
+        "platform": {
+            "name": "PenguinMod",
+            "url": "https://penguinmod.com/",
+            "version": "stable"
+        }
+    }
+}

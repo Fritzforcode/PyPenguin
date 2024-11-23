@@ -82,15 +82,15 @@ def validateProject(projectData):
             scopeVariables = projectDataCopy["globalVariables"]
             scopeLists     = projectDataCopy["globalLists"]
         else:
-            cloningTargets.insert(0, "_myself_")
+            newCloningTargets = ["_myself_"] + cloningTargets
             scopeVariables = sprite["localVariables"] + projectDataCopy["globalVariables"]
             scopeLists     = sprite["localLists"]     + projectDataCopy["globalLists"]
 
         context = {
             "scopeVariables": scopeVariables, 
             "scopeLists": scopeLists, 
-            "cloningTargets": [""] if cloningTargets == [] else cloningTargets, # When there are no sprites; make " " the fallback value
-            "otherSpriteOrStageTarget": [
+            "cloningTargets": newCloningTargets, # When there are no sprites; make " " the fallback value
+            "otherSpriteOrStageTargets": [
                 target for target in otherSpriteOrStageTargets if target != sprite["name"]
             ],
             "backdrops": backdrops,

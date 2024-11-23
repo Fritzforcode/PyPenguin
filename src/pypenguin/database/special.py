@@ -1,27 +1,48 @@
 opcodes = {
 # SPECIAL: Menus (DO NOT CREATE THESE MANUALLY; use their parent blocks)
     "control_stop_sprite_menu": {
-        "type": "textReporter",
+        "type": None,
         "category": "Control",
-        "newOpcode": "STOP SPRITE MENU",
+        "newOpcode": "#STOP SPRITE MENU",
         "inputTypes": {},
         "optionTypes": {"TARGET": "cloning target"},
     },
     "control_create_clone_of_menu": { # menu for clone creation and deletion
-        "type": "textReporter",
+        "type": None,
         "category": "Control",
-        "newOpcode": "CLONE TARGET MENU",
+        "newOpcode": "#CLONE TARGET MENU",
         "inputTypes": {},
         "optionTypes": {"TARGET": "cloning target"},
     },
     "control_run_as_sprite_menu": {
-        "type": "textReporter",
+        "type": None,
         "category": "Control",
-        "newOpcode": "",
+        "newOpcode": "#RUN AS SPRITE MENU",
         "inputTypes": {},
-        "optionTypes": {"TARGET": ""},
+        "optionTypes": {"TARGET": "other sprite or stage"},
     },
-# SPECIAL: Varibles and Lists
+    "sensing_touchingobjectmenu": {
+        "type": None,
+        "category": "Sensing",
+        "newOpcode": "#TOUCHING OBJECT MENU",
+        "inputTypes": {},
+        "optionTypes": {"OBJECT": "exclusive touchable object"},
+    },
+    "sensing_fulltouchingobjectmenu": {
+        "type": None,
+        "category": "Sensing",
+        "newOpcode": "#FULL TOUCHING OBJECT MENU",
+        "inputTypes": {},
+        "optionTypes": {"OBJECT": "inclusive touchable object"},
+    },
+    "sensing_touchingobjectmenusprites": {
+        "type": None,
+        "category": "Sensing",
+        "newOpcode": "#TOUCHING OBJECT MENU SPRITES",
+        "inputTypes": {},
+        "optionTypes": {"OBJECT": "touchable sprite"},
+    },
+# SPECIAL: Variables and Lists
     "special_variable_value": {
         "type": "textReporter",
         "category": "Variables",

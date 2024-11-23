@@ -134,7 +134,7 @@ def validateOptions(path, data, opcode, opcodeData, context):
         # validateSchema(pathToData=path+[optionID], data=optionValue, schema=optionSchema)
         
         match opcodeData["optionTypes"][optionID]: # type of the option
-            case "key"|"unary math operation"|"binary math operation large"|"binary math operation small"|"text operation"|"text case"|"stop script target"|"other sprite or stage"|"cloning target"|"up | down"|"backdrop"|"LOUDNESS | TIMER":
+            case "key"|"unary math operation"|"binary math operation large"|"binary math operation small"|"text operation"|"text case"|"stop script target"|"other sprite or stage"|"cloning target"|"up | down"|"backdrop"|"LOUDNESS | TIMER"|"exclusive touchable object"|"inclusive touchable object"|"touchable sprite":
                 match opcodeData["optionTypes"][optionID]:
                     case "key":
                         possibleValues = [
@@ -160,7 +160,7 @@ def validateOptions(path, data, opcode, opcodeData, context):
                     case "stop script target":
                         possibleValues = ["all", "this script", "other scripts in sprite"]
                     case "other sprite or stage":
-                        possibleValues = context["otherSpriteOrStageTarget"]
+                        possibleValues = context["otherSpriteOrStageTargets"]
                     case "cloning target":
                         possibleValues = context["cloningTargets"]
                     case "up | down":
@@ -169,6 +169,12 @@ def validateOptions(path, data, opcode, opcodeData, context):
                         possibleValues = context["backdrops"]
                     case "LOUDNESS | TIMER":
                         possibleValues = ["LOUDNESS", "TIMER"]
+                    case "exclusive touchable object":
+                        possibleValues = ["_mouse_", "_edge_", !]
+                    case "inclusive touchable object":
+                        possibleValues = [!]
+                    case "touchable sprite":
+                        possibleValues = [!]
                 if optionValue not in possibleValues:
                     raise formatError(path+[optionID], f"Must be one of {possibleValues}.")
             case "broadcast"|"string":
