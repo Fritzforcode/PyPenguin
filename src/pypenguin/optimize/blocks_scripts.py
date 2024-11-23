@@ -166,12 +166,33 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                 mutationDatas=mutationDatas
             )
             for i,inputID,inputData in ikv(inputs):
-                if "block" in inputData:
-                    if inputData["block"] != None:
-                        if isinstance(inputData["block"], str):
-                            inputs[inputID]["block"] = childrenDatas[inputData["block"]][0]
-                        elif isinstance(inputData["block"], dict):
-                            pass
+                if inputData.get("block") != None:
+                    if isinstance(inputData["block"], str):
+                        subBlockData = childrenDatas[inputData["block"]][0]
+                        inputs[inputID]["block"] = subBlockData
+                    elif isinstance(inputData["block"], dict):
+                        pass
+                if inputData.get("option") != None:
+                    print("bef")
+                    pp(inputData)
+                    if isinstance(inputData["option"], str):
+                        subBlockID = inputData["option"]
+                        childrenDatas[subBlockID] = translateScript(
+                            data=data,
+                            ancestorP=subBlockID,
+                            blockChildrenPs=blockChildrenPs,
+                            commentDatas=commentDatas,
+                            mutationDatas=mutationDatas,
+                        )
+                        subBlockData = childrenDatas[subBlockID]
+                        pp(subBlockData)
+                        #inputs[inputID]["option"] = subBlockData
+                    elif isinstance(inputData["option"], dict):
+                        pass
+                    print("aft")
+                    pp(inputData)
+                    raise WhatIsGoingOnError()
+
                 
             options = translateOptions(data=blockData["fields"], opcode=blockData["opcode"])
             newOpcode = opcodeDatabase[blockData["opcode"]]["newOpcode"]
