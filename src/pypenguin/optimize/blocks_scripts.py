@@ -43,9 +43,10 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
                 if opcode == "procedures_call":
                     inputType = "boolean"
                 inputType = None
-                if isinstance(opcodeData.get("menu"), dict):
-                    if opcodeData.get("menu").get("old") == inputID:
-                        inputType = "menu"
+                if "menus" in opcodeData:
+                    for menuData in opcodeData["menus"]:
+                        if menuData["outer"] == inputID:
+                            inputType = "menu"
                 # Otherwise
                 if inputType == None: 
                     inputType = opcodeData["inputTypes"][newInputID]
@@ -60,14 +61,19 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
             else:
                 raise WhatIsGoingOnError(inputData)
         elif len(inputData) == 3:
-            if   isinstance(inputData[1], str): # e.g. 'OPERAND1': [3, 'e', [10, '']]
-                mode = "block-and-text"
-                pointer = inputData[1]
-                text = inputData[2][1]
+            if   isinstance(inputData[1], str): 
+                if isinstance(inputData[2], str): 
+                    mode     = "block-or-option"
+                    pointer  = inputData[1]
+                    pointer2 = inputData[2]
+                elif isinstance(inputData[2], list): # e.g. 'OPERAND1': [3, 'e', [10, '']]
+                    mode    = "block-and-text"
+                    pointer = inputData[1]
+                    text    = inputData[2][1]
             elif isinstance(inputData[1], list): # e.g. 'VALUE': [3, [12, 'var', '=!vkqJLb6ODy(oqe-|ZN'], [10, '0']]
-                mode = "block-and-text"
+                mode    = "block-and-text"
                 pointer = translateVariableListBlock(inputData[1])
-                text = inputData[2][1]
+                text    = inputData[2][1]
         else:
             raise WhatIsGoingOnError(inputData)
         if mode == "block-only":
@@ -88,6 +94,11 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
                     commentDatas=commentDatas,
                     mutationDatas=mutationDatas,
                 )
+            }
+        elif mode == "block-or-option":
+            newInputData = {
+                "block": pointer,
+                "option": pointer2,
             }
         else: raise WhatIsGoingOnError(mode, inputType)
 
@@ -134,13 +145,12 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                     mutationDatas=mutationDatas,
                 )
                 for i,inputID,inputData in ikv(inputs):
-                    if "block" in inputData:
-                        if inputData["block"] != None:
-                            if isinstance(inputData["block"], str):
-                                subBlockData = childrenDatas[inputData["block"]][0]
-                                inputs[inputID]["block"] = subBlockData
-                            elif isinstance(inputData["block"], dict):
-                                pass
+                    if inputData.get("block") != None:
+                        if isinstance(inputData["block"], str):
+                            subBlockData = childrenDatas[inputData["block"]][0]
+                            inputs[inputID]["block"] = subBlockData
+                        elif isinstance(inputData["block"], dict):
+                            pass
             else:
                 inputs = blockData["inputs"]
             options = blockData["fields"]
@@ -162,6 +172,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                             inputs[inputID]["block"] = childrenDatas[inputData["block"]][0]
                         elif isinstance(inputData["block"], dict):
                             pass
+                
             options = translateOptions(data=blockData["fields"], opcode=blockData["opcode"])
             newOpcode = opcodeDatabase[blockData["opcode"]]["newOpcode"]
         comment = None
@@ -239,12 +250,14 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
     
     if isinstance(blockData, dict):
         opcodeData = opcodeDatabase[blockData["opcode"]]
-        if "menu" in opcodeData:
-            newID     = opcodeData["menu"]["new"]
-            oldID     = opcodeData["menu"]["old"]
-            menuValue = newData["inputs"][oldID]["block"]["options"][oldID]
-            del newData["inputs"][oldID]
-            newData["options"][newID] = menuValue
+        if "menus" in opcodeData:
+            for menuData in opcodeData["menus"]:
+                newID     = menuData["new"]
+                outerID   = menuData["outer"]
+                innerID   = menuData["inner"]
+                menuValue = newData["inputs"][outerID]["block"]["options"][innerID]
+                del newData["inputs"][outerID]
+                newData["inputs"][newID] = {"option": menuValue}
     
     newDatas = [newData] if newDatas == None else newDatas
     if isinstance(blockData, dict):

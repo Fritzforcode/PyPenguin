@@ -155,7 +155,7 @@ opcodes = {
         "inputTypes": {"BODY": "script"},
         "inputTranslation": {"SUBSTACK": "BODY"},
         "optionTypes": {"TARGET": "other sprite or stage"},
-        "menu": {"new": "TARGET", "old": "RUN_AS_OPTION", "menuOpcode": "control_run_as_sprite_menu"},
+        "menus": [{"new": "TARGET", "outer": "RUN_AS_OPTION", "inner": "RUN_AS_OPTION", "menuOpcode": "control_run_as_sprite_menu"}],
     },
     # Control: Error Management
     "control_try_catch": {
@@ -194,7 +194,7 @@ opcodes = {
         "newOpcode": "stop sprite [TARGET]", # changed for uniqueness
         "inputTypes": {},
         "optionTypes": {"TARGET": "other sprite or stage"},
-        "menu": {"new": "TARGET", "old": "STOP_OPTION", "menuOpcode": "control_stop_sprite_menu"},
+        "menus": [{"new": "TARGET", "outer": "STOP_OPTION", "inner": "STOP_OPTION", "menuOpcode": "control_stop_sprite_menu"}],
     },
     "control_stop": {
         "type": "dynamic", # When "other scripts in sprite" is selected it isn't an ending block
@@ -218,7 +218,7 @@ opcodes = {
         "newOpcode": "create clone of [TARGET]",
         "inputTypes": {},
         "optionTypes": {"TARGET": "cloning target"},
-        "menu": {"new": "TARGET", "old": "CLONE_OPTION", "menuOpcode": "control_create_clone_of_menu"},
+        "menus": [{"new": "TARGET", "outer": "CLONE_OPTION", "inner": "CLONE_OPTION", "menuOpcode": "control_create_clone_of_menu"}],
     },
     "control_delete_clones_of": {
         "type": "instruction",
@@ -226,7 +226,7 @@ opcodes = {
         "newOpcode": "delete clones of [TARGET]",
         "inputTypes": {},
         "optionTypes": {"TARGET": "cloning target"},
-        "menu": {"new": "TARGET", "old": "CLONE_OPTION", "menuOpcode": "control_create_clone_of_menu"},
+        "menus": [{"new": "TARGET", "outer": "CLONE_OPTION", "inner": "CLONE_OPTION", "menuOpcode": "control_create_clone_of_menu"}],
     },
     "control_delete_this_clone": {
         "type": "lastInstruction",

@@ -1,46 +1,61 @@
 opcodes = {
 # SPECIAL: Menus (DO NOT CREATE THESE MANUALLY; use their parent blocks)
+    # Control
     "control_stop_sprite_menu": {
         "type": None,
         "category": "Control",
         "newOpcode": "#STOP SPRITE MENU",
         "inputTypes": {},
-        "optionTypes": {"TARGET": "cloning target"},
+        "optionTypes": {},
+        #"optionTypes": {"TARGET": "cloning target"},
     },
     "control_create_clone_of_menu": { # menu for clone creation and deletion
         "type": None,
         "category": "Control",
         "newOpcode": "#CLONE TARGET MENU",
         "inputTypes": {},
-        "optionTypes": {"TARGET": "cloning target"},
+        "optionTypes": {},
+        #"optionTypes": {"TARGET": "cloning target"},
     },
     "control_run_as_sprite_menu": {
         "type": None,
         "category": "Control",
         "newOpcode": "#RUN AS SPRITE MENU",
         "inputTypes": {},
-        "optionTypes": {"TARGET": "other sprite or stage"},
+        "optionTypes": {},
+        #"optionTypes": {"TARGET": "other sprite or stage"},
     },
+    # Sensing
     "sensing_touchingobjectmenu": {
         "type": None,
         "category": "Sensing",
         "newOpcode": "#TOUCHING OBJECT MENU",
         "inputTypes": {},
-        "optionTypes": {"OBJECT": "exclusive touchable object"},
+        "optionTypes": {},
+        #"optionTypes": {"OBJECT": "half-inclusive touchable object"},
     },
     "sensing_fulltouchingobjectmenu": {
         "type": None,
         "category": "Sensing",
         "newOpcode": "#FULL TOUCHING OBJECT MENU",
         "inputTypes": {},
-        "optionTypes": {"OBJECT": "inclusive touchable object"},
+        "optionTypes": {},
+        #"optionTypes": {"OBJECT": "inclusive touchable object"},
     },
     "sensing_touchingobjectmenusprites": {
         "type": None,
         "category": "Sensing",
         "newOpcode": "#TOUCHING OBJECT MENU SPRITES",
         "inputTypes": {},
-        "optionTypes": {"OBJECT": "touchable sprite"},
+        "optionTypes": {},
+        #"optionTypes": {"OBJECT": "touchable sprite"},
+    },
+    "sensing_distancetomenu": {
+        "type": None,
+        "category": "Sensing",
+        "newOpcode": "#DISTANCE TO MENU",
+        "inputTypes": {},
+        "optionTypes": {},
     },
 # SPECIAL: Variables and Lists
     "special_variable_value": {

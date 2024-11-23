@@ -90,6 +90,12 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
                 required = ["block"]
             elif inputMode == "script":
                 required = ["blocks"]
+            elif inputMode == "block-or-option":
+                required = []
+                hasBlock  = inputValue.get("block") != None
+                hasOption = "option" in inputValue
+                if hasBlock == hasOption: # if none or both exist
+                    raise formatError(path+[inputID], f"Must have either the 'block' or 'option' attribute.")
             
             for attribute in required:
                 if attribute not in inputValue:
@@ -134,7 +140,7 @@ def validateOptions(path, data, opcode, opcodeData, context):
         # validateSchema(pathToData=path+[optionID], data=optionValue, schema=optionSchema)
         
         match opcodeData["optionTypes"][optionID]: # type of the option
-            case "key"|"unary math operation"|"binary math operation large"|"binary math operation small"|"text operation"|"text case"|"stop script target"|"other sprite or stage"|"cloning target"|"up | down"|"backdrop"|"LOUDNESS | TIMER"|"exclusive touchable object"|"inclusive touchable object"|"touchable sprite":
+            case "key"|"unary math operation"|"binary math operation large"|"binary math operation small"|"text operation"|"text case"|"stop script target"|"other sprite or stage"|"cloning target"|"up | down"|"backdrop"|"LOUDNESS | TIMER"|"exclusive touchable object"|"half-inclusive touchable object"|"inclusive touchable object"|"touchable sprite"|"coordinate"|"blockType":
                 match opcodeData["optionTypes"][optionID]:
                     case "key":
                         possibleValues = [
@@ -160,7 +166,7 @@ def validateOptions(path, data, opcode, opcodeData, context):
                     case "stop script target":
                         possibleValues = ["all", "this script", "other scripts in sprite"]
                     case "other sprite or stage":
-                        possibleValues = context["otherSpriteOrStageTargets"]
+                        possibleValues = ["_stage_"] + context["otherSprites"]
                     case "cloning target":
                         possibleValues = context["cloningTargets"]
                     case "up | down":
@@ -170,11 +176,17 @@ def validateOptions(path, data, opcode, opcodeData, context):
                     case "LOUDNESS | TIMER":
                         possibleValues = ["LOUDNESS", "TIMER"]
                     case "exclusive touchable object":
-                        possibleValues = ["_mouse_", "_edge_", !]
+                        possibleValues = ["_mouse_"] + context["otherSprites"]
+                    case "half-inclusive touchable object":
+                        possibleValues = ["_mouse_", "_edge_"] + context["otherSprites"]
                     case "inclusive touchable object":
-                        possibleValues = [!]
+                        possibleValues = ["_mouse_", "_edge_", "_myself_"] + context["otherSprites"]
                     case "touchable sprite":
-                        possibleValues = [!]
+                        possibleValues = ["_myself_"] + context["otherSprites"]
+                    case "coordinate":
+                        possibleValues = ["x", "y"]
+                    case "blockType":
+                        possibleValues = ["instruction", "lastInstruction", "stringReporter", "numberReporter", "booleanReporter"]
                 if optionValue not in possibleValues:
                     raise formatError(path+[optionID], f"Must be one of {possibleValues}.")
             case "broadcast"|"string":
@@ -189,8 +201,4 @@ def validateOptions(path, data, opcode, opcodeData, context):
             case "boolean":
                 if not isinstance(optionValue, bool):
                     raise formatError(path+[optionID], f"Must be a boolean.")
-            case "blockType":
-                possibleValues = ["instruction", "lastInstruction", "stringReporter", "numberReporter", "booleanReporter"]
-                if optionValue not in possibleValues:
-                    raise formatError(path+[optionID], f"Must be one of {possibleValues}.")
             case _: raise Exception()

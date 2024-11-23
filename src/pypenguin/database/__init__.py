@@ -49,9 +49,12 @@ inputModes = {
     "positive number" : "block-and-text",
     "number"          : "block-and-text",
     "text"            : "block-and-text",
+    "color"           : "block-and-text",
     "boolean"         : "block-only",
     "round"           : "block-only",
     "script"          : "script",
+
+    "half-inclusive touchable object": "block-or-option",
 }
 
 

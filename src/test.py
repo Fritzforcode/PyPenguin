@@ -1,37 +1,21 @@
-A = {
-    "position": [0,0],
-    "blocks": [
-        {
-            "opcode": "when backdrop switches to [BACKDROP]",
-            "options": {"BACKDROP": "empty costume"},
-        },
-    ],
-}
-"""        {
-            "opcode": "try to do {TRY} if a block errors {IFERROR}",
-            "inputs": {
-                "TRY": {"blocks": [
-                    {
-                        "opcode": "wait (DURATION) seconds", 
-                        "inputs": {"DURATION": {"text": "53"}},
-                    },
-                    {"opcode": "escape loop"},
-                ]},
-                "IFERROR": {"blocks": [
-                    {
-                        "opcode": "wait (DURATION) seconds", 
-                        "inputs": {"DURATION": {"text": "fg"}},
-                    },
-                    {"opcode": "escape loop"},
-                ]},
+A = [
+    {
+        "position": [0,0],
+        "blocks": [
+            {
+                "opcode": "set [VARIABLE] to (VALUE)",
+                "options": {"VARIABLE": "var"},
+                "inputs": {"VALUE": {"text": "123"}},
             },
-        },"""
+        ],
+    },
+]
 projectData = {
     "sprites": [
         {
             "name": "Stage",
             "isStage": True,
-            "scripts": [A],
+            "scripts": A,
             "comments": [],
             "currentCostume": 0,
             "costumes": [],
@@ -39,7 +23,26 @@ projectData = {
             "volume": 100,
         },
         {
-            "name": "Sprite14",
+            "name": "Sprite1",
+            "isStage": False,
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [],
+            "sounds": [],
+            "localVariables": [],
+            "localLists": [],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": True,
+            "position": [0,0],
+            "size": 100,
+            "direction": 90,
+            "draggable": True,
+            "rotationStyle": "all around",
+        },
+        {
+            "name": "Sprite6",
             "isStage": False,
             "scripts": [],
             "comments": [],

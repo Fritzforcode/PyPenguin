@@ -1,5 +1,7 @@
 # TODO
 
+add option value translation
+
 possibly change null to None ...
 
 update documentation

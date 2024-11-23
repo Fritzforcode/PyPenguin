@@ -147,6 +147,7 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                         match opcodeData["inputTypes"][inputID]:
                             case "broadcast"       : magicNumber = 11
                             case "text"            : magicNumber = 10
+                            case "color"           : magicNumber =  9
                             case "integer"         : magicNumber =  7
                             case "positive integer": magicNumber =  6
                             case "positive number" : magicNumber =  5
@@ -376,28 +377,30 @@ def finishBlocks(data, commentDatas):
                     "hasnext": json.dumps(hasNext)
                 }
             
-            if "menu" in opcodeData:
-                newID         = opcodeData["menu"]["new"]
-                oldID         = opcodeData["menu"]["old"]
-                menuOpcode    = opcodeData["menu"]["menuOpcode"]
-                
-                menuValue = blockData["fields"][newID]
-                del blockData["fields"][newID]
-                menuID = tempSelector(path=blockID+[100])
-                
-                menuBlockData = {
-                    "opcode": menuOpcode,
-                    "next"  : None,
-                    "parent": blockID,
-                    "inputs": {},
-                    "fields": {
-                        oldID: menuValue,
-                    },
-                    "shadow"  : True,
-                    "topLevel": False,
-                }
-                additionalBlockDatas[menuID] = menuBlockData
-                blockData["inputs"][oldID] = [1, menuID]
+            if "menus" in opcodeData:
+                for j, menuData in enumerate(opcodeData["menus"]):
+                    newID      = menuData["new"]
+                    outerID    = menuData["outer"]
+                    innerID    = menuData["inner"]
+                    menuOpcode = menuData["menuOpcode"]
+                    
+                    menuValue = blockData["fields"][newID]
+                    del blockData["fields"][newID]
+                    menuID = tempSelector(path=blockID+[100]+[j])
+                    
+                    menuBlockData = {
+                        "opcode": menuOpcode,
+                        "next"  : None,
+                        "parent": blockID,
+                        "inputs": {},
+                        "fields": {
+                            innerID: menuValue,
+                        },
+                        "shadow"  : True,
+                        "topLevel": False,
+                    }
+                    additionalBlockDatas[menuID] = menuBlockData
+                    blockData["inputs"][outerID] = [1, menuID]
     data |= additionalBlockDatas
 
     def getSelectors(obj):

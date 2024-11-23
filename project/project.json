@@ -7,13 +7,37 @@
                 {
                     "position": [
                         0,
-                        0
+                        1500
                     ],
                     "blocks": [
                         {
-                            "opcode": "when backdrop switches to [BACKDROP]",
+                            "opcode": "set [VARIABLE] to (VALUE)",
                             "options": {
-                                "BACKDROP": "empty costume"
+                                "VARIABLE": "var"
+                            },
+                            "inputs": {
+                                "VALUE": {
+                                    "text": "123"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        0,
+                        160000
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "options": {
+                                "VARIABLE": "var"
+                            },
+                            "inputs": {
+                                "VALUE": {
+                                    "text": "abc"
+                                }
                             }
                         }
                     ]
@@ -26,7 +50,29 @@
             "volume": 100
         },
         {
-            "name": "Sprite14",
+            "name": "Sprite1",
+            "isStage": false,
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [],
+            "sounds": [],
+            "localVariables": [],
+            "localLists": [],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "position": [
+                0,
+                0
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": true,
+            "rotationStyle": "all around"
+        },
+        {
+            "name": "Sprite6",
             "isStage": false,
             "scripts": [],
             "comments": [],
