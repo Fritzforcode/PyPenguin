@@ -90,12 +90,8 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
                 required = ["block"]
             elif inputMode == "script":
                 required = ["blocks"]
-            elif inputMode == "block-or-option":
-                required = []
-                hasBlock  = inputValue.get("block") != None
-                hasOption = "option" in inputValue
-                if hasBlock == hasOption: # if none or both exist
-                    raise formatError(path+[inputID], f"Must have either the 'block' or 'option' attribute.")
+            elif inputMode == "block-and-option":
+                required = ["option"]
             
             for attribute in required:
                 if attribute not in inputValue:

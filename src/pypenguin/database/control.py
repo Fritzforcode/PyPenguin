@@ -152,9 +152,9 @@ opcodes = {
         "type": "instruction",
         "category": "Control",
         "newOpcode": "as [TARGET] {BODY}",
-        "inputTypes": {"BODY": "script"},
+        "inputTypes": {"TARGET": "other sprite or stage", "BODY": "script"},
         "inputTranslation": {"SUBSTACK": "BODY"},
-        "optionTypes": {"TARGET": "other sprite or stage"},
+        "optionTypes": {},
         "menus": [{"new": "TARGET", "outer": "RUN_AS_OPTION", "inner": "RUN_AS_OPTION", "menuOpcode": "control_run_as_sprite_menu"}],
     },
     # Control: Error Management
@@ -192,8 +192,8 @@ opcodes = {
         "type": "instruction",
         "category": "Control",
         "newOpcode": "stop sprite [TARGET]", # changed for uniqueness
-        "inputTypes": {},
-        "optionTypes": {"TARGET": "other sprite or stage"},
+        "inputTypes": {"TARGET": "other sprite or stage"},
+        "optionTypes": {},
         "menus": [{"new": "TARGET", "outer": "STOP_OPTION", "inner": "STOP_OPTION", "menuOpcode": "control_stop_sprite_menu"}],
     },
     "control_stop": {
@@ -216,16 +216,16 @@ opcodes = {
         "type": "instruction",
         "category": "Control",
         "newOpcode": "create clone of [TARGET]",
-        "inputTypes": {},
-        "optionTypes": {"TARGET": "cloning target"},
+        "inputTypes": {"TARGET": "cloning target"},
+        "optionTypes": {},
         "menus": [{"new": "TARGET", "outer": "CLONE_OPTION", "inner": "CLONE_OPTION", "menuOpcode": "control_create_clone_of_menu"}],
     },
     "control_delete_clones_of": {
         "type": "instruction",
         "category": "Control",
         "newOpcode": "delete clones of [TARGET]",
-        "inputTypes": {},
-        "optionTypes": {"TARGET": "cloning target"},
+        "inputTypes": {"TARGET": "cloning target"},
+        "optionTypes": {},
         "menus": [{"new": "TARGET", "outer": "CLONE_OPTION", "inner": "CLONE_OPTION", "menuOpcode": "control_create_clone_of_menu"}],
     },
     "control_delete_this_clone": {

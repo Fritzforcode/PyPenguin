@@ -6,8 +6,11 @@ from pypenguin.database.variables import opcodes as variables
 from pypenguin.database.lists     import opcodes as lists
 
 from pypenguin.database.special   import opcodes as special
-
 from pypenguin.database.extJSON   import opcodes as extJSON
+
+from pypenguin.helper_functions   import ikv
+
+import functools
 
 """
 Category      Status ('.'=some 'x'=all)
@@ -38,12 +41,28 @@ opcodeDatabase = (
 def getOptimizedOpcode(opcode):
     return opcodeDatabase[opcode]["newOpcode"]
 
+@functools.cache
+def getDeoptimizedOpcode(opcode):
+    found = False
+    for i, oldOpcode, opcodeData in ikv(opcodeDatabase):
+        if opcodeData["newOpcode"] == opcode:
+            found = True
+            break
+    assert found, f"Opcode not found: {opcode}"
+    return oldOpcode
+
 def getOptimizedInputID(opcode, inputID):
-    if "inputTranslation" not in opcodeDatabase[opcode]:
-        return inputID
-    return opcodeDatabase[opcode]["inputTranslation"][inputID]
+    if "inputTranslation" in opcodeDatabase[opcode]:
+        if inputID in opcodeDatabase[opcode]["inputTranslation"]:
+            return opcodeDatabase[opcode]["inputTranslation"][inputID]
+    if "menus" in opcodeDatabase[opcode]:
+        for menuData in opcodeDatabase[opcode]["menus"]:
+            if menuData["outer"] == inputID:
+                return menuData["new"]
+    return inputID
 
 def getInputType(opcode, inputID):
+    print(opcode)
     return opcodeDatabase[opcode]["inputTypes"][inputID]
 
 def getInputMode(opcode, inputID):
@@ -51,6 +70,17 @@ def getInputMode(opcode, inputID):
         opcode=opcode, 
         inputID=inputID,
     )]
+
+def getOptimizedOptionID(opcode, optionID):
+    if "optionTranslation" not in opcodeDatabase[opcode]:
+        return optionID
+    if optionID not in opcodeDatabase[opcode]["optionTranslation"]:
+        return optionID
+    return opcodeDatabase[opcode]["optionTranslation"][optionID]
+
+def getBlockType(opcode):
+    return opcodeDatabase[opcode]["type"]
+
 
 inputDefault = {}
 inputBlockDefault = None
@@ -71,7 +101,8 @@ inputModes = {
     "round"           : "block-only",
     "script"          : "script",
 
-    "half-inclusive touchable object": "block-or-option",
+    "half-inclusive touchable object": "block-and-option",
+    "other sprite or stage"          : "block-and-option",
 }
 
 

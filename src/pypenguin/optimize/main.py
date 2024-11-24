@@ -1,7 +1,7 @@
 from pypenguin.helper_functions import pp
 from pypenguin.optimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.optimize.variables_lists import translateVariables, translateLists
-from pypenguin.optimize.blocks_scripts import getCustomBlockMutations, prepareBlocks, nestScripts
+from pypenguin.optimize.blocks_scripts import getCustomBlockMutations, prepareBlocks, nestScripts, finishScripts
 #from pypenguin.optimize.blocks_scripts import translateScript, generateBlockChildrenIDs, getCustomBlockMutations
 from pypenguin.optimize.comments import translateComment
 
@@ -16,21 +16,9 @@ def optimizeProjectJSON(projectData):
                 floatingCommentDatas.append(translateComment(data=commentData))
         
         preparedBlockDatas = prepareBlocks(data=spriteData["blocks"])
-        nestedScripts      = nestScripts  (data=preparedBlockDatas)
-        
-        pp(preparedBlockDatas)
-        #ancestorIDs, blockChildrenIDs = generateBlockChildrenIDs(data=spriteData["blocks"])
-        #newScriptDatas = []
-        #print(ancestorIDs)
-        """for ancestorP in ancestorIDs:
-            newScriptData = translateScript(
-                data=spriteData["blocks"], 
-                ancestorP=ancestorP, 
-                blockChildrenIDs=blockChildrenIDs,
-                commentDatas=commentDatas,
-                mutationDatas=mutationDatas,
-            )
-            newScriptDatas.append(newScriptData)
+        nestedScriptDatas  = nestScripts  (data=preparedBlockDatas)
+        newScriptDatas     = finishScripts(data=nestedScriptDatas)
+
         translatedCostumeDatas = translateCostumes(data=spriteData["costumes"])
         translatedSoundDatas   = translateSounds  (data=spriteData["sounds"])
         translatedVariableDatas = translateVariables(
@@ -82,4 +70,4 @@ def optimizeProjectJSON(projectData):
         "meta"                : projectData["meta"],
     }
     return newData
-    """
+    

@@ -63,7 +63,7 @@ def translateInputs(data, opcode, scriptData, blockChildrenIDs, commentDatas, mu
         elif len(inputData) == 3:
             if   isinstance(inputData[1], str): 
                 if isinstance(inputData[2], str): 
-                    mode     = "block-or-option"
+                    mode     = "block-and-option"
                     pointer  = inputData[1]
                     pointer2 = inputData[2]
                 elif isinstance(inputData[2], list): # e.g. 'OPERAND1': [3, 'e', [10, '']]
@@ -95,7 +95,7 @@ def translateInputs(data, opcode, scriptData, blockChildrenIDs, commentDatas, mu
                     mutationDatas=mutationDatas,
                 )
             }
-        elif mode == "block-or-option":
+        elif mode == "block-and-option":
             newInputData = {
                 "block": pointer,
                 "option": pointer2,

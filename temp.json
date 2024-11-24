@@ -42,82 +42,541 @@
             "broadcasts": {},
             "customVars": [],
             "blocks": {
-                "a": {
-                    "opcode": "sensing_touchingobject",
-                    "next": null,
+                "p": {
+                    "opcode": "control_wait",
+                    "next": "e",
                     "parent": null,
                     "inputs": {
-                        "TOUCHINGOBJECTMENU": [
+                        "DURATION": [
                             1,
-                            "b"
+                            [
+                                5,
+                                "1"
+                            ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 240,
-                    "y": -44
-                },
-                "b": {
-                    "opcode": "sensing_touchingobjectmenu",
-                    "next": null,
-                    "parent": "a",
-                    "inputs": {},
-                    "fields": {
-                        "TOUCHINGOBJECTMENU": [
-                            "_mouse_",
-                            "F%H0hoOqi:Jb^=|7pT+O"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "c": {
-                    "opcode": "sensing_touchingobject",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "TOUCHINGOBJECTMENU": [
-                            3,
-                            "d",
-                            "e"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 283,
-                    "y": 84
+                    "x": 251,
+                    "y": 111
                 },
                 "e": {
-                    "opcode": "sensing_touchingobjectmenu",
+                    "opcode": "control_waitsecondsoruntil",
+                    "next": "f",
+                    "parent": "p",
+                    "inputs": {
+                        "DURATION": [
+                            1,
+                            [
+                                5,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "f": {
+                    "opcode": "control_repeat",
+                    "next": "q",
+                    "parent": "e",
+                    "inputs": {
+                        "TIMES": [
+                            1,
+                            [
+                                6,
+                                "10"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            1,
+                            null
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "q": {
+                    "opcode": "control_forever",
+                    "next": null,
+                    "parent": "f",
+                    "inputs": {
+                        "SUBSTACK": [
+                            1,
+                            null
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "F": {
+                    "opcode": "control_exitLoop",
                     "next": null,
                     "parent": null,
                     "inputs": {},
-                    "fields": {
-                        "TOUCHINGOBJECTMENU": [
-                            "_mouse_",
-                            "-o/UG}]csoXO@HXV6x{J"
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 228,
+                    "y": 513
+                },
+                "G": {
+                    "opcode": "control_continueLoop",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 238,
+                    "y": 608
+                },
+                "r": {
+                    "opcode": "control_switch",
+                    "next": "g",
+                    "parent": null,
+                    "inputs": {
+                        "SUBSTACK": [
+                            1,
+                            null
                         ]
                     },
-                    "shadow": true,
+                    "fields": {},
+                    "shadow": false,
                     "topLevel": true,
-                    "x": 372,
-                    "y": 88
+                    "x": 248,
+                    "y": 694
                 },
-                "d": {
-                    "opcode": "operator_stringify",
-                    "next": null,
-                    "parent": "c",
+                "g": {
+                    "opcode": "control_switch_default",
+                    "next": "s",
+                    "parent": "r",
                     "inputs": {
-                        "ONE": [
+                        "SUBSTACK1": [
+                            1,
+                            null
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "s": {
+                    "opcode": "control_exitCase",
+                    "next": null,
+                    "parent": "g",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "t": {
+                    "opcode": "control_case_next",
+                    "next": "u",
+                    "parent": null,
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "ello"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 236,
+                    "y": 1054
+                },
+                "H": {
+                    "opcode": "control_if_return_else_return",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "TEXT1": [
                             1,
                             [
                                 10,
                                 "foo"
                             ]
+                        ],
+                        "TEXT2": [
+                            1,
+                            [
+                                10,
+                                "bar"
+                            ]
                         ]
                     },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 610,
+                    "y": 1798
+                },
+                "I": {
+                    "opcode": "control_error",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 543,
+                    "y": 2228
+                },
+                "J": {
+                    "opcode": "control_stop",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "STOP_OPTION": [
+                            "this script",
+                            "F-T{U@%b}`a[v_)LE|2}"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 494,
+                    "y": 2391,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "hasnext": "false"
+                    }
+                },
+                "K": {
+                    "opcode": "control_stop",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "STOP_OPTION": [
+                            "other scripts in sprite",
+                            "Q.RVbm~=wai|oc5N.K8_"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 703,
+                    "y": 2378,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "hasnext": "true"
+                    }
+                },
+                "v": {
+                    "opcode": "control_start_as_clone",
+                    "next": "a",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 303,
+                    "y": 2514
+                },
+                "w": {
+                    "opcode": "control_backToGreenFlag",
+                    "next": "b",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 305,
+                    "y": 2318
+                },
+                "b": {
+                    "opcode": "control_stop_sprite",
+                    "next": "x",
+                    "parent": "w",
+                    "inputs": {
+                        "STOP_OPTION": [
+                            1,
+                            "y"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "y": {
+                    "opcode": "control_stop_sprite_menu",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "STOP_OPTION": [
+                            "_stage_",
+                            "~F!wMuQ@W37.N#f:tr_g"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "x": {
+                    "opcode": "control_stop",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "STOP_OPTION": [
+                            "all",
+                            ";p6R}n6np|N(08s9^wma"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "hasnext": "false"
+                    }
+                },
+                "h": {
+                    "opcode": "control_if",
+                    "next": "i",
+                    "parent": null,
+                    "inputs": {
+                        "SUBSTACK": [
+                            2,
+                            "z"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 284,
+                    "y": 1254
+                },
+                "i": {
+                    "opcode": "control_if_else",
+                    "next": "j",
+                    "parent": "h",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "j": {
+                    "opcode": "control_wait_until",
+                    "next": "k",
+                    "parent": "i",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "k": {
+                    "opcode": "control_repeat_until",
+                    "next": "l",
+                    "parent": "j",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "l": {
+                    "opcode": "control_while",
+                    "next": "m",
+                    "parent": "k",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "m": {
+                    "opcode": "control_for_each",
+                    "next": "n",
+                    "parent": "l",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                6,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "my variable",
+                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "n": {
+                    "opcode": "control_all_at_once",
+                    "next": "c",
+                    "parent": "m",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "c": {
+                    "opcode": "control_run_as_sprite",
+                    "next": "o",
+                    "parent": "n",
+                    "inputs": {
+                        "RUN_AS_OPTION": [
+                            1,
+                            "A"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "A": {
+                    "opcode": "control_run_as_sprite_menu",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "RUN_AS_OPTION": [
+                            "_stage_",
+                            "6({[Z[9;uZk~pGu`OM-x"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "o": {
+                    "opcode": "control_try_catch",
+                    "next": "B",
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "B": {
+                    "opcode": "control_throw_error",
+                    "next": null,
+                    "parent": "o",
+                    "inputs": {
+                        "ERROR": [
+                            1,
+                            [
+                                10,
+                                "Hello!"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "u": {
+                    "opcode": "control_case",
+                    "next": null,
+                    "parent": "t",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "ello"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a": {
+                    "opcode": "control_create_clone_of",
+                    "next": "d",
+                    "parent": "v",
+                    "inputs": {
+                        "CLONE_OPTION": [
+                            1,
+                            "C"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "C": {
+                    "opcode": "control_create_clone_of_menu",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "CLONE_OPTION": [
+                            "_myself_",
+                            "dzoURjj:pjkT[:ZCf.f6"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "d": {
+                    "opcode": "control_delete_clones_of",
+                    "next": "D",
+                    "parent": "a",
+                    "inputs": {
+                        "CLONE_OPTION": [
+                            1,
+                            "E"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "E": {
+                    "opcode": "control_create_clone_of_menu",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {
+                        "CLONE_OPTION": [
+                            "_myself_",
+                            "f2`iW7/uswDMhK6cb=9{"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "D": {
+                    "opcode": "control_delete_this_clone",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "L": {
+                    "opcode": "control_is_clone",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 519,
+                    "y": 2695
+                },
+                "z": {
+                    "opcode": "control_exitCase",
+                    "next": null,
+                    "parent": "h",
+                    "inputs": {},
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
@@ -160,7 +619,9 @@
     ],
     "monitors": [],
     "extensionData": {},
-    "extensions": [],
+    "extensions": [
+        "jgJSON"
+    ],
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",
