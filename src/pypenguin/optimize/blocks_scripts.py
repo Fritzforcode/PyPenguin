@@ -26,7 +26,7 @@ def translateVariableListBlock(data):
         raise WhatIsGoingOnError(data)
     return newData
 
-def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mutationDatas):
+def translateInputs(data, opcode, scriptData, blockChildrenIDs, commentDatas, mutationDatas):
     newData = {}
     opcodeData = opcodeDatabase[opcode]
     for i,inputID,inputData in ikv(data):
@@ -90,7 +90,7 @@ def translateInputs(data, opcode, scriptData, blockChildrenPs, commentDatas, mut
                 "blocks": translateScript(
                     data=scriptData,
                     ancestorP=inputData[1],
-                    blockChildrenPs=blockChildrenPs,
+                    blockChildrenIDs=blockChildrenIDs,
                     commentDatas=commentDatas,
                     mutationDatas=mutationDatas,
                 )
@@ -120,18 +120,21 @@ def translateOptions(data, opcode):
         newData[optionID] = newOptionData
     return newData
 
-def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationDatas):
-    childrenDatas = {}
-    for pointer in blockChildrenPs[ancestorP]:
+def translateScript(data, ancestorP, blockChildrenIDs, commentDatas, mutationDatas):
+    print(100*"=")
+    pp(data)
+    """childrenDatas = {}
+    for pointer in blockChildrenIDs[ancestorP]:
         childrenDatas[pointer] = translateScript(
             data=data, 
             ancestorP=pointer, 
-            blockChildrenPs=blockChildrenPs,
+            blockChildrenIDs=blockChildrenIDs,
             commentDatas=commentDatas,
             mutationDatas=mutationDatas,
         )
     blockData = data[ancestorP] # Get the block's own data
     mutation = None
+    pp(childrenDatas)
     if isinstance(blockData, dict):
         if blockData["opcode"] in ["procedures_definition", "procedures_definition_return", "procedures_prototype", "procedures_call"]:
             newOpcode = blockData["opcode"]
@@ -140,7 +143,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                     data=blockData["inputs"], 
                     opcode=blockData["opcode"], 
                     scriptData=data,
-                    blockChildrenPs=blockChildrenPs,
+                    blockChildrenIDs=blockChildrenIDs,
                     commentDatas=commentDatas,
                     mutationDatas=mutationDatas,
                 )
@@ -161,7 +164,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                 data=blockData["inputs"], 
                 opcode=blockData["opcode"], 
                 scriptData=data,
-                blockChildrenPs=blockChildrenPs,
+                blockChildrenIDs=blockChildrenIDs,
                 commentDatas=commentDatas,
                 mutationDatas=mutationDatas
             )
@@ -180,7 +183,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
                         childrenDatas[subBlockID] = translateScript(
                             data=data,
                             ancestorP=subBlockID,
-                            blockChildrenPs=blockChildrenPs,
+                            blockChildrenIDs=blockChildrenIDs,
                             commentDatas=commentDatas,
                             mutationDatas=mutationDatas,
                         )
@@ -217,7 +220,7 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
         newDatas = translateScript(
             data=data,
             ancestorP=newData["inputs"]["custom_block"][1],
-            blockChildrenPs=blockChildrenPs,
+            blockChildrenIDs=blockChildrenIDs,
             commentDatas=commentDatas,
             mutationDatas=mutationDatas
         )
@@ -292,23 +295,32 @@ def translateScript(data, ancestorP, blockChildrenPs, commentDatas, mutationData
     else:
         returnValue = newDatas
     return returnValue
-
-def generateBlockChildrenPs(data):
-    blockParentPs = {}
-    for i,k,v in ikv(data):
-        if isinstance(v, dict):
-            blockParentPs[k] = v["parent"]
-        elif isinstance(v, list):
-            blockParentPs[k] = None
-    blockChildrenPs = {k:[] for k in data.keys()} # Create an empty dict which records each block's children
+    """
+def generateBlockChildrenIDs(data):
+    blockParentIDs = {}
+    for i,blockID,blockData in ikv(data):
+        if blockID not in blockParentIDs:
+            if isinstance(blockData, dict):
+                blockParentIDs[blockID] = blockData["parent"]
+            elif isinstance(blockData, list):
+                blockParentIDs[blockID] = None
+        
+        # For a special case when "parent" is wrongfully None e.g. [3, "d", "e"]
+        for i, inputID, inputData in ikv(blockData["inputs"]):
+            if len(inputData) != 3: continue
+            if inputData[0]   != 3: continue
+            if not isinstance(inputData[1], str): continue
+            if not isinstance(inputData[2], str): continue
+            blockParentIDs[inputData[2]] = blockID 
+    blockChildrenIDs = {k:[] for k in data.keys()} # Create an empty dict which records each block's children
     # Add each block to their parent's children list
-    ancestorPs = []
-    for i,childP,parentP in ikv(blockParentPs):
+    ancestorIDs = []
+    for i,childP,parentP in ikv(blockParentIDs):
         if parentP != None:
-            blockChildrenPs[parentP].append(childP)
+            blockChildrenIDs[parentP].append(childP)
         if parentP == None:
-            ancestorPs.append(childP)
-    return ancestorPs, blockChildrenPs
+            ancestorIDs.append(childP)
+    return ancestorIDs, blockChildrenIDs
 
 def getCustomBlockMutations(data):
     mutationDatas = {}
