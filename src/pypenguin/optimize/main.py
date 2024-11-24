@@ -1,6 +1,8 @@
+from pypenguin.helper_functions import pp
 from pypenguin.optimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.optimize.variables_lists import translateVariables, translateLists
-from pypenguin.optimize.blocks_scripts import translateScript, generateBlockChildrenIDs, getCustomBlockMutations
+from pypenguin.optimize.blocks_scripts import getCustomBlockMutations, prepareBlocks, nestScripts
+#from pypenguin.optimize.blocks_scripts import translateScript, generateBlockChildrenIDs, getCustomBlockMutations
 from pypenguin.optimize.comments import translateComment
 
 def optimizeProjectJSON(projectData):
@@ -12,9 +14,14 @@ def optimizeProjectJSON(projectData):
         for commentData in commentDatas.values():
             if commentData["blockId"] == None: # No Block connection
                 floatingCommentDatas.append(translateComment(data=commentData))
-        ancestorIDs, blockChildrenIDs = generateBlockChildrenIDs(data=spriteData["blocks"])
-        newScriptDatas = []
-        print(ancestorIDs)
+        
+        preparedBlockDatas = prepareBlocks(data=spriteData["blocks"])
+        nestedScripts      = nestScripts  (data=preparedBlockDatas)
+        
+        pp(preparedBlockDatas)
+        #ancestorIDs, blockChildrenIDs = generateBlockChildrenIDs(data=spriteData["blocks"])
+        #newScriptDatas = []
+        #print(ancestorIDs)
         """for ancestorP in ancestorIDs:
             newScriptData = translateScript(
                 data=spriteData["blocks"], 

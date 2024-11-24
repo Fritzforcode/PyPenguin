@@ -35,6 +35,23 @@ opcodeDatabase = (
     extJSON
 )
 
+def getOptimizedOpcode(opcode):
+    return opcodeDatabase[opcode]["newOpcode"]
+
+def getOptimizedInputID(opcode, inputID):
+    if "inputTranslation" not in opcodeDatabase[opcode]:
+        return inputID
+    return opcodeDatabase[opcode]["inputTranslation"][inputID]
+
+def getInputType(opcode, inputID):
+    return opcodeDatabase[opcode]["inputTypes"][inputID]
+
+def getInputMode(opcode, inputID):
+    return inputModes[getInputType(
+        opcode=opcode, 
+        inputID=inputID,
+    )]
+
 inputDefault = {}
 inputBlockDefault = None
 inputTextDefault = ""

@@ -4,6 +4,7 @@ opcodes = {
         "category": "Sensing",
         "newOpcode": "touching ([OBJECT]) ?",
         "inputTypes": {"OBJECT": "half-inclusive touchable object"},
+        "inputTranslation": {"TOUCHINGOBJECTMENU": "OBJECT"},
         "optionTypes": {},
         #"optionTypes": {"OBJECT": "half-inclusive touchable object"},
         "menus": [{"new": "OBJECT", "outer": "TOUCHINGOBJECTMENU", "inner": "TOUCHINGOBJECTMENU", "menuOpcode": "sensing_touchingobjectmenu"}],

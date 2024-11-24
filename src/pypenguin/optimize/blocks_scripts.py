@@ -1,330 +1,154 @@
-import json
+from pypenguin.helper_functions import ikv, pp
+from pypenguin.database import getOptimizedOpcode, getOptimizedInputID, getInputMode
 
-from pypenguin.helper_functions import ikv, WhatIsGoingOnError, pp, customHash, escape_chars, generateCustomOpcode
+def prepareBlocks(data):
+    newData = {}
+    for i, blockID, blockData in ikv(data):
+        if isinstance(blockData, list): # For list blocks e.g. value of a variable
+            newBlockData = prepareListBlock(data=blockData)
+        else: # For normal blocks
+            newBlockData = {
+                "opcode"      : getOptimizedOpcode(opcode=blockData["opcode"]),
+                "inputs"      : prepareInputs(
+                    data=blockData["inputs"],
+                    opcode=blockData["opcode"],
+                ),
+                "options"     : prepareOptions(data=blockData["fields"]),
+                "_info_"      : {
+                    "position": None,
+                    "next"    : blockData["next"],
+                    "topLevel": blockData["topLevel"],
+                },
+            }
+            if "x" in blockData and "y" in blockData:
+                newBlockData["_info_"]["position"] = [blockData["x"], blockData["y"]]
+            #TODO: implement comments, custom blocks
+            #if comment != None:
+            #    newData["comment"] = comment
+            #if mutation != None:
+            #    newData["mutation"] = mutation
+        newData[blockID] = newBlockData
+    return newData
 
-from pypenguin.optimize.comments import translateComment
+def nestScripts(data):
+    for i, blockID, blockData in ikv(data):
+        if blockData["_info_"]["topLevel"]:
+            nestBlockRecursively(
+                blockDatas=data,
+                blockID=blockID,
+            )
+            raise Exception(".")
 
-from pypenguin.database import opcodeDatabase
+def nestBlockRecursively(blockDatas, blockID):
+    blockData = blockDatas[blockID]
+    pp(blockData)
+    for i, inputID, inputData in ikv(blockData["inputs"]):
+        subBlockDatas = []
+        print(inputID, inputData)
+        for reference in inputData["references"]: 
+            subBlockDatas.append(nestBlockRecursively(
+                blockDatas=blockDatas,
+                blockID=reference,
+            ))
+        if inputData["listBlock"] != None:
+            subBlockDatas.append(inputData["listBlock"])
+        
+        blockCount = len(subBlockDatas)
+        match 
+        
 
-def translateVariableListBlock(data):
+def prepareInputs(data, opcode):
+    # Replace the old with the new input ids
+    newData = {}
+    for i, inputID, inputData in ikv(data):
+        newInputID = getOptimizedInputID(
+            opcode=opcode, 
+            inputID=inputID,
+        )
+        newData[newInputID] = inputData
+    data = newData
+    
+    # Optimize the input values
+    newData = {}
+    for i, inputID, inputData in ikv(data):
+        #magicNumber = inputData[0]
+        itemOneType = type(inputData[1])
+        references = []
+        listBlock  = None
+        text       = None
+        if   len(inputData) == 2:
+            if   itemOneType == str: # e.g. "CONDITION": [2, "b"]
+                # one block only, no text
+                references.append(inputData[1])
+            elif itemOneType == list: # e.g. "MESSAGE": [1, [10, "Bye!"]]
+                # one block(currently empty) and text
+                text = inputData[1][1]
+        elif len(inputData) == 3:
+            itemTwoType = type(inputData[2])
+            if   itemOneType == str and itemTwoType == str: # e.g. "TOUCHINGOBJECTMENU": [3, "d", "e"]
+                # two blocks(a menu, and a normal block) and no text
+                references.append(inputData[1])
+                references.append(inputData[2])
+            elif itemOneType == str and itemTwoType == list: # e.g. 'OPERAND1': [3, 'e', [10, '']]
+                # one block and text
+                references.append(inputData[1])
+                text = blockData[2][1]
+            elif itemOneType == list: # e.g. 'VALUE': [3, [12, 'var', '=!vkqJLb6ODy(oqe-|ZN'], [10, '0']]
+                # one list block and text
+                listBlock = inputData[1]
+                text = blockData[2][1]
+        print(opcode)
+        mode = getInputMode(
+            opcode=opcode,
+            inputID=inputID,
+        )
+        newInputData = {
+            "mode"      : mode,
+            "references": references,
+            "listBlock" : listBlock,
+            "text"      : text,
+        }
+        newData[inputID] = newInputData
+    return newData    
+
+def prepareOptions(data):
+    return data
+
+def prepareListBlock(data):
     # A variable or list block
     if data[0] == 12: # A magic value
         newData = {
             "opcode": "value of [VARIABLE]",
             "inputs": {},
             "options": {"VARIABLE": data[1]},
-            "comment": None
+            "_info_"      : {
+                "position": None,
+                "next"    : None,
+                "topLevel": False,
+            },
         }
     elif data[0] == 13: # A magic value
         newData = {
             "opcode": "value of [LIST]",
             "inputs": {},
             "options": {"LIST": data[1]},
-            "comment": None
-        }
-    else:
-        raise WhatIsGoingOnError(data)
-    return newData
-
-def translateInputs(data, opcode, scriptData, blockChildrenIDs, commentDatas, mutationDatas):
-    newData = {}
-    opcodeData = opcodeDatabase[opcode]
-    for i,inputID,inputData in ikv(data):
-        if "inputTranslation" in opcodeData:
-            if inputID in opcodeData["inputTranslation"]:
-                newInputID = opcodeData["inputTranslation"][inputID]
-            else:
-                newInputID = inputID
-        else:
-            newInputID = inputID
-        if len(inputData) == 2:
-            if   isinstance(inputData[1], str): # e.g. "CONDITION": [2, "b"]
-                # Exceptions
-                if opcode == "procedures_call":
-                    inputType = "boolean"
-                inputType = None
-                if "menus" in opcodeData:
-                    for menuData in opcodeData["menus"]:
-                        if menuData["outer"] == inputID:
-                            inputType = "menu"
-                # Otherwise
-                if inputType == None: 
-                    inputType = opcodeData["inputTypes"][newInputID]
-                
-                mode = "block-only" if inputType in ["boolean", "round", "menu"] else ("script" if inputType=="script" else None)
-                pointer = inputData[1]
-                text = None
-            elif isinstance(inputData[1], list): # e.g. "MESSAGE": [1, [10, "Bye!"]]
-                mode = "block-and-text"
-                pointer = None
-                text = inputData[1][1]
-            else:
-                raise WhatIsGoingOnError(inputData)
-        elif len(inputData) == 3:
-            if   isinstance(inputData[1], str): 
-                if isinstance(inputData[2], str): 
-                    mode     = "block-or-option"
-                    pointer  = inputData[1]
-                    pointer2 = inputData[2]
-                elif isinstance(inputData[2], list): # e.g. 'OPERAND1': [3, 'e', [10, '']]
-                    mode    = "block-and-text"
-                    pointer = inputData[1]
-                    text    = inputData[2][1]
-            elif isinstance(inputData[1], list): # e.g. 'VALUE': [3, [12, 'var', '=!vkqJLb6ODy(oqe-|ZN'], [10, '0']]
-                mode    = "block-and-text"
-                pointer = translateVariableListBlock(inputData[1])
-                text    = inputData[2][1]
-        else:
-            raise WhatIsGoingOnError(inputData)
-        if mode == "block-only":
-            newInputData = {
-                "block": pointer,
-            }
-        elif mode == "block-and-text":
-            newInputData = {
-                "block": pointer,
-                "text" : text, 
-            }
-        elif mode == "script":
-            newInputData = {
-                "blocks": translateScript(
-                    data=scriptData,
-                    ancestorP=inputData[1],
-                    blockChildrenIDs=blockChildrenIDs,
-                    commentDatas=commentDatas,
-                    mutationDatas=mutationDatas,
-                )
-            }
-        elif mode == "block-or-option":
-            newInputData = {
-                "block": pointer,
-                "option": pointer2,
-            }
-        else: raise WhatIsGoingOnError(mode, inputType)
-
-        newData[newInputID] = newInputData
-    return newData
-
-def translateOptions(data, opcode):
-    newData = {}
-    opcodeData = opcodeDatabase[opcode]
-    for i,fieldID,fieldData in ikv(data):
-        if "optionTranslation" in opcodeData:
-            if fieldID in opcodeData["optionTranslation"]:
-                optionID = opcodeData["optionTranslation"][fieldID]
-            else:
-                optionID = fieldID
-        else:
-            optionID = fieldID
-        newOptionData = fieldData[0]
-        newData[optionID] = newOptionData
-    return newData
-
-def translateScript(data, ancestorP, blockChildrenIDs, commentDatas, mutationDatas):
-    print(100*"=")
-    pp(data)
-    """childrenDatas = {}
-    for pointer in blockChildrenIDs[ancestorP]:
-        childrenDatas[pointer] = translateScript(
-            data=data, 
-            ancestorP=pointer, 
-            blockChildrenIDs=blockChildrenIDs,
-            commentDatas=commentDatas,
-            mutationDatas=mutationDatas,
-        )
-    blockData = data[ancestorP] # Get the block's own data
-    mutation = None
-    pp(childrenDatas)
-    if isinstance(blockData, dict):
-        if blockData["opcode"] in ["procedures_definition", "procedures_definition_return", "procedures_prototype", "procedures_call"]:
-            newOpcode = blockData["opcode"]
-            if blockData["opcode"] == "procedures_call":
-                inputs = translateInputs(
-                    data=blockData["inputs"], 
-                    opcode=blockData["opcode"], 
-                    scriptData=data,
-                    blockChildrenIDs=blockChildrenIDs,
-                    commentDatas=commentDatas,
-                    mutationDatas=mutationDatas,
-                )
-                for i,inputID,inputData in ikv(inputs):
-                    if inputData.get("block") != None:
-                        if isinstance(inputData["block"], str):
-                            subBlockData = childrenDatas[inputData["block"]][0]
-                            inputs[inputID]["block"] = subBlockData
-                        elif isinstance(inputData["block"], dict):
-                            pass
-            else:
-                inputs = blockData["inputs"]
-            options = blockData["fields"]
-            if blockData["opcode"] in ["procedures_prototype", "procedures_call"]:
-                mutation = blockData["mutation"]
-        else:
-            inputs = translateInputs(
-                data=blockData["inputs"], 
-                opcode=blockData["opcode"], 
-                scriptData=data,
-                blockChildrenIDs=blockChildrenIDs,
-                commentDatas=commentDatas,
-                mutationDatas=mutationDatas
-            )
-            for i,inputID,inputData in ikv(inputs):
-                if inputData.get("block") != None:
-                    if isinstance(inputData["block"], str):
-                        subBlockData = childrenDatas[inputData["block"]][0]
-                        inputs[inputID]["block"] = subBlockData
-                    elif isinstance(inputData["block"], dict):
-                        pass
-                if inputData.get("option") != None:
-                    print("bef")
-                    pp(inputData)
-                    if isinstance(inputData["option"], str):
-                        subBlockID = inputData["option"]
-                        childrenDatas[subBlockID] = translateScript(
-                            data=data,
-                            ancestorP=subBlockID,
-                            blockChildrenIDs=blockChildrenIDs,
-                            commentDatas=commentDatas,
-                            mutationDatas=mutationDatas,
-                        )
-                        subBlockData = childrenDatas[subBlockID]
-                        pp(subBlockData)
-                        #inputs[inputID]["option"] = subBlockData
-                    elif isinstance(inputData["option"], dict):
-                        pass
-                    print("aft")
-                    pp(inputData)
-                    raise WhatIsGoingOnError()
-
-                
-            options = translateOptions(data=blockData["fields"], opcode=blockData["opcode"])
-            newOpcode = opcodeDatabase[blockData["opcode"]]["newOpcode"]
-        comment = None
-        for commentData in commentDatas.values():
-            if commentData["blockId"] == ancestorP:
-                comment = translateComment(data=commentData)
-        newData = {
-            "opcode"      : newOpcode,
-            "inputs"      : inputs,
-            "options"     : options,
-        }
-        if comment != None:
-            newData["comment"] = comment
-        if mutation != None:
-            newData["mutation"] = mutation
-    elif isinstance(blockData, list): # A variable or list block
-        newData = translateVariableListBlock(blockData)
-
-    newDatas = None
-    if newData["opcode"] in ["procedures_definition", "procedures_definition_return"]:
-        newDatas = translateScript(
-            data=data,
-            ancestorP=newData["inputs"]["custom_block"][1],
-            blockChildrenIDs=blockChildrenIDs,
-            commentDatas=commentDatas,
-            mutationDatas=mutationDatas
-        )
-    elif newData["opcode"] == "procedures_prototype":
-        mutationData = newData["mutation"]
-        proccode = mutationData["proccode"]
-        argumentNames = json.loads(mutationData["argumentnames"])
-        customOpcode = generateCustomOpcode(proccode=proccode, argumentNames=argumentNames)
-
-        match json.loads(mutationData["optype"]):
-            case None       : blockType = "instruction"
-            case "statement": blockType = "instruction"
-            case "end"      : blockType = "lastInstruction"
-            case "string"   : blockType = "stringReporter"
-            case "number"   : blockType = "numberReporter"
-            case "boolean"  : blockType = "booleanReporter"
-            case _: raise Exception(mutationData["optype"], mutationData["returns"])
-        oldData = newData
-        newData = {
-            "opcode": "define ...",
-            "inputs": {},
-            "options": {
-                "customOpcode"   : customOpcode,
-                "noScreenRefresh": json.loads(mutationData["warp"]),
-                "blockType"      : blockType,
+            "_info_"      : {
+                "position": None,
+                "next"    : None,
+                "topLevel": False,
             },
         }
-        if "comment" in oldData:
-            newData["comment"] = oldData["comment"]
-    elif newData["opcode"] == "procedures_call":
-        proccode = newData["mutation"]["proccode"]
-        mutationData = mutationDatas[proccode] # Get the full mutation data
-        argumentNames = json.loads(mutationData["argumentnames"])
-        argumentIDs = json.loads(mutationData["argumentids"])
-        customOpcode = generateCustomOpcode(proccode=proccode, argumentNames=argumentNames)
-
-        inputDatas = {}
-        for i, inputID, inputData in ikv(newData["inputs"]):
-            newInputID = argumentNames[argumentIDs.index(inputID)]
-            inputDatas[newInputID] = inputData
-        oldData = newData
-        newData = {
-            "opcode" : "call ...",
-            "inputs" : inputDatas,
-            "options": {
-                "customOpcode": customOpcode,
-            },
-        }
-        if "comment" in oldData:
-            newData["comment"] = oldData["comment"]
-    
-    if isinstance(blockData, dict):
-        opcodeData = opcodeDatabase[blockData["opcode"]]
-        if "menus" in opcodeData:
-            for menuData in opcodeData["menus"]:
-                newID     = menuData["new"]
-                outerID   = menuData["outer"]
-                innerID   = menuData["inner"]
-                menuValue = newData["inputs"][outerID]["block"]["options"][innerID]
-                del newData["inputs"][outerID]
-                newData["inputs"][newID] = {"option": menuValue}
-    
-    newDatas = [newData] if newDatas == None else newDatas
-    if isinstance(blockData, dict):
-        if blockData["next"] != None: #if the block does have a neighbour
-            newDatas += childrenDatas[blockData["next"]]
-    
-    if isinstance(blockData, list):
-        returnValue = {"position": [blockData[3], blockData[4]], "blocks": newDatas} 
-    elif blockData["topLevel"] == True:
-        returnValue = {"position": [blockData["x"], blockData["y"]], "blocks": newDatas} 
-    else:
-        returnValue = newDatas
-    return returnValue
-    """
-def generateBlockChildrenIDs(data):
-    blockParentIDs = {}
-    for i,blockID,blockData in ikv(data):
-        if blockID not in blockParentIDs:
-            if isinstance(blockData, dict):
-                blockParentIDs[blockID] = blockData["parent"]
-            elif isinstance(blockData, list):
-                blockParentIDs[blockID] = None
+    raise Exception() # Correct the following code
+    if len(data) > 3:
+        newData["_info_"]["position"] = data[4:6]
+        newData["_info_"]["topLevel"] = True
         
-        # For a special case when "parent" is wrongfully None e.g. [3, "d", "e"]
-        for i, inputID, inputData in ikv(blockData["inputs"]):
-            if len(inputData) != 3: continue
-            if inputData[0]   != 3: continue
-            if not isinstance(inputData[1], str): continue
-            if not isinstance(inputData[2], str): continue
-            blockParentIDs[inputData[2]] = blockID 
-    blockChildrenIDs = {k:[] for k in data.keys()} # Create an empty dict which records each block's children
-    # Add each block to their parent's children list
-    ancestorIDs = []
-    for i,childP,parentP in ikv(blockParentIDs):
-        if parentP != None:
-            blockChildrenIDs[parentP].append(childP)
-        if parentP == None:
-            ancestorIDs.append(childP)
-    return ancestorIDs, blockChildrenIDs
+        
+    return newData
 
 def getCustomBlockMutations(data):
     mutationDatas = {}
-    for j, blockID, blockData in ikv(data):
+    for i, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):
             if blockData["opcode"] == "procedures_prototype":
                 mutationData = blockData["mutation"]
