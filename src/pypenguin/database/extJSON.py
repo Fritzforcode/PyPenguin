@@ -187,8 +187,9 @@ opcodes = {
     "jgJSON_json_array_contains": {
         "type": "booleanReporter",
         "category": "JSON",
-        "newOpcode": "array (array) contains (value) ?",
-        "inputTypes": {"array": "text", "value": "text"},
+        "newOpcode": "array (ARRAY) contains (VALUE) ?",
+        "inputTypes": {"ARRAY": "text", "VALUE": "text"},
+        "inputTranlation": {"array": "ARRAY", "value": "VALUE"},
         "optionTypes": {},
     },
     "jgJSON_json_array_flat": {

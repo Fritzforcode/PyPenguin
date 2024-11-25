@@ -126,6 +126,8 @@ def unnestScript(data, spriteName, tokens, scriptIDs):
                         required = ["block", "text"]
                     elif inputMode == "block-only":
                         required = ["block"]
+                    elif inputMode == "block-and-option":
+                        required = ["option"]
                     elif inputMode == "script":
                         required = ["blocks"]
                     

@@ -1,5 +1,5 @@
 from pypenguin.helper_functions import ikv, pp
-from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputID, getInputMode, getOptimizedOptionID, getBlockType
+from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputID, getInputMode, getInputModes, getOptimizedOptionID, getBlockType
 
 import copy
 
@@ -42,6 +42,7 @@ def finishBlock(data):
             newInputData["option"] = finishBlock(data=inputData["option"])
         newInputDatas[inputID] = newInputData
     newData = data | {"inputs": newInputDatas}
+    del newData["_info_"]
     return newData
 
 
@@ -114,16 +115,18 @@ def nestBlockRecursively(blockDatas, blockID):
             case "script":
                 assert blockCount in [0, 1]
                 newInputData |= {
-                    "blocks": subBlockDatas[0] if blockCount == 1 else None,
+                    "blocks": subBlockDatas[0] if blockCount == 1 else [],
                 }
             case "block-and-option":
                 assert blockCount in [1, 2]
                 newInputData |= {
                     "option": subBlockDatas[0][0] if blockCount == 1 else subBlockDatas[1][0],
                     "block" : None                if blockCount == 1 else subBlockDatas[0][0],
-                }
-                    
+              }          
         newInputDatas[inputID] = newInputData
+    
+    
+    
     newBlockData = blockData | {"inputs": newInputDatas}
     newBlockDatas = [newBlockData]
     if blockData["_info_"]["next"] != None:
@@ -217,6 +220,19 @@ def prepareInputs(data, opcode):
             "text"      : text,
         }
         newData[inputID] = newInputData
+    
+    for i, inputID, inputMode in ikv(getInputModes(opcode)):
+        if inputID not in newData:
+            if inputMode in ["block-only", "script"]:
+                newData[inputID] = {
+                    "mode"      : inputMode,
+                    "references": [],
+                    "listBlock" : None,
+                    "text"      : None,
+                }
+            else:
+                raise Exception(inputMode)
+    
     return newData    
 
 def prepareOptions(data, opcode):

@@ -62,14 +62,22 @@ def getOptimizedInputID(opcode, inputID):
     return inputID
 
 def getInputType(opcode, inputID):
-    print(opcode)
     return opcodeDatabase[opcode]["inputTypes"][inputID]
+
+def getInputTypes(opcode):
+    return opcodeDatabase[opcode]["inputTypes"]
 
 def getInputMode(opcode, inputID):
     return inputModes[getInputType(
         opcode=opcode, 
         inputID=inputID,
     )]
+
+def getInputModes(opcode):
+    return {inputID: getInputMode(
+        opcode=opcode,
+        inputID=inputID,
+    ) for inputID in getInputTypes(opcode).keys()}
 
 def getOptimizedOptionID(opcode, optionID):
     if "optionTranslation" not in opcodeDatabase[opcode]:
@@ -103,6 +111,7 @@ inputModes = {
 
     "half-inclusive touchable object": "block-and-option",
     "other sprite or stage"          : "block-and-option",
+    "cloning target"                 : "block-and-option",
 }
 
 
@@ -124,4 +133,4 @@ defaultCostumeDeoptimized = {
     "rotationCenterY": 0
 }
 
-defaultCostumeFilePath = "assets/defaultCostume.svg"
+defaultCostumeFilePath = "../assets/defaultCostume.svg"

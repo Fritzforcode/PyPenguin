@@ -86,6 +86,7 @@ opcodes = {
         "category": "My Blocks",
         "newOpcode": "return (return)",
         "inputTypes": {"return": "text"},
+        #TODO: change return to VALUE
         "optionTypes": {},
     },
     "procedures_set": {
