@@ -68,3 +68,24 @@ class tempSelector:
 
     def __repr__(self):
         return f"tS<{self.path}>"
+
+class newTempSelector:
+    def __init__(self):
+        self.id = random.randint(1, 10000)
+    
+    def __eq__(self, other):
+        if isinstance(other, newTempSelector):
+            return self.id == other.id
+        return False
+
+    def __hash__(self):
+        # Use a tuple of the attributes to create a unique hash
+        return hash(self.id)
+
+    def __repr__(self):
+        return f"tSn<{self.id % 1000}>"
+    
+    def copy(self):
+        new = newTempSelector()
+        new.id = self.id
+        return new

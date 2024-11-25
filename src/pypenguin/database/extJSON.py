@@ -189,7 +189,7 @@ opcodes = {
         "category": "JSON",
         "newOpcode": "array (ARRAY) contains (VALUE) ?",
         "inputTypes": {"ARRAY": "text", "VALUE": "text"},
-        "inputTranlation": {"array": "ARRAY", "value": "VALUE"},
+        "inputTranslation": {"array": "ARRAY", "value": "VALUE"},
         "optionTypes": {},
     },
     "jgJSON_json_array_flat": {

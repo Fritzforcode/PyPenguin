@@ -27,8 +27,8 @@
             "scripts": [
                 {
                     "position": [
-                        569,
-                        657
+                        467,
+                        405
                     ],
                     "blocks": [
                         {
@@ -37,156 +37,39 @@
                                 "OBJECT": {
                                     "mode": "block-and-option",
                                     "option": "_mouse_",
+                                    "block": null
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        532,
+                        583
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "touching ([OBJECT]) ?",
+                            "inputs": {
+                                "OBJECT": {
+                                    "mode": "block-and-option",
+                                    "option": "_edge_",
                                     "block": {
                                         "opcode": "(VALUE)",
                                         "inputs": {
                                             "VALUE": {
                                                 "mode": "block-and-text",
-                                                "block": {
-                                                    "opcode": "not <OPERAND>",
-                                                    "inputs": {
-                                                        "OPERAND": {
-                                                            "mode": "block-only",
-                                                            "block": {
-                                                                "opcode": "true",
-                                                                "inputs": {},
-                                                                "options": {},
-                                                                "_info_": {
-                                                                    "next": null,
-                                                                    "topLevel": false
-                                                                }
-                                                            }
-                                                        }
-                                                    },
-                                                    "options": {},
-                                                    "_info_": {
-                                                        "next": null,
-                                                        "topLevel": false
-                                                    }
-                                                },
+                                                "block": null,
                                                 "text": "foo"
                                             }
                                         },
-                                        "options": {},
-                                        "_info_": {
-                                            "next": null,
-                                            "topLevel": false
-                                        }
+                                        "options": {}
                                     }
                                 }
                             },
-                            "options": {},
-                            "_info_": {
-                                "next": null,
-                                "topLevel": true,
-                                "position": [
-                                    569,
-                                    657
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        428,
-                        368
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "if <CONDITION> then {THEN}",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": {
-                                        "opcode": "touching ([OBJECT]) ?",
-                                        "inputs": {
-                                            "OBJECT": {
-                                                "mode": "block-and-option",
-                                                "option": "_mouse_",
-                                                "block": null
-                                            }
-                                        },
-                                        "options": {},
-                                        "_info_": {
-                                            "next": null,
-                                            "topLevel": false
-                                        }
-                                    }
-                                },
-                                "THEN": {
-                                    "mode": "script",
-                                    "blocks": [
-                                        {
-                                            "opcode": "set [VARIABLE] to (VALUE)",
-                                            "inputs": {
-                                                "VALUE": {
-                                                    "mode": "block-and-text",
-                                                    "block": {
-                                                        "opcode": "(VALUE)",
-                                                        "inputs": {
-                                                            "VALUE": {
-                                                                "mode": "block-and-text",
-                                                                "block": null,
-                                                                "text": "foo"
-                                                            }
-                                                        },
-                                                        "options": {},
-                                                        "_info_": {
-                                                            "next": null,
-                                                            "topLevel": false
-                                                        }
-                                                    },
-                                                    "text": "0"
-                                                }
-                                            },
-                                            "options": {
-                                                "VARIABLE": "my variable"
-                                            },
-                                            "_info_": {
-                                                "next": null,
-                                                "topLevel": false
-                                            }
-                                        }
-                                    ]
-                                }
-                            },
-                            "options": {},
-                            "_info_": {
-                                "next": null,
-                                "topLevel": true,
-                                "position": [
-                                    428,
-                                    368
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        433,
-                        737
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "stop sprite [TARGET]",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "option": "_stage_",
-                                    "block": null
-                                }
-                            },
-                            "options": {},
-                            "_info_": {
-                                "next": null,
-                                "topLevel": true,
-                                "position": [
-                                    433,
-                                    737
-                                ]
-                            }
+                            "options": {}
                         }
                     ]
                 }

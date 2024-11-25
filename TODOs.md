@@ -1,5 +1,11 @@
 # TODO
 
+validate input "option"
+
+insure procedures working
+
+rewrite deoptimize/blocks_script.py
+
 add option value translation
 
 possibly change null to None ...

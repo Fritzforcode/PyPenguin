@@ -1,7 +1,7 @@
 from pypenguin.validate.errors import ValidationError
 
 from pypenguin.database import opcodeDatabase
-allowedOpcodes = [data["newOpcode"] for data in opcodeDatabase.values()]
+allowedOpcodes = [(data["newOpcode"]) for data in opcodeDatabase.values()]
 textToSpeechLanguages = [
     None,
     "ar", "zh-cn", "da", "nl", "en", 

@@ -62,6 +62,7 @@ def getOptimizedInputID(opcode, inputID):
     return inputID
 
 def getInputType(opcode, inputID):
+    #print(opcode)
     return opcodeDatabase[opcode]["inputTypes"][inputID]
 
 def getInputTypes(opcode):
@@ -89,6 +90,13 @@ def getOptimizedOptionID(opcode, optionID):
 def getBlockType(opcode):
     return opcodeDatabase[opcode]["type"]
 
+def getMenu(opcode, inputID):
+    if "menus" not in opcodeDatabase[opcode]:
+        return None
+    for menu in opcodeDatabase[opcode]["menus"]:
+        if menu["new"] == inputID:
+            return menu
+    return None
 
 inputDefault = {}
 inputBlockDefault = None
@@ -109,9 +117,14 @@ inputModes = {
     "round"           : "block-only",
     "script"          : "script",
 
-    "half-inclusive touchable object": "block-and-option",
     "other sprite or stage"          : "block-and-option",
     "cloning target"                 : "block-and-option",
+    "exclusive touchable object"     : "block-and-option",
+    "half-inclusive touchable object": "block-and-option",
+    "inclusive touchable object"     : "block-and-option",
+    "touchable sprite"               : "block-and-option",
+    "key"                            : "block-and-option",
+    "up or down"                     : "block-and-option",
 }
 
 
@@ -133,4 +146,4 @@ defaultCostumeDeoptimized = {
     "rotationCenterY": 0
 }
 
-defaultCostumeFilePath = "../assets/defaultCostume.svg"
+defaultCostumeFilePath = "assets/defaultCostume.svg"

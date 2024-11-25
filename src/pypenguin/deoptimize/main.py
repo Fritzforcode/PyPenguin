@@ -45,10 +45,11 @@ def deoptimizeProject(projectData):
             
             unnestedScriptData, scriptCommentDatasB = unnestScript(
                 data=linkedScriptData, 
-                spriteName=spriteData["name"],
-                tokens=tokens,
-                scriptIDs=[scriptID],
+                #spriteName=spriteData["name"],
+                #tokens=tokens,
+                #scriptIDs=[scriptID],
             )
+            raise Exception("DONE")
 
             scriptCommentDatas = scriptCommentDatasA | scriptCommentDatasB
             newCommentDatas |= scriptCommentDatas

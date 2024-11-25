@@ -51,6 +51,20 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    "sensing_keyoptions": {
+        "type": "menu",
+        "category": "Sensing",
+        "newOpcode": "#KEY MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "sensing_scrolldirections": {
+        "type": "menu",
+        "category": "Sensing",
+        "newOpcode": "#SCROLL DIRECTION MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
 # SPECIAL: Variables and Lists
     "special_variable_value": {
         "type": "textReporter",
