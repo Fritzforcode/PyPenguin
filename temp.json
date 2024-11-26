@@ -43,28 +43,43 @@
             "customVars": [],
             "blocks": {
                 "a": {
-                    "opcode": "sensing_touchingobject",
-                    "next": null,
+                    "opcode": "data_setvariableto",
+                    "next": "b",
                     "parent": null,
                     "inputs": {
-                        "TOUCHINGOBJECTMENU": [
-                            1,
-                            "b"
+                        "VALUE": [
+                            3,
+                            "c",
+                            [
+                                10,
+                                "0"
+                            ]
                         ]
                     },
-                    "fields": {},
+                    "fields": {
+                        "VARIABLE": [
+                            "my variable",
+                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                            ""
+                        ]
+                    },
                     "shadow": false,
                     "topLevel": true,
-                    "x": 467,
-                    "y": 405
+                    "x": 140,
+                    "y": 294
                 },
                 "c": {
                     "opcode": "operator_stringify",
                     "next": null,
-                    "parent": "d",
+                    "parent": "a",
                     "inputs": {
                         "ONE": [
-                            1,
+                            3,
+                            [
+                                12,
+                                "my variable",
+                                "`jEk@4|i[#Fk?(8x)AV.-my variable"
+                            ],
                             [
                                 10,
                                 "foo"
@@ -76,51 +91,27 @@
                     "topLevel": false
                 },
                 "b": {
-                    "opcode": "sensing_touchingobjectmenu",
+                    "opcode": "data_changevariableby",
                     "next": null,
                     "parent": "a",
-                    "inputs": {},
-                    "fields": {
-                        "TOUCHINGOBJECTMENU": [
-                            "_mouse_",
-                            "K{zH6@o*vzKZgj|2t:|Y"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "d": {
-                    "opcode": "sensing_touchingobject",
-                    "next": null,
-                    "parent": null,
                     "inputs": {
-                        "TOUCHINGOBJECTMENU": [
-                            3,
-                            "c",
-                            "e"
+                        "VALUE": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
                         ]
                     },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 532,
-                    "y": 583
-                },
-                "e": {
-                    "opcode": "sensing_touchingobjectmenu",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
                     "fields": {
-                        "TOUCHINGOBJECTMENU": [
-                            "_edge_",
-                            "m:Yz2d6ssR/NnH4%=[VO"
+                        "VARIABLE": [
+                            "my variable",
+                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                            ""
                         ]
                     },
-                    "shadow": true,
-                    "topLevel": true,
-                    "x": 620,
-                    "y": 587
+                    "shadow": false,
+                    "topLevel": false
                 }
             },
             "comments": {},

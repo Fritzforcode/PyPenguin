@@ -63,6 +63,19 @@
                             "options": {
                                 "VARIABLE": "my variable"
                             }
+                        },
+                        {
+                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "my variable"
+                            }
                         }
                     ]
                 }

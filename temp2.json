@@ -27,49 +27,55 @@
             "scripts": [
                 {
                     "position": [
-                        467,
-                        405
+                        140,
+                        294
                     ],
                     "blocks": [
                         {
-                            "opcode": "touching ([OBJECT]) ?",
+                            "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
-                                "OBJECT": {
-                                    "mode": "block-and-option",
-                                    "option": "_mouse_",
-                                    "block": null
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        532,
-                        583
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "touching ([OBJECT]) ?",
-                            "inputs": {
-                                "OBJECT": {
-                                    "mode": "block-and-option",
-                                    "option": "_edge_",
+                                "VALUE": {
+                                    "mode": "block-and-text",
                                     "block": {
                                         "opcode": "(VALUE)",
                                         "inputs": {
                                             "VALUE": {
                                                 "mode": "block-and-text",
-                                                "block": null,
+                                                "block": {
+                                                    "opcode": "(VALUE) as a boolean",
+                                                    "inputs": {
+                                                        "VALUE": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "true"
+                                                        }
+                                                    },
+                                                    "options": {}
+                                                },
                                                 "text": "foo"
                                             }
                                         },
                                         "options": {}
-                                    }
+                                    },
+                                    "text": "0"
                                 }
                             },
-                            "options": {}
+                            "options": {
+                                "VARIABLE": "my variable"
+                            }
+                        },
+                        {
+                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "my variable"
+                            }
                         }
                     ]
                 }

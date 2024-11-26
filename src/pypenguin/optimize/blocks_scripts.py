@@ -16,6 +16,8 @@ def finishScripts(data):
     return newScriptDatas
 
 def finishBlock(data):
+    print("start fblock", 100*"{")
+    pp(data)
     blockType = getBlockType(
         opcode=getDeoptimizedOpcode(
             opcode=data["opcode"]
@@ -43,10 +45,14 @@ def finishBlock(data):
         newInputDatas[inputID] = newInputData
     newData = data | {"inputs": newInputDatas}
     del newData["_info_"]
+    #print("stop fblock", 100*"}")
+    #pp(newData)
     return newData
 
 
 def nestScripts(data):
+    print("start scripts", 100*"(")
+    pp(data)
     # Get all top level block ids
     topLevelIDs = []
     for i, blockID, blockData in ikv(data):
@@ -79,6 +85,8 @@ def nestScripts(data):
         newScriptDatas.append(newScriptData)
         #print("script end", 100*")")
         #pp(newScriptData)
+    print("stop scripts", 100*")")
+    pp(newScriptDatas)
     return newScriptDatas
 
 def nestBlockRecursively(blockDatas, blockID):
