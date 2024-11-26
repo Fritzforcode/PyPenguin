@@ -98,6 +98,18 @@ def getMenu(opcode, inputID):
             return menu
     return None
 
+def getInputMagicNumber(inputType):
+    match inputType:
+        case "broadcast"       : magicNumber = 11
+        case "text"            : magicNumber = 10
+        case "color"           : magicNumber =  9
+        case "integer"         : magicNumber =  7
+        case "positive integer": magicNumber =  6
+        case "positive number" : magicNumber =  5
+        case "number"          : magicNumber =  4
+        case "boolean"         : pass
+    return magicNumber
+
 inputDefault = {}
 inputBlockDefault = None
 inputTextDefault = ""

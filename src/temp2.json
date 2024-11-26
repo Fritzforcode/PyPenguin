@@ -3,21 +3,7 @@
         {
             "isStage": true,
             "name": "Stage",
-            "scripts": [
-                {
-                    "position": [
-                        44,
-                        44
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when stage clicked",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                }
-            ],
+            "scripts": [],
             "comments": [],
             "currentCostume": 0,
             "costumes": [
@@ -41,229 +27,41 @@
             "scripts": [
                 {
                     "position": [
-                        296,
-                        163
+                        140,
+                        294
                     ],
                     "blocks": [
                         {
-                            "opcode": "when flag clicked",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        295,
-                        256
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when stop clicked",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        293,
-                        352
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "always",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        286,
-                        454
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when <CONDITION>",
+                            "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
+                                "VALUE": {
+                                    "mode": "block-and-text",
                                     "block": {
-                                        "opcode": "true",
-                                        "inputs": {},
+                                        "opcode": "(VALUE)",
+                                        "inputs": {
+                                            "VALUE": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "(VALUE) as a boolean",
+                                                    "inputs": {
+                                                        "VALUE": {
+                                                            "mode": "block-and-text",
+                                                            "block": null,
+                                                            "text": "true"
+                                                        }
+                                                    },
+                                                    "options": {}
+                                                },
+                                                "text": "foo"
+                                            }
+                                        },
                                         "options": {}
-                                    }
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        277,
-                        553
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when [KEY] key pressed",
-                            "inputs": {},
-                            "options": {
-                                "KEY": "space"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        261,
-                        647
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when [KEY] key hit",
-                            "inputs": {},
-                            "options": {
-                                "KEY": "space"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        283,
-                        734
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when mouse is scrolled [DIRECTION]",
-                            "inputs": {},
-                            "options": {
-                                "DIRECTION": "up"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        307,
-                        815
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when this sprite clicked",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        299,
-                        906
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when backdrop switches to [BACKDROP]",
-                            "inputs": {},
-                            "options": {
-                                "BACKDROP": "backdrop1"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        286,
-                        983
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when [OPTION] > (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "10"
+                                    },
+                                    "text": "0"
                                 }
                             },
                             "options": {
-                                "OPTION": "LOUDNESS"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        280,
-                        1077
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when i receive [BROADCAST]",
-                            "inputs": {},
-                            "options": {
-                                "BROADCAST": "message1"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        286,
-                        1205
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "broadcast [BROADCAST]",
-                            "inputs": {
-                                "BROADCAST": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "message1"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        240,
-                        1323
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "broadcast [BROADCAST] and wait",
-                            "inputs": {
-                                "BROADCAST": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "message1"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        569,
-                        987
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when [OPTION] > (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "10"
-                                }
-                            },
-                            "options": {
-                                "OPTION": "TIMER"
+                                "VARIABLE": "my variable"
                             }
                         }
                     ]

@@ -2,7 +2,7 @@ from pypenguin.helper_functions import generateRandomToken,  tempSelector, pp, i
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
 from pypenguin.deoptimize.broadcasts import generateBroadcastTokens
-from pypenguin.deoptimize.blocks_scripts import linkBlocksToScript, unnestScript, finishBlocks
+from pypenguin.deoptimize.blocks_scripts import unfinishScripts#linkBlocksToScript, unnestScript, finishBlocks
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
 
@@ -45,9 +45,8 @@ def deoptimizeProject(projectData):
             
             unnestedScriptData, scriptCommentDatasB = unnestScript(
                 data=linkedScriptData, 
-                #spriteName=spriteData["name"],
-                #tokens=tokens,
-                #scriptIDs=[scriptID],
+                spriteName=spriteData["name"],
+                tokens=tokens,
             )
             raise Exception("DONE")
 
