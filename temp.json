@@ -42,74 +42,172 @@
             "broadcasts": {},
             "customVars": [],
             "blocks": {
-                "a": {
-                    "opcode": "data_setvariableto",
-                    "next": "b",
+                "k": {
+                    "opcode": "operator_length",
+                    "next": null,
                     "parent": null,
                     "inputs": {
-                        "VALUE": [
-                            3,
-                            "c",
+                        "STRING": [
+                            1,
                             [
                                 10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "VARIABLE": [
-                            "my variable",
-                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
-                            ""
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 140,
-                    "y": 294
-                },
-                "c": {
-                    "opcode": "operator_stringify",
-                    "next": null,
-                    "parent": "a",
-                    "inputs": {
-                        "ONE": [
-                            3,
-                            [
-                                12,
-                                "my variable",
-                                "`jEk@4|i[#Fk?(8x)AV.-my variable"
-                            ],
-                            [
-                                10,
-                                "foo"
+                                "apple"
                             ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": false
+                    "topLevel": true,
+                    "x": 33,
+                    "y": 17
                 },
                 "b": {
-                    "opcode": "data_changevariableby",
+                    "opcode": "operator_length",
                     "next": null,
-                    "parent": "a",
+                    "parent": null,
                     "inputs": {
-                        "VALUE": [
-                            1,
+                        "STRING": [
+                            3,
+                            "c",
                             [
-                                4,
-                                "1"
+                                10,
+                                "apple"
                             ]
                         ]
                     },
-                    "fields": {
-                        "VARIABLE": [
-                            "my variable",
-                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
-                            ""
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 31,
+                    "y": 68
+                },
+                "c": {
+                    "opcode": "operator_tabCharacter",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "l": {
+                    "opcode": "control_if",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 34,
+                    "y": 155
+                },
+                "a": {
+                    "opcode": "control_if",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "d"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "e"
                         ]
                     },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 46,
+                    "y": 314
+                },
+                "d": {
+                    "opcode": "operator_trueBoolean",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "e": {
+                    "opcode": "control_exitCase",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "f": {
+                    "opcode": "sensing_touchingobject",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "TOUCHINGOBJECTMENU": [
+                            1,
+                            "g"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 1,
+                    "y": 471
+                },
+                "g": {
+                    "opcode": "sensing_touchingobjectmenu",
+                    "next": null,
+                    "parent": "f",
+                    "inputs": {},
+                    "fields": {
+                        "TOUCHINGOBJECTMENU": [
+                            "_mouse_",
+                            "W~r7wGt.tyGaU{*N,*Gm"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "h": {
+                    "opcode": "sensing_touchingobject",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "TOUCHINGOBJECTMENU": [
+                            3,
+                            "i",
+                            "j"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": -2,
+                    "y": 568
+                },
+                "j": {
+                    "opcode": "sensing_touchingobjectmenu",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "TOUCHINGOBJECTMENU": [
+                            "_mouse_",
+                            "KjDNG,u77S{Q5Qi#F*J!"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": true,
+                    "x": 87,
+                    "y": 572
+                },
+                "i": {
+                    "opcode": "operator_newLine",
+                    "next": null,
+                    "parent": "h",
+                    "inputs": {},
+                    "fields": {},
                     "shadow": false,
                     "topLevel": false
                 }

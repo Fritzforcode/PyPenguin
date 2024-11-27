@@ -27,55 +27,139 @@
             "scripts": [
                 {
                     "position": [
-                        140,
-                        294
+                        33,
+                        17
                     ],
                     "blocks": [
                         {
-                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "opcode": "length of (TEXT)",
                             "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": {
-                                        "opcode": "(VALUE)",
-                                        "inputs": {
-                                            "VALUE": {
-                                                "mode": "block-and-text",
-                                                "block": {
-                                                    "opcode": "(VALUE) as a boolean",
-                                                    "inputs": {
-                                                        "VALUE": {
-                                                            "mode": "block-and-text",
-                                                            "block": null,
-                                                            "text": "true"
-                                                        }
-                                                    },
-                                                    "options": {}
-                                                },
-                                                "text": "foo"
-                                            }
-                                        },
-                                        "options": {}
-                                    },
-                                    "text": "0"
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "my variable"
-                            }
-                        },
-                        {
-                            "opcode": "change [VARIABLE] by (VALUE)",
-                            "inputs": {
-                                "VALUE": {
+                                "TEXT": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "1"
+                                    "text": "apple"
                                 }
                             },
-                            "options": {
-                                "VARIABLE": "my variable"
-                            }
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        31,
+                        68
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "length of (TEXT)",
+                            "inputs": {
+                                "TEXT": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "tab character",
+                                        "inputs": {},
+                                        "options": {}
+                                    },
+                                    "text": "apple"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        34,
+                        155
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "if <CONDITION> then {THEN}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": null
+                                },
+                                "THEN": {
+                                    "mode": "script",
+                                    "blocks": []
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        46,
+                        314
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "if <CONDITION> then {THEN}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": {
+                                        "opcode": "true",
+                                        "inputs": {},
+                                        "options": {}
+                                    }
+                                },
+                                "THEN": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "exit case",
+                                            "inputs": {},
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        1,
+                        471
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "touching ([OBJECT]) ?",
+                            "inputs": {
+                                "OBJECT": {
+                                    "mode": "block-and-option",
+                                    "option": "_mouse_",
+                                    "block": null
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -2,
+                        568
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "touching ([OBJECT]) ?",
+                            "inputs": {
+                                "OBJECT": {
+                                    "mode": "block-and-option",
+                                    "option": "_mouse_",
+                                    "block": {
+                                        "opcode": "new line",
+                                        "inputs": {},
+                                        "options": {}
+                                    }
+                                }
+                            },
+                            "options": {}
                         }
                     ]
                 }

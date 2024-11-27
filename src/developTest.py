@@ -2,7 +2,7 @@ from pypenguin import extractAndOptimizeProject, deoptimizeAndCompressProject, v
 from pypenguin.helper_functions import readJSONFile, pp
 
 optimizedData = extractAndOptimizeProject(
-    projectFilePath           = "assets/studies/test2.pmp",
+    projectFilePath           = "assets/studies/inputTest.pmp",#test2.pmp",
     optimizedProjectDirectory = "extractedProject",
     temporaryDirectory        = "temporary",
     writeDebugFiles           = True,
@@ -11,10 +11,11 @@ optimizedData = extractAndOptimizeProject(
 validateProject(projectData=optimizedData)
 
 
-from pypenguin.deoptimize.blocks_scripts import unfinishScripts, flattenScripts
-scriptDatas = optimizedData["sprites"][1]["scripts"]
+from pypenguin.deoptimize.blocks_scripts import unfinishScripts, flattenScripts, unprepareBlocks
+scriptDatas           = optimizedData["sprites"][1]["scripts"]
 unfinishedScriptDatas = unfinishScripts(scriptDatas)
-pp(flattenScripts(unfinishedScriptDatas))
+flattendScriptDatas   = flattenScripts(unfinishedScriptDatas)
+pp(unprepareBlocks(data=flattendScriptDatas))
 
 """
 deoptimizeAndCompressProject(

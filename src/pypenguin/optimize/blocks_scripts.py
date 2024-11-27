@@ -16,8 +16,8 @@ def finishScripts(data):
     return newScriptDatas
 
 def finishBlock(data):
-    print("start fblock", 100*"{")
-    pp(data)
+    #print("start fblock", 100*"{")
+    #pp(data)
     blockType = getBlockType(
         opcode=getDeoptimizedOpcode(
             opcode=data["opcode"]
@@ -51,8 +51,8 @@ def finishBlock(data):
 
 
 def nestScripts(data):
-    print("start scripts", 100*"(")
-    pp(data)
+    #print("start scripts", 100*"(")
+    #pp(data)
     # Get all top level block ids
     topLevelIDs = []
     for i, blockID, blockData in ikv(data):
@@ -85,12 +85,13 @@ def nestScripts(data):
         newScriptDatas.append(newScriptData)
         #print("script end", 100*")")
         #pp(newScriptData)
-    print("stop scripts", 100*")")
-    pp(newScriptDatas)
+    #print("stop scripts", 100*")")
+    #pp(newScriptDatas)
     return newScriptDatas
 
 def nestBlockRecursively(blockDatas, blockID):
     blockData = blockDatas[blockID]
+    #print("start nbr", 50*"$", blockID)
     #pp(blockData)
     newInputDatas = {}
     for i, inputID, inputData in ikv(blockData["inputs"]):
@@ -103,33 +104,44 @@ def nestBlockRecursively(blockDatas, blockID):
             ))
 
         if inputData["listBlock"] != None:
-            subBlockDatas.append(inputData["listBlock"])
+            subBlockDatas.insert(0, [inputData["listBlock"]])
         
-        #pp(subBlockDatas)
+        #print("subBlocks", subBlockDatas)
         blockCount = len(subBlockDatas)
         newInputData = {"mode": inputData["mode"]}
+        if 0 in range(len(subBlockDatas)):
+            subScriptData = subBlockDatas[0]
+            subBlockData0 = subBlockDatas[0][0]
+        else:
+            subScriptData = None
+            subBlockData0 = None
+        if 1 in range(len(subBlockDatas)):
+            subBlockData1 = subBlockDatas[1][0]
+        else:
+            subBlockData1 = None
+        
         match inputData["mode"]:
             case "block-and-text":
                 assert blockCount in [0, 1]
                 newInputData |= {
-                    "block": subBlockDatas[0][0] if blockCount == 1 else None,
+                    "block": subBlockData0 if blockCount == 1 else None,
                     "text" : inputData["text"],
                 }
             case "block-only":
                 assert blockCount in [0, 1]
                 newInputData |= {
-                    "block": subBlockDatas[0][0] if blockCount == 1 else None,
+                    "block": subBlockData0 if blockCount == 1 else None,
                 }
             case "script":
                 assert blockCount in [0, 1]
                 newInputData |= {
-                    "blocks": subBlockDatas[0] if blockCount == 1 else [],
+                    "blocks": subScriptData if blockCount == 1 else [],
                 }
             case "block-and-option":
                 assert blockCount in [1, 2]
                 newInputData |= {
-                    "option": subBlockDatas[0][0] if blockCount == 1 else subBlockDatas[1][0],
-                    "block" : None                if blockCount == 1 else subBlockDatas[0][0],
+                    "option": subBlockData0 if blockCount == 1 else subBlockData1,
+                    "block" : None          if blockCount == 1 else subBlockData0,
               }          
         newInputDatas[inputID] = newInputData
     
@@ -142,13 +154,16 @@ def nestBlockRecursively(blockDatas, blockID):
             blockDatas=blockDatas,
             blockID=blockData["_info_"]["next"],
         )
-    #print("ret", 50*"&")
+    #print("stop nbr", 50*"&")
     #pp(newBlockDatas)
     return newBlockDatas
 
 def prepareBlocks(data):
-    newData = {}
+    print(100*"(")
+    pp(data)
+    newBlockDatas = {}
     for i, blockID, blockData in ikv(data):
+        #print(".", blockData)
         if isinstance(blockData, list): # For list blocks e.g. value of a variable
             newBlockData = prepareListBlock(data=blockData)
         else: # For normal blocks
@@ -174,8 +189,10 @@ def prepareBlocks(data):
             #    newData["comment"] = comment
             #if mutation != None:
             #    newData["mutation"] = mutation
-        newData[blockID] = newBlockData
-    return newData
+        newBlockDatas[blockID] = newBlockData
+    print(100*")")
+    pp(newBlockDatas)
+    return newBlockDatas
 
 def prepareInputs(data, opcode):
     # Replace the old with the new input ids
@@ -196,6 +213,7 @@ def prepareInputs(data, opcode):
         references = []
         listBlock  = None
         text       = None
+        # Account for list blocks; 
         if   len(inputData) == 2:
             if   itemOneType == str: # e.g. "CONDITION": [2, "b"]
                 # one block only, no text
@@ -204,6 +222,7 @@ def prepareInputs(data, opcode):
                 # one block(currently empty) and text
                 text = inputData[1][1]
         elif len(inputData) == 3:
+            #print("step 1")
             itemTwoType = type(inputData[2])
             if   itemOneType == str and itemTwoType == str: # e.g. "TOUCHINGOBJECTMENU": [3, "d", "e"]
                 # two blocks(a menu, and a normal block) and no text
@@ -214,9 +233,10 @@ def prepareInputs(data, opcode):
                 references.append(inputData[1])
                 text = inputData[2][1]
             elif itemOneType == list: # e.g. 'VALUE': [3, [12, 'var', '=!vkqJLb6ODy(oqe-|ZN'], [10, '0']]
+                #print("step 2")
                 # one list block and text
-                listBlock = inputData[1]
-                text = inputData[2][1]
+                listBlock = prepareListBlock(data=inputData[1]) #translate list blocks into standard blocks
+                text      = inputData[2][1]
         mode = getInputMode(
             opcode=opcode,
             inputID=inputID,
@@ -240,7 +260,6 @@ def prepareInputs(data, opcode):
                 }
             else:
                 raise Exception(inputMode)
-    
     return newData    
 
 def prepareOptions(data, opcode):
@@ -277,9 +296,8 @@ def prepareListBlock(data):
                 "topLevel": False,
             },
         }
-    raise Exception() # Correct the following code
     if len(data) > 3:
-        newData["_info_"]["position"] = data[4:6]
+        newData["_info_"]["position"] = data[3:5]
         newData["_info_"]["topLevel"] = True
         
         

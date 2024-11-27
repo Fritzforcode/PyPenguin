@@ -91,14 +91,33 @@ def flattenBlock(data, blockID, parentID, nextID):
     newInputDatas = {}
     for j, inputID, inputData in ikv(data["inputs"]):
         references = []
+        listBlock = None
         if inputData.get("block") != None:
-            subBlockID = newTempSelector()
-            references.append(subBlockID)
+            if inputData["block"]["opcode"] in [
+                getOptimizedOpcode(opcode="special_variable_value"),
+                getOptimizedOpcode(opcode="special_list_value"),
+            ]:
+                # If a list block, dont make it independent; instead use "listBlock"
+                listBlock = inputData["block"]
+                # Optional just in case
+                listBlock["_info_"] |= {
+                    "parent": blockID,
+                    "next"  : None
+                }
+            else:
+                subBlockID = newTempSelector()
+                references.append(subBlockID)
+                newBlockDatas |= flattenBlock(
+                    data=inputData["block"],
+                    blockID=subBlockID,
+                    parentID=blockID,
+                    nextID=None
+                )
         newInputData = {
             "mode"      : inputData["mode"],
             "references": references,
-            "listBlock" : ...,
-            "text"      : ...,
+            "listBlock" : listBlock,
+            "text"      : inputData.get("text"),
         }
         newInputDatas[inputID] = newInputData
 
@@ -114,3 +133,45 @@ def flattenBlock(data, blockID, parentID, nextID):
     newBlockDatas[blockID] = newBlockData
     return newBlockDatas
 
+def unprepareBlocks(data):
+    pp(data)
+    newBlockDatas = {}
+    for i, blockID, blockData in ikv(data):
+        opcode = getDeoptimizedOpcode(opcode=blockData["opcode"])
+
+        newBlockData = {
+            "opcode"  : opcode,
+            "next"    : blockData["_info_"]["next"],
+            "parent"  : blockData["_info_"]["parent"],
+            "inputs"  : unprepareInputs(
+                data=blockData["inputs"],
+                opcode=opcode,
+            ),
+            "fields"  : unprepareOptions(
+                data=blockData["options"],
+                opcode=opcode,
+            ),
+            "shadow"  : False,
+            "topLevel": blockData["_info_"]["topLevel"],
+        }
+        if blockData["_info_"]["position"] != None:
+            position = blockData["_info_"]["position"]
+            newBlockData |= {"x": position[0], "y": position[1]}
+
+def unprepareInputs(data, opcode):
+    newInputDatas = {}
+    for i, inputID, inputData in ikv(data):
+        inputType = getInputType(
+            opcode=opcode,
+            inputID=inputID
+        )
+        inputMode = getInputMode(
+            opcode=opcode,
+            inputID=inputID
+        )
+        #TODO: translate input values
+        print(inputID, inputType, inputMode)
+    return newInputDatas
+
+def unprepareOptions(data, opcode):
+    return data
