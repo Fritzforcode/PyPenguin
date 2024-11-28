@@ -90,7 +90,7 @@ def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
                 required = ["block"]
             elif inputMode == "script":
                 required = ["blocks"]
-            elif inputMode == "block-and-option":
+            elif inputMode in ["block-and-option", "block-and-hybrid-option"]:
                 required = ["option"]
             
             for attribute in required:

@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import generateRandomToken,  tempSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
+from pypenguin.helper_functions import generateRandomToken,  newTempSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
 from pypenguin.deoptimize.broadcasts import generateBroadcastTokens
@@ -50,13 +50,15 @@ def deoptimizeProject(projectData):
         
         nameKey = None if spriteData["isStage"] else spriteData["name"]
         for i, commentData in enumerate(spriteData["comments"]):
-            commentID = tempSelector(path=[i]+["c"])
+            commentID = newTempSelector()
             newCommentDatas[commentID] = translateComment(
                 data=commentData,
                 id=None,
             )
         newSpriteBlockDatas, newCommentDatas = finishBlocks(
             data=newSpriteBlockDatas,
+            spriteName=spriteData["name"],
+            tokens=tokens,
             commentDatas=newCommentDatas,
         )
         

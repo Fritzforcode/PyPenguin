@@ -10,7 +10,9 @@
                 ]
             },
             "lists": {},
-            "broadcasts": {},
+            "broadcasts": {
+                "{ubU2K5qOToRbXcFt_Bw": "message1"
+            },
             "customVars": [],
             "blocks": {},
             "comments": {},
@@ -42,174 +44,80 @@
             "broadcasts": {},
             "customVars": [],
             "blocks": {
-                "k": {
-                    "opcode": "operator_length",
+                "c": {
+                    "opcode": "event_broadcast",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "STRING": [
+                        "BROADCAST_INPUT": [
                             1,
                             [
-                                10,
-                                "apple"
+                                11,
+                                "message1",
+                                "{ubU2K5qOToRbXcFt_Bw"
                             ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 33,
-                    "y": 17
-                },
-                "b": {
-                    "opcode": "operator_length",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "STRING": [
-                            3,
-                            "c",
-                            [
-                                10,
-                                "apple"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 31,
-                    "y": 68
-                },
-                "c": {
-                    "opcode": "operator_tabCharacter",
-                    "next": null,
-                    "parent": "b",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "l": {
-                    "opcode": "control_if",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 34,
-                    "y": 155
+                    "x": 282,
+                    "y": 435
                 },
                 "a": {
-                    "opcode": "control_if",
+                    "opcode": "event_broadcast",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "CONDITION": [
-                            2,
-                            "d"
-                        ],
-                        "SUBSTACK": [
-                            2,
-                            "e"
+                        "BROADCAST_INPUT": [
+                            3,
+                            "b",
+                            [
+                                11,
+                                "message1",
+                                "{ubU2K5qOToRbXcFt_Bw"
+                            ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 46,
-                    "y": 314
+                    "x": 270,
+                    "y": 577
+                },
+                "b": {
+                    "opcode": "operator_tabCharacter",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
                 },
                 "d": {
-                    "opcode": "operator_trueBoolean",
-                    "next": null,
-                    "parent": "a",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "e": {
-                    "opcode": "control_exitCase",
-                    "next": null,
-                    "parent": "a",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "f": {
-                    "opcode": "sensing_touchingobject",
+                    "opcode": "event_broadcast",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "TOUCHINGOBJECTMENU": [
-                            1,
-                            "g"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 1,
-                    "y": 471
-                },
-                "g": {
-                    "opcode": "sensing_touchingobjectmenu",
-                    "next": null,
-                    "parent": "f",
-                    "inputs": {},
-                    "fields": {
-                        "TOUCHINGOBJECTMENU": [
-                            "_mouse_",
-                            "W~r7wGt.tyGaU{*N,*Gm"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "h": {
-                    "opcode": "sensing_touchingobject",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "TOUCHINGOBJECTMENU": [
+                        "BROADCAST_INPUT": [
                             3,
-                            "i",
-                            "j"
+                            [
+                                12,
+                                "my variable",
+                                "`jEk@4|i[#Fk?(8x)AV.-my variable"
+                            ],
+                            [
+                                11,
+                                "message1",
+                                "{ubU2K5qOToRbXcFt_Bw"
+                            ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": -2,
-                    "y": 568
-                },
-                "j": {
-                    "opcode": "sensing_touchingobjectmenu",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "TOUCHINGOBJECTMENU": [
-                            "_mouse_",
-                            "KjDNG,u77S{Q5Qi#F*J!"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": true,
-                    "x": 87,
-                    "y": 572
-                },
-                "i": {
-                    "opcode": "operator_newLine",
-                    "next": null,
-                    "parent": "h",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
+                    "x": 228,
+                    "y": 777
                 }
             },
             "comments": {},

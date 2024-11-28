@@ -93,17 +93,17 @@ opcodes = {
     "event_broadcast": {
         "type": "instruction",
         "category": "Events",
-        "newOpcode": "broadcast [BROADCAST]",
-        "inputTypes": {"BROADCAST": "broadcast"},
-        "inputTranslation": {"BROADCAST_INPUT": "BROADCAST"},
+        "newOpcode": "broadcast ([MESSAGE])",
+        "inputTypes": {"MESSAGE": "broadcast"},
+        "inputTranslation": {"BROADCAST_INPUT": "MESSAGE"},
         "optionTypes": {},
     },
     "event_broadcastandwait": {
         "type": "instruction",
         "category": "Events",
-        "newOpcode": "broadcast [BROADCAST] and wait",
-        "inputTypes": {"BROADCAST": "broadcast"},
-        "inputTranslation": {"BROADCAST_INPUT": "BROADCAST"},
+        "newOpcode": "broadcast ([MESSAGE]) and wait",
+        "inputTypes": {"MESSAGE": "broadcast"},
+        "inputTranslation": {"BROADCAST_INPUT": "MESSAGE"},
         "optionTypes": {},
     },
 }

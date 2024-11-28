@@ -10,7 +10,9 @@
                 ]
             },
             "lists": {},
-            "broadcasts": {},
+            "broadcasts": {
+                "NmjQ-_mT(OA^.)?Hh^bl": "message1"
+            },
             "customVars": [],
             "blocks": {},
             "comments": {},
@@ -27,7 +29,7 @@
                 }
             ],
             "sounds": [],
-            "id": "NmjQ-_mT(OA^.)?Hh^bl",
+            "id": "Za:QFPiy`CEs]*lkO=/n",
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,
@@ -44,67 +46,79 @@
             "customVars": [],
             "blocks": {
                 "a": {
-                    "opcode": "sensing_touchingcolor",
+                    "opcode": "event_broadcast",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "COLOR": [
+                        "BROADCAST_INPUT": [
                             1,
                             [
-                                9,
-                                "#5551b3"
+                                11,
+                                "message1",
+                                "NmjQ-_mT(OA^.)?Hh^bl"
                             ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 513,
-                    "y": 187
+                    "x": 282,
+                    "y": 435
                 },
                 "b": {
-                    "opcode": "operator_stringify",
+                    "opcode": "operator_tabCharacter",
                     "next": null,
                     "parent": "c",
-                    "inputs": {
-                        "ONE": [
-                            1,
-                            [
-                                10,
-                                "foo"
-                            ]
-                        ]
-                    },
+                    "inputs": {},
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
                 "c": {
-                    "opcode": "sensing_coloristouchingcolor",
+                    "opcode": "event_broadcast",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "COLOR": [
-                            1,
-                            [
-                                9,
-                                "#66b879"
-                            ]
-                        ],
-                        "COLOR2": [
+                        "BROADCAST_INPUT": [
                             3,
                             "b",
                             [
-                                9,
-                                "#b03025"
+                                11,
+                                "message1",
+                                "NmjQ-_mT(OA^.)?Hh^bl"
                             ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 476,
-                    "y": 254
+                    "x": 270,
+                    "y": 577
+                },
+                "d": {
+                    "opcode": "event_broadcast",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "BROADCAST_INPUT": [
+                            3,
+                            [
+                                12,
+                                "my variable",
+                                "X#fH=/ZM.T|B;rKrmG[s"
+                            ],
+                            [
+                                11,
+                                "message1",
+                                "NmjQ-_mT(OA^.)?Hh^bl"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 228,
+                    "y": 777
                 }
             },
             "comments": {},
@@ -130,7 +144,7 @@
                     "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
                 }
             ],
-            "id": "Za:QFPiy`CEs]*lkO=/n",
+            "id": "^Q]A^}K)lXO{ELxyxeH-",
             "volume": 100,
             "visible": true,
             "x": 0,

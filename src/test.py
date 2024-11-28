@@ -3,15 +3,12 @@ A = [
         "position": [0,0],
         "blocks": [
             {
-                "opcode": "touching ([OBJECT]) ?",
+                "opcode": "create clone of [TARGET]",
                 "inputs": {
-                    "OBJECT": {
+                    "TARGET": {
                         "mode": "block-and-option",
-                        "block": {
-                            "opcode": "(VALUE)",
-                            "inputs": {"VALUE": {"mode": "block-and-text", "block": None, "text": "abc"}},
-                        },
-                        "option": "_edge_",
+                        "block": None,
+                        "option": "Shoutout to @ddededodediamante! 👍",
                     },
                 },
             },

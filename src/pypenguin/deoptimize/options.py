@@ -1,6 +1,6 @@
 from pypenguin.helper_functions import ikv,  WhatIsGoingOnError, generateRandomToken,  readJSONFile, pp
 
-from pypenguin.database import getOptionType, getBlockType
+from pypenguin.database import getOptionType, getBlockType, getDeoptimizedOptionID
 
 
 def translateOptions(data, opcode, spriteName, tokens):
@@ -45,5 +45,10 @@ def translateOptions(data, opcode, spriteName, tokens):
             newOptionData = optionData
         else:
             newOptionData = [optionData, generateRandomToken()]
-        newData[optionID] = newOptionData
+        
+        newOptionID = getDeoptimizedOptionID(
+            opcode=opcode,
+            optionID=optionID,
+        )
+        newData[newOptionID] = newOptionData
     return newData

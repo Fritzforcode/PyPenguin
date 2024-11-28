@@ -27,17 +27,17 @@
             "scripts": [
                 {
                     "position": [
-                        33,
-                        17
+                        282,
+                        435
                     ],
                     "blocks": [
                         {
-                            "opcode": "length of (TEXT)",
+                            "opcode": "broadcast ([MESSAGE])",
                             "inputs": {
-                                "TEXT": {
-                                    "mode": "block-and-text",
+                                "MESSAGE": {
+                                    "mode": "block-and-hybrid-option",
                                     "block": null,
-                                    "text": "apple"
+                                    "option": "message1"
                                 }
                             },
                             "options": {}
@@ -46,21 +46,21 @@
                 },
                 {
                     "position": [
-                        31,
-                        68
+                        270,
+                        577
                     ],
                     "blocks": [
                         {
-                            "opcode": "length of (TEXT)",
+                            "opcode": "broadcast ([MESSAGE])",
                             "inputs": {
-                                "TEXT": {
-                                    "mode": "block-and-text",
+                                "MESSAGE": {
+                                    "mode": "block-and-hybrid-option",
                                     "block": {
                                         "opcode": "tab character",
                                         "inputs": {},
                                         "options": {}
                                     },
-                                    "text": "apple"
+                                    "option": "message1"
                                 }
                             },
                             "options": {}
@@ -69,94 +69,23 @@
                 },
                 {
                     "position": [
-                        34,
-                        155
+                        228,
+                        777
                     ],
                     "blocks": [
                         {
-                            "opcode": "if <CONDITION> then {THEN}",
+                            "opcode": "broadcast ([MESSAGE])",
                             "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": null
-                                },
-                                "THEN": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        46,
-                        314
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "if <CONDITION> then {THEN}",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
+                                "MESSAGE": {
+                                    "mode": "block-and-hybrid-option",
                                     "block": {
-                                        "opcode": "true",
+                                        "opcode": "value of [VARIABLE]",
                                         "inputs": {},
-                                        "options": {}
-                                    }
-                                },
-                                "THEN": {
-                                    "mode": "script",
-                                    "blocks": [
-                                        {
-                                            "opcode": "exit case",
-                                            "inputs": {},
-                                            "options": {}
+                                        "options": {
+                                            "VARIABLE": "my variable"
                                         }
-                                    ]
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        1,
-                        471
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "touching ([OBJECT]) ?",
-                            "inputs": {
-                                "OBJECT": {
-                                    "mode": "block-and-option",
-                                    "option": "_mouse_",
-                                    "block": null
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        -2,
-                        568
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "touching ([OBJECT]) ?",
-                            "inputs": {
-                                "OBJECT": {
-                                    "mode": "block-and-option",
-                                    "option": "_mouse_",
-                                    "block": {
-                                        "opcode": "new line",
-                                        "inputs": {},
-                                        "options": {}
-                                    }
+                                    },
+                                    "option": "message1"
                                 }
                             },
                             "options": {}

@@ -72,7 +72,6 @@ def getDeoptimizedInputID(opcode, inputID):
         for menuData in opcodeDatabase[opcode]["menus"]:
             if menuData["new"] == inputID:
                 return menuData["outer"]
-    print(inputID)
     return inputID
 
 def getInputType(opcode, inputID):
@@ -99,6 +98,19 @@ def getOptimizedOptionID(opcode, optionID):
     if optionID not in opcodeDatabase[opcode]["optionTranslation"]:
         return optionID
     return opcodeDatabase[opcode]["optionTranslation"][optionID]
+
+def getDeoptimizedOptionID(opcode, optionID):
+    if "optionTranslation" in opcodeDatabase[opcode]:
+        table = flipKeysAndValues(
+            opcodeDatabase[opcode]["optionTranslation"]
+        )
+        if optionID in table:
+            return table[optionID]
+    if "menus" in opcodeDatabase[opcode]:
+        for menuData in opcodeDatabase[opcode]["menus"]:
+            if menuData["new"] == optionID:
+                return menuData["inner"]
+    return optionID
 
 def getBlockType(opcode):
     return opcodeDatabase[opcode]["type"]
@@ -134,7 +146,6 @@ optionDefault = {}
 commentDefault = None
 
 inputModes = {
-    "broadcast"       : "block-and-text",
     "integer"         : "block-and-text",
     "positive integer": "block-and-text",
     "positive number" : "block-and-text",
@@ -145,6 +156,7 @@ inputModes = {
     "round"           : "block-only",
     "script"          : "script",
 
+    "broadcast"                      : "block-and-hybrid-option",
     "other sprite or stage"          : "block-and-option",
     "cloning target"                 : "block-and-option",
     "exclusive touchable object"     : "block-and-option",

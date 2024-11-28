@@ -37,6 +37,13 @@ def generateMenu(data, parentOpcode, inputID):
         },
     }
     return newData
+    """ "_mouse_" ->
+    {
+        "opcode": "#TOUCHING OBJECT MENU",
+        "inputs": {},
+        "options": {"TOUCHINGOBJECTMENU": "_mouse_"},
+        "_info_": ...,
+    }"""
 
 def unfinishBlock(data, parentOpcode, position=None, isOption=False, inputID=None):
     #print("start fblock", 100*"{")
@@ -49,13 +56,6 @@ def unfinishBlock(data, parentOpcode, position=None, isOption=False, inputID=Non
             parentOpcode=parentOpcode,
             inputID=inputID,
         )
-        """ "_mouse_" ->
-        {
-            "opcode": "#TOUCHING OBJECT MENU",
-            "inputs": {},
-            "options": {"TOUCHINGOBJECTMENU": "_mouse_"},
-            "_info_": ...,
-        }"""
     #blockType = getBlockType(
     #    opcode=getDeoptimizedOpcode(
     #        opcode=data["opcode"]
@@ -202,36 +202,45 @@ def restoreBlocks(data, spriteName, tokens):
     for i, blockID, blockData in ikv(data):
         opcode = getDeoptimizedOpcode(opcode=blockData["opcode"])
         
-        blockType = getBlockType(opcode=opcode)
-        if blockType == "menu":
-            hasShadow = True
-        else:
-            hasShadow = False
-        
-        newBlockData = {
-            "opcode"  : opcode,
-            "next"    : blockData["_info_"]["next"],
-            "parent"  : blockData["_info_"]["parent"],
-            "inputs"  : restoreInputs(
-                data=blockData["inputs"],
-                opcode=opcode,
-            ),
-            "fields"  : translateOptions(
-                data=blockData["options"],
-                opcode=opcode,
+        if opcode in ["special_variable_value", "special_list_value"]:
+            newBlockData = restoreListBlock(
+                data=blockData,
                 spriteName=spriteName,
                 tokens=tokens,
-            ),
-            "shadow"  : hasShadow,
-            "topLevel": blockData["_info_"]["topLevel"],
-        }
-        if blockData["_info_"]["position"] != None:
-            position = blockData["_info_"]["position"]
-            newBlockData |= {"x": position[0], "y": position[1]}
+            )
+        else:
+            blockType = getBlockType(opcode=opcode)
+            if blockType == "menu":
+                hasShadow = True
+            else:
+                hasShadow = False
+            
+            newBlockData = {
+                "opcode"  : opcode,
+                "next"    : blockData["_info_"]["next"],
+                "parent"  : blockData["_info_"]["parent"],
+                "inputs"  : restoreInputs(
+                    data=blockData["inputs"],
+                    opcode=opcode,
+                    spriteName=spriteName,
+                    tokens=tokens,
+                ),
+                "fields"  : translateOptions(
+                    data=blockData["options"],
+                    opcode=opcode,
+                    spriteName=spriteName,
+                    tokens=tokens,
+                ),
+                "shadow"  : hasShadow,
+                "topLevel": blockData["_info_"]["topLevel"],
+            }
+            if blockData["_info_"]["position"] != None:
+                position = blockData["_info_"]["position"]
+                newBlockData |= {"x": position[0], "y": position[1]}
         newBlockDatas[blockID] = newBlockData
     return newBlockDatas
 
-def restoreInputs(data, opcode):
+def restoreInputs(data, opcode, spriteName, tokens):
     newInputDatas = {}
     for i, inputID, inputData in ikv(data):
         inputType = getInputType(
@@ -244,26 +253,36 @@ def restoreInputs(data, opcode):
         )
         #print(inputID, inputType, inputMode, inputData)
         
-        references = inputData["references"]
-        referenceCount = len(references)
+        subBlocks     = inputData["references"]
+        if inputData["listBlock"] != None:
+            subBlocks.insert(0, restoreListBlock(
+                data=inputData["listBlock"],
+                spriteName=spriteName,
+                tokens=tokens,
+            ))
+        subBlockCount = len(subBlocks)
         match inputMode:
-            case "block-and-text":
+            case "block-and-text"|"block-and-hybrid-option":
                 magicNumber = getInputMagicNumber(inputType=inputType)
                 textData = [magicNumber, inputData["text"]]
-                if   referenceCount == 0:
+                if inputMode == "block-and-hybrid-option":
+                    token = tokens["broadcasts"][None][inputData["text"]]
+
+                    textData.append(token)
+                if   subBlockCount == 0:
                     newInputData = [1, textData]
-                elif referenceCount == 1:
-                    newInputData = [3, references[0], textData]
+                elif subBlockCount == 1:
+                    newInputData = [3, subBlocks[0], textData]
             case "block-only"|"script":
-                if   referenceCount == 0:
+                if   subBlockCount == 0:
                     newInputData = None
-                elif referenceCount == 1:
-                    newInputData = [2, references[0]]
+                elif subBlockCount == 1:
+                    newInputData = [2, subBlocks[0]]
             case "block-and-option":
-                if   referenceCount == 1:
-                    newInputData = [1, references[0]]
-                elif referenceCount == 2:
-                    newInputData = [3, references[0],  references[1]]
+                if   subBlockCount == 1:
+                    newInputData = [1, subBlocks[0]]
+                elif subBlockCount == 2:
+                    newInputData = [3, subBlocks[0],  subBlocks[1]]
         
         
         newInputID = getDeoptimizedInputID(
@@ -274,7 +293,30 @@ def restoreInputs(data, opcode):
             newInputDatas[newInputID] = newInputData
     return newInputDatas
 
-def finishBlocks(data, commentDatas):
+def restoreListBlock(data, spriteName, tokens):
+    variableTokens = tokens["variables"]
+    if   data["opcode"] == getOptimizedOpcode(opcode="special_variable_value"):
+        magicNumber = 12
+        value = data["options"]["VARIABLE"]
+    elif data["opcode"] == getOptimizedOpcode(opcode="special_list_value"    ):
+        magicNumber = 13
+        value = data["options"]["LIST"]
+    
+    if spriteName not in variableTokens:
+        if spriteName == "Stage":
+            nameKey = None
+    elif value in variableTokens[spriteName]:
+        nameKey = spriteName
+    else:
+        nameKey = None
+    token = variableTokens[nameKey][value]
+
+    newData = [magicNumber, value, token]
+    if data["_info_"]["topLevel"]:
+        newData += data["_info_"]["position"]
+    return newData
+
+def finishBlocks(data, spriteName, tokens, commentDatas):
     mutationDatas = {}
     for j, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):
@@ -301,9 +343,8 @@ def finishBlocks(data, commentDatas):
                     inputValue for j,inputID,inputValue in ikv(blockData["inputs"]) 
                 }
             
-            opcodeData = opcodeDatabase[blockData["opcode"]]
-            
             if blockData["opcode"] == "control_stop":
+                pp(blockData)
                 match blockData["fields"]["STOP_OPTION"][0]:
                     case "all" | "this script"    : hasNext = False
                     case "other scripts in sprite": hasNext = True

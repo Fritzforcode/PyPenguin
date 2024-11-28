@@ -11,21 +11,12 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "touching ([OBJECT]) ?",
+                            "opcode": "create clone of [TARGET]",
                             "inputs": {
-                                "OBJECT": {
+                                "TARGET": {
                                     "mode": "block-and-option",
-                                    "block": {
-                                        "opcode": "(VALUE)",
-                                        "inputs": {
-                                            "VALUE": {
-                                                "mode": "block-and-text",
-                                                "block": null,
-                                                "text": "abc"
-                                            }
-                                        }
-                                    },
-                                    "option": "_edge_"
+                                    "block": null,
+                                    "option": "Shoutout to @ddededodediamante! \ud83d\udc4d"
                                 }
                             }
                         }

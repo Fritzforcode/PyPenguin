@@ -33,6 +33,8 @@ def finishBlock(data):
             "_info_": ...,
         }
         --> "_mouse_" """
+    opcode = getDeoptimizedOpcode(opcode=data["opcode"])
+
     newInputDatas = {}
     for i, inputID, inputData in ikv(data["inputs"]):
         newInputData = copy.deepcopy(inputData)
@@ -40,8 +42,19 @@ def finishBlock(data):
             newInputData["block"]  = finishBlock(data=inputData["block"])
         if inputData.get("blocks") != None:
             newInputData["blocks"] = [finishBlock(data=subBlockData) for subBlockData in inputData["blocks"]]
-        if inputData.get("option") != None:
+        if   isinstance(inputData.get("option"), dict):
             newInputData["option"] = finishBlock(data=inputData["option"])
+        elif isinstance(inputData.get("option"), str):
+            newInputData["option"] = inputData["option"]
+        
+        inputMode = getInputMode(
+            opcode=opcode,
+            inputID=inputID,
+        )
+        if inputMode == "block-and-hybrid-option":
+            newInputData["option"] = newInputData["text"]
+            del newInputData["text"]
+
         newInputDatas[inputID] = newInputData
     newData = data | {"inputs": newInputDatas}
     del newData["_info_"]
@@ -121,7 +134,7 @@ def nestBlockRecursively(blockDatas, blockID):
             subBlockData1 = None
         
         match inputData["mode"]:
-            case "block-and-text":
+            case "block-and-text"|"block-and-hybrid-option":
                 assert blockCount in [0, 1]
                 newInputData |= {
                     "block": subBlockData0 if blockCount == 1 else None,
@@ -140,9 +153,9 @@ def nestBlockRecursively(blockDatas, blockID):
             case "block-and-option":
                 assert blockCount in [1, 2]
                 newInputData |= {
-                    "option": subBlockData0 if blockCount == 1 else subBlockData1,
                     "block" : None          if blockCount == 1 else subBlockData0,
-              }          
+                    "option": subBlockData0 if blockCount == 1 else subBlockData1,
+               }
         newInputDatas[inputID] = newInputData
     
     
@@ -159,8 +172,8 @@ def nestBlockRecursively(blockDatas, blockID):
     return newBlockDatas
 
 def prepareBlocks(data):
-    print(100*"(")
-    pp(data)
+    #print(100*"(")
+    #pp(data)
     newBlockDatas = {}
     for i, blockID, blockData in ikv(data):
         #print(".", blockData)
@@ -190,11 +203,13 @@ def prepareBlocks(data):
             #if mutation != None:
             #    newData["mutation"] = mutation
         newBlockDatas[blockID] = newBlockData
-    print(100*")")
-    pp(newBlockDatas)
+    #print(100*")")
+    #pp(newBlockDatas)
     return newBlockDatas
 
 def prepareInputs(data, opcode):
+    #print(100*"<")
+    #pp(data)
     # Replace the old with the new input ids
     newData = {}
     for i, inputID, inputData in ikv(data):
@@ -210,9 +225,9 @@ def prepareInputs(data, opcode):
     for i, inputID, inputData in ikv(data):
         #magicNumber = inputData[0]
         itemOneType = type(inputData[1])
-        references = []
-        listBlock  = None
-        text       = None
+        references    = []
+        listBlock     = None
+        text          = None
         # Account for list blocks; 
         if   len(inputData) == 2:
             if   itemOneType == str: # e.g. "CONDITION": [2, "b"]
@@ -260,7 +275,9 @@ def prepareInputs(data, opcode):
                 }
             else:
                 raise Exception(inputMode)
-    return newData    
+    #print(100*">")
+    #pp(newData)
+    return newData
 
 def prepareOptions(data, opcode):
     newData = {}
