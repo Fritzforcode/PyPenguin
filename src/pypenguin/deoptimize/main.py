@@ -2,7 +2,7 @@ from pypenguin.helper_functions import generateRandomToken,  tempSelector, pp, i
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
 from pypenguin.deoptimize.broadcasts import generateBroadcastTokens
-from pypenguin.deoptimize.blocks_scripts import unfinishScripts#linkBlocksToScript, unnestScript, finishBlocks
+from pypenguin.deoptimize.blocks_scripts import unfinishScripts, flattenScripts, restoreBlocks, finishBlocks
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
 
@@ -33,26 +33,20 @@ def deoptimizeProject(projectData):
     
     newSpriteDatas = []
     for spriteData in projectData["sprites"]:
-        newCommentDatas = {}
-        newSpriteBlocks = {}
-        for scriptID, scriptData in enumerate(spriteData["scripts"]):
-            linkedScriptData, scriptCommentDatasA = linkBlocksToScript(
-                data=scriptData, 
-                spriteName=spriteData["name"],
-                tokens=tokens,
-                scriptIDs=[scriptID],
-            )
-            
-            unnestedScriptData, scriptCommentDatasB = unnestScript(
-                data=linkedScriptData, 
-                spriteName=spriteData["name"],
-                tokens=tokens,
-            )
-            raise Exception("DONE")
+        newCommentDatas       = {}
+        newSpriteBlockDatas   = {}
+        
+        unfinishedScriptDatas = unfinishScripts(spriteData["scripts"])
+        flattendScriptDatas   = flattenScripts(unfinishedScriptDatas)
+        restoredBlockDatas    = restoreBlocks(
+            data=flattendScriptDatas,
+            spriteName=spriteData["name"],
+            tokens=tokens,
+        )
 
-            scriptCommentDatas = scriptCommentDatasA | scriptCommentDatasB
-            newCommentDatas |= scriptCommentDatas
-            newSpriteBlocks |= unnestedScriptData
+        scriptCommentDatas    = {}#scriptCommentDatasA | scriptCommentDatasB
+        newCommentDatas      |= scriptCommentDatas
+        newSpriteBlockDatas  |= restoredBlockDatas
         
         nameKey = None if spriteData["isStage"] else spriteData["name"]
         for i, commentData in enumerate(spriteData["comments"]):
@@ -61,8 +55,8 @@ def deoptimizeProject(projectData):
                 data=commentData,
                 id=None,
             )
-        newSpriteBlocks, newCommentDatas = finishBlocks(
-            data=newSpriteBlocks,
+        newSpriteBlockDatas, newCommentDatas = finishBlocks(
+            data=newSpriteBlockDatas,
             commentDatas=newCommentDatas,
         )
         
@@ -81,7 +75,7 @@ def deoptimizeProject(projectData):
             "lists"         : translatedListDatas    [nameKey],
             "broadcasts"    : {},
             "customVars"    : [], # NO MEANING FOUND
-            "blocks"        : newSpriteBlocks,
+            "blocks"        : newSpriteBlockDatas,
             "comments"      : newCommentDatas,
             "currentCostume": spriteData["currentCostume"],
             "costumes"      : newCostumeDatas,

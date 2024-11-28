@@ -3,9 +3,17 @@ A = [
         "position": [0,0],
         "blocks": [
             {
-                "opcode": "set [VARIABLE] to (VALUE)",
-                "options": {"VARIABLE": "var"},
-                "inputs": {"VALUE": {"text": "123"}},
+                "opcode": "touching ([OBJECT]) ?",
+                "inputs": {
+                    "OBJECT": {
+                        "mode": "block-and-option",
+                        "block": {
+                            "opcode": "(VALUE)",
+                            "inputs": {"VALUE": {"mode": "block-and-text", "block": None, "text": "abc"}},
+                        },
+                        "option": "_edge_",
+                    },
+                },
             },
         ],
     },

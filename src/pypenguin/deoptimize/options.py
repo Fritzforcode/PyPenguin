@@ -1,17 +1,25 @@
 from pypenguin.helper_functions import ikv,  WhatIsGoingOnError, generateRandomToken,  readJSONFile, pp
 
-from pypenguin.database import opcodeDatabase
+from pypenguin.database import getOptionType, getBlockType
 
 
-def translateOptions(optionDatas, opcode, spriteName, tokens):
-    variableTokens = tokens["variables"]
-    listTokens = tokens["lists"]
+def translateOptions(data, opcode, spriteName, tokens):
+    blockType = getBlockType(opcode=opcode)
+    if blockType == "menu":
+        key = list(data.keys())[0]
+        value = list(data.values())[0]
+        return {key: [value, generateRandomToken()]}
+    
+    variableTokens  = tokens["variables"]
+    listTokens      = tokens["lists"]
     broadcastTokens = tokens["broadcasts"]
     
     newData = {}
-    opcodeData = opcodeDatabase[opcode]
-    for i,optionID,optionData in ikv(optionDatas):
-        mode = opcodeData["optionTypes"][optionID]
+    for i,optionID,optionData in ikv(data):
+        mode = getOptionType(
+            opcode=opcode,
+            optionID=optionID,
+        )
         if mode in ["variable", "list", "broadcast"]:
             if mode == "variable":
                 tokens = variableTokens

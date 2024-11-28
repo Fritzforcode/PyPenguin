@@ -11,17 +11,16 @@ optimizedData = extractAndOptimizeProject(
 validateProject(projectData=optimizedData)
 
 
-from pypenguin.deoptimize.blocks_scripts import unfinishScripts, flattenScripts, unprepareBlocks
+"""from pypenguin.deoptimize.blocks_scripts import unfinishScripts, flattenScripts, unprepareBlocks
 scriptDatas           = optimizedData["sprites"][1]["scripts"]
 unfinishedScriptDatas = unfinishScripts(scriptDatas)
 flattendScriptDatas   = flattenScripts(unfinishedScriptDatas)
 pp(unprepareBlocks(data=flattendScriptDatas))
-
 """
+
 deoptimizeAndCompressProject(
     projectFilePath           = "../export.pmp",
     optimizedProjectDirectory = "../extractedProject",
     temporaryDirectory        = "../temporary",
     writeDebugFiles           = True,
 )
-"""

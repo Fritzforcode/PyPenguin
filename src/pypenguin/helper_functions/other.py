@@ -98,8 +98,8 @@ def ikv(data:dict): # Iterate through a dict with i(ndex of the pair), k(ey) and
 def pp(obj): # pretty print with settings i like
     pprint(obj, sort_dicts=False)
 
-def flipKeysAndValues(obj: dict): # self explanatory
-    return {v:k for i,k,v in ikv(obj)}
+def flipKeysAndValues(obj: dict):
+    return dict(zip(obj.values(), obj.keys()))
 
 def removeStringDuplicates(array):
     return dict.fromkeys(array).keys()

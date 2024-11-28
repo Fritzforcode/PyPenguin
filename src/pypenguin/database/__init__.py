@@ -8,7 +8,7 @@ from pypenguin.database.lists     import opcodes as lists
 from pypenguin.database.special   import opcodes as special
 from pypenguin.database.extJSON   import opcodes as extJSON
 
-from pypenguin.helper_functions   import ikv
+from pypenguin.helper_functions   import ikv, flipKeysAndValues
 
 import functools
 
@@ -61,8 +61,21 @@ def getOptimizedInputID(opcode, inputID):
                 return menuData["new"]
     return inputID
 
+def getDeoptimizedInputID(opcode, inputID):
+    if "inputTranslation" in opcodeDatabase[opcode]:
+        table = flipKeysAndValues(
+            opcodeDatabase[opcode]["inputTranslation"]
+        )
+        if inputID in table:
+            return table[inputID]
+    if "menus" in opcodeDatabase[opcode]:
+        for menuData in opcodeDatabase[opcode]["menus"]:
+            if menuData["new"] == inputID:
+                return menuData["outer"]
+    print(inputID)
+    return inputID
+
 def getInputType(opcode, inputID):
-    #print(opcode)
     return opcodeDatabase[opcode]["inputTypes"][inputID]
 
 def getInputTypes(opcode):
@@ -109,6 +122,9 @@ def getInputMagicNumber(inputType):
         case "number"          : magicNumber =  4
         case "boolean"         : pass
     return magicNumber
+
+def getOptionType(opcode, optionID):
+    return opcodeDatabase[opcode]["optionTypes"][optionID]
 
 inputDefault = {}
 inputBlockDefault = None
