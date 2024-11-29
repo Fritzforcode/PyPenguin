@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import ikv, WhatIsGoingOnError, generateRandomToken, readJSONFile, removeStringDuplicates, pp
+from pypenguin.helper_functions import ikv, WhatIsGoingOnError, readJSONFile, removeStringDuplicates, pp, stringToToken
 
 from pypenguin.database import opcodeDatabase, inputDefault, inputTextDefault, optionDefault
 
@@ -8,7 +8,7 @@ def findBlockBroadcastMessages(data):
         if opcodeData["newOpcode"] == data["opcode"]:
             break
     if not opcodeData["newOpcode"] == data["opcode"]: raise WhatIsGoingOnError(data["opcode"])
-    
+
     broadcastMessages = []
     if "inputs" not in data:
         data["inputs"] = inputDefault
@@ -19,7 +19,7 @@ def findBlockBroadcastMessages(data):
                     inputData["text"] = inputTextDefault
                 if inputData["text"] not in broadcastMessages:
                     broadcastMessages.append(inputData["text"])
-            
+
         if "block" in inputData:
             if inputData["block"] != None:
                 broadcastMessages += findBlockBroadcastMessages(data=inputData["block"])
@@ -30,18 +30,16 @@ def findBlockBroadcastMessages(data):
             if optionData not in broadcastMessages:
                 broadcastMessages.append(optionData)
     return broadcastMessages
-    
-def generateBroadcastTokens(data, spriteNames):
+
+def generateBroadcasts(data):
     broadcastMessages = []
     for spriteData in data:
         for scriptData in spriteData["scripts"]:
             for blockData in scriptData["blocks"]:
                 broadcastMessages += findBlockBroadcastMessages(data=blockData)
     broadcastMessages = removeStringDuplicates(broadcastMessages) # Remove duplicates
-    tokens = {}
+    newDatas = {}
     for broadcastMessage in broadcastMessages:
-        tokens[broadcastMessage] = generateRandomToken()
+        newDatas[broadcastMessage] = stringToToken(broadcastMessage)
     # Because all broadcast messages are for all sprites (None=Stage)
-    newTokens = {spriteName:{} for spriteName in spriteNames}
-    newTokens[None] = tokens 
-    return newTokens
+    return newDatas

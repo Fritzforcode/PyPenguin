@@ -1,35 +1,28 @@
 from pypenguin.helper_functions import generateRandomToken,  newTempSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
-from pypenguin.deoptimize.broadcasts import generateBroadcastTokens
 from pypenguin.deoptimize.blocks_scripts import unfinishScripts, flattenScripts, restoreBlocks, finishBlocks
+from pypenguin.deoptimize.broadcasts import generateBroadcasts
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
 
-def generateTokens(data):
+def translateVariablesLists(data):
     spriteNames = [sprite["name"] for sprite in data["sprites"]][1:]
-    translatedVariableDatas, variableTokens, variableMonitorDatas = translateVariables(
+    translatedVariableDatas, variableMonitorDatas = translateVariables(
         data=data, 
         spriteNames=spriteNames,
     )
-    translatedListDatas, listTokens, listMonitorDatas = translateLists(
+    translatedListDatas, listMonitorDatas = translateLists(
         data=data, 
         spriteNames=spriteNames,
     )
     monitorDatas = variableMonitorDatas + listMonitorDatas
-    broadcastTokens = generateBroadcastTokens(
-        data=data["sprites"],
-        spriteNames=spriteNames,
-    )
-    tokens = {
-        "variables"   : variableTokens,
-        "lists"       : listTokens,
-        "broadcasts"  : broadcastTokens,
-    }
-    return tokens, translatedVariableDatas, translatedListDatas, monitorDatas
+    return translatedVariableDatas, translatedListDatas, monitorDatas
 
 def deoptimizeProject(projectData):
-    tokens, translatedVariableDatas, translatedListDatas, monitorDatas = generateTokens(data=projectData)    
+    spriteNames = [sprite["name"] for sprite in projectData["sprites"]][1:]
+    translatedVariableDatas, translatedListDatas, monitorDatas = translateVariablesLists(data=projectData)    
+    broadcastDatas = generateBroadcasts(data=projectData["sprites"])
     
     newSpriteDatas = []
     for spriteData in projectData["sprites"]:
@@ -41,7 +34,6 @@ def deoptimizeProject(projectData):
         restoredBlockDatas    = restoreBlocks(
             data=flattendScriptDatas,
             spriteName=spriteData["name"],
-            tokens=tokens,
         )
 
         scriptCommentDatas    = {}#scriptCommentDatasA | scriptCommentDatasB
@@ -58,7 +50,6 @@ def deoptimizeProject(projectData):
         newSpriteBlockDatas, newCommentDatas = finishBlocks(
             data=newSpriteBlockDatas,
             spriteName=spriteData["name"],
-            tokens=tokens,
             commentDatas=newCommentDatas,
         )
         
@@ -86,8 +77,8 @@ def deoptimizeProject(projectData):
             "volume"        : spriteData["volume"],
         }
         if spriteData["isStage"]:
-            newSpriteData["broadcasts"] = flipKeysAndValues(tokens["broadcasts"][None])
             newSpriteData |= {
+                "broadcasts"          : broadcastDatas,
                 "layerOrder"          : 0,
                 "tempo"               : projectData["tempo"],
                 "videoTransparency"   : projectData["videoTransparency"],

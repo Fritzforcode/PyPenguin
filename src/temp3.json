@@ -1,0 +1,418 @@
+{
+    "targets": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "variables": {
+                "AP#jU[:mkdOmU^%;j-m@": [
+                    "my variable",
+                    0
+                ]
+            },
+            "lists": {},
+            "broadcasts": {
+                "message1": "|%#{G%mJf?R|^inRwi`|",
+                "": "{wQ?}vCuaunU~IFKNu=|"
+            },
+            "customVars": [],
+            "blocks": {
+                "a": {
+                    "opcode": "event_whenstageclicked",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 44,
+                    "y": 44
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "bitmapResolution": 1,
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "dataFormat": "svg",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 240,
+                    "rotationCenterY": 180
+                }
+            ],
+            "sounds": [],
+            "id": "#fH=/ZM.T|B;rKrmG[sN",
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 50,
+            "videoState": "on",
+            "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {
+                "a": {
+                    "opcode": "event_whenflagclicked",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 296,
+                    "y": 163
+                },
+                "b": {
+                    "opcode": "event_whenstopclicked",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 295,
+                    "y": 256
+                },
+                "c": {
+                    "opcode": "event_always",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 293,
+                    "y": 352
+                },
+                "d": {
+                    "opcode": "operator_trueBoolean",
+                    "next": null,
+                    "parent": "e",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "e": {
+                    "opcode": "event_whenanything",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "ANYTHING": [
+                            2,
+                            "d"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 286,
+                    "y": 454
+                },
+                "f": {
+                    "opcode": "event_whenkeypressed",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "KEY_OPTION": [
+                            "space",
+                            "lZa:QFPiy`CEs]*lkO=/"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 277,
+                    "y": 553
+                },
+                "g": {
+                    "opcode": "event_whenkeyhit",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "KEY_OPTION": [
+                            "space",
+                            "nM^Lp^Q]A^}K)lXO{ELx"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 261,
+                    "y": 647
+                },
+                "h": {
+                    "opcode": "event_whenmousescrolled",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "KEY_OPTION": [
+                            "up",
+                            "yxeH-ilqtek]Y@J?EB}#"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 283,
+                    "y": 734
+                },
+                "i": {
+                    "opcode": "event_whenthisspriteclicked",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 307,
+                    "y": 815
+                },
+                "j": {
+                    "opcode": "event_whenbackdropswitchesto",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "BACKDROP": [
+                            "backdrop1",
+                            "|J*:TkPo/}QyFcIoCVvQ"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 299,
+                    "y": 906
+                },
+                "k": {
+                    "opcode": "event_whengreaterthan",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                4,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "WHENGREATERTHANMENU": [
+                            "LOUDNESS",
+                            "%hmsCf{[jdpy{pYlVoec"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 286,
+                    "y": 983
+                },
+                "l": {
+                    "opcode": "event_whenbroadcastreceived",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "BROADCAST_OPTION": [
+                            "message1",
+                            "|%#{G%mJf?R|^inRwi`|",
+                            "broadcast_msg"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 280,
+                    "y": 1077
+                },
+                "m": {
+                    "opcode": "event_broadcast",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "BROADCAST_INPUT": [
+                            1,
+                            [
+                                11,
+                                "message1",
+                                "|%#{G%mJf?R|^inRwi`|"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 286,
+                    "y": 1205
+                },
+                "n": {
+                    "opcode": "event_broadcastandwait",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "BROADCAST_INPUT": [
+                            1,
+                            [
+                                11,
+                                "message1",
+                                "|%#{G%mJf?R|^inRwi`|"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 240,
+                    "y": 1323
+                },
+                "o": {
+                    "opcode": "event_whengreaterthan",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                4,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "WHENGREATERTHANMENU": [
+                            "TIMER",
+                            "yxp.Ahc]%mHiCjMS(xh;"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 569,
+                    "y": 987
+                },
+                "p": {
+                    "opcode": "event_broadcast",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "BROADCAST_INPUT": [
+                            3,
+                            [
+                                12,
+                                "my variable",
+                                "oTDHAP#jU[:mkdOmU^%;"
+                            ],
+                            [
+                                11,
+                                "message1",
+                                "|%#{G%mJf?R|^inRwi`|"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 466,
+                    "y": 1415
+                },
+                "q": {
+                    "opcode": "operator_add",
+                    "next": null,
+                    "parent": "r",
+                    "inputs": {
+                        "NUM1": [
+                            1,
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "NUM2": [
+                            1,
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "r": {
+                    "opcode": "event_broadcastandwait",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "BROADCAST_INPUT": [
+                            3,
+                            "q",
+                            [
+                                11,
+                                "message1",
+                                "|%#{G%mJf?R|^inRwi`|"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 449,
+                    "y": 1541
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "assetId": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "dataFormat": "svg",
+                    "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
+                    "rotationCenterX": 26,
+                    "rotationCenterY": 46
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "assetId": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "dataFormat": "wav",
+                    "rate": 48000,
+                    "sampleCount": 17867,
+                    "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
+                }
+            ],
+            "id": ",fmYzHT-`vAhuuR@Gp)w",
+            "volume": 100,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around",
+            "layerOrder": 1
+        }
+    ],
+    "monitors": [],
+    "extensionData": {},
+    "extensions": [],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": "",
+        "platform": {
+            "name": "PenguinMod",
+            "url": "https://penguinmod.com/",
+            "version": "stable"
+        }
+    }
+}

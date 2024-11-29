@@ -1,10 +1,33 @@
-import random
+import random, hashlib
 random.seed(0)
 
 literalCharSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#%()*+,-./:;=?@[]^_`{|}~"
+charsetLength = len(literalCharSet)
+
+def stringToToken(main: str, spriteName=None) -> str:
+    def convert(inputString: str, digits: int) -> str:
+        # Character set to use in the output
+        
+        # Compute SHA-256 hash of the input string
+        hashObject = hashlib.sha256(inputString.encode())
+        hexHash = hashObject.hexdigest()
+        
+        # Convert the hexadecimal hash to a deterministic 20-character string
+        result = []
+        for i in range(digits):
+            # Take 2 characters from the hash at a time and convert to an integer
+            chunk = hexHash[i * 2:(i * 2) + 2]
+            index = int(chunk, 16) % charsetLength
+            result.append(literalCharSet[index])
+        
+        return ''.join(result)
+    
+    if spriteName == None:
+        return convert(main, digits=20)
+    else:
+        return convert(spriteName, digits=4) + convert(main, digits=16)
 
 def generateRandomToken():
-    #return f"Token::{random.randint(0,1000)}"
     Token = ""
     for _ in range(20):
         Token += literalCharSet[random.randrange(0, len(literalCharSet)-1)]
@@ -31,18 +54,6 @@ def generateNextKeyInDict(obj:dict, offset=0):
     ints = [literalToNumber(i) for i in keys]
     biggest = max([0] + ints)
     return numberToLiteral(biggest + 1 + offset)
-
-def generateSelector(scriptIDs:list[int]|str, isComment:bool):
-    if isinstance(scriptIDs, str):
-        scriptIDs = [literalToNumber(i) for i in scriptIDs.split(":")]
-    
-    items = []
-    for scriptID in scriptIDs:
-        items.append(numberToLiteral(scriptID))
-    if isComment:
-        items.append("c")
-    return ":".join(items)
-
 
 class tempSelector:
     def __init__(self, path):
@@ -79,7 +90,6 @@ class newTempSelector:
         return False
 
     def __hash__(self):
-        # Use a tuple of the attributes to create a unique hash
         return hash(self.id)
 
     def __repr__(self):
@@ -89,3 +99,7 @@ class newTempSelector:
         new = newTempSelector()
         new.id = self.id
         return new
+
+def encryptStringToToken(string: str):
+    hashed = hashliv.sha256(string.encode()).hexdigest()
+    return 

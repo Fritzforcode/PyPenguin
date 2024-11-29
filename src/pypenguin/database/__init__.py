@@ -186,4 +186,4 @@ defaultCostumeDeoptimized = {
     "rotationCenterY": 0
 }
 
-defaultCostumeFilePath = "assets/defaultCostume.svg"
+defaultCostumeFilePath = "../assets/defaultCostume.svg"

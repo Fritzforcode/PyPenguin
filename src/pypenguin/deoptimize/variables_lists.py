@@ -1,8 +1,7 @@
-from pypenguin.helper_functions import generateRandomToken, WhatIsGoingOnError, pp
+from pypenguin.helper_functions import WhatIsGoingOnError, pp, stringToToken
 
 
 def translateVariables(data, spriteNames):
-    tokens = {k:{} for k in spriteNames+[None]}
     newData = {k:{} for k in spriteNames+[None]}
     newMonitorDatas = []
     for spriteData in data["sprites"]:
@@ -13,15 +12,14 @@ def translateVariables(data, spriteNames):
             spriteName = spriteData["name"]
             localVariableDatas = spriteData["localVariables"]
         for variableData in localVariableDatas:
-            token, newVariableData, newMonitorData = translateVariable(data=variableData, spriteName=spriteName)
-            tokens[spriteName][variableData["name"]] = token
+            newVariableData, newMonitorData = translateVariable(data=variableData, spriteName=spriteName)
+            token = stringToToken(variableData["name"], spriteName=spriteName)
             newData[spriteName][token] = newVariableData
             if newMonitorData != None:
                 newMonitorDatas.append(newMonitorData)
-    return newData, tokens, newMonitorDatas
+    return newData, newMonitorDatas
 
 def translateVariable(data, spriteName):
-    token = generateRandomToken()
     name = data["name"]
     newData = [name, data["currentValue"]]
 
@@ -30,7 +28,7 @@ def translateVariable(data, spriteName):
         newMonitorData = None
     else:
         newMonitorData = {
-            "id"        : token,
+            "id"        : stringToToken(name, spriteName=spriteName),
             "mode"      : "default",
             "opcode"    : "data_variable",
             "params"    : {"VARIABLE": name},
@@ -56,10 +54,9 @@ def translateVariable(data, spriteName):
     else: # local var
         if "\u2601" in name:
             raise ValueError("Non-cloud variables cannot contain '☁'(unicode 2601)")
-    return token, newData, newMonitorData
+    return newData, newMonitorData
 
 def translateLists(data, spriteNames):
-    tokens = {k:{} for k in spriteNames+[None]}
     newData = {k:{} for k in spriteNames+[None]}
     newMonitorDatas = []
     for spriteData in data["sprites"]:
@@ -70,15 +67,14 @@ def translateLists(data, spriteNames):
             spriteName = spriteData["name"]
             localListDatas = spriteData["localLists"]
         for listData in localListDatas:
-            token, newListData, newMonitorData = translateList(data=listData, spriteName=spriteName)
-            tokens[spriteName][listData["name"]] = token
+            newListData, newMonitorData = translateList(data=listData, spriteName=spriteName)
+            token = stringToToken(listData["name"], spriteName=spriteName)
             newData[spriteName][token] = newListData
             if newMonitorData != None:
                 newMonitorDatas.append(newMonitorData)
-    return newData, tokens, newMonitorDatas
+    return newData, newMonitorDatas
 
 def translateList(data, spriteName):
-    token = generateRandomToken()
     name = data["name"]
     newData = [name, data["currentValue"]]
 
@@ -87,7 +83,7 @@ def translateList(data, spriteName):
         newMonitorData = None
     else:
         newMonitorData = {
-            "id"        : token,
+            "id"        : stringToToken(name, spriteName=spriteName),
             "mode"      : "list",
             "opcode"    : "data_listcontents",
             "params"    : {"LIST": name},
@@ -99,5 +95,5 @@ def translateList(data, spriteName):
             "y"         : monitorData["position"][1],
             "visible"   : monitorData["visible"],
         }
-    return token, newData, newMonitorData
+    return newData, newMonitorData
 
