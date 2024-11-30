@@ -1,8 +1,20 @@
-from pypenguin.helper_functions import ikv, parseCustomOpcode
+from pypenguin.helper_functions import ikv, parseCustomOpcode, pp
 from pypenguin.validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema, opcodeDatabase, allowedOpcodes
 from pypenguin.validate.comments import validateComment
-from pypenguin.database import inputDefault, optionDefault, commentDefault, inputModes, inputBlockDefault, inputTextDefault, inputBlocksDefault
+from pypenguin.database import *#inputDefault, optionDefault, commentDefault, inputModes, inputBlockDefault, inputTextDefault, inputBlocksDefault
 
+
+def validateScript(path, data, context):
+    # Check script format
+    validateSchema(pathToData=path, data=data, schema=scriptSchema)
+
+    # Check block formats
+    for i, block in enumerate(data["blocks"]):
+        validateBlock(path=path+["blocks"]+[i], data=block, context=context)
+        oldOpcode = getDeoptimizedOpcode(opcode=block["opcode"])
+        blockType = getBlockType(opcode=oldOpcode)
+        if (blockType in ["stringReporter", "numberReporter", "booleanReporter"]) and (len(data["blocks"]) > 1):
+            raise formatError(path, "A script whose first block is a reporter mustn't have more than one block.")
 
 def validateBlock(path, data, context):
     if "inputs" not in data:
@@ -18,112 +30,109 @@ def validateBlock(path, data, context):
     validateComment(path=path+["comment"], data=data["comment"])
     
     opcode = data["opcode"]
-    opcodeData = list(opcodeDatabase.values())[allowedOpcodes.index(opcode)]
-    
-
-    validateOptions(
-        path=path+["options"], 
-        data=data["options"], 
-        opcode=opcode, 
-        opcodeData=opcodeData, 
-        context=context,
-    )
     validateInputs(
         path=path+["inputs"], 
         data=data["inputs"],
         opcode=opcode, 
-        opcodeData=opcodeData,
         context=context, 
-        optionDatas=data["options"],
     )
+    validateOptions(
+        path=path+["options"],
+        data=data["options"],
+        opcode=opcode,
+        context=context,
+        inputDatas=data["inputs"],
+    )
+    if opcode == "call ...":
+        validateCallInputs(
+            path=path+["inputs"], 
+            data=data["inputs"],
+            optionDatas=data["options"],
+        )
 
-def validateScript(path, data, context):
-    # Check script format
-    validateSchema(pathToData=path, data=data, schema=scriptSchema)
-
-    # Check block formats
-    for i, block in enumerate(data["blocks"]):
-        validateBlock(path=path+["blocks"]+[i], data=block, context=context)
-        newOpcode = block["opcode"]
-        for i, oldOpcode, opcodeData in ikv(opcodeDatabase):
-            if opcodeData["newOpcode"] == newOpcode:
-                break
-        if (opcodeData["type"] in ["stringReporter", "numberReporter", "booleanReporter"]) and (len(data["blocks"]) > 1):
-            raise formatError(path, "A script whose first block is a reporter mustn't have more than one block.")
-
-def validateInputs(path, data, opcode, opcodeData, context, optionDatas):
-    allowedInputIDs = list(opcodeData["inputTypes"].keys()) # List of inputs which are defined for the specific opcode
-    if opcode == "call ...": # Inputs in the call block type are custom
-        proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"])
-        inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
-        for i, inputID, inputType in ikv(inputTypes):
-            if inputType == "text" and inputID not in data:
-                raise formatError(path, f"A custom block with custom opcode '{optionDatas['customOpcode']}' must have the input '{inputID}'.")
-    else:
-        inputTypes = opcodeData["inputTypes"]
+def validateInputs(path, data, opcode, context):
+    oldOpcode       = getDeoptimizedOpcode(opcode=opcode)
+    allowedInputIDs = list(getInputTypes(opcode=oldOpcode).keys()) # List of inputs which are defined for the specific opcode
+    if opcode != "call ...": # Inputs in the call ... block are custom
         for i, inputID, inputValue in ikv(data):
             if inputID not in allowedInputIDs:
                 raise formatError(path, f"Input '{inputID}' is not defined for a block with opcode '{opcode}'.")
         for inputID in allowedInputIDs:
-            inputType = inputTypes[inputID]
-            if inputType not in ["boolean", "round", "script"]:
+            inputMode = getInputMode(
+                opcode=oldOpcode,
+                inputID=inputID,
+            )
+            if inputMode not in ["block-only", "script"]:
                 if inputID not in data:
                     raise formatError(path, f"A block with opcode '{opcode}' must have the input '{inputID}'.")
+
+        inputTypes = getInputTypes(opcode=oldOpcode)
+    
+        # Check input formats
+        for inputID in data:
+            inputType = inputTypes[inputID]
+
+            if inputID in data:
+                inputMode = inputModes[inputType]
+
+                inputValue = data[inputID]
+                if "mode" not in inputValue:
+                    inputValue["mode"] = inputMode
+                # Check input value format
+                validateSchema(pathToData=path+[inputID], data=inputValue, schema=inputSchema)
+                if   inputMode == "block-and-text":
+                    required = ["block", "text"]
+                elif inputMode == "block-only":
+                    required = ["block"]
+                elif inputMode == "script":
+                    required = ["blocks"]
+                elif inputMode in ["block-and-option", "block-and-hybrid-option"]:
+                    required = ["option"]
+                
+                for attribute in required:
+                    if attribute not in inputValue:
+                        match attribute:
+                            case "block":
+                                inputValue["block"] = inputBlockDefault
+                            case "text":
+                                inputValue["text"] = inputTextDefault
+                            case "blocks":
+                                inputValue["blocks"] = inputBlocksDefault
+                            case "option":
+                                raise formatError(path=path+[inputID], message="Must have the attribute 'option'.")
+
+                if inputValue.get("block") != None: # When the input has a block and it isn't None, check the block format
+                    validateBlock(path=path+[inputID]+["block"], data=inputValue["block"], context=context)
+                
+                if inputValue.get("blocks", []) != []:
+                    preparedData = {"position": [0,0], "blocks": inputValue["blocks"]}
+                    validateScript(path=path+[inputID], data=preparedData, context=context)
+                
+                if inputValue.get("option") != None:
+                    validateOptionValue(
+                        path=path+[inputID]+["option"],
+                        data=inputValue["option"],
+                        opcode=opcode,
+                        optionType=inputType, # Might need to be changed
+                        context=context,
+                        inputDatas=data,
+                    )
+
+def validateCallInputs(path, data, optionDatas):
+    proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"])
+    inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
+    for i, inputID, inputType in ikv(inputTypes):
+        if inputType == "text" and inputID not in data:
+            raise formatError(path, f"A custom block with custom opcode '{optionDatas['customOpcode']}' must have the input '{inputID}'.")
+    
     # Check input formats
     for inputID in data:
-        if opcode == "call ...":
-            if inputID not in inputTypes:
-                raise formatError(path, f"Input '{inputID}' is not defined for a custom block with custom opcode '{optionDatas['customOpcode']}'.")
-        inputType = inputTypes[inputID]
+        if inputID not in inputTypes:
+            raise formatError(path, f"Input '{inputID}' is not defined for a custom block with custom opcode '{optionDatas['customOpcode']}'.")
 
-        if inputID in data:
-            inputMode = inputModes[inputType]
-
-            inputValue = data[inputID]
-            if "mode" not in inputValue:
-                inputValue["mode"] = inputMode
-            # Check input value format
-            validateSchema(pathToData=path+[inputID], data=inputValue, schema=inputSchema)
-            if   inputMode == "block-and-text":
-                required = ["block", "text"]
-            elif inputMode == "block-only":
-                required = ["block"]
-            elif inputMode == "script":
-                required = ["blocks"]
-            elif inputMode in ["block-and-option", "block-and-hybrid-option"]:
-                required = ["option"]
-            
-            for attribute in required:
-                if attribute not in inputValue:
-                    match attribute:
-                        case "block":
-                            inputValue["block"] = inputBlockDefault
-                        case "text":
-                            inputValue["text"] = inputTextDefault
-                        case "blocks":
-                            inputValue["blocks"] = inputBlocksDefault
-
-            if inputValue.get("block") != None: # When the input has a block and it isn't None, check the block format
-               validateBlock(path=path+[inputID]+["block"], data=inputValue["block"], context=context)
-            
-            if inputValue.get("blocks", []) != []:
-                preparedData = {"position": [0,0], "blocks": inputValue["blocks"]}
-                validateScript(path=path+[inputID], data=preparedData, context=context)
-            
-            # Specific value controls(None currently)
-            match inputType: # type of the input
-                case "broadcast"       : pass
-                case "integer"         : pass
-                case "positive integer": pass
-                case "positive number" : pass
-                case "number"          : pass
-                case "text"            : pass
-                case "boolean"         : pass
-                case "round"           : pass
-                case "script"          : pass
-
-def validateOptions(path, data, opcode, opcodeData, context):    
-    allowedOptionIDs = list(opcodeData["optionTypes"].keys()) # List of options which are defined for the specific opcode
+def validateOptions(path, data, opcode, context, inputDatas):
+    oldOpcode        = getDeoptimizedOpcode(opcode=opcode)
+    allowedOptionIDs = list(getOptionTypes(opcode=oldOpcode).keys()) # List of inputs which are defined for the specific opcode
     for i, optionID, optionValue in ikv(data):
         if optionID not in allowedOptionIDs:
             raise formatError(path, f"Option '{optionID}' is not defined for a block with opcode '{opcode}'.")
@@ -131,72 +140,94 @@ def validateOptions(path, data, opcode, opcodeData, context):
         if optionID not in data:
             raise formatError(path, f"A block with opcode '{opcode}' must have the option '{optionID}'.")
 
-        optionValue = data[optionID]
-        # Check option value format (was paused due to always being a string)
-        # validateSchema(pathToData=path+[optionID], data=optionValue, schema=optionSchema)
         
-        match opcodeData["optionTypes"][optionID]: # type of the option
-            case "key"|"unary math operation"|"binary math operation large"|"binary math operation small"|"text operation"|"text case"|"stop script target"|"other sprite or stage"|"cloning target"|"up | down"|"backdrop"|"LOUDNESS | TIMER"|"exclusive touchable object"|"half-inclusive touchable object"|"inclusive touchable object"|"touchable sprite"|"coordinate"|"drag mode"|"blockType":
-                match opcodeData["optionTypes"][optionID]:
-                    case "key":
-                        possibleValues = [
-                            "space", "up arrow", "down arrow", "right arrow", "left arrow", 
-                            "enter", "any", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", 
-                            "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", 
-                            "x", "y", "z", "-", ",", ".", "`", "=", "[", "]", "\\", ";", "'", 
-                            "/", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", 
-                            "{", "}", "|", ":", '"', "?", "<", ">", "~", "backspace", "delete", 
-                            "shift", "caps lock", "scroll lock", "control", "escape", "insert", 
-                            "home", "end", "page up", "page down"
-                        ]
-                    case "unary math operation":
-                        possibleValues = ["abs", "floor", "ceiling", "sqrt", "sin", "cos", "tan", "asin", "acos", "atan", "ln", "log", "e ^", "10 ^"]
-                    case "binary math operation large":
-                        possibleValues = ["^", "root", "log"]
-                    case "binary math operation small":
-                        possibleValues = ["root", "log"]
-                    case "text operation":
-                        possibleValues = ["starts", "ends"]
-                    case "text case":
-                        possibleValues = ["upper", "lower"]
-                    case "stop script target":
-                        possibleValues = ["all", "this script", "other scripts in sprite"]
-                    case "other sprite or stage":
-                        possibleValues = ["_stage_"] + context["otherSprites"]
-                    case "cloning target":
-                        possibleValues = context["cloningTargets"]
-                    case "up | down":
-                        possibleValues = ["up", "down"]
-                    case "backdrop":
-                        possibleValues = context["backdrops"]
-                    case "LOUDNESS | TIMER":
-                        possibleValues = ["LOUDNESS", "TIMER"]
-                    case "exclusive touchable object":
-                        possibleValues = ["_mouse_"] + context["otherSprites"]
-                    case "half-inclusive touchable object":
-                        possibleValues = ["_mouse_", "_edge_"] + context["otherSprites"]
-                    case "inclusive touchable object":
-                        possibleValues = ["_mouse_", "_edge_", "_myself_"] + context["otherSprites"]
-                    case "touchable sprite":
-                        possibleValues = ["_myself_"] + context["otherSprites"]
-                    case "coordinate":
-                        possibleValues = ["x", "y"]
-                    case "drag mode":
-                        possibleValues = ["draggable", "not draggable"]
-                    case "blockType":
-                        possibleValues = ["instruction", "lastInstruction", "stringReporter", "numberReporter", "booleanReporter"]
-                if optionValue not in possibleValues:
-                    raise formatError(path+[optionID], f"Must be one of {possibleValues}.")
-            case "broadcast"|"string":
-                if not isinstance(optionValue, str):
-                    raise formatError(path+[optionID], f"Must be a string.")
-            case "variable":
-                if optionValue not in [var["name"] for var in context["scopeVariables"]]:
-                    raise formatError(path+[optionID], f"Must be a defined variable.")
-            case "list":
-                if optionValue not in [list_["name"] for list_ in context["scopeLists"]]:
-                    raise formatError(path+[optionID], f"Must be a defined list.")
-            case "boolean":
-                if not isinstance(optionValue, bool):
-                    raise formatError(path+[optionID], f"Must be a boolean.")
-            case _: raise Exception()
+        optionType = getOptionType(
+            opcode=oldOpcode,
+            optionID=optionID,
+        )
+        optionValue = data[optionID]
+        validateOptionValue(
+            path=path+[optionID],
+            data=optionValue,
+            opcode=opcode,
+            optionType=optionType,
+            context=context,
+            inputDatas=inputDatas,
+        )
+
+def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
+    match optionType:
+        case "broadcast"|"string":
+            if not isinstance(data, str):
+                raise formatError(path, f"Must be a string.")
+        case "variable":
+            if data not in [var["name"] for var in context["scopeVariables"]]:
+                raise formatError(path, f"Must be a defined variable.")
+        case "list":
+            if data not in [list_["name"] for list_ in context["scopeLists"]]:
+                raise formatError(path, f"Must be a defined list.")
+        case "boolean":
+            if not isinstance(data, bool):
+                raise formatError(path, f"Must be a boolean.")
+        case _:
+            match optionType:
+                case "key":
+                    possibleValues = [
+                        "space", "up arrow", "down arrow", "right arrow", "left arrow", 
+                        "enter", "any", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", 
+                        "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", 
+                        "x", "y", "z", "-", ",", ".", "`", "=", "[", "]", "\\", ";", "'", 
+                        "/", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", 
+                        "{", "}", "|", ":", '"', "?", "<", ">", "~", "backspace", "delete", 
+                        "shift", "caps lock", "scroll lock", "control", "escape", "insert", 
+                        "home", "end", "page up", "page down"
+                    ]
+                case "unary math operation":
+                    possibleValues = ["abs", "floor", "ceiling", "sqrt", "sin", "cos", "tan", "asin", "acos", "atan", "ln", "log", "e ^", "10 ^"]
+                case "binary math operation large":
+                    possibleValues = ["^", "root", "log"]
+                case "binary math operation small":
+                    possibleValues = ["root", "log"]
+                case "text operation":
+                    possibleValues = ["starts", "ends"]
+                case "text case":
+                    possibleValues = ["upper", "lower"]
+                case "stop script target":
+                    possibleValues = ["all", "this script", "other scripts in sprite"]
+                case "other sprite or stage":
+                    possibleValues = ["_stage_"] + context["otherSprites"]
+                case "cloning target":
+                    possibleValues = context["cloningTargets"]
+                case "up | down":
+                    possibleValues = ["up", "down"]
+                case "backdrop":
+                    possibleValues = context["backdrops"]
+                case "LOUDNESS | TIMER":
+                    possibleValues = ["LOUDNESS", "TIMER"]
+                case "exclusive touchable object":
+                    possibleValues = ["_mouse_"] + context["otherSprites"]
+                case "half-inclusive touchable object":
+                    possibleValues = ["_mouse_", "_edge_"] + context["otherSprites"]
+                case "inclusive touchable object":
+                    possibleValues = ["_mouse_", "_edge_", "_myself_"] + context["otherSprites"]
+                case "touchable sprite":
+                    possibleValues = ["_myself_"] + context["otherSprites"]
+                case "coordinate":
+                    possibleValues = ["x", "y"]
+                case "drag mode":
+                    possibleValues = ["draggable", "not draggable"]
+                case "sprite property":
+                    match opcode:
+                        case "set [PROPERTY] of ([TARGET]) to (VALUE)":
+                            if inputDatas["TARGET"]["option"] == "_stage_":
+                                nameKey = None
+                            else:
+                                nameKey = inputDatas["TARGET"]["option"]
+                    if nameKey == None:
+                        possibleValues = ["backdrop", "volume"] + context["globalVariables"]
+                    else:
+                        possibleValues = ["x position", "y position", "direction", "costume", "size", "volume"] + context["localVariables"][nameKey]
+                case "blockType":
+                    possibleValues = ["instruction", "lastInstruction", "stringReporter", "numberReporter", "booleanReporter"] + context["localVariables"]
+            if data not in possibleValues:
+                raise formatError(path, f"Must be one of {possibleValues}.")
