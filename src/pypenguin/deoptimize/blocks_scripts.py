@@ -229,6 +229,7 @@ def flattenBlock(data, blockID, parentID, nextID):
     return newBlockDatas
 
 def restoreBlocks(data, spriteName):
+    #print("rbs", 100*"{")
     #pp(data)
     newBlockDatas = {}
     newCommentDatas = {}
@@ -294,7 +295,10 @@ def restoreInputs(data, opcode, spriteName):
         
         subBlocks     = inputData["references"]
         if inputData["listBlock"] != None:
-            subBlocks.insert(0, inputData["listBlock"])
+            subBlocks.insert(0, restoreListBlock(
+                data=inputData["listBlock"],
+                spriteName=spriteName,
+            ))
         subBlockCount = len(subBlocks)
         match inputMode:
             case "block-and-text"|"block-and-hybrid-option":

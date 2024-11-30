@@ -216,7 +216,7 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = ["x", "y"]
                 case "drag mode":
                     possibleValues = ["draggable", "not draggable"]
-                case "sprite property":
+                case "mutable sprite property":
                     match opcode:
                         case "set [PROPERTY] of ([TARGET]) to (VALUE)":
                             if inputDatas["TARGET"]["option"] == "_stage_":
@@ -227,6 +227,19 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                         possibleValues = ["backdrop", "volume"] + context["globalVariables"]
                     else:
                         possibleValues = ["x position", "y position", "direction", "costume", "size", "volume"] + context["localVariables"][nameKey]
+                case "readable sprite property":
+                    match opcode:
+                        case "[PROPERTY] of ([TARGET])":
+                            if inputDatas["TARGET"]["option"] == "_stage_":
+                                nameKey = None
+                            else:
+                                nameKey = inputDatas["TARGET"]["option"]
+                    if nameKey == None:
+                        possibleValues = ["backdrop #", "backdrop name", "volume"] + context["globalVariables"]
+                    else:
+                        possibleValues = ["x position", "y position", "direction", "costume #", "costume name", "layer", "size", "volume"] + context["localVariables"][nameKey]
+                case "time property":
+                    possibleValues = ["YEAR", "MONTH", "DATE", "DAYOFWEEK", "HOUR", "MINUTE", "SECOND", "TIMESTAMP"]
                 case "blockType":
                     possibleValues = ["instruction", "lastInstruction", "stringReporter", "numberReporter", "booleanReporter"] + context["localVariables"]
             if data not in possibleValues:

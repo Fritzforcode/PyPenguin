@@ -27,107 +27,126 @@
             "scripts": [
                 {
                     "position": [
-                        237,
-                        169
+                        301,
+                        80
                     ],
                     "blocks": [
                         {
-                            "opcode": "(NUM1) + (NUM2)",
-                            "inputs": {
-                                "NUM1": {
-                                    "mode": "block-and-text",
-                                    "block": {
-                                        "opcode": "new line",
-                                        "inputs": {},
-                                        "options": {},
-                                        "comment": {
-                                            "position": [
-                                                355.91975021362305,
-                                                177
-                                            ],
-                                            "size": [
-                                                200,
-                                                200
-                                            ],
-                                            "isMinimized": false,
-                                            "text": "Iekk"
-                                        }
-                                    },
-                                    "text": ""
-                                },
-                                "NUM2": {
-                                    "mode": "block-and-text",
-                                    "block": {
-                                        "opcode": "value of [VARIABLE]",
-                                        "inputs": {},
-                                        "options": {
-                                            "VARIABLE": "my variable"
-                                        }
-                                    },
-                                    "text": ""
-                                }
-                            },
-                            "options": {},
-                            "comment": {
-                                "position": [
-                                    654.919750213623,
-                                    150
-                                ],
-                                "size": [
-                                    200,
-                                    200
-                                ],
-                                "isMinimized": false,
-                                "text": "afgh"
+                            "opcode": "current [PROPERTY]",
+                            "inputs": {},
+                            "options": {
+                                "PROPERTY": "YEAR"
                             }
                         }
                     ]
                 },
                 {
                     "position": [
-                        70,
-                        354
+                        305,
+                        138
                     ],
                     "blocks": [
                         {
-                            "opcode": "value of [VARIABLE]",
+                            "opcode": "current [PROPERTY]",
                             "inputs": {},
                             "options": {
-                                "VARIABLE": "my variable"
-                            },
-                            "comment": {
-                                "position": [
-                                    208.14505767822266,
-                                    358
-                                ],
-                                "size": [
-                                    200,
-                                    200
-                                ],
-                                "isMinimized": false,
-                                "text": "er"
+                                "PROPERTY": "MONTH"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        301,
+                        194
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "current [PROPERTY]",
+                            "inputs": {},
+                            "options": {
+                                "PROPERTY": "DATE"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        307,
+                        262
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "current [PROPERTY]",
+                            "inputs": {},
+                            "options": {
+                                "PROPERTY": "DAYOFWEEK"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        307,
+                        331
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "current [PROPERTY]",
+                            "inputs": {},
+                            "options": {
+                                "PROPERTY": "HOUR"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        296,
+                        384
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "current [PROPERTY]",
+                            "inputs": {},
+                            "options": {
+                                "PROPERTY": "MINUTE"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        295,
+                        448
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "current [PROPERTY]",
+                            "inputs": {},
+                            "options": {
+                                "PROPERTY": "SECOND"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        296,
+                        525
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "current [PROPERTY]",
+                            "inputs": {},
+                            "options": {
+                                "PROPERTY": "TIMESTAMP"
                             }
                         }
                     ]
                 }
             ],
-            "comments": [
-                {
-                    "position": [
-                        33.580277054398145,
-                        468.1481481481481
-                    ],
-                    "size": [
-                        200,
-                        200
-                    ],
-                    "isMinimized": false,
-                    "text": "Ofod",
-                    "_info_": {
-                        "block": null
-                    }
-                }
-            ],
+            "comments": [],
             "currentCostume": 0,
             "costumes": [
                 {

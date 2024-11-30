@@ -3,42 +3,24 @@ A = [
         "position": [0,0],
         "blocks": [
             {
-                "opcode": "broadcast ([MESSAGE])",
+                "opcode": "[PROPERTY] of ([TARGET])",
                 "inputs": {
-                    "MESSAGE": {
+                    "TARGET": {
+                        "option": "_stage_",
                         "block": {
-                            "opcode": "touching ([OBJECT]) ?",
-                            "inputs": {
-                                "OBJECT": {
-                                    "block": {"opcode": "error"},
-                                    "option": "_mouse_",
-                                },
-                            },
+                            "opcode": "value of [VARIABLE]",
+                            "options": {"VARIABLE": "var"},
                         },
-                        "option": "\u9999",
                     },
                 },
-            },
-            {
-                "opcode": "broadcast ([MESSAGE])",
-                "inputs": {
-                    "MESSAGE": {
-                        "block": {
-                            "opcode": "touching ([OBJECT]) ?",
-                            "inputs": {
-                                "OBJECT": {
-                                    "block": {"opcode": "error"},
-                                    "option": "Sprite1",
-                                },
-                            },
-                        },
-                        "option": "\u0043",
-                    },
+                "options": {
+                    "PROPERTY": "volume",
                 },
             },
         ],
     },
 ]
+# ['x position', 'y position', 'direction', 'costume', 'size', 'volume', 'loc var']
 projectData = {
     "sprites": [
         {
@@ -59,7 +41,13 @@ projectData = {
             "currentCostume": 0,
             "costumes": [],
             "sounds": [],
-            "localVariables": [],
+            "localVariables": [
+                {
+                    "name": "loc var",
+                    "currentValue": "",
+                    "monitor": None,
+                }
+            ],
             "localLists": [],
             "volume": 100,
             "layerOrder": 1,
@@ -135,8 +123,8 @@ writeJSONFile(
 )
 
 deoptimizeAndCompressProject(
-    optimizedProjectDirectory = "project",
-    projectFilePath           = "export.pmp",
-    temporaryDirectory        = "temporary",
-    writeDebugFiles           = True,
+    optimizedProjectDir = "project",
+    projectFilePath     = "export.pmp",
+    temporaryDir        = "temporary",
+    writeDebugFiles     = True,
 )

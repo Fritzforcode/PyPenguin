@@ -138,6 +138,9 @@ def getInputMagicNumber(inputType):
 def getOptionType(opcode, optionID):
     return opcodeDatabase[opcode]["optionTypes"][optionID]
 
+def getOptionTypes(opcode):
+    return opcodeDatabase[opcode]["optionTypes"]
+
 inputDefault = {}
 inputBlockDefault = None
 inputTextDefault = ""

@@ -58,7 +58,8 @@ def validateProject(projectData):
     # Check sprite formats
     spriteNames               = []
     cloningTargets            = []
-    otherSprites = []
+    localVariables            = {}
+    otherSprites              = []
     for i, sprite in enumerate(projectDataCopy["sprites"]):
         spriteName = None if i == 0 else sprite["name"] # None for the stage
         if spriteName in spriteNames: # If there is the same sprite name twice
@@ -76,24 +77,27 @@ def validateProject(projectData):
         else:
             cloningTargets.append(spriteName)
             otherSprites.append(spriteName)
+            localVariables[spriteName] = [item["name"] for item in sprite["localVariables"]]
     
     for i, sprite in enumerate(projectDataCopy["sprites"]):
         if i == 0:
             scopeVariables    = projectDataCopy["globalVariables"]
-            scopeLists        = projectDataCopy["globalLists"]
+            scopeLists        = projectDataCopy["globalLists"    ]
             if cloningTargets == []:
                 newCloningTargets = [" "] # When there are no sprites; make " " the fallback value
             else:
                 newCloningTargets = cloningTargets
         else:
             newCloningTargets = ["_myself_"] + cloningTargets
-            scopeVariables    = sprite["localVariables"] + projectDataCopy["globalVariables"]
-            scopeLists        = sprite["localLists"]     + projectDataCopy["globalLists"]
+            scopeVariables    = [item["name"] for item in sprite["localVariables"] + projectDataCopy["globalVariables"]]
+            scopeLists        = [item["name"] for item in sprite["localLists"    ] + projectDataCopy["globalLists"    ]]
 
         context = {
-            "scopeVariables": scopeVariables, 
-            "scopeLists": scopeLists, 
-            "cloningTargets": newCloningTargets,
+            "scopeVariables" : scopeVariables, 
+            "scopeLists"     : scopeLists, 
+            "globalVariables": [item["name"] for item in projectDataCopy["globalVariables"]],
+            "localVariables" : localVariables,
+            "cloningTargets" : newCloningTargets,
             "otherSprites": [
                 target for target in otherSprites if target != sprite["name"]
             ],

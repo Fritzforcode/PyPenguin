@@ -43,112 +43,135 @@
             "customVars": [],
             "blocks": {
                 "a": {
-                    "opcode": "operator_add",
+                    "opcode": "sensing_current",
                     "next": null,
                     "parent": null,
-                    "inputs": {
-                        "NUM1": [
-                            3,
-                            "b",
-                            [
-                                4,
-                                ""
-                            ]
-                        ],
-                        "NUM2": [
-                            3,
-                            [
-                                12,
-                                "my variable",
-                                "`jEk@4|i[#Fk?(8x)AV.-my variable"
-                            ],
-                            [
-                                4,
-                                ""
-                            ]
+                    "inputs": {},
+                    "fields": {
+                        "CURRENTMENU": [
+                            "YEAR",
+                            "Cfc_:+KqPMC/}e+PZYVC"
                         ]
                     },
-                    "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 237,
-                    "y": 169,
-                    "comment": "c"
+                    "x": 301,
+                    "y": 80
                 },
                 "b": {
-                    "opcode": "operator_newLine",
+                    "opcode": "sensing_current",
                     "next": null,
-                    "parent": "a",
+                    "parent": null,
                     "inputs": {},
-                    "fields": {},
+                    "fields": {
+                        "CURRENTMENU": [
+                            "MONTH",
+                            "u;FAvQWFAzkt)g)okPyV"
+                        ]
+                    },
                     "shadow": false,
-                    "topLevel": false,
-                    "comment": "d"
+                    "topLevel": true,
+                    "x": 305,
+                    "y": 138
                 },
-                "e": [
-                    12,
-                    "my variable",
-                    "`jEk@4|i[#Fk?(8x)AV.-my variable",
-                    70,
-                    354
-                ]
-            },
-            "comments": {
                 "c": {
-                    "blockId": "a",
-                    "x": 654.919750213623,
-                    "y": 150,
-                    "width": 200,
-                    "height": 200,
-                    "minimized": false,
-                    "text": "afgh"
-                },
-                "f": {
-                    "blockId": "g",
-                    "x": 460.6462935694941,
-                    "y": 409.62962962962735,
-                    "width": 200,
-                    "height": 200,
-                    "minimized": false,
-                    "text": "dfgdfg"
-                },
-                "h": {
-                    "blockId": "i",
-                    "x": 207.88579841896336,
-                    "y": 357.5308792679414,
-                    "width": 200,
-                    "height": 200,
-                    "minimized": false,
-                    "text": "Ufjnen3"
+                    "opcode": "sensing_current",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "CURRENTMENU": [
+                            "DATE",
+                            "yNbn.-AS[8|6YX4maYO)"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 301,
+                    "y": 194
                 },
                 "d": {
-                    "blockId": "b",
-                    "x": 355.91975021362305,
-                    "y": 177,
-                    "width": 200,
-                    "height": 200,
-                    "minimized": false,
-                    "text": "Iekk"
+                    "opcode": "sensing_current",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "CURRENTMENU": [
+                            "DAYOFWEEK",
+                            "^~eGJtxbBnioaXRCT4~o"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 307,
+                    "y": 262
                 },
-                "j": {
-                    "blockId": null,
-                    "x": 33.580277054398145,
-                    "y": 468.1481481481481,
-                    "width": 200,
-                    "height": 200,
-                    "minimized": false,
-                    "text": "Ofod"
+                "e": {
+                    "opcode": "sensing_current",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "CURRENTMENU": [
+                            "HOUR",
+                            "oDGWMK8iEgD2M%*t/eAG"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 307,
+                    "y": 331
                 },
-                "k": {
-                    "blockId": "e",
-                    "x": 208.14505767822266,
-                    "y": 358,
-                    "width": 200,
-                    "height": 200,
-                    "minimized": false,
-                    "text": "er"
+                "f": {
+                    "opcode": "sensing_current",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "CURRENTMENU": [
+                            "MINUTE",
+                            ",,r|smsjEYT|EH:%^2G3"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 296,
+                    "y": 384
+                },
+                "g": {
+                    "opcode": "sensing_current",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "CURRENTMENU": [
+                            "SECOND",
+                            "1K#Ji|Zbs8z#ruGR[Rin"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 295,
+                    "y": 448
+                },
+                "h": {
+                    "opcode": "sensing_current",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "CURRENTMENU": [
+                            "TIMESTAMP",
+                            "Mh5ZrkRVa*)/S/UF5oJ("
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 296,
+                    "y": 525
                 }
             },
+            "comments": {},
             "currentCostume": 0,
             "costumes": [
                 {

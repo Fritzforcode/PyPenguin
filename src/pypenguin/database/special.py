@@ -65,6 +65,13 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    "sensing_of_object_menu": {
+        "type": "menu",
+        "category": "Sensing",
+        "newOpcode": "#OJBECT PROPERTY MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
 # SPECIAL: Variables and Lists
     "special_variable_value": {
         "type": "textReporter",

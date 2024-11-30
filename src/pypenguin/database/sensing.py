@@ -224,4 +224,28 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    "sensing_set_of": {
+        "type": "instruction",
+        "category": "Sensing",
+        "newOpcode": "set [PROPERTY] of ([TARGET]) to (VALUE)",
+        "inputTypes": {"VALUE": "text", "TARGET": "other sprite or stage"},
+        "optionTypes": {"PROPERTY": "mutable sprite property"},
+        "menus": [{"new": "TARGET", "outer": "OBJECT", "inner": "OBJECT", "menuOpcode": "sensing_of_object_menu"}],
+    },
+    "sensing_of": {
+        "type": "textReporter",
+        "category": "Sensing",
+        "newOpcode": "[PROPERTY] of ([TARGET])",
+        "inputTypes": {"TARGET": "other sprite or stage"},
+        "optionTypes": {"PROPERTY": "readable sprite property"},
+        "menus": [{"new": "TARGET", "outer": "OBJECT", "inner": "OBJECT", "menuOpcode": "sensing_of_object_menu"}],
+    },
+    "sensing_current": {
+        "type": "textReporter",
+        "category": "Sensing",
+        "newOpcode": "current [PROPERTY]",
+        "inputTypes": {},
+        "optionTypes": {"PROPERTY": "time property"},
+        "optionTranslation": {"CURRENTMENU": "PROPERTY"},
+    },
 }
