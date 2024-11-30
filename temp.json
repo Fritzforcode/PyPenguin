@@ -10,9 +10,7 @@
                 ]
             },
             "lists": {},
-            "broadcasts": {
-                "{ubU2K5qOToRbXcFt_Bw": "message1"
-            },
+            "broadcasts": {},
             "customVars": [],
             "blocks": {},
             "comments": {},
@@ -44,62 +42,19 @@
             "broadcasts": {},
             "customVars": [],
             "blocks": {
-                "c": {
-                    "opcode": "event_broadcast",
+                "a": {
+                    "opcode": "operator_add",
                     "next": null,
                     "parent": null,
                     "inputs": {
-                        "BROADCAST_INPUT": [
+                        "NUM1": [
                             1,
                             [
-                                11,
-                                "message1",
-                                "{ubU2K5qOToRbXcFt_Bw"
+                                4,
+                                ""
                             ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 282,
-                    "y": 435
-                },
-                "a": {
-                    "opcode": "event_broadcast",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "BROADCAST_INPUT": [
-                            3,
-                            "b",
-                            [
-                                11,
-                                "message1",
-                                "{ubU2K5qOToRbXcFt_Bw"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 270,
-                    "y": 577
-                },
-                "b": {
-                    "opcode": "operator_tabCharacter",
-                    "next": null,
-                    "parent": "a",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "d": {
-                    "opcode": "event_broadcast",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "BROADCAST_INPUT": [
+                        ],
+                        "NUM2": [
                             3,
                             [
                                 12,
@@ -107,20 +62,39 @@
                                 "`jEk@4|i[#Fk?(8x)AV.-my variable"
                             ],
                             [
-                                11,
-                                "message1",
-                                "{ubU2K5qOToRbXcFt_Bw"
+                                4,
+                                ""
                             ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 228,
-                    "y": 777
+                    "x": 237,
+                    "y": 169,
+                    "comment": "b"
                 }
             },
-            "comments": {},
+            "comments": {
+                "b": {
+                    "blockId": "a",
+                    "x": 612.7944417176423,
+                    "y": 150.37037037036814,
+                    "width": 200,
+                    "height": 200,
+                    "minimized": false,
+                    "text": "afgh"
+                },
+                "c": {
+                    "blockId": "d",
+                    "x": 460.6462935694941,
+                    "y": 409.62962962962735,
+                    "width": 200,
+                    "height": 200,
+                    "minimized": false,
+                    "text": "dfgdfg"
+                }
+            },
             "currentCostume": 0,
             "costumes": [
                 {

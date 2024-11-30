@@ -4,4 +4,7 @@ def translateComment(data):
         "size"       : [data["width"], data["height"]],
         "isMinimized": data["minimized"],
         "text"       : data["text"],
+        "_info_"     : {
+            "block": data["blockId"],
+        },
     }

@@ -11,12 +11,40 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "create clone of [TARGET]",
+                            "opcode": "broadcast ([MESSAGE])",
                             "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "Shoutout to @ddededodediamante! \ud83d\udc4d"
+                                "MESSAGE": {
+                                    "block": {
+                                        "opcode": "touching ([OBJECT]) ?",
+                                        "inputs": {
+                                            "OBJECT": {
+                                                "block": {
+                                                    "opcode": "error"
+                                                },
+                                                "option": "_mouse_"
+                                            }
+                                        }
+                                    },
+                                    "option": "\u9999"
+                                }
+                            }
+                        },
+                        {
+                            "opcode": "broadcast ([MESSAGE])",
+                            "inputs": {
+                                "MESSAGE": {
+                                    "block": {
+                                        "opcode": "touching ([OBJECT]) ?",
+                                        "inputs": {
+                                            "OBJECT": {
+                                                "block": {
+                                                    "opcode": "error"
+                                                },
+                                                "option": "Sprite1"
+                                            }
+                                        }
+                                    },
+                                    "option": "C"
                                 }
                             }
                         }

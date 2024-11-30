@@ -1,5 +1,6 @@
 from pypenguin.helper_functions import ikv, pp
 from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputID, getInputMode, getInputModes, getOptimizedOptionID, getBlockType
+from pypenguin.optimize.comments import translateComment
 
 import copy
 
@@ -16,8 +17,8 @@ def finishScripts(data):
     return newScriptDatas
 
 def finishBlock(data):
-    #print("start fblock", 100*"{")
-    #pp(data)
+    print("start fblock", 100*"{")
+    pp(data)
     blockType = getBlockType(
         opcode=getDeoptimizedOpcode(
             opcode=data["opcode"]
@@ -58,6 +59,9 @@ def finishBlock(data):
         newInputDatas[inputID] = newInputData
     newData = data | {"inputs": newInputDatas}
     del newData["_info_"]
+    if "comment" in newData:
+        pass#pp(newData["comment"])
+        #del newData["comment"]["_info_"]
     #print("stop fblock", 100*"}")
     #pp(newData)
     return newData
@@ -171,20 +175,25 @@ def nestBlockRecursively(blockDatas, blockID):
     #pp(newBlockDatas)
     return newBlockDatas
 
-def prepareBlocks(data):
+def prepareBlocks(data, commentDatas):
     #print(100*"(")
     #pp(data)
     newBlockDatas = {}
     for i, blockID, blockData in ikv(data):
         #print(".", blockData)
         if isinstance(blockData, list): # For list blocks e.g. value of a variable
-            newBlockData = prepareListBlock(data=blockData)
+            newBlockData = prepareListBlock(
+                data=blockData, 
+                blockID=blockID,
+                commentDatas=commentDatas,
+            )
         else: # For normal blocks
             newBlockData = {
                 "opcode"      : getOptimizedOpcode(opcode=blockData["opcode"]),
                 "inputs"      : prepareInputs(
                     data=blockData["inputs"],
                     opcode=blockData["opcode"],
+                    commentDatas=commentDatas,
                 ),
                 "options"     : prepareOptions(
                     data=blockData["fields"],
@@ -197,6 +206,8 @@ def prepareBlocks(data):
             }
             if "x" in blockData and "y" in blockData:
                 newBlockData["_info_"]["position"] = [blockData["x"], blockData["y"]]
+            if "comment" in blockData:
+                newBlockData["comment"] = commentDatas[blockData["comment"]]
             #TODO: implement comments, custom blocks
             #if comment != None:
             #    newData["comment"] = comment
@@ -207,7 +218,7 @@ def prepareBlocks(data):
     #pp(newBlockDatas)
     return newBlockDatas
 
-def prepareInputs(data, opcode):
+def prepareInputs(data, opcode, commentDatas):
     #print(100*"<")
     #pp(data)
     # Replace the old with the new input ids
@@ -247,11 +258,22 @@ def prepareInputs(data, opcode):
                 # one block and text
                 references.append(inputData[1])
                 text = inputData[2][1]
-            elif itemOneType == list: # e.g. 'VALUE': [3, [12, 'var', '=!vkqJLb6ODy(oqe-|ZN'], [10, '0']]
-                #print("step 2")
+            elif itemOneType == list and itemTwoType == list: # e.g. 'VALUE': [3, [12, 'var', '=!vkqJLb6ODy(oqe-|ZN'], [10, '0']]
                 # one list block and text
-                listBlock = prepareListBlock(data=inputData[1]) #translate list blocks into standard blocks
+                listBlock = prepareListBlock(
+                    data=inputData[1], 
+                    blockID=None,
+                    commentDatas=commentDatas,
+                ) #translate list blocks into standard blocks
                 text      = inputData[2][1]
+            elif itemOneType == list and itemTwoType == str: # "TOUCHINGOBJECTMENU": [3, [12, "my variable", "`jEk@4|i[#Fk?(8x)AV.-my variable"], "b"]
+                # two blocks(a menu, and a list block) and no text
+                listBlock = prepareListBlock(
+                    data=inputData[1], 
+                    blockID=None,
+                    commentDatas=commentDatas,
+                )
+                references.append(inputData[2])
         mode = getInputMode(
             opcode=opcode,
             inputID=inputID,
@@ -289,7 +311,7 @@ def prepareOptions(data, opcode):
         newData[newOptionID] = optionData[0]
     return newData
 
-def prepareListBlock(data):
+def prepareListBlock(data, blockID, commentDatas):
     # A variable or list block
     if data[0] == 12: # A magic value
         newData = {
@@ -316,7 +338,15 @@ def prepareListBlock(data):
     if len(data) > 3:
         newData["_info_"]["position"] = data[3:5]
         newData["_info_"]["topLevel"] = True
-        
+    
+    # Get the comment attached to the block
+    blockCommentData = None
+    for i, commentID, commentData in ikv(commentDatas):
+        if commentData["_info_"]["block"] == blockID:
+            blockCommentData = commentData
+            break
+    if commentData != None:
+        newData["comment"] = blockCommentData
         
     return newData
 

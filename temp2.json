@@ -27,68 +27,47 @@
             "scripts": [
                 {
                     "position": [
-                        282,
-                        435
+                        237,
+                        169
                     ],
                     "blocks": [
                         {
-                            "opcode": "broadcast ([MESSAGE])",
+                            "opcode": "(NUM1) + (NUM2)",
                             "inputs": {
-                                "MESSAGE": {
-                                    "mode": "block-and-hybrid-option",
+                                "NUM1": {
+                                    "mode": "block-and-text",
                                     "block": null,
-                                    "option": "message1"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        270,
-                        577
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "broadcast ([MESSAGE])",
-                            "inputs": {
-                                "MESSAGE": {
-                                    "mode": "block-and-hybrid-option",
-                                    "block": {
-                                        "opcode": "tab character",
-                                        "inputs": {},
-                                        "options": {}
-                                    },
-                                    "option": "message1"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        228,
-                        777
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "broadcast ([MESSAGE])",
-                            "inputs": {
-                                "MESSAGE": {
-                                    "mode": "block-and-hybrid-option",
+                                    "text": ""
+                                },
+                                "NUM2": {
+                                    "mode": "block-and-text",
                                     "block": {
                                         "opcode": "value of [VARIABLE]",
                                         "inputs": {},
                                         "options": {
                                             "VARIABLE": "my variable"
-                                        }
+                                        },
+                                        "comment": null
                                     },
-                                    "option": "message1"
+                                    "text": ""
                                 }
                             },
-                            "options": {}
+                            "options": {},
+                            "comment": {
+                                "position": [
+                                    612.7944417176423,
+                                    150.37037037036814
+                                ],
+                                "size": [
+                                    200,
+                                    200
+                                ],
+                                "isMinimized": false,
+                                "text": "afgh",
+                                "_info_": {
+                                    "block": "a"
+                                }
+                            }
                         }
                     ]
                 }

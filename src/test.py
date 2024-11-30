@@ -3,12 +3,36 @@ A = [
         "position": [0,0],
         "blocks": [
             {
-                "opcode": "create clone of [TARGET]",
+                "opcode": "broadcast ([MESSAGE])",
                 "inputs": {
-                    "TARGET": {
-                        "mode": "block-and-option",
-                        "block": None,
-                        "option": "Shoutout to @ddededodediamante! 👍",
+                    "MESSAGE": {
+                        "block": {
+                            "opcode": "touching ([OBJECT]) ?",
+                            "inputs": {
+                                "OBJECT": {
+                                    "block": {"opcode": "error"},
+                                    "option": "_mouse_",
+                                },
+                            },
+                        },
+                        "option": "\u9999",
+                    },
+                },
+            },
+            {
+                "opcode": "broadcast ([MESSAGE])",
+                "inputs": {
+                    "MESSAGE": {
+                        "block": {
+                            "opcode": "touching ([OBJECT]) ?",
+                            "inputs": {
+                                "OBJECT": {
+                                    "block": {"opcode": "error"},
+                                    "option": "Sprite1",
+                                },
+                            },
+                        },
+                        "option": "\u0043",
                     },
                 },
             },

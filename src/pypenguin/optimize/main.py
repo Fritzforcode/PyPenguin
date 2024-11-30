@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import pp
+from pypenguin.helper_functions import pp, ikv
 from pypenguin.optimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.optimize.variables_lists import translateVariables, translateLists
 from pypenguin.optimize.blocks_scripts import getCustomBlockMutations, prepareBlocks, nestScripts, finishScripts
@@ -11,11 +11,15 @@ def optimizeProjectJSON(projectData):
         mutationDatas = getCustomBlockMutations(data=spriteData["blocks"])
         commentDatas = spriteData["comments"]
         floatingCommentDatas = [] # The comments that aren't connected to any blocks
-        for commentData in commentDatas.values():
+        attachedCommentDatas = {}
+        for j, commentID, commentData in ikv(commentDatas):
             if commentData["blockId"] == None: # No Block connection
                 floatingCommentDatas.append(translateComment(data=commentData))
-        
-        preparedBlockDatas = prepareBlocks(data=spriteData["blocks"])
+            else:
+                attachedCommentDatas[commentID] = translateComment(data=commentData)
+        pp(attachedCommentDatas)
+
+        preparedBlockDatas = prepareBlocks(data=spriteData["blocks"], commentDatas=attachedCommentDatas)
         nestedScriptDatas  = nestScripts  (data=preparedBlockDatas)
         newScriptDatas     = finishScripts(data=nestedScriptDatas)
 

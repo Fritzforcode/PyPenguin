@@ -69,3 +69,6 @@ maybe validate:
 - custom block ids matching
 - no duplicate custom block input names
 - custom opcodes
+
+Notes:
+    Comments of list blocks who are embedded in another blocks are deleted automatically. There is no way for this to change.

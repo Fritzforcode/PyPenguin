@@ -56,8 +56,40 @@ def unfinishBlock(data, parentOpcode, position=None, isOption=False, inputID=Non
             parentOpcode=parentOpcode,
             inputID=inputID,
         )
+    opcode = getDeoptimizedOpcode(opcode=data["opcode"])
     newInputDatas = {}
     for i, inputID, inputData in ikv(data["inputs"]):
+        inputMode = getInputMode(
+            opcode=opcode, 
+            inputID=inputID
+        )
+        inputData["mode"] = inputMode
+    
+        if   inputMode == "block-and-text":
+            required = ["block", "text"]
+        elif inputMode == "block-only":
+            required = ["block"]
+        elif inputMode in ["block-and-option", "block-and-hybrid-option"]:
+            required = ["option"]
+        elif inputMode == "script":
+            required = ["blocks"]
+        
+        for attribute in required:
+            if attribute not in inputData:
+                match attribute:
+                    case "block":
+                        inputData["block"] = inputBlockDefault
+                    case "text":
+                        inputData["text"] = inputTextDefault
+                    case "blocks":
+                        inputData["blocks"] = inputBlocksDefault
+                    case "option":
+                        raise Exception()
+        newInputDatas[inputID] = inputData
+
+    inputDatas = newInputDatas
+    newInputDatas = {}
+    for i, inputID, inputData in ikv(inputDatas):
         if inputData["mode"] == "block-and-hybrid-option":
             inputData["text"] = inputData["option"]
             del inputData["option"]

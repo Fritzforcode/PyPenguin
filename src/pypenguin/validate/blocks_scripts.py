@@ -136,7 +136,7 @@ def validateOptions(path, data, opcode, opcodeData, context):
         # validateSchema(pathToData=path+[optionID], data=optionValue, schema=optionSchema)
         
         match opcodeData["optionTypes"][optionID]: # type of the option
-            case "key"|"unary math operation"|"binary math operation large"|"binary math operation small"|"text operation"|"text case"|"stop script target"|"other sprite or stage"|"cloning target"|"up | down"|"backdrop"|"LOUDNESS | TIMER"|"exclusive touchable object"|"half-inclusive touchable object"|"inclusive touchable object"|"touchable sprite"|"coordinate"|"blockType":
+            case "key"|"unary math operation"|"binary math operation large"|"binary math operation small"|"text operation"|"text case"|"stop script target"|"other sprite or stage"|"cloning target"|"up | down"|"backdrop"|"LOUDNESS | TIMER"|"exclusive touchable object"|"half-inclusive touchable object"|"inclusive touchable object"|"touchable sprite"|"coordinate"|"drag mode"|"blockType":
                 match opcodeData["optionTypes"][optionID]:
                     case "key":
                         possibleValues = [
@@ -181,6 +181,8 @@ def validateOptions(path, data, opcode, opcodeData, context):
                         possibleValues = ["_myself_"] + context["otherSprites"]
                     case "coordinate":
                         possibleValues = ["x", "y"]
+                    case "drag mode":
+                        possibleValues = ["draggable", "not draggable"]
                     case "blockType":
                         possibleValues = ["instruction", "lastInstruction", "stringReporter", "numberReporter", "booleanReporter"]
                 if optionValue not in possibleValues:
