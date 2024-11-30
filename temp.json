@@ -48,7 +48,8 @@
                     "parent": null,
                     "inputs": {
                         "NUM1": [
-                            1,
+                            3,
+                            "b",
                             [
                                 4,
                                 ""
@@ -72,27 +73,80 @@
                     "topLevel": true,
                     "x": 237,
                     "y": 169,
-                    "comment": "b"
-                }
+                    "comment": "c"
+                },
+                "b": {
+                    "opcode": "operator_newLine",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "comment": "d"
+                },
+                "e": [
+                    12,
+                    "my variable",
+                    "`jEk@4|i[#Fk?(8x)AV.-my variable",
+                    70,
+                    354
+                ]
             },
             "comments": {
-                "b": {
+                "c": {
                     "blockId": "a",
-                    "x": 612.7944417176423,
-                    "y": 150.37037037036814,
+                    "x": 654.919750213623,
+                    "y": 150,
                     "width": 200,
                     "height": 200,
                     "minimized": false,
                     "text": "afgh"
                 },
-                "c": {
-                    "blockId": "d",
+                "f": {
+                    "blockId": "g",
                     "x": 460.6462935694941,
                     "y": 409.62962962962735,
                     "width": 200,
                     "height": 200,
                     "minimized": false,
                     "text": "dfgdfg"
+                },
+                "h": {
+                    "blockId": "i",
+                    "x": 207.88579841896336,
+                    "y": 357.5308792679414,
+                    "width": 200,
+                    "height": 200,
+                    "minimized": false,
+                    "text": "Ufjnen3"
+                },
+                "d": {
+                    "blockId": "b",
+                    "x": 355.91975021362305,
+                    "y": 177,
+                    "width": 200,
+                    "height": 200,
+                    "minimized": false,
+                    "text": "Iekk"
+                },
+                "j": {
+                    "blockId": null,
+                    "x": 33.580277054398145,
+                    "y": 468.1481481481481,
+                    "width": 200,
+                    "height": 200,
+                    "minimized": false,
+                    "text": "Ofod"
+                },
+                "k": {
+                    "blockId": "e",
+                    "x": 208.14505767822266,
+                    "y": 358,
+                    "width": 200,
+                    "height": 200,
+                    "minimized": false,
+                    "text": "er"
                 }
             },
             "currentCostume": 0,

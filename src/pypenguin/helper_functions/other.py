@@ -1,5 +1,5 @@
 from pprint import pprint
-import re
+import re, os
 
 def escape_chars(input_string: str, chars_to_escape: list) -> str:
     # Escape backslashes first by doubling them up
@@ -109,3 +109,31 @@ def customHash(obj):
 
 class WhatIsGoingOnError(Exception): # Just means its likely the dev's fault 
     pass
+
+def insureCorrectPath(path, targetFolderName):
+    if path == None: return path
+    
+    initialPath = __file__
+    # Normalize the path to avoid inconsistencies
+    currentPath = os.path.normpath(initialPath)
+    
+    while True:
+        # Get the last component of the path
+        baseName = os.path.basename(currentPath)
+        
+        # Check if the current path ends with the target folder name
+        if baseName == targetFolderName and os.path.isdir(currentPath):
+            break
+        
+        # Get the parent Dir
+        parentPath = os.path.dirname(currentPath)
+        
+        # If we've reached the root and still not found the target, stop
+        if parentPath == currentPath:
+            raise ValueError(f"Target folder '{targetFolderName}' not found in the path '{initialPath}'")
+        
+        # Update the current path to the parent
+        currentPath = parentPath
+    
+    finalPath = os.path.join(currentPath, path)
+    return finalPath

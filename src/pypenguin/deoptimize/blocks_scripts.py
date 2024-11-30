@@ -58,6 +58,7 @@ def unfinishBlock(data, parentOpcode, position=None, isOption=False, inputID=Non
         )
     opcode = getDeoptimizedOpcode(opcode=data["opcode"])
     newInputDatas = {}
+    commentData = None
     for i, inputID, inputData in ikv(data["inputs"]):
         inputMode = getInputMode(
             opcode=opcode, 
@@ -86,7 +87,7 @@ def unfinishBlock(data, parentOpcode, position=None, isOption=False, inputID=Non
                     case "option":
                         raise Exception()
         newInputDatas[inputID] = inputData
-
+    
     inputDatas = newInputDatas
     newInputDatas = {}
     for i, inputID, inputData in ikv(inputDatas):
@@ -112,6 +113,7 @@ def unfinishBlock(data, parentOpcode, position=None, isOption=False, inputID=Non
                 inputID=inputID,
             )
         newInputDatas[inputID] = newInputData
+        
     newData = data | {
         "inputs": newInputDatas,
         "_info_": {
@@ -229,6 +231,7 @@ def flattenBlock(data, blockID, parentID, nextID):
 def restoreBlocks(data, spriteName):
     #pp(data)
     newBlockDatas = {}
+    newCommentDatas = {}
     for i, blockID, blockData in ikv(data):
         opcode = getDeoptimizedOpcode(opcode=blockData["opcode"])
         
@@ -264,8 +267,17 @@ def restoreBlocks(data, spriteName):
             if blockData["_info_"]["position"] != None:
                 position = blockData["_info_"]["position"]
                 newBlockData |= {"x": position[0], "y": position[1]}
+        
+        if blockData.get("comment") != None:
+            newCommentData = translateComment(
+                data=blockData["comment"],
+                id=blockID,
+            )
+            newCommentID = newTempSelector()
+            newCommentDatas[newCommentID] = newCommentData
+        
         newBlockDatas[blockID] = newBlockData
-    return newBlockDatas
+    return newBlockDatas, newCommentDatas
 
 def restoreInputs(data, opcode, spriteName):
     newInputDatas = {}
@@ -282,10 +294,7 @@ def restoreInputs(data, opcode, spriteName):
         
         subBlocks     = inputData["references"]
         if inputData["listBlock"] != None:
-            subBlocks.insert(0, restoreListBlock(
-                data=inputData["listBlock"],
-                spriteName=spriteName,
-            ))
+            subBlocks.insert(0, inputData["listBlock"])
         subBlockCount = len(subBlocks)
         match inputMode:
             case "block-and-text"|"block-and-hybrid-option":

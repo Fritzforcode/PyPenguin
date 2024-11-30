@@ -17,8 +17,7 @@ def optimizeProjectJSON(projectData):
                 floatingCommentDatas.append(translateComment(data=commentData))
             else:
                 attachedCommentDatas[commentID] = translateComment(data=commentData)
-        pp(attachedCommentDatas)
-
+        
         preparedBlockDatas = prepareBlocks(data=spriteData["blocks"], commentDatas=attachedCommentDatas)
         nestedScriptDatas  = nestScripts  (data=preparedBlockDatas)
         newScriptDatas     = finishScripts(data=nestedScriptDatas)

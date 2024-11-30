@@ -36,7 +36,23 @@
                             "inputs": {
                                 "NUM1": {
                                     "mode": "block-and-text",
-                                    "block": null,
+                                    "block": {
+                                        "opcode": "new line",
+                                        "inputs": {},
+                                        "options": {},
+                                        "comment": {
+                                            "position": [
+                                                355.91975021362305,
+                                                177
+                                            ],
+                                            "size": [
+                                                200,
+                                                200
+                                            ],
+                                            "isMinimized": false,
+                                            "text": "Iekk"
+                                        }
+                                    },
                                     "text": ""
                                 },
                                 "NUM2": {
@@ -46,8 +62,7 @@
                                         "inputs": {},
                                         "options": {
                                             "VARIABLE": "my variable"
-                                        },
-                                        "comment": null
+                                        }
                                     },
                                     "text": ""
                                 }
@@ -55,24 +70,64 @@
                             "options": {},
                             "comment": {
                                 "position": [
-                                    612.7944417176423,
-                                    150.37037037036814
+                                    654.919750213623,
+                                    150
                                 ],
                                 "size": [
                                     200,
                                     200
                                 ],
                                 "isMinimized": false,
-                                "text": "afgh",
-                                "_info_": {
-                                    "block": "a"
-                                }
+                                "text": "afgh"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        70,
+                        354
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "value of [VARIABLE]",
+                            "inputs": {},
+                            "options": {
+                                "VARIABLE": "my variable"
+                            },
+                            "comment": {
+                                "position": [
+                                    208.14505767822266,
+                                    358
+                                ],
+                                "size": [
+                                    200,
+                                    200
+                                ],
+                                "isMinimized": false,
+                                "text": "er"
                             }
                         }
                     ]
                 }
             ],
-            "comments": [],
+            "comments": [
+                {
+                    "position": [
+                        33.580277054398145,
+                        468.1481481481481
+                    ],
+                    "size": [
+                        200,
+                        200
+                    ],
+                    "isMinimized": false,
+                    "text": "Ofod",
+                    "_info_": {
+                        "block": null
+                    }
+                }
+            ],
             "currentCostume": 0,
             "costumes": [
                 {

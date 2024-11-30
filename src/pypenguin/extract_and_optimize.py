@@ -1,10 +1,10 @@
-from .validate import validateProject, ValidationError
-from .optimize import optimizeProjectJSON
+from pypenguin.validate import validateProject, ValidationError
+from pypenguin.optimize import optimizeProjectJSON
 
 import urllib.parse
 import os, shutil, zipfile
 
-from .helper_functions import readJSONFile, writeJSONFile, pp
+from pypenguin.helper_functions import readJSONFile, writeJSONFile, pp, insureCorrectPath
 
 def extractProject(
     pmpFilePath       : str, # Path to your .pmp file
@@ -13,20 +13,21 @@ def extractProject(
     prettyFormat      : bool = True,
     deleteTemporaryDir: bool = False,
 ):
-    # Directory where you want to extract files
-    # Path to your .zip file
-    zip_file_path = "source.zip"
+    pmpFilePath  = insureCorrectPath(pmpFilePath , "PyPenguin")
+    jsonFilePath = insureCorrectPath(jsonFilePath, "PyPenguin")
+    temporaryDir = insureCorrectPath(temporaryDir, "PyPenguin")
+    zipFilePath  = insureCorrectPath("source.zip", "PyPenguin")
     
     # Copy the .pmp to file and rename it .zip
-    shutil.copy(pmpFilePath, zip_file_path)
+    shutil.copy(pmpFilePath, zipFilePath)
     
-    # Ensure the extraction directory exists
+    # Ensure the extraction Dir exists
     os.makedirs(temporaryDir, exist_ok=True)
     shutil.rmtree(temporaryDir)
     os.makedirs(temporaryDir, exist_ok=True)
     
     # Open and extract the zip file
-    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+    with zipfile.ZipFile(zipFilePath, 'r') as zip_ref:
         zip_ref.extractall(temporaryDir)
     
     
@@ -40,46 +41,43 @@ def extractProject(
     
     
     # Delete temporary files
-    os.remove(zip_file_path)
+    os.remove(zipFilePath)
     if deleteTemporaryDir:
         shutil.rmtree(temporaryDir)
     return json
 
 def extractAndOptimizeProject(
-    projectFilePath: str,
-    optimizedProjectDirectory: str,
-    temporaryDirectory: str,
-    writeDebugFiles   : bool = False,
+    projectFilePath    : str,
+    optimizedProjectDir: str,
+    temporaryDir       : str,
+    writeDebugFiles    : bool = False,
 ):
+    projectFilePath     = insureCorrectPath(projectFilePath , "PyPenguin")
+    optimizedProjectDir = insureCorrectPath(optimizedProjectDir, "PyPenguin")
+    temporaryDir        = insureCorrectPath(temporaryDir, "PyPenguin")
+    temp1FilePath       = insureCorrectPath("temp.json",  "PyPenguin")
+    temp2FilePath       = insureCorrectPath("temp2.json", "PyPenguin")
+    
     # Extract the PenguinMod project
     deoptimizedData = extractProject(
         pmpFilePath=projectFilePath,
         jsonFilePath=None, # Dont write the unoptimized version to a file
-        temporaryDir=temporaryDirectory,
+        temporaryDir=temporaryDir,
     )
-    if writeDebugFiles: writeJSONFile("temp.json", data=deoptimizedData)
+    if writeDebugFiles: writeJSONFile(temp1FilePath, data=deoptimizedData)
 
     # Optimize project.json
     optimizedData = optimizeProjectJSON(
         projectData=deoptimizedData,
     )
-    if writeDebugFiles: writeJSONFile("temp2.json", data=optimizedData)
+    if writeDebugFiles: writeJSONFile(temp2FilePath, data=optimizedData)
     
-    # Make sure the project directory exists
-    os.makedirs(optimizedProjectDirectory, exist_ok=True)
+    # Make sure the project Dir exists
+    os.makedirs(optimizedProjectDir, exist_ok=True)
     
-    # Validate the optimized project.json and handle errors
-    #try:
-    #validateProject(
-    #    projectData=optimizedData,
-    #)
-    #except ValidationError as error:
-    #    print(repr(error))
-    #    print("This error is likely the fault of the developer. Please report this.")
-    
-    # Clear the project directory
-    os.makedirs(optimizedProjectDirectory, exist_ok=True)
-    shutil.rmtree(path=optimizedProjectDirectory)
+    # Clear the project Dir
+    os.makedirs(optimizedProjectDir, exist_ok=True)
+    shutil.rmtree(path=optimizedProjectDir)
     
     # Reorganize Assets
     for sprite in optimizedData["sprites"]:
@@ -92,7 +90,7 @@ def extractAndOptimizeProject(
         # Make sure the sprite dir has the costume dir
         os.makedirs(
             os.path.join(
-                optimizedProjectDirectory,
+                optimizedProjectDir,
                 encodedSpriteName,
                 "costumes",
             ), 
@@ -103,9 +101,9 @@ def extractAndOptimizeProject(
             oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
             encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
             shutil.copy(
-                src=os.path.join(temporaryDirectory, oldCostumeName),
+                src=os.path.join(temporaryDir, oldCostumeName),
                 dst=os.path.join(
-                    optimizedProjectDirectory, 
+                    optimizedProjectDir, 
                     encodedSpriteName, 
                     "costumes", 
                     encodedCostumeName
@@ -115,7 +113,7 @@ def extractAndOptimizeProject(
         # Make sure the sprite dir has the sounds dir
         os.makedirs(
             os.path.join(
-                optimizedProjectDirectory,
+                optimizedProjectDir,
                 encodedSpriteName,
                 "sounds",
             ), 
@@ -126,9 +124,9 @@ def extractAndOptimizeProject(
             oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
             encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
             shutil.copy(
-                src=os.path.join(temporaryDirectory, oldCostumeName),
+                src=os.path.join(temporaryDir, oldCostumeName),
                 dst=os.path.join(
-                    optimizedProjectDirectory, 
+                    optimizedProjectDir, 
                     encodedSpriteName, 
                     "sounds", 
                     encodedCostumeName
@@ -137,17 +135,17 @@ def extractAndOptimizeProject(
     
     # Add the optimized project.json
     writeJSONFile(
-        filePath=os.path.join(optimizedProjectDirectory, "project.json"), 
+        filePath=os.path.join(optimizedProjectDir, "project.json"), 
         data=optimizedData,
     )
     
-    # Remove the temporary directory
-    shutil.rmtree(temporaryDirectory)
+    # Remove the temporary Dir
+    shutil.rmtree(temporaryDir)
     return optimizedData
 
 if __name__ == "__main__":
     extractAndOptimizeProject(
         projectFilePath           = "assets/studies/jsonBlocks.pmp",
-        optimizedProjectDirectory = "optimizedProject/",
-        temporaryDirectory        = "temporary/",
+        optimizedProjectDir = "optimizedProject/",
+        temporaryDir        = "temporary/",
     )

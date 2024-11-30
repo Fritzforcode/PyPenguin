@@ -17,8 +17,8 @@ def finishScripts(data):
     return newScriptDatas
 
 def finishBlock(data):
-    print("start fblock", 100*"{")
-    pp(data)
+    #print("start fblock", 100*"{")
+    #pp(data)
     blockType = getBlockType(
         opcode=getDeoptimizedOpcode(
             opcode=data["opcode"]
@@ -60,8 +60,8 @@ def finishBlock(data):
     newData = data | {"inputs": newInputDatas}
     del newData["_info_"]
     if "comment" in newData:
-        pass#pp(newData["comment"])
-        #del newData["comment"]["_info_"]
+        pp(newData["comment"])
+        del newData["comment"]["_info_"]
     #print("stop fblock", 100*"}")
     #pp(newData)
     return newData
@@ -345,7 +345,7 @@ def prepareListBlock(data, blockID, commentDatas):
         if commentData["_info_"]["block"] == blockID:
             blockCommentData = commentData
             break
-    if commentData != None:
+    if blockCommentData != None:
         newData["comment"] = blockCommentData
         
     return newData

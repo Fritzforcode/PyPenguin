@@ -3,32 +3,37 @@ import urllib.parse
 
 from pypenguin.deoptimize import deoptimizeProject
 
-from pypenguin.helper_functions import readJSONFile, writeJSONFile
+from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrectPath
 
 from pypenguin.database import defaultCostumeFilePath
 
 def deoptimizeAndCompressProject(
-    optimizedProjectDirectory: str,
-    projectFilePath          : str,
-    temporaryDirectory       : str,
-    writeDebugFiles          : bool = False,
+    optimizedProjectDir: str,
+    projectFilePath    : str,
+    temporaryDir       : str,
+    writeDebugFiles    : bool = False,
 ):
+    optimizedProjectDir = insureCorrectPath(optimizedProjectDir, "PyPenguin")
+    projectFilePath     = insureCorrectPath(projectFilePath,     "PyPenguin")
+    temporaryDir        = insureCorrectPath(temporaryDir,        "PyPenguin")
+    temp3FilePath       = insureCorrectPath("temp3.json",        "PyPenguin")    
+    
     # Read the optimized project.json
     optimizedData = readJSONFile(
-        os.path.join(optimizedProjectDirectory, "project.json")
+        os.path.join(optimizedProjectDir, "project.json")
     )
     # Deoptimize the project data
     deoptimizedData = deoptimizeProject(
         projectData=optimizedData,
     )
     if writeDebugFiles:
-        writeJSONFile("temp3.json", data=deoptimizedData)
-    # Make sure the temporary directory exists
-    os.makedirs(temporaryDirectory, exist_ok=True)
+        writeJSONFile(temp3FilePath, data=deoptimizedData)
+    # Make sure the temporary Dir exists
+    os.makedirs(temporaryDir, exist_ok=True)
     
     # Write the deoptimized project.json
     writeJSONFile(
-        filePath=os.path.join(temporaryDirectory, "project.json"),
+        filePath=os.path.join(temporaryDir, "project.json"),
         data=deoptimizedData,
     )
 
@@ -50,14 +55,14 @@ def deoptimizeAndCompressProject(
                 srcPath = defaultCostumeFilePath
             else:
                 srcPath = os.path.join(
-                    optimizedProjectDirectory, 
+                    optimizedProjectDir, 
                     encodedSpriteName, 
                     "costumes", 
                     encodedCostumeName
                 )
             shutil.copy(
                 src=srcPath,
-                dst=os.path.join(temporaryDirectory, oldCostumeName),
+                dst=os.path.join(temporaryDir, oldCostumeName),
             )
         
         # Copy and rename sounds
@@ -65,37 +70,37 @@ def deoptimizeAndCompressProject(
             oldSoundName                        = sound["md5ext"]
             encodedSoundName = urllib.parse.quote(sound["name"] + "." + sound["dataFormat"])
             srcPath = os.path.join(
-                optimizedProjectDirectory, 
+                optimizedProjectDir, 
                 encodedSpriteName, 
                 "sounds", 
                 encodedSoundName
             )
             shutil.copy(
                 src=srcPath,
-                dst=os.path.join(temporaryDirectory, oldSoundName),
+                dst=os.path.join(temporaryDir, oldSoundName),
             )
         """for costume in sprite["sounds"]:
             oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
             encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
             shutil.copy(
                 src=os.path.join(
-                    optimizedProjectDirectory, 
+                    optimizedProjectDir, 
                     encodedSpriteName, 
                     "sounds", 
                     encodedCostumeName
                 ),
-                dst=os.path.join(temporaryDirectory, oldCostumeName),
+                dst=os.path.join(temporaryDir, oldCostumeName),
             )"""
 
     # Make sure projectFilePath does not exist
     if os.path.exists(projectFilePath):
         os.remove(projectFilePath)
 
-    # Compress the temporary directory into a zip file
+    # Compress the temporary Dir into a zip file
     shutil.make_archive(
         os.path.splitext(projectFilePath)[0],
         "zip",
-        temporaryDirectory,
+        temporaryDir,
     )
     print("created", projectFilePath)
 
@@ -106,11 +111,11 @@ def deoptimizeAndCompressProject(
     )
 
     # Remove the temporary dir
-    shutil.rmtree(temporaryDirectory)
+    shutil.rmtree(temporaryDir)
 
 if __name__ == "__main__":
     deoptimizeAndCompressProject(
         projectFilePath           = "assets/studies/example.pmp",
-        optimizedProjectDirectory = "optimizedProject/",
-        temporaryDirectory        = "temporary/",
+        optimizedProjectDir = "optimizedProject/",
+        temporaryDir        = "temporary/",
     )

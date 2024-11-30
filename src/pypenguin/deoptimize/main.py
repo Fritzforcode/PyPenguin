@@ -26,19 +26,14 @@ def deoptimizeProject(projectData):
     
     newSpriteDatas = []
     for spriteData in projectData["sprites"]:
-        newCommentDatas       = {}
-        newSpriteBlockDatas   = {}
-        
         unfinishedScriptDatas = unfinishScripts(spriteData["scripts"])
         flattendScriptDatas   = flattenScripts(unfinishedScriptDatas)
-        restoredBlockDatas    = restoreBlocks(
+        newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,
             spriteName=spriteData["name"],
         )
 
-        scriptCommentDatas    = {}#scriptCommentDatasA | scriptCommentDatasB
-        newCommentDatas      |= scriptCommentDatas
-        newSpriteBlockDatas  |= restoredBlockDatas
+        newCommentDatas = scriptCommentDatas
         
         nameKey = None if spriteData["isStage"] else spriteData["name"]
         for i, commentData in enumerate(spriteData["comments"]):
