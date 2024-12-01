@@ -72,6 +72,13 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    "sensing_fingeroptions": {
+        "type": "menu",
+        "category": "Sensing",
+        "newOpcode": "#FINGER INDEX MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
 # SPECIAL: Variables and Lists
     "special_variable_value": {
         "type": "textReporter",

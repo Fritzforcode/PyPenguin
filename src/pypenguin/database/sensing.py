@@ -248,4 +248,40 @@ opcodes = {
         "optionTypes": {"PROPERTY": "time property"},
         "optionTranslation": {"CURRENTMENU": "PROPERTY"},
     },
+    "sensing_fingerdown": {
+        "type": "booleanReporter",
+        "category": "Sensing",
+        "newOpcode": "finger ([INDEX]) down?",
+        "inputTypes": {"INDEX": "finger index"},
+        "optionTypes": {},
+        "menus": [{"new": "INDEX", "outer": "FINGER_OPTION", "inner": "FINGER_OPTION", "menuOpcode": "sensing_fingeroptions"}],
+    },
+    "sensing_fingertapped": {
+        "type": "booleanReporter",
+        "category": "Sensing",
+        "newOpcode": "finger ([INDEX]) tapped?",
+        "inputTypes": {"INDEX": "finger index"},
+        "optionTypes": {},
+        "menus": [{"new": "INDEX", "outer": "FINGER_OPTION", "inner": "FINGER_OPTION", "menuOpcode": "sensing_fingeroptions"}],
+    },
+    "sensing_fingerx": {
+        "type": "textReporter",
+        "category": "Sensing",
+        "newOpcode": "finger ([INDEX]) x",
+        "inputTypes": {"INDEX": "finger index"},
+        "optionTypes": {},
+        "menus": [{"new": "INDEX", "outer": "FINGER_OPTION", "inner": "FINGER_OPTION", "menuOpcode": "sensing_fingeroptions"}],
+    },
+    "sensing_fingery": {
+        "type": "textReporter",
+        "category": "Sensing",
+        "newOpcode": "finger ([INDEX]) y",
+        "inputTypes": {"INDEX": "finger index"},
+        "optionTypes": {},
+        "menus": [{"new": "INDEX", "outer": "FINGER_OPTION", "inner": "FINGER_OPTION", "menuOpcode": "sensing_fingeroptions"}],
+    },
+    "sensing_username": {
+        "type": "textReporter",
+        "category": "Sensing"
+    },
 }

@@ -240,6 +240,8 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                         possibleValues = ["x position", "y position", "direction", "costume #", "costume name", "layer", "size", "volume"] + context["localVariables"][nameKey]
                 case "time property":
                     possibleValues = ["YEAR", "MONTH", "DATE", "DAYOFWEEK", "HOUR", "MINUTE", "SECOND", "TIMESTAMP"]
+                case "finger index":
+                    possibleValues = ["1", "2", "3", "4", "5"]
                 case "blockType":
                     possibleValues = ["instruction", "lastInstruction", "stringReporter", "numberReporter", "booleanReporter"] + context["localVariables"]
             if data not in possibleValues:

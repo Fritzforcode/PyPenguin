@@ -27,121 +27,229 @@
             "scripts": [
                 {
                     "position": [
-                        301,
-                        80
+                        67,
+                        49
                     ],
                     "blocks": [
                         {
-                            "opcode": "current [PROPERTY]",
-                            "inputs": {},
-                            "options": {
-                                "PROPERTY": "YEAR"
-                            }
+                            "opcode": "finger ([INDEX]) down?",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "1"
+                                }
+                            },
+                            "options": {}
                         }
                     ]
                 },
                 {
                     "position": [
-                        305,
-                        138
+                        49,
+                        118
                     ],
                     "blocks": [
                         {
-                            "opcode": "current [PROPERTY]",
-                            "inputs": {},
-                            "options": {
-                                "PROPERTY": "MONTH"
-                            }
+                            "opcode": "finger ([INDEX]) down?",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "2"
+                                }
+                            },
+                            "options": {}
                         }
                     ]
                 },
                 {
                     "position": [
-                        301,
-                        194
+                        61,
+                        176
                     ],
                     "blocks": [
                         {
-                            "opcode": "current [PROPERTY]",
-                            "inputs": {},
-                            "options": {
-                                "PROPERTY": "DATE"
-                            }
+                            "opcode": "finger ([INDEX]) down?",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "3"
+                                }
+                            },
+                            "options": {}
                         }
                     ]
                 },
                 {
                     "position": [
-                        307,
-                        262
+                        84,
+                        247
                     ],
                     "blocks": [
                         {
-                            "opcode": "current [PROPERTY]",
-                            "inputs": {},
-                            "options": {
-                                "PROPERTY": "DAYOFWEEK"
-                            }
+                            "opcode": "finger ([INDEX]) down?",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "4"
+                                }
+                            },
+                            "options": {}
                         }
                     ]
                 },
                 {
                     "position": [
-                        307,
-                        331
+                        132,
+                        317
                     ],
                     "blocks": [
                         {
-                            "opcode": "current [PROPERTY]",
-                            "inputs": {},
-                            "options": {
-                                "PROPERTY": "HOUR"
-                            }
+                            "opcode": "finger ([INDEX]) down?",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "5"
+                                }
+                            },
+                            "options": {}
                         }
                     ]
                 },
                 {
                     "position": [
-                        296,
-                        384
+                        62,
+                        463
                     ],
                     "blocks": [
                         {
-                            "opcode": "current [PROPERTY]",
-                            "inputs": {},
-                            "options": {
-                                "PROPERTY": "MINUTE"
-                            }
+                            "opcode": "finger ([INDEX]) tapped?",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "1"
+                                }
+                            },
+                            "options": {}
                         }
                     ]
                 },
                 {
                     "position": [
-                        295,
-                        448
+                        55,
+                        508
                     ],
                     "blocks": [
                         {
-                            "opcode": "current [PROPERTY]",
-                            "inputs": {},
-                            "options": {
-                                "PROPERTY": "SECOND"
-                            }
+                            "opcode": "finger ([INDEX]) tapped?",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "2"
+                                }
+                            },
+                            "options": {}
                         }
                     ]
                 },
                 {
                     "position": [
-                        296,
-                        525
+                        63,
+                        558
                     ],
                     "blocks": [
                         {
-                            "opcode": "current [PROPERTY]",
-                            "inputs": {},
-                            "options": {
-                                "PROPERTY": "TIMESTAMP"
-                            }
+                            "opcode": "finger ([INDEX]) tapped?",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "2"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        69,
+                        616
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "finger ([INDEX]) tapped?",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "4"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        109,
+                        683
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "finger ([INDEX]) tapped?",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "5"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        147,
+                        762
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "finger ([INDEX]) x",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "1"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        158,
+                        820
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "finger ([INDEX]) y",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "1"
+                                }
+                            },
+                            "options": {}
                         }
                     ]
                 }

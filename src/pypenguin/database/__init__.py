@@ -168,6 +168,7 @@ inputModes = {
     "touchable sprite"               : "block-and-option",
     "key"                            : "block-and-option",
     "up or down"                     : "block-and-option",
+    "finger index"                   : "block-and-option",
 }
 
 

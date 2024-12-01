@@ -44,132 +44,364 @@
             "customVars": [],
             "blocks": {
                 "a": {
-                    "opcode": "sensing_current",
+                    "opcode": "sensing_fingeroptions",
                     "next": null,
-                    "parent": null,
+                    "parent": "b",
                     "inputs": {},
                     "fields": {
-                        "CURRENTMENU": [
-                            "YEAR",
-                            "(OA^.)?Hh^blZa:QFPiy"
+                        "FINGER_OPTION": [
+                            "1",
+                            "FPiy`CEs]*lkO=/nM^Lp"
                         ]
                     },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 301,
-                    "y": 80
+                    "shadow": true,
+                    "topLevel": false
                 },
                 "b": {
-                    "opcode": "sensing_current",
+                    "opcode": "sensing_fingerdown",
                     "next": null,
                     "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CURRENTMENU": [
-                            "MONTH",
-                            "`CEs]*lkO=/nM^Lp^Q]A"
+                    "inputs": {
+                        "FINGER_OPTION": [
+                            1,
+                            "a"
                         ]
                     },
+                    "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 305,
-                    "y": 138
+                    "x": 67,
+                    "y": 49
                 },
                 "c": {
-                    "opcode": "sensing_current",
+                    "opcode": "sensing_fingeroptions",
                     "next": null,
-                    "parent": null,
+                    "parent": "d",
                     "inputs": {},
                     "fields": {
-                        "CURRENTMENU": [
-                            "DATE",
-                            "^}K)lXO{ELxyxeH-ilqt"
+                        "FINGER_OPTION": [
+                            "2",
+                            "^Q]A^}K)lXO{ELxyxeH-"
                         ]
                     },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 301,
-                    "y": 194
+                    "shadow": true,
+                    "topLevel": false
                 },
                 "d": {
-                    "opcode": "sensing_current",
+                    "opcode": "sensing_fingerdown",
                     "next": null,
                     "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CURRENTMENU": [
-                            "DAYOFWEEK",
-                            "ek]Y@J?EB}#|J*:TkPo/"
+                    "inputs": {
+                        "FINGER_OPTION": [
+                            1,
+                            "c"
                         ]
                     },
+                    "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 307,
-                    "y": 262
+                    "x": 49,
+                    "y": 118
                 },
                 "e": {
-                    "opcode": "sensing_current",
+                    "opcode": "sensing_fingeroptions",
                     "next": null,
-                    "parent": null,
+                    "parent": "f",
                     "inputs": {},
                     "fields": {
-                        "CURRENTMENU": [
-                            "HOUR",
-                            "}QyFcIoCVvQ%hmsCf{[j"
+                        "FINGER_OPTION": [
+                            "3",
+                            "ilqtek]Y@J?EB}#|J*:T"
                         ]
                     },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 307,
-                    "y": 331
+                    "shadow": true,
+                    "topLevel": false
                 },
                 "f": {
-                    "opcode": "sensing_current",
+                    "opcode": "sensing_fingerdown",
                     "next": null,
                     "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CURRENTMENU": [
-                            "MINUTE",
-                            "dpy{pYlVoecyxp.Ahc]%"
+                    "inputs": {
+                        "FINGER_OPTION": [
+                            1,
+                            "e"
                         ]
                     },
+                    "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 296,
-                    "y": 384
+                    "x": 61,
+                    "y": 176
                 },
                 "g": {
-                    "opcode": "sensing_current",
+                    "opcode": "sensing_fingeroptions",
                     "next": null,
-                    "parent": null,
+                    "parent": "h",
                     "inputs": {},
                     "fields": {
-                        "CURRENTMENU": [
-                            "SECOND",
-                            "mHiCjMS(xh;,fmYzHT-`"
+                        "FINGER_OPTION": [
+                            "4",
+                            "kPo/}QyFcIoCVvQ%hmsC"
                         ]
                     },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 295,
-                    "y": 448
+                    "shadow": true,
+                    "topLevel": false
                 },
                 "h": {
-                    "opcode": "sensing_current",
+                    "opcode": "sensing_fingerdown",
                     "next": null,
                     "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CURRENTMENU": [
-                            "TIMESTAMP",
-                            "vAhuuR@Gp)wb-!`=NTXG"
+                    "inputs": {
+                        "FINGER_OPTION": [
+                            1,
+                            "g"
                         ]
                     },
+                    "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 296,
-                    "y": 525
+                    "x": 84,
+                    "y": 247
+                },
+                "i": {
+                    "opcode": "sensing_fingeroptions",
+                    "next": null,
+                    "parent": "j",
+                    "inputs": {},
+                    "fields": {
+                        "FINGER_OPTION": [
+                            "5",
+                            "f{[jdpy{pYlVoecyxp.A"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "j": {
+                    "opcode": "sensing_fingerdown",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "FINGER_OPTION": [
+                            1,
+                            "i"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 132,
+                    "y": 317
+                },
+                "k": {
+                    "opcode": "sensing_fingeroptions",
+                    "next": null,
+                    "parent": "l",
+                    "inputs": {},
+                    "fields": {
+                        "FINGER_OPTION": [
+                            "1",
+                            "hc]%mHiCjMS(xh;,fmYz"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "l": {
+                    "opcode": "sensing_fingertapped",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "FINGER_OPTION": [
+                            1,
+                            "k"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 62,
+                    "y": 463
+                },
+                "m": {
+                    "opcode": "sensing_fingeroptions",
+                    "next": null,
+                    "parent": "n",
+                    "inputs": {},
+                    "fields": {
+                        "FINGER_OPTION": [
+                            "2",
+                            "HT-`vAhuuR@Gp)wb-!`="
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "n": {
+                    "opcode": "sensing_fingertapped",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "FINGER_OPTION": [
+                            1,
+                            "m"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 55,
+                    "y": 508
+                },
+                "o": {
+                    "opcode": "sensing_fingeroptions",
+                    "next": null,
+                    "parent": "p",
+                    "inputs": {},
+                    "fields": {
+                        "FINGER_OPTION": [
+                            "2",
+                            "NTXGt_b+kQf]JrE.TKT}"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "p": {
+                    "opcode": "sensing_fingertapped",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "FINGER_OPTION": [
+                            1,
+                            "o"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 63,
+                    "y": 558
+                },
+                "q": {
+                    "opcode": "sensing_fingeroptions",
+                    "next": null,
+                    "parent": "r",
+                    "inputs": {},
+                    "fields": {
+                        "FINGER_OPTION": [
+                            "4",
+                            "qNX#kayQuEC*W`#eZ`#f"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "r": {
+                    "opcode": "sensing_fingertapped",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "FINGER_OPTION": [
+                            1,
+                            "q"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 69,
+                    "y": 616
+                },
+                "s": {
+                    "opcode": "sensing_fingeroptions",
+                    "next": null,
+                    "parent": "t",
+                    "inputs": {},
+                    "fields": {
+                        "FINGER_OPTION": [
+                            "5",
+                            "v*iHu*@/_ae:PN,g#y^k"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "t": {
+                    "opcode": "sensing_fingertapped",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "FINGER_OPTION": [
+                            1,
+                            "s"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 109,
+                    "y": 683
+                },
+                "u": {
+                    "opcode": "sensing_fingeroptions",
+                    "next": null,
+                    "parent": "v",
+                    "inputs": {},
+                    "fields": {
+                        "FINGER_OPTION": [
+                            "1",
+                            "qbZ#OaBba@mypzMJxm-Y"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "v": {
+                    "opcode": "sensing_fingerx",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "FINGER_OPTION": [
+                            1,
+                            "u"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 147,
+                    "y": 762
+                },
+                "w": {
+                    "opcode": "sensing_fingeroptions",
+                    "next": null,
+                    "parent": "x",
+                    "inputs": {},
+                    "fields": {
+                        "FINGER_OPTION": [
+                            "1",
+                            "kcJ*oGr?SotJcffAH_OU"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "x": {
+                    "opcode": "sensing_fingery",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "FINGER_OPTION": [
+                            1,
+                            "w"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 158,
+                    "y": 820
                 }
             },
             "comments": {},
@@ -195,7 +427,7 @@
                     "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
                 }
             ],
-            "id": "t_b+kQf]JrE.TKT}qNX#",
+            "id": "`f:+(V[wAW}LbrtIQRVl",
             "volume": 100,
             "visible": true,
             "x": 0,
