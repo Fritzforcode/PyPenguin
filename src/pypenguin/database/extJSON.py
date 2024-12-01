@@ -9,7 +9,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_getValueFromJSON": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "get (KEY) from (JSON)",
         "inputTypes": {"KEY": "text", "JSON": "text"},
@@ -17,7 +17,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_getTreeValueFromJSON": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "get path (PATH) from (JSON)",
         "inputTypes": {"PATH": "text", "JSON": "text"},
@@ -25,14 +25,14 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_setValueToKeyInJSON": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "set (KEY) to (VALUE) in (JSON)",
         "inputTypes": {"KEY": "text", "VALUE": "text", "JSON": "text"},
         "optionTypes": {},
     },
     "jgJSON_json_delete": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "in json (JSON) delete key (KEY)",
         "inputTypes": {"KEY": "text", "JSON": "text"},
@@ -40,7 +40,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_values": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "get all values from json (JSON)",
         "inputTypes": {"JSON": "text"},
@@ -48,7 +48,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_keys": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "get all keys from json (JSON)",
         "inputTypes": {"JSON": "text"},
@@ -64,7 +64,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_combine": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "combine json (JSON1) and json (JSON2)",
         "inputTypes": {"JSON1": "text", "JSON2": "text"},
@@ -97,7 +97,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_push": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "in array (ARRAY) add (ITEM)",
         "inputTypes": {"ARRAY": "text", "ITEM": "text"},
@@ -105,7 +105,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_concatLayer1": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "add items from array (SOURCEARRAY) to array (TARGETARRAY)",
         "inputTypes": {"SOURCEARRAY": "text", "TARGETARRAY": "text"},
@@ -113,7 +113,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_concatLayer2": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "add items from array (SOURCEARRAY1) and array (SOURCEARRAY2) to array (TARGETARRAY)",
         "inputTypes": {"SOURCEARRAY1": "text", "SOURCEARRAY2": "text", "TARGETARRAY": "text"},
@@ -121,7 +121,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_delete": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "in array (ARRAY) delete (INDEX)",
         "inputTypes": {"ARRAY": "text", "INDEX": "number"},
@@ -129,7 +129,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_reverse": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "reverse array (ARRAY)",
         "inputTypes": {"ARRAY": "text"},
@@ -137,7 +137,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_insert": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "in array (ARRAY) insert (VALUE) at (INDEX)",
         "inputTypes": {"ARRAY": "text", "VALUE": "text", "INDEX": "number"},
@@ -145,7 +145,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_set": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "in array (ARRAY) set (INDEX) to (VALUE)",
         "inputTypes": {"ARRAY": "text", "INDEX": "number", "VALUE": "text"},
@@ -153,7 +153,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_get": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "in array (ARRAY) get (INDEX)",
         "inputTypes": {"ARRAY": "text", "INDEX": "number"},
@@ -161,7 +161,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_indexofNostart": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "in array (ARRAY) get index of (VALUE)",
         "inputTypes": {"ARRAY": "text", "VALUE": "text"},
@@ -169,7 +169,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_indexof": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "in array (ARRAY) from (START) get index of (VALUE)",
         "inputTypes": {"ARRAY": "text", "START": "number", "VALUE": "text"},
@@ -177,7 +177,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_length": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "length of array (ARRAY)",
         "inputTypes": {"ARRAY": "text"},
@@ -193,7 +193,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_flat": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "flatten nested array (ARRAY) by (LAYERS) layers",
         "inputTypes": {"ARRAY": "text", "LAYERS": "number"},
@@ -201,7 +201,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_getrange": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "in array (ARRAY) get all items from (START) to (STOP)",
         "inputTypes": {"ARRAY": "text", "START": "number", "STOP": "number"},
@@ -209,7 +209,7 @@ opcodes = {
         "optionTypes": {},
     },
     "jgJSON_json_array_isempty": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "JSON",
         "newOpcode": "is array (ARRAY) empty?",
         "inputTypes": {"ARRAY": "text"},

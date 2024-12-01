@@ -13,7 +13,7 @@ def validateScript(path, data, context):
         validateBlock(path=path+["blocks"]+[i], data=block, context=context)
         oldOpcode = getDeoptimizedOpcode(opcode=block["opcode"])
         blockType = getBlockType(opcode=oldOpcode)
-        if (blockType in ["stringReporter", "numberReporter", "booleanReporter"]) and (len(data["blocks"]) > 1):
+        if (blockType in ["textReporter", "numberReporter", "booleanReporter"]) and (len(data["blocks"]) > 1):
             raise formatError(path, "A script whose first block is a reporter mustn't have more than one block.")
 
 def validateBlock(path, data, context):
@@ -157,7 +157,7 @@ def validateOptions(path, data, opcode, context, inputDatas):
 
 def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
     match optionType:
-        case "broadcast"|"string":
+        case "broadcast"|"string"|"opcode":
             if not isinstance(data, str):
                 raise formatError(path, f"Must be a string.")
         case "variable":
@@ -198,7 +198,7 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = ["_stage_"] + context["otherSprites"]
                 case "cloning target":
                     possibleValues = context["cloningTargets"]
-                case "up | down":
+                case "up or down":
                     possibleValues = ["up", "down"]
                 case "backdrop":
                     possibleValues = context["backdrops"]
@@ -243,6 +243,6 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                 case "finger index":
                     possibleValues = ["1", "2", "3", "4", "5"]
                 case "blockType":
-                    possibleValues = ["instruction", "lastInstruction", "stringReporter", "numberReporter", "booleanReporter"] + context["localVariables"]
+                    possibleValues = ["instruction", "lastInstruction", "textReporter", "numberReporter", "booleanReporter"]
             if data not in possibleValues:
                 raise formatError(path, f"Must be one of {possibleValues}.")

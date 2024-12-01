@@ -46,7 +46,7 @@ opcodes = {
         "optionTypes": {},
     },
     "sensing_getxyoftouchingsprite": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "[COORDINATE] of touching ([OBJECT]) point",
         "inputTypes": {"OBJECT": "exclusive touchable object"},
@@ -55,7 +55,7 @@ opcodes = {
         "menus": [{"new": "OBJECT", "outer": "SPRITE", "inner": "DISTANCETOMENU", "menuOpcode": "sensing_distancetomenu"}],
     },
     "sensing_distanceto": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "distance to ([OBJECT])",
         "inputTypes": {"OBJECT": "exclusive touchable object"},
@@ -63,7 +63,7 @@ opcodes = {
         "menus": [{"new": "OBJECT", "outer": "DISTANCETOMENU", "inner": "DISTANCETOMENU", "menuOpcode": "sensing_distancetomenu"}],
     },
     "sensing_distanceTo": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "distance from (X1) (Y1) to (X2) (Y2)",
         "inputTypes": {
@@ -74,7 +74,7 @@ opcodes = {
         "optionTypes": {},
     },
     "sensing_directionTo": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "direction to (X1) (Y1) from (X2) (Y2)",
         "inputTypes": {
@@ -92,7 +92,7 @@ opcodes = {
         "optionTypes": {},
     },
     "sensing_answer": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "answer",
         "inputTypes": {},
@@ -153,14 +153,14 @@ opcodes = {
         "optionTypes": {},
     },
     "sensing_mousex": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "mouse x",
         "inputTypes": {},
         "optionTypes": {},
     },
     "sensing_mousey": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "mouse y",
         "inputTypes": {},
@@ -175,7 +175,7 @@ opcodes = {
         "optionTypes": {},
     },
     "sensing_getclipboard": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "clipboard item",
         "inputTypes": {},
@@ -190,21 +190,21 @@ opcodes = {
         "optionTranslation": {"DRAG_MODE": "MODE"},
     },
     "sensing_getdragmode": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "draggable?",
         "inputTypes": {},
         "optionTypes": {},
     },
     "sensing_loudness": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "loudness",
         "inputTypes": {},
         "optionTypes": {},
     },
     "sensing_loud": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "loud?",
         "inputTypes": {},
@@ -218,7 +218,7 @@ opcodes = {
         "optionTypes": {},
     },
     "sensing_timer": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "timer",
         "inputTypes": {},
@@ -233,7 +233,7 @@ opcodes = {
         "menus": [{"new": "TARGET", "outer": "OBJECT", "inner": "OBJECT", "menuOpcode": "sensing_of_object_menu"}],
     },
     "sensing_of": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "[PROPERTY] of ([TARGET])",
         "inputTypes": {"TARGET": "other sprite or stage"},
@@ -241,12 +241,26 @@ opcodes = {
         "menus": [{"new": "TARGET", "outer": "OBJECT", "inner": "OBJECT", "menuOpcode": "sensing_of_object_menu"}],
     },
     "sensing_current": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "current [PROPERTY]",
         "inputTypes": {},
         "optionTypes": {"PROPERTY": "time property"},
         "optionTranslation": {"CURRENTMENU": "PROPERTY"},
+    },
+    "sensing_dayssince2000": {
+        "type": "stringReporter",
+        "category": "Sensing",
+        "newOpcode": "days since 2000",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "sensing_mobile": {
+        "type": "booleanReporter",
+        "category": "Sensing",
+        "newOpcode": "mobile?",
+        "inputTypes": {},
+        "optionTypes": {},
     },
     "sensing_fingerdown": {
         "type": "booleanReporter",
@@ -265,7 +279,7 @@ opcodes = {
         "menus": [{"new": "INDEX", "outer": "FINGER_OPTION", "inner": "FINGER_OPTION", "menuOpcode": "sensing_fingeroptions"}],
     },
     "sensing_fingerx": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "finger ([INDEX]) x",
         "inputTypes": {"INDEX": "finger index"},
@@ -273,7 +287,7 @@ opcodes = {
         "menus": [{"new": "INDEX", "outer": "FINGER_OPTION", "inner": "FINGER_OPTION", "menuOpcode": "sensing_fingeroptions"}],
     },
     "sensing_fingery": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Sensing",
         "newOpcode": "finger ([INDEX]) y",
         "inputTypes": {"INDEX": "finger index"},
@@ -281,7 +295,17 @@ opcodes = {
         "menus": [{"new": "INDEX", "outer": "FINGER_OPTION", "inner": "FINGER_OPTION", "menuOpcode": "sensing_fingeroptions"}],
     },
     "sensing_username": {
-        "type": "textReporter",
-        "category": "Sensing"
+        "type": "stringReporter",
+        "category": "Sensing",
+        "newOpcode": "username",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "sensing_loggedin": {
+        "type": "booleanReporter",
+        "category": "Sensing",
+        "newOpcode": "logged in?",
+        "inputTypes": {},
+        "optionTypes": {},
     },
 }

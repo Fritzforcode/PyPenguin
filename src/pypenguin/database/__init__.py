@@ -19,7 +19,7 @@ Category      Status ('.'=some 'x'=all)
     Sound     [ ]
     Events    [x]
     Control   [x]
-    Sensing   [ ]
+    Sensing   [x]
     Operators [x]
     Variables [x]
     Lists     [x]

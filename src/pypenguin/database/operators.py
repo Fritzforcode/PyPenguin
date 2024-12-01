@@ -1,42 +1,42 @@
 opcodes = {
     # Operators: Math Part 1
     "operator_add": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "(NUM1) + (NUM2)",
         "inputTypes": {"NUM1": "number", "NUM2": "number"},
         "optionTypes": {},
     },
     "operator_subtract": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "(NUM1) - (NUM2)",
         "inputTypes": {"NUM1": "number", "NUM2": "number"},
         "optionTypes": {},
     },
     "operator_multiply": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "(NUM1) * (NUM2)",
         "inputTypes": {"NUM1": "number", "NUM2": "number"},
         "optionTypes": {},
     },
     "operator_divide": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "(NUM1) / (NUM2)",
         "inputTypes": {"NUM1": "number", "NUM2": "number"},
         "optionTypes": {},
     },
     "operator_power": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "(NUM1) ^ (NUM2)",
         "inputTypes": {"NUM1": "number", "NUM2": "number"},
         "optionTypes": {},
     },
     "operator_advMathExpanded": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "(NUM1) * (NUM2) [OPERATION] (NUM3)",
         "inputTypes": {"NUM1": "number", "NUM2": "number", "NUM3": "number"},
@@ -45,7 +45,7 @@ opcodes = {
         "optionTranslation": {"OPTION": "OPERATION"},
     },
     "operator_advMath": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "(NUM1) [OPERATION] (NUM2)",
         "inputTypes": {"NUM1": "number", "NUM2": "number"},
@@ -54,7 +54,7 @@ opcodes = {
         "optionTranslation": {"OPTION": "OPERATION"},
     },
     "operator_random": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "pick random (NUM1) to (NUM2)",
         "inputTypes": {"NUM1": "number", "NUM2": "number"},
@@ -62,7 +62,7 @@ opcodes = {
         "optionTypes": {},
     },
     "operator_constrainnumber": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "constrain (NUM) min (MIN) max (MAX)",
         "inputTypes": {"NUM": "number", "MIN": "number", "MAX": "number"},
@@ -70,7 +70,7 @@ opcodes = {
         "optionTypes": {},
     },
     "operator_lerpFunc": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "interpolate (NUM1) to (NUM2) by (WEIGHT)",
         "inputTypes": {"NUM1": "number", "NUM2": "number", "WEIGHT": "number"},
@@ -159,14 +159,14 @@ opcodes = {
     },
     # Operators: Newline and Tab
     "operator_newLine": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "new line",
         "inputTypes": {},
         "optionTypes": {},
     },
     "operator_tabCharacter": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "tab character",
         "inputTypes": {},
@@ -174,21 +174,21 @@ opcodes = {
     },
     # Operators: Text Manipulation
     "operator_join": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "join (STRING1) (STRING2)",
         "inputTypes": {"STRING1": "text", "STRING2": "text"},
         "optionTypes": {},
     },
     "operator_join3": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "join (STRING1) (STRING2) (STRING3)",
         "inputTypes": {"STRING1": "text", "STRING2": "text", "STRING3": "text"},
         "optionTypes": {},
     },
     "operator_indexOfTextInText": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "index of (SUBSTRING) in (TEXT)",
         "inputTypes": {"SUBSTRING": "text", "TEXT": "text"},
@@ -196,7 +196,7 @@ opcodes = {
         "optionTypes": {},
     },
     "operator_lastIndexOfTextInText": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "last index of (SUBSTRING) in (TEXT)",
         "inputTypes": {"SUBSTRING": "text", "TEXT": "text"},
@@ -204,14 +204,14 @@ opcodes = {
         "optionTypes": {},
     },
     "operator_letter_of": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "letter (LETTER) of (STRING)",
         "inputTypes": {"LETTER": "positive integer", "STRING": "text"},
         "optionTypes": {},
     },
     "operator_getLettersFromIndexToIndexInText": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "letters from (START) to (STOP) in (TEXT)",
         "inputTypes": {"START": "positive integer", "STOP": "text", "TEXT": "text"},
@@ -219,7 +219,7 @@ opcodes = {
         "optionTypes": {},
     },
     "operator_length": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "length of (TEXT)",
         "inputTypes": {"TEXT": "text"},
@@ -244,7 +244,7 @@ opcodes = {
         "optionTranslation": {"OPTION": "OPERATION"},
     },
     "operator_replaceAll": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "in (TEXT) replace all (OLDVALUE) with (NEWVALUE)",
         "inputTypes": {"TEXT": "text", "OLDVALUE": "text", "NEWVALUE": "text"},
@@ -252,7 +252,7 @@ opcodes = {
         "optionTypes": {},
     },
     "operator_replaceFirst": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "in (TEXT) replace first (OLDVALUE) with (NEWVALUE)",
         "inputTypes": {"TEXT": "text", "OLDVALUE": "text", "NEWVALUE": "text"},
@@ -260,7 +260,7 @@ opcodes = {
         "optionTypes": {},
     },
     "operator_regexmatch": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "match (TEXT) with regex (REGEX) (MODIFIER)",
         "inputTypes": {"TEXT": "text", "REGEX": "text", "MODIFIER": "text"},
@@ -268,7 +268,7 @@ opcodes = {
         "optionTypes": {},
     },
     "operator_toUpperLowerCase": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "(TEXT) to [CASE]",
         "inputTypes": {"TEXT": "text"},
@@ -277,21 +277,21 @@ opcodes = {
     },
     # Operators: Math Part 2
     "operator_mod": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "(NUM1) mod (NUM2)",
         "inputTypes": {"NUM1": "text", "NUM2": "text"},
         "optionTypes": {},
     },
     "operator_round": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "round (NUM)",
         "inputTypes": {"NUM": "number"},
         "optionTypes": {},
     },
     "operator_mathop": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "[OPERATION] of (NUM)",
         "inputTypes": {"NUM": "number"},
@@ -299,7 +299,7 @@ opcodes = {
         "optionTranslation": {"OPERATOR": "OPERATION"},
     },
     "operator_stringify": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Operators",
         "newOpcode": "(VALUE)",
         "inputTypes": {"VALUE": "text"},

@@ -174,7 +174,7 @@ opcodes = {
         "optionTypes": {},
     },
     "control_error": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Control",
         "newOpcode": "error", # yes that is correct
         "inputTypes": {},

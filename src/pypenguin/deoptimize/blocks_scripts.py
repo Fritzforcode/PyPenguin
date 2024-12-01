@@ -228,6 +228,85 @@ def flattenBlock(data, blockID, parentID, nextID):
     #pp(newBlockDatas)
     return newBlockDatas
 
+def restoreProcedureDefinitionBlock(data, blockID):
+    customOpcode        = data["options"]["customOpcode"]
+    proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
+    argumentIDs      = []
+    argumentNames    = []
+    argumentDefaults = []
+    argumentBlockIDs = []
+    for i, argumentName, argumentType in ikv(arguments):
+        argumentIDs     .append(generateRandomToken())
+        argumentNames   .append(argumentName)
+        # The argument reporter defaults
+        argumentDefaults.append("" if argumentType==str else json.dumps(False))
+        argumentBlockIDs.append(newTempSelector())
+    
+    match data["options"]["blockType"]:
+        case "instruction"    : returns, optype, opcode = False, "statement", "procedures_definition"
+        case "lastInstruction": returns, optype, opcode = None , "end"      , "procedures_definition"
+        case "textReporter"   : returns, optype, opcode = True , "string"   , "procedures_definition_return" 
+        case "numberReporter" : returns, optype, opcode = True , "number"   , "procedures_definition_return"
+        case "booleanReporter": returns, optype, opcode = True , "boolean"  , "procedures_definition_return"
+    
+    definitionID = blockID
+    prototypeID  = newTempSelector()
+    position     = data["_info_"]["position"]
+    definitionData = {
+        "opcode": opcode,
+        "next": data["_info_"]["next"],
+        "parent": None,
+        "inputs": {"custom_block": [1, prototypeID]},
+        "fields": {},
+        "shadow": False,
+        "topLevel": True,
+        "x": position[0],
+        "y": position[1],
+    }
+    prototypeData = {
+        "opcode"  : "procedures_prototype",
+        "next"    : None,
+        "parent"  : definitionID,
+        "inputs"  : { argumentIDs[j]: [1, argumentBlockIDs[j]] for j in range(len(argumentIDs)) }, 
+        "fields"  : {},
+        "shadow"  : True,
+        "topLevel": False,
+        "mutation": {
+            "tagName"         : "mutation",
+            "children"        : [],
+            "proccode"        : proccode,
+            "argumentids"     : json.dumps(argumentIDs),
+            "argumentnames"   : json.dumps(argumentNames),
+            "argumentdefaults": json.dumps(argumentDefaults),
+            "warp"            : json.dumps(data["options"]["noScreenRefresh"]),
+            "returns"         : json.dumps(returns),
+            "edited"          : json.dumps(True),
+            "optype"          : json.dumps(optype),
+            "color"           : json.dumps(["#FF6680", "#eb3d5b", "#df2847"]),
+        }
+    }
+    newBlockDatas = {}
+    newBlockDatas[definitionID] = definitionData
+    newBlockDatas[prototypeID]  = prototypeData
+    for j in range(len(argumentIDs)):
+        newBlockDatas[argumentBlockIDs[j]] = {
+            "opcode": "argument_reporter_string_number" if argumentDefaults[j] == "" else "argument_reporter_boolean",
+            "next": None,
+            "parent": prototypeID,
+            "inputs": {},
+            "fields": {
+                "VALUE": [argumentNames[j], generateRandomToken()]
+            },
+            "shadow": True,
+            "topLevel": False,
+            "mutation": {
+                "tagName": "mutation",
+                "children": [],
+                "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+            }
+        }
+    return newBlockDatas
+
 def restoreBlocks(data, spriteName):
     #print("rbs", 100*"{")
     #pp(data)
@@ -240,6 +319,12 @@ def restoreBlocks(data, spriteName):
             newBlockData = restoreListBlock(
                 data=blockData,
                 spriteName=spriteName,
+            )
+        elif opcode in ["special_define"]:
+            newBlockData = None
+            newBlockDatas |= restoreProcedureDefinitionBlock(
+                data=blockData,
+                blockID=blockID,
             )
         else:
             blockType = getBlockType(opcode=opcode)
@@ -277,7 +362,8 @@ def restoreBlocks(data, spriteName):
             newCommentID = newTempSelector()
             newCommentDatas[newCommentID] = newCommentData
         
-        newBlockDatas[blockID] = newBlockData
+        if newBlockData != None:
+            newBlockDatas[blockID] = newBlockData
     return newBlockDatas, newCommentDatas
 
 def restoreInputs(data, opcode, spriteName):

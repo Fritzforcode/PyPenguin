@@ -1,8 +1,8 @@
-from pypenguin.helper_functions import ikv, pp
-from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputID, getInputMode, getInputModes, getOptimizedOptionID, getBlockType
+from pypenguin.helper_functions import ikv, pp, generateCustomOpcode
+from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputID, getDeoptimizedInputID, getInputMode, getInputModes, getOptimizedOptionID, getBlockType
 from pypenguin.optimize.comments import translateComment
 
-import copy
+import copy, json
 
 def finishScripts(data):
     newScriptDatas = []
@@ -60,7 +60,6 @@ def finishBlock(data):
     newData = data | {"inputs": newInputDatas}
     del newData["_info_"]
     if "comment" in newData:
-        pp(newData["comment"])
         del newData["comment"]["_info_"]
     #print("stop fblock", 100*"}")
     #pp(newData)
@@ -175,18 +174,73 @@ def nestBlockRecursively(blockDatas, blockID):
     #pp(newBlockDatas)
     return newBlockDatas
 
+def prepareProcedureDefinitionBlock(blockDatas, definitionID):
+    definitionData = blockDatas[definitionID]
+    prototypeID    = definitionData["inputs"]["custom_block"][1]
+    prototypeData  = blockDatas[prototypeID]
+
+    mutationData  = prototypeData["mutation"]
+    proccode      = mutationData["proccode"]
+    argumentNames = json.loads(mutationData["argumentnames"])
+    customOpcode  = generateCustomOpcode(
+        proccode=proccode, 
+        argumentNames=argumentNames
+    )
+
+    # Find out which block type the custom block is
+    optype = json.loads(mutationData["optype"])
+    match optype:
+        case None       : blockType = "instruction"
+        case "statement": blockType = "instruction"
+        case "end"      : blockType = "lastInstruction"
+        case "string"   : blockType = "textReporter"
+        case "number"   : blockType = "numberReporter"
+        case "boolean"  : blockType = "booleanReporter"
+    
+    newBlockData = {
+        "opcode": "define ...",
+        "inputs": {},
+        "options": {
+            "customOpcode"   : customOpcode,
+            "noScreenRefresh": json.loads(mutationData["warp"]),
+            "blockType"      : blockType,
+        },
+        "_info_"      : {
+            "next"    : definitionData["next"],
+            "topLevel": definitionData["topLevel"],
+        },
+    }
+    if "comment" in definitionData:
+        newBlockData["comment"] = definitionData["comment"]
+
+    # Mark the prototype and the arguments display blocks to be deleted in the future
+    prototypeData["doDelete"] = True
+    for i, argumentToken, argumentTemp in ikv(prototypeData["inputs"]):
+        argumentID = argumentTemp[1]
+        blockDatas[argumentID]["doDelete"] = True
+
+    return newBlockData
+
 def prepareBlocks(data, commentDatas):
     #print(100*"(")
     #pp(data)
     newBlockDatas = {}
     for i, blockID, blockData in ikv(data):
         #print(".", blockData)
-        if isinstance(blockData, list): # For list blocks e.g. value of a variable
+        isListBlock = isinstance(blockData, list)
+        if isListBlock: # For list blocks e.g. value of a variable
             newBlockData = prepareListBlock(
                 data=blockData, 
                 blockID=blockID,
                 commentDatas=commentDatas,
             )
+        elif blockData["opcode"] in ["procedures_definition", "procedures_definition_return"]:
+            newBlockData = prepareProcedureDefinitionBlock(
+                blockDatas=data,
+                definitionID=blockID,
+            )
+        elif blockData["opcode"] in ["procedures_prototype"]:
+            newBlockData = None
         else: # For normal blocks
             newBlockData = {
                 "opcode"      : getOptimizedOpcode(opcode=blockData["opcode"]),
@@ -204,18 +258,25 @@ def prepareBlocks(data, commentDatas):
                     "topLevel": blockData["topLevel"],
                 },
             }
-            if "x" in blockData and "y" in blockData:
-                newBlockData["_info_"]["position"] = [blockData["x"], blockData["y"]]
-            if "comment" in blockData:
-                newBlockData["comment"] = commentDatas[blockData["comment"]]
+        if not isListBlock and blockData["topLevel"] == True:
+            newBlockData["_info_"]["position"] = [blockData["x"], blockData["y"]]
+        if not isListBlock and "comment" in blockData:
+            newBlockData["comment"] = commentDatas[blockData["comment"]]
             #TODO: implement comments, custom blocks
             #if comment != None:
             #    newData["comment"] = comment
             #if mutation != None:
             #    newData["mutation"] = mutation
-        newBlockDatas[blockID] = newBlockData
+        if newBlockData != None:
+            newBlockDatas[blockID] = newBlockData
     #print(100*")")
     #pp(newBlockDatas)
+    blockDatas = newBlockDatas
+    newBlockDatas = {}
+    for i, blockID, blockData in ikv(blockDatas):
+        if blockData.get("doDelete") == True:
+            continue
+        newBlockDatas[blockID] = blockData
     return newBlockDatas
 
 def prepareInputs(data, opcode, commentDatas):
@@ -276,7 +337,10 @@ def prepareInputs(data, opcode, commentDatas):
                 references.append(inputData[2])
         mode = getInputMode(
             opcode=opcode,
-            inputID=inputID,
+            inputID=getDeoptimizedInputID(
+                opcode=opcode,
+                inputID=inputID,
+            ),
         )
         newInputData = {
             "mode"      : mode,
@@ -287,6 +351,10 @@ def prepareInputs(data, opcode, commentDatas):
         newData[inputID] = newInputData
     
     for i, inputID, inputMode in ikv(getInputModes(opcode)):
+        oldInputID = getDeoptimizedInputID(
+            opcode=opcode,
+            inputID=inputID
+        )
         if inputID not in newData:
             if inputMode in ["block-only", "script"]:
                 newData[inputID] = {

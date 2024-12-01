@@ -20,27 +20,35 @@ def parseCustomOpcode(customOpcode: str):
     mode = None
     arguments = {}
     isEscaped = False
+    justCompletedArgument = False
     proccode = ""
     for i, char in enumerate(customOpcode):
         if char == "\\":
+            justCompletedArgument = False
             if isEscaped:
                 part += "\\"
             isEscaped = not isEscaped
         elif char == "(":
+            justCompletedArgument = False
             if isEscaped:
                 isEscaped = False
                 part += char
             else:
                 mode = str
+                if not part.endswith(" "):
+                    part += " "
                 proccode += part
                 proccode += "%s"
                 part = ""
         elif char == "<":
+            justCompletedArgument = False
             if isEscaped:
                 isEscaped = False
                 part += char
             else:
                 mode = bool
+                if not part.endswith(" "):
+                    part += " "
                 proccode += part
                 proccode += "%b"
                 part = ""
@@ -51,6 +59,7 @@ def parseCustomOpcode(customOpcode: str):
                 if mode != str: raise Exception()
                 arguments[part] = str
                 part = ""
+                justCompletedArgument = True
         elif char == ">":
             if isEscaped:
                 part += char
@@ -58,9 +67,14 @@ def parseCustomOpcode(customOpcode: str):
                 if mode != bool: raise Exception()
                 arguments[part] = bool
                 part = ""
+                justCompletedArgument = True
         else:
-            isEscaped = False
-            part += char
+            if char == " " and justCompletedArgument:
+                pass
+            else:
+                justCompletedArgument
+                isEscaped = False
+                part += char
     proccode += part
     return proccode, arguments
 

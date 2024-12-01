@@ -81,14 +81,14 @@ opcodes = {
     },
 # SPECIAL: Variables and Lists
     "special_variable_value": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Variables",
         "newOpcode": "value of [VARIABLE]",
         "inputTypes": {},
         "optionTypes": {"VARIABLE": "variable"},
     },
     "special_list_value": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": "Lists",
         "newOpcode": "value of [LIST]",
         "inputTypes": {},
@@ -112,9 +112,9 @@ opcodes = {
     "procedures_return": {
         "type": "lastInstruction",
         "category": "My Blocks",
-        "newOpcode": "return (return)",
+        "newOpcode": "return (VALUE)",
         "inputTypes": {"return": "text"},
-        #TODO: change return to VALUE
+        "inputTranslation": {"return": "VALUE"},
         "optionTypes": {},
     },
     "procedures_set": {
@@ -125,7 +125,7 @@ opcodes = {
         "optionTypes": {},
     },
     "argument_reporter_string_number": {
-        "type": "textReporter",
+        "type": "stringReporter",
         "category": None,
         "newOpcode": "value of text [ARGUMENT]",
         "inputTypes": {},

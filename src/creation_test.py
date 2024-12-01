@@ -1,26 +1,72 @@
 A = [
     {
-        "position": [0,0],
+        "position": [0, 0],
         "blocks": [
             {
-                "opcode": "[PROPERTY] of ([TARGET])",
-                "inputs": {
-                    "TARGET": {
-                        "option": "_stage_",
-                        "block": {
-                            "opcode": "value of [VARIABLE]",
-                            "options": {"VARIABLE": "var"},
-                        },
-                    },
-                },
+                "opcode": "define ...",
                 "options": {
-                    "PROPERTY": "volume",
-                },
-            },
-        ],
+                    "noScreenRefresh": False,
+                    "blockType": "instruction",
+                    "customOpcode": "instr (num txt) <bool val> !"
+                }
+            }
+        ]
     },
+    {
+        "position": [0, 100],
+        "blocks": [
+            {
+                "opcode": "define ...",
+                "options": {
+                    "noScreenRefresh": False,
+                    "blockType": "lastInstruction",
+                    "customOpcode": "lastInstr (txt) <bool val>!"
+                }
+            }
+        ]
+    },
+    {
+        "position": [0, 200],
+        "blocks": [
+            {
+                "opcode": "define ...",
+                "options": {
+                    "noScreenRefresh": False,
+                    "blockType": "textReporter",
+                    "customOpcode": "reportText (txt)"
+                }
+            }
+        ]
+    },
+    {
+        "position": [0, 300],
+        "blocks": [
+            {
+                "opcode": "define ...",
+                "options": {
+                    "noScreenRefresh": False,
+                    "blockType": "numberReporter",
+                    "customOpcode": "reportNumber (num)"
+                }
+            }
+        ]
+    },
+    {
+        "position": [0, 400],
+        "blocks": [
+            {
+                "opcode": "define ...",
+                "options": {
+                    "noScreenRefresh": False,
+                    "blockType": "booleanReporter",
+                    "customOpcode": "reportBool <bool>"
+                }
+            }
+        ]
+    }
 ]
-# ['x position', 'y position', 'direction', 'costume', 'size', 'volume', 'loc var']
+
+# ['instruction', 'lastInstruction', 'textReporter', 'numberReporter', 'booleanReporter']
 projectData = {
     "sprites": [
         {
