@@ -1,5 +1,27 @@
 opcodes = {
-# SPECIAL: Menus (DO NOT CREATE THESE MANUALLY; use their parent blocks)
+# SPECIAL: Menus (DO NOT CREATE THESE MANUALLY; they are created automatically when needed)
+    # Motion
+    "motion_goto_menu": {
+        "type": "menu",
+        "category": "Motion",
+        "newOpcode": "#REACHABLE TARGET MENU (GO)",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "motion_glideto_menu": {
+        "type": "menu",
+        "category": "Motion",
+        "newOpcode": "#REACHABLE TARGET MENU (GLIDE)",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "motion_pointtowards_menu": {
+        "type": "menu",
+        "category": "Motion",
+        "newOpcode": "#OBSERVABLE TARGET MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
     # Control
     "control_stop_sprite_menu": {
         "type": "menu",
@@ -113,7 +135,7 @@ opcodes = {
         "type": "lastInstruction",
         "category": "My Blocks",
         "newOpcode": "return (VALUE)",
-        "inputTypes": {"return": "text"},
+        "inputTypes": {"VALUE": "text"},
         "inputTranslation": {"return": "VALUE"},
         "optionTypes": {},
     },

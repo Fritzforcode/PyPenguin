@@ -9,7 +9,11 @@ A = [
                     "blockType": "instruction",
                     "customOpcode": "instr (num txt) <bool val> !"
                 }
-            }
+            },
+            {
+                "opcode": "return (VALUE)",
+                "inputs": {"VALUE": {}},
+            },
         ]
     },
     {

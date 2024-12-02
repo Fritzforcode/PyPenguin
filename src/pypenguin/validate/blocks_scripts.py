@@ -242,6 +242,12 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = ["YEAR", "MONTH", "DATE", "DAYOFWEEK", "HOUR", "MINUTE", "SECOND", "TIMESTAMP"]
                 case "finger index":
                     possibleValues = ["1", "2", "3", "4", "5"]
+                case "reachable target":
+                    possibleValues = ["_random_", "_mouse_"] + context["otherSprites"]
+                case "rotation style":
+                    possibleValues = ["left-right", "up-down", "don't rotate", "look at", "all around"]
+                case "stage zone":
+                    possibleValues = ["bottom-left", "bottom", "bottom-right", "top-left", "top", "top-right", "left", "right"]
                 case "blockType":
                     possibleValues = ["instruction", "lastInstruction", "textReporter", "numberReporter", "booleanReporter"]
             if data not in possibleValues:

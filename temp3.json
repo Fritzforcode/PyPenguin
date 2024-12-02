@@ -4,8 +4,8 @@
             "isStage": true,
             "name": "Stage",
             "variables": {
-                "w(yEU*z%C^JvkNgf_f[p": [
-                    "global var",
+                "AP#jU[:mkdOmU^%;j-m@": [
+                    "my variable",
                     0
                 ]
             },
@@ -44,2207 +44,874 @@
             "customVars": [],
             "blocks": {
                 "a": {
-                    "opcode": "sensing_touchingobjectmenu",
-                    "next": null,
-                    "parent": "b",
-                    "inputs": {},
-                    "fields": {
-                        "TOUCHINGOBJECTMENU": [
-                            "_mouse_",
-                            "%mHiCjMS(xh;,fmYzHT-"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "b": {
-                    "opcode": "sensing_touchingobject",
-                    "next": null,
+                    "opcode": "motion_movesteps",
+                    "next": "b",
                     "parent": null,
                     "inputs": {
-                        "TOUCHINGOBJECTMENU": [
+                        "STEPS": [
                             1,
-                            "a"
+                            [
+                                4,
+                                "10"
+                            ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 263,
-                    "y": -39
+                    "x": 264,
+                    "y": 139
                 },
-                "c": {
-                    "opcode": "sensing_touchingobjectmenu",
-                    "next": null,
-                    "parent": "d",
-                    "inputs": {},
-                    "fields": {
-                        "TOUCHINGOBJECTMENU": [
-                            "_edge_",
-                            "`vAhuuR@Gp)wb-!`=NTX"
+                "b": {
+                    "opcode": "motion_movebacksteps",
+                    "next": "c",
+                    "parent": "a",
+                    "inputs": {
+                        "STEPS": [
+                            1,
+                            [
+                                4,
+                                "10"
+                            ]
                         ]
                     },
-                    "shadow": true,
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "c": {
+                    "opcode": "motion_moveupdownsteps",
+                    "next": "d",
+                    "parent": "b",
+                    "inputs": {
+                        "STEPS": [
+                            1,
+                            [
+                                4,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "DIRECTION": [
+                            "up",
+                            "O{ELxyxeH-ilqtek]Y@J"
+                        ]
+                    },
+                    "shadow": false,
                     "topLevel": false
                 },
                 "d": {
-                    "opcode": "sensing_touchingobject",
-                    "next": null,
-                    "parent": null,
+                    "opcode": "motion_turnright",
+                    "next": "e",
+                    "parent": "c",
                     "inputs": {
-                        "TOUCHINGOBJECTMENU": [
+                        "DEGREES": [
                             1,
-                            "c"
+                            [
+                                4,
+                                "15"
+                            ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 260,
-                    "y": 21
+                    "topLevel": false
                 },
                 "e": {
-                    "opcode": "sensing_touchingobjectmenu",
+                    "opcode": "motion_turnleft",
+                    "next": "f",
+                    "parent": "d",
+                    "inputs": {
+                        "DEGREES": [
+                            1,
+                            [
+                                4,
+                                "15"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "g": {
+                    "opcode": "motion_goto_menu",
                     "next": null,
                     "parent": "f",
                     "inputs": {},
                     "fields": {
-                        "TOUCHINGOBJECTMENU": [
-                            "Sprite2",
-                            "Gt_b+kQf]JrE.TKT}qNX"
+                        "TO": [
+                            "_random_",
+                            "?EB}#|J*:TkPo/}QyFcI"
                         ]
                     },
                     "shadow": true,
                     "topLevel": false
                 },
                 "f": {
-                    "opcode": "sensing_touchingobject",
-                    "next": null,
-                    "parent": null,
+                    "opcode": "motion_goto",
+                    "next": "h",
+                    "parent": "e",
                     "inputs": {
-                        "TOUCHINGOBJECTMENU": [
+                        "TO": [
                             1,
-                            "e"
+                            "g"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 260,
-                    "y": 79
-                },
-                "g": {
-                    "opcode": "sensing_fulltouchingobjectmenu",
-                    "next": null,
-                    "parent": "h",
-                    "inputs": {},
-                    "fields": {
-                        "FULLTOUCHINGOBJECTMENU": [
-                            "_mouse_",
-                            "#kayQuEC*W`#eZ`#fv*i"
-                        ]
-                    },
-                    "shadow": true,
                     "topLevel": false
                 },
                 "i": {
-                    "opcode": "sensing_touchingobjectmenusprites",
+                    "opcode": "motion_goto_menu",
                     "next": null,
                     "parent": "h",
                     "inputs": {},
                     "fields": {
-                        "SPRITETOUCHINGOBJECTMENU": [
-                            "_myself_",
-                            "Hu*@/_ae:PN,g#y^kqbZ"
+                        "TO": [
+                            "_mouse_",
+                            "oCVvQ%hmsCf{[jdpy{pY"
                         ]
                     },
                     "shadow": true,
                     "topLevel": false
                 },
                 "h": {
-                    "opcode": "sensing_objecttouchingobject",
-                    "next": null,
-                    "parent": null,
+                    "opcode": "motion_goto",
+                    "next": "j",
+                    "parent": "f",
                     "inputs": {
-                        "FULLTOUCHINGOBJECTMENU": [
-                            1,
-                            "g"
-                        ],
-                        "SPRITETOUCHINGOBJECTMENU": [
+                        "TO": [
                             1,
                             "i"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 269,
-                    "y": 177
-                },
-                "j": {
-                    "opcode": "sensing_fulltouchingobjectmenu",
-                    "next": null,
-                    "parent": "k",
-                    "inputs": {},
-                    "fields": {
-                        "FULLTOUCHINGOBJECTMENU": [
-                            "_edge_",
-                            "#OaBba@mypzMJxm-YkcJ"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "l": {
-                    "opcode": "sensing_touchingobjectmenusprites",
-                    "next": null,
-                    "parent": "k",
-                    "inputs": {},
-                    "fields": {
-                        "SPRITETOUCHINGOBJECTMENU": [
-                            "Sprite2",
-                            "*oGr?SotJcffAH_OU`f:"
-                        ]
-                    },
-                    "shadow": true,
                     "topLevel": false
                 },
                 "k": {
-                    "opcode": "sensing_objecttouchingobject",
+                    "opcode": "motion_goto_menu",
                     "next": null,
-                    "parent": null,
+                    "parent": "j",
+                    "inputs": {},
+                    "fields": {
+                        "TO": [
+                            "_mouse_",
+                            "lVoecyxp.Ahc]%mHiCjM"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "j": {
+                    "opcode": "motion_goto",
+                    "next": "l",
+                    "parent": "h",
                     "inputs": {
-                        "FULLTOUCHINGOBJECTMENU": [
+                        "TO": [
                             1,
-                            "j"
-                        ],
-                        "SPRITETOUCHINGOBJECTMENU": [
-                            1,
-                            "l"
+                            "k"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 264,
-                    "y": 247
+                    "topLevel": false
                 },
-                "m": {
-                    "opcode": "sensing_fulltouchingobjectmenu",
-                    "next": null,
-                    "parent": "n",
-                    "inputs": {},
-                    "fields": {
-                        "FULLTOUCHINGOBJECTMENU": [
-                            "_myself_",
-                            "+(V[wAW}LbrtIQRVlRef"
+                "l": {
+                    "opcode": "motion_gotoxy",
+                    "next": "m",
+                    "parent": "j",
+                    "inputs": {
+                        "X": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ],
+                        "Y": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
                         ]
                     },
-                    "shadow": true,
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "m": {
+                    "opcode": "motion_changebyxy",
+                    "next": "n",
+                    "parent": "l",
+                    "inputs": {
+                        "DX": [
+                            1,
+                            [
+                                4,
+                                "10"
+                            ]
+                        ],
+                        "DY": [
+                            1,
+                            [
+                                4,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
                     "topLevel": false
                 },
                 "o": {
-                    "opcode": "sensing_touchingobjectmenusprites",
+                    "opcode": "motion_glideto_menu",
                     "next": null,
                     "parent": "n",
                     "inputs": {},
                     "fields": {
-                        "SPRITETOUCHINGOBJECTMENU": [
-                            "_myself_",
-                            "Iut|LUY^qLo.EgNw?jMZ"
+                        "TO": [
+                            "_random_",
+                            "S(xh;,fmYzHT-`vAhuuR"
                         ]
                     },
                     "shadow": true,
                     "topLevel": false
                 },
                 "n": {
-                    "opcode": "sensing_objecttouchingobject",
-                    "next": null,
-                    "parent": null,
+                    "opcode": "motion_glideto",
+                    "next": "p",
+                    "parent": "m",
                     "inputs": {
-                        "FULLTOUCHINGOBJECTMENU": [
+                        "SECS": [
                             1,
-                            "m"
+                            [
+                                4,
+                                "1"
+                            ]
                         ],
-                        "SPRITETOUCHINGOBJECTMENU": [
+                        "TO": [
                             1,
                             "o"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 254,
-                    "y": 314
+                    "topLevel": false
                 },
-                "p": {
-                    "opcode": "sensing_fulltouchingobjectmenu",
+                "q": {
+                    "opcode": "motion_glideto_menu",
                     "next": null,
-                    "parent": "q",
+                    "parent": "p",
                     "inputs": {},
                     "fields": {
-                        "FULLTOUCHINGOBJECTMENU": [
+                        "TO": [
+                            "_mouse_",
+                            "@Gp)wb-!`=NTXGt_b+kQ"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "p": {
+                    "opcode": "motion_glideto",
+                    "next": "r",
+                    "parent": "n",
+                    "inputs": {
+                        "SECS": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ],
+                        "TO": [
+                            1,
+                            "q"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "s": {
+                    "opcode": "motion_glideto_menu",
+                    "next": null,
+                    "parent": "r",
+                    "inputs": {},
+                    "fields": {
+                        "TO": [
                             "Sprite2",
-                            "QM#nm_.-RRp.o:%eMQtv"
+                            "f]JrE.TKT}qNX#kayQuE"
                         ]
                     },
                     "shadow": true,
                     "topLevel": false
                 },
                 "r": {
-                    "opcode": "sensing_touchingobjectmenusprites",
-                    "next": null,
-                    "parent": "q",
-                    "inputs": {},
-                    "fields": {
-                        "SPRITETOUCHINGOBJECTMENU": [
-                            "Sprite2",
-                            "`WlikzChXbmY_?L*/|B%"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "q": {
-                    "opcode": "sensing_objecttouchingobject",
-                    "next": null,
-                    "parent": null,
+                    "opcode": "motion_glideto",
+                    "next": "t",
+                    "parent": "p",
                     "inputs": {
-                        "FULLTOUCHINGOBJECTMENU": [
+                        "SECS": [
                             1,
-                            "p"
+                            [
+                                4,
+                                "1"
+                            ]
                         ],
-                        "SPRITETOUCHINGOBJECTMENU": [
+                        "TO": [
                             1,
-                            "r"
+                            "s"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 245,
-                    "y": 378
-                },
-                "s": {
-                    "opcode": "sensing_fulltouchingobjectmenu",
-                    "next": null,
-                    "parent": "t",
-                    "inputs": {},
-                    "fields": {
-                        "FULLTOUCHINGOBJECTMENU": [
-                            "_mouse_",
-                            "kVCH|v(yToid@*zp:YGA"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "u": {
-                    "opcode": "sensing_touchingobjectmenusprites",
-                    "next": null,
-                    "parent": "t",
-                    "inputs": {},
-                    "fields": {
-                        "SPRITETOUCHINGOBJECTMENU": [
-                            "_myself_",
-                            "fBsnz+WU]tn/s`Z%?:P:"
-                        ]
-                    },
-                    "shadow": true,
                     "topLevel": false
                 },
                 "t": {
-                    "opcode": "sensing_objecttouchingclonesprite",
-                    "next": null,
-                    "parent": null,
+                    "opcode": "motion_glidesecstoxy",
+                    "next": "u",
+                    "parent": "r",
                     "inputs": {
-                        "FULLTOUCHINGOBJECTMENU": [
-                            1,
-                            "s"
-                        ],
-                        "SPRITETOUCHINGOBJECTMENU": [
-                            1,
-                            "u"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 237,
-                    "y": 465
-                },
-                "v": {
-                    "opcode": "sensing_touchingcolor",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "COLOR": [
+                        "SECS": [
                             1,
                             [
-                                9,
-                                "#51acc0"
+                                4,
+                                "1"
+                            ]
+                        ],
+                        "X": [
+                            1,
+                            [
+                                4,
+                                "192"
+                            ]
+                        ],
+                        "Y": [
+                            1,
+                            [
+                                4,
+                                "0"
                             ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 305,
-                    "y": 536
+                    "topLevel": false
+                },
+                "u": {
+                    "opcode": "motion_pointindirection",
+                    "next": "v",
+                    "parent": "t",
+                    "inputs": {
+                        "DIRECTION": [
+                            1,
+                            [
+                                8,
+                                "90"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
                 },
                 "w": {
-                    "opcode": "sensing_coloristouchingcolor",
+                    "opcode": "motion_glideto_menu",
                     "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "COLOR": [
-                            1,
-                            [
-                                9,
-                                "#147597"
-                            ]
-                        ],
-                        "COLOR2": [
-                            1,
-                            [
-                                9,
-                                "#f66720"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 287,
-                    "y": 604
-                },
-                "x": {
-                    "opcode": "sensing_distancetomenu",
-                    "next": null,
-                    "parent": "y",
+                    "parent": "v",
                     "inputs": {},
                     "fields": {
-                        "DISTANCETOMENU": [
+                        "TOWARDS": [
                             "_mouse_",
-                            ":z]CbROPe@sGtW|L-ik?"
+                            "C*W`#eZ`#fv*iHu*@/_a"
                         ]
                     },
                     "shadow": true,
+                    "topLevel": false
+                },
+                "v": {
+                    "opcode": "motion_pointtowards",
+                    "next": "x",
+                    "parent": "u",
+                    "inputs": {
+                        "TOWARDS": [
+                            1,
+                            "w"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
                     "topLevel": false
                 },
                 "y": {
-                    "opcode": "sensing_getxyoftouchingsprite",
+                    "opcode": "motion_glideto_menu",
                     "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "SPRITE": [
-                            1,
-                            "x"
-                        ]
-                    },
-                    "fields": {
-                        "XY": [
-                            "x",
-                            "fiCqfMb*Qut+V;W@;e{l"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 257,
-                    "y": 683
-                },
-                "z": {
-                    "opcode": "sensing_distancetomenu",
-                    "next": null,
-                    "parent": "A",
+                    "parent": "x",
                     "inputs": {},
                     "fields": {
-                        "DISTANCETOMENU": [
-                            "Sprite2",
-                            "?j%AL[#.X}DcaxM;`GQi"
+                        "TOWARDS": [
+                            "_random_",
+                            "e:PN,g#y^kqbZ#OaBba@"
                         ]
                     },
                     "shadow": true,
+                    "topLevel": false
+                },
+                "x": {
+                    "opcode": "motion_pointtowards",
+                    "next": "z",
+                    "parent": "v",
+                    "inputs": {
+                        "TOWARDS": [
+                            1,
+                            "y"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
                     "topLevel": false
                 },
                 "A": {
-                    "opcode": "sensing_getxyoftouchingsprite",
+                    "opcode": "motion_glideto_menu",
                     "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "SPRITE": [
-                            1,
-                            "z"
-                        ]
-                    },
-                    "fields": {
-                        "XY": [
-                            "y",
-                            ":HM!XXhuqEKQhe.#s/kt"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 264,
-                    "y": 730
-                },
-                "B": {
-                    "opcode": "sensing_distancetomenu",
-                    "next": null,
-                    "parent": "C",
+                    "parent": "z",
                     "inputs": {},
                     "fields": {
-                        "DISTANCETOMENU": [
-                            "_mouse_",
-                            "T!e,X+gm-tceqPn^SyX/"
+                        "TOWARDS": [
+                            "Sprite2",
+                            "mypzMJxm-YkcJ*oGr?So"
                         ]
                     },
                     "shadow": true,
+                    "topLevel": false
+                },
+                "z": {
+                    "opcode": "motion_pointtowards",
+                    "next": "B",
+                    "parent": "x",
+                    "inputs": {
+                        "TOWARDS": [
+                            1,
+                            "A"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "B": {
+                    "opcode": "motion_pointtowardsxy",
+                    "next": "C",
+                    "parent": "z",
+                    "inputs": {
+                        "X": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ],
+                        "Y": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
                     "topLevel": false
                 },
                 "C": {
-                    "opcode": "sensing_distanceto",
-                    "next": null,
-                    "parent": null,
+                    "opcode": "motion_turnaround",
+                    "next": "D",
+                    "parent": "B",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "D": {
+                    "opcode": "motion_changexby",
+                    "next": "E",
+                    "parent": "C",
                     "inputs": {
-                        "DISTANCETOMENU": [
+                        "DX": [
                             1,
-                            "B"
+                            [
+                                4,
+                                "10"
+                            ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 285,
-                    "y": 791
-                },
-                "D": {
-                    "opcode": "sensing_distancetomenu",
-                    "next": null,
-                    "parent": "E",
-                    "inputs": {},
-                    "fields": {
-                        "DISTANCETOMENU": [
-                            "Sprite2",
-                            "oh,RpLqXLp?yeY)Vy+Tj"
-                        ]
-                    },
-                    "shadow": true,
                     "topLevel": false
                 },
                 "E": {
-                    "opcode": "sensing_distanceto",
-                    "next": null,
-                    "parent": null,
+                    "opcode": "motion_setx",
+                    "next": "F",
+                    "parent": "D",
                     "inputs": {
-                        "DISTANCETOMENU": [
+                        "X": [
                             1,
-                            "D"
+                            [
+                                4,
+                                "83"
+                            ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 283,
-                    "y": 840
+                    "topLevel": false
                 },
                 "F": {
-                    "opcode": "sensing_distanceTo",
-                    "next": null,
-                    "parent": null,
+                    "opcode": "motion_changeyby",
+                    "next": "G",
+                    "parent": "E",
                     "inputs": {
-                        "x1": [
+                        "DY": [
                             1,
                             [
-                                10,
-                                "10"
-                            ]
-                        ],
-                        "y1": [
-                            1,
-                            [
-                                10,
-                                "-10"
-                            ]
-                        ],
-                        "x2": [
-                            1,
-                            [
-                                10,
-                                "-10"
-                            ]
-                        ],
-                        "y2": [
-                            1,
-                            [
-                                10,
+                                4,
                                 "10"
                             ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 260,
-                    "y": 897
+                    "topLevel": false
                 },
                 "G": {
-                    "opcode": "sensing_directionTo",
-                    "next": null,
-                    "parent": null,
+                    "opcode": "motion_sety",
+                    "next": "H",
+                    "parent": "F",
                     "inputs": {
-                        "x2": [
+                        "Y": [
                             1,
                             [
-                                10,
-                                "-10"
-                            ]
-                        ],
-                        "y2": [
-                            1,
-                            [
-                                10,
-                                "10"
-                            ]
-                        ],
-                        "x1": [
-                            1,
-                            [
-                                10,
-                                "10"
-                            ]
-                        ],
-                        "y1": [
-                            1,
-                            [
-                                10,
-                                "-10"
+                                4,
+                                "39"
                             ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 253,
-                    "y": 956
+                    "topLevel": false
                 },
                 "H": {
-                    "opcode": "sensing_askandwait",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "QUESTION": [
-                            1,
-                            [
-                                10,
-                                "What's your name?"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 297,
-                    "y": 1019
-                },
-                "I": {
-                    "opcode": "sensing_answer",
-                    "next": null,
-                    "parent": null,
+                    "opcode": "motion_ifonedgebounce",
+                    "next": "I",
+                    "parent": "G",
                     "inputs": {},
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 353,
-                    "y": 1083
+                    "topLevel": false
                 },
                 "J": {
-                    "opcode": "sensing_thing_is_text",
+                    "opcode": "motion_pointtowards_menu",
                     "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "TEXT1": [
-                            1,
-                            [
-                                10,
-                                "world"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 329,
-                    "y": 1137
-                },
-                "K": {
-                    "opcode": "sensing_thing_is_number",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "TEXT1": [
-                            1,
-                            [
-                                10,
-                                "10"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 336,
-                    "y": 1192
-                },
-                "L": {
-                    "opcode": "sensing_keyoptions",
-                    "next": null,
-                    "parent": "M",
+                    "parent": "I",
                     "inputs": {},
                     "fields": {
-                        "KEY_OPTION": [
-                            "space",
-                            "ff/Gd?`{BDl;@#;Nos%`"
+                        "TOWARDS": [
+                            "_mouse_",
+                            "tJcffAH_OU`f:+(V[wAW"
                         ]
                     },
                     "shadow": true,
                     "topLevel": false
                 },
-                "M": {
-                    "opcode": "sensing_keypressed",
-                    "next": null,
-                    "parent": null,
+                "I": {
+                    "opcode": "motion_ifonspritebounce",
+                    "next": "K",
+                    "parent": "H",
                     "inputs": {
-                        "KEY_OPTION": [
+                        "SPRITE": [
+                            1,
+                            "J"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "L": {
+                    "opcode": "motion_pointtowards_menu",
+                    "next": null,
+                    "parent": "K",
+                    "inputs": {},
+                    "fields": {
+                        "TOWARDS": [
+                            "_random_",
+                            "}LbrtIQRVlRefIut|LUY"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "K": {
+                    "opcode": "motion_ifonspritebounce",
+                    "next": "M",
+                    "parent": "I",
+                    "inputs": {
+                        "SPRITE": [
                             1,
                             "L"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 311,
-                    "y": 1245
+                    "topLevel": false
                 },
                 "N": {
-                    "opcode": "sensing_keyoptions",
+                    "opcode": "motion_pointtowards_menu",
                     "next": null,
-                    "parent": "O",
+                    "parent": "M",
                     "inputs": {},
                     "fields": {
-                        "KEY_OPTION": [
-                            "space",
-                            "%kn#im#td*(#d:PGkTjp"
+                        "TOWARDS": [
+                            "Sprite2",
+                            "^qLo.EgNw?jMZQM#nm_."
                         ]
                     },
                     "shadow": true,
                     "topLevel": false
                 },
-                "O": {
-                    "opcode": "sensing_keyhit",
-                    "next": null,
-                    "parent": null,
+                "M": {
+                    "opcode": "motion_ifonspritebounce",
+                    "next": "O",
+                    "parent": "K",
                     "inputs": {
-                        "KEY_OPTION": [
+                        "SPRITE": [
                             1,
                             "N"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 310,
-                    "y": 1297
+                    "topLevel": false
                 },
-                "P": {
-                    "opcode": "sensing_scrolldirections",
-                    "next": null,
-                    "parent": "Q",
+                "O": {
+                    "opcode": "motion_setrotationstyle",
+                    "next": "P",
+                    "parent": "M",
                     "inputs": {},
                     "fields": {
-                        "SCROLL_OPTION": [
-                            "up",
-                            "TdSSwbDUjsAaApaLVdDs"
+                        "STYLE": [
+                            "left-right",
+                            "-RRp.o:%eMQtv`WlikzC"
                         ]
                     },
-                    "shadow": true,
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "P": {
+                    "opcode": "motion_setrotationstyle",
+                    "next": "Q",
+                    "parent": "O",
+                    "inputs": {},
+                    "fields": {
+                        "STYLE": [
+                            "up-down",
+                            "hXbmY_?L*/|B%kVCH|v("
+                        ]
+                    },
+                    "shadow": false,
                     "topLevel": false
                 },
                 "Q": {
-                    "opcode": "sensing_mousescrolling",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "SCROLL_OPTION": [
-                            1,
-                            "P"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 301,
-                    "y": 1349
-                },
-                "R": {
-                    "opcode": "sensing_scrolldirections",
-                    "next": null,
-                    "parent": "S",
+                    "opcode": "motion_setrotationstyle",
+                    "next": "R",
+                    "parent": "P",
                     "inputs": {},
                     "fields": {
-                        "SCROLL_OPTION": [
-                            "down",
-                            "x+o.SHqdAUQ-LL^Px}kn"
+                        "STYLE": [
+                            "look at",
+                            "yToid@*zp:YGAfBsnz+W"
                         ]
                     },
-                    "shadow": true,
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "R": {
+                    "opcode": "motion_setrotationstyle",
+                    "next": "S",
+                    "parent": "Q",
+                    "inputs": {},
+                    "fields": {
+                        "STYLE": [
+                            "don't rotate",
+                            "U]tn/s`Z%?:P::z]CbRO"
+                        ]
+                    },
+                    "shadow": false,
                     "topLevel": false
                 },
                 "S": {
-                    "opcode": "sensing_mousescrolling",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "SCROLL_OPTION": [
-                            1,
-                            "R"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 307,
-                    "y": 1401
-                },
-                "T": {
-                    "opcode": "sensing_mousedown",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 360,
-                    "y": 1458
-                },
-                "U": {
-                    "opcode": "sensing_mouseclicked",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 366,
-                    "y": 1512
-                },
-                "V": {
-                    "opcode": "sensing_mousex",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 388,
-                    "y": 1564
-                },
-                "W": {
-                    "opcode": "sensing_mousey",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 396,
-                    "y": 1614
-                },
-                "X": {
-                    "opcode": "sensing_setclipboard",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "ITEM": [
-                            1,
-                            [
-                                10,
-                                "Hello!"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 369,
-                    "y": 1699
-                },
-                "Y": {
-                    "opcode": "sensing_getclipboard",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 405,
-                    "y": 1782
-                },
-                "Z": {
-                    "opcode": "sensing_setdragmode",
-                    "next": "!",
-                    "parent": null,
+                    "opcode": "motion_setrotationstyle",
+                    "next": "T",
+                    "parent": "R",
                     "inputs": {},
                     "fields": {
-                        "DRAG_MODE": [
-                            "draggable",
-                            "[|NuWsqCO=FExLV#fqcY"
+                        "STYLE": [
+                            "all around",
+                            "Pe@sGtW|L-ik?fiCqfMb"
                         ]
                     },
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 370,
-                    "y": 1845
+                    "topLevel": false
+                },
+                "T": {
+                    "opcode": "motion_move_sprite_to_scene_side",
+                    "next": "U",
+                    "parent": "S",
+                    "inputs": {},
+                    "fields": {
+                        "ALIGNMENT": [
+                            "bottom-left",
+                            "*Qut+V;W@;e{l?j%AL[#"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "U": {
+                    "opcode": "motion_move_sprite_to_scene_side",
+                    "next": "V",
+                    "parent": "T",
+                    "inputs": {},
+                    "fields": {
+                        "ALIGNMENT": [
+                            "bottom",
+                            ".X}DcaxM;`GQi:HM!XXh"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "V": {
+                    "opcode": "motion_move_sprite_to_scene_side",
+                    "next": "W",
+                    "parent": "U",
+                    "inputs": {},
+                    "fields": {
+                        "ALIGNMENT": [
+                            "bottom-right",
+                            "uqEKQhe.#s/ktT!e,X+g"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "W": {
+                    "opcode": "motion_move_sprite_to_scene_side",
+                    "next": "X",
+                    "parent": "V",
+                    "inputs": {},
+                    "fields": {
+                        "ALIGNMENT": [
+                            "top-left",
+                            "m-tceqPn^SyX/oh,RpLq"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "X": {
+                    "opcode": "motion_move_sprite_to_scene_side",
+                    "next": "Y",
+                    "parent": "W",
+                    "inputs": {},
+                    "fields": {
+                        "ALIGNMENT": [
+                            "top",
+                            "XLp?yeY)Vy+Tjff/Gd?`"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "Y": {
+                    "opcode": "motion_move_sprite_to_scene_side",
+                    "next": "Z",
+                    "parent": "X",
+                    "inputs": {},
+                    "fields": {
+                        "ALIGNMENT": [
+                            "top-right",
+                            "{BDl;@#;Nos%`%kn#im#"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "Z": {
+                    "opcode": "motion_move_sprite_to_scene_side",
+                    "next": "!",
+                    "parent": "Y",
+                    "inputs": {},
+                    "fields": {
+                        "ALIGNMENT": [
+                            "left",
+                            "td*(#d:PGkTjpTdSSwbD"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
                 },
                 "!": {
-                    "opcode": "sensing_setdragmode",
+                    "opcode": "motion_move_sprite_to_scene_side",
                     "next": null,
                     "parent": "Z",
                     "inputs": {},
                     "fields": {
-                        "DRAG_MODE": [
-                            "not draggable",
-                            "jjq#M^#s}%MTkF)V@hW!"
+                        "ALIGNMENT": [
+                            "right",
+                            "UjsAaApaLVdDsx+o.SHq"
                         ]
                     },
                     "shadow": false,
                     "topLevel": false
                 },
                 "#": {
-                    "opcode": "sensing_getdragmode",
+                    "opcode": "motion_xposition",
                     "next": null,
                     "parent": null,
                     "inputs": {},
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 407,
-                    "y": 1979
+                    "x": 298,
+                    "y": 2233
                 },
                 "%": {
-                    "opcode": "sensing_loudness",
+                    "opcode": "motion_yposition",
                     "next": null,
                     "parent": null,
                     "inputs": {},
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 403,
-                    "y": 2038
+                    "x": 275,
+                    "y": 2289
                 },
                 "(": {
-                    "opcode": "sensing_loud",
+                    "opcode": "motion_direction",
                     "next": null,
                     "parent": null,
                     "inputs": {},
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 407,
-                    "y": 2101
-                },
-                ")": {
-                    "opcode": "sensing_resettimer",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 397,
-                    "y": 2151
-                },
-                "*": {
-                    "opcode": "sensing_timer",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 417,
-                    "y": 2225
-                },
-                "+": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": ",",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "_stage_",
-                            "b#P)AVL-lxnJo_t*Zx#("
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                ",": {
-                    "opcode": "sensing_set_of",
-                    "next": "-",
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "+"
-                        ],
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "backdrop",
-                            "wF+R?sT,l.ALa*,aBMoM"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 328,
-                    "y": 2269
-                },
-                ".": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "-",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "_stage_",
-                            "]t%-l:D]ZJcpIfaGY@|Y"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "-": {
-                    "opcode": "sensing_set_of",
-                    "next": "/",
-                    "parent": ",",
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "."
-                        ],
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "volume",
-                            ")nGTKzkejHN[Rp@Fui#L"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                ":": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "/",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "_stage_",
-                            "K?r{?A[n!]ZJL)V`rupp"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "/": {
-                    "opcode": "sensing_set_of",
-                    "next": null,
-                    "parent": "-",
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            ":"
-                        ],
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "global var",
-                            "WZ},r_MT-#B./;O:h)Ms"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                ";": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "=",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            ":gBdT-Yb@ikYaUfoaILD"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "=": {
-                    "opcode": "sensing_set_of",
-                    "next": "?",
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            ";"
-                        ],
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "x position",
-                            "s{Kyn(+QXvQ#(s*s@OqA"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 362,
-                    "y": 2462
-                },
-                "@": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "?",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "x)SX%/XCz)A}gXeDkxUh"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "?": {
-                    "opcode": "sensing_set_of",
-                    "next": "[",
-                    "parent": "=",
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "@"
-                        ],
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "y position",
-                            "wDMl=KT!+g?^(|+/G-BR"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "]": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "[",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "IffguSaLari%CY_C+yRn"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "[": {
-                    "opcode": "sensing_set_of",
-                    "next": "^",
-                    "parent": "?",
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "]"
-                        ],
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "direction",
-                            "kOP[+PGd?fyVkA@SyzGM"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "_": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "^",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "N?XG.SEfN^jb+:)g!:+)"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "^": {
-                    "opcode": "sensing_set_of",
-                    "next": "`",
-                    "parent": "[",
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "_"
-                        ],
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "costume",
-                            "pkkEmt!B)j%_YfxF/CqJ"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "{": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "`",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "TO(n_K]zL)=,[HIDcpmw"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "`": {
-                    "opcode": "sensing_set_of",
-                    "next": "|",
-                    "parent": "^",
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "{"
-                        ],
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "size",
-                            "#FBKa[=%gpXIp`TD]KCE"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "}": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "|",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "i?NPDV.K|vrb^;PU|dqY"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "|": {
-                    "opcode": "sensing_set_of",
-                    "next": "~",
-                    "parent": "`",
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "}"
-                        ],
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "volume",
-                            "tw=jrA:`BEqDXT}q:nd@"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "aa": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "~",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "T/+NbC_u:.]OkHrZyOLX"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "~": {
-                    "opcode": "sensing_set_of",
-                    "next": null,
-                    "parent": "|",
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "aa"
-                        ],
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "local var",
-                            "hAeOFR)CHSuNcT{]htTc"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "ab": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "ac",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "_stage_",
-                            "/hdEfbCPihS%rB*(sTNw"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "ac": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "ab"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "backdrop #",
-                            "Q!Wb!H[[,f`p!Xva;r=s"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 302,
-                    "y": 2839
-                },
-                "ad": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "ae",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "_stage_",
-                            "kQEwFcv_vk%n+tfGRWde"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "ae": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "ad"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "backdrop name",
-                            ":lTLt+E;TuZRI:YbN@K^"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 306,
-                    "y": 2898
-                },
-                "af": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "ag",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "_stage_",
-                            "-e[{^He+YpZS:gcIeG|L"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "ag": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "af"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "volume",
-                            "A@?RXGAo`QF}[TutQb|g"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 304,
-                    "y": 2960
-                },
-                "ah": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "ai",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "_stage_",
-                            "`tSULLP:Z(vas`f)qRb."
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "ai": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "ah"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "global var",
-                            "Gyi^%Jw@viu|o;]X(INK"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 313,
-                    "y": 3022
-                },
-                "aj": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "ak",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "b%JH[@^ORy(sa=t`XU,e"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "ak": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "aj"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "x position",
-                            "_!DcU@uyT:cF{EJx#j{*"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 315,
-                    "y": 3108
-                },
-                "al": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "am",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "E*=myv)i%YIG(TPlNd:b"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "am": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "al"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "y position",
-                            "GzYX(Xe|,T`q`JPdY-?r"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 316,
-                    "y": 3169
-                },
-                "an": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "ao",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "fk`SUaiyo]-fOdOYqJ!s"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "ao": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "an"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "direction",
-                            "sZN=huqr.f?f_XxS|kk_"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 316,
-                    "y": 3219
-                },
-                "ap": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "aq",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "wHzHPGH?+t*^te|w=eOj"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "aq": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "ap"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "costume #",
-                            "y+E+?uQr-_h]k?Rakn%T"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 320,
-                    "y": 3274
-                },
-                "ar": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "as",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "`*QW=UprOcxqcRyf!hNX"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "as": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "ar"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "costume name",
-                            "gvTj!g)TGN`+!xd+HyXi"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 317,
-                    "y": 3329
-                },
-                "at": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "au",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "TmpdScwZbP+^:-kg[ZHd"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "au": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "at"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "layer",
-                            "?mkQTm-et?KeaWRu^suw"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 315,
-                    "y": 3384
-                },
-                "av": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "aw",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "uFQd.YfCEKQvETCu#,U`"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "aw": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "av"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "size",
-                            "rX`bu|aXwtcdP=aego{s"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 320,
-                    "y": 3439
-                },
-                "ax": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "ay",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "tWd#(`QFrU=B[Zjq!`Sm"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "ay": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "ax"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "volume",
-                            "((F-WCYE.Y|iGJ@V]c-E"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 322,
-                    "y": 3498
-                },
-                "az": {
-                    "opcode": "sensing_of_object_menu",
-                    "next": null,
-                    "parent": "aA",
-                    "inputs": {},
-                    "fields": {
-                        "OBJECT": [
-                            "Sprite2",
-                            "JfPYn[gsYd#Y(n+,uvR-"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "aA": {
-                    "opcode": "sensing_of",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "OBJECT": [
-                            1,
-                            "az"
-                        ]
-                    },
-                    "fields": {
-                        "PROPERTY": [
-                            "local var",
-                            "!u}K;oVSsT-?gzGw|PLW"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 328,
-                    "y": 3556
-                },
-                "aB": {
-                    "opcode": "sensing_current",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CURRENTMENU": [
-                            "YEAR",
-                            "fL^(e!IWASrqoTvd({Y,"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 335,
-                    "y": 3693
-                },
-                "aC": {
-                    "opcode": "sensing_current",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CURRENTMENU": [
-                            "MONTH",
-                            "jj%]^rvtAvDd@r:TKQp!"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 334,
-                    "y": 3748
-                },
-                "aD": {
-                    "opcode": "sensing_current",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CURRENTMENU": [
-                            "DATE",
-                            "HuR;Q[sW_NEWSX-=N!!m"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 339,
-                    "y": 3808
-                },
-                "aE": {
-                    "opcode": "sensing_current",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CURRENTMENU": [
-                            "DAYOFWEEK",
-                            "tsa|?nA=oIvWkeboU.On"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 338,
-                    "y": 3866
-                },
-                "aF": {
-                    "opcode": "sensing_current",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CURRENTMENU": [
-                            "HOUR",
-                            "*V|G/Du_^j=vdv?!A)ZH"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 343,
-                    "y": 3926
-                },
-                "aG": {
-                    "opcode": "sensing_current",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CURRENTMENU": [
-                            "MINUTE",
-                            "c}rXv)`gWl}ZQD;+f.nI"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 344,
-                    "y": 3978
-                },
-                "aH": {
-                    "opcode": "sensing_current",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CURRENTMENU": [
-                            "SECOND",
-                            ";/^Y-HxD]UuMs+ii.Y`!"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 348,
-                    "y": 4038
-                },
-                "aI": {
-                    "opcode": "sensing_current",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CURRENTMENU": [
-                            "TIMESTAMP",
-                            "_lH.DoLsUmrhr}_zaeZ_"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 347,
-                    "y": 4101
-                },
-                "aJ": {
-                    "opcode": "sensing_dayssince2000",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 343,
-                    "y": 4215
-                },
-                "aK": {
-                    "opcode": "sensing_mobile",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 352,
-                    "y": 4281
-                },
-                "aL": {
-                    "opcode": "sensing_fingeroptions",
-                    "next": null,
-                    "parent": "aM",
-                    "inputs": {},
-                    "fields": {
-                        "FINGER_OPTION": [
-                            "1",
-                            "/n-_SRmaED:NJCb:T=Rl"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "aM": {
-                    "opcode": "sensing_fingerdown",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "FINGER_OPTION": [
-                            1,
-                            "aL"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 320,
-                    "y": 4339
-                },
-                "aN": {
-                    "opcode": "sensing_fingeroptions",
-                    "next": null,
-                    "parent": "aO",
-                    "inputs": {},
-                    "fields": {
-                        "FINGER_OPTION": [
-                            "2",
-                            "jN{%CVWsDKz.TKXqpZT;"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "aO": {
-                    "opcode": "sensing_fingerdown",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "FINGER_OPTION": [
-                            1,
-                            "aN"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 320,
-                    "y": 4400
-                },
-                "aP": {
-                    "opcode": "sensing_fingeroptions",
-                    "next": null,
-                    "parent": "aQ",
-                    "inputs": {},
-                    "fields": {
-                        "FINGER_OPTION": [
-                            "3",
-                            "-DVT(JTZKn.Lp*tSFxR:"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "aQ": {
-                    "opcode": "sensing_fingerdown",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "FINGER_OPTION": [
-                            1,
-                            "aP"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 324,
-                    "y": 4469
-                },
-                "aR": {
-                    "opcode": "sensing_fingeroptions",
-                    "next": null,
-                    "parent": "aS",
-                    "inputs": {},
-                    "fields": {
-                        "FINGER_OPTION": [
-                            "4",
-                            "DoXX,=,`CZ;N/DO?al-O"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "aS": {
-                    "opcode": "sensing_fingerdown",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "FINGER_OPTION": [
-                            1,
-                            "aR"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 324,
-                    "y": 4530
-                },
-                "aT": {
-                    "opcode": "sensing_fingeroptions",
-                    "next": null,
-                    "parent": "aU",
-                    "inputs": {},
-                    "fields": {
-                        "FINGER_OPTION": [
-                            "5",
-                            "YD(g{f!lHzPwoxUdDfbW"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "aU": {
-                    "opcode": "sensing_fingerdown",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "FINGER_OPTION": [
-                            1,
-                            "aT"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 322,
-                    "y": 4583
-                },
-                "aV": {
-                    "opcode": "sensing_fingeroptions",
-                    "next": null,
-                    "parent": "aW",
-                    "inputs": {},
-                    "fields": {
-                        "FINGER_OPTION": [
-                            "1",
-                            "[aqozk,za?#i[wDD#W-a"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "aW": {
-                    "opcode": "sensing_fingertapped",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "FINGER_OPTION": [
-                            1,
-                            "aV"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 314,
-                    "y": 4651
-                },
-                "aX": {
-                    "opcode": "sensing_fingeroptions",
-                    "next": null,
-                    "parent": "aY",
-                    "inputs": {},
-                    "fields": {
-                        "FINGER_OPTION": [
-                            "1",
-                            "(AWfId|SVR+r?lGnnIds"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "aY": {
-                    "opcode": "sensing_fingerx",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "FINGER_OPTION": [
-                            1,
-                            "aX"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 335,
-                    "y": 4709
-                },
-                "aZ": {
-                    "opcode": "sensing_fingeroptions",
-                    "next": null,
-                    "parent": "a!",
-                    "inputs": {},
-                    "fields": {
-                        "FINGER_OPTION": [
-                            "1",
-                            "rWA{Oz#=;p_n-p=*-w+^"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "a!": {
-                    "opcode": "sensing_fingery",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "FINGER_OPTION": [
-                            1,
-                            "aZ"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 322,
-                    "y": 4765
-                },
-                "a#": {
-                    "opcode": "sensing_username",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 333,
-                    "y": 4830
-                },
-                "a%": {
-                    "opcode": "sensing_loggedin",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 334,
-                    "y": 4885
+                    "x": 301,
+                    "y": 2395
                 }
             },
             "comments": {},
@@ -2270,13 +937,13 @@
                     "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
                 }
             ],
-            "id": "Rq#GWk`;QD+FS.!d*a^Z",
+            "id": "dAUQ-LL^Px}kn[|NuWsq",
             "volume": 100,
             "visible": true,
-            "x": 0,
+            "x": 192.20077514648438,
             "y": 0,
             "size": 100,
-            "direction": 90,
+            "direction": -52.12501634890182,
             "draggable": false,
             "rotationStyle": "all around",
             "layerOrder": 1
@@ -2284,12 +951,7 @@
         {
             "isStage": false,
             "name": "Sprite2",
-            "variables": {
-                "JZ[p#pdu@eRvWBe?jHkB": [
-                    "local var",
-                    0
-                ]
-            },
+            "variables": {},
             "lists": {},
             "broadcasts": {},
             "customVars": [],
@@ -2308,7 +970,7 @@
                 }
             ],
             "sounds": [],
-            "id": "*C%EG.-sD)KU/t?lyM?p",
+            "id": "CO=FExLV#fqcYjjq#M^#",
             "volume": 100,
             "visible": true,
             "x": 36,
@@ -2320,26 +982,7 @@
             "layerOrder": 2
         }
     ],
-    "monitors": [
-        {
-            "id": "JZ[p#pdu@eRvWBe?jHkB",
-            "mode": "default",
-            "opcode": "data_variable",
-            "params": {
-                "VARIABLE": "local var"
-            },
-            "spriteName": "Sprite2",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 5,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        }
-    ],
+    "monitors": [],
     "extensionData": {},
     "extensions": [],
     "meta": {

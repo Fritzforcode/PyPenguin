@@ -337,10 +337,7 @@ def prepareInputs(data, opcode, commentDatas):
                 references.append(inputData[2])
         mode = getInputMode(
             opcode=opcode,
-            inputID=getDeoptimizedInputID(
-                opcode=opcode,
-                inputID=inputID,
-            ),
+            inputID=inputID,
         )
         newInputData = {
             "mode"      : mode,

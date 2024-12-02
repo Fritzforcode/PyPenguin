@@ -13,10 +13,11 @@ def deoptimizeAndCompressProject(
     temporaryDir       : str,
     writeDebugFiles    : bool = False,
 ):
-    optimizedProjectDir = insureCorrectPath(optimizedProjectDir, "PyPenguin")
-    projectFilePath     = insureCorrectPath(projectFilePath,     "PyPenguin")
-    temporaryDir        = insureCorrectPath(temporaryDir,        "PyPenguin")
-    temp3FilePath       = insureCorrectPath("temp3.json",        "PyPenguin")    
+    optimizedProjectDir = insureCorrectPath(optimizedProjectDir,    "PyPenguin")
+    projectFilePath     = insureCorrectPath(projectFilePath,        "PyPenguin")
+    temporaryDir        = insureCorrectPath(temporaryDir,           "PyPenguin")
+    temp3FilePath       = insureCorrectPath("temp3.json",           "PyPenguin")
+    defCostumeFilePath  = insureCorrectPath(defaultCostumeFilePath, "PyPenguin")
     
     # Read the optimized project.json
     optimizedData = readJSONFile(
@@ -52,7 +53,7 @@ def deoptimizeAndCompressProject(
             oldCostumeName                        = costume["md5ext"]
             encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
             if costume.get("isDefault") == True:
-                srcPath = defaultCostumeFilePath
+                srcPath = defCostumeFilePath
             else:
                 srcPath = os.path.join(
                     optimizedProjectDir, 

@@ -1,3 +1,6 @@
+from pypenguin.database.motion    import opcodes as motion
+# Looks (soon)
+# Sound (soon)
 from pypenguin.database.events    import opcodes as events
 from pypenguin.database.control   import opcodes as control
 from pypenguin.database.sensing   import opcodes as sensing
@@ -30,7 +33,8 @@ Extension     Status ('.'=some 'x'=all)
 
 opcodeDatabase = (
 # CATEGORIES
-    # missing: Motion, Looks, Sound
+    motion |
+    # missing: Looks, Sound
     events    | control   | sensing |
     operators | variables | lists   |
     special   |
@@ -128,6 +132,7 @@ def getInputMagicNumber(inputType):
         case "broadcast"       : magicNumber = 11
         case "text"            : magicNumber = 10
         case "color"           : magicNumber =  9
+        case "direction"       : magicNumber =  8
         case "integer"         : magicNumber =  7
         case "positive integer": magicNumber =  6
         case "positive number" : magicNumber =  5
@@ -149,6 +154,7 @@ optionDefault = {}
 commentDefault = None
 
 inputModes = {
+    "direction"       : "block-and-text",
     "integer"         : "block-and-text",
     "positive integer": "block-and-text",
     "positive number" : "block-and-text",
@@ -169,6 +175,7 @@ inputModes = {
     "key"                            : "block-and-option",
     "up or down"                     : "block-and-option",
     "finger index"                   : "block-and-option",
+    "reachable target"               : "block-and-option",
 }
 
 

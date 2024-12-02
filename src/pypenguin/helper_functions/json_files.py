@@ -2,8 +2,10 @@ import platform
 from json import dump
 from jsoncomment import JsonComment
 parser = JsonComment()
+from pypenguin.helper_functions.other import insureCorrectPath
 
 def readJSONFile(filePath):
+    filePath = insureCorrectPath(filePath, "PyPenguin")
     print("read", filePath)
     #import inspect
     #stack = inspect.stack()
@@ -16,6 +18,7 @@ def readJSONFile(filePath):
     return parser.loads(string) 
 
 def writeJSONFile(filePath, data, beautiful:bool=True):
+    filePath = insureCorrectPath(filePath, "PyPenguin")
     print("write", filePath)
     with open(filePath, "w") as file:
         if beautiful:
