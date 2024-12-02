@@ -11,7 +11,7 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "define ...",
+                            "opcode": "define custom block",
                             "options": {
                                 "noScreenRefresh": false,
                                 "blockType": "instruction",
@@ -33,7 +33,7 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "define ...",
+                            "opcode": "define custom block",
                             "options": {
                                 "noScreenRefresh": false,
                                 "blockType": "lastInstruction",
@@ -49,7 +49,7 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "define ...",
+                            "opcode": "define custom block",
                             "options": {
                                 "noScreenRefresh": false,
                                 "blockType": "textReporter",
@@ -65,7 +65,7 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "define ...",
+                            "opcode": "define custom block",
                             "options": {
                                 "noScreenRefresh": false,
                                 "blockType": "numberReporter",
@@ -81,7 +81,7 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "define ...",
+                            "opcode": "define custom block",
                             "options": {
                                 "noScreenRefresh": false,
                                 "blockType": "booleanReporter",

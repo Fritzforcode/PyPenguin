@@ -1,6 +1,6 @@
 moveDiskDef = {"position": [0,1000], "blocks":[
     {
-        "opcode": "define ...",
+        "opcode": "define custom block",
         "options": {
             "noScreenRefresh": True, 
             "blockType": "instruction", 
@@ -52,7 +52,7 @@ caseOne = {
     "mode": "script",
     "blocks": [
         {
-            "opcode": "call ...",
+            "opcode": "call custom block",
             "inputs": {
                 "source": {
                     "block": {
@@ -73,7 +73,7 @@ caseOne = {
 }
 
 callOne = {
-    "opcode": "call ...",
+    "opcode": "call custom block",
     "inputs": {
         "n": {
             "block": {
@@ -114,7 +114,7 @@ callOne = {
 }
 
 callTwo = {
-    "opcode": "call ...",
+    "opcode": "call custom block",
     "inputs": {
         "source": {
             "block": {
@@ -133,7 +133,7 @@ callTwo = {
 }
 
 callThree = {
-    "opcode": "call ...",
+    "opcode": "call custom block",
     "inputs": {
         "n": {
             "block": {
@@ -182,7 +182,7 @@ caseTwo = {
 
 hanoiDef = {"position": [0,0], "blocks": [
     {
-        "opcode": "define ...",
+        "opcode": "define custom block",
         "options": {
             "noScreenRefresh": True, 
             "blockType": "instruction", 

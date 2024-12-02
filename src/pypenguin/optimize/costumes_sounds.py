@@ -23,7 +23,7 @@ def translateSounds(data):
             "dataFormat" : soundData["dataFormat"],
             "fileStem"   : soundData["assetId"],
             "rate"       : soundData["rate"],        # playback speed in Hz
-            "sampleCount": soundData["sampleCount"], # = "rate" * duration in secs
+            "sampleCount": soundData["sampleCount"], # = "rate" * SECONDS in secs
         }
         newSoundDatas.append(newSoundData)
     return newSoundDatas

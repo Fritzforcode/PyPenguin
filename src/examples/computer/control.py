@@ -3,7 +3,7 @@ executeCurrentInstrDef = {
     "position": [-1500,0],
     "blocks": [
         {
-            "opcode": "define ...",
+            "opcode": "define custom block",
             "options": {
                 "noScreenRefresh": True,
                 "blockType": "instruction",
@@ -63,7 +63,7 @@ executeCurrentInstrDef = {
                 }},
                 "THEN": {"blocks": [
                     {
-                        "opcode": "call ...",
+                        "opcode": "call custom block",
                         "options": {"customOpcode": "execute alu instr (instr) (A) (B) (C)"},
                         "inputs": {
                             "instr": {"block": {
@@ -131,7 +131,7 @@ executeCurrentInstrDef = {
                             }},
                             "THEN": {"blocks": [
                                 {
-                                    "opcode": "call ...",
+                                    "opcode": "call custom block",
                                     "options": {"customOpcode": "execute control instr (instr) (A) (B) (C)"},
                                     "inputs": {
                                         "instr": {"block": {
@@ -199,7 +199,7 @@ executeCurrentInstrDef = {
                                         }},
                                         "THEN": {"blocks": [
                                             {
-                                                "opcode": "call ...",
+                                                "opcode": "call custom block",
                                                 "options": {"customOpcode": "execute control instr (instr) (A) (B) (C)"},
                                                 "inputs": {
                                                     "instr": {"block": {
@@ -310,7 +310,7 @@ executeControlInstrDef = {
     "position": [-200,0],
     "blocks": [
         {
-            "opcode": "define ...",
+            "opcode": "define custom block",
             "options": {
                 "noScreenRefresh": True,
                 "blockType": "instruction",

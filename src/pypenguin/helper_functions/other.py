@@ -38,7 +38,7 @@ def parseCustomOpcode(customOpcode: str):
                 if not part.endswith(" "):
                     part += " "
                 proccode += part
-                proccode += "%s"
+                proccode += "%s "
                 part = ""
         elif char == "<":
             justCompletedArgument = False
@@ -50,7 +50,7 @@ def parseCustomOpcode(customOpcode: str):
                 if not part.endswith(" "):
                     part += " "
                 proccode += part
-                proccode += "%b"
+                proccode += "%b "
                 part = ""
         elif char == ")":
             if isEscaped:
@@ -76,6 +76,7 @@ def parseCustomOpcode(customOpcode: str):
                 isEscaped = False
                 part += char
     proccode += part
+    proccode = proccode.removesuffix(" ")
     return proccode, arguments
 
 def generateCustomOpcode(proccode: str, argumentNames: list[str]):

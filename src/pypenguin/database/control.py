@@ -3,15 +3,15 @@ opcodes = {
     "control_wait": {
         "type": "instruction",
         "category": "Control",
-        "newOpcode": "wait (DURATION) seconds",
-        "inputTypes": {"DURATION": "positive number"},
+        "newOpcode": "wait (SECONDS) seconds",
+        "inputTypes": {"SECONDS": "positive number"},
         "optionTypes": {},
     },
     "control_waitsecondsoruntil": {
         "type": "instruction",
         "category": "Control",
-        "newOpcode": "wait (DURATION) seconds or until <CONDITION>",
-        "inputTypes": {"DURATION": "positive number", "CONDITION": "boolean"},
+        "newOpcode": "wait (SECONDS) seconds or until <CONDITION>",
+        "inputTypes": {"SECONDS": "positive number", "CONDITION": "boolean"},
         "optionTypes": {},
     },
     # Control: Loops

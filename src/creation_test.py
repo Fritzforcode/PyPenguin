@@ -3,7 +3,7 @@ A = [
         "position": [0, 0],
         "blocks": [
             {
-                "opcode": "define ...",
+                "opcode": "define custom block",
                 "options": {
                     "noScreenRefresh": False,
                     "blockType": "instruction",
@@ -20,7 +20,7 @@ A = [
         "position": [0, 100],
         "blocks": [
             {
-                "opcode": "define ...",
+                "opcode": "define custom block",
                 "options": {
                     "noScreenRefresh": False,
                     "blockType": "lastInstruction",
@@ -33,7 +33,7 @@ A = [
         "position": [0, 200],
         "blocks": [
             {
-                "opcode": "define ...",
+                "opcode": "define custom block",
                 "options": {
                     "noScreenRefresh": False,
                     "blockType": "textReporter",
@@ -46,7 +46,7 @@ A = [
         "position": [0, 300],
         "blocks": [
             {
-                "opcode": "define ...",
+                "opcode": "define custom block",
                 "options": {
                     "noScreenRefresh": False,
                     "blockType": "numberReporter",
@@ -59,7 +59,7 @@ A = [
         "position": [0, 400],
         "blocks": [
             {
-                "opcode": "define ...",
+                "opcode": "define custom block",
                 "options": {
                     "noScreenRefresh": False,
                     "blockType": "booleanReporter",

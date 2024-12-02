@@ -1,5 +1,5 @@
 from pypenguin.database.motion    import opcodes as motion
-# Looks (soon)
+from pypenguin.database.looks     import opcodes as looks
 # Sound (soon)
 from pypenguin.database.events    import opcodes as events
 from pypenguin.database.control   import opcodes as control
@@ -33,8 +33,8 @@ Extension     Status ('.'=some 'x'=all)
 
 opcodeDatabase = (
 # CATEGORIES
-    motion |
-    # missing: Looks, Sound
+    motion | looks |
+    # missing: Sound
     events    | control   | sensing |
     operators | variables | lists   |
     special   |

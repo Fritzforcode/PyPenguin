@@ -79,7 +79,7 @@ excecuteAluInstrDef = {
     "position": [500,0],
     "blocks": [
         {
-            "opcode": "define ...",
+            "opcode": "define custom block",
             "options": {
                 "noScreenRefresh": True,
                 "blockType": "instruction",
@@ -90,7 +90,7 @@ excecuteAluInstrDef = {
             "opcode": "set [VARIABLE] to (VALUE)",
             "inputs": {
                 "VALUE": {"block": {
-                    "opcode": "call ...",
+                    "opcode": "call custom block",
                     "inputs": {
                         "reg": {"block": {
                             "opcode": "value of text argument [VALUE]",
@@ -120,7 +120,7 @@ excecuteAluInstrDef = {
                         "opcode": "set [VARIABLE] to (VALUE)",
                         "inputs": {
                             "VALUE": {"block": {
-                                "opcode": "call ...",
+                                "opcode": "call custom block",
                                 "inputs": {
                                     "reg": {"block": {
                                         "opcode": "value of text argument [VALUE]",
@@ -149,7 +149,7 @@ excecuteAluInstrDef = {
         },
         instructions,
         {
-            "opcode": "call ...",
+            "opcode": "call custom block",
             "inputs": {
                 "reg": {"block": {
                     "opcode": "value of text argument [VALUE]",

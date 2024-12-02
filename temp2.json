@@ -27,449 +27,254 @@
             "scripts": [
                 {
                     "position": [
-                        264,
-                        139
+                        296,
+                        99
                     ],
                     "blocks": [
                         {
-                            "opcode": "move (STEPS) steps",
+                            "opcode": "say (MESSAGE) for (SECONDS) seconds",
                             "inputs": {
-                                "STEPS": {
+                                "MESSAGE": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "10"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "move back (STEPS) steps",
-                            "inputs": {
-                                "STEPS": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "10"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "move [DIRECTION] (STEPS) steps",
-                            "inputs": {
-                                "STEPS": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "10"
-                                }
-                            },
-                            "options": {
-                                "DIRECTION": "up"
-                            }
-                        },
-                        {
-                            "opcode": "turn clockwise (DEGREES) degrees",
-                            "inputs": {
-                                "DEGREES": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "15"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "turn counterclockwise (DEGREES) degrees",
-                            "inputs": {
-                                "DEGREES": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "15"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "goto ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_random_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "goto ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_mouse_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "goto ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_mouse_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "go to x: (X) y: (Y)",
-                            "inputs": {
-                                "X": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
+                                    "text": "Hello!"
                                 },
-                                "Y": {
+                                "SECONDS": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "0"
+                                    "text": "2"
                                 }
                             },
                             "options": {}
                         },
                         {
-                            "opcode": "change by x: (DX) y: (DY)",
+                            "opcode": "say (MESSAGE)",
                             "inputs": {
-                                "DX": {
+                                "MESSAGE": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "10"
+                                    "text": "Hello!"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "think (MESSAGE) for (SECONDS) seconds",
+                            "inputs": {
+                                "MESSAGE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "Hmm..."
                                 },
-                                "DY": {
+                                "SECONDS": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "10"
+                                    "text": "2"
                                 }
                             },
                             "options": {}
                         },
                         {
-                            "opcode": "glide (DURATION) secs to ([TARGET])",
+                            "opcode": "think (MESSAGE)",
                             "inputs": {
-                                "DURATION": {
+                                "MESSAGE": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "1"
+                                    "text": "Hmm..."
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "stop speaking",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set font to (FONT) with font size (FONT-SIZE)",
+                            "inputs": {
+                                "FONT": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "Helvetica"
                                 },
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_random_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "glide (DURATION) secs to ([TARGET])",
-                            "inputs": {
-                                "DURATION": {
+                                "FONT-SIZE": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "1"
-                                },
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_mouse_"
+                                    "text": "14"
                                 }
                             },
                             "options": {}
-                        },
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        256,
+                        488
+                    ],
+                    "blocks": [
                         {
-                            "opcode": "glide (DURATION) secs to ([TARGET])",
+                            "opcode": "set [PROPERTY] color to (COLOR)",
                             "inputs": {
-                                "DURATION": {
+                                "COLOR": {
                                     "mode": "block-and-text",
                                     "block": null,
-                                    "text": "1"
-                                },
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "Sprite2"
+                                    "text": "#c097e9"
                                 }
                             },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "glide (DURATION) secs to x: (X) y: (Y)",
-                            "inputs": {
-                                "DURATION": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1"
-                                },
-                                "X": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "192"
-                                },
-                                "Y": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "point in direction (DIRECTION)",
-                            "inputs": {
-                                "DIRECTION": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "90"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "point towards ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_mouse_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "point towards ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_random_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "point towards ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "Sprite2"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "point towards x: (X) y: (Y)",
-                            "inputs": {
-                                "X": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                },
-                                "Y": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "turn around",
-                            "inputs": {},
-                            "options": {}
-                        },
-                        {
-                            "opcode": "change x by (DX)",
-                            "inputs": {
-                                "DX": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "10"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "set x to (X)",
-                            "inputs": {
-                                "X": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "83"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "change y by (DY)",
-                            "inputs": {
-                                "DY": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "10"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "set y to (Y)",
-                            "inputs": {
-                                "Y": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "39"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "if on edge, bounce",
-                            "inputs": {},
-                            "options": {}
-                        },
-                        {
-                            "opcode": "if touching ([TARGET]), bounce",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_mouse_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "if touching ([TARGET]), bounce",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_random_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "if touching ([TARGET]), bounce",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "Sprite2"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "set rotation style [STYLE]",
-                            "inputs": {},
                             "options": {
-                                "STYLE": "left-right"
+                                "PROPERTY": "BUBBLE_STROKE"
                             }
                         },
                         {
-                            "opcode": "set rotation style [STYLE]",
-                            "inputs": {},
+                            "opcode": "set [PROPERTY] color to (COLOR)",
+                            "inputs": {
+                                "COLOR": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "#c097e9"
+                                }
+                            },
                             "options": {
-                                "STYLE": "up-down"
+                                "PROPERTY": "BUBBLE_FILL"
                             }
                         },
                         {
-                            "opcode": "set rotation style [STYLE]",
-                            "inputs": {},
+                            "opcode": "set [PROPERTY] color to (COLOR)",
+                            "inputs": {
+                                "COLOR": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "#c097e9"
+                                }
+                            },
                             "options": {
-                                "STYLE": "look at"
-                            }
-                        },
-                        {
-                            "opcode": "set rotation style [STYLE]",
-                            "inputs": {},
-                            "options": {
-                                "STYLE": "don't rotate"
-                            }
-                        },
-                        {
-                            "opcode": "set rotation style [STYLE]",
-                            "inputs": {},
-                            "options": {
-                                "STYLE": "all around"
-                            }
-                        },
-                        {
-                            "opcode": "move to stage [ZONE]",
-                            "inputs": {},
-                            "options": {
-                                "ZONE": "bottom-left"
-                            }
-                        },
-                        {
-                            "opcode": "move to stage [ZONE]",
-                            "inputs": {},
-                            "options": {
-                                "ZONE": "bottom"
-                            }
-                        },
-                        {
-                            "opcode": "move to stage [ZONE]",
-                            "inputs": {},
-                            "options": {
-                                "ZONE": "bottom-right"
-                            }
-                        },
-                        {
-                            "opcode": "move to stage [ZONE]",
-                            "inputs": {},
-                            "options": {
-                                "ZONE": "top-left"
-                            }
-                        },
-                        {
-                            "opcode": "move to stage [ZONE]",
-                            "inputs": {},
-                            "options": {
-                                "ZONE": "top"
-                            }
-                        },
-                        {
-                            "opcode": "move to stage [ZONE]",
-                            "inputs": {},
-                            "options": {
-                                "ZONE": "top-right"
-                            }
-                        },
-                        {
-                            "opcode": "move to stage [ZONE]",
-                            "inputs": {},
-                            "options": {
-                                "ZONE": "left"
-                            }
-                        },
-                        {
-                            "opcode": "move to stage [ZONE]",
-                            "inputs": {},
-                            "options": {
-                                "ZONE": "right"
+                                "PROPERTY": "TEXT_FILL"
                             }
                         }
                     ]
                 },
                 {
                     "position": [
-                        298,
-                        2233
+                        241,
+                        718
                     ],
                     "blocks": [
                         {
-                            "opcode": "x position",
+                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "PROPERTY": "MIN_WIDTH"
+                            }
+                        },
+                        {
+                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "PROPERTY": "MAX_LINE_WIDTH"
+                            }
+                        },
+                        {
+                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "PROPERTY": "STROKE_WIDTH"
+                            }
+                        },
+                        {
+                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "PROPERTY": "PADDING"
+                            }
+                        },
+                        {
+                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "PROPERTY": "CORNER_RADIUS"
+                            }
+                        },
+                        {
+                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "PROPERTY": "TAIL_HEIGHT"
+                            }
+                        },
+                        {
+                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "PROPERTY": "FONT_HEIGHT_RATIO"
+                            }
+                        },
+                        {
+                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "PROPERTY": "texlim"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        302,
+                        1121
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "bubble width",
                             "inputs": {},
                             "options": {}
                         }
@@ -477,25 +282,12 @@
                 },
                 {
                     "position": [
-                        275,
-                        2289
+                        295,
+                        1173
                     ],
                     "blocks": [
                         {
-                            "opcode": "y position",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        301,
-                        2395
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "direction",
+                            "opcode": "bubble height",
                             "inputs": {},
                             "options": {}
                         }
@@ -531,41 +323,8 @@
             "layerOrder": 1,
             "visible": true,
             "position": [
-                192.20077514648438,
+                0,
                 0
-            ],
-            "size": 100,
-            "direction": -52.12501634890182,
-            "draggable": false,
-            "rotationStyle": "all around"
-        },
-        {
-            "isStage": false,
-            "name": "Sprite2",
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "costume1",
-                    "dataFormat": "svg",
-                    "fileStem": "3339a2953a3bf62bb80e54ff575dbced",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0,
-                        0
-                    ]
-                }
-            ],
-            "sounds": [],
-            "volume": 100,
-            "localVariables": [],
-            "localLists": [],
-            "layerOrder": 2,
-            "visible": true,
-            "position": [
-                36,
-                28
             ],
             "size": 100,
             "direction": 90,

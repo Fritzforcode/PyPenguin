@@ -43,7 +43,7 @@ def validateBlock(path, data, context):
         context=context,
         inputDatas=data["inputs"],
     )
-    if opcode == "call ...":
+    if opcode == "call custom block":
         validateCallInputs(
             path=path+["inputs"], 
             data=data["inputs"],
@@ -53,7 +53,7 @@ def validateBlock(path, data, context):
 def validateInputs(path, data, opcode, context):
     oldOpcode       = getDeoptimizedOpcode(opcode=opcode)
     allowedInputIDs = list(getInputTypes(opcode=oldOpcode).keys()) # List of inputs which are defined for the specific opcode
-    if opcode != "call ...": # Inputs in the call ... block are custom
+    if opcode != "call custom block": # Inputs in the call custom block block are custom
         for i, inputID, inputValue in ikv(data):
             if inputID not in allowedInputIDs:
                 raise formatError(path, f"Input '{inputID}' is not defined for a block with opcode '{opcode}'.")
@@ -248,6 +248,10 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = ["left-right", "up-down", "don't rotate", "look at", "all around"]
                 case "stage zone":
                     possibleValues = ["bottom-left", "bottom", "bottom-right", "top-left", "top", "top-right", "left", "right"]
+                case "text bubble color property":
+                    possibleValues = ["BUBBLE_STROKE", "BUBBLE_FILL", "TEXT_FILL"]
+                case "text bubble property":
+                    possibleValues = ["MIN_WIDTH", "MAX_LINE_WIDTH", "STROKE_WIDTH", "PADDING", "CORNER_RADIUS", "TAIL_HEIGHT", "FONT_HEIGHT_RATIO", "texlim"]
                 case "blockType":
                     possibleValues = ["instruction", "lastInstruction", "textReporter", "numberReporter", "booleanReporter"]
             if data not in possibleValues:

@@ -48,13 +48,16 @@ def finishBlock(data):
         elif isinstance(inputData.get("option"), str):
             newInputData["option"] = inputData["option"]
         
-        inputMode = getInputMode(
-            opcode=opcode,
-            inputID=inputID,
-        )
-        if inputMode == "block-and-hybrid-option":
-            newInputData["option"] = newInputData["text"]
-            del newInputData["text"]
+        if opcode != "procedures_call":
+            # A procedure call can't have a "block-and-hybrid-option" input
+            # Otherwise rename 'text' to 'option'
+            inputMode = getInputMode(
+                opcode=opcode,
+                inputID=inputID,
+            )
+            if inputMode == "block-and-hybrid-option":
+                newInputData["option"] = newInputData["text"]
+                del newInputData["text"]
 
         newInputDatas[inputID] = newInputData
     newData = data | {"inputs": newInputDatas}
@@ -179,9 +182,10 @@ def prepareProcedureDefinitionBlock(blockDatas, definitionID):
     prototypeID    = definitionData["inputs"]["custom_block"][1]
     prototypeData  = blockDatas[prototypeID]
 
-    mutationData  = prototypeData["mutation"]
-    proccode      = mutationData["proccode"]
-    argumentNames = json.loads(mutationData["argumentnames"])
+    mutationData   = prototypeData["mutation"]
+    proccode       = mutationData["proccode"]
+    argumentNames  = json.loads(mutationData["argumentnames"])
+    argumentTokens = json.loads(mutationData["argumentids"])
     customOpcode  = generateCustomOpcode(
         proccode=proccode, 
         argumentNames=argumentNames
@@ -198,7 +202,7 @@ def prepareProcedureDefinitionBlock(blockDatas, definitionID):
         case "boolean"  : blockType = "booleanReporter"
     
     newBlockData = {
-        "opcode": "define ...",
+        "opcode": "define custom block",
         "inputs": {},
         "options": {
             "customOpcode"   : customOpcode,
@@ -215,13 +219,69 @@ def prepareProcedureDefinitionBlock(blockDatas, definitionID):
 
     # Mark the prototype and the arguments display blocks to be deleted in the future
     prototypeData["doDelete"] = True
-    for i, argumentToken, argumentTemp in ikv(prototypeData["inputs"]):
-        argumentID = argumentTemp[1]
-        blockDatas[argumentID]["doDelete"] = True
+    #for i, argumentToken, argumentTemp in ikv(prototypeData["inputs"]):
+    #    if argumentToken in argumentTokens: # make sure the input is not a phantom(a leftover of a deleted)
+    #        argumentID = argumentTemp[-1]
+    #        blockDatas[argumentID]["doDelete"] = True
+
+    for i, blockID, blockData in ikv(blockDatas):
+        if blockData["parent"] == prototypeID:
+            blockData["doDelete"] = True
 
     return newBlockData
 
-def prepareBlocks(data, commentDatas):
+def prepareProcedureCallBlock(blockDatas, blockID, commentDatas, mutationDatas):
+    data             = blockDatas[blockID]
+    proccode         = data["mutation"]["proccode"]
+    mutationData     = mutationDatas[proccode]
+    argumentNames    = json.loads(mutationData["argumentnames"])
+    argumentTokens   = json.loads(mutationData["argumentids"])
+    argumentDefaults = json.loads(mutationData["argumentdefaults"])
+
+    newInputDatas = {}
+    for i, argumentToken in enumerate(argumentTokens):
+        inputID         = argumentNames[i]
+        argumentDefault = argumentDefaults[i]
+        if argumentDefault == "":
+            inputMode = "block-and-text" # is of text type
+        elif argumentDefault == "false":
+            inputMode = "block-only"     # is of boolean type
+        if argumentToken in data["inputs"]:
+            newInputData = prepareInputValue(
+                data=data["inputs"][argumentToken],
+                inputMode=inputMode,
+                commentDatas=commentDatas,
+            )
+        else:
+            # Only "block-only" inputs can disappear randomly --> None is fine for "text"
+            newInputData = {
+                "mode"      : inputMode,
+                "references": [],
+                "listBlock" : None,
+                "text"      : None,
+            }
+        newInputDatas[inputID] = newInputData
+
+    customOpcode  = generateCustomOpcode(
+        proccode=proccode, 
+        argumentNames=argumentNames
+    )
+
+    newBlockData = {
+        "opcode": getOptimizedOpcode(opcode="procedures_call"),
+        "inputs": newInputDatas,
+        "options": {
+            "customOpcode": customOpcode,
+        },
+        "_info_"      : {
+            "next"    : data["next"],
+            "topLevel": data["topLevel"],
+        },
+    }
+    pp(newBlockData)
+    return newBlockData
+
+def prepareBlocks(data, commentDatas, mutationDatas):
     #print(100*"(")
     #pp(data)
     newBlockDatas = {}
@@ -239,8 +299,15 @@ def prepareBlocks(data, commentDatas):
                 blockDatas=data,
                 definitionID=blockID,
             )
-        elif blockData["opcode"] in ["procedures_prototype"]:
-            newBlockData = None
+        elif blockData["opcode"] == "procedures_prototype":
+            newBlockData = None # The valuable information of the prototype is alredy being transfered into the optimized definition block
+        elif blockData["opcode"] == "procedures_call":
+            newBlockData = prepareProcedureCallBlock(
+                blockDatas=data,
+                blockID=blockID,
+                commentDatas=commentDatas,
+                mutationDatas=mutationDatas,
+            )
         else: # For normal blocks
             newBlockData = {
                 "opcode"      : getOptimizedOpcode(opcode=blockData["opcode"]),
@@ -279,6 +346,57 @@ def prepareBlocks(data, commentDatas):
         newBlockDatas[blockID] = blockData
     return newBlockDatas
 
+def prepareInputValue(data, inputMode, commentDatas):
+    itemOneType = type(data[1])
+    references    = []
+    listBlock     = None
+    text          = None
+    # Account for list blocks; 
+    if   len(data) == 2:
+        if   itemOneType == str: # e.g. "CONDITION": [2, "b"]
+            # one block only, no text
+            references.append(data[1])
+        elif itemOneType == list: # e.g. "MESSAGE": [1, [10, "Bye!"]]
+            # one block(currently empty) and text
+            text = data[1][1]
+    elif len(data) == 3:
+        #print("step 1")
+        itemTwoType = type(data[2])
+        if   itemOneType == str  and itemTwoType == str: # e.g. "TOUCHINGOBJECTMENU": [3, "d", "e"]
+            # two blocks(a menu, and a normal block) and no text
+            references.append(data[1])
+            references.append(data[2])
+        elif itemOneType == str  and itemTwoType == list: # e.g. 'OPERAND1': [3, 'e', [10, '']]
+            # one block and text
+            references.append(data[1])
+            text = data[2][1]
+        elif itemOneType == str  and itemTwoType == type(None): # e.g. 'custom input bool': [3, 'c', None]
+            # one block
+            references.append(data[1])
+        elif itemOneType == list and itemTwoType == list: # e.g. 'VALUE': [3, [12, 'var', '=!vkqJLb6ODy(oqe-|ZN'], [10, '0']]
+            # one list block and text
+            listBlock = prepareListBlock(
+                data=data[1], 
+                blockID=None,
+                commentDatas=commentDatas,
+            ) #translate list blocks into standard blocks
+            text      = data[2][1]
+        elif itemOneType == list and itemTwoType == str: # "TOUCHINGOBJECTMENU": [3, [12, "my variable", "`jEk@4|i[#Fk?(8x)AV.-my variable"], "b"]
+            # two blocks(a menu, and a list block) and no text
+            listBlock = prepareListBlock(
+                data=data[1], 
+                blockID=None,
+                commentDatas=commentDatas,
+            )
+            references.append(data[2])
+    newInputData = {
+        "mode"      : inputMode,
+        "references": references,
+        "listBlock" : listBlock,
+        "text"      : text,
+    }
+    return newInputData
+
 def prepareInputs(data, opcode, commentDatas):
     #print(100*"<")
     #pp(data)
@@ -295,57 +413,15 @@ def prepareInputs(data, opcode, commentDatas):
     # Optimize the input values
     newData = {}
     for i, inputID, inputData in ikv(data):
-        #magicNumber = inputData[0]
-        itemOneType = type(inputData[1])
-        references    = []
-        listBlock     = None
-        text          = None
-        # Account for list blocks; 
-        if   len(inputData) == 2:
-            if   itemOneType == str: # e.g. "CONDITION": [2, "b"]
-                # one block only, no text
-                references.append(inputData[1])
-            elif itemOneType == list: # e.g. "MESSAGE": [1, [10, "Bye!"]]
-                # one block(currently empty) and text
-                text = inputData[1][1]
-        elif len(inputData) == 3:
-            #print("step 1")
-            itemTwoType = type(inputData[2])
-            if   itemOneType == str and itemTwoType == str: # e.g. "TOUCHINGOBJECTMENU": [3, "d", "e"]
-                # two blocks(a menu, and a normal block) and no text
-                references.append(inputData[1])
-                references.append(inputData[2])
-            elif itemOneType == str and itemTwoType == list: # e.g. 'OPERAND1': [3, 'e', [10, '']]
-                # one block and text
-                references.append(inputData[1])
-                text = inputData[2][1]
-            elif itemOneType == list and itemTwoType == list: # e.g. 'VALUE': [3, [12, 'var', '=!vkqJLb6ODy(oqe-|ZN'], [10, '0']]
-                # one list block and text
-                listBlock = prepareListBlock(
-                    data=inputData[1], 
-                    blockID=None,
-                    commentDatas=commentDatas,
-                ) #translate list blocks into standard blocks
-                text      = inputData[2][1]
-            elif itemOneType == list and itemTwoType == str: # "TOUCHINGOBJECTMENU": [3, [12, "my variable", "`jEk@4|i[#Fk?(8x)AV.-my variable"], "b"]
-                # two blocks(a menu, and a list block) and no text
-                listBlock = prepareListBlock(
-                    data=inputData[1], 
-                    blockID=None,
-                    commentDatas=commentDatas,
-                )
-                references.append(inputData[2])
-        mode = getInputMode(
+        inputMode = getInputMode(
             opcode=opcode,
             inputID=inputID,
         )
-        newInputData = {
-            "mode"      : mode,
-            "references": references,
-            "listBlock" : listBlock,
-            "text"      : text,
-        }
-        newData[inputID] = newInputData
+        newData[inputID] = prepareInputValue(
+            data=inputData,
+            inputMode=inputMode,
+            commentDatas=commentDatas,
+        )
     
     for i, inputID, inputMode in ikv(getInputModes(opcode)):
         oldInputID = getDeoptimizedInputID(

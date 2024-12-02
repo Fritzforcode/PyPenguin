@@ -1,7 +1,7 @@
 from pypenguin.helper_functions import generateRandomToken,  newTempSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
-from pypenguin.deoptimize.blocks_scripts import unfinishScripts, flattenScripts, restoreBlocks, finishBlocks
+from pypenguin.deoptimize.blocks_scripts import restoreScripts, flattenScripts, restoreBlocks, finishBlocks
 from pypenguin.deoptimize.broadcasts import generateBroadcasts
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
@@ -26,7 +26,7 @@ def deoptimizeProject(projectData):
     
     newSpriteDatas = []
     for spriteData in projectData["sprites"]:
-        unfinishedScriptDatas = unfinishScripts(spriteData["scripts"])
+        unfinishedScriptDatas = restoreScripts(spriteData["scripts"])
         flattendScriptDatas   = flattenScripts(unfinishedScriptDatas)
         newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,

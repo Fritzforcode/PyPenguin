@@ -120,14 +120,14 @@ opcodes = {
     "special_define": {
         "type": "hat",
         "category": "My Blocks",
-        "newOpcode": "define ...",
+        "newOpcode": "define custom block",
         "inputTypes": {},
         "optionTypes": {"noScreenRefresh": "boolean", "blockType": "blockType", "customOpcode": "opcode"},
     },
     "procedures_call": {
         "type": "dynamic",
         "category": "My Blocks",
-        "newOpcode": "call ...",
+        "newOpcode": "call custom block",
         "inputTypes": {},
         "optionTypes": {"customOpcode": "opcode"},
     },

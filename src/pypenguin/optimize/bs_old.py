@@ -240,7 +240,7 @@ def translateScript(data, ancestorP, blockChildrenIDs, commentDatas, mutationDat
             case _: raise Exception(mutationData["optype"], mutationData["returns"])
         oldData = newData
         newData = {
-            "opcode": "define ...",
+            "opcode": "define custom block",
             "inputs": {},
             "options": {
                 "customOpcode"   : customOpcode,
@@ -263,7 +263,7 @@ def translateScript(data, ancestorP, blockChildrenIDs, commentDatas, mutationDat
             inputDatas[newInputID] = inputData
         oldData = newData
         newData = {
-            "opcode" : "call ...",
+            "opcode" : "call custom block",
             "inputs" : inputDatas,
             "options": {
                 "customOpcode": customOpcode,

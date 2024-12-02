@@ -6,12 +6,12 @@ from pypenguin.deoptimize.comments import translateComment
 from pypenguin.database import *
 
 
-def unfinishScripts(data):
+def restoreScripts(data):
     newScriptDatas = []
     for scriptData in data:
         newBlockDatas = []
         for i, blockData in enumerate(scriptData["blocks"]):
-            newBlockDatas.append(unfinishBlock(
+            newBlockDatas.append(restoreBlock(
                 data=blockData,
                 parentOpcode=None,
                 position=scriptData["position"] if i == 0 else None
@@ -45,7 +45,7 @@ def generateMenu(data, parentOpcode, inputID):
         "_info_": ...,
     }"""
 
-def unfinishBlock(data, parentOpcode, position=None, isOption=False, inputID=None):
+def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None):
     #print("start ufblock", 100*"{")
     #pp(data)
     if isinstance(data, str):
@@ -57,13 +57,22 @@ def unfinishBlock(data, parentOpcode, position=None, isOption=False, inputID=Non
             inputID=inputID,
         )
     opcode = getDeoptimizedOpcode(opcode=data["opcode"])
+    if opcode == "procedures_call":
+        proccode, arguments = parseCustomOpcode(customOpcode=data["options"]["customOpcode"])
     newInputDatas = {}
     commentData = None
     for i, inputID, inputData in ikv(data["inputs"]):
-        inputMode = getInputMode(
-            opcode=opcode, 
-            inputID=inputID
-        )
+        if opcode == "procedures_call":
+            argument  = arguments[inputID]
+            if   argument == str:
+                inputMode = "block-and-text"
+            elif argument == bool:
+                inputMode = "block-only"
+        else:
+            inputMode = getInputMode(
+                opcode=opcode, 
+                inputID=inputID
+            )
         inputData["mode"] = inputMode
     
         if   inputMode == "block-and-text":
@@ -96,17 +105,17 @@ def unfinishBlock(data, parentOpcode, position=None, isOption=False, inputID=Non
             del inputData["option"]
         newInputData = copy.deepcopy(inputData)
         if inputData.get("block") != None:
-            newInputData["block"]  = unfinishBlock(
+            newInputData["block"]  = restoreBlock(
                 data=inputData["block"],
                 parentOpcode=data["opcode"],
             )
         if inputData.get("blocks") != None:
-            newInputData["blocks"] = [unfinishBlock(
+            newInputData["blocks"] = [restoreBlock(
                 data=subBlockData,
                 parentOpcode=data["opcode"],
             ) for subBlockData in inputData["blocks"]]
         if inputData.get("option") != None:
-            newInputData["option"] = unfinishBlock(
+            newInputData["option"] = restoreBlock(
                 data=inputData["option"],
                 parentOpcode=data["opcode"],
                 isOption=True,
@@ -341,6 +350,7 @@ def restoreBlocks(data, spriteName):
                     data=blockData["inputs"],
                     opcode=opcode,
                     spriteName=spriteName,
+                    blockData=blockData,
                 ),
                 "fields"  : translateOptions(
                     data=blockData["options"],
@@ -366,17 +376,28 @@ def restoreBlocks(data, spriteName):
             newBlockDatas[blockID] = newBlockData
     return newBlockDatas, newCommentDatas
 
-def restoreInputs(data, opcode, spriteName):
+def restoreInputs(data, opcode, spriteName, blockData):
     newInputDatas = {}
+    if opcode == "procedures_call":
+        proccode, arguments = parseCustomOpcode(customOpcode=blockData["options"]["customOpcode"])
     for i, inputID, inputData in ikv(data):
-        inputType = getInputType(
-            opcode=opcode,
-            inputID=inputID
-        )
-        inputMode = getInputMode(
-            opcode=opcode,
-            inputID=inputID
-        )
+        if opcode == "procedures_call":
+            argument = arguments[inputID]
+            if   argument == str:
+                inputType = "text"
+                inputMode = "block-and-text"
+            elif argument == bool:
+                inputType = "boolean"
+                inputMode = "block-only"
+        else:
+            inputType = getInputType(
+                opcode=opcode,
+                inputID=inputID
+            )
+            inputMode = getInputMode(
+                opcode=opcode,
+                inputID=inputID
+            )
         #print(inputID, inputType, inputMode, inputData)
         
         subBlocks     = inputData["references"]
@@ -457,8 +478,8 @@ def finishBlocks(data, spriteName, commentDatas):
                     argumentIDs[argumentNames.index(inputID)]: 
                     inputValue for j,inputID,inputValue in ikv(blockData["inputs"]) 
                 }
-            
-            if blockData["opcode"] == "control_stop":
+
+            elif blockData["opcode"] == "control_stop":
                 #pp(blockData)
                 match blockData["fields"]["STOP_OPTION"][0]:
                     case "all" | "this script"    : hasNext = False

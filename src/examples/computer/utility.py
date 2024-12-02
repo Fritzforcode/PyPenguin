@@ -2,7 +2,7 @@ readRegisterDef = {
     "position": [1000,0],
     "blocks": [
         {
-            "opcode": "define ...",
+            "opcode": "define custom block",
             "options": {
                 "noScreenRefresh": True,
                 "blockType": "numberReporter",
@@ -56,7 +56,7 @@ setRegisterDef = {
     "position": [1500,0],
     "blocks": [
         {
-            "opcode": "define ...",
+            "opcode": "define custom block",
             "options": {
                 "noScreenRefresh": True,
                 "blockType": "instruction",
