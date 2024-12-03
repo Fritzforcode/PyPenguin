@@ -1,5 +1,7 @@
 # TODO
 
+combine "other sprite or stage" and "touchable sprite"
+
 validate input "option"
 
 insure procedures working

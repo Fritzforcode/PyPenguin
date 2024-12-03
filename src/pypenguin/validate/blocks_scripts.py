@@ -10,7 +10,12 @@ def validateScript(path, data, context):
 
     # Check block formats
     for i, block in enumerate(data["blocks"]):
-        validateBlock(path=path+["blocks"]+[i], data=block, context=context)
+        validateBlock(
+            path=path+["blocks"]+[i], 
+            data=block, 
+            context=context,
+        )
+        
         oldOpcode = getDeoptimizedOpcode(opcode=block["opcode"])
         blockType = getBlockType(opcode=oldOpcode)
         if (blockType in ["textReporter", "numberReporter", "booleanReporter"]) and (len(data["blocks"]) > 1):
@@ -252,6 +257,24 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = ["BUBBLE_STROKE", "BUBBLE_FILL", "TEXT_FILL"]
                 case "text bubble property":
                     possibleValues = ["MIN_WIDTH", "MAX_LINE_WIDTH", "STROKE_WIDTH", "PADDING", "CORNER_RADIUS", "TAIL_HEIGHT", "FONT_HEIGHT_RATIO", "texlim"]
+                case "sprite effect":
+                    possibleValues = ["COLOR", "FISHEYE", "WHIRL", "PIXELATE", "MOSAIC", "BRIGHTNESS", "GHOST", "SATURATION", "RED", "GREEN", "BLUE", "OPAQUE"]
+                case "costume":
+                    possibleValues = context["costumes"]
+                case "backdrop":
+                    possibleValues = context["backdrops"]
+                case "costume property":
+                    possibleValues = ["width", "height", "rotation center x", "rotation center y", "drawing mode"]
+                case "this or other sprite":
+                    possibleValues = ["_myself_"] + context["otherSprites"]
+                case "front or back":
+                    possibleValues = ["front", "back"]
+                case "forward or backward":
+                    possibleValues = ["forward", "backward"]
+                case "infront or behind":
+                    possibleValues = ["infront", "behind"]
+                case "number or name":
+                    possibleValues = ["number", "name"]
                 case "blockType":
                     possibleValues = ["instruction", "lastInstruction", "textReporter", "numberReporter", "booleanReporter"]
             if data not in possibleValues:

@@ -20,14 +20,6 @@ def validateSprite(path, data, context):
         if data["layerOrder"] < 1:
             raise formatError(path+["layerOrder"], "'layerOrder' of a sprite must be at least 1.")
         
-    # Check script formats
-    for j, script in enumerate(data["scripts"]):
-        validateScript(path=path+["scripts"]+[j], data=script, context=context)
-    
-    # Check comment formats
-    for j, comment in enumerate(data["comments"]):
-        validateComment(path=path+["comments"]+[j], data=comment)
-
     # Check costume formats
     if len(data["costumes"]) < 1:
         #raise formatError(path=path+["costumes"], message="Each sprite must have at least one costume.")
@@ -51,3 +43,24 @@ def validateSprite(path, data, context):
     # Make sure that currentCostume refers to an existing costume
     if data["currentCostume"] >= len(data["costumes"]):
         raise formatError(path=path+["currentCostume"], message=f"Is out of range. There are only {len(data['costumes'])} costumes in this sprite, so 'currentCostume' could be at most {len(data['costumes']) - 1}.")
+    
+    # Check script formats
+    spriteContext = context | {
+        "costumes" : costumeNames,
+    }
+    
+    for j, script in enumerate(data["scripts"]):
+        validateScript(
+            path=path+["scripts"]+[j], 
+            data=script, 
+            context=spriteContext, 
+        )
+    
+    # Check comment formats
+    for j, comment in enumerate(data["comments"]):
+        validateComment(
+            path=path+["comments"]+[j], 
+            data=comment,
+        )
+
+    

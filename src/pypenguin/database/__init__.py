@@ -176,6 +176,11 @@ inputModes = {
     "up or down"                     : "block-and-option",
     "finger index"                   : "block-and-option",
     "reachable target"               : "block-and-option",
+    "costume"                        : "block-and-option",
+    "costume property"               : "block-and-option",
+    "backdrop"                       : "block-and-option",
+    "backdrop property"              : "block-and-option",
+    "this or other sprite"           : "block-and-option",
 }
 
 

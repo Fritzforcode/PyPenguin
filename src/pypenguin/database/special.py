@@ -22,6 +22,42 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    # Looks
+    "looks_costume": {
+        "type": "menu",
+        "category": "Motion",
+        "newOpcode": "#COSTUME MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "looks_backdrops": {
+        "type": "menu",
+        "category": "Motion",
+        "newOpcode": "#BACKDROP MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "looks_getinput_menu": {
+        "type": "menu",
+        "category": "Motion",
+        "newOpcode": "#COSTUME PROPERTY MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "looks_changeVisibilityOfSprite_menu": {
+        "type": "menu",
+        "category": "Motion",
+        "newOpcode": "#SHOW/HIDE SPRITE MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "looks_getOtherSpriteVisible_menu": {
+        "type": "menu",
+        "category": "Motion",
+        "newOpcode": "#IS SPRITE VISIBLE MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
     # Control
     "control_stop_sprite_menu": {
         "type": "menu",
