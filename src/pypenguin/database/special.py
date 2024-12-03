@@ -58,6 +58,14 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    # Sounds
+    "sound_sounds_menu": {
+        "type": "menu",
+        "category": "Sounds",
+        "newOpcode": "#SOUND MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
     # Control
     "control_stop_sprite_menu": {
         "type": "menu",

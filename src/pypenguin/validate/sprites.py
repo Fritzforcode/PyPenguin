@@ -46,7 +46,8 @@ def validateSprite(path, data, context):
     
     # Check script formats
     spriteContext = context | {
-        "costumes" : costumeNames,
+        "costumes": costumeNames,
+        "sounds"  : soundNames,
     }
     
     for j, script in enumerate(data["scripts"]):

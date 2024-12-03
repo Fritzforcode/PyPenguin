@@ -161,6 +161,23 @@
     "videoTransparency": 0,
     "videoState": "off",
     "textToSpeechLanguage": null,
+    "monitors": [
+        {
+            "opcode": "",
+            "options": {},
+            "spriteName": "",
+            "value": 43,
+            "size": [
+                5,
+                5
+            ],
+            "position": [
+                15,
+                15
+            ],
+            "visible": true
+        }
+    ],
     "extensionData": {},
     "extensions": [
         "jgJSON"

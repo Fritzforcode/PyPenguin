@@ -63,18 +63,20 @@ opcodes = {
         "optionTranslation": {"prop": "PROPERTY"},
     },
     "looks_sayWidth": {
-        "type": "instruction",
+        "type": "stringReporter",
         "category": "Looks",
         "newOpcode": "bubble width",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "looks_sayHeight": {
-        "type": "instruction",
+        "type": "stringReporter",
         "category": "Looks",
         "newOpcode": "bubble height",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "looks_switchcostumeto": {
         "type": "instruction",
@@ -108,7 +110,7 @@ opcodes = {
         "newOpcode": "switch backdrop to ([BACKDROP])",
         "inputTypes": {"BACKDROP": "backdrop"},
         "optionTypes": {},
-        "menus": [{"new": "BACKDROP", "outer": "BACKDROP", "inner": "BACKDROP", "menuOpcode": "looks_backdrop"}],
+        "menus": [{"new": "BACKDROP", "outer": "BACKDROP", "inner": "BACKDROP", "menuOpcode": "looks_backdrops"}],
     },
     "looks_nextbackdrop": {
         "type": "instruction",
@@ -145,6 +147,7 @@ opcodes = {
         "newOpcode": "x stretch",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "looks_stretchGetY": {
         "type": "stringReporter",
@@ -152,11 +155,12 @@ opcodes = {
         "newOpcode": "y stretch",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "looks_changeeffectby": {
         "type": "instruction",
         "category": "Looks",
-        "newOpcode": "change [EFFECT] effect by (AMOUNT)",
+        "newOpcode": "change [EFFECT] sprite effect by (AMOUNT)",
         "inputTypes": {"AMOUNT": "number"},
         "inputTranslation": {"CHANGE": "AMOUNT"},
         "optionTypes": {"EFFECT": "sprite effect"},
@@ -164,7 +168,7 @@ opcodes = {
     "looks_seteffectto": {
         "type": "instruction",
         "category": "Looks",
-        "newOpcode": "set [EFFECT] effect to (VALUE)",
+        "newOpcode": "set [EFFECT] sprite effect to (VALUE)",
         "inputTypes": {"VALUE": "number"},
         "optionTypes": {"EFFECT": "sprite effect"},
     },
@@ -187,9 +191,10 @@ opcodes = {
     "looks_getEffectValue": {
         "type": "stringReporter",
         "catgeory": "Looks",
-        "newOpcode": "[EFFECT] effect",
+        "newOpcode": "[EFFECT] sprite effect",
         "inputTypes": {},
         "optionTypes": {"EFFECT": "sprite effect"},
+        "canHaveMonitor": True,
     },
     "looks_tintColor": {
         "type": "stringReporter",
@@ -197,6 +202,7 @@ opcodes = {
         "newOpcode": "tint color",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "looks_show": {
         "type": "instruction",
@@ -218,12 +224,13 @@ opcodes = {
         "newOpcode": "visible?",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "looks_changeVisibilityOfSpriteShow": {
         "type": "instruction",
         "category": "Looks",
         "newOpcode": "show ([TARGET])",
-        "inputTypes": {"TARGET": "this or other sprite"},
+        "inputTypes": {"TARGET": "own or other sprite"},
         "optionTypes": {},
         "menus": [{"new": "TARGET", "outer": "VISIBLE_OPTION", "inner": "VISIBLE_OPTION", "menuOpcode": "looks_changeVisibilityOfSprite_menu"}],
     },
@@ -231,7 +238,7 @@ opcodes = {
         "type": "instruction",
         "category": "Looks",
         "newOpcode": "hide ([TARGET])",
-        "inputTypes": {"TARGET": "this or other sprite"},
+        "inputTypes": {"TARGET": "own or other sprite"},
         "optionTypes": {},
         "menus": [{"new": "TARGET", "outer": "VISIBLE_OPTION", "inner": "VISIBLE_OPTION", "menuOpcode": "looks_changeVisibilityOfSprite_menu"}],
     },    
@@ -239,7 +246,7 @@ opcodes = {
         "type": "booleanReporter", 
         "category": "Looks",
         "newOpcode": "is ([TARGET]) visible?",
-        "inputTypes": {"TARGET": "this or other sprite"},
+        "inputTypes": {"TARGET": "own or other sprite"},
         "optionTypes": {},
         "menus": [{"new": "TARGET", "outer": "VISIBLE_OPTION", "inner": "VISIBLE_OPTION", "menuOpcode": "looks_getOtherSpriteVisible_menu"}],
     },
@@ -272,7 +279,7 @@ opcodes = {
         "type": "instruction",
         "category": "Looks",
         "newOpcode": "go [DIRECTION] ([TARGET])",
-        "inputTypes": {"TARGET": "this or other sprite"},
+        "inputTypes": {"TARGET": "own or other sprite"},
         "optionTypes": {"DIRECTION": "infront or behind"},
         "optionTranslation": {"FORWARD_BACKWARD": "DIRECTION"},
         "menus": [{"new": "TARGET", "outer": "VISIBLE_OPTION", "inner": "VISIBLE_OPTION", "menuOpcode": "looks_getOtherSpriteVisible_menu"}],
@@ -291,6 +298,7 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {"PROPERTY": "number or name"},
         "optionTranslation": {"NUMBER_NAME": "PROPERTY"},
+        "canHaveMonitor": True,
     },
     "looks_backdropnumbername": {
         "type": "stringReporter",
@@ -299,6 +307,7 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {"PROPERTY": "number or name"},
         "optionTranslation": {"NUMBER_NAME": "PROPERTY"},
+        "canHaveMonitor": True,
     },
     "looks_size": {
         "type": "stringReporter",
@@ -306,6 +315,7 @@ opcodes = {
         "newOpcode": "size",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     
 

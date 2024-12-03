@@ -1,6 +1,6 @@
 from pypenguin.database.motion    import opcodes as motion
 from pypenguin.database.looks     import opcodes as looks
-# Sound (soon)
+from pypenguin.database.sounds    import opcodes as sounds
 from pypenguin.database.events    import opcodes as events
 from pypenguin.database.control   import opcodes as control
 from pypenguin.database.sensing   import opcodes as sensing
@@ -33,8 +33,7 @@ Extension     Status ('.'=some 'x'=all)
 
 opcodeDatabase = (
 # CATEGORIES
-    motion | looks |
-    # missing: Sound
+    motion    | looks     | sounds  |
     events    | control   | sensing |
     operators | variables | lists   |
     special   |
@@ -79,7 +78,10 @@ def getDeoptimizedInputID(opcode, inputID):
     return inputID
 
 def getInputType(opcode, inputID):
-    return opcodeDatabase[opcode]["inputTypes"][inputID]
+    try:
+        return opcodeDatabase[opcode]["inputTypes"][inputID]
+    except KeyError:
+        raise Exception(f"Could not find input '{inputID}' for a block with opcode '{opcode}'")
 
 def getInputTypes(opcode):
     return opcodeDatabase[opcode]["inputTypes"]
@@ -171,7 +173,6 @@ inputModes = {
     "exclusive touchable object"     : "block-and-option",
     "half-inclusive touchable object": "block-and-option",
     "inclusive touchable object"     : "block-and-option",
-    "touchable sprite"               : "block-and-option",
     "key"                            : "block-and-option",
     "up or down"                     : "block-and-option",
     "finger index"                   : "block-and-option",
@@ -180,7 +181,8 @@ inputModes = {
     "costume property"               : "block-and-option",
     "backdrop"                       : "block-and-option",
     "backdrop property"              : "block-and-option",
-    "this or other sprite"           : "block-and-option",
+    "own or other sprite"            : "block-and-option",
+    "sound"                          : "block-and-option",
 }
 
 

@@ -5,6 +5,7 @@ opcodes = {
         "category": "Control",
         "newOpcode": "wait (SECONDS) seconds",
         "inputTypes": {"SECONDS": "positive number"},
+        "inputTranslation": {"DURATION": "SECONDS"},
         "optionTypes": {},
     },
     "control_waitsecondsoruntil": {
@@ -12,6 +13,7 @@ opcodes = {
         "category": "Control",
         "newOpcode": "wait (SECONDS) seconds or until <CONDITION>",
         "inputTypes": {"SECONDS": "positive number", "CONDITION": "boolean"},
+        "inputTranslation": {"DURATION": "SECONDS"},
         "optionTypes": {},
     },
     # Control: Loops
@@ -167,7 +169,7 @@ opcodes = {
         "optionTypes": {},
     },
     "control_throw_error": {
-        "type": "instruction",
+        "type": "lastInstruction",
         "category": "Control",
         "newOpcode": "throw error (ERROR)",
         "inputTypes": {"ERROR": "text"},

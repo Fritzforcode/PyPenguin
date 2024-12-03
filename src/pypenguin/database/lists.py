@@ -121,7 +121,7 @@ opcodes = {
         "optionTypes": {"LIST": "list"},
     },
     "data_listarray": {
-        "type": "instruction",
+        "type": "stringReporter",
         "category": "Lists",
         "newOpcode": "get list [LIST] as an array",
         "inputTypes": {},

@@ -12,7 +12,7 @@ opcodes = {
         "type": "booleanReporter",
         "category": "Sensing",
         "newOpcode": "([OBJECT]) touching ([SPRITE]) ?",
-        "inputTypes": {"OBJECT": "inclusive touchable object", "SPRITE": "touchable sprite"},
+        "inputTypes": {"OBJECT": "inclusive touchable object", "SPRITE": "own or other sprite"},
         "optionTypes": {},
         "menus": [
             {"new": "OBJECT", "outer": "FULLTOUCHINGOBJECTMENU",   "inner": "FULLTOUCHINGOBJECTMENU",   "menuOpcode": "sensing_fulltouchingobjectmenu"   },
@@ -23,7 +23,7 @@ opcodes = {
         "type": "booleanReporter",
         "category": "Sensing",
         "newOpcode": "([OBJECT]) touching clone of ([SPRITE]) ?",
-        "inputTypes": {"OBJECT": "inclusive touchable object", "SPRITE": "touchable sprite"},
+        "inputTypes": {"OBJECT": "inclusive touchable object", "SPRITE": "own or other sprite"},
         "optionTypes": {},
         "menus": [
             {"new": "OBJECT", "outer": "FULLTOUCHINGOBJECTMENU",   "inner": "FULLTOUCHINGOBJECTMENU",   "menuOpcode": "sensing_fulltouchingobjectmenu"   },
@@ -97,6 +97,7 @@ opcodes = {
         "newOpcode": "answer",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "sensing_thing_is_text": {
         "type": "booleanReporter",
@@ -144,6 +145,7 @@ opcodes = {
         "newOpcode": "mouse down?",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "sensing_mouseclicked": {
         "type": "booleanReporter",
@@ -151,6 +153,7 @@ opcodes = {
         "newOpcode": "mouse clicked?",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "sensing_mousex": {
         "type": "stringReporter",
@@ -158,6 +161,7 @@ opcodes = {
         "newOpcode": "mouse x",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "sensing_mousey": {
         "type": "stringReporter",
@@ -165,6 +169,7 @@ opcodes = {
         "newOpcode": "mouse y",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "sensing_setclipboard": {
         "type": "instruction",
@@ -180,6 +185,7 @@ opcodes = {
         "newOpcode": "clipboard item",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "sensing_setdragmode": {
         "type": "instruction",
@@ -195,6 +201,7 @@ opcodes = {
         "newOpcode": "draggable?",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "sensing_loudness": {
         "type": "stringReporter",
@@ -202,13 +209,15 @@ opcodes = {
         "newOpcode": "loudness",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "sensing_loud": {
-        "type": "stringReporter",
+        "type": "booleanReporter",
         "category": "Sensing",
         "newOpcode": "loud?",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "sensing_resettimer": {
         "type": "instruction",
@@ -223,6 +232,7 @@ opcodes = {
         "newOpcode": "timer",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "sensing_set_of": {
         "type": "instruction",
@@ -247,6 +257,7 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {"PROPERTY": "time property"},
         "optionTranslation": {"CURRENTMENU": "PROPERTY"},
+        "canHaveMonitor": True,
     },
     "sensing_dayssince2000": {
         "type": "stringReporter",
@@ -254,6 +265,7 @@ opcodes = {
         "newOpcode": "days since 2000",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "sensing_mobile": {
         "type": "booleanReporter",
@@ -300,6 +312,7 @@ opcodes = {
         "newOpcode": "username",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "sensing_loggedin": {
         "type": "booleanReporter",
@@ -307,5 +320,6 @@ opcodes = {
         "newOpcode": "logged in?",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
 }

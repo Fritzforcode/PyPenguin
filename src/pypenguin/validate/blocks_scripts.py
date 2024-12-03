@@ -1,5 +1,5 @@
 from pypenguin.helper_functions import ikv, parseCustomOpcode, pp
-from pypenguin.validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema, opcodeDatabase, allowedOpcodes
+from pypenguin.validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema
 from pypenguin.validate.comments import validateComment
 from pypenguin.database import *#inputDefault, optionDefault, commentDefault, inputModes, inputBlockDefault, inputTextDefault, inputBlocksDefault
 
@@ -166,10 +166,10 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
             if not isinstance(data, str):
                 raise formatError(path, f"Must be a string.")
         case "variable":
-            if data not in [var["name"] for var in context["scopeVariables"]]:
+            if data not in context["scopeVariables"]:
                 raise formatError(path, f"Must be a defined variable.")
         case "list":
-            if data not in [list_["name"] for list_ in context["scopeLists"]]:
+            if data not in context["scopeLists"]:
                 raise formatError(path, f"Must be a defined list.")
         case "boolean":
             if not isinstance(data, bool):
@@ -205,18 +205,16 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = context["cloningTargets"]
                 case "up or down":
                     possibleValues = ["up", "down"]
+                case "loudness or timer":
+                    possibleValues = ["LOUDNESS", "TIMER"]
                 case "backdrop":
                     possibleValues = context["backdrops"]
-                case "LOUDNESS | TIMER":
-                    possibleValues = ["LOUDNESS", "TIMER"]
                 case "exclusive touchable object":
                     possibleValues = ["_mouse_"] + context["otherSprites"]
                 case "half-inclusive touchable object":
                     possibleValues = ["_mouse_", "_edge_"] + context["otherSprites"]
                 case "inclusive touchable object":
                     possibleValues = ["_mouse_", "_edge_", "_myself_"] + context["otherSprites"]
-                case "touchable sprite":
-                    possibleValues = ["_myself_"] + context["otherSprites"]
                 case "coordinate":
                     possibleValues = ["x", "y"]
                 case "drag mode":
@@ -265,7 +263,7 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = context["backdrops"]
                 case "costume property":
                     possibleValues = ["width", "height", "rotation center x", "rotation center y", "drawing mode"]
-                case "this or other sprite":
+                case "own or other sprite":
                     possibleValues = ["_myself_"] + context["otherSprites"]
                 case "front or back":
                     possibleValues = ["front", "back"]
@@ -275,6 +273,10 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = ["infront", "behind"]
                 case "number or name":
                     possibleValues = ["number", "name"]
+                case "sound":
+                    possibleValues = context["sounds"]
+                case "sound effect":
+                    possibleValues = ["PITCH", "PAN"]
                 case "blockType":
                     possibleValues = ["instruction", "lastInstruction", "textReporter", "numberReporter", "booleanReporter"]
             if data not in possibleValues:

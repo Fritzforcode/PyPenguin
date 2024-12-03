@@ -50,7 +50,7 @@ opcodes = {
         "category": "Events",
         "newOpcode": "when mouse is scrolled [DIRECTION]",
         "inputTypes": {},
-        "optionTypes": {"DIRECTION": "up | down"},
+        "optionTypes": {"DIRECTION": "up or down"},
         "optionTranslation": {"KEY_OPTION": "DIRECTION"},
     },
     "event_whenthisspriteclicked": { # for sprites
@@ -79,7 +79,7 @@ opcodes = {
         "category": "Events",
         "newOpcode": "when [OPTION] > (VALUE)",
         "inputTypes": {"VALUE": "number"},
-        "optionTypes": {"OPTION": "LOUDNESS | TIMER"},
+        "optionTypes": {"OPTION": "loudness or timer"},
         "optionTranslation": {"WHENGREATERTHANMENU": "OPTION"},
     },
     "event_whenbroadcastreceived": {

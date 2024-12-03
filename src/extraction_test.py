@@ -2,9 +2,9 @@ from pypenguin import extractAndOptimizeProject, deoptimizeAndCompressProject, v
 from pypenguin.helper_functions import readJSONFile, pp
 
 optimizedData = extractAndOptimizeProject(
-    projectFilePath     = "assets/categories/looks.pmp",
-#    projectFilePath     = "assets/studies/proceduresCall.pmp",
-#    projectFilePath     = "assets/from_online/Cardboard Minecraft v1.1.pmp",
+#    projectFilePath     = "assets/categories/custom_blocks.pmp",
+    projectFilePath     = "assets/studies/allMonitors.pmp",
+#    projectFilePath     = "assets/from_online/my 1st platformer .pmp",
     optimizedProjectDir = "extractedProject",
     temporaryDir        = "temporary",
     writeDebugFiles     = True,
@@ -12,9 +12,9 @@ optimizedData = extractAndOptimizeProject(
 
 validateProject(projectData=optimizedData)
 
-deoptimizeAndCompressProject(
-    projectFilePath     = "export.pmp",
-    optimizedProjectDir = "extractedProject",
-    temporaryDir        = "temporary",
-    writeDebugFiles     = True,
-)
+#deoptimizeAndCompressProject(
+#    projectFilePath     = "export.pmp",
+#    optimizedProjectDir = "extractedProject",
+#    temporaryDir        = "temporary",
+#    writeDebugFiles     = True,
+#)

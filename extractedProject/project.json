@@ -3,57 +3,7 @@
         {
             "isStage": true,
             "name": "Stage",
-            "scripts": [
-                {
-                    "position": [
-                        44,
-                        44
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "show ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_myself_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "show ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "Sprite2"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        74,
-                        247
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "is ([TARGET]) visible?",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_myself_"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                }
-            ],
+            "scripts": [],
             "comments": [],
             "currentCostume": 0,
             "costumes": [
@@ -74,1029 +24,7 @@
         {
             "isStage": false,
             "name": "Sprite1",
-            "scripts": [
-                {
-                    "position": [
-                        296,
-                        99
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "say (MESSAGE) for (SECONDS) seconds",
-                            "inputs": {
-                                "MESSAGE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "Hello!"
-                                },
-                                "SECONDS": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "2"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "say (MESSAGE)",
-                            "inputs": {
-                                "MESSAGE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "Hello!"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "think (MESSAGE) for (SECONDS) seconds",
-                            "inputs": {
-                                "MESSAGE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "Hmm..."
-                                },
-                                "SECONDS": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "2"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "think (MESSAGE)",
-                            "inputs": {
-                                "MESSAGE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "Hmm..."
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "stop speaking",
-                            "inputs": {},
-                            "options": {}
-                        },
-                        {
-                            "opcode": "set font to (FONT) with font size (FONT-SIZE)",
-                            "inputs": {
-                                "FONT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "Helvetica"
-                                },
-                                "FONT-SIZE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "14"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        256,
-                        488
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "set [PROPERTY] color to (COLOR)",
-                            "inputs": {
-                                "COLOR": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "#c097e9"
-                                }
-                            },
-                            "options": {
-                                "PROPERTY": "BUBBLE_STROKE"
-                            }
-                        },
-                        {
-                            "opcode": "set [PROPERTY] color to (COLOR)",
-                            "inputs": {
-                                "COLOR": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "#c097e9"
-                                }
-                            },
-                            "options": {
-                                "PROPERTY": "BUBBLE_FILL"
-                            }
-                        },
-                        {
-                            "opcode": "set [PROPERTY] color to (COLOR)",
-                            "inputs": {
-                                "COLOR": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "#c097e9"
-                                }
-                            },
-                            "options": {
-                                "PROPERTY": "TEXT_FILL"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        241,
-                        718
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {
-                                "PROPERTY": "MIN_WIDTH"
-                            }
-                        },
-                        {
-                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {
-                                "PROPERTY": "MAX_LINE_WIDTH"
-                            }
-                        },
-                        {
-                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {
-                                "PROPERTY": "STROKE_WIDTH"
-                            }
-                        },
-                        {
-                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {
-                                "PROPERTY": "PADDING"
-                            }
-                        },
-                        {
-                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {
-                                "PROPERTY": "CORNER_RADIUS"
-                            }
-                        },
-                        {
-                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {
-                                "PROPERTY": "TAIL_HEIGHT"
-                            }
-                        },
-                        {
-                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {
-                                "PROPERTY": "FONT_HEIGHT_RATIO"
-                            }
-                        },
-                        {
-                            "opcode": "set text bubble [PROPERTY] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {
-                                "PROPERTY": "texlim"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        302,
-                        1121
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "bubble width",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        295,
-                        1173
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "bubble height",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        255,
-                        1251
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "switch costume to ([COSTUME])",
-                            "inputs": {
-                                "COSTUME": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "costume1"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "next costume",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        230,
-                        1378
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "([PROPERTY]) of ([COSTUME])",
-                            "inputs": {
-                                "PROPERTY": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "width"
-                                },
-                                "COSTUME": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "costume1"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        251,
-                        1435
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "([PROPERTY]) of ([COSTUME])",
-                            "inputs": {
-                                "PROPERTY": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "height"
-                                },
-                                "COSTUME": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "costume1"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        235,
-                        1498
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "([PROPERTY]) of ([COSTUME])",
-                            "inputs": {
-                                "PROPERTY": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "rotation center x"
-                                },
-                                "COSTUME": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "costume1"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        235,
-                        1558
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "([PROPERTY]) of ([COSTUME])",
-                            "inputs": {
-                                "PROPERTY": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "rotation center y"
-                                },
-                                "COSTUME": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "costume1"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        238,
-                        1624
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "([PROPERTY]) of ([COSTUME])",
-                            "inputs": {
-                                "PROPERTY": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "drawing mode"
-                                },
-                                "COSTUME": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "costume1"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        241,
-                        1697
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "switch backdrop to ([BACKDROP])",
-                            "inputs": {
-                                "BACKDROP": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "backdrop1"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "next backdrop",
-                            "inputs": {},
-                            "options": {}
-                        },
-                        {
-                            "opcode": "change size by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "10"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "set size to (SIZE)",
-                            "inputs": {
-                                "SIZE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "100"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "set stretch to x: (X) y: (Y)",
-                            "inputs": {
-                                "X": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "100"
-                                },
-                                "Y": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "100"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        306,
-                        1970
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "x stretch",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        285,
-                        2014
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "y stretch",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        252,
-                        2094
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "change [EFFECT] effect by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "25"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "COLOR"
-                            }
-                        },
-                        {
-                            "opcode": "change [EFFECT] effect by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "25"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "FISHEYE"
-                            }
-                        },
-                        {
-                            "opcode": "change [EFFECT] effect by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "25"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "WHIRL"
-                            }
-                        },
-                        {
-                            "opcode": "change [EFFECT] effect by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "25"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "PIXELATE"
-                            }
-                        },
-                        {
-                            "opcode": "change [EFFECT] effect by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "25"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "MOSAIC"
-                            }
-                        },
-                        {
-                            "opcode": "change [EFFECT] effect by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "25"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "BRIGHTNESS"
-                            }
-                        },
-                        {
-                            "opcode": "change [EFFECT] effect by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "25"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "GHOST"
-                            }
-                        },
-                        {
-                            "opcode": "change [EFFECT] effect by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "25"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "SATURATION"
-                            }
-                        },
-                        {
-                            "opcode": "change [EFFECT] effect by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "25"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "RED"
-                            }
-                        },
-                        {
-                            "opcode": "change [EFFECT] effect by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "25"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "GREEN"
-                            }
-                        },
-                        {
-                            "opcode": "change [EFFECT] effect by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "25"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "BLUE"
-                            }
-                        },
-                        {
-                            "opcode": "change [EFFECT] effect by (AMOUNT)",
-                            "inputs": {
-                                "AMOUNT": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "25"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "OPAQUE"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        262,
-                        2737
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "set [EFFECT] effect to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {
-                                "EFFECT": "COLOR"
-                            }
-                        },
-                        {
-                            "opcode": "set tint color to (COLOR)",
-                            "inputs": {
-                                "COLOR": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "#3f4663"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "clear graphic effects",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        315,
-                        2916
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "[EFFECT] effect",
-                            "inputs": {},
-                            "options": {
-                                "EFFECT": "COLOR"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        330,
-                        2977
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "tint color",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        269,
-                        3051
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "show",
-                            "inputs": {},
-                            "options": {}
-                        },
-                        {
-                            "opcode": "hide",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        321,
-                        3183
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "visible?",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        172,
-                        3231
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "show ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_myself_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "show ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "Sprite2"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "hide ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_myself_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "hide ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "Sprite2"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        272,
-                        3373
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "is ([TARGET]) visible?",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_myself_"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        231,
-                        3436
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "is ([TARGET]) visible?",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "Sprite2"
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        212,
-                        3538
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "go to [LAYER] layer",
-                            "inputs": {},
-                            "options": {
-                                "LAYER": "front"
-                            }
-                        },
-                        {
-                            "opcode": "go to [LAYER] layer",
-                            "inputs": {},
-                            "options": {
-                                "LAYER": "back"
-                            }
-                        },
-                        {
-                            "opcode": "go [DIRECTION] (LAYERS) layers",
-                            "inputs": {
-                                "LAYERS": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1"
-                                }
-                            },
-                            "options": {
-                                "DIRECTION": "forward"
-                            }
-                        },
-                        {
-                            "opcode": "go [DIRECTION] (LAYERS) layers",
-                            "inputs": {
-                                "LAYERS": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1"
-                                }
-                            },
-                            "options": {
-                                "DIRECTION": "backward"
-                            }
-                        },
-                        {
-                            "opcode": "go to layer (LAYER)",
-                            "inputs": {
-                                "LAYER": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "go [DIRECTION] ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_myself_"
-                                }
-                            },
-                            "options": {
-                                "DIRECTION": "infront"
-                            }
-                        },
-                        {
-                            "opcode": "go [DIRECTION] ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "Sprite2"
-                                }
-                            },
-                            "options": {
-                                "DIRECTION": "behind"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        246,
-                        3893
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "layer",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        199,
-                        3958
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "costume [PROPERTY]",
-                            "inputs": {},
-                            "options": {
-                                "PROPERTY": "number"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        201,
-                        4014
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "costume [PROPERTY]",
-                            "inputs": {},
-                            "options": {
-                                "PROPERTY": "name"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        196,
-                        4069
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "costume [PROPERTY]",
-                            "inputs": {},
-                            "options": {
-                                "PROPERTY": "number"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        188,
-                        4121
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "costume [PROPERTY]",
-                            "inputs": {},
-                            "options": {
-                                "PROPERTY": "name"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        204,
-                        4202
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "size",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                }
-            ],
+            "scripts": [],
             "comments": [],
             "currentCostume": 0,
             "costumes": [
@@ -1133,54 +61,834 @@
             "direction": 90,
             "draggable": false,
             "rotationStyle": "all around"
-        },
-        {
-            "isStage": false,
-            "name": "Sprite2",
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "costume1",
-                    "dataFormat": "svg",
-                    "fileStem": "3339a2953a3bf62bb80e54ff575dbced",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0,
-                        0
-                    ]
-                }
-            ],
-            "sounds": [],
-            "volume": 100,
-            "localVariables": [],
-            "localLists": [],
-            "layerOrder": 2,
-            "visible": true,
-            "position": [
-                36,
-                28
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": false,
-            "rotationStyle": "all around"
         }
     ],
     "globalVariables": [
         {
             "name": "my variable",
             "currentValue": 0,
-            "monitor": null,
             "isCloudVariable": false
         }
     ],
-    "globalLists": [],
+    "globalLists": [
+        {
+            "name": "my list",
+            "currentValue": []
+        }
+    ],
     "tempo": 60,
     "videoTransparency": 50,
     "videoState": "on",
     "textToSpeechLanguage": null,
+    "monitors": [
+        {
+            "opcode": "x position",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                5,
+                5
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "y position",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                5,
+                31
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "direction",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                5,
+                57
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "bubble width",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                5,
+                83
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "bubble height",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                5,
+                109
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "x stretch",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                5,
+                135
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "y stretch",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                5,
+                161
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sprite effect",
+            "options": {
+                "EFFECT": "COLOR"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                5,
+                187
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sprite effect",
+            "options": {
+                "EFFECT": "FISHEYE"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                5,
+                213
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sprite effect",
+            "options": {
+                "EFFECT": "WHIRL"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                5,
+                239
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sprite effect",
+            "options": {
+                "EFFECT": "PIXELATE"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                5,
+                265
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sprite effect",
+            "options": {
+                "EFFECT": "MOSAIC"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                205,
+                5
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sprite effect",
+            "options": {
+                "EFFECT": "BRIGHTNESS"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                205,
+                31
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sprite effect",
+            "options": {
+                "EFFECT": "GHOST"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                205,
+                57
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sprite effect",
+            "options": {
+                "EFFECT": "SATURATION"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                205,
+                83
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sprite effect",
+            "options": {
+                "EFFECT": "RED"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                205,
+                109
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sprite effect",
+            "options": {
+                "EFFECT": "GREEN"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                205,
+                135
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sprite effect",
+            "options": {
+                "EFFECT": "BLUE"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                205,
+                161
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sprite effect",
+            "options": {
+                "EFFECT": "OPAQUE"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                205,
+                187
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "tint color",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                205,
+                213
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "visible?",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                205,
+                239
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "layer",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                255,
+                265
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "costume [PROPERTY]",
+            "options": {
+                "PROPERTY": "number"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                82,
+                69
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "costume [PROPERTY]",
+            "options": {
+                "PROPERTY": "number"
+            },
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                192,
+                190
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "size",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                198,
+                131
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "[EFFECT] sound effect",
+            "options": {
+                "EFFECT": "PITCH"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                36,
+                31
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "volume",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                64,
+                116
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "answer",
+            "options": {},
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                41,
+                256
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "mouse down?",
+            "options": {},
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                89,
+                241
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "mouse clicked?",
+            "options": {},
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                88,
+                107
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "mouse x",
+            "options": {},
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                191,
+                233
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "mouse y",
+            "options": {},
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                1,
+                134
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "clipboard item",
+            "options": {},
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                72,
+                182
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "draggable?",
+            "options": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                109,
+                142
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "loudness",
+            "options": {},
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                149,
+                248
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "loud?",
+            "options": {},
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                136,
+                53
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "timer",
+            "options": {},
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                28,
+                198
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "YEAR"
+            },
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                66,
+                23
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "days since 2000",
+            "options": {},
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                160,
+                110
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "username",
+            "options": {},
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                164,
+                132
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "logged in?",
+            "options": {},
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                143,
+                165
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "value of [VARIABLE]",
+            "options": {
+                "VARIABLE": "my variable"
+            },
+            "spriteName": null,
+            "value": 0,
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                183,
+                113
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "opcode": "value of [LIST]",
+            "options": {
+                "LIST": "my list"
+            },
+            "spriteName": null,
+            "value": [],
+            "size": [
+                0,
+                0
+            ],
+            "position": [
+                200,
+                76
+            ],
+            "visible": true
+        }
+    ],
     "extensionData": {},
     "extensions": [],
     "meta": {

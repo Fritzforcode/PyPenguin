@@ -23,26 +23,26 @@ def translateVariable(data, spriteName):
     name = data["name"]
     newData = [name, data["currentValue"]]
 
-    monitorData = data["monitor"]
-    if monitorData == None:
-        newMonitorData = None
-    else:
-        newMonitorData = {
-            "id"        : stringToToken(name, spriteName=spriteName),
-            "mode"      : "default",
-            "opcode"    : "data_variable",
-            "params"    : {"VARIABLE": name},
-            "spriteName": spriteName,
-            "value"     : data["currentValue"],
-            "width"     : monitorData["size"][0],
-            "height"    : monitorData["size"][1],
-            "x"         : monitorData["position"][0],
-            "y"         : monitorData["position"][1],
-            "visible"   : monitorData["visible"],
-            "sliderMin" : monitorData["sliderMin"],
-            "sliderMax" : monitorData["sliderMax"],
-            "isDiscrete": monitorData["onlyIntegers"],
-        }
+    #monitorData = data["monitor"]
+    #if monitorData == None:
+    #    newMonitorData = None
+    #else:
+    #    newMonitorData = {
+    #        "id"        : stringToToken(name, spriteName=spriteName),
+    #        "mode"      : "default",
+    #        "opcode"    : "data_variable",
+    #        "params"    : {"VARIABLE": name},
+    #        "spriteName": spriteName,
+    #        "value"     : data["currentValue"],
+    #        "width"     : monitorData["size"][0],
+    #        "height"    : monitorData["size"][1],
+    #        "x"         : monitorData["position"][0],
+    #        "y"         : monitorData["position"][1],
+    #        "visible"   : monitorData["visible"],
+    #        "sliderMin" : monitorData["sliderMin"],
+    #        "sliderMax" : monitorData["sliderMax"],
+    #        "isDiscrete": monitorData["onlyIntegers"],
+    #    }
     if spriteName == None: # stage
         if data["isCloudVariable"]: # cloud var
             if not name.startswith("\u2601 "):
@@ -54,7 +54,7 @@ def translateVariable(data, spriteName):
     else: # local var
         if "\u2601" in name:
             raise ValueError("Non-cloud variables cannot contain '☁'(unicode 2601)")
-    return newData, newMonitorData
+    return newData
 
 def translateLists(data, spriteNames):
     newData = {k:{} for k in spriteNames+[None]}
@@ -78,22 +78,22 @@ def translateList(data, spriteName):
     name = data["name"]
     newData = [name, data["currentValue"]]
 
-    monitorData = data["monitor"]
-    if monitorData == None:
-        newMonitorData = None
-    else:
-        newMonitorData = {
-            "id"        : stringToToken(name, spriteName=spriteName),
-            "mode"      : "list",
-            "opcode"    : "data_listcontents",
-            "params"    : {"LIST": name},
-            "spriteName": spriteName,
-            "value"     : data["currentValue"],
-            "width"     : monitorData["size"][0],
-            "height"    : monitorData["size"][1],
-            "x"         : monitorData["position"][0],
-            "y"         : monitorData["position"][1],
-            "visible"   : monitorData["visible"],
-        }
-    return newData, newMonitorData
+    #monitorData = data["monitor"]
+    #if monitorData == None:
+    #    newMonitorData = None
+    #else:
+    #    newMonitorData = {
+    #        "id"        : stringToToken(name, spriteName=spriteName),
+    #        "mode"      : "list",
+    #        "opcode"    : "data_listcontents",
+    #        "params"    : {"LIST": name},
+    #        "spriteName": spriteName,
+    #        "value"     : data["currentValue"],
+    #        "width"     : monitorData["size"][0],
+    #        "height"    : monitorData["size"][1],
+    #        "x"         : monitorData["position"][0],
+    #        "y"         : monitorData["position"][1],
+    #        "visible"   : monitorData["visible"],
+    #    }
+    return newData
 

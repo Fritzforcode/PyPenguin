@@ -9,99 +9,15 @@
                     0
                 ]
             },
-            "lists": {},
+            "lists": {
+                "DLZ*ZPXCDT!#KR9:B+T-": [
+                    "my list",
+                    []
+                ]
+            },
             "broadcasts": {},
             "customVars": [],
-            "blocks": {
-                "d": {
-                    "opcode": "looks_changeVisibilityOfSpriteShow",
-                    "next": "e",
-                    "parent": null,
-                    "inputs": {
-                        "VISIBLE_OPTION": [
-                            1,
-                            "S"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 44,
-                    "y": 44
-                },
-                "S": {
-                    "opcode": "looks_changeVisibilityOfSprite_menu",
-                    "next": null,
-                    "parent": "d",
-                    "inputs": {},
-                    "fields": {
-                        "VISIBLE_OPTION": [
-                            "_myself_",
-                            "uxljVE8_{B8/-R{Om=65"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "e": {
-                    "opcode": "looks_changeVisibilityOfSpriteShow",
-                    "next": null,
-                    "parent": "d",
-                    "inputs": {
-                        "VISIBLE_OPTION": [
-                            1,
-                            "T"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "T": {
-                    "opcode": "looks_changeVisibilityOfSprite_menu",
-                    "next": null,
-                    "parent": "e",
-                    "inputs": {},
-                    "fields": {
-                        "VISIBLE_OPTION": [
-                            "Sprite2",
-                            "A`(_4Z.I8k{!VL.6[1n="
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "U": {
-                    "opcode": "looks_getOtherSpriteVisible",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "VISIBLE_OPTION": [
-                            1,
-                            "V"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 74,
-                    "y": 247
-                },
-                "V": {
-                    "opcode": "looks_getOtherSpriteVisible_menu",
-                    "next": null,
-                    "parent": "U",
-                    "inputs": {},
-                    "fields": {
-                        "VISIBLE_OPTION": [
-                            "_myself_",
-                            ";}U*P3EL@aCG6ua*;6o%"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                }
-            },
+            "blocks": {},
             "comments": {},
             "currentCostume": 0,
             "costumes": [
@@ -130,1582 +46,7 @@
             "lists": {},
             "broadcasts": {},
             "customVars": [],
-            "blocks": {
-                "W": {
-                    "opcode": "looks_sayforsecs",
-                    "next": "f",
-                    "parent": null,
-                    "inputs": {
-                        "MESSAGE": [
-                            1,
-                            [
-                                10,
-                                "Hello!"
-                            ]
-                        ],
-                        "SECS": [
-                            1,
-                            [
-                                4,
-                                "2"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 296,
-                    "y": 99
-                },
-                "f": {
-                    "opcode": "looks_say",
-                    "next": "g",
-                    "parent": "W",
-                    "inputs": {
-                        "MESSAGE": [
-                            1,
-                            [
-                                10,
-                                "Hello!"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "g": {
-                    "opcode": "looks_thinkforsecs",
-                    "next": "h",
-                    "parent": "f",
-                    "inputs": {
-                        "MESSAGE": [
-                            1,
-                            [
-                                10,
-                                "Hmm..."
-                            ]
-                        ],
-                        "SECS": [
-                            1,
-                            [
-                                4,
-                                "2"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "h": {
-                    "opcode": "looks_think",
-                    "next": "i",
-                    "parent": "g",
-                    "inputs": {
-                        "MESSAGE": [
-                            1,
-                            [
-                                10,
-                                "Hmm..."
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "i": {
-                    "opcode": "looks_stoptalking",
-                    "next": "X",
-                    "parent": "h",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "X": {
-                    "opcode": "looks_setFont",
-                    "next": null,
-                    "parent": "i",
-                    "inputs": {
-                        "font": [
-                            1,
-                            [
-                                10,
-                                "Helvetica"
-                            ]
-                        ],
-                        "size": [
-                            1,
-                            [
-                                4,
-                                "14"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "Y": {
-                    "opcode": "looks_setColor",
-                    "next": "j",
-                    "parent": null,
-                    "inputs": {
-                        "color": [
-                            1,
-                            [
-                                9,
-                                "#c097e9"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "prop": [
-                            "BUBBLE_STROKE",
-                            "lhQ%2;mf}uSn{]zMCjm8"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 256,
-                    "y": 488
-                },
-                "j": {
-                    "opcode": "looks_setColor",
-                    "next": "Z",
-                    "parent": "Y",
-                    "inputs": {
-                        "color": [
-                            1,
-                            [
-                                9,
-                                "#c097e9"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "prop": [
-                            "BUBBLE_FILL",
-                            "7TLdF7LD]I#MALBjjb6("
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "Z": {
-                    "opcode": "looks_setColor",
-                    "next": null,
-                    "parent": "j",
-                    "inputs": {
-                        "color": [
-                            1,
-                            [
-                                9,
-                                "#c097e9"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "prop": [
-                            "TEXT_FILL",
-                            "-V1fm_erl+^PjzgEG67Q"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "!": {
-                    "opcode": "looks_setShape",
-                    "next": "k",
-                    "parent": null,
-                    "inputs": {
-                        "color": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "prop": [
-                            "MIN_WIDTH",
-                            "{HNqR%Wyj_?@.|BqF}~m"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 241,
-                    "y": 718
-                },
-                "k": {
-                    "opcode": "looks_setShape",
-                    "next": "l",
-                    "parent": "!",
-                    "inputs": {
-                        "color": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "prop": [
-                            "MAX_LINE_WIDTH",
-                            "x|jzqTW1lpTxNB}PSMcB"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "l": {
-                    "opcode": "looks_setShape",
-                    "next": "m",
-                    "parent": "k",
-                    "inputs": {
-                        "color": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "prop": [
-                            "STROKE_WIDTH",
-                            "rDSuJbCDRNW`d^wK/3sN"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "m": {
-                    "opcode": "looks_setShape",
-                    "next": "n",
-                    "parent": "l",
-                    "inputs": {
-                        "color": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "prop": [
-                            "PADDING",
-                            "6xUn[it/}va-#1@M~oK/"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "n": {
-                    "opcode": "looks_setShape",
-                    "next": "o",
-                    "parent": "m",
-                    "inputs": {
-                        "color": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "prop": [
-                            "CORNER_RADIUS",
-                            "Tx%Qn*f!R}?Pn@WEnch?"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "o": {
-                    "opcode": "looks_setShape",
-                    "next": "p",
-                    "parent": "n",
-                    "inputs": {
-                        "color": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "prop": [
-                            "TAIL_HEIGHT",
-                            "JZo;W1i~0ec!BES,NN*w"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "p": {
-                    "opcode": "looks_setShape",
-                    "next": "#",
-                    "parent": "o",
-                    "inputs": {
-                        "color": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "prop": [
-                            "FONT_HEIGHT_RATIO",
-                            "CTsZ,tDblGu}5,58~egQ"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "#": {
-                    "opcode": "looks_setShape",
-                    "next": null,
-                    "parent": "p",
-                    "inputs": {
-                        "color": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "prop": [
-                            "texlim",
-                            "_t^~4QInf9kT0~DeDe@)"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "ai": {
-                    "opcode": "looks_sayWidth",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 302,
-                    "y": 1121
-                },
-                "aj": {
-                    "opcode": "looks_sayHeight",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 295,
-                    "y": 1173
-                },
-                "q": {
-                    "opcode": "looks_switchcostumeto",
-                    "next": "%",
-                    "parent": null,
-                    "inputs": {
-                        "COSTUME": [
-                            1,
-                            "("
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 255,
-                    "y": 1251
-                },
-                "(": {
-                    "opcode": "looks_costume",
-                    "next": null,
-                    "parent": "q",
-                    "inputs": {},
-                    "fields": {
-                        "COSTUME": [
-                            "costume1",
-                            "[O*OwKW8X)/djM5s|#?R"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "%": {
-                    "opcode": "looks_nextcostume",
-                    "next": null,
-                    "parent": "q",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "r": {
-                    "opcode": "looks_getinputofcostume",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "INPUT": [
-                            1,
-                            ")"
-                        ],
-                        "COSTUME": [
-                            1,
-                            "*"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 230,
-                    "y": 1378
-                },
-                ")": {
-                    "opcode": "looks_getinput_menu",
-                    "next": null,
-                    "parent": "r",
-                    "inputs": {},
-                    "fields": {
-                        "INPUT": [
-                            "width",
-                            "P+qwa:+=l-(-]m#oG_4p"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "*": {
-                    "opcode": "looks_costume",
-                    "next": null,
-                    "parent": "r",
-                    "inputs": {},
-                    "fields": {
-                        "COSTUME": [
-                            "costume1",
-                            "U*42zF5}row[x|Fd]VU)"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "s": {
-                    "opcode": "looks_getinputofcostume",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "INPUT": [
-                            1,
-                            "+"
-                        ],
-                        "COSTUME": [
-                            1,
-                            ","
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 251,
-                    "y": 1435
-                },
-                "+": {
-                    "opcode": "looks_getinput_menu",
-                    "next": null,
-                    "parent": "s",
-                    "inputs": {},
-                    "fields": {
-                        "INPUT": [
-                            "height",
-                            "=FOrQk+5l=uIN0nq^}7E"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                ",": {
-                    "opcode": "looks_costume",
-                    "next": null,
-                    "parent": "s",
-                    "inputs": {},
-                    "fields": {
-                        "COSTUME": [
-                            "costume1",
-                            "KMRKf9%y1``q*=KRl=B3"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "t": {
-                    "opcode": "looks_getinputofcostume",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "INPUT": [
-                            1,
-                            "-"
-                        ],
-                        "COSTUME": [
-                            1,
-                            "."
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 235,
-                    "y": 1498
-                },
-                "-": {
-                    "opcode": "looks_getinput_menu",
-                    "next": null,
-                    "parent": "t",
-                    "inputs": {},
-                    "fields": {
-                        "INPUT": [
-                            "rotation center x",
-                            "pctJ1|!H%^eYUE}}#uXM"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                ".": {
-                    "opcode": "looks_costume",
-                    "next": null,
-                    "parent": "t",
-                    "inputs": {},
-                    "fields": {
-                        "COSTUME": [
-                            "costume1",
-                            "]]%J4{VXyt?kBE`]?1Er"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "u": {
-                    "opcode": "looks_getinputofcostume",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "INPUT": [
-                            1,
-                            "/"
-                        ],
-                        "COSTUME": [
-                            1,
-                            ":"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 235,
-                    "y": 1558
-                },
-                "/": {
-                    "opcode": "looks_getinput_menu",
-                    "next": null,
-                    "parent": "u",
-                    "inputs": {},
-                    "fields": {
-                        "INPUT": [
-                            "rotation center y",
-                            "x:AZ/maJNOi/{QKD0a8S"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                ":": {
-                    "opcode": "looks_costume",
-                    "next": null,
-                    "parent": "u",
-                    "inputs": {},
-                    "fields": {
-                        "COSTUME": [
-                            "costume1",
-                            "_MRZAW2=dQ%f:KiEGC}{"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "v": {
-                    "opcode": "looks_getinputofcostume",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "INPUT": [
-                            1,
-                            ";"
-                        ],
-                        "COSTUME": [
-                            1,
-                            "="
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 238,
-                    "y": 1624
-                },
-                ";": {
-                    "opcode": "looks_getinput_menu",
-                    "next": null,
-                    "parent": "v",
-                    "inputs": {},
-                    "fields": {
-                        "INPUT": [
-                            "drawing mode",
-                            "8|dz#twfUgP=|*|qv.9g"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "=": {
-                    "opcode": "looks_costume",
-                    "next": null,
-                    "parent": "v",
-                    "inputs": {},
-                    "fields": {
-                        "COSTUME": [
-                            "costume1",
-                            "[L~,;yieNUNZ4)6Xj1qS"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "w": {
-                    "opcode": "looks_switchbackdropto",
-                    "next": "x",
-                    "parent": null,
-                    "inputs": {
-                        "BACKDROP": [
-                            1,
-                            "?"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 241,
-                    "y": 1697
-                },
-                "?": {
-                    "opcode": "looks_backdrops",
-                    "next": null,
-                    "parent": "w",
-                    "inputs": {},
-                    "fields": {
-                        "BACKDROP": [
-                            "backdrop1",
-                            "y2/N:IfZKW_RdF+z|I1x"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "x": {
-                    "opcode": "looks_nextbackdrop",
-                    "next": "y",
-                    "parent": "w",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "y": {
-                    "opcode": "looks_changesizeby",
-                    "next": "z",
-                    "parent": "x",
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "10"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "z": {
-                    "opcode": "looks_setsizeto",
-                    "next": "@",
-                    "parent": "y",
-                    "inputs": {
-                        "SIZE": [
-                            1,
-                            [
-                                4,
-                                "100"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "@": {
-                    "opcode": "looks_setStretch",
-                    "next": null,
-                    "parent": "z",
-                    "inputs": {
-                        "X": [
-                            1,
-                            [
-                                4,
-                                "100"
-                            ]
-                        ],
-                        "Y": [
-                            1,
-                            [
-                                4,
-                                "100"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "ak": {
-                    "opcode": "looks_stretchGetX",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 306,
-                    "y": 1970
-                },
-                "al": {
-                    "opcode": "looks_stretchGetY",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 285,
-                    "y": 2014
-                },
-                "[": {
-                    "opcode": "looks_changeeffectby",
-                    "next": "A",
-                    "parent": null,
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "25"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "COLOR",
-                            "p|Dvi;Bqvrp1/y@:AR28"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 252,
-                    "y": 2094
-                },
-                "A": {
-                    "opcode": "looks_changeeffectby",
-                    "next": "B",
-                    "parent": "[",
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "25"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "FISHEYE",
-                            "opc|xJM?z#RvV~eDhk^2"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "B": {
-                    "opcode": "looks_changeeffectby",
-                    "next": "C",
-                    "parent": "A",
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "25"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "WHIRL",
-                            "}+YWYX-N*ZGK}Y7lFq=E"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "C": {
-                    "opcode": "looks_changeeffectby",
-                    "next": "D",
-                    "parent": "B",
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "25"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "PIXELATE",
-                            "yu}KaS*9=t!g{5@emeX)"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "D": {
-                    "opcode": "looks_changeeffectby",
-                    "next": "E",
-                    "parent": "C",
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "25"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "MOSAIC",
-                            "?g%W{`@S.8`?T;^Tdbg^"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "E": {
-                    "opcode": "looks_changeeffectby",
-                    "next": "F",
-                    "parent": "D",
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "25"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "BRIGHTNESS",
-                            "6bjHHF6upi5jyVkZV_f."
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "F": {
-                    "opcode": "looks_changeeffectby",
-                    "next": "G",
-                    "parent": "E",
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "25"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "GHOST",
-                            "|7BI@]nz@KsklYc}AU;4"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "G": {
-                    "opcode": "looks_changeeffectby",
-                    "next": "H",
-                    "parent": "F",
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "25"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "SATURATION",
-                            "J4-vSz:yF[.uwX{g86+,"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "H": {
-                    "opcode": "looks_changeeffectby",
-                    "next": "I",
-                    "parent": "G",
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "25"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "RED",
-                            "8|=qU+)u0{5M0n;52HF!"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "I": {
-                    "opcode": "looks_changeeffectby",
-                    "next": "J",
-                    "parent": "H",
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "25"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "GREEN",
-                            "vD}o0.j{OR5Xk8Y`{|_O"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "J": {
-                    "opcode": "looks_changeeffectby",
-                    "next": "]",
-                    "parent": "I",
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "25"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "BLUE",
-                            "[vW5x3|wxt1@+{t!pi/."
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "]": {
-                    "opcode": "looks_changeeffectby",
-                    "next": null,
-                    "parent": "J",
-                    "inputs": {
-                        "CHANGE": [
-                            1,
-                            [
-                                4,
-                                "25"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "OPAQUE",
-                            "rlIH.|C|B^.n4{Lw7t9="
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "^": {
-                    "opcode": "looks_seteffectto",
-                    "next": "K",
-                    "parent": null,
-                    "inputs": {
-                        "VALUE": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "EFFECT": [
-                            "COLOR",
-                            "7NRkOBK_USWuam(r2C?S"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 262,
-                    "y": 2737
-                },
-                "K": {
-                    "opcode": "looks_setTintColor",
-                    "next": "_",
-                    "parent": "^",
-                    "inputs": {
-                        "color": [
-                            1,
-                            [
-                                9,
-                                "#3f4663"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "_": {
-                    "opcode": "looks_cleargraphiceffects",
-                    "next": null,
-                    "parent": "K",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "am": {
-                    "opcode": "looks_getEffectValue",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "EFFECT": [
-                            "COLOR",
-                            "QR@6A0z52}o1]|b4b`0`"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 315,
-                    "y": 2916
-                },
-                "an": {
-                    "opcode": "looks_tintColor",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 330,
-                    "y": 2977
-                },
-                "`": {
-                    "opcode": "looks_show",
-                    "next": "{",
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 269,
-                    "y": 3051
-                },
-                "{": {
-                    "opcode": "looks_hide",
-                    "next": null,
-                    "parent": "`",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "ao": {
-                    "opcode": "looks_getSpriteVisible",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 321,
-                    "y": 3183
-                },
-                "L": {
-                    "opcode": "looks_changeVisibilityOfSpriteShow",
-                    "next": "a",
-                    "parent": null,
-                    "inputs": {
-                        "VISIBLE_OPTION": [
-                            1,
-                            "|"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 172,
-                    "y": 3231
-                },
-                "|": {
-                    "opcode": "looks_changeVisibilityOfSprite_menu",
-                    "next": null,
-                    "parent": "L",
-                    "inputs": {},
-                    "fields": {
-                        "VISIBLE_OPTION": [
-                            "_myself_",
-                            "4Er?C3:hH:-fg-r9EYbg"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "a": {
-                    "opcode": "looks_changeVisibilityOfSpriteShow",
-                    "next": "b",
-                    "parent": "L",
-                    "inputs": {
-                        "VISIBLE_OPTION": [
-                            1,
-                            "}"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "}": {
-                    "opcode": "looks_changeVisibilityOfSprite_menu",
-                    "next": null,
-                    "parent": "a",
-                    "inputs": {},
-                    "fields": {
-                        "VISIBLE_OPTION": [
-                            "Sprite2",
-                            "Co}VC_*buB~{XS{mg;tP"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "~": {
-                    "opcode": "looks_getOtherSpriteVisible",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "VISIBLE_OPTION": [
-                            1,
-                            "aa"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 272,
-                    "y": 3373
-                },
-                "aa": {
-                    "opcode": "looks_getOtherSpriteVisible_menu",
-                    "next": null,
-                    "parent": "~",
-                    "inputs": {},
-                    "fields": {
-                        "VISIBLE_OPTION": [
-                            "_myself_",
-                            "oPOd^^FRYvy)`T;}FZFS"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "ab": {
-                    "opcode": "looks_getOtherSpriteVisible",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "VISIBLE_OPTION": [
-                            1,
-                            "ac"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 231,
-                    "y": 3436
-                },
-                "ac": {
-                    "opcode": "looks_getOtherSpriteVisible_menu",
-                    "next": null,
-                    "parent": "ab",
-                    "inputs": {},
-                    "fields": {
-                        "VISIBLE_OPTION": [
-                            "Sprite2",
-                            ":5z|cvq8qPHx,7+?j/He"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "M": {
-                    "opcode": "looks_gotofrontback",
-                    "next": "N",
-                    "parent": "ad",
-                    "inputs": {},
-                    "fields": {
-                        "FRONT_BACK": [
-                            "back",
-                            "aU77SxWCzPrwZdjBS{48"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "ad": {
-                    "opcode": "looks_gotofrontback",
-                    "next": "M",
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "FRONT_BACK": [
-                            "front",
-                            "vz6lA6MbDyXi0hABvR=]"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 212,
-                    "y": 3538
-                },
-                "N": {
-                    "opcode": "looks_goforwardbackwardlayers",
-                    "next": "O",
-                    "parent": "M",
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                7,
-                                "1"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "FORWARD_BACKWARD": [
-                            "forward",
-                            "-w``?N*a3sL,I:hP0EXi"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "O": {
-                    "opcode": "looks_goforwardbackwardlayers",
-                    "next": "P",
-                    "parent": "N",
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                7,
-                                "1"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "FORWARD_BACKWARD": [
-                            "backward",
-                            "B(.X9:BA|3IfPz~_}tfs"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "P": {
-                    "opcode": "looks_layersSetLayer",
-                    "next": "c",
-                    "parent": "O",
-                    "inputs": {
-                        "NUM": [
-                            1,
-                            [
-                                7,
-                                "1"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "c": {
-                    "opcode": "looks_goTargetLayer",
-                    "next": "Q",
-                    "parent": "P",
-                    "inputs": {
-                        "VISIBLE_OPTION": [
-                            1,
-                            "ae"
-                        ]
-                    },
-                    "fields": {
-                        "FORWARD_BACKWARD": [
-                            "infront",
-                            "J8amHjo`@K~NlQCKPO7U"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "ae": {
-                    "opcode": "looks_getOtherSpriteVisible_menu",
-                    "next": null,
-                    "parent": "c",
-                    "inputs": {},
-                    "fields": {
-                        "VISIBLE_OPTION": [
-                            "_myself_",
-                            "j+o/K@;(WEM.0v:?_fKE"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "Q": {
-                    "opcode": "looks_goTargetLayer",
-                    "next": null,
-                    "parent": "c",
-                    "inputs": {
-                        "VISIBLE_OPTION": [
-                            1,
-                            "af"
-                        ]
-                    },
-                    "fields": {
-                        "FORWARD_BACKWARD": [
-                            "behind",
-                            "vWxilm_CChsNT*.0Rpw`"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "af": {
-                    "opcode": "looks_getOtherSpriteVisible_menu",
-                    "next": null,
-                    "parent": "Q",
-                    "inputs": {},
-                    "fields": {
-                        "VISIBLE_OPTION": [
-                            "Sprite2",
-                            "aB:w6-C;@ao=?!B[Pym6"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "ap": {
-                    "opcode": "looks_layersGetLayer",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 246,
-                    "y": 3893
-                },
-                "aq": {
-                    "opcode": "looks_costumenumbername",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "NUMBER_NAME": [
-                            "number",
-                            "hXQ8ELqQ]Que%3}dpy?d"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 199,
-                    "y": 3958
-                },
-                "ar": {
-                    "opcode": "looks_costumenumbername",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "NUMBER_NAME": [
-                            "name",
-                            "86U%fUGB|+8n@+OAv-;]"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 201,
-                    "y": 4014
-                },
-                "as": {
-                    "opcode": "looks_backdropnumbername",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "NUMBER_NAME": [
-                            "number",
-                            "#.,IsNf?BWYTA3H)Jf)B"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 196,
-                    "y": 4069
-                },
-                "at": {
-                    "opcode": "looks_backdropnumbername",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "NUMBER_NAME": [
-                            "name",
-                            "A}-]IQ}I.ge1gURR(3XG"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 188,
-                    "y": 4121
-                },
-                "au": {
-                    "opcode": "looks_size",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 204,
-                    "y": 4202
-                },
-                "b": {
-                    "opcode": "looks_changeVisibilityOfSpriteHide",
-                    "next": "R",
-                    "parent": "a",
-                    "inputs": {
-                        "VISIBLE_OPTION": [
-                            1,
-                            "ag"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "ag": {
-                    "opcode": "looks_changeVisibilityOfSprite_menu",
-                    "next": null,
-                    "parent": "b",
-                    "inputs": {},
-                    "fields": {
-                        "VISIBLE_OPTION": [
-                            "_myself_",
-                            "H}0^gOJ0|ODwij6P6unZ"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "R": {
-                    "opcode": "looks_changeVisibilityOfSpriteHide",
-                    "next": null,
-                    "parent": "b",
-                    "inputs": {
-                        "VISIBLE_OPTION": [
-                            1,
-                            "ah"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "ah": {
-                    "opcode": "looks_changeVisibilityOfSprite_menu",
-                    "next": null,
-                    "parent": "R",
-                    "inputs": {},
-                    "fields": {
-                        "VISIBLE_OPTION": [
-                            "Sprite2",
-                            "`M^il[neSy25GG0:V{kL"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                }
-            },
+            "blocks": {},
             "comments": {},
             "currentCostume": 0,
             "costumes": [
@@ -1739,46 +80,13 @@
             "direction": 90,
             "draggable": false,
             "rotationStyle": "all around"
-        },
-        {
-            "isStage": false,
-            "name": "Sprite2",
-            "variables": {},
-            "lists": {},
-            "broadcasts": {},
-            "customVars": [],
-            "blocks": {},
-            "comments": {},
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "costume1",
-                    "bitmapResolution": 1,
-                    "dataFormat": "svg",
-                    "assetId": "3339a2953a3bf62bb80e54ff575dbced",
-                    "md5ext": "3339a2953a3bf62bb80e54ff575dbced.svg",
-                    "rotationCenterX": 0,
-                    "rotationCenterY": 0
-                }
-            ],
-            "sounds": [],
-            "id": "{1XK~hDma:,5^OZBjV2V",
-            "volume": 100,
-            "layerOrder": 2,
-            "visible": true,
-            "x": 36,
-            "y": 28,
-            "size": 100,
-            "direction": 90,
-            "draggable": false,
-            "rotationStyle": "all around"
         }
     ],
     "monitors": [
         {
-            "id": "5I9nI;7P)jdiR-_X;/%l_stretchY",
+            "id": "5I9nI;7P)jdiR-_X;/%l_xposition",
             "mode": "default",
-            "opcode": "looks_stretchGetY",
+            "opcode": "motion_xposition",
             "params": {},
             "spriteName": "Sprite1",
             "value": 0,
@@ -1790,6 +98,711 @@
             "sliderMin": 0,
             "sliderMax": 100,
             "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_yposition",
+            "mode": "default",
+            "opcode": "motion_yposition",
+            "params": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 31,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_direction",
+            "mode": "default",
+            "opcode": "motion_direction",
+            "params": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 57,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_sayWidth",
+            "mode": "default",
+            "opcode": "looks_sayWidth",
+            "params": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 83,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_sayHeight",
+            "mode": "default",
+            "opcode": "looks_sayHeight",
+            "params": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 109,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_stretchGetX",
+            "mode": "default",
+            "opcode": "looks_stretchGetX",
+            "params": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 135,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_stretchGetY",
+            "mode": "default",
+            "opcode": "looks_stretchGetY",
+            "params": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 161,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_COLOR",
+            "mode": "default",
+            "opcode": "looks_getEffectValue",
+            "params": {
+                "EFFECT": "COLOR"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 187,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_FISHEYE",
+            "mode": "default",
+            "opcode": "looks_getEffectValue",
+            "params": {
+                "EFFECT": "FISHEYE"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 213,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_WHIRL",
+            "mode": "default",
+            "opcode": "looks_getEffectValue",
+            "params": {
+                "EFFECT": "WHIRL"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 239,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_PIXELATE",
+            "mode": "default",
+            "opcode": "looks_getEffectValue",
+            "params": {
+                "EFFECT": "PIXELATE"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 265,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_MOSAIC",
+            "mode": "default",
+            "opcode": "looks_getEffectValue",
+            "params": {
+                "EFFECT": "MOSAIC"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 205,
+            "y": 5,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_BRIGHTNESS",
+            "mode": "default",
+            "opcode": "looks_getEffectValue",
+            "params": {
+                "EFFECT": "BRIGHTNESS"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 205,
+            "y": 31,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_GHOST",
+            "mode": "default",
+            "opcode": "looks_getEffectValue",
+            "params": {
+                "EFFECT": "GHOST"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 205,
+            "y": 57,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_SATURATION",
+            "mode": "default",
+            "opcode": "looks_getEffectValue",
+            "params": {
+                "EFFECT": "SATURATION"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 205,
+            "y": 83,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_RED",
+            "mode": "default",
+            "opcode": "looks_getEffectValue",
+            "params": {
+                "EFFECT": "RED"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 205,
+            "y": 109,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_GREEN",
+            "mode": "default",
+            "opcode": "looks_getEffectValue",
+            "params": {
+                "EFFECT": "GREEN"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 205,
+            "y": 135,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_BLUE",
+            "mode": "default",
+            "opcode": "looks_getEffectValue",
+            "params": {
+                "EFFECT": "BLUE"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 205,
+            "y": 161,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_OPAQUE",
+            "mode": "default",
+            "opcode": "looks_getEffectValue",
+            "params": {
+                "EFFECT": "OPAQUE"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 205,
+            "y": 187,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_tintColor",
+            "mode": "default",
+            "opcode": "looks_tintColor",
+            "params": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 205,
+            "y": 213,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getSpriteVisible",
+            "mode": "default",
+            "opcode": "looks_getSpriteVisible",
+            "params": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 205,
+            "y": 239,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_layersGetLayer",
+            "mode": "default",
+            "opcode": "looks_layersGetLayer",
+            "params": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 255,
+            "y": 265,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_costumenumbername_number",
+            "mode": "default",
+            "opcode": "looks_costumenumbername",
+            "params": {
+                "NUMBER_NAME": "number"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 82,
+            "y": 69,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "backdropnumbername_number",
+            "mode": "default",
+            "opcode": "looks_backdropnumbername",
+            "params": {
+                "NUMBER_NAME": "number"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 192,
+            "y": 190,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_size",
+            "mode": "default",
+            "opcode": "looks_size",
+            "params": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 198,
+            "y": 131,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_soundgetEffectValue_PITCH",
+            "mode": "default",
+            "opcode": "sound_getEffectValue",
+            "params": {
+                "EFFECT": "PITCH"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 36,
+            "y": 31,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_volume",
+            "mode": "default",
+            "opcode": "sound_volume",
+            "params": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 64,
+            "y": 116,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "answer",
+            "mode": "default",
+            "opcode": "sensing_answer",
+            "params": {},
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 41,
+            "y": 256,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "sensing_mousedown",
+            "mode": "default",
+            "opcode": "sensing_mousedown",
+            "params": {},
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 89,
+            "y": 241,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "sensing_mouseclicked",
+            "mode": "default",
+            "opcode": "sensing_mouseclicked",
+            "params": {},
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 88,
+            "y": 107,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "sensing_mousex",
+            "mode": "default",
+            "opcode": "sensing_mousex",
+            "params": {},
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 191,
+            "y": 233,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "sensing_mousey",
+            "mode": "default",
+            "opcode": "sensing_mousey",
+            "params": {},
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 1,
+            "y": 134,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "sensing_getclipboard",
+            "mode": "default",
+            "opcode": "sensing_getclipboard",
+            "params": {},
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 72,
+            "y": 182,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_getdragmode",
+            "mode": "default",
+            "opcode": "sensing_getdragmode",
+            "params": {},
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 109,
+            "y": 142,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "loudness",
+            "mode": "default",
+            "opcode": "sensing_loudness",
+            "params": {},
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 149,
+            "y": 248,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "loud",
+            "mode": "default",
+            "opcode": "sensing_loud",
+            "params": {},
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 136,
+            "y": 53,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "timer",
+            "mode": "default",
+            "opcode": "sensing_timer",
+            "params": {},
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 28,
+            "y": 198,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "current_year",
+            "mode": "default",
+            "opcode": "sensing_current",
+            "params": {
+                "CURRENTMENU": "YEAR"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 66,
+            "y": 23,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "sensing_dayssince2000",
+            "mode": "default",
+            "opcode": "sensing_dayssince2000",
+            "params": {},
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 160,
+            "y": 110,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "sensing_username",
+            "mode": "default",
+            "opcode": "sensing_username",
+            "params": {},
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 164,
+            "y": 132,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "sensing_loggedin",
+            "mode": "default",
+            "opcode": "sensing_loggedin",
+            "params": {},
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 143,
+            "y": 165,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "`jEk@4|i[#Fk?(8x)AV.-my variable",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "my variable"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 183,
+            "y": 113,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "DLZ*ZPXCDT!#KR9:B+T-",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "my list"
+            },
+            "spriteName": null,
+            "value": [],
+            "width": 0,
+            "height": 0,
+            "x": 200,
+            "y": 76,
+            "visible": true
         }
     ],
     "extensionData": {},

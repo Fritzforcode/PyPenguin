@@ -142,6 +142,19 @@ projectData = {
     "videoTransparency": 0,
     "videoState": "off",
     "textToSpeechLanguage": None,
+
+    "monitors": [
+        {
+            "opcode": "",
+            "options": {},
+            "spriteName": "",
+            "value": 43,
+            "size": [5, 5],
+            "position": [15, 15],
+            "visible": True,
+        },
+    ],
+
     "extensionData": {},
     "extensions": ["jgJSON"],
     "meta": {

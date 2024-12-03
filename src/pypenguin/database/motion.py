@@ -166,6 +166,7 @@ opcodes = {
         "newOpcode": "x position",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "motion_yposition": {
         "type": "stringReporter",
@@ -173,6 +174,7 @@ opcodes = {
         "newOpcode": "y position",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "motion_direction": {
         "type": "stringReporter",
@@ -180,5 +182,6 @@ opcodes = {
         "newOpcode": "direction",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
 }

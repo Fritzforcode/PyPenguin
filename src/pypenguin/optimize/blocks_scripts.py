@@ -1,6 +1,5 @@
 from pypenguin.helper_functions import ikv, pp, generateCustomOpcode
 from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputID, getDeoptimizedInputID, getInputMode, getInputModes, getOptimizedOptionID, getBlockType
-from pypenguin.optimize.comments import translateComment
 
 import copy, json
 

@@ -2,6 +2,11 @@ from pypenguin.validate.errors import ValidationError
 
 from pypenguin.database import opcodeDatabase
 allowedOpcodes = [(data["newOpcode"]) for data in opcodeDatabase.values()]
+allowedMenuOpcodes = []
+for opcodeData in opcodeDatabase.values():
+  if opcodeData.get("canHaveMonitor") == True:
+    allowedMenuOpcodes.append(opcodeData["newOpcode"])
+  
 textToSpeechLanguages = [
     None,
     "ar", "zh-cn", "da", "nl", "en", 
@@ -43,6 +48,7 @@ projectSchema = {
       "type": ["null", "string"],
       "enum": textToSpeechLanguages
     },
+    "monitors": { "type": "array" },
     "extensionData": { "type": "object" },
     "extensions"   : { "type": "array"  },
     "meta"         : {
@@ -68,6 +74,7 @@ projectSchema = {
     "sprites",
     "globalVariables",
     "globalLists",
+    "monitors",
     "extensionData",
     "extensions",
     "meta",
@@ -247,23 +254,45 @@ variableSchema = {
   "properties": {
     "name"           : { "type": "string", "minLength": 1 },
     "currentValue"   : { "type": ["string", "number"] },
-    "monitor"        : { "type": ["object", "null"] },
     "isCloudVariable": { "type": "boolean" }
   },
-  "required": ["name", "currentValue", "monitor"]
+  "required": ["name", "currentValue"]
 }
 
 listSchema = {
   "type": "object",
   "properties": {
     "name"        : { "type": "string", "minLength": 1 },
-    "currentValue": { "type" : "array", "items": {"type": ["string", "number"]} },
-    "monitor"     : { "type": ["object", "null"] }
+    "currentValue": { "type" : "array", "items": {"type": ["string", "number"]} }
   },
-  "required": ["name", "currentValue", "monitor"]
+  "required": ["name", "currentValue"]
 }
 
-variableMonitorSchema = {
+monitorSchema = {
+  "type": "object",
+  "properties": {
+    "opcode"    : { "type": "string", "enum": allowedMenuOpcodes },
+    "options"   : { "type": "object" },
+    "spriteName": { "type": ["string", "null"] },
+    "value"     : { "type": ["number", "array"] },
+    "size"      : {
+      "type"    : "array",
+      "items"   : { "type": "number" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "position"  : {
+      "type"    : "array",
+      "items"   : { "type": "number" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "visible"   : { "type": "boolean" },
+  },
+  "required": ["opcode", "options", "spriteName", "value", "size", "position", "visible"]
+}
+
+"""variableMonitorSchema = {
   "type": ["object", "null"],
   "properties": {
     "visible": { "type": "boolean" },
@@ -304,12 +333,12 @@ listMonitorSchema = {
     }
   },
   "required": ["visible", "size", "position"]
-}
+}"""
 
 from jsonschema import validate, exceptions
 
 def validateSchema(pathToData, data, schema):
-    
+    from pypenguin.helper_functions import pp
     try:
         validate(instance=data, schema=schema)
         error = None

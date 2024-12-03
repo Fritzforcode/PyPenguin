@@ -1,7 +1,5 @@
 # TODO
 
-combine "other sprite or stage" and "touchable sprite"
-
 validate input "option"
 
 insure procedures working
@@ -17,10 +15,6 @@ update documentation
 both empty script and None as input should make the input value empty
 
 add blocks requirering their extensions
-
-add more blocks
-
-what happens, when a comment is attached to a variable/list block
 
 explore and possibly translate extensionData
 

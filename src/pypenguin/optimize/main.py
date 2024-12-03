@@ -1,9 +1,10 @@
-from pypenguin.helper_functions import pp, ikv
+from pypenguin.helper_functions         import pp, ikv
+
 from pypenguin.optimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.optimize.variables_lists import translateVariables, translateLists
-from pypenguin.optimize.blocks_scripts import getCustomBlockMutations, prepareBlocks, nestScripts, finishScripts
-#from pypenguin.optimize.blocks_scripts import translateScript, generateBlockChildrenIDs, getCustomBlockMutations
-from pypenguin.optimize.comments import translateComment
+from pypenguin.optimize.blocks_scripts  import getCustomBlockMutations, prepareBlocks, nestScripts, finishScripts
+from pypenguin.optimize.comments        import translateComment
+from pypenguin.optimize.monitors        import translateMonitors
 
 def optimizeProjectJSON(projectData):
     newSpriteDatas = []
@@ -26,16 +27,10 @@ def optimizeProjectJSON(projectData):
         nestedScriptDatas  = nestScripts  (data=preparedBlockDatas)
         newScriptDatas     = finishScripts(data=nestedScriptDatas)
 
-        translatedCostumeDatas = translateCostumes(data=spriteData["costumes"])
-        translatedSoundDatas   = translateSounds  (data=spriteData["sounds"])
-        translatedVariableDatas = translateVariables(
-            data=spriteData, 
-            monitorDatas=projectData["monitors"]
-        )
-        translatedListDatas = translateLists(
-            data=spriteData,
-            monitorDatas=projectData["monitors"],
-        )
+        translatedCostumeDatas  = translateCostumes (data=spriteData["costumes"])
+        translatedSoundDatas    = translateSounds   (data=spriteData["sounds"])
+        translatedVariableDatas = translateVariables(data=spriteData)
+        translatedListDatas     = translateLists    (data=spriteData)
         newSpriteData = {
             "isStage"       : i == 0,
             "name"          : spriteData["name"],
@@ -63,6 +58,9 @@ def optimizeProjectJSON(projectData):
             }
         newSpriteDatas.append(newSpriteData)
     stageData = projectData["targets"][0]
+    newMonitorDatas = translateMonitors(
+        data=projectData["monitors"],
+    )
     newData = {
         "sprites"             : newSpriteDatas,
         "globalVariables"     : globalVariableDatas,
@@ -72,6 +70,7 @@ def optimizeProjectJSON(projectData):
         "videoState"          : stageData["videoState"],
         "textToSpeechLanguage": stageData["textToSpeechLanguage"],
 
+        "monitors"            : newMonitorDatas,
         "extensionData"       : projectData["extensionData"],
         "extensions"          : projectData["extensions"],
         "meta"                : projectData["meta"],

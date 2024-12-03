@@ -2,6 +2,7 @@ from pypenguin.helper_functions import pp
 from pypenguin.validate.constants import validateSchema, formatError, projectSchema
 from pypenguin.validate.variables_lists import validateVariable, validateList
 from pypenguin.validate.sprites import validateSprite
+from pypenguin.validate.monitors import validateMonitor
 from pypenguin.database import defaultCostume
 import copy
 
@@ -105,3 +106,5 @@ def validateProject(projectData):
         }
         validateSprite(path=["sprites"]+[i], data=sprite, context=context)
 
+    for i, monitorData in enumerate(projectDataCopy["monitors"]):
+        validateMonitor(path=["monitors"]+[i], data=monitorData)

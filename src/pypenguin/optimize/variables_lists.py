@@ -1,7 +1,7 @@
 from pypenguin.helper_functions import ikv, WhatIsGoingOnError, pp
 
 
-def translateVariables(data, monitorDatas):
+def translateVariables(data):
     newData = []
     for i,variableID,variableData in ikv(data["variables"]):
         name = variableData[0]
@@ -18,25 +18,24 @@ def translateVariables(data, monitorDatas):
         if data["customVars"] != []:
             raise WhatIsGoingOnError("Wow! I have been trying to find out what 'customVars' is used for. Can you explain how you did that? Please contact me on GitHub.")
         
-        monitorIDs = [i["id"] for i in monitorDatas]
-        # if there is no monitor for that variable
-        if variableID not in monitorIDs:
-            newMonitorData = None
-        else:
-            monitorData = monitorDatas[monitorIDs.index(variableID)]
-            newMonitorData = {
-                "visible"     : monitorData["visible"],
-                "size"        : [monitorData["width"], monitorData["height"]],
-                "position"    : [monitorData["x"], monitorData["y"]],
-                "sliderMin"   : monitorData["sliderMin"],
-                "sliderMax"   : monitorData["sliderMax"],
-                "onlyIntegers": monitorData["isDiscrete"],
-            }
+        #monitorIDs = [i["id"] for i in monitorDatas]
+        ## if there is no monitor for that variable
+        #if variableID not in monitorIDs:
+        #    newMonitorData = None
+        #else:
+        #    monitorData = monitorDatas[monitorIDs.index(variableID)]
+        #    newMonitorData = {
+        #        "visible"     : monitorData["visible"],
+        #        "size"        : [monitorData["width"], monitorData["height"]],
+        #        "position"    : [monitorData["x"], monitorData["y"]],
+        #        "sliderMin"   : monitorData["sliderMin"],
+        #        "sliderMax"   : monitorData["sliderMax"],
+        #        "onlyIntegers": monitorData["isDiscrete"],
+        #    }
         
         newVariableData = {
             "name"        : name,
             "currentValue": currentValue,
-            "monitor"     : newMonitorData,
         }
         if mode == "global":
             newVariableData["isCloudVariable"] = False
@@ -47,28 +46,27 @@ def translateVariables(data, monitorDatas):
         newData.append(newVariableData)
     return newData
     
-def translateLists(data, monitorDatas):
+def translateLists(data):
     newData = []
     for i,listID,listData in ikv(data["lists"]):
         name = listData[0]
         currentValue = listData[1]
         
-        monitorIDs = [i["id"] for i in monitorDatas]
-        # if there is no monitor for that list
-        if listID not in monitorIDs:
-            newMonitorData = None
-        else:
-            monitorData = monitorDatas[monitorIDs.index(listID)]
-            newMonitorData = {
-                "visible"     : monitorData["visible"],
-                "size"        : [monitorData["width"], monitorData["height"]],
-                "position"    : [monitorData["x"], monitorData["y"]],
-            }
+        #monitorIDs = [i["id"] for i in monitorDatas]
+        ## if there is no monitor for that list
+        #if listID not in monitorIDs:
+        #    newMonitorData = None
+        #else:
+        #    monitorData = monitorDatas[monitorIDs.index(listID)]
+        #    newMonitorData = {
+        #        "visible"     : monitorData["visible"],
+        #        "size"        : [monitorData["width"], monitorData["height"]],
+        #        "position"    : [monitorData["x"], monitorData["y"]],
+        #    }
         
         newListData = {
             "name"        : name,
             "currentValue": currentValue,
-            "monitor"     : newMonitorData,
         }
         newData.append(newListData)
     return newData
