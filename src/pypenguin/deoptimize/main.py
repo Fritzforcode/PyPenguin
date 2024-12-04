@@ -8,15 +8,16 @@ from pypenguin.deoptimize.comments import translateComment
 
 def translateVariablesLists(data):
     spriteNames = [sprite["name"] for sprite in data["sprites"]][1:]
-    translatedVariableDatas, variableMonitorDatas = translateVariables(
+    translatedVariableDatas = translateVariables(
         data=data, 
         spriteNames=spriteNames,
     )
-    translatedListDatas, listMonitorDatas = translateLists(
+    translatedListDatas = translateLists(
         data=data, 
         spriteNames=spriteNames,
     )
-    monitorDatas = variableMonitorDatas + listMonitorDatas
+    raise Exception("NOT THERE YET")
+    #monitorDatas = 
     return translatedVariableDatas, translatedListDatas, monitorDatas
 
 def deoptimizeProject(projectData):

@@ -152,6 +152,7 @@ opcodes = {
         "newOpcode": "value of [VARIABLE]",
         "inputTypes": {},
         "optionTypes": {"VARIABLE": "variable"},
+        "canHaveMonitor": True,
     },
     "special_list_value": {
         "type": "stringReporter",
@@ -159,6 +160,7 @@ opcodes = {
         "newOpcode": "value of [LIST]",
         "inputTypes": {},
         "optionTypes": {"LIST": "list"},
+        "canHaveMonitor": True,
     },
 # SPECIAL: Custom Blocks
     "special_define": {

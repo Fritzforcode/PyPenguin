@@ -66,14 +66,17 @@
     "globalVariables": [
         {
             "name": "my variable",
-            "currentValue": 0,
+            "currentValue": 5,
             "isCloudVariable": false
         }
     ],
     "globalLists": [
         {
             "name": "my list",
-            "currentValue": []
+            "currentValue": [
+                "ertert",
+                "thing"
+            ]
         }
     ],
     "tempo": 60,
@@ -85,7 +88,6 @@
             "opcode": "x position",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -97,13 +99,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "y position",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -115,13 +116,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "direction",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -133,13 +133,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "bubble width",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -151,13 +150,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "bubble height",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -169,13 +167,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "x stretch",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -187,13 +184,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "y stretch",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -205,7 +201,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sprite effect",
@@ -213,7 +209,6 @@
                 "EFFECT": "COLOR"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -225,7 +220,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sprite effect",
@@ -233,7 +228,6 @@
                 "EFFECT": "FISHEYE"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -245,7 +239,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sprite effect",
@@ -253,7 +247,6 @@
                 "EFFECT": "WHIRL"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -265,7 +258,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sprite effect",
@@ -273,7 +266,6 @@
                 "EFFECT": "PIXELATE"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -285,7 +277,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sprite effect",
@@ -293,7 +285,6 @@
                 "EFFECT": "MOSAIC"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -305,7 +296,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sprite effect",
@@ -313,7 +304,6 @@
                 "EFFECT": "BRIGHTNESS"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -325,7 +315,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sprite effect",
@@ -333,7 +323,6 @@
                 "EFFECT": "GHOST"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -345,7 +334,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sprite effect",
@@ -353,7 +342,6 @@
                 "EFFECT": "SATURATION"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -365,7 +353,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sprite effect",
@@ -373,7 +361,6 @@
                 "EFFECT": "RED"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -385,7 +372,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sprite effect",
@@ -393,7 +380,6 @@
                 "EFFECT": "GREEN"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -405,7 +391,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sprite effect",
@@ -413,7 +399,6 @@
                 "EFFECT": "BLUE"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -425,7 +410,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sprite effect",
@@ -433,7 +418,6 @@
                 "EFFECT": "OPAQUE"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -445,13 +429,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "tint color",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -463,13 +446,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "visible?",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -481,13 +463,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "layer",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -499,7 +480,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "costume [PROPERTY]",
@@ -507,7 +488,6 @@
                 "PROPERTY": "number"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -519,15 +499,14 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
-            "opcode": "costume [PROPERTY]",
+            "opcode": "backdrop [PROPERTY]",
             "options": {
                 "PROPERTY": "number"
             },
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -539,13 +518,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "size",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -557,7 +535,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "[EFFECT] sound effect",
@@ -565,7 +543,6 @@
                 "EFFECT": "PITCH"
             },
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -577,13 +554,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "volume",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -595,13 +571,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "answer",
             "options": {},
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -613,13 +588,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "mouse down?",
             "options": {},
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -631,13 +605,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "mouse clicked?",
             "options": {},
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -649,13 +622,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "mouse x",
             "options": {},
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -667,13 +639,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "mouse y",
             "options": {},
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -685,13 +656,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "clipboard item",
             "options": {},
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -703,13 +673,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "draggable?",
             "options": {},
             "spriteName": "Sprite1",
-            "value": 0,
             "size": [
                 0,
                 0
@@ -721,13 +690,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "loudness",
             "options": {},
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -739,13 +707,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "loud?",
             "options": {},
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -757,13 +724,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "timer",
             "options": {},
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -775,7 +741,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "current [PROPERTY]",
@@ -783,7 +749,6 @@
                 "PROPERTY": "YEAR"
             },
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -795,13 +760,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "days since 2000",
             "options": {},
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -813,13 +777,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "username",
             "options": {},
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -831,13 +794,12 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "logged in?",
             "options": {},
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -849,7 +811,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "value of [VARIABLE]",
@@ -857,7 +819,6 @@
                 "VARIABLE": "my variable"
             },
             "spriteName": null,
-            "value": 0,
             "size": [
                 0,
                 0
@@ -869,7 +830,7 @@
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
-            "isDiscrete": true
+            "onlyIntegers": true
         },
         {
             "opcode": "value of [LIST]",
@@ -877,7 +838,6 @@
                 "LIST": "my list"
             },
             "spriteName": null,
-            "value": [],
             "size": [
                 0,
                 0

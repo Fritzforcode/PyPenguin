@@ -6,13 +6,16 @@
             "variables": {
                 "`jEk@4|i[#Fk?(8x)AV.-my variable": [
                     "my variable",
-                    0
+                    5
                 ]
             },
             "lists": {
                 "DLZ*ZPXCDT!#KR9:B+T-": [
                     "my list",
-                    []
+                    [
+                        "ertert",
+                        "thing"
+                    ]
                 ]
             },
             "broadcasts": {},
@@ -164,7 +167,7 @@
             "isDiscrete": true
         },
         {
-            "id": "5I9nI;7P)jdiR-_X;/%l_stretchGetX",
+            "id": "5I9nI;7P)jdiR-_X;/%l_stretchX",
             "mode": "default",
             "opcode": "looks_stretchGetX",
             "params": {},
@@ -180,7 +183,7 @@
             "isDiscrete": true
         },
         {
-            "id": "5I9nI;7P)jdiR-_X;/%l_stretchGetY",
+            "id": "5I9nI;7P)jdiR-_X;/%l_stretchY",
             "mode": "default",
             "opcode": "looks_stretchGetY",
             "params": {},
@@ -512,7 +515,7 @@
             "isDiscrete": true
         },
         {
-            "id": "5I9nI;7P)jdiR-_X;/%l_soundgetEffectValue_PITCH",
+            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_PITCH",
             "mode": "default",
             "opcode": "sound_getEffectValue",
             "params": {

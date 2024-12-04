@@ -290,6 +290,7 @@ opcodes = {
         "newOpcode": "layer",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "looks_costumenumbername": {
         "type": "stringReporter",
@@ -303,7 +304,7 @@ opcodes = {
     "looks_backdropnumbername": {
         "type": "stringReporter",
         "category": "Looks",
-        "newOpcode": "costume [PROPERTY]",
+        "newOpcode": "backdrop [PROPERTY]",
         "inputTypes": {},
         "optionTypes": {"PROPERTY": "number or name"},
         "optionTranslation": {"NUMBER_NAME": "PROPERTY"},

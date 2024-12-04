@@ -163,17 +163,16 @@
     "textToSpeechLanguage": null,
     "monitors": [
         {
-            "opcode": "",
+            "opcode": "logged in?",
             "options": {},
-            "spriteName": "",
-            "value": 43,
+            "spriteName": null,
             "size": [
-                5,
-                5
+                0,
+                0
             ],
             "position": [
-                15,
-                15
+                10,
+                10
             ],
             "visible": true
         }

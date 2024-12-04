@@ -91,6 +91,7 @@ opcodes = {
         "newOpcode": "[EFFECT] sound effect",
         "inputTypes": {},
         "optionTypes": {"EFFECT": "sound effect"},
+        "canHaveMonitor": True,
     },
     "sound_changevolumeby": {
         "type": "instruction",
@@ -114,5 +115,6 @@ opcodes = {
         "newOpcode": "volume",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
 }

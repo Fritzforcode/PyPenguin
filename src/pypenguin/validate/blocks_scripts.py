@@ -167,10 +167,10 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                 raise formatError(path, f"Must be a string.")
         case "variable":
             if data not in context["scopeVariables"]:
-                raise formatError(path, f"Must be a defined variable.")
+                raise formatError(path, f"Must be a defined variable. Must be one of these: {context['scopeVariables']}")
         case "list":
             if data not in context["scopeLists"]:
-                raise formatError(path, f"Must be a defined list.")
+                raise formatError(path, f"Must be a defined list. Must be one of these: {context['scopeVariables']}")
         case "boolean":
             if not isinstance(data, bool):
                 raise formatError(path, f"Must be a boolean.")

@@ -145,12 +145,11 @@ projectData = {
 
     "monitors": [
         {
-            "opcode": "",
-            "options": {},
-            "spriteName": "",
-            "value": 43,
-            "size": [5, 5],
-            "position": [15, 15],
+            "opcode": "value of [VARIABLE]",
+            "options": {"VARIABLE": "var"},
+            "spriteName": None,
+            "size": [0, 0],
+            "position": [10, 10],
             "visible": True,
         },
     ],
@@ -175,7 +174,9 @@ from pypenguin.helper_functions import writeJSONFile, pp
 validateProject(projectData=projectData)
 #pp(projectData)
 
-writeJSONFile(
+print("DONE")
+
+"""writeJSONFile(
     filePath = "temp2.json",
     data     = projectData
 )
@@ -191,3 +192,5 @@ deoptimizeAndCompressProject(
     temporaryDir        = "temporary",
     writeDebugFiles     = True,
 )
+"""
+#"""

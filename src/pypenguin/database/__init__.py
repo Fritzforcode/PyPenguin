@@ -41,6 +41,28 @@ opcodeDatabase = (
     extJSON
 )
 
+def getAllOptimizedOpcodes():
+    opcodes = {}
+    for i, oldOpcode, opcodeData in ikv(opcodeDatabase):
+        if opcodeData["newOpcode"] in opcodes.values():
+            index       = list(opcodes.values()).index(opcodeData["newOpcode"])
+            otherOpcode = list(opcodes.keys  ())[index]
+            raise Exception(f"Double opocde detected {otherOpcode} and {oldOpcode}")
+        opcodes[oldOpcode] = opcodeData["newOpcode"]
+    return list(opcodes.values())
+
+def getAllMonitorOpcodes():
+    opcodes = {}
+    for i, oldOpcode, opcodeData in ikv(opcodeDatabase):
+        if opcodeData["newOpcode"] in opcodes.values():
+            index       = list(opcodes.values()).index(opcodeData["newOpcode"])
+            otherOpcode = list(opcodes.keys  ())[index]
+            raise Exception(f"Double opocde detected {otherOpcode} and {oldOpcode}")
+        
+        if opcodeData.get("canHaveMonitor") == True:
+            opcodes[oldOpcode] = opcodeData["newOpcode"]
+    return list(opcodes.values())
+
 def getOptimizedOpcode(opcode):
     return opcodeDatabase[opcode]["newOpcode"]
 

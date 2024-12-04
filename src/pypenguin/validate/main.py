@@ -107,4 +107,8 @@ def validateProject(projectData):
         validateSprite(path=["sprites"]+[i], data=sprite, context=context)
 
     for i, monitorData in enumerate(projectDataCopy["monitors"]):
-        validateMonitor(path=["monitors"]+[i], data=monitorData)
+        validateMonitor(
+            path=["monitors"]+[i], 
+            data=monitorData, 
+            context=context
+        )

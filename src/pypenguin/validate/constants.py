@@ -1,11 +1,8 @@
 from pypenguin.validate.errors import ValidationError
 
-from pypenguin.database import opcodeDatabase
-allowedOpcodes = [(data["newOpcode"]) for data in opcodeDatabase.values()]
-allowedMenuOpcodes = []
-for opcodeData in opcodeDatabase.values():
-  if opcodeData.get("canHaveMonitor") == True:
-    allowedMenuOpcodes.append(opcodeData["newOpcode"])
+from pypenguin.database import getAllOptimizedOpcodes, getAllMonitorOpcodes
+allowedOpcodes     = getAllOptimizedOpcodes()
+allowedMenuOpcodes = getAllMonitorOpcodes()
   
 textToSpeechLanguages = [
     None,
@@ -274,7 +271,6 @@ monitorSchema = {
     "opcode"    : { "type": "string", "enum": allowedMenuOpcodes },
     "options"   : { "type": "object" },
     "spriteName": { "type": ["string", "null"] },
-    "value"     : { "type": ["number", "array"] },
     "size"      : {
       "type"    : "array",
       "items"   : { "type": "number" },
@@ -289,51 +285,8 @@ monitorSchema = {
     },
     "visible"   : { "type": "boolean" },
   },
-  "required": ["opcode", "options", "spriteName", "value", "size", "position", "visible"]
+  "required": ["opcode", "options", "spriteName", "size", "position", "visible"]
 }
-
-"""variableMonitorSchema = {
-  "type": ["object", "null"],
-  "properties": {
-    "visible": { "type": "boolean" },
-    "size"   : {
-      "type"    : "array",
-      "items"   : { "type": "integer", "minimum": 0 },
-      "minItems": 2,
-      "maxItems": 2
-    },
-    "position": {
-      "type"    : "array",
-      "items"   : { "type": "number" },
-      "minItems": 2,
-      "maxItems": 2
-    },
-    "sliderMin"   : { "type": "number" },
-    "sliderMax"   : { "type": "number" },
-    "onlyIntegers": { "type": "boolean" }
-  },
-  "required": ["visible", "size", "position", "sliderMin", "sliderMax", "onlyIntegers"]
-  }
-
-listMonitorSchema = {
-  "type": ["object", "null"],
-  "properties": {
-    "visible": { "type": "boolean" },
-    "size": {
-      "type"    : "array",
-      "items"   : { "type": "integer", "minimum": 0 },
-      "minItems": 2,
-      "maxItems": 2
-    },
-    "position": {
-      "type"    : "array",
-      "items"   : { "type": "number" },
-      "minItems": 2,
-      "maxItems": 2
-    }
-  },
-  "required": ["visible", "size", "position"]
-}"""
 
 from jsonschema import validate, exceptions
 
