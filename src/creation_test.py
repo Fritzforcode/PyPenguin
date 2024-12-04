@@ -142,15 +142,19 @@ projectData = {
     "videoTransparency": 0,
     "videoState": "off",
     "textToSpeechLanguage": None,
-
+# ['x position', 'y position', 'direction', 'bubble width', 'bubble height', 'x stretch', 'y stretch', '[EFFECT] sprite effect', 'tint color', 'visible?', 'layer', 'costume [PROPERTY]', 'backdrop [PROPERTY]', 'size', '[EFFECT] sound effect', 'volume', 'answer', 'mouse down?', 'mouse clicked?', 'mouse x', 'mouse y', 'clipboard item', 'draggable?', 'loudness', 'loud?', 'timer', 'current [PROPERTY]', 'days since 2000', 'username', 'logged in?', 'value of [VARIABLE]', 'value of [LIST]']
     "monitors": [
         {
             "opcode": "value of [VARIABLE]",
-            "options": {"VARIABLE": "var"},
-            "spriteName": None,
-            "size": [0, 0],
+            "options": {
+                "VARIABLE": "loc var",
+            },
+            "spriteName": "Sprite1",
             "position": [10, 10],
             "visible": True,
+            "sliderMin": 4,
+            "sliderMax": 9,
+            "onlyIntegers": True,
         },
     ],
 
@@ -174,9 +178,7 @@ from pypenguin.helper_functions import writeJSONFile, pp
 validateProject(projectData=projectData)
 #pp(projectData)
 
-print("DONE")
-
-"""writeJSONFile(
+writeJSONFile(
     filePath = "temp2.json",
     data     = projectData
 )
@@ -192,5 +194,3 @@ deoptimizeAndCompressProject(
     temporaryDir        = "temporary",
     writeDebugFiles     = True,
 )
-"""
-#"""

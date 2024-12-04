@@ -283,9 +283,13 @@ monitorSchema = {
       "minItems": 2,
       "maxItems": 2
     },
-    "visible"   : { "type": "boolean" },
+    "visible"     : { "type": "boolean" },
+    "sliderMin"   : { "type": "number" }, 
+    "sliderMax"   : { "type": "number" }, 
+    "onlyIntegers": { "type": "boolean" }, 
+
   },
-  "required": ["opcode", "options", "spriteName", "size", "position", "visible"]
+  "required": ["opcode", "options", "spriteName", "position", "visible"]
 }
 
 from jsonschema import validate, exceptions

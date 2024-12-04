@@ -1,186 +1,421 @@
 {
     "sprites": [
         {
-            "name": "Stage",
             "isStage": true,
-            "scripts": [
+            "name": "Stage",
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
                 {
-                    "position": [
-                        0,
-                        0
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "instruction",
-                                "customOpcode": "instr (num txt) <bool val> !"
-                            }
-                        },
-                        {
-                            "opcode": "return (VALUE)",
-                            "inputs": {
-                                "VALUE": {}
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        100
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "lastInstruction",
-                                "customOpcode": "lastInstr (txt) <bool val>!"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        200
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "textReporter",
-                                "customOpcode": "reportText (txt)"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        300
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "numberReporter",
-                                "customOpcode": "reportNumber (num)"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        400
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "booleanReporter",
-                                "customOpcode": "reportBool <bool>"
-                            }
-                        }
+                    "name": "backdrop1",
+                    "dataFormat": "svg",
+                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        240,
+                        180
                     ]
                 }
             ],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
             "sounds": [],
             "volume": 100
         },
         {
-            "name": "Sprite1",
             "isStage": false,
+            "name": "Sprite1",
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [],
-            "sounds": [],
-            "localVariables": [
+            "costumes": [
                 {
-                    "name": "loc var",
-                    "currentValue": "",
-                    "monitor": null
+                    "name": "costume1",
+                    "dataFormat": "svg",
+                    "fileStem": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        26,
+                        46
+                    ]
                 }
             ],
-            "localLists": [],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "dataFormat": "wav",
+                    "fileStem": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "rate": 48000,
+                    "sampleCount": 17867
+                }
+            ],
             "volume": 100,
+            "localVariables": [
+                {
+                    "name": "local var",
+                    "currentValue": 0
+                }
+            ],
+            "localLists": [
+                {
+                    "name": "local list",
+                    "currentValue": []
+                }
+            ],
             "layerOrder": 1,
             "visible": true,
             "position": [
                 0,
                 0
             ],
-            "size": 100,
+            "size": 28,
             "direction": 90,
-            "draggable": true,
-            "rotationStyle": "all around"
-        },
-        {
-            "name": "Sprite6",
-            "isStage": false,
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
-            "sounds": [],
-            "localVariables": [],
-            "localLists": [],
-            "volume": 100,
-            "layerOrder": 1,
-            "visible": true,
-            "position": [
-                0,
-                0
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": true,
+            "draggable": false,
             "rotationStyle": "all around"
         }
     ],
     "globalVariables": [
         {
-            "name": "var",
-            "currentValue": "",
-            "monitor": null,
+            "name": "global var",
+            "currentValue": 0,
             "isCloudVariable": false
         }
     ],
-    "globalLists": [],
+    "globalLists": [
+        {
+            "name": "global list",
+            "currentValue": []
+        }
+    ],
     "tempo": 60,
-    "videoTransparency": 0,
-    "videoState": "off",
+    "videoTransparency": 50,
+    "videoState": "on",
     "textToSpeechLanguage": null,
     "monitors": [
+        {
+            "opcode": "[EFFECT] sound effect",
+            "options": {
+                "EFFECT": "PITCH"
+            },
+            "spriteName": "Sprite1",
+            "position": [
+                5,
+                5
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "[EFFECT] sound effect",
+            "options": {
+                "EFFECT": "PAN"
+            },
+            "spriteName": "Sprite1",
+            "position": [
+                5,
+                31
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "volume",
+            "options": {},
+            "spriteName": "Sprite1",
+            "position": [
+                5,
+                57
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "answer",
+            "options": {},
+            "spriteName": null,
+            "position": [
+                5,
+                83
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "mouse down?",
+            "options": {},
+            "spriteName": null,
+            "position": [
+                5,
+                109
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "mouse clicked?",
+            "options": {},
+            "spriteName": null,
+            "position": [
+                5,
+                135
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "mouse x",
+            "options": {},
+            "spriteName": null,
+            "position": [
+                5,
+                161
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "mouse y",
+            "options": {},
+            "spriteName": null,
+            "position": [
+                5,
+                187
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "clipboard item",
+            "options": {},
+            "spriteName": null,
+            "position": [
+                5,
+                213
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "draggable?",
+            "options": {},
+            "spriteName": "Sprite1",
+            "position": [
+                5,
+                239
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "loudness",
+            "options": {},
+            "spriteName": null,
+            "position": [
+                5,
+                265
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "loud?",
+            "options": {},
+            "spriteName": null,
+            "position": [
+                363,
+                287
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "timer",
+            "options": {},
+            "spriteName": null,
+            "position": [
+                279,
+                59
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "YEAR"
+            },
+            "spriteName": null,
+            "position": [
+                283,
+                141
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "MONTH"
+            },
+            "spriteName": null,
+            "position": [
+                285,
+                171
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "DATE"
+            },
+            "spriteName": null,
+            "position": [
+                366,
+                205
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "DAYOFWEEK"
+            },
+            "spriteName": null,
+            "position": [
+                277,
+                1
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "HOUR"
+            },
+            "spriteName": null,
+            "position": [
+                275,
+                29
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "MINUTE"
+            },
+            "spriteName": null,
+            "position": [
+                279,
+                86
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "SECOND"
+            },
+            "spriteName": null,
+            "position": [
+                280,
+                114
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "TIMESTAMP"
+            },
+            "spriteName": null,
+            "position": [
+                286,
+                203
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "days since 2000",
+            "options": {},
+            "spriteName": null,
+            "position": [
+                272,
+                233
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "username",
+            "options": {},
+            "spriteName": null,
+            "position": [
+                324,
+                322
+            ],
+            "visible": true
+        },
         {
             "opcode": "logged in?",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                10,
-                10
+                330,
+                260
             ],
             "visible": true
+        },
+        {
+            "opcode": "value of [VARIABLE]",
+            "options": {
+                "VARIABLE": "global var"
+            },
+            "spriteName": null,
+            "position": [
+                0,
+                295
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "onlyIntegers": true
+        },
+        {
+            "opcode": "value of [VARIABLE]",
+            "options": {
+                "VARIABLE": "local var"
+            },
+            "spriteName": "Sprite1",
+            "position": [
+                0,
+                324
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "onlyIntegers": true
+        },
+        {
+            "opcode": "value of [LIST]",
+            "options": {
+                "LIST": "global list"
+            },
+            "spriteName": null,
+            "position": [
+                164,
+                284
+            ],
+            "visible": true,
+            "size": [
+                100,
+                76
+            ]
+        },
+        {
+            "opcode": "value of [LIST]",
+            "options": {
+                "LIST": "local list"
+            },
+            "spriteName": "Sprite1",
+            "position": [
+                175,
+                176
+            ],
+            "visible": true,
+            "size": [
+                100,
+                89
+            ]
         }
     ],
     "extensionData": {},
-    "extensions": [
-        "jgJSON"
-    ],
+    "extensions": [],
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",

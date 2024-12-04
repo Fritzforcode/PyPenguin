@@ -49,15 +49,25 @@
                 }
             ],
             "volume": 100,
-            "localVariables": [],
-            "localLists": [],
+            "localVariables": [
+                {
+                    "name": "local var",
+                    "currentValue": 0
+                }
+            ],
+            "localLists": [
+                {
+                    "name": "local list",
+                    "currentValue": []
+                }
+            ],
             "layerOrder": 1,
             "visible": true,
             "position": [
                 0,
                 0
             ],
-            "size": 100,
+            "size": 28,
             "direction": 90,
             "draggable": false,
             "rotationStyle": "all around"
@@ -65,18 +75,15 @@
     ],
     "globalVariables": [
         {
-            "name": "my variable",
-            "currentValue": 5,
+            "name": "global var",
+            "currentValue": 0,
             "isCloudVariable": false
         }
     ],
     "globalLists": [
         {
-            "name": "my list",
-            "currentValue": [
-                "ertert",
-                "thing"
-            ]
+            "name": "global list",
+            "currentValue": []
         }
     ],
     "tempo": 60,
@@ -85,663 +92,138 @@
     "textToSpeechLanguage": null,
     "monitors": [
         {
-            "opcode": "x position",
-            "options": {},
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                5,
-                5
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "y position",
-            "options": {},
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                5,
-                31
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "direction",
-            "options": {},
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                5,
-                57
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "bubble width",
-            "options": {},
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                5,
-                83
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "bubble height",
-            "options": {},
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                5,
-                109
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "x stretch",
-            "options": {},
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                5,
-                135
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "y stretch",
-            "options": {},
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                5,
-                161
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "[EFFECT] sprite effect",
-            "options": {
-                "EFFECT": "COLOR"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                5,
-                187
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "[EFFECT] sprite effect",
-            "options": {
-                "EFFECT": "FISHEYE"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                5,
-                213
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "[EFFECT] sprite effect",
-            "options": {
-                "EFFECT": "WHIRL"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                5,
-                239
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "[EFFECT] sprite effect",
-            "options": {
-                "EFFECT": "PIXELATE"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                5,
-                265
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "[EFFECT] sprite effect",
-            "options": {
-                "EFFECT": "MOSAIC"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                205,
-                5
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "[EFFECT] sprite effect",
-            "options": {
-                "EFFECT": "BRIGHTNESS"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                205,
-                31
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "[EFFECT] sprite effect",
-            "options": {
-                "EFFECT": "GHOST"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                205,
-                57
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "[EFFECT] sprite effect",
-            "options": {
-                "EFFECT": "SATURATION"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                205,
-                83
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "[EFFECT] sprite effect",
-            "options": {
-                "EFFECT": "RED"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                205,
-                109
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "[EFFECT] sprite effect",
-            "options": {
-                "EFFECT": "GREEN"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                205,
-                135
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "[EFFECT] sprite effect",
-            "options": {
-                "EFFECT": "BLUE"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                205,
-                161
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "[EFFECT] sprite effect",
-            "options": {
-                "EFFECT": "OPAQUE"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                205,
-                187
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "tint color",
-            "options": {},
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                205,
-                213
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "visible?",
-            "options": {},
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                205,
-                239
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "layer",
-            "options": {},
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                255,
-                265
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "costume [PROPERTY]",
-            "options": {
-                "PROPERTY": "number"
-            },
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                82,
-                69
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "backdrop [PROPERTY]",
-            "options": {
-                "PROPERTY": "number"
-            },
-            "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                192,
-                190
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
-            "opcode": "size",
-            "options": {},
-            "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
-            "position": [
-                198,
-                131
-            ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
-        },
-        {
             "opcode": "[EFFECT] sound effect",
             "options": {
                 "EFFECT": "PITCH"
             },
             "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                36,
+                5,
+                5
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "[EFFECT] sound effect",
+            "options": {
+                "EFFECT": "PAN"
+            },
+            "spriteName": "Sprite1",
+            "position": [
+                5,
                 31
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "volume",
             "options": {},
             "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                64,
-                116
+                5,
+                57
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "answer",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                41,
-                256
+                5,
+                83
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "mouse down?",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                89,
-                241
+                5,
+                109
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "mouse clicked?",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                88,
-                107
+                5,
+                135
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "mouse x",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                191,
-                233
+                5,
+                161
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "mouse y",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                1,
-                134
+                5,
+                187
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "clipboard item",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                72,
-                182
+                5,
+                213
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "draggable?",
             "options": {},
             "spriteName": "Sprite1",
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                109,
-                142
+                5,
+                239
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "loudness",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                149,
-                248
+                5,
+                265
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "loud?",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                136,
-                53
+                363,
+                287
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "timer",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                28,
-                198
+                279,
+                59
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "current [PROPERTY]",
@@ -749,64 +231,135 @@
                 "PROPERTY": "YEAR"
             },
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                66,
-                23
+                283,
+                141
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "MONTH"
+            },
+            "spriteName": null,
+            "position": [
+                285,
+                171
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "DATE"
+            },
+            "spriteName": null,
+            "position": [
+                366,
+                205
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "DAYOFWEEK"
+            },
+            "spriteName": null,
+            "position": [
+                277,
+                1
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "HOUR"
+            },
+            "spriteName": null,
+            "position": [
+                275,
+                29
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "MINUTE"
+            },
+            "spriteName": null,
+            "position": [
+                279,
+                86
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "SECOND"
+            },
+            "spriteName": null,
+            "position": [
+                280,
+                114
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "current [PROPERTY]",
+            "options": {
+                "PROPERTY": "TIMESTAMP"
+            },
+            "spriteName": null,
+            "position": [
+                286,
+                203
+            ],
+            "visible": true
         },
         {
             "opcode": "days since 2000",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                160,
-                110
+                272,
+                233
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "username",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                164,
-                132
+                324,
+                322
             ],
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "onlyIntegers": true
+            "visible": true
         },
         {
             "opcode": "logged in?",
             "options": {},
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                143,
-                165
+                330,
+                260
+            ],
+            "visible": true
+        },
+        {
+            "opcode": "value of [VARIABLE]",
+            "options": {
+                "VARIABLE": "global var"
+            },
+            "spriteName": null,
+            "position": [
+                0,
+                295
             ],
             "visible": true,
             "sliderMin": 0,
@@ -816,16 +369,12 @@
         {
             "opcode": "value of [VARIABLE]",
             "options": {
-                "VARIABLE": "my variable"
+                "VARIABLE": "local var"
             },
-            "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
+            "spriteName": "Sprite1",
             "position": [
-                183,
-                113
+                0,
+                324
             ],
             "visible": true,
             "sliderMin": 0,
@@ -835,18 +384,34 @@
         {
             "opcode": "value of [LIST]",
             "options": {
-                "LIST": "my list"
+                "LIST": "global list"
             },
             "spriteName": null,
-            "size": [
-                0,
-                0
-            ],
             "position": [
-                200,
-                76
+                164,
+                284
             ],
-            "visible": true
+            "visible": true,
+            "size": [
+                100,
+                76
+            ]
+        },
+        {
+            "opcode": "value of [LIST]",
+            "options": {
+                "LIST": "local list"
+            },
+            "spriteName": "Sprite1",
+            "position": [
+                175,
+                176
+            ],
+            "visible": true,
+            "size": [
+                100,
+                89
+            ]
         }
     ],
     "extensionData": {},

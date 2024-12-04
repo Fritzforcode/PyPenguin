@@ -1,10 +1,11 @@
-from pypenguin.helper_functions import generateRandomToken,  newTempSelector, pp, ikv, flipKeysAndValues, WhatIsGoingOnError
+from pypenguin.helper_functions import newTempSelector, pp, stringToToken
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
 from pypenguin.deoptimize.blocks_scripts import restoreScripts, flattenScripts, restoreBlocks, finishBlocks
 from pypenguin.deoptimize.broadcasts import generateBroadcasts
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
+from pypenguin.deoptimize.monitors import translateMonitor
 
 def translateVariablesLists(data):
     spriteNames = [sprite["name"] for sprite in data["sprites"]][1:]
@@ -16,17 +17,15 @@ def translateVariablesLists(data):
         data=data, 
         spriteNames=spriteNames,
     )
-    raise Exception("NOT THERE YET")
-    #monitorDatas = 
-    return translatedVariableDatas, translatedListDatas, monitorDatas
+    return translatedVariableDatas, translatedListDatas
 
 def deoptimizeProject(projectData):
     spriteNames = [sprite["name"] for sprite in projectData["sprites"]][1:]
-    translatedVariableDatas, translatedListDatas, monitorDatas = translateVariablesLists(data=projectData)    
+    translatedVariableDatas, translatedListDatas = translateVariablesLists(data=projectData)    
     broadcastDatas = generateBroadcasts(data=projectData["sprites"])
     
     newSpriteDatas = []
-    for spriteData in projectData["sprites"]:
+    for i, spriteData in enumerate(projectData["sprites"]):
         unfinishedScriptDatas = restoreScripts(spriteData["scripts"])
         flattendScriptDatas   = flattenScripts(unfinishedScriptDatas)
         newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
@@ -55,6 +54,11 @@ def deoptimizeProject(projectData):
         newSoundDatas = translateSounds(
             data=spriteData["sounds"],
         )
+
+        if i == 0:
+            token = stringToToken("_stage_")
+        else:
+            token = stringToToken(spriteData["name"])
         
         
         newSpriteData = {
@@ -69,7 +73,7 @@ def deoptimizeProject(projectData):
             "currentCostume": spriteData["currentCostume"],
             "costumes"      : newCostumeDatas,
             "sounds"        : newSoundDatas,
-            "id"            : generateRandomToken(),
+            "id"            : token,
             "volume"        : spriteData["volume"],
         }
         if spriteData["isStage"]:
@@ -93,9 +97,15 @@ def deoptimizeProject(projectData):
                 "layerOrder"   : spriteData["layerOrder"],
             }
         newSpriteDatas.append(newSpriteData)
+    
+    # Translate monitors
+    newMonitorDatas = []
+    for monitorData in projectData["monitors"]:
+        newMonitorDatas.append(translateMonitor(data=monitorData))
+
     newProjectData = {
         "targets"      : newSpriteDatas,
-        "monitors"     : monitorDatas,
+        "monitors"     : newMonitorDatas,
         "extensionData": projectData["extensionData"],
         "extensions"   : projectData["extensions"],
         "meta"         : projectData["meta"],

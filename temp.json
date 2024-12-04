@@ -4,18 +4,15 @@
             "isStage": true,
             "name": "Stage",
             "variables": {
-                "`jEk@4|i[#Fk?(8x)AV.-my variable": [
-                    "my variable",
-                    5
+                "kYBE8D1#B{PBu##M]3ph": [
+                    "global var",
+                    0
                 ]
             },
             "lists": {
-                "DLZ*ZPXCDT!#KR9:B+T-": [
-                    "my list",
-                    [
-                        "ertert",
-                        "thing"
-                    ]
+                "]UCmAt?OO1zGqn[46T{H": [
+                    "global list",
+                    []
                 ]
             },
             "broadcasts": {},
@@ -45,8 +42,18 @@
         {
             "isStage": false,
             "name": "Sprite1",
-            "variables": {},
-            "lists": {},
+            "variables": {
+                "w(.xK,U`Z+w5:Nd.TZ^r": [
+                    "local var",
+                    0
+                ]
+            },
+            "lists": {
+                "R1E6Ngpb=8F!pI-,pX]+": [
+                    "local list",
+                    []
+                ]
+            },
             "broadcasts": {},
             "customVars": [],
             "blocks": {},
@@ -79,7 +86,7 @@
             "visible": true,
             "x": 0,
             "y": 0,
-            "size": 100,
+            "size": 28,
             "direction": 90,
             "draggable": false,
             "rotationStyle": "all around"
@@ -87,435 +94,7 @@
     ],
     "monitors": [
         {
-            "id": "5I9nI;7P)jdiR-_X;/%l_xposition",
-            "mode": "default",
-            "opcode": "motion_xposition",
-            "params": {},
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 5,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_yposition",
-            "mode": "default",
-            "opcode": "motion_yposition",
-            "params": {},
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 31,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_direction",
-            "mode": "default",
-            "opcode": "motion_direction",
-            "params": {},
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 57,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_sayWidth",
-            "mode": "default",
-            "opcode": "looks_sayWidth",
-            "params": {},
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 83,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_sayHeight",
-            "mode": "default",
-            "opcode": "looks_sayHeight",
-            "params": {},
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 109,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_stretchX",
-            "mode": "default",
-            "opcode": "looks_stretchGetX",
-            "params": {},
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 135,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_stretchY",
-            "mode": "default",
-            "opcode": "looks_stretchGetY",
-            "params": {},
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 161,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_COLOR",
-            "mode": "default",
-            "opcode": "looks_getEffectValue",
-            "params": {
-                "EFFECT": "COLOR"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 187,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_FISHEYE",
-            "mode": "default",
-            "opcode": "looks_getEffectValue",
-            "params": {
-                "EFFECT": "FISHEYE"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 213,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_WHIRL",
-            "mode": "default",
-            "opcode": "looks_getEffectValue",
-            "params": {
-                "EFFECT": "WHIRL"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 239,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_PIXELATE",
-            "mode": "default",
-            "opcode": "looks_getEffectValue",
-            "params": {
-                "EFFECT": "PIXELATE"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 5,
-            "y": 265,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_MOSAIC",
-            "mode": "default",
-            "opcode": "looks_getEffectValue",
-            "params": {
-                "EFFECT": "MOSAIC"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 205,
-            "y": 5,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_BRIGHTNESS",
-            "mode": "default",
-            "opcode": "looks_getEffectValue",
-            "params": {
-                "EFFECT": "BRIGHTNESS"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 205,
-            "y": 31,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_GHOST",
-            "mode": "default",
-            "opcode": "looks_getEffectValue",
-            "params": {
-                "EFFECT": "GHOST"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 205,
-            "y": 57,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_SATURATION",
-            "mode": "default",
-            "opcode": "looks_getEffectValue",
-            "params": {
-                "EFFECT": "SATURATION"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 205,
-            "y": 83,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_RED",
-            "mode": "default",
-            "opcode": "looks_getEffectValue",
-            "params": {
-                "EFFECT": "RED"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 205,
-            "y": 109,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_GREEN",
-            "mode": "default",
-            "opcode": "looks_getEffectValue",
-            "params": {
-                "EFFECT": "GREEN"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 205,
-            "y": 135,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_BLUE",
-            "mode": "default",
-            "opcode": "looks_getEffectValue",
-            "params": {
-                "EFFECT": "BLUE"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 205,
-            "y": 161,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_OPAQUE",
-            "mode": "default",
-            "opcode": "looks_getEffectValue",
-            "params": {
-                "EFFECT": "OPAQUE"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 205,
-            "y": 187,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_tintColor",
-            "mode": "default",
-            "opcode": "looks_tintColor",
-            "params": {},
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 205,
-            "y": 213,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getSpriteVisible",
-            "mode": "default",
-            "opcode": "looks_getSpriteVisible",
-            "params": {},
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 205,
-            "y": 239,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_layersGetLayer",
-            "mode": "default",
-            "opcode": "looks_layersGetLayer",
-            "params": {},
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 255,
-            "y": 265,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_costumenumbername_number",
-            "mode": "default",
-            "opcode": "looks_costumenumbername",
-            "params": {
-                "NUMBER_NAME": "number"
-            },
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 82,
-            "y": 69,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "backdropnumbername_number",
-            "mode": "default",
-            "opcode": "looks_backdropnumbername",
-            "params": {
-                "NUMBER_NAME": "number"
-            },
-            "spriteName": null,
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 192,
-            "y": 190,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_size",
-            "mode": "default",
-            "opcode": "looks_size",
-            "params": {},
-            "spriteName": "Sprite1",
-            "value": 0,
-            "width": 0,
-            "height": 0,
-            "x": 198,
-            "y": 131,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
-        },
-        {
-            "id": "5I9nI;7P)jdiR-_X;/%l_getEffectValue_PITCH",
+            "id": "5I9nI;7P)jdiR-_X;/%l_soundgetEffectValue_PITCH",
             "mode": "default",
             "opcode": "sound_getEffectValue",
             "params": {
@@ -525,7 +104,25 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 36,
+            "x": 5,
+            "y": 5,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "5I9nI;7P)jdiR-_X;/%l_soundgetEffectValue_PAN",
+            "mode": "default",
+            "opcode": "sound_getEffectValue",
+            "params": {
+                "EFFECT": "PAN"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 5,
             "y": 31,
             "visible": true,
             "sliderMin": 0,
@@ -541,8 +138,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 64,
-            "y": 116,
+            "x": 5,
+            "y": 57,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -557,8 +154,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 41,
-            "y": 256,
+            "x": 5,
+            "y": 83,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -573,8 +170,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 89,
-            "y": 241,
+            "x": 5,
+            "y": 109,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -589,8 +186,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 88,
-            "y": 107,
+            "x": 5,
+            "y": 135,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -605,8 +202,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 191,
-            "y": 233,
+            "x": 5,
+            "y": 161,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -621,8 +218,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 1,
-            "y": 134,
+            "x": 5,
+            "y": 187,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -637,8 +234,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 72,
-            "y": 182,
+            "x": 5,
+            "y": 213,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -653,8 +250,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 109,
-            "y": 142,
+            "x": 5,
+            "y": 239,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -669,8 +266,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 149,
-            "y": 248,
+            "x": 5,
+            "y": 265,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -685,8 +282,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 136,
-            "y": 53,
+            "x": 363,
+            "y": 287,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -701,8 +298,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 28,
-            "y": 198,
+            "x": 279,
+            "y": 59,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -719,8 +316,134 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 66,
-            "y": 23,
+            "x": 283,
+            "y": 141,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "current_month",
+            "mode": "default",
+            "opcode": "sensing_current",
+            "params": {
+                "CURRENTMENU": "MONTH"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 285,
+            "y": 171,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "current_date",
+            "mode": "default",
+            "opcode": "sensing_current",
+            "params": {
+                "CURRENTMENU": "DATE"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 366,
+            "y": 205,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "current_dayofweek",
+            "mode": "default",
+            "opcode": "sensing_current",
+            "params": {
+                "CURRENTMENU": "DAYOFWEEK"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 277,
+            "y": 1,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "current_hour",
+            "mode": "default",
+            "opcode": "sensing_current",
+            "params": {
+                "CURRENTMENU": "HOUR"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 275,
+            "y": 29,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "current_minute",
+            "mode": "default",
+            "opcode": "sensing_current",
+            "params": {
+                "CURRENTMENU": "MINUTE"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 279,
+            "y": 86,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "current_second",
+            "mode": "default",
+            "opcode": "sensing_current",
+            "params": {
+                "CURRENTMENU": "SECOND"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 280,
+            "y": 114,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "current_timestamp",
+            "mode": "default",
+            "opcode": "sensing_current",
+            "params": {
+                "CURRENTMENU": "TIMESTAMP"
+            },
+            "spriteName": null,
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 286,
+            "y": 203,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -735,8 +458,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 160,
-            "y": 110,
+            "x": 272,
+            "y": 233,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -751,8 +474,8 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 164,
-            "y": 132,
+            "x": 324,
+            "y": 322,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
@@ -767,44 +490,77 @@
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 143,
-            "y": 165,
+            "x": 330,
+            "y": 260,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
             "isDiscrete": true
         },
         {
-            "id": "`jEk@4|i[#Fk?(8x)AV.-my variable",
+            "id": "kYBE8D1#B{PBu##M]3ph",
             "mode": "default",
             "opcode": "data_variable",
             "params": {
-                "VARIABLE": "my variable"
+                "VARIABLE": "global var"
             },
             "spriteName": null,
             "value": 0,
             "width": 0,
             "height": 0,
-            "x": 183,
-            "y": 113,
+            "x": 0,
+            "y": 295,
             "visible": true,
             "sliderMin": 0,
             "sliderMax": 100,
             "isDiscrete": true
         },
         {
-            "id": "DLZ*ZPXCDT!#KR9:B+T-",
+            "id": "w(.xK,U`Z+w5:Nd.TZ^r",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "local var"
+            },
+            "spriteName": "Sprite1",
+            "value": 0,
+            "width": 0,
+            "height": 0,
+            "x": 0,
+            "y": 324,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "]UCmAt?OO1zGqn[46T{H",
             "mode": "list",
             "opcode": "data_listcontents",
             "params": {
-                "LIST": "my list"
+                "LIST": "global list"
             },
             "spriteName": null,
             "value": [],
-            "width": 0,
-            "height": 0,
-            "x": 200,
-            "y": 76,
+            "width": 100,
+            "height": 76,
+            "x": 164,
+            "y": 284,
+            "visible": true
+        },
+        {
+            "id": "R1E6Ngpb=8F!pI-,pX]+",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "local list"
+            },
+            "spriteName": "Sprite1",
+            "value": [],
+            "width": 100,
+            "height": 89,
+            "x": 175,
+            "y": 176,
             "visible": true
         }
     ],

@@ -80,18 +80,21 @@ def validateProject(projectData):
             otherSprites.append(spriteName)
             localVariables[spriteName] = [item["name"] for item in sprite["localVariables"]]
     
+    contexts = {}
     for i, sprite in enumerate(projectDataCopy["sprites"]):
         if i == 0:
-            scopeVariables    = projectDataCopy["globalVariables"]
-            scopeLists        = projectDataCopy["globalLists"    ]
+            scopeVariables    = [item["name"] for item in projectDataCopy["globalVariables"]]
+            scopeLists        = [item["name"] for item in projectDataCopy["globalLists"    ]]
             if cloningTargets == []:
                 newCloningTargets = [" "] # When there are no sprites; make " " the fallback value
             else:
                 newCloningTargets = cloningTargets
+            nameKey = None
         else:
             newCloningTargets = ["_myself_"] + cloningTargets
             scopeVariables    = [item["name"] for item in sprite["localVariables"] + projectDataCopy["globalVariables"]]
             scopeLists        = [item["name"] for item in sprite["localLists"    ] + projectDataCopy["globalLists"    ]]
+            nameKey           = sprite["name"]
 
         context = {
             "scopeVariables" : scopeVariables, 
@@ -105,10 +108,11 @@ def validateProject(projectData):
             "backdrops": backdrops,
         }
         validateSprite(path=["sprites"]+[i], data=sprite, context=context)
+        contexts[nameKey] = context
 
     for i, monitorData in enumerate(projectDataCopy["monitors"]):
         validateMonitor(
             path=["monitors"]+[i], 
             data=monitorData, 
-            context=context
+            contexts=contexts
         )

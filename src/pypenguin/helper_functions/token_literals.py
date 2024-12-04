@@ -99,7 +99,3 @@ class newTempSelector:
         new = newTempSelector()
         new.id = self.id
         return new
-
-def encryptStringToToken(string: str):
-    hashed = hashliv.sha256(string.encode()).hexdigest()
-    return 

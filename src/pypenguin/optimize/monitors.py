@@ -30,16 +30,15 @@ def translateMonitors(data):
             "opcode"    : newOpcode,
             "options"   : newOptionDatas,
             "spriteName": monitorData["spriteName"],
-            "size"      : [monitorData["width"], monitorData["height"]],
             "position"  : [monitorData["x"], monitorData["y"]],
             "visible"   : monitorData["visible"],
         }
-        if "sliderMin" in monitorData:
+        if opcode == "data_variable":
             newMonitorData["sliderMin"] = monitorData["sliderMin"]
-        if "sliderMax" in monitorData:
             newMonitorData["sliderMax"] = monitorData["sliderMax"]
-        if "isDiscrete" in monitorData:
             newMonitorData["onlyIntegers"] = monitorData["isDiscrete"]
+        elif opcode == "data_listcontents":
+            newMonitorData["size"] = [monitorData["width"], monitorData["height"]]
         newMonitorDatas.append(newMonitorData)
 
     return newMonitorDatas
