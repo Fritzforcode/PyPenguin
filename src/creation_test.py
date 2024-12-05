@@ -94,7 +94,7 @@ projectData = {
             "localVariables": [
                 {
                     "name": "loc var",
-                    "currentValue": "",
+                    "currentValue": "www",
                     "monitor": None,
                 }
             ],
@@ -102,7 +102,7 @@ projectData = {
             "volume": 100,
             "layerOrder": 1,
             "visible": True,
-            "position": [0,0],
+            "position": [77,0],
             "size": 100,
             "direction": 90,
             "draggable": True,
@@ -145,16 +145,16 @@ projectData = {
 # ['x position', 'y position', 'direction', 'bubble width', 'bubble height', 'x stretch', 'y stretch', '[EFFECT] sprite effect', 'tint color', 'visible?', 'layer', 'costume [PROPERTY]', 'backdrop [PROPERTY]', 'size', '[EFFECT] sound effect', 'volume', 'answer', 'mouse down?', 'mouse clicked?', 'mouse x', 'mouse y', 'clipboard item', 'draggable?', 'loudness', 'loud?', 'timer', 'current [PROPERTY]', 'days since 2000', 'username', 'logged in?', 'value of [VARIABLE]', 'value of [LIST]']
     "monitors": [
         {
-            "opcode": "value of [VARIABLE]",
+            "opcode": "y stretch",
             "options": {
-                "VARIABLE": "loc var",
+                #"VARIABLE": "loc var",
             },
             "spriteName": "Sprite1",
             "position": [10, 10],
             "visible": True,
-            "sliderMin": 4,
-            "sliderMax": 9,
-            "onlyIntegers": True,
+            #"sliderMin": 4,
+            #"sliderMax": 9,
+            #"onlyIntegers": True,
         },
     ],
 
