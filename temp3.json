@@ -9,7 +9,12 @@
                     ""
                 ]
             },
-            "lists": {},
+            "lists": {
+                "jW*pMl+(GQ%hDynMm;^O": [
+                    "list",
+                    []
+                ]
+            },
             "broadcasts": {},
             "customVars": [],
             "blocks": {
@@ -486,20 +491,19 @@
     ],
     "monitors": [
         {
-            "id": "oTDHQbL~wA;YdpAys^y/_stretchGetY",
-            "mode": "default",
-            "opcode": "looks_stretchGetY",
-            "params": {},
-            "spriteName": "Sprite1",
-            "value": 0,
+            "id": "jW*pMl+(GQ%hDynMm;^O",
+            "mode": "list",
+            "opcode": "data_listcontents",
+            "params": {
+                "LIST": "list"
+            },
+            "spriteName": null,
+            "value": [],
             "width": 0,
             "height": 0,
             "x": 10,
             "y": 10,
-            "visible": true,
-            "sliderMin": 0,
-            "sliderMax": 100,
-            "isDiscrete": true
+            "visible": true
         }
     ],
     "extensionData": {},

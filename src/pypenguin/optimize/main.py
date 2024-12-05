@@ -73,7 +73,6 @@ def optimizeProjectJSON(projectData):
         "monitors"            : newMonitorDatas,
         "extensionData"       : projectData["extensionData"],
         "extensions"          : projectData["extensions"],
-        "meta"                : projectData["meta"],
     }
     return newData
     

@@ -108,7 +108,16 @@ def deoptimizeProject(projectData):
         "monitors"     : newMonitorDatas,
         "extensionData": projectData["extensionData"],
         "extensions"   : projectData["extensions"],
-        "meta"         : projectData["meta"],
+        "meta"         : {
+            "semver": "3.0.0",
+            "vm"    : "0.2.0",
+            "agent" : "",
+            "platform": {
+                "name"   : "PenguinMod",
+                "url"    : "https://penguinmod.com/",
+                "version": "stable",
+            },
+        }, # Hardcoded because there is no use in changing it
     }
     return newProjectData
     

@@ -1,4 +1,5 @@
 # PyPenguin
 Python tool for creating, editing and inspecting Penguinmod(.pmp) files.
 
-### [Documetation](DOCUMENTATION.md)
+### [Old Documetation](docs/DOCUMENTATION.md)
+### [New Documetation](docs/main.md)

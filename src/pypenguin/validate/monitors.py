@@ -11,11 +11,16 @@ def validateMonitor(path, data, contexts):
     if data["spriteName"] not in spriteNames:
         raise formatError(path=path+["spriteName"], message=f"Must be the name of an existing sprite. Must be one of these: {spriteNames}.")
     
+    context = contexts[data["spriteName"]]
+    if data["spriteName"] != None: # Disallow local variables/lists for a local variable/list monitor
+        context["scopeVariables"] = context["localVariables"][data["spriteName"]]
+        context["scopeLists"    ] = context["localLists"    ][data["spriteName"]]
+
     validateOptions(
         path=path+["options"],
         data=data["options"],
         opcode=data["opcode"],
-        context=contexts[data["spriteName"]],
+        context=context,
         inputDatas=None,
     )
 

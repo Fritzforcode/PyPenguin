@@ -152,39 +152,39 @@
         {
             "name": "var",
             "currentValue": "",
-            "monitor": null,
             "isCloudVariable": false
         }
     ],
-    "globalLists": [],
+    "globalLists": [
+        {
+            "name": "list",
+            "currentValue": []
+        }
+    ],
     "tempo": 60,
     "videoTransparency": 0,
     "videoState": "off",
     "textToSpeechLanguage": null,
     "monitors": [
         {
-            "opcode": "y stretch",
-            "options": {},
-            "spriteName": "Sprite1",
+            "opcode": "value of [LIST]",
+            "options": {
+                "LIST": "list"
+            },
             "position": [
                 10,
                 10
             ],
-            "visible": true
+            "spriteName": null,
+            "visible": true,
+            "size": [
+                0,
+                0
+            ]
         }
     ],
     "extensionData": {},
     "extensions": [
         "jgJSON"
-    ],
-    "meta": {
-        "semver": "3.0.0",
-        "vm": "0.2.0",
-        "agent": "",
-        "platform": {
-            "name": "PenguinMod",
-            "url": "https://penguinmod.com/",
-            "version": "stable"
-        }
-    }
+    ]
 }

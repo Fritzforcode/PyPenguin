@@ -57,10 +57,11 @@ def validateProject(projectData):
     
 
     # Check sprite formats
-    spriteNames               = []
-    cloningTargets            = []
-    localVariables            = {}
-    otherSprites              = []
+    spriteNames    = []
+    cloningTargets = []
+    localVariables = {}
+    localLists     = {}
+    otherSprites   = []
     for i, sprite in enumerate(projectDataCopy["sprites"]):
         spriteName = None if i == 0 else sprite["name"] # None for the stage
         if spriteName in spriteNames: # If there is the same sprite name twice
@@ -79,6 +80,7 @@ def validateProject(projectData):
             cloningTargets.append(spriteName)
             otherSprites.append(spriteName)
             localVariables[spriteName] = [item["name"] for item in sprite["localVariables"]]
+            localLists    [spriteName] = [item["name"] for item in sprite["localLists"    ]]
     
     contexts = {}
     for i, sprite in enumerate(projectDataCopy["sprites"]):
@@ -101,6 +103,7 @@ def validateProject(projectData):
             "scopeLists"     : scopeLists, 
             "globalVariables": [item["name"] for item in projectDataCopy["globalVariables"]],
             "localVariables" : localVariables,
+            "localLists"     : localLists,
             "cloningTargets" : newCloningTargets,
             "otherSprites": [
                 target for target in otherSprites if target != sprite["name"]

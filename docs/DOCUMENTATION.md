@@ -1,5 +1,5 @@
 # **PyPenguin Documentation**
- This is the documentation for [**PyPenguin**](README.md). 
+ This is the documentation for [**PyPenguin**](../README.md). 
 
 The file structure of a **PyPenguin Project** could look like this:
 
