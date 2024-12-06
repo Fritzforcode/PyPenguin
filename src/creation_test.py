@@ -130,6 +130,11 @@ projectData = {
     ],
     "globalVariables": [
         {
+            "name": "c",
+            "currentValue": "Günter Jüchen",
+            "isCloudVariable": True,
+        },
+        {
             "name": "var",
             "currentValue": "",
             "isCloudVariable": False,

@@ -150,6 +150,11 @@
     ],
     "globalVariables": [
         {
+            "name": "c",
+            "currentValue": "G\u00fcnter J\u00fcchen",
+            "isCloudVariable": true
+        },
+        {
             "name": "var",
             "currentValue": "",
             "isCloudVariable": false

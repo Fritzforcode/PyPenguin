@@ -22,15 +22,15 @@ def translateVariable(data, spriteName):
 
     if spriteName == None: # stage
         if data["isCloudVariable"]: # cloud var
-            if not name.startswith("\u2601 "):
-                raise ValueError("Cloud variables have to start with '☁ ' eg. '☁ var' (☁: unicode 2601)")
+            pass#if not name.startswith("\u2601 "):
+            #    raise ValueError("Cloud variables have to start with '☁ ' eg. '☁ var' (☁: unicode 2601)")
             newData.append(True)
         else: # global var
-            if "\u2601" in name:
-                raise ValueError("Non-cloud variables cannot contain '☁'(unicode 2601)")
+            pass#if "\u2601" in name:
+            #    raise ValueError("Non-cloud variables cannot contain '☁'(unicode 2601)")
     else: # local var
-        if "\u2601" in name:
-            raise ValueError("Non-cloud variables cannot contain '☁'(unicode 2601)")
+        pass#if "\u2601" in name:
+        #    raise ValueError("Non-cloud variables cannot contain '☁'(unicode 2601)")
     return newData
 
 def translateLists(data, spriteNames):
