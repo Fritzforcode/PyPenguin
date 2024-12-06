@@ -1,195 +1,591 @@
 {
     "sprites": [
         {
-            "name": "Stage",
             "isStage": true,
-            "scripts": [
+            "name": "Stage",
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
                 {
-                    "position": [
-                        0,
-                        0
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "instruction",
-                                "customOpcode": "instr (num txt) <bool val> !"
-                            }
-                        },
-                        {
-                            "opcode": "return (VALUE)",
-                            "inputs": {
-                                "VALUE": {}
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        100
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "lastInstruction",
-                                "customOpcode": "lastInstr (txt) <bool val>!"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        200
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "textReporter",
-                                "customOpcode": "reportText (txt)"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        300
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "numberReporter",
-                                "customOpcode": "reportNumber (num)"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        400
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "booleanReporter",
-                                "customOpcode": "reportBool <bool>"
-                            }
-                        }
+                    "name": "backdrop1",
+                    "dataFormat": "svg",
+                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        240,
+                        180
                     ]
                 }
             ],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
             "sounds": [],
             "volume": 100
         },
         {
-            "name": "Sprite1",
             "isStage": false,
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
-            "sounds": [],
-            "localVariables": [
+            "name": "Sprite1",
+            "scripts": [
                 {
-                    "name": "loc var",
-                    "currentValue": "www",
-                    "monitor": null
+                    "position": [
+                        264,
+                        139
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "move (STEPS) steps",
+                            "inputs": {
+                                "STEPS": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "10"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "move back (STEPS) steps",
+                            "inputs": {
+                                "STEPS": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "10"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "move [DIRECTION] (STEPS) steps",
+                            "inputs": {
+                                "STEPS": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "10"
+                                }
+                            },
+                            "options": {
+                                "DIRECTION": "up"
+                            }
+                        },
+                        {
+                            "opcode": "turn clockwise (DEGREES) degrees",
+                            "inputs": {
+                                "DEGREES": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "15"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "turn counterclockwise (DEGREES) degrees",
+                            "inputs": {
+                                "DEGREES": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "15"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "goto ([TARGET])",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "_random_"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "goto ([TARGET])",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "_mouse_"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "goto ([TARGET])",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "Sprite2"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "go to x: (X) y: (Y)",
+                            "inputs": {
+                                "X": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                },
+                                "Y": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "change by x: (DX) y: (DY)",
+                            "inputs": {
+                                "DX": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "10"
+                                },
+                                "DY": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "10"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "glide (SECONDS) secs to ([TARGET])",
+                            "inputs": {
+                                "SECONDS": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "_random_"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "glide (SECONDS) secs to ([TARGET])",
+                            "inputs": {
+                                "SECONDS": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "_mouse_"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "glide (SECONDS) secs to ([TARGET])",
+                            "inputs": {
+                                "SECONDS": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "Sprite2"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "glide (SECONDS) secs to x: (X) y: (Y)",
+                            "inputs": {
+                                "SECONDS": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "X": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "192"
+                                },
+                                "Y": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "point in direction (DIRECTION)",
+                            "inputs": {
+                                "DIRECTION": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "90"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "point towards ([TARGET])",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "_mouse_"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "point towards ([TARGET])",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "_random_"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "point towards ([TARGET])",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "Sprite2"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "point towards x: (X) y: (Y)",
+                            "inputs": {
+                                "X": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                },
+                                "Y": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "turn around",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "change x by (DX)",
+                            "inputs": {
+                                "DX": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "10"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set x to (X)",
+                            "inputs": {
+                                "X": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "83"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "change y by (DY)",
+                            "inputs": {
+                                "DY": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "10"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set y to (Y)",
+                            "inputs": {
+                                "Y": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "39"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "if on edge, bounce",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "if touching ([TARGET]), bounce",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "_mouse_"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "if touching ([TARGET]), bounce",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "_random_"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "if touching ([TARGET]), bounce",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "Sprite2"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set rotation style [STYLE]",
+                            "inputs": {},
+                            "options": {
+                                "STYLE": "left-right"
+                            }
+                        },
+                        {
+                            "opcode": "set rotation style [STYLE]",
+                            "inputs": {},
+                            "options": {
+                                "STYLE": "up-down"
+                            }
+                        },
+                        {
+                            "opcode": "set rotation style [STYLE]",
+                            "inputs": {},
+                            "options": {
+                                "STYLE": "look at"
+                            }
+                        },
+                        {
+                            "opcode": "set rotation style [STYLE]",
+                            "inputs": {},
+                            "options": {
+                                "STYLE": "don't rotate"
+                            }
+                        },
+                        {
+                            "opcode": "set rotation style [STYLE]",
+                            "inputs": {},
+                            "options": {
+                                "STYLE": "all around"
+                            }
+                        },
+                        {
+                            "opcode": "move to stage [ZONE]",
+                            "inputs": {},
+                            "options": {
+                                "ZONE": "bottom-left"
+                            }
+                        },
+                        {
+                            "opcode": "move to stage [ZONE]",
+                            "inputs": {},
+                            "options": {
+                                "ZONE": "bottom"
+                            }
+                        },
+                        {
+                            "opcode": "move to stage [ZONE]",
+                            "inputs": {},
+                            "options": {
+                                "ZONE": "bottom-right"
+                            }
+                        },
+                        {
+                            "opcode": "move to stage [ZONE]",
+                            "inputs": {},
+                            "options": {
+                                "ZONE": "top-left"
+                            }
+                        },
+                        {
+                            "opcode": "move to stage [ZONE]",
+                            "inputs": {},
+                            "options": {
+                                "ZONE": "top"
+                            }
+                        },
+                        {
+                            "opcode": "move to stage [ZONE]",
+                            "inputs": {},
+                            "options": {
+                                "ZONE": "top-right"
+                            }
+                        },
+                        {
+                            "opcode": "move to stage [ZONE]",
+                            "inputs": {},
+                            "options": {
+                                "ZONE": "left"
+                            }
+                        },
+                        {
+                            "opcode": "move to stage [ZONE]",
+                            "inputs": {},
+                            "options": {
+                                "ZONE": "right"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        298,
+                        2233
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "x position",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        275,
+                        2289
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "y position",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        301,
+                        2395
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "direction",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
                 }
             ],
-            "localLists": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "dataFormat": "svg",
+                    "fileStem": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        26,
+                        46
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "dataFormat": "wav",
+                    "fileStem": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "rate": 48000,
+                    "sampleCount": 17867
+                }
+            ],
             "volume": 100,
+            "localVariables": [],
+            "localLists": [],
             "layerOrder": 1,
             "visible": true,
             "position": [
-                77,
+                192.20077514648438,
                 0
             ],
             "size": 100,
-            "direction": 90,
-            "draggable": true,
+            "direction": -52.12501634890182,
+            "draggable": false,
             "rotationStyle": "all around"
         },
         {
-            "name": "Sprite6",
             "isStage": false,
+            "name": "Sprite2",
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [],
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "dataFormat": "svg",
+                    "fileStem": "3339a2953a3bf62bb80e54ff575dbced",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        0,
+                        0
+                    ]
+                }
+            ],
             "sounds": [],
+            "volume": 100,
             "localVariables": [],
             "localLists": [],
-            "volume": 100,
-            "layerOrder": 1,
+            "layerOrder": 2,
             "visible": true,
             "position": [
-                0,
-                0
+                36,
+                28
             ],
             "size": 100,
             "direction": 90,
-            "draggable": true,
+            "draggable": false,
             "rotationStyle": "all around"
         }
     ],
     "globalVariables": [
         {
-            "name": "c",
-            "currentValue": "G\u00fcnter J\u00fcchen",
-            "isCloudVariable": true
-        },
-        {
-            "name": "var",
-            "currentValue": "",
+            "name": "my variable",
+            "currentValue": 0,
             "isCloudVariable": false
         }
     ],
-    "globalLists": [
-        {
-            "name": "list",
-            "currentValue": []
-        }
-    ],
+    "globalLists": [],
     "tempo": 60,
-    "videoTransparency": 0,
-    "videoState": "off",
+    "videoTransparency": 50,
+    "videoState": "on",
     "textToSpeechLanguage": null,
-    "monitors": [
-        {
-            "opcode": "value of [LIST]",
-            "options": {
-                "LIST": "list"
-            },
-            "position": [
-                10,
-                10
-            ],
-            "spriteName": null,
-            "visible": true,
-            "size": [
-                0,
-                0
-            ]
-        }
-    ],
+    "monitors": [],
     "extensionData": {},
-    "extensions": [
-        "jgJSON"
-    ]
+    "extensions": []
 }
