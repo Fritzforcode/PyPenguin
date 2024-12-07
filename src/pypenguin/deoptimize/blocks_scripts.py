@@ -46,10 +46,6 @@ def generateMenu(data, parentOpcode, inputID):
     }"""
 
 def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None):
-    if "inputs" not in data:
-        data["inputs"] = inputDefault
-    if "options" not in data:
-        data["options"] = optionDefault
     #print("start ufblock", 100*"{")
     #pp(data)
     if isinstance(data, str):
@@ -60,11 +56,16 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
             parentOpcode=parentOpcode,
             inputID=inputID,
         )
+    
+    
+    if "inputs" not in data:
+        data["inputs"] = inputDefault
+    if "options" not in data:
+        data["options"] = optionDefault
     opcode = getDeoptimizedOpcode(opcode=data["opcode"])
     if opcode == "procedures_call":
         proccode, arguments = parseCustomOpcode(customOpcode=data["options"]["customOpcode"])
     newInputDatas = {}
-    commentData = None
     for i, inputID, inputData in ikv(data["inputs"]):
         if opcode == "procedures_call":
             argument  = arguments[inputID]

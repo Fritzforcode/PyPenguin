@@ -1,411 +1,362 @@
 {
     "sprites": [
         {
-            "isStage": true,
             "name": "Stage",
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "backdrop1",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        240,
-                        180
-                    ]
-                }
-            ],
-            "sounds": [],
-            "volume": 100
-        },
-        {
-            "isStage": false,
-            "name": "Sprite1",
+            "isStage": true,
             "scripts": [
                 {
                     "position": [
-                        41,
-                        205
+                        0,
+                        0
                     ],
                     "blocks": [
                         {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
+                            "opcode": "when I receive [MESSAGE]",
                             "options": {
-                                "VARIABLE": "my variable"
+                                "MESSAGE": "Player 1 Scores"
                             }
                         },
                         {
                             "opcode": "change [VARIABLE] by (VALUE)",
                             "inputs": {
                                 "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
                                     "text": "1"
                                 }
                             },
                             "options": {
-                                "VARIABLE": "my variable"
+                                "VARIABLE": "Player 1 Score"
                             }
                         },
                         {
-                            "opcode": "show variable [VARIABLE]",
-                            "inputs": {},
-                            "options": {
-                                "VARIABLE": "my variable"
+                            "opcode": "broadcast ([MESSAGE])",
+                            "inputs": {
+                                "MESSAGE": {
+                                    "option": "Reset Ball"
+                                }
                             }
                         },
                         {
-                            "opcode": "hide variable [VARIABLE]",
-                            "inputs": {},
-                            "options": {
-                                "VARIABLE": "my variable"
-                            }
+                            "opcode": "run flag"
                         }
                     ]
                 },
                 {
                     "position": [
-                        69,
-                        540
+                        0,
+                        300
                     ],
                     "blocks": [
                         {
-                            "opcode": "add (ITEM) to [LIST]",
-                            "inputs": {
-                                "ITEM": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "thing"
-                                }
-                            },
+                            "opcode": "when I receive [MESSAGE]",
                             "options": {
-                                "LIST": "my list"
+                                "MESSAGE": "Player 2 Scores"
                             }
                         },
                         {
-                            "opcode": "delete (INDEX) of [LIST]",
-                            "inputs": {
-                                "INDEX": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1"
-                                }
-                            },
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        },
-                        {
-                            "opcode": "delete all of [LIST]",
-                            "inputs": {},
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        },
-                        {
-                            "opcode": "shift [LIST] by (INDEX)",
-                            "inputs": {
-                                "INDEX": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1"
-                                }
-                            },
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        },
-                        {
-                            "opcode": "insert (ITEM) at (INDEX) of [LIST]",
-                            "inputs": {
-                                "ITEM": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "thing"
-                                },
-                                "INDEX": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1"
-                                }
-                            },
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        },
-                        {
-                            "opcode": "replace item (INDEX) of [LIST] with (ITEM)",
-                            "inputs": {
-                                "INDEX": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1"
-                                },
-                                "ITEM": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "thing"
-                                }
-                            },
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        },
-                        {
-                            "opcode": "For each item [VARIABLE] in [LIST] {BODY}",
-                            "inputs": {
-                                "BODY": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "my variable",
-                                "LIST": "my list"
-                            }
-                        },
-                        {
-                            "opcode": "For each item # [VARIABLE] in [LIST] {BODY}",
-                            "inputs": {
-                                "BODY": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "my variable",
-                                "LIST": "my list"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        109,
-                        1024
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "item (INDEX) of [LIST]",
-                            "inputs": {
-                                "INDEX": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1"
-                                }
-                            },
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        105,
-                        1075
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "item # of (ITEM) in [LIST]",
-                            "inputs": {
-                                "ITEM": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "thing"
-                                }
-                            },
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        107,
-                        1138
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "amount of (VALUE) of [LIST]",
+                            "opcode": "change [VARIABLE] by (VALUE)",
                             "inputs": {
                                 "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "foo"
-                                }
-                            },
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        132,
-                        1192
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "length of [LIST]",
-                            "inputs": {},
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        55,
-                        1244
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "[LIST] contains (ITEM) ?",
-                            "inputs": {
-                                "ITEM": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "thing"
-                                }
-                            },
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        37,
-                        1307
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "item (INDEX) exists in [LIST] ?",
-                            "inputs": {
-                                "INDEX": {
-                                    "mode": "block-and-text",
-                                    "block": null,
                                     "text": "1"
                                 }
                             },
                             "options": {
-                                "LIST": "my list"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        65,
-                        1362
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "is [LIST] empty?",
-                            "inputs": {},
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        90,
-                        1446
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "reverse [LIST]",
-                            "inputs": {},
-                            "options": {
-                                "LIST": "my list"
+                                "VARIABLE": "Player 2 Score"
                             }
                         },
                         {
-                            "opcode": "set [LIST] to array (VALUE)",
+                            "opcode": "run flag"
+                        }
+                    ]
+                }
+            ],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [],
+            "sounds": [],
+            "volume": 100
+        },
+        {
+            "name": "Ball",
+            "isStage": false,
+            "scripts": [
+                {
+                    "position": [
+                        0,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked"
+                        },
+                        {
+                            "opcode": "go to x: (X) y: (Y)",
+                            "inputs": {
+                                "X": {
+                                    "text": "0"
+                                },
+                                "Y": {
+                                    "text": "0"
+                                }
+                            }
+                        },
+                        {
+                            "opcode": "point in direction (DIRECTION)",
+                            "inputs": {
+                                "DIRECTION": {
+                                    "block": {
+                                        "opcode": "pick random (OPERAND1) to (OPERAND2)",
+                                        "inputs": {
+                                            "OPERAND1": {
+                                                "text": "45"
+                                            },
+                                            "OPERAND2": {
+                                                "text": "135"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
                                 "VALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "[\"a\", \"b\", \"c\"]"
+                                    "text": "5"
                                 }
                             },
                             "options": {
-                                "LIST": "my list"
+                                "VARIABLE": "Speed"
                             }
                         },
                         {
-                            "opcode": "show list [LIST]",
-                            "inputs": {},
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        },
-                        {
-                            "opcode": "hide list [LIST]",
-                            "inputs": {},
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        372,
-                        1426
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "get list [LIST] as an array",
-                            "inputs": {},
-                            "options": {
-                                "LIST": "my list"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        117,
-                        127
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "value of [VARIABLE]",
-                            "inputs": {},
-                            "options": {
-                                "VARIABLE": "my variable"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        85,
-                        477
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "value of [LIST]",
-                            "inputs": {},
-                            "options": {
-                                "LIST": "my list"
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "move (STEPS) steps",
+                                            "inputs": {
+                                                "STEPS": {
+                                                    "block": {
+                                                        "opcode": "value of [VARIABLE]",
+                                                        "options": {
+                                                            "VARIABLE": "Speed"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "block": {
+                                                        "opcode": "<OPERAND1> or <OPERAND2>",
+                                                        "inputs": {
+                                                            "OPERAND1": {
+                                                                "block": {
+                                                                    "opcode": "touching ([OBJECT]) ?",
+                                                                    "inputs": {
+                                                                        "OBJECT": {
+                                                                            "option": "Paddle 1"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "OPERAND2": {
+                                                                "block": {
+                                                                    "opcode": "touching ([OBJECT]) ?",
+                                                                    "inputs": {
+                                                                        "OBJECT": {
+                                                                            "option": "Paddle 2"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "point in direction (DIRECTION)",
+                                                            "inputs": {
+                                                                "DIRECTION": {
+                                                                    "block": {
+                                                                        "opcode": "(OPERAND1) - (OPERAND2)",
+                                                                        "inputs": {
+                                                                            "OPERAND1": {
+                                                                                "text": ""
+                                                                            },
+                                                                            "OPERAND2": {
+                                                                                "block": {
+                                                                                    "opcode": "direction"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "text": "1"
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "VARIABLE": "Speed"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "block": {
+                                                        "opcode": "<OPERAND1> or <OPERAND2>",
+                                                        "inputs": {
+                                                            "OPERAND1": {
+                                                                "block": {
+                                                                    "opcode": "(OPERAND1) > (OPERAND2)",
+                                                                    "inputs": {
+                                                                        "OPERAND1": {
+                                                                            "block": {
+                                                                                "opcode": "y position"
+                                                                            }
+                                                                        },
+                                                                        "OPERAND2": {
+                                                                            "text": "156"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "OPERAND2": {
+                                                                "block": {
+                                                                    "opcode": "(OPERAND1) < (OPERAND2)",
+                                                                    "inputs": {
+                                                                        "OPERAND1": {
+                                                                            "block": {
+                                                                                "opcode": "y position"
+                                                                            }
+                                                                        },
+                                                                        "OPERAND2": {
+                                                                            "text": "-156"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "point in direction (DIRECTION)",
+                                                            "inputs": {
+                                                                "DIRECTION": {
+                                                                    "block": {
+                                                                        "opcode": "(OPERAND1) - (OPERAND2)",
+                                                                        "inputs": {
+                                                                            "OPERAND1": {
+                                                                                "text": "180"
+                                                                            },
+                                                                            "OPERAND2": {
+                                                                                "block": {
+                                                                                    "opcode": "direction"
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "block": {
+                                                        "opcode": "(OPERAND1) > (OPERAND2)",
+                                                        "inputs": {
+                                                            "OPERAND1": {
+                                                                "block": {
+                                                                    "opcode": "x position"
+                                                                }
+                                                            },
+                                                            "OPERAND2": {
+                                                                "text": "216"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "broadcast ([MESSAGE])",
+                                                            "inputs": {
+                                                                "MESSAGE": {
+                                                                    "option": "Player 1 Scores"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "opcode": "stop script [TARGET]",
+                                                            "options": {
+                                                                "TARGET": "this script"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "block": {
+                                                        "opcode": "(OPERAND1) < (OPERAND2)",
+                                                        "inputs": {
+                                                            "OPERAND1": {
+                                                                "block": {
+                                                                    "opcode": "x position"
+                                                                }
+                                                            },
+                                                            "OPERAND2": {
+                                                                "text": "-216"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "broadcast ([MESSAGE])",
+                                                            "inputs": {
+                                                                "MESSAGE": {
+                                                                    "option": "Player 2 Scores"
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "opcode": "stop script [TARGET]",
+                                                            "options": {
+                                                                "TARGET": "this script"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
                             }
                         }
                     ]
@@ -415,26 +366,19 @@
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "costume1",
+                    "name": "Basketball",
                     "extension": "svg",
                     "bitmapResolution": 1,
                     "rotationCenter": [
-                        26,
-                        46
+                        23,
+                        23
                     ]
                 }
             ],
-            "sounds": [
-                {
-                    "name": "Squawk",
-                    "extension": "wav",
-                    "rate": 48000,
-                    "sampleCount": 17867
-                }
-            ],
-            "volume": 100,
+            "sounds": [],
             "localVariables": [],
             "localLists": [],
+            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -443,47 +387,315 @@
             ],
             "size": 100,
             "direction": 90,
-            "draggable": false,
+            "draggable": true,
+            "rotationStyle": "left-right"
+        },
+        {
+            "name": "Paddle 1",
+            "isStage": false,
+            "scripts": [
+                {
+                    "position": [
+                        0,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked"
+                        },
+                        {
+                            "opcode": "go to x: (X) y: (Y)",
+                            "inputs": {
+                                "X": {
+                                    "text": "-220"
+                                },
+                                "Y": {
+                                    "text": "0"
+                                }
+                            }
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "block": {
+                                                        "opcode": "key ([KEY]) pressed?",
+                                                        "inputs": {
+                                                            "KEY": {
+                                                                "option": "w"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "change y by (DY)",
+                                                            "inputs": {
+                                                                "DY": {
+                                                                    "text": "10"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "block": {
+                                                        "opcode": "key ([KEY]) pressed?",
+                                                        "inputs": {
+                                                            "KEY": {
+                                                                "option": "s"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "change y by (DY)",
+                                                            "inputs": {
+                                                                "DY": {
+                                                                    "text": "-10"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "rectangle",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        9.083,
+                        67.25
+                    ]
+                }
+            ],
+            "sounds": [],
+            "localVariables": [],
+            "localLists": [],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "position": [
+                0,
+                0
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": true,
+            "rotationStyle": "all around"
+        },
+        {
+            "name": "Paddle 2",
+            "isStage": false,
+            "scripts": [
+                {
+                    "position": [
+                        0,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked"
+                        },
+                        {
+                            "opcode": "go to x: (X) y: (Y)",
+                            "inputs": {
+                                "X": {
+                                    "text": "220"
+                                },
+                                "Y": {
+                                    "text": "0"
+                                }
+                            }
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "block": {
+                                                        "opcode": "key ([KEY]) pressed?",
+                                                        "inputs": {
+                                                            "KEY": {
+                                                                "option": "up arrow"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "change y by (DY)",
+                                                            "inputs": {
+                                                                "DY": {
+                                                                    "text": "10"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "block": {
+                                                        "opcode": "key ([KEY]) pressed?",
+                                                        "inputs": {
+                                                            "KEY": {
+                                                                "option": "down arrow"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "change y by (DY)",
+                                                            "inputs": {
+                                                                "DY": {
+                                                                    "text": "-10"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "rectangle",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        9.083,
+                        67.25
+                    ]
+                }
+            ],
+            "sounds": [],
+            "localVariables": [],
+            "localLists": [],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "position": [
+                0,
+                0
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": true,
             "rotationStyle": "all around"
         }
     ],
     "globalVariables": [
         {
-            "name": "my variable",
-            "currentValue": 0,
+            "name": "Speed",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "Player 1 Score",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "Player 2 Score",
+            "currentValue": "",
             "isCloudVariable": false
         }
     ],
-    "globalLists": [
-        {
-            "name": "my list",
-            "currentValue": []
-        }
-    ],
+    "globalLists": [],
     "tempo": 60,
-    "videoTransparency": 50,
-    "videoState": "on",
+    "videoTransparency": 0,
+    "videoState": "off",
     "textToSpeechLanguage": null,
     "monitors": [
         {
-            "opcode": "value of [LIST]",
+            "opcode": "value of [VARIABLE]",
             "options": {
-                "LIST": "my list"
+                "VARIABLE": "Speed"
             },
             "spriteName": null,
             "position": [
-                5,
-                5
+                10,
+                10
             ],
             "visible": true,
-            "size": [
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "onlyIntegers": true
+        },
+        {
+            "opcode": "value of [VARIABLE]",
+            "options": {
+                "VARIABLE": "Player 1 Score"
+            },
+            "spriteName": null,
+            "position": [
                 0,
-                0
-            ]
+                338
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "onlyIntegers": true
+        },
+        {
+            "opcode": "value of [VARIABLE]",
+            "options": {
+                "VARIABLE": "Player 2 Score"
+            },
+            "spriteName": null,
+            "position": [
+                328,
+                338
+            ],
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "onlyIntegers": true
         }
     ],
     "extensionData": {},
-    "extensions": [
-        "jgJSON"
-    ]
+    "extensions": []
 }

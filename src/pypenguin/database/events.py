@@ -85,7 +85,7 @@ opcodes = {
     "event_whenbroadcastreceived": {
         "type": "hat",
         "category": "Events",
-        "newOpcode": "when i receive [MESSAGE]",
+        "newOpcode": "when I receive [MESSAGE]",
         "inputTypes": {},
         "optionTypes": {"MESSAGE": "broadcast"},
         "optionTranslation": {"BROADCAST_OPTION": "MESSAGE"},
