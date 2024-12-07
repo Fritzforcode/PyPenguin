@@ -3,7 +3,7 @@ opcodes = {
     "event_whenflagclicked": {
         "type": "hat",
         "category": "Events",
-        "newOpcode": "when flag clicked",
+        "newOpcode": "when green flag clicked",
         "inputTypes": {},
         "optionTypes": {},
     },
@@ -85,10 +85,10 @@ opcodes = {
     "event_whenbroadcastreceived": {
         "type": "hat",
         "category": "Events",
-        "newOpcode": "when i receive [BROADCAST]",
+        "newOpcode": "when i receive [MESSAGE]",
         "inputTypes": {},
-        "optionTypes": {"BROADCAST": "broadcast"},
-        "optionTranslation": {"BROADCAST_OPTION": "BROADCAST"},
+        "optionTypes": {"MESSAGE": "broadcast"},
+        "optionTranslation": {"BROADCAST_OPTION": "MESSAGE"},
     },
     "event_broadcast": {
         "type": "instruction",

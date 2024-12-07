@@ -46,6 +46,10 @@ def generateMenu(data, parentOpcode, inputID):
     }"""
 
 def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None):
+    if "inputs" not in data:
+        data["inputs"] = inputDefault
+    if "options" not in data:
+        data["options"] = optionDefault
     #print("start ufblock", 100*"{")
     #pp(data)
     if isinstance(data, str):

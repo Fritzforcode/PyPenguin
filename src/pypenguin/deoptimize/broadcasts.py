@@ -10,6 +10,7 @@ def findBlockBroadcastMessages(data):
     if not opcodeData["newOpcode"] == data["opcode"]: raise WhatIsGoingOnError(data["opcode"])
 
     broadcastMessages = []
+    
     if "inputs" not in data:
         data["inputs"] = inputDefault
     for i,inputID,inputData in  ikv(data["inputs"]):
@@ -23,6 +24,7 @@ def findBlockBroadcastMessages(data):
         if "block" in inputData:
             if inputData["block"] != None:
                 broadcastMessages += findBlockBroadcastMessages(data=inputData["block"])
+    
     if "options" not in data:
         data["options"] = optionDefault
     for i,optionID,optionData in  ikv(data["options"]):

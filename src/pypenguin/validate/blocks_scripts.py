@@ -1,8 +1,7 @@
 from pypenguin.helper_functions import ikv, parseCustomOpcode, pp
 from pypenguin.validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema
 from pypenguin.validate.comments import validateComment
-from pypenguin.database import *#inputDefault, optionDefault, commentDefault, inputModes, inputBlockDefault, inputTextDefault, inputBlocksDefault
-
+from pypenguin.database import *
 
 def validateScript(path, data, context):
     # Check script format

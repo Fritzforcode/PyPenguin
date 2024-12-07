@@ -2,7 +2,7 @@ from pypenguin import extractAndOptimizeProject, deoptimizeAndCompressProject, v
 from pypenguin.helper_functions import readJSONFile, pp
 
 optimizedData = extractAndOptimizeProject(
-    projectFilePath     = "assets/categories/motion.pmp",
+    projectFilePath     = "assets/categories/variables and lists.pmp",
 #    projectFilePath     = "assets/studies/monitors2.pmp",
 #    projectFilePath     = "assets/from_online/my 1st platformer .pmp",
     optimizedProjectDir = "extractedProject",

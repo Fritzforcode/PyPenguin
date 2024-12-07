@@ -4,9 +4,9 @@
             "isStage": true,
             "name": "Stage",
             "variables": {
-                "AP#jU[:mkdOmU^%;j-m@": [
-                    "my variable",
-                    0
+                "PLxcAjE)l]uH}}Km]c=M": [
+                    "Speed",
+                    ""
                 ]
             },
             "lists": {},
@@ -17,13 +17,14 @@
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "backdrop1",
+                    "name": "empty costume",
                     "bitmapResolution": 1,
                     "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
                     "dataFormat": "svg",
                     "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
-                    "rotationCenterX": 240,
-                    "rotationCenterY": 180
+                    "rotationCenterX": 0,
+                    "rotationCenterY": 0,
+                    "isDefault": true
                 }
             ],
             "sounds": [],
@@ -31,47 +32,70 @@
             "volume": 100,
             "layerOrder": 0,
             "tempo": 60,
-            "videoTransparency": 50,
-            "videoState": "on",
+            "videoTransparency": 0,
+            "videoState": "off",
             "textToSpeechLanguage": null
         },
         {
             "isStage": false,
-            "name": "Sprite1",
+            "name": "Ball",
             "variables": {},
             "lists": {},
             "broadcasts": {},
             "customVars": [],
             "blocks": {
                 "a": {
-                    "opcode": "motion_movesteps",
+                    "opcode": "event_whenflagclicked",
                     "next": "b",
                     "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 0,
+                    "y": 0
+                },
+                "b": {
+                    "opcode": "motion_gotoxy",
+                    "next": "c",
+                    "parent": "a",
                     "inputs": {
-                        "STEPS": [
+                        "X": [
                             1,
                             [
                                 4,
-                                "10"
+                                "0"
+                            ]
+                        ],
+                        "Y": [
+                            1,
+                            [
+                                4,
+                                "0"
                             ]
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 264,
-                    "y": 139
+                    "topLevel": false
                 },
-                "b": {
-                    "opcode": "motion_movebacksteps",
-                    "next": "c",
-                    "parent": "a",
+                "d": {
+                    "opcode": "operator_random",
+                    "next": null,
+                    "parent": "c",
                     "inputs": {
-                        "STEPS": [
+                        "FROM": [
                             1,
                             [
                                 4,
-                                "10"
+                                "45"
+                            ]
+                        ],
+                        "TO": [
+                            1,
+                            [
+                                4,
+                                "135"
                             ]
                         ]
                     },
@@ -80,37 +104,16 @@
                     "topLevel": false
                 },
                 "c": {
-                    "opcode": "motion_moveupdownsteps",
-                    "next": "d",
+                    "opcode": "motion_pointindirection",
+                    "next": "e",
                     "parent": "b",
                     "inputs": {
-                        "STEPS": [
-                            1,
-                            [
-                                4,
-                                "10"
-                            ]
-                        ]
-                    },
-                    "fields": {
                         "DIRECTION": [
-                            "up",
-                            "kO=/nM^Lp^Q]A^}K)lXO"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "d": {
-                    "opcode": "motion_turnright",
-                    "next": "e",
-                    "parent": "c",
-                    "inputs": {
-                        "DEGREES": [
-                            1,
+                            3,
+                            "d",
                             [
-                                4,
-                                "15"
+                                8,
+                                ""
                             ]
                         ]
                     },
@@ -119,15 +122,43 @@
                     "topLevel": false
                 },
                 "e": {
-                    "opcode": "motion_turnleft",
+                    "opcode": "data_setvariableto",
                     "next": "f",
-                    "parent": "d",
+                    "parent": "c",
                     "inputs": {
-                        "DEGREES": [
+                        "VALUE": [
                             1,
                             [
+                                10,
+                                "5"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "Speed",
+                            "ulmfPLxcAjE)l]uH}}Km",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "g": {
+                    "opcode": "motion_movesteps",
+                    "next": null,
+                    "parent": "f",
+                    "inputs": {
+                        "STEPS": [
+                            3,
+                            [
+                                12,
+                                "Speed",
+                                "ulmfPLxcAjE)l]uH}}Km"
+                            ],
+                            [
                                 4,
-                                "15"
+                                ""
                             ]
                         ]
                     },
@@ -135,822 +166,50 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "g": {
-                    "opcode": "motion_goto_menu",
-                    "next": null,
-                    "parent": "f",
-                    "inputs": {},
-                    "fields": {
-                        "TO": [
-                            "_random_",
-                            "{ELxyxeH-ilqtek]Y@J?"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
                 "f": {
-                    "opcode": "motion_goto",
-                    "next": "h",
+                    "opcode": "control_forever",
+                    "next": null,
                     "parent": "e",
                     "inputs": {
-                        "TO": [
-                            1,
+                        "SUBSTACK": [
+                            2,
                             "g"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
-                },
-                "i": {
-                    "opcode": "motion_goto_menu",
-                    "next": null,
-                    "parent": "h",
-                    "inputs": {},
-                    "fields": {
-                        "TO": [
-                            "_mouse_",
-                            "EB}#|J*:TkPo/}QyFcIo"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "h": {
-                    "opcode": "motion_goto",
-                    "next": "j",
-                    "parent": "f",
-                    "inputs": {
-                        "TO": [
-                            1,
-                            "i"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "k": {
-                    "opcode": "motion_goto_menu",
-                    "next": null,
-                    "parent": "j",
-                    "inputs": {},
-                    "fields": {
-                        "TO": [
-                            "Sprite2",
-                            "CVvQ%hmsCf{[jdpy{pYl"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "j": {
-                    "opcode": "motion_goto",
-                    "next": "l",
-                    "parent": "h",
-                    "inputs": {
-                        "TO": [
-                            1,
-                            "k"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "l": {
-                    "opcode": "motion_gotoxy",
-                    "next": "m",
-                    "parent": "j",
-                    "inputs": {
-                        "X": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ],
-                        "Y": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "m": {
-                    "opcode": "motion_changebyxy",
-                    "next": "n",
-                    "parent": "l",
-                    "inputs": {
-                        "DX": [
-                            1,
-                            [
-                                4,
-                                "10"
-                            ]
-                        ],
-                        "DY": [
-                            1,
-                            [
-                                4,
-                                "10"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "o": {
-                    "opcode": "motion_glideto_menu",
-                    "next": null,
-                    "parent": "n",
-                    "inputs": {},
-                    "fields": {
-                        "TO": [
-                            "_random_",
-                            "Voecyxp.Ahc]%mHiCjMS"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "n": {
-                    "opcode": "motion_glideto",
-                    "next": "p",
-                    "parent": "m",
-                    "inputs": {
-                        "SECS": [
-                            1,
-                            [
-                                4,
-                                "1"
-                            ]
-                        ],
-                        "TO": [
-                            1,
-                            "o"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "q": {
-                    "opcode": "motion_glideto_menu",
-                    "next": null,
-                    "parent": "p",
-                    "inputs": {},
-                    "fields": {
-                        "TO": [
-                            "_mouse_",
-                            "(xh;,fmYzHT-`vAhuuR@"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "p": {
-                    "opcode": "motion_glideto",
-                    "next": "r",
-                    "parent": "n",
-                    "inputs": {
-                        "SECS": [
-                            1,
-                            [
-                                4,
-                                "1"
-                            ]
-                        ],
-                        "TO": [
-                            1,
-                            "q"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "s": {
-                    "opcode": "motion_glideto_menu",
-                    "next": null,
-                    "parent": "r",
-                    "inputs": {},
-                    "fields": {
-                        "TO": [
-                            "Sprite2",
-                            "Gp)wb-!`=NTXGt_b+kQf"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "r": {
-                    "opcode": "motion_glideto",
-                    "next": "t",
-                    "parent": "p",
-                    "inputs": {
-                        "SECS": [
-                            1,
-                            [
-                                4,
-                                "1"
-                            ]
-                        ],
-                        "TO": [
-                            1,
-                            "s"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "t": {
-                    "opcode": "motion_glidesecstoxy",
-                    "next": "u",
-                    "parent": "r",
-                    "inputs": {
-                        "SECS": [
-                            1,
-                            [
-                                4,
-                                "1"
-                            ]
-                        ],
-                        "X": [
-                            1,
-                            [
-                                4,
-                                "192"
-                            ]
-                        ],
-                        "Y": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "u": {
-                    "opcode": "motion_pointindirection",
-                    "next": "v",
-                    "parent": "t",
-                    "inputs": {
-                        "DIRECTION": [
-                            1,
-                            [
-                                8,
-                                "90"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "w": {
-                    "opcode": "motion_glideto_menu",
-                    "next": null,
-                    "parent": "v",
-                    "inputs": {},
-                    "fields": {
-                        "TOWARDS": [
-                            "_mouse_",
-                            "]JrE.TKT}qNX#kayQuEC"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "v": {
-                    "opcode": "motion_pointtowards",
-                    "next": "x",
-                    "parent": "u",
-                    "inputs": {
-                        "TOWARDS": [
-                            1,
-                            "w"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "y": {
-                    "opcode": "motion_glideto_menu",
-                    "next": null,
-                    "parent": "x",
-                    "inputs": {},
-                    "fields": {
-                        "TOWARDS": [
-                            "_random_",
-                            "*W`#eZ`#fv*iHu*@/_ae"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "x": {
-                    "opcode": "motion_pointtowards",
-                    "next": "z",
-                    "parent": "v",
-                    "inputs": {
-                        "TOWARDS": [
-                            1,
-                            "y"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "A": {
-                    "opcode": "motion_glideto_menu",
-                    "next": null,
-                    "parent": "z",
-                    "inputs": {},
-                    "fields": {
-                        "TOWARDS": [
-                            "Sprite2",
-                            ":PN,g#y^kqbZ#OaBba@m"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "z": {
-                    "opcode": "motion_pointtowards",
-                    "next": "B",
-                    "parent": "x",
-                    "inputs": {
-                        "TOWARDS": [
-                            1,
-                            "A"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "B": {
-                    "opcode": "motion_pointtowardsxy",
-                    "next": "C",
-                    "parent": "z",
-                    "inputs": {
-                        "X": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ],
-                        "Y": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "C": {
-                    "opcode": "motion_turnaround",
-                    "next": "D",
-                    "parent": "B",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "D": {
-                    "opcode": "motion_changexby",
-                    "next": "E",
-                    "parent": "C",
-                    "inputs": {
-                        "DX": [
-                            1,
-                            [
-                                4,
-                                "10"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "E": {
-                    "opcode": "motion_setx",
-                    "next": "F",
-                    "parent": "D",
-                    "inputs": {
-                        "X": [
-                            1,
-                            [
-                                4,
-                                "83"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "F": {
-                    "opcode": "motion_changeyby",
-                    "next": "G",
-                    "parent": "E",
-                    "inputs": {
-                        "DY": [
-                            1,
-                            [
-                                4,
-                                "10"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "G": {
-                    "opcode": "motion_sety",
-                    "next": "H",
-                    "parent": "F",
-                    "inputs": {
-                        "Y": [
-                            1,
-                            [
-                                4,
-                                "39"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "H": {
-                    "opcode": "motion_ifonedgebounce",
-                    "next": "I",
-                    "parent": "G",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "J": {
-                    "opcode": "motion_pointtowards_menu",
-                    "next": null,
-                    "parent": "I",
-                    "inputs": {},
-                    "fields": {
-                        "TOWARDS": [
-                            "_mouse_",
-                            "ypzMJxm-YkcJ*oGr?Sot"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "I": {
-                    "opcode": "motion_ifonspritebounce",
-                    "next": "K",
-                    "parent": "H",
-                    "inputs": {
-                        "SPRITE": [
-                            1,
-                            "J"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "L": {
-                    "opcode": "motion_pointtowards_menu",
-                    "next": null,
-                    "parent": "K",
-                    "inputs": {},
-                    "fields": {
-                        "TOWARDS": [
-                            "_random_",
-                            "JcffAH_OU`f:+(V[wAW}"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "K": {
-                    "opcode": "motion_ifonspritebounce",
-                    "next": "M",
-                    "parent": "I",
-                    "inputs": {
-                        "SPRITE": [
-                            1,
-                            "L"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "N": {
-                    "opcode": "motion_pointtowards_menu",
-                    "next": null,
-                    "parent": "M",
-                    "inputs": {},
-                    "fields": {
-                        "TOWARDS": [
-                            "Sprite2",
-                            "LbrtIQRVlRefIut|LUY^"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "M": {
-                    "opcode": "motion_ifonspritebounce",
-                    "next": "O",
-                    "parent": "K",
-                    "inputs": {
-                        "SPRITE": [
-                            1,
-                            "N"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "O": {
-                    "opcode": "motion_setrotationstyle",
-                    "next": "P",
-                    "parent": "M",
-                    "inputs": {},
-                    "fields": {
-                        "STYLE": [
-                            "left-right",
-                            "qLo.EgNw?jMZQM#nm_.-"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "P": {
-                    "opcode": "motion_setrotationstyle",
-                    "next": "Q",
-                    "parent": "O",
-                    "inputs": {},
-                    "fields": {
-                        "STYLE": [
-                            "up-down",
-                            "RRp.o:%eMQtv`WlikzCh"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "Q": {
-                    "opcode": "motion_setrotationstyle",
-                    "next": "R",
-                    "parent": "P",
-                    "inputs": {},
-                    "fields": {
-                        "STYLE": [
-                            "look at",
-                            "XbmY_?L*/|B%kVCH|v(y"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "R": {
-                    "opcode": "motion_setrotationstyle",
-                    "next": "S",
-                    "parent": "Q",
-                    "inputs": {},
-                    "fields": {
-                        "STYLE": [
-                            "don't rotate",
-                            "Toid@*zp:YGAfBsnz+WU"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "S": {
-                    "opcode": "motion_setrotationstyle",
-                    "next": "T",
-                    "parent": "R",
-                    "inputs": {},
-                    "fields": {
-                        "STYLE": [
-                            "all around",
-                            "]tn/s`Z%?:P::z]CbROP"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "T": {
-                    "opcode": "motion_move_sprite_to_scene_side",
-                    "next": "U",
-                    "parent": "S",
-                    "inputs": {},
-                    "fields": {
-                        "ALIGNMENT": [
-                            "bottom-left",
-                            "e@sGtW|L-ik?fiCqfMb*"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "U": {
-                    "opcode": "motion_move_sprite_to_scene_side",
-                    "next": "V",
-                    "parent": "T",
-                    "inputs": {},
-                    "fields": {
-                        "ALIGNMENT": [
-                            "bottom",
-                            "Qut+V;W@;e{l?j%AL[#."
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "V": {
-                    "opcode": "motion_move_sprite_to_scene_side",
-                    "next": "W",
-                    "parent": "U",
-                    "inputs": {},
-                    "fields": {
-                        "ALIGNMENT": [
-                            "bottom-right",
-                            "X}DcaxM;`GQi:HM!XXhu"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "W": {
-                    "opcode": "motion_move_sprite_to_scene_side",
-                    "next": "X",
-                    "parent": "V",
-                    "inputs": {},
-                    "fields": {
-                        "ALIGNMENT": [
-                            "top-left",
-                            "qEKQhe.#s/ktT!e,X+gm"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "X": {
-                    "opcode": "motion_move_sprite_to_scene_side",
-                    "next": "Y",
-                    "parent": "W",
-                    "inputs": {},
-                    "fields": {
-                        "ALIGNMENT": [
-                            "top",
-                            "-tceqPn^SyX/oh,RpLqX"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "Y": {
-                    "opcode": "motion_move_sprite_to_scene_side",
-                    "next": "Z",
-                    "parent": "X",
-                    "inputs": {},
-                    "fields": {
-                        "ALIGNMENT": [
-                            "top-right",
-                            "Lp?yeY)Vy+Tjff/Gd?`{"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "Z": {
-                    "opcode": "motion_move_sprite_to_scene_side",
-                    "next": "!",
-                    "parent": "Y",
-                    "inputs": {},
-                    "fields": {
-                        "ALIGNMENT": [
-                            "left",
-                            "BDl;@#;Nos%`%kn#im#t"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "!": {
-                    "opcode": "motion_move_sprite_to_scene_side",
-                    "next": null,
-                    "parent": "Z",
-                    "inputs": {},
-                    "fields": {
-                        "ALIGNMENT": [
-                            "right",
-                            "d*(#d:PGkTjpTdSSwbDU"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "#": {
-                    "opcode": "motion_xposition",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 298,
-                    "y": 2233
-                },
-                "%": {
-                    "opcode": "motion_yposition",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 275,
-                    "y": 2289
-                },
-                "(": {
-                    "opcode": "motion_direction",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 301,
-                    "y": 2395
                 }
             },
             "comments": {},
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "costume1",
+                    "name": "empty costume",
                     "bitmapResolution": 1,
-                    "assetId": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
                     "dataFormat": "svg",
-                    "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
-                    "rotationCenterX": 26,
-                    "rotationCenterY": 46
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 0,
+                    "rotationCenterY": 0,
+                    "isDefault": true
                 }
             ],
-            "sounds": [
-                {
-                    "name": "Squawk",
-                    "assetId": "e140d7ff07de8fa35c3d1595bba835ac",
-                    "dataFormat": "wav",
-                    "rate": 48000,
-                    "sampleCount": 17867,
-                    "md5ext": "e140d7ff07de8fa35c3d1595bba835ac.wav"
-                }
-            ],
-            "id": "oTDHQbL~wA;YdpAys^y/",
+            "sounds": [],
+            "id": "ulmfdX,{{?OpS|(mgqYt",
             "volume": 100,
             "visible": true,
-            "x": 192.20077514648438,
+            "x": 0,
             "y": 0,
             "size": 100,
-            "direction": -52.12501634890182,
-            "draggable": false,
+            "direction": 90,
+            "draggable": true,
             "rotationStyle": "all around",
             "layerOrder": 1
         },
         {
             "isStage": false,
-            "name": "Sprite2",
+            "name": "Player 1",
             "variables": {},
             "lists": {},
             "broadcasts": {},
@@ -960,26 +219,61 @@
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "costume1",
+                    "name": "empty costume",
                     "bitmapResolution": 1,
-                    "assetId": "3339a2953a3bf62bb80e54ff575dbced",
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
                     "dataFormat": "svg",
-                    "md5ext": "3339a2953a3bf62bb80e54ff575dbced.svg",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
                     "rotationCenterX": 0,
-                    "rotationCenterY": 0
+                    "rotationCenterY": 0,
+                    "isDefault": true
                 }
             ],
             "sounds": [],
-            "id": "JZ[pcxv.fz+M;+W|tWBT",
+            "id": "Npfb_uL]i{q/Q/D+X_@W",
             "volume": 100,
             "visible": true,
-            "x": 36,
-            "y": 28,
+            "x": 0,
+            "y": 0,
             "size": 100,
             "direction": 90,
-            "draggable": false,
+            "draggable": true,
             "rotationStyle": "all around",
-            "layerOrder": 2
+            "layerOrder": 1
+        },
+        {
+            "isStage": false,
+            "name": "Player 2",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "empty costume",
+                    "bitmapResolution": 1,
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "dataFormat": "svg",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 0,
+                    "rotationCenterY": 0,
+                    "isDefault": true
+                }
+            ],
+            "sounds": [],
+            "id": "}A%|~plmnU%{pUCee~#o",
+            "volume": 100,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": true,
+            "rotationStyle": "all around",
+            "layerOrder": 1
         }
     ],
     "monitors": [],

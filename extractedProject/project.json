@@ -1,0 +1,492 @@
+{
+    "sprites": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "dataFormat": "svg",
+                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        240,
+                        180
+                    ]
+                }
+            ],
+            "sounds": [],
+            "volume": 100
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "scripts": [
+                {
+                    "position": [
+                        41,
+                        205
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "my variable"
+                            }
+                        },
+                        {
+                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "my variable"
+                            }
+                        },
+                        {
+                            "opcode": "show variable [VARIABLE]",
+                            "inputs": {},
+                            "options": {
+                                "VARIABLE": "my variable"
+                            }
+                        },
+                        {
+                            "opcode": "hide variable [VARIABLE]",
+                            "inputs": {},
+                            "options": {
+                                "VARIABLE": "my variable"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        69,
+                        540
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "add (ITEM) to [LIST]",
+                            "inputs": {
+                                "ITEM": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "thing"
+                                }
+                            },
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        },
+                        {
+                            "opcode": "delete (INDEX) of [LIST]",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        },
+                        {
+                            "opcode": "delete all of [LIST]",
+                            "inputs": {},
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        },
+                        {
+                            "opcode": "shift [LIST] by (INDEX)",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        },
+                        {
+                            "opcode": "insert (ITEM) at (INDEX) of [LIST]",
+                            "inputs": {
+                                "ITEM": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "thing"
+                                },
+                                "INDEX": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        },
+                        {
+                            "opcode": "replace item (INDEX) of [LIST] with (ITEM)",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "ITEM": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "thing"
+                                }
+                            },
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        },
+                        {
+                            "opcode": "For each item [VARIABLE] in [LIST] {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": []
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "my variable",
+                                "LIST": "my list"
+                            }
+                        },
+                        {
+                            "opcode": "For each item # [VARIABLE] in [LIST] {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": []
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "my variable",
+                                "LIST": "my list"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        109,
+                        1024
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "item (INDEX) of [LIST]",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        105,
+                        1075
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "item # of (ITEM) in [LIST]",
+                            "inputs": {
+                                "ITEM": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "thing"
+                                }
+                            },
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        107,
+                        1138
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "amount of (VALUE) of [LIST]",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "foo"
+                                }
+                            },
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        132,
+                        1192
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "length of [LIST]",
+                            "inputs": {},
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        55,
+                        1244
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "[LIST] contains (ITEM) ?",
+                            "inputs": {
+                                "ITEM": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "thing"
+                                }
+                            },
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        37,
+                        1307
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "item (INDEX) exists in [LIST] ?",
+                            "inputs": {
+                                "INDEX": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        65,
+                        1362
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "is [LIST] empty?",
+                            "inputs": {},
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        90,
+                        1446
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "reverse [LIST]",
+                            "inputs": {},
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        },
+                        {
+                            "opcode": "set [LIST] to array (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "[\"a\", \"b\", \"c\"]"
+                                }
+                            },
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        },
+                        {
+                            "opcode": "show list [LIST]",
+                            "inputs": {},
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        },
+                        {
+                            "opcode": "hide list [LIST]",
+                            "inputs": {},
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        372,
+                        1426
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "get list [LIST] as an array",
+                            "inputs": {},
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        117,
+                        127
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "value of [VARIABLE]",
+                            "inputs": {},
+                            "options": {
+                                "VARIABLE": "my variable"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        85,
+                        477
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "value of [LIST]",
+                            "inputs": {},
+                            "options": {
+                                "LIST": "my list"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "dataFormat": "svg",
+                    "fileStem": "c434b674f2da18ba13cdfe51dbc05ecc",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        26,
+                        46
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "Squawk",
+                    "dataFormat": "wav",
+                    "fileStem": "e140d7ff07de8fa35c3d1595bba835ac",
+                    "rate": 48000,
+                    "sampleCount": 17867
+                }
+            ],
+            "volume": 100,
+            "localVariables": [],
+            "localLists": [],
+            "layerOrder": 1,
+            "visible": true,
+            "position": [
+                0,
+                0
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "globalVariables": [
+        {
+            "name": "my variable",
+            "currentValue": 0,
+            "isCloudVariable": false
+        }
+    ],
+    "globalLists": [
+        {
+            "name": "my list",
+            "currentValue": []
+        }
+    ],
+    "tempo": 60,
+    "videoTransparency": 50,
+    "videoState": "on",
+    "textToSpeechLanguage": null,
+    "monitors": [
+        {
+            "opcode": "value of [LIST]",
+            "options": {
+                "LIST": "my list"
+            },
+            "spriteName": null,
+            "position": [
+                5,
+                5
+            ],
+            "visible": true,
+            "size": [
+                0,
+                0
+            ]
+        }
+    ],
+    "extensionData": {},
+    "extensions": [
+        "jgJSON"
+    ]
+}

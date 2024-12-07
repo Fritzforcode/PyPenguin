@@ -26,8 +26,8 @@ def deoptimizeProject(projectData):
     
     newSpriteDatas = []
     for i, spriteData in enumerate(projectData["sprites"]):
-        unfinishedScriptDatas = restoreScripts(spriteData["scripts"])
-        flattendScriptDatas   = flattenScripts(unfinishedScriptDatas)
+        restoredScriptDatas = restoreScripts(spriteData["scripts"])
+        flattendScriptDatas   = flattenScripts(restoredScriptDatas)
         newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,
             spriteName=spriteData["name"],
