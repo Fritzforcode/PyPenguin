@@ -65,7 +65,7 @@ projectData = {
             "costumes": [
                 {
                     "name": "Basketball",
-                    "dataFormat": "svg",
+                    "extension": "svg",
                     "bitmapResolution": 1,
                     "rotationCenter": [0,0],
                 }

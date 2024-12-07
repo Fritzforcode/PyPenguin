@@ -210,7 +210,7 @@ inputModes = {
 
 defaultCostume = {
     "name": "empty costume",
-    "dataFormat": "svg",
+    "extension": "svg",
     "bitmapResolution": 1,
     "rotationCenter": [0, 0]
 }
