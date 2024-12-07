@@ -62,7 +62,14 @@ projectData = {
             "scripts": [ballCode],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [],
+            "costumes": [
+                {
+                    "name": "Basketball",
+                    "dataFormat": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [0,0],
+                }
+            ],
             "sounds": [],
             "localVariables": [],
             "localLists": [],
@@ -130,7 +137,9 @@ projectData = {
     "extensionData": {},
     "extensions": [],
 }
-import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
 from pypenguin import validateProject, deoptimizeAndCompressProject
 from pypenguin.helper_functions import writeJSONFile, pp
 
@@ -143,12 +152,12 @@ writeJSONFile(
 )
 
 writeJSONFile(
-    filePath = "project/project.json",
+    filePath = "pong/project.json",
     data     = projectData
 )
 
 deoptimizeAndCompressProject(
-    optimizedProjectDir = "project",
+    optimizedProjectDir = "pong",
     projectFilePath     = "export.pmp",
     temporaryDir        = "temporary",
     writeDebugFiles     = True,

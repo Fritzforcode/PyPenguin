@@ -3,8 +3,7 @@ def translateCostumes(data):
     for costumeData in data:
         newCostumeData = {
             "name"            : costumeData["name"],
-            "dataFormat"      : costumeData["dataFormat"],
-            "fileStem"        : costumeData["assetId"],
+            "extension"       : costumeData["dataFormat"],
             "bitmapResolution": None,
             "rotationCenter"  : [costumeData["rotationCenterX"], costumeData["rotationCenterY"]],
         }
@@ -20,8 +19,7 @@ def translateSounds(data):
     for soundData in data:
         newSoundData = {
             "name"       : soundData["name"],
-            "dataFormat" : soundData["dataFormat"],
-            "fileStem"   : soundData["assetId"],
+            "extension"  : soundData["dataFormat"],
             "rate"       : soundData["rate"],        # playback speed in Hz
             "sampleCount": soundData["sampleCount"], # = "rate" * SECONDS in secs
         }

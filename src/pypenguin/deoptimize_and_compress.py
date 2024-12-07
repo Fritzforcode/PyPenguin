@@ -2,8 +2,9 @@ import os, shutil
 import urllib.parse
 
 from pypenguin.deoptimize import deoptimizeProject
+from pypenguin.deoptimize.costumes_sounds import finalizeCostume, finalizeSound
 
-from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrectPath
+from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrectPath, generateMd5
 
 from pypenguin.database import defaultCostumeFilePath
 
@@ -27,16 +28,8 @@ def deoptimizeAndCompressProject(
     deoptimizedData = deoptimizeProject(
         projectData=optimizedData,
     )
-    if writeDebugFiles:
-        writeJSONFile(temp3FilePath, data=deoptimizedData)
     # Make sure the temporary Dir exists
     os.makedirs(temporaryDir, exist_ok=True)
-    
-    # Write the deoptimized project.json
-    writeJSONFile(
-        filePath=os.path.join(temporaryDir, "project.json"),
-        data=deoptimizedData,
-    )
 
     # Reorganize Assets
     for i, sprite in enumerate(optimizedData["sprites"]):
@@ -49,8 +42,8 @@ def deoptimizeAndCompressProject(
             encodedSpriteName = urllib.parse.quote(sprite["name"])
         
         # Copy and rename costumes
+        newCostumes = []
         for j, costume in enumerate(deoptimizedSprite["costumes"]):
-            oldCostumeName                        = costume["md5ext"]
             encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
             if costume.get("isDefault") == True:
                 srcPath = defCostumeFilePath
@@ -61,14 +54,25 @@ def deoptimizeAndCompressProject(
                     "costumes", 
                     encodedCostumeName
                 )
+            md5    = generateMd5(file=srcPath)
+            md5ext = md5 + "." + costume["dataFormat"]
             shutil.copy(
                 src=srcPath,
-                dst=os.path.join(temporaryDir, oldCostumeName),
+                dst=os.path.join(temporaryDir, md5ext),
             )
+            newCostumes.append(finalizeCostume(
+                data=costume, 
+                md5=md5,
+                md5ext=md5ext,
+            ))
+        
+        deoptimizedSprite["costumes"] = newCostumes
+
+
         
         # Copy and rename sounds
+        newSounds = []
         for j, sound in enumerate(deoptimizedSprite["sounds"]):
-            oldSoundName                        = sound["md5ext"]
             encodedSoundName = urllib.parse.quote(sound["name"] + "." + sound["dataFormat"])
             srcPath = os.path.join(
                 optimizedProjectDir, 
@@ -76,22 +80,29 @@ def deoptimizeAndCompressProject(
                 "sounds", 
                 encodedSoundName
             )
+            md5    = generateMd5(file=srcPath)
+            md5ext = md5 + "." + sound["dataFormat"]
             shutil.copy(
                 src=srcPath,
-                dst=os.path.join(temporaryDir, oldSoundName),
+                dst=os.path.join(temporaryDir, md5ext),
             )
-        """for costume in sprite["sounds"]:
-            oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
-            encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
-            shutil.copy(
-                src=os.path.join(
-                    optimizedProjectDir, 
-                    encodedSpriteName, 
-                    "sounds", 
-                    encodedCostumeName
-                ),
-                dst=os.path.join(temporaryDir, oldCostumeName),
-            )"""
+            newSounds.append(finalizeSound(
+                data=sound, 
+                md5=md5,
+                md5ext=md5ext,
+            ))
+        
+        deoptimizedSprite["sounds"] = newSounds
+
+    
+    if writeDebugFiles:
+        writeJSONFile(temp3FilePath, data=deoptimizedData)
+    
+    # Write the deoptimized project.json
+    writeJSONFile(
+        filePath=os.path.join(temporaryDir, "project.json"),
+        data=deoptimizedData,
+    )
 
     # Make sure projectFilePath does not exist
     if os.path.exists(projectFilePath):

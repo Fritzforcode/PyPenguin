@@ -153,8 +153,7 @@ costumeSchema = {
     "type": "object",
     "properties": {
         "name": {"type": "string"},
-        "dataFormat": {"type": "string"},
-        "fileStem": {"type": "string"},
+        "extension": {"type": "string"},
         "bitmapResolution": {"type": "integer", "minimum": 1},
         "rotationCenter": {
             "type": "array",
@@ -165,8 +164,7 @@ costumeSchema = {
     },
     "required": [
         "name",
-        "dataFormat",
-        "fileStem",
+        "extension",
         "bitmapResolution",
         "rotationCenter",
     ],
@@ -177,12 +175,11 @@ soundSchema = {
     "type": "object",
     "properties": {
         "name": {"type": "string"},
-        "dataFormat": {"type": "string"},
-        "fileStem": {"type": "string"},
+        "extension": {"type": "string"},
         "rate": {"type": "integer", "minimum": 1},
         "sampleCount": {"type": "integer", "minimum": 1},
     },
-    "required": ["name", "dataFormat", "fileStem", "rate", "sampleCount"],
+    "required": ["name", "extension", "rate", "sampleCount"],
 }
 
 blockSchema = {

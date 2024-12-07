@@ -4,7 +4,7 @@ from pypenguin.optimize import optimizeProjectJSON
 import urllib.parse
 import os, shutil, zipfile
 
-from pypenguin.helper_functions import readJSONFile, writeJSONFile, pp, insureCorrectPath
+from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrectPath
 
 def extractProject(
     pmpFilePath       : str, # Path to your .pmp file
@@ -80,7 +80,8 @@ def extractAndOptimizeProject(
     shutil.rmtree(path=optimizedProjectDir)
     
     # Reorganize Assets
-    for sprite in optimizedData["sprites"]:
+    for i, sprite in enumerate(optimizedData["sprites"]):
+        deoptimizedSprite  = deoptimizedData["targets"][i]
         # Encode the sprite name
         if sprite["isStage"]:
             encodedSpriteName = "#Stage"
@@ -97,18 +98,22 @@ def extractAndOptimizeProject(
             exist_ok=True
         )
         # Copy and rename costumes
-        for costume in sprite["costumes"]:
-            oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
-            encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
-            shutil.copy(
-                src=os.path.join(temporaryDir, oldCostumeName),
-                dst=os.path.join(
-                    optimizedProjectDir, 
-                    encodedSpriteName, 
-                    "costumes", 
-                    encodedCostumeName
-                ),
+        for j, costume in enumerate(sprite["costumes"]):
+            deoptimizedCostume = deoptimizedSprite["costumes"][j]
+            oldCostumeName     =      deoptimizedCostume["assetId"] + "." + costume["extension"]
+            encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["extension"])
+            srcPath = os.path.join(temporaryDir, oldCostumeName)
+            destPath = os.path.join(
+                optimizedProjectDir, 
+                encodedSpriteName, 
+                "costumes", 
+                encodedCostumeName
             )
+            shutil.copy(
+                src=srcPath,
+                dst=destPath
+            )
+
         
         # Make sure the sprite dir has the sounds dir
         os.makedirs(
@@ -119,18 +124,21 @@ def extractAndOptimizeProject(
             ), 
             exist_ok=True
         )
-        # Copy and rename sounds
-        for costume in sprite["sounds"]:
-            oldCostumeName                    = costume["fileStem"] + "." + costume["dataFormat"]
-            encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
+        # Copy and rename sounds            
+        for j, sound in enumerate(sprite["sounds"]):
+            deoptimizedSound = deoptimizedSprite["sounds"][j]
+            oldSoundName     =      deoptimizedSound["assetId"] + "." + sound["extension"]
+            encodedSoundName = urllib.parse.quote(sound["name"] + "." + sound["extension"])
+            srcPath = os.path.join(temporaryDir, oldSoundName)
+            destPath = os.path.join(
+                optimizedProjectDir, 
+                encodedSpriteName, 
+                "sounds", 
+                encodedSoundName
+            )
             shutil.copy(
-                src=os.path.join(temporaryDir, oldCostumeName),
-                dst=os.path.join(
-                    optimizedProjectDir, 
-                    encodedSpriteName, 
-                    "sounds", 
-                    encodedCostumeName
-                ),
+                src=srcPath,
+                dst=destPath
             )
     
     # Add the optimized project.json

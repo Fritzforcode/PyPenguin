@@ -92,9 +92,8 @@
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "Ball",
+                    "name": "Basketball",
                     "dataFormat": "svg",
-                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
                     "bitmapResolution": 1,
                     "rotationCenter": [
                         0,

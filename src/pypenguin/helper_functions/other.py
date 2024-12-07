@@ -1,19 +1,19 @@
 from pprint import pprint
-import re, os
+import re, os, hashlib
 
-def escape_chars(input_string: str, chars_to_escape: list) -> str:
+def escapeChars(inputString: str, charsToEscape: list) -> str:
     # Escape backslashes first by doubling them up
-    escaped_string = re.sub(r'\\', r'\\\\', input_string)
+    escapedString = re.sub(r'\\', r'\\\\', inputString)
     
     # Escape each character in chars_to_escape by adding a backslash before it
-    for char in chars_to_escape:
-        escaped_string = re.sub(re.escape(char), r'\\' + char, escaped_string)
+    for char in charsToEscape:
+        escapedString = re.sub(re.escape(char), r'\\' + char, escapedString)
     
-    return escaped_string
+    return escapedString
 
-def unescape_chars(input_string: str) -> str:
+def unescapeChars(inputString: str) -> str:
     # Use regex to replace any backslash followed by a character with the character itself
-    return re.sub(r"\\(.)", r"\1", input_string)
+    return re.sub(r"\\(.)", r"\1", inputString)
 
 def parseCustomOpcode(customOpcode: str):
     part = ""
@@ -89,17 +89,17 @@ def generateCustomOpcode(proccode: str, argumentNames: list[str]):
         char2 = proccode[i + 1] if i + 1 in range(len(proccode)) else None
         char3 = proccode[i + 2] if i + 2 in range(len(proccode)) else None
         if   char==" " and char2=="%" and char3=="s": # if the next chars are ' %s '
-            argumentName = escape_chars(argumentNames[j], chars_to_escape)
+            argumentName = escapeChars(argumentNames[j], chars_to_escape)
             customOpcode += " (" + argumentName + ")"
             j += 1
             i += 2
         elif char==" " and char2=="%" and char3=="b": # if the next chars are ' %b '
-            argumentName = escape_chars(argumentNames[j], chars_to_escape)
+            argumentName = escapeChars(argumentNames[j], chars_to_escape)
             customOpcode += " <" + argumentName + ">"
             j += 1
             i += 2
         else:
-            customOpcode += escape_chars(char, chars_to_escape)
+            customOpcode += escapeChars(char, chars_to_escape)
         i += 1
     return customOpcode.removesuffix(" ")
 
@@ -152,3 +152,26 @@ def insureCorrectPath(path, targetFolderName):
     
     finalPath = os.path.join(currentPath, path)
     return finalPath
+
+def generateMd5(file):
+    """
+    Generate an MD5 hash for a string or file.
+
+    Parameters:
+        data (str): The input string or file path.
+
+    Returns:
+        str: The MD5 hash as a hexadecimal string.
+    """
+    md5Hash = hashlib.md5()
+
+    try:
+        with open(file, "rb") as file:
+            for chunk in iter(lambda: file.read(4096), b""):
+                md5Hash.update(chunk)
+    except FileNotFoundError:
+        return "Error: File not found."
+    except Exception as e:
+        return f"Error: {e}"
+
+    return md5Hash.hexdigest()
