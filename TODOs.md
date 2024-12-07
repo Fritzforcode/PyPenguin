@@ -26,18 +26,8 @@ maybe translate currentValue for certain types
 
 maybe validate json files before reading them
 
-maybe research monitor size
-
-maybe remove fileStem
-
-maybe show multiple errors when validating
-
-maybe research rotationCenter for different costume types
-
 maybe validate:
-- dataFormat
 - extension names
-- fileStem (no folders allowed and the file existing)
 - layerOrder to be at most 4 - needs research 
 - asset names matching
 - block types being in the correct place in script or input
