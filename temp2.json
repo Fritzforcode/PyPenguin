@@ -1,362 +1,1223 @@
 {
     "sprites": [
         {
-            "name": "Stage",
             "isStage": true,
+            "name": "Stage",
             "scripts": [
                 {
                     "position": [
-                        0,
-                        0
+                        -616,
+                        -568
                     ],
                     "blocks": [
                         {
-                            "opcode": "when I receive [MESSAGE]",
-                            "options": {
-                                "MESSAGE": "Player 1 Scores"
-                            }
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
                         },
                         {
-                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "opcode": "forever {BODY}",
                             "inputs": {
-                                "VALUE": {
-                                    "text": "1"
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": null
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": []
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
                                 }
                             },
-                            "options": {
-                                "VARIABLE": "Player 1 Score"
-                            }
-                        },
-                        {
-                            "opcode": "broadcast ([MESSAGE])",
-                            "inputs": {
-                                "MESSAGE": {
-                                    "option": "Reset Ball"
-                                }
-                            }
-                        },
-                        {
-                            "opcode": "run flag"
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        300
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when I receive [MESSAGE]",
-                            "options": {
-                                "MESSAGE": "Player 2 Scores"
-                            }
-                        },
-                        {
-                            "opcode": "change [VARIABLE] by (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "text": "1"
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "Player 2 Score"
-                            }
-                        },
-                        {
-                            "opcode": "run flag"
+                            "options": {}
                         }
                     ]
                 }
             ],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [],
-            "sounds": [],
+            "costumes": [
+                {
+                    "name": "1",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        381.2306306306307,
+                        197.11651651651664
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "pop",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 1123
+                }
+            ],
             "volume": 100
         },
         {
-            "name": "Ball",
             "isStage": false,
+            "name": "player ",
             "scripts": [
                 {
                     "position": [
-                        0,
-                        0
+                        50,
+                        89
                     ],
                     "blocks": [
                         {
-                            "opcode": "when green flag clicked"
+                            "opcode": "when [KEY] key pressed",
+                            "inputs": {},
+                            "options": {
+                                "KEY": "m"
+                            }
                         },
                         {
-                            "opcode": "go to x: (X) y: (Y)",
+                            "opcode": "play sound ([SOUND]) until done",
                             "inputs": {
-                                "X": {
-                                    "text": "0"
-                                },
-                                "Y": {
-                                    "text": "0"
+                                "SOUND": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "Meow"
                                 }
-                            }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        410,
+                        63
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "key ([KEY]) pressed?",
+                                                        "inputs": {
+                                                            "KEY": {
+                                                                "mode": "block-and-option",
+                                                                "block": null,
+                                                                "option": "m"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "switch costume to ([COSTUME])",
+                                                            "inputs": {
+                                                                "COSTUME": {
+                                                                    "mode": "block-and-option",
+                                                                    "block": null,
+                                                                    "option": "costume2"
+                                                                }
+                                                            },
+                                                            "options": {}
+                                                        },
+                                                        {
+                                                            "opcode": "wait (SECONDS) seconds",
+                                                            "inputs": {
+                                                                "SECONDS": {
+                                                                    "mode": "block-and-text",
+                                                                    "block": null,
+                                                                    "text": "0.4"
+                                                                }
+                                                            },
+                                                            "options": {}
+                                                        },
+                                                        {
+                                                            "opcode": "switch costume to ([COSTUME])",
+                                                            "inputs": {
+                                                                "COSTUME": {
+                                                                    "mode": "block-and-option",
+                                                                    "block": null,
+                                                                    "option": "costume1"
+                                                                }
+                                                            },
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        6,
+                        306
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
                         },
                         {
                             "opcode": "point in direction (DIRECTION)",
                             "inputs": {
                                 "DIRECTION": {
-                                    "block": {
-                                        "opcode": "pick random (OPERAND1) to (OPERAND2)",
-                                        "inputs": {
-                                            "OPERAND1": {
-                                                "text": "45"
-                                            },
-                                            "OPERAND2": {
-                                                "text": "135"
-                                            }
-                                        }
-                                    }
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "90"
                                 }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "switch costume to ([COSTUME])",
+                            "inputs": {
+                                "COSTUME": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "costume1"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-171"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "x"
                             }
                         },
                         {
                             "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
                                 "VALUE": {
-                                    "text": "5"
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-5"
                                 }
                             },
                             "options": {
-                                "VARIABLE": "Speed"
+                                "VARIABLE": "y"
                             }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        373,
+                        496
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
                         },
                         {
                             "opcode": "forever {BODY}",
                             "inputs": {
                                 "BODY": {
+                                    "mode": "script",
                                     "blocks": [
                                         {
-                                            "opcode": "move (STEPS) steps",
+                                            "opcode": "go to x: (X) y: (Y)",
                                             "inputs": {
-                                                "STEPS": {
+                                                "X": {
+                                                    "mode": "block-and-text",
                                                     "block": {
                                                         "opcode": "value of [VARIABLE]",
+                                                        "inputs": {},
                                                         "options": {
-                                                            "VARIABLE": "Speed"
+                                                            "VARIABLE": "x"
                                                         }
-                                                    }
+                                                    },
+                                                    "text": "-171"
+                                                },
+                                                "Y": {
+                                                    "mode": "block-and-text",
+                                                    "block": {
+                                                        "opcode": "value of [VARIABLE]",
+                                                        "inputs": {},
+                                                        "options": {
+                                                            "VARIABLE": "y"
+                                                        }
+                                                    },
+                                                    "text": "-5"
                                                 }
-                                            }
-                                        },
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        191,
+                        -225
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
                                         {
                                             "opcode": "if <CONDITION> then {THEN}",
                                             "inputs": {
                                                 "CONDITION": {
+                                                    "mode": "block-only",
                                                     "block": {
-                                                        "opcode": "<OPERAND1> or <OPERAND2>",
+                                                        "opcode": "key ([KEY]) pressed?",
                                                         "inputs": {
-                                                            "OPERAND1": {
-                                                                "block": {
-                                                                    "opcode": "touching ([OBJECT]) ?",
-                                                                    "inputs": {
-                                                                        "OBJECT": {
-                                                                            "option": "Paddle 1"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            },
-                                                            "OPERAND2": {
-                                                                "block": {
-                                                                    "opcode": "touching ([OBJECT]) ?",
-                                                                    "inputs": {
-                                                                        "OBJECT": {
-                                                                            "option": "Paddle 2"
-                                                                        }
-                                                                    }
-                                                                }
+                                                            "KEY": {
+                                                                "mode": "block-and-option",
+                                                                "block": null,
+                                                                "option": "right arrow"
                                                             }
-                                                        }
+                                                        },
+                                                        "options": {}
                                                     }
                                                 },
                                                 "THEN": {
+                                                    "mode": "script",
                                                     "blocks": [
                                                         {
                                                             "opcode": "point in direction (DIRECTION)",
                                                             "inputs": {
                                                                 "DIRECTION": {
-                                                                    "block": {
-                                                                        "opcode": "(OPERAND1) - (OPERAND2)",
-                                                                        "inputs": {
-                                                                            "OPERAND1": {
-                                                                                "text": ""
-                                                                            },
-                                                                            "OPERAND2": {
-                                                                                "block": {
-                                                                                    "opcode": "direction"
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
+                                                                    "mode": "block-and-text",
+                                                                    "block": null,
+                                                                    "text": "90"
                                                                 }
-                                                            }
+                                                            },
+                                                            "options": {}
                                                         },
                                                         {
                                                             "opcode": "change [VARIABLE] by (VALUE)",
                                                             "inputs": {
                                                                 "VALUE": {
-                                                                    "text": "1"
+                                                                    "mode": "block-and-text",
+                                                                    "block": null,
+                                                                    "text": "5"
                                                                 }
                                                             },
                                                             "options": {
-                                                                "VARIABLE": "Speed"
+                                                                "VARIABLE": "x"
                                                             }
                                                         }
                                                     ]
                                                 }
-                                            }
-                                        },
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -147,
+                        -496
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
                                         {
                                             "opcode": "if <CONDITION> then {THEN}",
                                             "inputs": {
                                                 "CONDITION": {
+                                                    "mode": "block-only",
                                                     "block": {
-                                                        "opcode": "<OPERAND1> or <OPERAND2>",
+                                                        "opcode": "key ([KEY]) pressed?",
                                                         "inputs": {
-                                                            "OPERAND1": {
-                                                                "block": {
-                                                                    "opcode": "(OPERAND1) > (OPERAND2)",
-                                                                    "inputs": {
-                                                                        "OPERAND1": {
-                                                                            "block": {
-                                                                                "opcode": "y position"
-                                                                            }
-                                                                        },
-                                                                        "OPERAND2": {
-                                                                            "text": "156"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            },
-                                                            "OPERAND2": {
-                                                                "block": {
-                                                                    "opcode": "(OPERAND1) < (OPERAND2)",
-                                                                    "inputs": {
-                                                                        "OPERAND1": {
-                                                                            "block": {
-                                                                                "opcode": "y position"
-                                                                            }
-                                                                        },
-                                                                        "OPERAND2": {
-                                                                            "text": "-156"
-                                                                        }
-                                                                    }
-                                                                }
+                                                            "KEY": {
+                                                                "mode": "block-and-option",
+                                                                "block": null,
+                                                                "option": "left arrow"
                                                             }
-                                                        }
+                                                        },
+                                                        "options": {}
                                                     }
                                                 },
                                                 "THEN": {
+                                                    "mode": "script",
                                                     "blocks": [
                                                         {
                                                             "opcode": "point in direction (DIRECTION)",
                                                             "inputs": {
                                                                 "DIRECTION": {
-                                                                    "block": {
-                                                                        "opcode": "(OPERAND1) - (OPERAND2)",
-                                                                        "inputs": {
-                                                                            "OPERAND1": {
-                                                                                "text": "180"
-                                                                            },
-                                                                            "OPERAND2": {
-                                                                                "block": {
-                                                                                    "opcode": "direction"
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        },
-                                        {
-                                            "opcode": "if <CONDITION> then {THEN}",
-                                            "inputs": {
-                                                "CONDITION": {
-                                                    "block": {
-                                                        "opcode": "(OPERAND1) > (OPERAND2)",
-                                                        "inputs": {
-                                                            "OPERAND1": {
-                                                                "block": {
-                                                                    "opcode": "x position"
+                                                                    "mode": "block-and-text",
+                                                                    "block": null,
+                                                                    "text": "-90"
                                                                 }
                                                             },
-                                                            "OPERAND2": {
-                                                                "text": "216"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                "THEN": {
-                                                    "blocks": [
-                                                        {
-                                                            "opcode": "broadcast ([MESSAGE])",
-                                                            "inputs": {
-                                                                "MESSAGE": {
-                                                                    "option": "Player 1 Scores"
-                                                                }
-                                                            }
+                                                            "options": {}
                                                         },
                                                         {
-                                                            "opcode": "stop script [TARGET]",
-                                                            "options": {
-                                                                "TARGET": "this script"
-                                                            }
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        },
-                                        {
-                                            "opcode": "if <CONDITION> then {THEN}",
-                                            "inputs": {
-                                                "CONDITION": {
-                                                    "block": {
-                                                        "opcode": "(OPERAND1) < (OPERAND2)",
-                                                        "inputs": {
-                                                            "OPERAND1": {
-                                                                "block": {
-                                                                    "opcode": "x position"
+                                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "mode": "block-and-text",
+                                                                    "block": null,
+                                                                    "text": "-5"
                                                                 }
                                                             },
-                                                            "OPERAND2": {
-                                                                "text": "-216"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                "THEN": {
-                                                    "blocks": [
-                                                        {
-                                                            "opcode": "broadcast ([MESSAGE])",
-                                                            "inputs": {
-                                                                "MESSAGE": {
-                                                                    "option": "Player 2 Scores"
-                                                                }
-                                                            }
-                                                        },
-                                                        {
-                                                            "opcode": "stop script [TARGET]",
                                                             "options": {
-                                                                "TARGET": "this script"
+                                                                "VARIABLE": "x"
                                                             }
                                                         }
                                                     ]
                                                 }
-                                            }
+                                            },
+                                            "options": {}
                                         }
                                     ]
                                 }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -1036,
+                        -966
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set [EFFECT] sprite effect to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "EFFECT": "GHOST"
+                            }
+                        },
+                        {
+                            "opcode": "show",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "level"
+                            }
+                        },
+                        {
+                            "opcode": "switch backdrop to ([BACKDROP])",
+                            "inputs": {
+                                "BACKDROP": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "1"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "go to x: (X) y: (Y)",
+                            "inputs": {
+                                "X": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-215"
+                                },
+                                "Y": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-97"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "point in direction (DIRECTION)",
+                            "inputs": {
+                                "DIRECTION": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "90"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -508,
+                        -268
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "key ([KEY]) pressed?",
+                                                        "inputs": {
+                                                            "KEY": {
+                                                                "mode": "block-and-option",
+                                                                "block": null,
+                                                                "option": "up arrow"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "mode": "block-and-text",
+                                                                    "block": null,
+                                                                    "text": "8"
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "VARIABLE": "y"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -434,
+                        70
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "not <OPERAND>",
+                                                        "inputs": {
+                                                            "OPERAND": {
+                                                                "mode": "block-only",
+                                                                "block": {
+                                                                    "opcode": "touching color (COLOR) ?",
+                                                                    "inputs": {
+                                                                        "COLOR": {
+                                                                            "mode": "block-and-text",
+                                                                            "block": null,
+                                                                            "text": "#000000"
+                                                                        }
+                                                                    },
+                                                                    "options": {}
+                                                                }
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "mode": "block-and-text",
+                                                                    "block": null,
+                                                                    "text": "-5"
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "VARIABLE": "y"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -528,
+                        -614
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "touching color (COLOR) ?",
+                                                        "inputs": {
+                                                            "COLOR": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "#d8d8d8"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "broadcast ([MESSAGE])",
+                                                            "inputs": {
+                                                                "MESSAGE": {
+                                                                    "mode": "block-and-hybrid-option",
+                                                                    "block": null,
+                                                                    "option": "reset"
+                                                                }
+                                                            },
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -976,
+                        -1638
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when I receive [MESSAGE]",
+                            "inputs": {},
+                            "options": {
+                                "MESSAGE": "reset"
+                            }
+                        },
+                        {
+                            "opcode": "set [EFFECT] sprite effect to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "EFFECT": "GHOST"
+                            }
+                        },
+                        {
+                            "opcode": "point in direction (DIRECTION)",
+                            "inputs": {
+                                "DIRECTION": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "90"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "switch costume to ([COSTUME])",
+                            "inputs": {
+                                "COSTUME": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "costume1"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-171"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "x"
+                            }
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-5"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "y"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -1389,
+                        -1362
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "touching ([OBJECT]) ?",
+                                                        "inputs": {
+                                                            "OBJECT": {
+                                                                "mode": "block-and-option",
+                                                                "block": null,
+                                                                "option": "    "
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "broadcast ([MESSAGE])",
+                                                            "inputs": {
+                                                                "MESSAGE": {
+                                                                    "mode": "block-and-hybrid-option",
+                                                                    "block": null,
+                                                                    "option": "oq"
+                                                                }
+                                                            },
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -1398,
+                        -1857
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when I receive [MESSAGE]",
+                            "inputs": {},
+                            "options": {
+                                "MESSAGE": "oq"
+                            }
+                        },
+                        {
+                            "opcode": "set [EFFECT] sprite effect to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "EFFECT": "GHOST"
+                            }
+                        },
+                        {
+                            "opcode": "point in direction (DIRECTION)",
+                            "inputs": {
+                                "DIRECTION": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "90"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "switch costume to ([COSTUME])",
+                            "inputs": {
+                                "COSTUME": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "costume1"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-171"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "x"
+                            }
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-5"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "y"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -1029,
+                        -1792
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when I receive [MESSAGE]",
+                            "inputs": {},
+                            "options": {
+                                "MESSAGE": "reset"
+                            }
+                        },
+                        {
+                            "opcode": "play sound ([SOUND]) until done",
+                            "inputs": {
+                                "SOUND": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "male-death-sound-128357"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -676,
+                        348
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "touching color (COLOR) ?",
+                                                        "inputs": {
+                                                            "COLOR": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "#84542f"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "mode": "block-and-text",
+                                                                    "block": null,
+                                                                    "text": "-5"
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "VARIABLE": "x"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -318,
+                        382
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "touching color (COLOR) ?",
+                                                        "inputs": {
+                                                            "COLOR": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "#c07b46"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "broadcast ([MESSAGE])",
+                                                            "inputs": {
+                                                                "MESSAGE": {
+                                                                    "mode": "block-and-hybrid-option",
+                                                                    "block": null,
+                                                                    "option": "reset"
+                                                                }
+                                                            },
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -1048,
+                        -509
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "touching ([OBJECT]) ?",
+                                                        "inputs": {
+                                                            "OBJECT": {
+                                                                "mode": "block-and-option",
+                                                                "block": null,
+                                                                "option": "Sprite1"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "broadcast ([MESSAGE])",
+                                                            "inputs": {
+                                                                "MESSAGE": {
+                                                                    "mode": "block-and-hybrid-option",
+                                                                    "block": null,
+                                                                    "option": "reset"
+                                                                }
+                                                            },
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -872,
+                        -185
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "touching color (COLOR) ?",
+                                                        "inputs": {
+                                                            "COLOR": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "#1465ee"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "broadcast ([MESSAGE])",
+                                                            "inputs": {
+                                                                "MESSAGE": {
+                                                                    "mode": "block-and-hybrid-option",
+                                                                    "block": null,
+                                                                    "option": "reset"
+                                                                }
+                                                            },
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -705,
+                        1196
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "value of [VARIABLE]",
+                            "inputs": {},
+                            "options": {
+                                "VARIABLE": "yv"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -1049,
+                        2524
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "value of [VARIABLE]",
+                            "inputs": {},
+                            "options": {
+                                "VARIABLE": "x"
                             }
                         }
                     ]
@@ -366,233 +1227,293 @@
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "Basketball",
+                    "name": "costume1",
                     "extension": "svg",
                     "bitmapResolution": 1,
                     "rotationCenter": [
-                        23,
-                        23
+                        45.77851636360117,
+                        50.29521220536611
+                    ]
+                },
+                {
+                    "name": "costume2",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        47.67898262622364,
+                        49.499230883013496
                     ]
                 }
             ],
-            "sounds": [],
-            "localVariables": [],
-            "localLists": [],
+            "sounds": [
+                {
+                    "name": "Meow",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 32288
+                },
+                {
+                    "name": "recording1",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 57173
+                },
+                {
+                    "name": "male-death-sound-128357",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 26492
+                }
+            ],
             "volume": 100,
-            "layerOrder": 1,
+            "localVariables": [
+                {
+                    "name": "Player: x2",
+                    "currentValue": "0"
+                },
+                {
+                    "name": "Player: y2",
+                    "currentValue": "-4.5"
+                },
+                {
+                    "name": "jump",
+                    "currentValue": "0"
+                }
+            ],
+            "localLists": [],
+            "layerOrder": 4,
             "visible": true,
             "position": [
-                0,
-                0
+                49,
+                164
             ],
-            "size": 100,
+            "size": 70,
             "direction": 90,
-            "draggable": true,
+            "draggable": false,
             "rotationStyle": "left-right"
         },
         {
-            "name": "Paddle 1",
             "isStage": false,
+            "name": "platformer",
             "scripts": [
                 {
                     "position": [
-                        0,
-                        0
+                        232,
+                        161
                     ],
                     "blocks": [
                         {
-                            "opcode": "when green flag clicked"
-                        },
-                        {
-                            "opcode": "go to x: (X) y: (Y)",
-                            "inputs": {
-                                "X": {
-                                    "text": "-220"
-                                },
-                                "Y": {
-                                    "text": "0"
-                                }
-                            }
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
                         },
                         {
                             "opcode": "forever {BODY}",
                             "inputs": {
                                 "BODY": {
+                                    "mode": "script",
                                     "blocks": [
                                         {
-                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "opcode": "switch costume to ([COSTUME])",
                                             "inputs": {
-                                                "CONDITION": {
+                                                "COSTUME": {
+                                                    "mode": "block-and-option",
                                                     "block": {
-                                                        "opcode": "key ([KEY]) pressed?",
-                                                        "inputs": {
-                                                            "KEY": {
-                                                                "option": "w"
-                                                            }
+                                                        "opcode": "value of [VARIABLE]",
+                                                        "inputs": {},
+                                                        "options": {
+                                                            "VARIABLE": "level"
                                                         }
-                                                    }
-                                                },
-                                                "THEN": {
-                                                    "blocks": [
-                                                        {
-                                                            "opcode": "change y by (DY)",
-                                                            "inputs": {
-                                                                "DY": {
-                                                                    "text": "10"
-                                                                }
-                                                            }
-                                                        }
-                                                    ]
+                                                    },
+                                                    "option": "2"
                                                 }
-                                            }
-                                        },
-                                        {
-                                            "opcode": "if <CONDITION> then {THEN}",
-                                            "inputs": {
-                                                "CONDITION": {
-                                                    "block": {
-                                                        "opcode": "key ([KEY]) pressed?",
-                                                        "inputs": {
-                                                            "KEY": {
-                                                                "option": "s"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                "THEN": {
-                                                    "blocks": [
-                                                        {
-                                                            "opcode": "change y by (DY)",
-                                                            "inputs": {
-                                                                "DY": {
-                                                                    "text": "-10"
-                                                                }
-                                                            }
-                                                        }
-                                                    ]
-                                                }
-                                            }
+                                            },
+                                            "options": {}
                                         }
                                     ]
                                 }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        453,
+                        44
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "level"
                             }
                         }
                     ]
                 }
             ],
             "comments": [],
-            "currentCostume": 0,
+            "currentCostume": 6,
             "costumes": [
                 {
-                    "name": "rectangle",
+                    "name": "1",
                     "extension": "svg",
                     "bitmapResolution": 1,
                     "rotationCenter": [
-                        9.083,
-                        67.25
+                        356.5,
+                        -8.231825855855874
+                    ]
+                },
+                {
+                    "name": "2",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        356.5,
+                        74.97462554054047
+                    ]
+                },
+                {
+                    "name": "3",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        604.2477477477479,
+                        117.16066066066062
+                    ]
+                },
+                {
+                    "name": "4",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        604.2477477477479,
+                        252.4099248506696
+                    ]
+                },
+                {
+                    "name": "5",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        604.2477477477479,
+                        252.40992940646652
+                    ]
+                },
+                {
+                    "name": "6",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        356.5,
+                        -53.49999500000001
+                    ]
+                },
+                {
+                    "name": "the end",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        356.5,
+                        173.65129578703136
                     ]
                 }
             ],
-            "sounds": [],
+            "sounds": [
+                {
+                    "name": "pop",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 1123
+                }
+            ],
+            "volume": 100,
             "localVariables": [],
             "localLists": [],
-            "volume": 100,
-            "layerOrder": 1,
+            "layerOrder": 5,
             "visible": true,
             "position": [
-                0,
-                0
+                28,
+                -2
             ],
             "size": 100,
             "direction": 90,
-            "draggable": true,
+            "draggable": false,
             "rotationStyle": "all around"
         },
         {
-            "name": "Paddle 2",
             "isStage": false,
+            "name": "HX",
             "scripts": [
                 {
                     "position": [
-                        0,
-                        0
+                        -156,
+                        -561
                     ],
                     "blocks": [
                         {
-                            "opcode": "when green flag clicked"
-                        },
-                        {
-                            "opcode": "go to x: (X) y: (Y)",
-                            "inputs": {
-                                "X": {
-                                    "text": "220"
-                                },
-                                "Y": {
-                                    "text": "0"
-                                }
-                            }
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
                         },
                         {
                             "opcode": "forever {BODY}",
                             "inputs": {
                                 "BODY": {
+                                    "mode": "script",
                                     "blocks": [
                                         {
-                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "opcode": "goto ([TARGET])",
                                             "inputs": {
-                                                "CONDITION": {
-                                                    "block": {
-                                                        "opcode": "key ([KEY]) pressed?",
-                                                        "inputs": {
-                                                            "KEY": {
-                                                                "option": "up arrow"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                "THEN": {
-                                                    "blocks": [
-                                                        {
-                                                            "opcode": "change y by (DY)",
-                                                            "inputs": {
-                                                                "DY": {
-                                                                    "text": "10"
-                                                                }
-                                                            }
-                                                        }
-                                                    ]
+                                                "TARGET": {
+                                                    "mode": "block-and-option",
+                                                    "block": null,
+                                                    "option": "player "
                                                 }
-                                            }
-                                        },
-                                        {
-                                            "opcode": "if <CONDITION> then {THEN}",
-                                            "inputs": {
-                                                "CONDITION": {
-                                                    "block": {
-                                                        "opcode": "key ([KEY]) pressed?",
-                                                        "inputs": {
-                                                            "KEY": {
-                                                                "option": "down arrow"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                "THEN": {
-                                                    "blocks": [
-                                                        {
-                                                            "opcode": "change y by (DY)",
-                                                            "inputs": {
-                                                                "DY": {
-                                                                    "text": "-10"
-                                                                }
-                                                            }
-                                                        }
-                                                    ]
-                                                }
-                                            }
+                                            },
+                                            "options": {}
                                         }
                                     ]
                                 }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -667,
+                        -1061
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "change [EFFECT] sprite effect by (AMOUNT)",
+                            "inputs": {
+                                "AMOUNT": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1234"
+                                }
+                            },
+                            "options": {
+                                "EFFECT": "GHOST"
                             }
                         }
                     ]
@@ -602,65 +1523,1234 @@
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "rectangle",
+                    "name": "costume1",
                     "extension": "svg",
                     "bitmapResolution": 1,
                     "rotationCenter": [
-                        9.083,
-                        67.25
+                        50.02774499999998,
+                        51.599999999999994
                     ]
                 }
             ],
-            "sounds": [],
+            "sounds": [
+                {
+                    "name": "pop",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 1123
+                }
+            ],
+            "volume": 100,
             "localVariables": [],
             "localLists": [],
-            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
-                0,
-                0
+                49,
+                164
             ],
             "size": 100,
             "direction": 90,
-            "draggable": true,
+            "draggable": false,
+            "rotationStyle": "all around"
+        },
+        {
+            "isStage": false,
+            "name": "hard rock",
+            "scripts": [
+                {
+                    "position": [
+                        -451,
+                        -516
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "play sound ([SOUND]) until done",
+                                            "inputs": {
+                                                "SOUND": {
+                                                    "mode": "block-and-option",
+                                                    "block": {
+                                                        "opcode": "pick random (OPERAND1) to (OPERAND2)",
+                                                        "inputs": {
+                                                            "OPERAND1": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "2"
+                                                            },
+                                                            "OPERAND2": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "1"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    },
+                                                    "option": "champion-upbeat-motivation-advertising-rock-251285"
+                                                }
+                                            },
+                                            "options": {}
+                                        },
+                                        {
+                                            "opcode": "wait (SECONDS) seconds",
+                                            "inputs": {
+                                                "SECONDS": {
+                                                    "mode": "block-and-text",
+                                                    "block": null,
+                                                    "text": "0.2"
+                                                }
+                                            },
+                                            "options": {}
+                                        },
+                                        {
+                                            "opcode": "play sound ([SOUND]) until done",
+                                            "inputs": {
+                                                "SOUND": {
+                                                    "mode": "block-and-option",
+                                                    "block": {
+                                                        "opcode": "pick random (OPERAND1) to (OPERAND2)",
+                                                        "inputs": {
+                                                            "OPERAND1": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "3"
+                                                            },
+                                                            "OPERAND2": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "1"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    },
+                                                    "option": "sport-rock-248925"
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                }
+            ],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        0,
+                        0
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "champion-upbeat-motivation-advertising-rock-251285",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 5737741
+                },
+                {
+                    "name": "stomping-rock-four-shots-111444",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 5717679
+                },
+                {
+                    "name": "sport-rock-248925",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 2470138
+                }
+            ],
+            "volume": 100,
+            "localVariables": [],
+            "localLists": [],
+            "layerOrder": 2,
+            "visible": true,
+            "position": [
+                36,
+                28
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        },
+        {
+            "isStage": false,
+            "name": "    ",
+            "scripts": [
+                {
+                    "position": [
+                        -670,
+                        -650
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when I receive [MESSAGE]",
+                            "inputs": {},
+                            "options": {
+                                "MESSAGE": "oq"
+                            }
+                        },
+                        {
+                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "level"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -345,
+                        -614
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "show",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -190,
+                        -625
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set [EFFECT] sprite effect to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1000"
+                                }
+                            },
+                            "options": {
+                                "EFFECT": "GHOST"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -327,
+                        -462
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "(OPERAND1) = (OPERAND2)",
+                                                        "inputs": {
+                                                            "OPERAND1": {
+                                                                "mode": "block-and-text",
+                                                                "block": {
+                                                                    "opcode": "value of [VARIABLE]",
+                                                                    "inputs": {},
+                                                                    "options": {
+                                                                        "VARIABLE": "level"
+                                                                    }
+                                                                },
+                                                                "text": ""
+                                                            },
+                                                            "OPERAND2": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "7"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "hide",
+                                                            "inputs": {},
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                }
+            ],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        4.750000000000057,
+                        176.49999999999991
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "pop",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 1123
+                }
+            ],
+            "volume": 100,
+            "localVariables": [],
+            "localLists": [],
+            "layerOrder": 3,
+            "visible": false,
+            "position": [
+                239,
+                43
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "scripts": [
+                {
+                    "position": [
+                        643,
+                        173
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set [EFFECT] sprite effect to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1000"
+                                }
+                            },
+                            "options": {
+                                "EFFECT": "GHOST"
+                            }
+                        },
+                        {
+                            "opcode": "hide",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        431,
+                        389
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "(OPERAND1) = (OPERAND2)",
+                                                        "inputs": {
+                                                            "OPERAND1": {
+                                                                "mode": "block-and-text",
+                                                                "block": {
+                                                                    "opcode": "value of [VARIABLE]",
+                                                                    "inputs": {},
+                                                                    "options": {
+                                                                        "VARIABLE": "level"
+                                                                    }
+                                                                },
+                                                                "text": ""
+                                                            },
+                                                            "OPERAND2": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "5"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "show",
+                                                            "inputs": {},
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                }
+            ],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        89.5,
+                        70.99999999999999
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "pop",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 1123
+                }
+            ],
+            "volume": 100,
+            "localVariables": [],
+            "localLists": [],
+            "layerOrder": 6,
+            "visible": true,
+            "position": [
+                50,
+                -166
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        },
+        {
+            "isStage": false,
+            "name": "Frank",
+            "scripts": [
+                {
+                    "position": [
+                        168,
+                        171
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "(OPERAND1) = (OPERAND2)",
+                                                        "inputs": {
+                                                            "OPERAND1": {
+                                                                "mode": "block-and-text",
+                                                                "block": {
+                                                                    "opcode": "value of [VARIABLE]",
+                                                                    "inputs": {},
+                                                                    "options": {
+                                                                        "VARIABLE": "level"
+                                                                    }
+                                                                },
+                                                                "text": ""
+                                                            },
+                                                            "OPERAND2": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "6"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "broadcast ([MESSAGE])",
+                                                            "inputs": {
+                                                                "MESSAGE": {
+                                                                    "mode": "block-and-hybrid-option",
+                                                                    "block": null,
+                                                                    "option": "wae"
+                                                                }
+                                                            },
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        525,
+                        -64
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when I receive [MESSAGE]",
+                            "inputs": {},
+                            "options": {
+                                "MESSAGE": "wae"
+                            }
+                        },
+                        {
+                            "opcode": "show",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "if <CONDITION> then {THEN}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": {
+                                        "opcode": "(OPERAND1) = (OPERAND2)",
+                                        "inputs": {
+                                            "OPERAND1": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of [VARIABLE]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "VARIABLE": "level"
+                                                    }
+                                                },
+                                                "text": ""
+                                            },
+                                            "OPERAND2": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "6"
+                                            }
+                                        },
+                                        "options": {}
+                                    }
+                                },
+                                "THEN": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "forever {BODY}",
+                                            "inputs": {
+                                                "BODY": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "if <CONDITION> then {THEN}",
+                                                            "inputs": {
+                                                                "CONDITION": {
+                                                                    "mode": "block-only",
+                                                                    "block": {
+                                                                        "opcode": "touching ([OBJECT]) ?",
+                                                                        "inputs": {
+                                                                            "OBJECT": {
+                                                                                "mode": "block-and-option",
+                                                                                "block": null,
+                                                                                "option": "player "
+                                                                            }
+                                                                        },
+                                                                        "options": {}
+                                                                    }
+                                                                },
+                                                                "THEN": {
+                                                                    "mode": "script",
+                                                                    "blocks": [
+                                                                        {
+                                                                            "opcode": "switch costume to ([COSTUME])",
+                                                                            "inputs": {
+                                                                                "COSTUME": {
+                                                                                    "mode": "block-and-option",
+                                                                                    "block": null,
+                                                                                    "option": "frank-acfvgbhj"
+                                                                                }
+                                                                            },
+                                                                            "options": {}
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        99,
+                        -180
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "hide",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "go to x: (X) y: (Y)",
+                            "inputs": {
+                                "X": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "142"
+                                },
+                                "Y": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "-2"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "switch costume to ([COSTUME])",
+                            "inputs": {
+                                "COSTUME": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "frank-b"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "point in direction (DIRECTION)",
+                            "inputs": {
+                                "DIRECTION": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "90"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        534,
+                        368
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "(OPERAND1) = (OPERAND2)",
+                                                        "inputs": {
+                                                            "OPERAND1": {
+                                                                "mode": "block-and-text",
+                                                                "block": {
+                                                                    "opcode": "value of [VARIABLE]",
+                                                                    "inputs": {},
+                                                                    "options": {
+                                                                        "VARIABLE": "level"
+                                                                    }
+                                                                },
+                                                                "text": ""
+                                                            },
+                                                            "OPERAND2": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "1"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "broadcast ([MESSAGE])",
+                                                            "inputs": {
+                                                                "MESSAGE": {
+                                                                    "mode": "block-and-hybrid-option",
+                                                                    "block": null,
+                                                                    "option": "wae"
+                                                                }
+                                                            },
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        338,
+                        -202
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "wait (SECONDS) seconds",
+                            "inputs": {
+                                "SECONDS": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0.2"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": "level"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -192,
+                        -85
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "if <CONDITION> then {THEN} else {ELSE}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-only",
+                                                    "block": {
+                                                        "opcode": "(OPERAND1) = (OPERAND2)",
+                                                        "inputs": {
+                                                            "OPERAND1": {
+                                                                "mode": "block-and-text",
+                                                                "block": {
+                                                                    "opcode": "value of [VARIABLE]",
+                                                                    "inputs": {},
+                                                                    "options": {
+                                                                        "VARIABLE": "level"
+                                                                    }
+                                                                },
+                                                                "text": ""
+                                                            },
+                                                            "OPERAND2": {
+                                                                "mode": "block-and-text",
+                                                                "block": null,
+                                                                "text": "6"
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    }
+                                                },
+                                                "THEN": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "set [EFFECT] sprite effect to (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "mode": "block-and-text",
+                                                                    "block": null,
+                                                                    "text": "0"
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "EFFECT": "GHOST"
+                                                            }
+                                                        },
+                                                        {
+                                                            "opcode": "show",
+                                                            "inputs": {},
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                },
+                                                "ELSE": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "set [EFFECT] sprite effect to (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "mode": "block-and-text",
+                                                                    "block": null,
+                                                                    "text": "100"
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "EFFECT": "GHOST"
+                                                            }
+                                                        },
+                                                        {
+                                                            "opcode": "hide",
+                                                            "inputs": {},
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                }
+            ],
+            "comments": [],
+            "currentCostume": 1,
+            "costumes": [
+                {
+                    "name": "frank-a",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        97,
+                        63
+                    ]
+                },
+                {
+                    "name": "frank-acfvgbhj",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        96.838,
+                        62.4027914569897
+                    ]
+                },
+                {
+                    "name": "frank-b",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        105,
+                        63
+                    ]
+                },
+                {
+                    "name": "frank-c",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        159,
+                        59
+                    ]
+                },
+                {
+                    "name": "frank-d",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        106,
+                        107
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "wolf howl",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 187245
+                }
+            ],
+            "volume": 100,
+            "localVariables": [],
+            "localLists": [],
+            "layerOrder": 7,
+            "visible": false,
+            "position": [
+                142,
+                -2
+            ],
+            "size": 50,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "left-right"
+        },
+        {
+            "isStage": false,
+            "name": "Sprite2",
+            "scripts": [
+                {
+                    "position": [
+                        99,
+                        157
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set [EFFECT] sprite effect to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
+                            "options": {
+                                "EFFECT": "GHOST"
+                            }
+                        },
+                        {
+                            "opcode": "go to x: (X) y: (Y)",
+                            "inputs": {
+                                "X": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "36"
+                                },
+                                "Y": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "28"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "repeat (TIMES) {BODY}",
+                            "inputs": {
+                                "TIMES": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "10"
+                                },
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "change [EFFECT] sprite effect by (AMOUNT)",
+                                            "inputs": {
+                                                "AMOUNT": {
+                                                    "mode": "block-and-text",
+                                                    "block": null,
+                                                    "text": "25"
+                                                }
+                                            },
+                                            "options": {
+                                                "EFFECT": "GHOST"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                }
+            ],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        395.6456455555557,
+                        259.75975678678674
+                    ]
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "pop",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 1123
+                }
+            ],
+            "volume": 100,
+            "localVariables": [],
+            "localLists": [],
+            "layerOrder": 8,
+            "visible": true,
+            "position": [
+                36,
+                28
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": false,
             "rotationStyle": "all around"
         }
     ],
     "globalVariables": [
         {
-            "name": "Speed",
-            "currentValue": "",
+            "name": "my variable",
+            "currentValue": "74",
             "isCloudVariable": false
         },
         {
-            "name": "Player 1 Score",
-            "currentValue": "",
+            "name": "y",
+            "currentValue": 164,
             "isCloudVariable": false
         },
         {
-            "name": "Player 2 Score",
-            "currentValue": "",
+            "name": "x",
+            "currentValue": 49,
+            "isCloudVariable": false
+        },
+        {
+            "name": "PlayerSkin",
+            "currentValue": "0",
+            "isCloudVariable": false
+        },
+        {
+            "name": "PlayerGlider",
+            "currentValue": "0",
+            "isCloudVariable": false
+        },
+        {
+            "name": "PlayerHealth",
+            "currentValue": "0",
+            "isCloudVariable": false
+        },
+        {
+            "name": "PlayerHit",
+            "currentValue": "0",
+            "isCloudVariable": false
+        },
+        {
+            "name": "PlayerHealth2",
+            "currentValue": "0",
+            "isCloudVariable": false
+        },
+        {
+            "name": "Player: x",
+            "currentValue": "0",
+            "isCloudVariable": false
+        },
+        {
+            "name": "Player: y",
+            "currentValue": "0",
+            "isCloudVariable": false
+        },
+        {
+            "name": "xv",
+            "currentValue": "5.897620496054406e-64",
+            "isCloudVariable": false
+        },
+        {
+            "name": "yv",
+            "currentValue": "-3",
+            "isCloudVariable": false
+        },
+        {
+            "name": "level",
+            "currentValue": 7,
+            "isCloudVariable": false
+        },
+        {
+            "name": "gravity",
+            "currentValue": "0",
+            "isCloudVariable": false
+        },
+        {
+            "name": "key?",
+            "currentValue": "0",
+            "isCloudVariable": false
+        },
+        {
+            "name": "start timer",
+            "currentValue": "0",
+            "isCloudVariable": false
+        },
+        {
+            "name": "x drag",
+            "currentValue": "0",
+            "isCloudVariable": false
+        },
+        {
+            "name": "y drag",
+            "currentValue": "0",
             "isCloudVariable": false
         }
     ],
-    "globalLists": [],
+    "globalLists": [
+        {
+            "name": "BoxX",
+            "currentValue": []
+        },
+        {
+            "name": "BoxY",
+            "currentValue": []
+        }
+    ],
     "tempo": 60,
-    "videoTransparency": 0,
-    "videoState": "off",
+    "videoTransparency": 50,
+    "videoState": "on",
     "textToSpeechLanguage": null,
     "monitors": [
         {
             "opcode": "value of [VARIABLE]",
             "options": {
-                "VARIABLE": "Speed"
+                "VARIABLE": "y"
             },
             "spriteName": null,
             "position": [
-                10,
-                10
+                5,
+                5
             ],
-            "visible": true,
+            "visible": false,
             "sliderMin": 0,
             "sliderMax": 100,
             "onlyIntegers": true
@@ -668,14 +2758,14 @@
         {
             "opcode": "value of [VARIABLE]",
             "options": {
-                "VARIABLE": "Player 1 Score"
+                "VARIABLE": "x"
             },
             "spriteName": null,
             "position": [
-                0,
-                338
+                5,
+                33
             ],
-            "visible": true,
+            "visible": false,
             "sliderMin": 0,
             "sliderMax": 100,
             "onlyIntegers": true
@@ -683,14 +2773,14 @@
         {
             "opcode": "value of [VARIABLE]",
             "options": {
-                "VARIABLE": "Player 2 Score"
+                "VARIABLE": "level"
             },
             "spriteName": null,
             "position": [
-                328,
-                338
+                5,
+                61
             ],
-            "visible": true,
+            "visible": false,
             "sliderMin": 0,
             "sliderMax": 100,
             "onlyIntegers": true

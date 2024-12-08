@@ -1,74 +1,173 @@
 A = [
     {
-        "position": [0, 0],
+        "position": [
+            10,
+            10
+        ],
         "blocks": [
             {
-                "opcode": "define custom block",
+                "opcode": "when green flag clicked",
+                "inputs": {},
+                "options": {}
+            },
+            {
+                "opcode": "ask (QUESTION) and wait",
+                "inputs": {
+                    "QUESTION": {
+                        "mode": "block-and-text",
+                        "block": None,
+                        "text": "Enter first number:"
+                    }
+                },
+                "options": {}
+            },
+            {
+                "opcode": "set [VARIABLE] to (VALUE)",
+                "inputs": {
+                    "VALUE": {
+                        "mode": "block-and-text",
+                        "block": {
+                            "opcode": "answer"
+                        },
+                        "text": ""
+                    }
+                },
                 "options": {
-                    "noScreenRefresh": False,
-                    "blockType": "instruction",
-                    "customOpcode": "instr (num txt) <bool val> !"
+                    "VARIABLE": "firstNumber"
                 }
             },
             {
-                "opcode": "return (VALUE)",
-                "inputs": {"VALUE": {}},
+                "opcode": "ask (QUESTION) and wait",
+                "inputs": {
+                    "QUESTION": {
+                        "mode": "block-and-text",
+                        "block": None,
+                        "text": "Enter second number:"
+                    }
+                },
+                "options": {}
             },
-        ]
-    },
-    {
-        "position": [0, 100],
-        "blocks": [
             {
-                "opcode": "define custom block",
+                "opcode": "set [VARIABLE] to (VALUE)",
+                "inputs": {
+                    "VALUE": {
+                        "mode": "block-and-text",
+                        "block": {
+                            "opcode": "answer"
+                        },
+                        "text": None
+                    }
+                },
                 "options": {
-                    "noScreenRefresh": False,
-                    "blockType": "lastInstruction",
-                    "customOpcode": "lastInstr (txt) <bool val>!"
+                    "VARIABLE": "secondNumber"
                 }
-            }
-        ]
-    },
-    {
-        "position": [0, 200],
-        "blocks": [
+            },
             {
-                "opcode": "define custom block",
-                "options": {
-                    "noScreenRefresh": False,
-                    "blockType": "textReporter",
-                    "customOpcode": "reportText (txt)"
-                }
-            }
-        ]
-    },
-    {
-        "position": [0, 300],
-        "blocks": [
+                "opcode": "ask (QUESTION) and wait",
+                "inputs": {
+                    "QUESTION": {
+                        "mode": "block-and-text",
+                        "block": None,
+                        "text": "Enter operation (+, -, *, /):"
+                    }
+                },
+                "options": {}
+            },
             {
-                "opcode": "define custom block",
+                "opcode": "set [VARIABLE] to (VALUE)",
+                "inputs": {
+                    "VALUE": {
+                        "mode": "block-and-text",
+                        "block": {
+                            "opcode": "answer"
+                        },
+                        "text": None
+                    }
+                },
                 "options": {
-                    "noScreenRefresh": False,
-                    "blockType": "numberReporter",
-                    "customOpcode": "reportNumber (num)"
+                    "VARIABLE": "operation"
                 }
-            }
-        ]
-    },
-    {
-        "position": [0, 400],
-        "blocks": [
+            },
             {
-                "opcode": "define custom block",
-                "options": {
-                    "noScreenRefresh": False,
-                    "blockType": "booleanReporter",
-                    "customOpcode": "reportBool <bool>"
-                }
+                "opcode": "if <CONDITION> then {THEN}",
+                "inputs": {
+                    "CONDITION": {
+                        "mode": "block-only",
+                        "block": {
+                            "opcode": "(OPERAND1) = (OPERAND2)",
+                            "inputs": {
+                                "OPERAND1": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "value of [VARIABLE]",
+                                        "options": {"VARIABLE": "operation"},
+                                    },
+                                    "text": ""
+                                },
+                                "OPERAND2": {
+                                    "mode": "block-and-text",
+                                    "block": None,
+                                    "text": "+"
+                                }
+                            },
+                            "options": {}
+                        }
+                    },
+                    "THEN": {
+                        "mode": "script",
+                        "blocks": [
+                            {
+                                "opcode": "set [VARIABLE] to (VALUE)",
+                                "inputs": {
+                                    "VALUE": {
+                                        "mode": "block-only",
+                                        "block": {
+                                            "opcode": "(OPERAND1) + (OPERAND2)",
+                                            "inputs": {
+                                                "NUM1": {
+                                                    "mode": "block-and-text",
+                                                    "block": {"opcode": "value of [VARIABLE]", "options": {"VARIABLE": "firstNumber"}},
+                                                    "option": ""
+                                                },
+                                                "NUM2": {
+                                                    "mode": "block-and-text",
+                                                    "block": {"opcode": "value of [VARIABLE]", "options": {"VARIABLE": "secondNumber"}},
+                                                    "option": ""
+                                                }
+                                            },
+                                            "options": {}
+                                        }
+                                    }
+                                },
+                                "options": {
+                                    "VARIABLE": "result"
+                                }
+                            }
+                        ]
+                    }
+                },
+                "options": {}
+            },
+            {
+                "opcode": "say (MESSAGE) for (SECONDS) seconds",
+                "inputs": {
+                    "MESSAGE": {
+                        "mode": "block-and-text",
+                        "block": None,
+                        "text": "Result: [result]"
+                    },
+                    "SECONDS": {
+                        "mode": "block-and-text",
+                        "block": None,
+                        "text": "2"
+                    }
+                },
+                "options": {}
             }
         ]
     }
 ]
+
 
 # ['instruction', 'lastInstruction', 'textReporter', 'numberReporter', 'booleanReporter']
 projectData = {

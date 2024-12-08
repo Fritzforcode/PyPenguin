@@ -280,5 +280,6 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = ["PITCH", "PAN"]
                 case "blockType":
                     possibleValues = ["instruction", "lastInstruction", "textReporter", "numberReporter", "booleanReporter"]
+            print(optionType)
             if data not in possibleValues:
                 raise formatError(path, f"Must be one of {possibleValues}.")
