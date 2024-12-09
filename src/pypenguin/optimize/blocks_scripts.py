@@ -277,7 +277,6 @@ def prepareProcedureCallBlock(blockDatas, blockID, commentDatas, mutationDatas):
             "topLevel": data["topLevel"],
         },
     }
-    pp(newBlockData)
     return newBlockData
 
 def prepareBlocks(data, commentDatas, mutationDatas):

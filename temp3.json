@@ -2434,13 +2434,8 @@
                     "assetId": "3339a2953a3bf62bb80e54ff575dbced",
                     "dataFormat": "svg",
                     "md5ext": "3339a2953a3bf62bb80e54ff575dbced.svg",
-<<<<<<< HEAD
-                    "rotationCenterX": 0,
-                    "rotationCenterY": 0,
-=======
                     "rotationCenterX": 0.0,
                     "rotationCenterY": 0.0,
->>>>>>> 79670223fd2de328248743305a496fd6138a040e
                     "bitmapResolution": 1
                 }
             ],
@@ -3500,13 +3495,8 @@
                     "assetId": "10d39bb7e31647a465e747cd243b8cd0",
                     "dataFormat": "svg",
                     "md5ext": "10d39bb7e31647a465e747cd243b8cd0.svg",
-<<<<<<< HEAD
-                    "rotationCenterX": 97,
-                    "rotationCenterY": 63,
-=======
                     "rotationCenterX": 97.0,
                     "rotationCenterY": 63.0,
->>>>>>> 79670223fd2de328248743305a496fd6138a040e
                     "bitmapResolution": 1
                 },
                 {
@@ -3523,13 +3513,8 @@
                     "assetId": "e56e930cc0229d1042a673e7503209c5",
                     "dataFormat": "svg",
                     "md5ext": "e56e930cc0229d1042a673e7503209c5.svg",
-<<<<<<< HEAD
-                    "rotationCenterX": 105,
-                    "rotationCenterY": 63,
-=======
                     "rotationCenterX": 105.0,
                     "rotationCenterY": 63.0,
->>>>>>> 79670223fd2de328248743305a496fd6138a040e
                     "bitmapResolution": 1
                 },
                 {
@@ -3537,13 +3522,8 @@
                     "assetId": "26da9617218493f4f42a1592f21afee8",
                     "dataFormat": "svg",
                     "md5ext": "26da9617218493f4f42a1592f21afee8.svg",
-<<<<<<< HEAD
-                    "rotationCenterX": 159,
-                    "rotationCenterY": 59,
-=======
                     "rotationCenterX": 159.0,
                     "rotationCenterY": 59.0,
->>>>>>> 79670223fd2de328248743305a496fd6138a040e
                     "bitmapResolution": 1
                 },
                 {
@@ -3551,13 +3531,8 @@
                     "assetId": "d16b76a634f7367ce7d6112401a78e57",
                     "dataFormat": "svg",
                     "md5ext": "d16b76a634f7367ce7d6112401a78e57.svg",
-<<<<<<< HEAD
-                    "rotationCenterX": 106,
-                    "rotationCenterY": 107,
-=======
                     "rotationCenterX": 106.0,
                     "rotationCenterY": 107.0,
->>>>>>> 79670223fd2de328248743305a496fd6138a040e
                     "bitmapResolution": 1
                 }
             ],
