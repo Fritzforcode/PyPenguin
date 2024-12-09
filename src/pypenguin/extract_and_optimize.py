@@ -1,10 +1,11 @@
 from pypenguin.validate import validateProject, ValidationError
 from pypenguin.optimize import optimizeProjectJSON
+from pypenguin.optimize.costumes_sounds import finalizeCostume
 
 import urllib.parse
 import os, shutil, zipfile
 
-from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrectPath
+from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrectPath, getImageSize
 
 def extractProject(
     pmpFilePath       : str, # Path to your .pmp file
@@ -70,7 +71,6 @@ def extractAndOptimizeProject(
     optimizedData = optimizeProjectJSON(
         projectData=deoptimizedData,
     )
-    if writeDebugFiles: writeJSONFile(temp2FilePath, data=optimizedData)
     
     # Make sure the project Dir exists
     os.makedirs(optimizedProjectDir, exist_ok=True)
@@ -98,6 +98,7 @@ def extractAndOptimizeProject(
             exist_ok=True
         )
         # Copy and rename costumes
+        newCostumes = []
         for j, costume in enumerate(sprite["costumes"]):
             deoptimizedCostume = deoptimizedSprite["costumes"][j]
             oldCostumeName     =      deoptimizedCostume["assetId"] + "." + costume["extension"]
@@ -109,11 +110,17 @@ def extractAndOptimizeProject(
                 "costumes", 
                 encodedCostumeName
             )
+            width, height = getImageSize(file=srcPath)
             shutil.copy(
                 src=srcPath,
                 dst=destPath
             )
-
+            newCostumes.append(finalizeCostume(
+                data=costume,
+                width=width,
+                height=height,
+            ))
+        sprite["costumes"] = newCostumes            
         
         # Make sure the sprite dir has the sounds dir
         os.makedirs(
@@ -141,6 +148,9 @@ def extractAndOptimizeProject(
                 dst=destPath
             )
     
+    
+    if writeDebugFiles: writeJSONFile(temp2FilePath, data=optimizedData)
+        
     # Add the optimized project.json
     writeJSONFile(
         filePath=os.path.join(optimizedProjectDir, "project.json"), 

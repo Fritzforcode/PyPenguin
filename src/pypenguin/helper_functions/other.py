@@ -1,5 +1,6 @@
 from pprint import pprint
 import re, os, hashlib
+from PIL import Image
 
 def escapeChars(inputString: str, charsToEscape: list) -> str:
     # Escape backslashes first by doubling them up
@@ -166,8 +167,8 @@ def generateMd5(file):
     md5Hash = hashlib.md5()
 
     try:
-        with open(file, "rb") as file:
-            for chunk in iter(lambda: file.read(4096), b""):
+        with open(file, "rb") as fileObj:
+            for chunk in iter(lambda: fileObj.read(4096), b""):
                 md5Hash.update(chunk)
     except FileNotFoundError:
         return "Error: File not found."
@@ -175,3 +176,36 @@ def generateMd5(file):
         return f"Error: {e}"
 
     return md5Hash.hexdigest()
+
+def getImageSize(file):
+    _, extension = os.path.splitext(file)
+    if  extension == ".svg":
+        return getSVGImageSize(file=file)
+    
+    with Image.open(file) as image:
+        size = image.size
+    return size
+
+import xml.etree.ElementTree as ET
+
+def getSVGImageSize(file):
+    # Parse the SVG file
+    tree = ET.parse(file)
+    root = tree.getroot()
+    
+    # SVG namespace (sometimes required for proper parsing)
+    svgNS = {'svg': 'http://www.w3.org/2000/svg'}
+    
+    # Get width and height attributes
+    width  = root.attrib.get('width')
+    height = root.attrib.get('height')
+    
+    # If width and height are not directly specified, use viewBox
+    if not width or not height:
+        viewBox = root.attrib.get('viewBox')
+        if viewBox:
+            # Parse the viewBox attribute (min-x, min-y, width, height)
+            _, _, width, height = map(float, viewBox.split())
+    
+    return float(width), float(height)
+
