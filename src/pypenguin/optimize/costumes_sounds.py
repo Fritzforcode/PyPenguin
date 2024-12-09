@@ -14,6 +14,17 @@ def translateCostumes(data):
         newCostumeDatas.append(newCostumeData)
     return newCostumeDatas
 
+def finalizeCostume(data, width, height):
+    newRotationCenter = [data["rotationCenter"][0] - width  / 2,
+                         data["rotationCenter"][1] - height / 2]
+    newData = {
+        "name"            : data["name"],
+        "extension"       : data["extension"],
+        "bitmapResolution": data["bitmapResolution"],
+        "rotationCenter"  : newRotationCenter,
+    }
+    return newData
+
 def translateSounds(data):
     newSoundDatas = []
     for soundData in data:

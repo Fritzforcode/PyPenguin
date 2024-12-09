@@ -3,16 +3,6 @@
         {
             "name": "Stage",
             "isStage": true,
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
-            "sounds": [],
-            "volume": 100
-        },
-        {
-            "name": "Ball",
-            "isStage": false,
             "scripts": [
                 {
                     "position": [
@@ -21,68 +11,81 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "when green flag clicked"
-                        },
-                        {
-                            "opcode": "go to x: (X) y: (Y)",
-                            "inputs": {
-                                "X": {
-                                    "text": "0"
-                                },
-                                "Y": {
-                                    "text": "0"
-                                }
-                            }
-                        },
-                        {
-                            "opcode": "point in direction (DIRECTION)",
-                            "inputs": {
-                                "DIRECTION": {
-                                    "block": {
-                                        "opcode": "pick random (NUM1) to (NUM2)",
-                                        "inputs": {
-                                            "NUM1": {
-                                                "text": "45"
-                                            },
-                                            "NUM2": {
-                                                "text": "135"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "text": "5"
-                                }
-                            },
+                            "opcode": "define custom block",
                             "options": {
-                                "VARIABLE": "Speed"
+                                "noScreenRefresh": false,
+                                "blockType": "instruction",
+                                "customOpcode": "instr (num txt) <bool val> !"
                             }
                         },
                         {
-                            "opcode": "forever {BODY}",
+                            "opcode": "return (VALUE)",
                             "inputs": {
-                                "BODY": {
-                                    "blocks": [
-                                        {
-                                            "opcode": "move (STEPS) steps",
-                                            "inputs": {
-                                                "STEPS": {
-                                                    "block": {
-                                                        "opcode": "value of [VARIABLE]",
-                                                        "options": {
-                                                            "VARIABLE": "Speed"
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    ]
-                                }
+                                "VALUE": {}
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        0,
+                        100
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "lastInstruction",
+                                "customOpcode": "lastInstr (txt) <bool val>!"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        0,
+                        200
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "textReporter",
+                                "customOpcode": "reportText (txt)"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        0,
+                        300
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "numberReporter",
+                                "customOpcode": "reportNumber (num)"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        0,
+                        400
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "options": {
+                                "noScreenRefresh": false,
+                                "blockType": "booleanReporter",
+                                "customOpcode": "reportBool <bool>"
                             }
                         }
                     ]
@@ -90,48 +93,31 @@
             ],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "Ball",
-                    "dataFormat": "svg",
-                    "fileStem": "cd21514d0531fdffb22204e0ec5ed84a",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0,
-                        0
-                    ]
-                }
-            ],
+            "costumes": [],
             "sounds": [],
-            "localVariables": [],
-            "localLists": [],
-            "volume": 100,
-            "layerOrder": 1,
-            "visible": true,
-            "position": [
-                0,
-                0
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": true,
-            "rotationStyle": "all around"
+            "volume": 100
         },
         {
-            "name": "Player 1",
+            "name": "Sprite1",
             "isStage": false,
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
             "costumes": [],
             "sounds": [],
-            "localVariables": [],
+            "localVariables": [
+                {
+                    "name": "loc var",
+                    "currentValue": "www",
+                    "monitor": null
+                }
+            ],
             "localLists": [],
             "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
-                0,
+                77,
                 0
             ],
             "size": 100,
@@ -140,7 +126,7 @@
             "rotationStyle": "all around"
         },
         {
-            "name": "Player 2",
+            "name": "Sprite6",
             "isStage": false,
             "scripts": [],
             "comments": [],
@@ -164,17 +150,46 @@
     ],
     "globalVariables": [
         {
-            "name": "Speed",
+            "name": "c",
+            "currentValue": "G\u00fcnter J\u00fcchen",
+            "isCloudVariable": true
+        },
+        {
+            "name": "var",
             "currentValue": "",
             "isCloudVariable": false
         }
     ],
-    "globalLists": [],
+    "globalLists": [
+        {
+            "name": "list",
+            "currentValue": []
+        }
+    ],
     "tempo": 60,
     "videoTransparency": 0,
     "videoState": "off",
     "textToSpeechLanguage": null,
-    "monitors": [],
+    "monitors": [
+        {
+            "opcode": "value of [LIST]",
+            "options": {
+                "LIST": "list"
+            },
+            "position": [
+                10,
+                10
+            ],
+            "spriteName": null,
+            "visible": true,
+            "size": [
+                0,
+                0
+            ]
+        }
+    ],
     "extensionData": {},
-    "extensions": []
+    "extensions": [
+        "jgJSON"
+    ]
 }
