@@ -2,8 +2,11 @@ from pypenguin.helper_functions import pp
 from enum import Enum
 
 class TokenType(Enum):
-    CHARS      = 0
-    TEXT_INPUT = 1
+    CHARS                 = 0
+    SQUARE_MENU_INPUT     = 1
+    TEXT_INPUT            = 2
+    ROUND_MENU_INPUT      = 3
+    NUMBER_OR_BLOCK_INPUT = 4
 
 class Token:
     def __init__(self, type, value):
@@ -23,8 +26,9 @@ class PathItem:
         return f"<{self.type.name}: {repr(self.value)}>"
 
 class ParseState(Enum):
-    DEFAULT    = 0
+    DEFAULT         = 0
     SQUARE_BRACKETS = 1
+    ROUND_BRACKETS  = 2
 
 startWords = {
     "when"  : ["when green flag clicked"],
@@ -49,44 +53,75 @@ def parse_scratchblocks(scratch_code):
                 tokens.append(Token(TokenType.CHARS, tokenChars))
                 tokenChars = ""
         
-        def endTextInput():
-            nonlocal textInputChars
-            if textInputChars != "":
-                tokens.append(Token(TokenType.TEXT_INPUT, textInputChars))
-                textInputChars = ""
+        def endBracket():
+            nonlocal bracketChars
+            nonlocal state
+            if bracketChars == "":
+                return
+            isMenu = bracketChars.endswith(" v") and not wasEscaped
+            if   isMenu:
+                bracketChars = bracketChars.removesuffix(" v")
+            if   state == ParseState.SQUARE_BRACKETS:
+                if isMenu:
+                    tokenType = TokenType.SQUARE_MENU_INPUT
+                else:                
+                    tokenType = TokenType.TEXT_INPUT
+            elif state == ParseState.ROUND_BRACKETS:
+                if isMenu:
+                    tokenType = TokenType.ROUND_MENU_INPUT
+                else:
+                    tokenType = TokenType.NUMBER_OR_BLOCK_INPUT
+            tokens.append(Token(tokenType, bracketChars))
+            bracketChars = ""
+            state = ParseState.DEFAULT
         
         print(repr(blockLiteral))
 
-        tokens         = []
-        tokenChars     = ""
-        textInputChars = ""
-        state          = ParseState.DEFAULT
-        isEscaped      = False
+        tokens       = []
+        tokenChars   = ""
+        bracketChars = ""
+        state        = ParseState.DEFAULT
+        wasEscaped   = True
+        isEscaped    = False
         for char in blockLiteral:
+            doCloseEscaped = True
             if   char == "\\" and not isEscaped:
                 isEscaped = True
+                doCloseEscaped = False
             
 
             elif state == ParseState.DEFAULT:
-                if   char.isalnum():
+                if   char.isalnum() or char == " ":
                     tokenChars += char
-                elif char == " ":
-                    endCharToken()
                 elif char == "[" and not isEscaped:
                     endCharToken()
                     state = ParseState.SQUARE_BRACKETS
+                elif char == "(" and not isEscaped:
+                	endCharToken()
+                	state = ParseState.ROUND_BRACKETS
                 else: raise Exception(char)
 
             
             elif state == ParseState.SQUARE_BRACKETS:
                 if   char == "]" and not isEscaped:
-                    state = ParseState.DEFAULT
-                    endTextInput()
+                    endBracket()
                 else:
-                    textInputChars += char
+                    bracketChars += char
+                    
+            elif state == ParseState.ROUND_BRACKETS:
+                if   char == ")" and not isEscaped:
+                    endBracket()
+                else:
+                    bracketChars += char
 
             else: raise Exception(state)
+        
+            
+            wasEscaped = isEscaped
+            if doCloseEscaped:
+                isEscaped = False 
         endCharToken()
+        endBracket()
 
         print(tokens)
 
@@ -105,9 +140,14 @@ def parse_scratchblocks(scratch_code):
     return parsed_data
 
 # Example Scratchblocks code
-scratch_code = """
+scratch_code = open("pypenguin/scratchblocks/code.txt").read()
+"""
 when green flag clicked
 say[Hello!]abc
+say[Hello! v]def
+say[Hello! \\v]ghi
+say[Hello! \\\\v]jkl
+
 """
 
 """
