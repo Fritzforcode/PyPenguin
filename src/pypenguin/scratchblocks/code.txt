@@ -1,5 +1,1 @@
-a((b))c
-a(b v)c
-a[b]c
-a[b v]c
-a<b>c
+({w qq[x)y}z> )
