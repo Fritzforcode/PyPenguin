@@ -226,20 +226,6 @@ def parse_scratchblocks(scratch_code):
 
 # Example Scratchblocks code
 scratch_code = open(insureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read()
-"""
-when green flag clicked
-say[Hello!]abc
-say[Hello! v]def
-say[Hello! \\v]ghi
-say[Hello! \\\\v]jkl
-
-"""
-
-"""
-move (10) steps
-repeat (5) times
-if <x > 10>
-"""
 
 parsed_result = parse_scratchblocks(scratch_code)
 #pp(parsed_result)

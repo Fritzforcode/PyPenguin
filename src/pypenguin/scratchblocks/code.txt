@@ -1,1 +1,7 @@
-({w qq[x)y}z> )
+abc {
+inst1a
+inst1b
+} def {
+inst1c
+inst1d
+}
