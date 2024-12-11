@@ -1,23 +1,85 @@
-from pypenguin.scratchblocks.helpers import *
 from pypenguin.helper_functions import pp, insureCorrectPath
+from enum import Enum
 
+class TokenType(Enum):
+    CHARS                 = 0
 
-def parse(string: str):
+    BOOLEAN_BLOCK_INPUT   = 1
+    SCRIPT_INPUT          = 2
+    ROUND_MENU_INPUT      = 3
+    NUMBER_OR_BLOCK_INPUT = 4
+    SQUARE_MENU_INPUT     = 5
+    TEXT_INPUT            = 6
+    
+    NEWLINE               = 7
+
+class Token:
+    def __init__(self, type, value):
+        self.type : TokenType  = type
+        self.value             = value
+    def __repr__(self):
+        if   self.type == TokenType.CHARS                : abbr = "c"
+        elif self.type == TokenType.BOOLEAN_BLOCK_INPUT  : abbr = "BB"
+        elif self.type == TokenType.SCRIPT_INPUT         : abbr = "S"
+        elif self.type == TokenType.ROUND_MENU_INPUT     : abbr = "RM"
+        elif self.type == TokenType.NUMBER_OR_BLOCK_INPUT: abbr = "NB"
+        elif self.type == TokenType.SQUARE_MENU_INPUT    : abbr = "SM"
+        elif self.type == TokenType.TEXT_INPUT           : abbr = "T"
+        
+        elif self.type == TokenType.NEWLINE:
+            return f"{self.type.name}"
+        return f"{abbr}{repr(self.value)}"
+
+class PathItemType(Enum):
+    LINE_NUMBER           = 0
+
+    BOOLEAN_BLOCK_INPUT   = 1
+    SCRIPT_INPUT          = 2
+    ROUND_MENU_INPUT      = 3
+    NUMBER_OR_BLOCK_INPUT = 4
+
+class PathItem:
+    def __init__(self, type, value):
+        self.type : PathItemType = type
+        self.value               = value
+    def __repr__(self):
+        return f"<{self.type.name}: {repr(self.value)}>"
+
+class ParseState(Enum):
+    DEFAULT        = 0
+    ANGLE_BRACKET  = 1
+    CURLY_BRACKET  = 2
+    ROUND_BRACKET  = 3
+    SQUARE_BRACKET = 4
+
+class Symbol(Enum):
+    ANGLE_BRACKET  = 0
+    CURLY_BRACKET  = 1
+    ROUND_BRACKET  = 2
+    SQUARE_BRACKET = 3
+
+startWords = {
+    "when"  : ["when green flag clicked"],
+    "say"   : ["say ()", "say () for () secs"],
+    "move"  : ["move () steps"],
+    "repeat": ["repeat ()"],
+    "if"    : ["if <>"],
+}
+
+def parseBlock(blockLiteral:str, path:list):
     def endCharToken():
         nonlocal tokenChars
         if tokenChars != "":
             tokens.append(Token(TokenType.CHARS, tokenChars))
             tokenChars = ""
     
-    def endBracket(keepScript:bool=False):
+    def endBracket():
+        print("---")
         nonlocal bracketChars, bracketMemory, state
         if state == ParseState.CURLY_BRACKET:
-            doAdd         = not keepScript
-            doChangeState = not keepScript
+            doAdd = True
         else:
-            doAdd         = True
-            doChangeState = True
-        
+            doAdd = bracketChars != ""
         if doAdd:
             isMenu = bracketChars.endswith(" v") and not wasEscaped
             if   isMenu:
@@ -35,8 +97,7 @@ def parse(string: str):
             tokens.append(Token(tokenType, bracketChars))
             bracketChars = ""
             bracketMemory = []
-        if doChangeState:
-            state = ParseState.DEFAULT
+        state = ParseState.DEFAULT
     
     def handleBracketChar():
         nonlocal bracketChars
@@ -74,14 +135,8 @@ def parse(string: str):
         else:
             bracketChars += char
 
-    def handleNewline():
-        nonlocal tokens
-        endCharToken()
-        endBracket(keepScript=True)
-        tokens.append(Token(TokenType.NEWLINE, None))
-
     print(100*"{")
-    print(repr(string))
+    print(repr(blockLiteral))
 
     tokens        = []
     tokenChars    = ""
@@ -90,16 +145,14 @@ def parse(string: str):
     state         = ParseState.DEFAULT
     wasEscaped    = True
     isEscaped     = False
-    for char in string:
-        print(repr(char), state)
+    for char in blockLiteral:
+        print(repr(char), state, bracketMemory)
 
         doCloseEscaped = True
         if   char == "\\" and not isEscaped:
             isEscaped = True
             doCloseEscaped = False
         
-        elif char == "\n":
-            handleNewline()
 
         elif state == ParseState.DEFAULT:
             if   char.isalnum() or char in [" ", ">", "}", ")", "]", "."]:
@@ -138,8 +191,47 @@ def parse(string: str):
     endBracket()
 
     print("->", tokens)
+    nestedTokens = []
+    for token in tokens:
+        token: Token
+        if   token.type == TokenType.BOOLEAN_BLOCK_INPUT  : pathItemType = PathItemType.BOOLEAN_BLOCK_INPUT  
+        elif token.type == TokenType.SCRIPT_INPUT         : pathItemType = PathItemType.SCRIPT_INPUT         
+        elif token.type == TokenType.ROUND_MENU_INPUT     : pathItemType = PathItemType.ROUND_MENU_INPUT     
+        elif token.type == TokenType.NUMBER_OR_BLOCK_INPUT: pathItemType = PathItemType.NUMBER_OR_BLOCK_INPUT 
+        else: # non input types:  SQUARE_MENU_INPUT, TEXT_INPUT, CHARS
+            nestedTokens.append(token)
+            continue
+        
+        pathItem = PathItem(pathItemType, None)
+        nestedTokens.append(Token(token.type, parseBlock(
+            blockLiteral=token.value,
+            path=path+[pathItem]
+        )))
+
+    pp(nestedTokens)
+    print(110*"}")
+    return nestedTokens
+
+def parse_scratchblocks(scratch_code):
+    # Split the input code into lines
+    lines = scratch_code.strip().split("\n")
+    
+    # Process each line and parse it
+    tokens = []
+    for i, line in enumerate(lines):
+        path   = [PathItem(PathItemType.LINE_NUMBER, i)]
+        blockTokens = parseBlock(
+            blockLiteral=line.strip(),
+            path=path,
+        )
+        if i != 0:
+            tokens += [Token(TokenType.NEWLINE, None)]
+        tokens += blockTokens
+    pp(tokens)
     return tokens
 
+# Example Scratchblocks code
+scratch_code = open(insureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read()
 
-string = open(insureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read().strip()
-parse(string)
+parsed_result = parse_scratchblocks(scratch_code)
+#pp(parsed_result)
