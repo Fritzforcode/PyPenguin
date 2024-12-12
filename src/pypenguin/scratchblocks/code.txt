@@ -1,4 +1,4 @@
-123 (
+123 ( abc) def
 abc {
 inst1a
 inst1b
@@ -6,3 +6,4 @@ inst1b
 inst1c
 inst1d
 }
+a

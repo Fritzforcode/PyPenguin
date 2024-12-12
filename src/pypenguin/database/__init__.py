@@ -41,6 +41,9 @@ opcodeDatabase = (
     extJSON
 )
 
+def getAllDeoptimizedOpcodes():
+    return [opcode for opcode in opcodeDatabase.keys()]
+
 def getAllOptimizedOpcodes():
     opcodes = {}
     for i, oldOpcode, opcodeData in ikv(opcodeDatabase):

@@ -1,16 +1,22 @@
-from pypenguin.scratchblocks.helpers import *
+if __name__ == "__main__": import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+
+from helpers import *
 from pypenguin.helper_functions import pp, insureCorrectPath
 
+tokenOpcodes = getAllTokenOpcodes()
 
-def parse(string: str):
+def tokenize(string: str):
     def endCharToken():
         nonlocal tokenChars
         if tokenChars != "":
-            tokens.append(Token(TokenType.CHARS, tokenChars))
+            chars = tokenChars.strip()
+            tokens.append(Token(TokenType.CHARS, chars))
             tokenChars = ""
     
     def endBracket(keepScript:bool=False):
         nonlocal bracketChars, bracketMemory, state
+        if state == ParseState.DEFAULT:
+            return
         if state == ParseState.CURLY_BRACKET:
             doAdd         = not keepScript
             doChangeState = not keepScript
@@ -58,9 +64,9 @@ def parse(string: str):
             
         
         if  bracketMemory == [] and not(isEscaped) and not(wasShortend) and (
-            (char == ">" and state == ParseState.ANGLE_BRACKET )
-        or (char == "}" and state == ParseState.CURLY_BRACKET )  
-        or (char == ")" and state == ParseState.ROUND_BRACKET )        
+            (char == ">" and state == ParseState.ANGLE_BRACKET)
+        or  (char == "}" and state == ParseState.CURLY_BRACKET)  
+        or  (char == ")" and state == ParseState.ROUND_BRACKET)
         ):
             endBracket()
             #...
@@ -75,13 +81,13 @@ def parse(string: str):
             bracketChars += char
 
     def handleNewline():
-        nonlocal tokens
+        nonlocal tokens, bracketChars
         endCharToken()
         endBracket(keepScript=True)
-        tokens.append(Token(TokenType.NEWLINE, None))
-
-    print(100*"{")
-    print(repr(string))
+        if state == ParseState.CURLY_BRACKET:
+            bracketChars += "\n"
+        else:
+            tokens.append(Token(TokenType.NEWLINE, None))
 
     tokens        = []
     tokenChars    = ""
@@ -91,7 +97,6 @@ def parse(string: str):
     wasEscaped    = True
     isEscaped     = False
     for char in string:
-        print(repr(char), state)
 
         doCloseEscaped = True
         if   char == "\\" and not isEscaped:
@@ -136,10 +141,38 @@ def parse(string: str):
             isEscaped = False 
     endCharToken()
     endBracket()
-
-    print("->", tokens)
     return tokens
 
+def parse(string: str):
+    tokens = tokenize(string)
+    print(tokens)
+
+    lines = []
+    lineTokens = []
+    for token in tokens:
+        token: Token
+        if token.type == TokenType.NEWLINE:
+            lines.append(lineTokens)
+            lineTokens = []
+        else:
+            lineTokens.append(token)
+    if lineTokens != []:
+        lines.append(lineTokens)
+    for line in lines:
+        parseLine(line)
+
+def parseLine(tokens: str):
+    print("<", tokens)
+
+    tokenTypes = [
+        TokenType.TEXT_OR_BLOCK_INPUT 
+        if token.type in [TokenType.NUMBER_OR_BLOCK_INPUT, TokenType.TEXT_INPUT] 
+        else token.type for token in tokens
+    ]
+
+    for opcode, opcodeTokens in tokenOpcodes:
+        print("-", opcode, opcodeTokens)
+    print("-->", tokenTypes)
 
 string = open(insureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read().strip()
-parse(string)
+pp(parse(string))
