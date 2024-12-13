@@ -6,4 +6,4 @@ inst1b
 inst1c
 inst1d
 }
-a
+move(5)steps

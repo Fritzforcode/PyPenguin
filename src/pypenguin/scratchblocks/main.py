@@ -8,9 +8,9 @@ tokenOpcodes = getAllTokenOpcodes()
 def tokenize(string: str):
     def endCharToken():
         nonlocal tokenChars
+        tokenChars = tokenChars.strip()
         if tokenChars != "":
-            chars = tokenChars.strip()
-            tokens.append(Token(TokenType.CHARS, chars))
+            tokens.append(Token(TokenType.CHARS, tokenChars))
             tokenChars = ""
     
     def endBracket(keepScript:bool=False):
@@ -171,7 +171,7 @@ def parseLine(tokens: str):
     ]
 
     for opcode, opcodeTokens in tokenOpcodes:
-        print("-", opcode, opcodeTokens)
+        pass#print("-", opcode, opcodeTokens)
     print("-->", tokenTypes)
 
 string = open(insureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read().strip()

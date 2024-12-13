@@ -71,16 +71,36 @@ from pypenguin.helper_functions import ikv
 def getAllTokenOpcodes():
     tokenOpcodes = []
     for i, oldOpcode, opcodeData in ikv(opcodeDatabase):
-        newOpcode = opcodeData["newOpcode"].replace("([", "&")
-        tokenTypes = []
-        for i, char in enumerate(newOpcode):
-            if   char == "<": tokenType = TokenType.BOOLEAN_BLOCK_INPUT  
-            elif char == "{": tokenType = TokenType.SCRIPT_INPUT         
-            elif char == "[": tokenType = TokenType.SQUARE_MENU_INPUT    
-            elif char == "&": tokenType = TokenType.ROUND_MENU_INPUT     
-            elif char == "(": tokenType = TokenType.TEXT_INPUT           
+        newOpcode = opcodeData["newOpcode"]
+        newOpcodeChars = []
+        for j, char in enumerate(newOpcode):
+            lastChar = newOpcode[j-1] if j-1 in range(len(newOpcode)) else None
+            nextChar = newOpcode[j+1] if j+1 in range(len(newOpcode)) else None
+            if   lastChar == "(" and char == "[":
+                newOpcodeChars.pop()
+                newOpcodeChars.append("([")
+            elif lastChar == "]" and char == ")":
+                newOpcodeChars.pop()
+                newOpcodeChars.append("])")
             else:
-                continue
-            tokenTypes.append(tokenType)
-        tokenOpcodes.append((oldOpcode, tokenTypes))
+                newOpcodeChars.append(char)
+        
+        tokens    = []
+        lastIndex = 0
+        for j, char in enumerate(newOpcodeChars):
+            if   char == "<" : token = Token(TokenType.BOOLEAN_BLOCK_INPUT, None) 
+            elif char == "{" : token = Token(TokenType.SCRIPT_INPUT       , None)
+            elif char == "[" : token = Token(TokenType.SQUARE_MENU_INPUT  , None)
+            elif char == "([": token = Token(TokenType.ROUND_MENU_INPUT   , None)
+            elif char == "(" : token = Token(TokenType.TEXT_OR_BLOCK_INPUT, None)
+            
+            if   char in ["<", "{", "[", "([", "("]:
+                textChars = "".join(newOpcodeChars[lastIndex:j]).strip()
+                if textChars != "":
+                    tokens.append(Token(TokenType.CHARS, textChars))
+                tokens.append(token)
+            elif char in [">", "}", "]", ")]", ")"]:
+                lastIndex = j + 1
+        tokenOpcodes.append((oldOpcode, tokens))
+        print("-", newOpcode, tokens)
     return tokenOpcodes
