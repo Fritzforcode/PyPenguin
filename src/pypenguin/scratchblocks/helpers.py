@@ -16,6 +16,10 @@ class TokenType(Enum):
 
     def __repr__(self):
         return self.name
+    def __eq__(self, other):
+        if not isinstance(other, TokenType):
+            return False
+        return self.value == other.value
 
 class Token:
     def __init__(self, type, value):
@@ -36,6 +40,17 @@ class Token:
         if self.value == None:
             return abbr
         return f"{abbr}{repr(self.value)}"
+    def __eq__(self, other):
+        if not isinstance(other, Token):
+            return False
+        return (self.type == other.type) and (self.value == other.value)
+    def isSimilar(self, other: "Token"):
+        if self.type == TokenType.CHARS:
+            return self == other
+        types = [self.type, other.type]
+        if (TokenType.TEXT_OR_BLOCK_INPUT in types) and ((TokenType.TEXT_INPUT in types) or (TokenType.NUMBER_OR_BLOCK_INPUT in types)):
+            return True
+        return self.type == other.type
 
 class PathItemType(Enum):
     LINE_NUMBER           = 0
@@ -99,8 +114,11 @@ def getAllTokenOpcodes():
                 if textChars != "":
                     tokens.append(Token(TokenType.CHARS, textChars))
                 tokens.append(token)
-            elif char in [">", "}", "]", ")]", ")"]:
+            elif char in [">", "}", "]", "])", ")"]:
                 lastIndex = j + 1
+        textChars = "".join(newOpcodeChars[lastIndex:]).strip()
+        if textChars != "":
+            tokens.append(Token(TokenType.CHARS, textChars))
+        #print("-", newOpcode, tokens)
         tokenOpcodes.append((oldOpcode, tokens))
-        print("-", newOpcode, tokens)
     return tokenOpcodes

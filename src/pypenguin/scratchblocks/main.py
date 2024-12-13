@@ -145,7 +145,16 @@ def tokenize(string: str):
 
 def parse(string: str):
     tokens = tokenize(string)
-    print(tokens)
+
+    newTokens = []
+    for token in tokens:
+        token: Token
+        #if   token.type in [TokenType.BOOLEAN_BLOCK_INPUT, TokenType.ROUND_MENU_INPUT, TokenType.NUMBER_OR_BLOCK_INPUT, #TokenType.SQUARE_MENU_INPUT, TokenType.TEXT_INPUT]:
+        #    newTokens.append(Token(token.type, parse(token.value)[0]))
+        #elif token.type == TokenType.SCRIPT_INPUT:
+        #    newTokens.append(Token(token.type, parse(token.value)))
+        #else:
+        newTokens.append(token)
 
     lines = []
     lineTokens = []
@@ -160,19 +169,24 @@ def parse(string: str):
         lines.append(lineTokens)
     for line in lines:
         parseLine(line)
+    
 
 def parseLine(tokens: str):
     print("<", tokens)
 
-    tokenTypes = [
-        TokenType.TEXT_OR_BLOCK_INPUT 
-        if token.type in [TokenType.NUMBER_OR_BLOCK_INPUT, TokenType.TEXT_INPUT] 
-        else token.type for token in tokens
-    ]
-
     for opcode, opcodeTokens in tokenOpcodes:
-        pass#print("-", opcode, opcodeTokens)
-    print("-->", tokenTypes)
+        if len(tokens) != len(opcodeTokens):
+            isSimilar = False
+        else:
+            isSimilar = True
+            for token, opcodeToken in zip(tokens, opcodeTokens):
+                token: Token
+                opcodeToken: Token
+                isSimilar = token.isSimilar(opcodeToken)
+                if not isSimilar:
+                    break
+        if isSimilar:
+            print("=", opcode, opcodeTokens)
 
 string = open(insureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read().strip()
 pp(parse(string))
