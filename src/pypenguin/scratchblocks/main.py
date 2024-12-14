@@ -108,9 +108,7 @@ def tokenize(string: str):
             handleNewline()
 
         elif state == ParseState.DEFAULT:
-            if   char.isalnum() or char in [" ", ">", "}", ")", "]", "."]:
-                tokenChars += char
-            elif char == "<" and not isEscaped:
+            if   char == "<" and not isEscaped:
                 endCharToken()
                 state = ParseState.ANGLE_BRACKET
             elif char == "{" and not isEscaped:
@@ -122,7 +120,8 @@ def tokenize(string: str):
             elif char == "[" and not isEscaped:
                 endCharToken()
                 state = ParseState.SQUARE_BRACKET
-            else: raise Exception(char)
+            else:
+                tokenChars += char
 
 
         elif state == ParseState.ANGLE_BRACKET:
@@ -221,6 +220,7 @@ def parseBlock(tokens: list[Token]):
             "options": {"VARIABLE": tokens[0].value},
         }
     if len(matches) != 1:
+        pp(matches)
         raise Exception()
     opcode      = matches[0]
     newOpcode   = getOptimizedOpcode(opcode=opcode)

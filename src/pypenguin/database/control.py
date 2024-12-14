@@ -217,7 +217,7 @@ opcodes = {
     "control_create_clone_of": {
         "type": "instruction",
         "category": "Control",
-        "newOpcode": "create clone of [TARGET]",
+        "newOpcode": "create clone of ([TARGET])",
         "inputTypes": {"TARGET": "cloning target"},
         "optionTypes": {},
         "menus": [{"new": "TARGET", "outer": "CLONE_OPTION", "inner": "CLONE_OPTION", "menuOpcode": "control_create_clone_of_menu"}],
@@ -225,7 +225,7 @@ opcodes = {
     "control_delete_clones_of": {
         "type": "instruction",
         "category": "Control",
-        "newOpcode": "delete clones of [TARGET]",
+        "newOpcode": "delete clones of ([TARGET])",
         "inputTypes": {"TARGET": "cloning target"},
         "optionTypes": {},
         "menus": [{"new": "TARGET", "outer": "CLONE_OPTION", "inner": "CLONE_OPTION", "menuOpcode": "control_create_clone_of_menu"}],

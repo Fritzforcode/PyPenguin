@@ -1,6 +1,1 @@
-when green flag clicked
-set [score v] to (0)
-say [Click to increase score!] for (2) seconds
-wait (1) seconds
-change [score v] by (1)
-say (join [Score: ] (score)) for (2) seconds
+broadcast [jhi v]

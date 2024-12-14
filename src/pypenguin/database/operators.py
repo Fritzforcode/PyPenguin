@@ -89,6 +89,7 @@ opcodes = {
         "newOpcode": "(OPERAND1) > (OPERAND2)",
         "inputTypes": {"OPERAND1": "text", "OPERAND2": "text"},
         "optionTypes": {},
+        "tokens": ["TEXT_OR_BLOCK_INPUT", '">"', "TEXT_OR_BLOCK_INPUT"],
     },
     "operator_gtorequal": {
         "type": "booleanReporter",
@@ -96,6 +97,7 @@ opcodes = {
         "newOpcode": "(OPERAND1) >= (OPERAND2)",
         "inputTypes": {"OPERAND1": "text", "OPERAND2": "text"},
         "optionTypes": {},
+        "tokens": ["TEXT_OR_BLOCK_INPUT", '">="', "TEXT_OR_BLOCK_INPUT"],
     },
     "operator_lt": {
         "type": "booleanReporter",
@@ -103,6 +105,7 @@ opcodes = {
         "newOpcode": "(OPERAND1) < (OPERAND2)",
         "inputTypes": {"OPERAND1": "text", "OPERAND2": "text"},
         "optionTypes": {},
+        "tokens": ["TEXT_OR_BLOCK_INPUT", '"<"', "TEXT_OR_BLOCK_INPUT"],
     },
     "operator_ltorequal": {
         "type": "booleanReporter",
@@ -110,6 +113,7 @@ opcodes = {
         "newOpcode": "(OPERAND1) <= (OPERAND2)",
         "inputTypes": {"OPERAND1": "text", "OPERAND2": "text"},
         "optionTypes": {},
+        "tokens": ["TEXT_OR_BLOCK_INPUT", '"<="', "TEXT_OR_BLOCK_INPUT"],
     },
     "operator_equals": {
         "type": "booleanReporter",
@@ -117,6 +121,7 @@ opcodes = {
         "newOpcode": "(OPERAND1) = (OPERAND2)",
         "inputTypes": {"OPERAND1": "text", "OPERAND2": "text"},
         "optionTypes": {},
+        "tokens": ["TEXT_OR_BLOCK_INPUT", '"="', "TEXT_OR_BLOCK_INPUT"],
     },
     "operator_notequal": {
         "type": "booleanReporter",
@@ -124,6 +129,7 @@ opcodes = {
         "newOpcode": "(OPERAND1) != (OPERAND2)",
         "inputTypes": {"OPERAND1": "text", "OPERAND2": "text"},
         "optionTypes": {},
+        "tokens": ["TEXT_OR_BLOCK_INPUT", '"!="', "TEXT_OR_BLOCK_INPUT"],
     },        
     # Operators: True and False
     "operator_trueBoolean": {

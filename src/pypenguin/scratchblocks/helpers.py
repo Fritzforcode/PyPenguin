@@ -66,11 +66,15 @@ class Token:
             return self == other
         if self.isInput() and other.isInput():
             return True
+        types = []
+        if (TokenType.OPTION_LITERAL in types) and ((TokenType.ROUND_MENU_INPUT in types) or (TokenType.SQUARE_MENU_INPUT in types)):
+            return True
         return self.type == other.type
     def isInput(self):
         if self.type in [TokenType.BOOLEAN_BLOCK_INPUT,  TokenType.SCRIPT_INPUT, TokenType.ROUND_MENU_INPUT, TokenType.NUMBER_OR_BLOCK_INPUT, TokenType.TEXT_INPUT, TokenType.TEXT_OR_BLOCK_INPUT, TokenType.INPUT_LITERAL, TokenType.INPUT_BLOCK, TokenType.INPUT_BLOCKS]:
             return True
         return False
+
 class PathItemType(Enum):
     LINE_NUMBER           = 0
 
@@ -99,7 +103,9 @@ class Symbol(Enum):
     ROUND_BRACKET  = 2
     SQUARE_BRACKET = 3
 
-from pypenguin.database import opcodeDatabase
+print(Token(TokenType.OPTION_LITERAL, "jhi").isSimilar2(Token(TokenType.ROUND_MENU_INPUT, None)))
+
+from pypenguin.database import opcodeDatabase, getPredefinedTokens
 from pypenguin.helper_functions import ikv
 
 def getAllTokenOpcodes():
@@ -119,26 +125,36 @@ def getAllTokenOpcodes():
             else:
                 newOpcodeChars.append(char)
         
-        tokens    = []
-        lastIndex = 0
-        for j, char in enumerate(newOpcodeChars):
-            if   char == "<" : token = Token(TokenType.BOOLEAN_BLOCK_INPUT, None) 
-            elif char == "{" : token = Token(TokenType.SCRIPT_INPUT       , None)
-            elif char == "[" : token = Token(TokenType.OPTION_LITERAL     , None)
-            elif char == "([": token = Token(TokenType.ROUND_MENU_INPUT   , None)
-            elif char == "(" : token = Token(TokenType.TEXT_OR_BLOCK_INPUT, None)
-            
-            if   char in ["<", "{", "[", "([", "("]:
-                textChars = "".join(newOpcodeChars[lastIndex:j]).strip()
-                if textChars != "":
-                    tokens.append(Token(TokenType.CHARS, textChars))
-                tokens.append(token)
-            elif char in [">", "}", "]", "])", ")"]:
-                lastIndex = j + 1
-        textChars = "".join(newOpcodeChars[lastIndex:]).strip()
-        if textChars != "":
-            tokens.append(Token(TokenType.CHARS, textChars))
-        #print("-", newOpcode, tokens)
+        predefinedTokens = getPredefinedTokens(opcode=oldOpcode)
+        tokens           = []
+        if predefinedTokens == None:
+            lastIndex = 0
+            for j, char in enumerate(newOpcodeChars):
+                if   char == "<" : token = Token(TokenType.BOOLEAN_BLOCK_INPUT, None) 
+                elif char == "{" : token = Token(TokenType.SCRIPT_INPUT       , None)
+                elif char == "[" : token = Token(TokenType.OPTION_LITERAL     , None)
+                elif char == "([": token = Token(TokenType.ROUND_MENU_INPUT   , None)
+                elif char == "(" : token = Token(TokenType.TEXT_OR_BLOCK_INPUT, None)
+                
+                if   char in ["<", "{", "[", "([", "("]:
+                    textChars = "".join(newOpcodeChars[lastIndex:j]).strip()
+                    if textChars != "":
+                        tokens.append(Token(TokenType.CHARS, textChars))
+                    tokens.append(token)
+                elif char in [">", "}", "]", "])", ")"]:
+                    lastIndex = j + 1
+            textChars = "".join(newOpcodeChars[lastIndex:]).strip()
+            if textChars != "":
+                tokens.append(Token(TokenType.CHARS, textChars))
+        else:
+            for token in predefinedTokens:
+                token: str
+                if token.startswith('"') and token.endswith('"'):
+                    tokens.append(Token(TokenType.CHARS, token.removeprefix('"').removesuffix('"')))
+                else:
+                    tokens.append(Token(TokenType[token], None))
+
+        print("-", newOpcode, tokens)
         tokenOpcodes.append((oldOpcode, tokens))
     return tokenOpcodes
 

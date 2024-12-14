@@ -102,6 +102,9 @@ def getDeoptimizedInputID(opcode, inputID):
                 return menuData["outer"]
     return inputID
 
+def getPredefinedTokens(opcode):
+    return opcodeDatabase[opcode].get("tokens", None)
+
 def getInputType(opcode, inputID):
     try:
         return opcodeDatabase[opcode]["inputTypes"][inputID]
