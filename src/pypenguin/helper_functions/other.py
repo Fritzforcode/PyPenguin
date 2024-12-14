@@ -1,4 +1,4 @@
-from pprint import pprint
+from pprint import pformat
 import re, os, hashlib
 from PIL import Image
 
@@ -111,8 +111,14 @@ def ikv(data:dict): # Iterate through a dict with i(ndex of the pair), k(ey) and
         data.values(),
     )
 
-def pp(obj): # pretty print with settings i like
-    pprint(obj, sort_dicts=False)
+def pp(*objects, sep=" ", end="\n"): # pretty print with settings i like
+    string = ""
+    for i, object in enumerate(objects):
+        string += pformat(object, sort_dicts=False)
+        if i+1 in range(len(objects)):
+            string += sep
+    string += end
+    print(string)
 
 def flipKeysAndValues(obj: dict):
     return dict(zip(obj.values(), obj.keys()))

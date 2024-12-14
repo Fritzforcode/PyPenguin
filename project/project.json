@@ -11,82 +11,90 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "define custom block",
+                            "opcode": "when green flag clicked",
+                            "inputs": {},
+                            "options": {}
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "block": null,
+                                    "text": "0"
+                                }
+                            },
                             "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "instruction",
-                                "customOpcode": "instr (num txt) <bool val> !"
+                                "VARIABLE": "score"
                             }
                         },
                         {
-                            "opcode": "return (VALUE)",
+                            "opcode": "say (MESSAGE) for (SECONDS) seconds",
                             "inputs": {
-                                "VALUE": {}
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        100
-                    ],
-                    "blocks": [
+                                "MESSAGE": {
+                                    "block": null,
+                                    "text": "Click to increase score!"
+                                },
+                                "SECONDS": {
+                                    "block": null,
+                                    "text": "2"
+                                }
+                            },
+                            "options": {}
+                        },
                         {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "lastInstruction",
-                                "customOpcode": "lastInstr (txt) <bool val>!"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        200
-                    ],
-                    "blocks": [
+                            "opcode": "wait (SECONDS) seconds",
+                            "inputs": {
+                                "SECONDS": {
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {}
+                        },
                         {
-                            "opcode": "define custom block",
+                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
                             "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "textReporter",
-                                "customOpcode": "reportText (txt)"
+                                "VARIABLE": "score"
                             }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        300
-                    ],
-                    "blocks": [
+                        },
                         {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "numberReporter",
-                                "customOpcode": "reportNumber (num)"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        0,
-                        400
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": false,
-                                "blockType": "booleanReporter",
-                                "customOpcode": "reportBool <bool>"
-                            }
+                            "opcode": "say (MESSAGE) for (SECONDS) seconds",
+                            "inputs": {
+                                "MESSAGE": {
+                                    "block": {
+                                        "opcode": "join (STRING1) (STRING2)",
+                                        "inputs": {
+                                            "STRING1": {
+                                                "block": null,
+                                                "text": "Score: "
+                                            },
+                                            "STRING2": {
+                                                "block": {
+                                                    "opcode": "value of [VARIABLE]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "VARIABLE": "score"
+                                                    }
+                                                },
+                                                "text": ""
+                                            }
+                                        },
+                                        "options": {}
+                                    },
+                                    "text": ""
+                                },
+                                "SECONDS": {
+                                    "block": null,
+                                    "text": "2"
+                                }
+                            },
+                            "options": {}
                         }
                     ]
                 }
@@ -150,7 +158,7 @@
     ],
     "globalVariables": [
         {
-            "name": "c",
+            "name": "score",
             "currentValue": "G\u00fcnter J\u00fcchen",
             "isCloudVariable": true
         },

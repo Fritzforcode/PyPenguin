@@ -1,171 +1,35 @@
 A = [
-    {
-        "position": [
-            10,
-            10
-        ],
-        "blocks": [
-            {
-                "opcode": "when green flag clicked",
-                "inputs": {},
-                "options": {}
-            },
-            {
-                "opcode": "ask (QUESTION) and wait",
-                "inputs": {
-                    "QUESTION": {
-                        "mode": "block-and-text",
-                        "block": None,
-                        "text": "Enter first number:"
-                    }
-                },
-                "options": {}
-            },
-            {
-                "opcode": "set [VARIABLE] to (VALUE)",
-                "inputs": {
-                    "VALUE": {
-                        "mode": "block-and-text",
-                        "block": {
-                            "opcode": "answer"
-                        },
-                        "text": ""
-                    }
-                },
-                "options": {
-                    "VARIABLE": "firstNumber"
-                }
-            },
-            {
-                "opcode": "ask (QUESTION) and wait",
-                "inputs": {
-                    "QUESTION": {
-                        "mode": "block-and-text",
-                        "block": None,
-                        "text": "Enter second number:"
-                    }
-                },
-                "options": {}
-            },
-            {
-                "opcode": "set [VARIABLE] to (VALUE)",
-                "inputs": {
-                    "VALUE": {
-                        "mode": "block-and-text",
-                        "block": {
-                            "opcode": "answer"
-                        },
-                        "text": None
-                    }
-                },
-                "options": {
-                    "VARIABLE": "secondNumber"
-                }
-            },
-            {
-                "opcode": "ask (QUESTION) and wait",
-                "inputs": {
-                    "QUESTION": {
-                        "mode": "block-and-text",
-                        "block": None,
-                        "text": "Enter operation (+, -, *, /):"
-                    }
-                },
-                "options": {}
-            },
-            {
-                "opcode": "set [VARIABLE] to (VALUE)",
-                "inputs": {
-                    "VALUE": {
-                        "mode": "block-and-text",
-                        "block": {
-                            "opcode": "answer"
-                        },
-                        "text": None
-                    }
-                },
-                "options": {
-                    "VARIABLE": "operation"
-                }
-            },
-            {
-                "opcode": "if <CONDITION> then {THEN}",
-                "inputs": {
-                    "CONDITION": {
-                        "mode": "block-only",
-                        "block": {
-                            "opcode": "(OPERAND1) = (OPERAND2)",
-                            "inputs": {
-                                "OPERAND1": {
-                                    "mode": "block-and-text",
-                                    "block": {
-                                        "opcode": "value of [VARIABLE]",
-                                        "options": {"VARIABLE": "operation"},
-                                    },
-                                    "text": ""
-                                },
-                                "OPERAND2": {
-                                    "mode": "block-and-text",
-                                    "block": None,
-                                    "text": "+"
-                                }
-                            },
-                            "options": {}
-                        }
-                    },
-                    "THEN": {
-                        "mode": "script",
-                        "blocks": [
-                            {
-                                "opcode": "set [VARIABLE] to (VALUE)",
-                                "inputs": {
-                                    "VALUE": {
-                                        "mode": "block-only",
-                                        "block": {
-                                            "opcode": "(OPERAND1) + (OPERAND2)",
-                                            "inputs": {
-                                                "NUM1": {
-                                                    "mode": "block-and-text",
-                                                    "block": {"opcode": "value of [VARIABLE]", "options": {"VARIABLE": "firstNumber"}},
-                                                    "option": ""
-                                                },
-                                                "NUM2": {
-                                                    "mode": "block-and-text",
-                                                    "block": {"opcode": "value of [VARIABLE]", "options": {"VARIABLE": "secondNumber"}},
-                                                    "option": ""
-                                                }
-                                            },
-                                            "options": {}
-                                        }
-                                    }
-                                },
-                                "options": {
-                                    "VARIABLE": "result"
-                                }
-                            }
-                        ]
-                    }
-                },
-                "options": {}
-            },
-            {
-                "opcode": "say (MESSAGE) for (SECONDS) seconds",
-                "inputs": {
-                    "MESSAGE": {
-                        "mode": "block-and-text",
-                        "block": None,
-                        "text": "Result: [result]"
-                    },
-                    "SECONDS": {
-                        "mode": "block-and-text",
-                        "block": None,
-                        "text": "2"
-                    }
-                },
-                "options": {}
-            }
-        ]
-    }
+    {"position": [0, 0],
+ "blocks": [{"opcode": "when green flag clicked", "inputs": {}, "options": {}},
+            {"opcode": "set [VARIABLE] to (VALUE)",
+             "inputs": {"VALUE": {"block": None, "text": "0"}},
+             "options": {"VARIABLE": "score"}},
+            {"opcode": "say (MESSAGE) for (SECONDS) seconds",
+             "inputs": {"MESSAGE": {"block": None,
+                                    "text": "Click to increase score!"},
+                        "SECONDS": {"block": None, "text": "2"}},
+             "options": {}},
+            {"opcode": "wait (SECONDS) seconds",
+             "inputs": {"SECONDS": {"block": None, "text": "1"}},
+             "options": {}},
+            {"opcode": "change [VARIABLE] by (VALUE)",
+             "inputs": {"VALUE": {"block": None, "text": "1"}},
+             "options": {"VARIABLE": "score"}},
+            {"opcode": "say (MESSAGE) for (SECONDS) seconds",
+             "inputs": {"MESSAGE": {"block": {"opcode": "join (STRING1) "
+                                                        "(STRING2)",
+                                              "inputs": {"STRING1": {"block": None,
+                                                                     "text": "Score: "},
+                                                         "STRING2": {"block": {"opcode": "value "
+                                                                                         "of "
+                                                                                         "[VARIABLE]",
+                                                                               "inputs": {},
+                                                                               "options": {"VARIABLE": "score"}},
+                                                                     "text": ""}},
+                                              "options": {}},
+                                    "text": ""},
+                        "SECONDS": {"block": None, "text": "2"}},
+             "options": {}}]}
 ]
 
 
@@ -229,7 +93,7 @@ projectData = {
     ],
     "globalVariables": [
         {
-            "name": "c",
+            "name": "score",
             "currentValue": "Günter Jüchen",
             "isCloudVariable": True,
         },

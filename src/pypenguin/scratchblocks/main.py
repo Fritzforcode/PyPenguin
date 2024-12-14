@@ -2,6 +2,7 @@ if __name__ == "__main__": import sys, os; sys.path.insert(0, os.path.abspath(os
 
 from helpers import *
 from pypenguin.helper_functions import pp, insureCorrectPath
+from pypenguin.database import getInputModes, getOptionTypes, getOptimizedOpcode
 
 tokenOpcodes = getAllTokenOpcodes()
 
@@ -143,22 +144,35 @@ def tokenize(string: str):
     endBracket()
     return tokens
 
-def parse(string: str):
+def parse(string: str, returnScript:bool=True):
     tokens = tokenize(string)
-
+    print("&", tokens)
     newTokens = []
     for token in tokens:
         token: Token
-        #if   token.type in [TokenType.BOOLEAN_BLOCK_INPUT, TokenType.ROUND_MENU_INPUT, TokenType.NUMBER_OR_BLOCK_INPUT, #TokenType.SQUARE_MENU_INPUT, TokenType.TEXT_INPUT]:
-        #    newTokens.append(Token(token.type, parse(token.value)[0]))
-        #elif token.type == TokenType.SCRIPT_INPUT:
-        #    newTokens.append(Token(token.type, parse(token.value)))
-        #else:
-        newTokens.append(token)
+        if   token.type in [TokenType.BOOLEAN_BLOCK_INPUT, TokenType.ROUND_MENU_INPUT]:
+            block = parse(token.value, returnScript=False)[0]
+            newToken = Token(TokenType.INPUT_BLOCK, block)
+        elif token.type == TokenType.TEXT_INPUT:
+            newToken = Token(TokenType.INPUT_LITERAL, token.value)
+        elif token.type == TokenType.NUMBER_OR_BLOCK_INPUT:
+            if isValidNumber(token.value):
+                newToken = Token(TokenType.INPUT_LITERAL, token.value)
+            else:
+                block = parse(token.value, returnScript=False)[0]
+                newToken = Token(TokenType.INPUT_BLOCK, block)
+        elif token.type == TokenType.SCRIPT_INPUT:
+            blocks = parse(token.value, returnScript=False)
+            newToken = Token(TokenType.INPUT_BLOCKS, blocks)
+        elif token.type == TokenType.SQUARE_MENU_INPUT:
+            newToken = Token(TokenType.OPTION_LITERAL, token.value)
+        elif token.type in [TokenType.CHARS, TokenType.NEWLINE]:
+            newToken = token
+        newTokens.append(newToken)
 
     lines = []
     lineTokens = []
-    for token in tokens:
+    for token in newTokens:
         token: Token
         if token.type == TokenType.NEWLINE:
             lines.append(lineTokens)
@@ -167,26 +181,95 @@ def parse(string: str):
             lineTokens.append(token)
     if lineTokens != []:
         lines.append(lineTokens)
-    for line in lines:
-        parseLine(line)
     
+    pp(lines)
+    blocks = []
+    for line in lines:
+        blocks.append(parseBlock(line))
+    if returnScript:
+        result = {
+            "position": [0, 0], # placeholder
+            "blocks"  : blocks,
+        }
+    else:
+        result = blocks
+    print(100*"=")
+    pp(result)
+    return result
 
-def parseLine(tokens: str):
+def parseBlock(tokens: list[Token]):
     print("<", tokens)
 
+    matches = []
     for opcode, opcodeTokens in tokenOpcodes:
         if len(tokens) != len(opcodeTokens):
             isSimilar = False
         else:
-            isSimilar = True
+            isSimilar  = True
             for token, opcodeToken in zip(tokens, opcodeTokens):
                 token: Token
                 opcodeToken: Token
-                isSimilar = token.isSimilar(opcodeToken)
+                isSimilar  = token.isSimilar2(opcodeToken)
                 if not isSimilar:
                     break
         if isSimilar:
-            print("=", opcode, opcodeTokens)
+            matches.append(opcode)
+    if len(matches) == 0:
+        return {
+            "opcode" : getOptimizedOpcode(opcode="special_variable_value"),
+            "inputs" : {},
+            "options": {"VARIABLE": tokens[0].value},
+        }
+    if len(matches) != 1:
+        raise Exception()
+    opcode      = matches[0]
+    newOpcode   = getOptimizedOpcode(opcode=opcode)
+    inputModes  = getInputModes(opcode=opcode)
+    inputIDs    = list(inputModes.keys())
+    optionTypes = getOptionTypes(opcode=opcode)
+    optionIDs   = list(optionTypes.keys())
+    print("=>", newOpcode, inputModes, optionTypes)
+    
+    inputs      = {}
+    options     = {}
+    inputIndex  = 0
+    optionIndex = 0    
+    for token in tokens:
+        token: Token
+        if   token.isInput():
+            inputID = inputIDs[inputIndex]
+            inputMode = inputModes[inputID]
+            inputIndex += 1
+            
+            if inputMode == "block-and-text":
+                if   token.type == TokenType.INPUT_LITERAL:
+                    block = None
+                    text = token.value
+                elif token.type == TokenType.INPUT_BLOCK:
+                    block = token.value
+                    text = ""
+                inputValue = {
+                    "block": block,
+                    "text" : text,
+                }
+            
+            print(".", inputID, inputMode, token, inputValue)
+            inputs[inputID] = inputValue
+        
+        elif token.type == TokenType.OPTION_LITERAL:
+            optionID = optionIDs[optionIndex]
+            #optionType = opionTypes[optionID] # has no effect currently
+            optionIndex += 1
+            
+            optionValue = token.value
+            options[optionID] = optionValue
+    block = {
+        "opcode" : newOpcode,
+        "inputs" : inputs,
+        "options": options,
+    }
+    pp(">>>", block)
+    return block
 
 string = open(insureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read().strip()
 pp(parse(string))

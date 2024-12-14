@@ -12,7 +12,12 @@ class TokenType(Enum):
 
     TEXT_OR_BLOCK_INPUT   = 7
     
-    NEWLINE               = 8
+    INPUT_LITERAL         = 8
+    INPUT_BLOCK           = 9
+    INPUT_BLOCKS          = 10
+    OPTION_LITERAL        = 11
+    
+    NEWLINE               = 12
 
     def __repr__(self):
         return self.name
@@ -34,12 +39,17 @@ class Token:
         elif self.type == TokenType.SQUARE_MENU_INPUT    : abbr = "SM"
         elif self.type == TokenType.TEXT_INPUT           : abbr = "T"
         elif self.type == TokenType.TEXT_OR_BLOCK_INPUT  : abbr = "TB"
+        
+        elif self.type == TokenType.INPUT_LITERAL        : abbr = "IL"
+        elif self.type == TokenType.INPUT_BLOCK          : abbr = "IB"
+        elif self.type == TokenType.INPUT_BLOCKS         : abbr = "IBs"
+        elif self.type == TokenType.OPTION_LITERAL       : abbr = "OL"
 
         elif self.type == TokenType.NEWLINE:
             return f"{self.type.name}"
         if self.value == None:
             return abbr
-        return f"{abbr}{repr(self.value)}"
+        return f"{abbr}:{repr(self.value)}"
     def __eq__(self, other):
         if not isinstance(other, Token):
             return False
@@ -51,7 +61,16 @@ class Token:
         if (TokenType.TEXT_OR_BLOCK_INPUT in types) and ((TokenType.TEXT_INPUT in types) or (TokenType.NUMBER_OR_BLOCK_INPUT in types)):
             return True
         return self.type == other.type
-
+    def isSimilar2(self, other: "Token"):
+        if self.type == TokenType.CHARS:
+            return self == other
+        if self.isInput() and other.isInput():
+            return True
+        return self.type == other.type
+    def isInput(self):
+        if self.type in [TokenType.BOOLEAN_BLOCK_INPUT,  TokenType.SCRIPT_INPUT, TokenType.ROUND_MENU_INPUT, TokenType.NUMBER_OR_BLOCK_INPUT, TokenType.TEXT_INPUT, TokenType.TEXT_OR_BLOCK_INPUT, TokenType.INPUT_LITERAL, TokenType.INPUT_BLOCK, TokenType.INPUT_BLOCKS]:
+            return True
+        return False
 class PathItemType(Enum):
     LINE_NUMBER           = 0
 
@@ -105,7 +124,7 @@ def getAllTokenOpcodes():
         for j, char in enumerate(newOpcodeChars):
             if   char == "<" : token = Token(TokenType.BOOLEAN_BLOCK_INPUT, None) 
             elif char == "{" : token = Token(TokenType.SCRIPT_INPUT       , None)
-            elif char == "[" : token = Token(TokenType.SQUARE_MENU_INPUT  , None)
+            elif char == "[" : token = Token(TokenType.OPTION_LITERAL     , None)
             elif char == "([": token = Token(TokenType.ROUND_MENU_INPUT   , None)
             elif char == "(" : token = Token(TokenType.TEXT_OR_BLOCK_INPUT, None)
             
@@ -122,3 +141,11 @@ def getAllTokenOpcodes():
         #print("-", newOpcode, tokens)
         tokenOpcodes.append((oldOpcode, tokens))
     return tokenOpcodes
+
+def isValidNumber(string: str):
+    isValid = True
+    for char in string:
+        if char not in "01233456789.-":
+            isValid = False
+            break
+    return isValid
