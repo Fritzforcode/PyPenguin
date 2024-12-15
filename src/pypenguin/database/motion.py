@@ -37,7 +37,7 @@ opcodes = {
     "motion_goto": {
         "type": "instruction",
         "category": "Motion",
-        "newOpcode": "goto ([TARGET])",
+        "newOpcode": "go to ([TARGET])",
         "inputTypes": {"TARGET": "reachable target"},
         "optionTypes": {},
         "menus": [{"new": "TARGET", "outer": "TO", "inner": "TO", "menuOpcode":  "motion_goto_menu"}],

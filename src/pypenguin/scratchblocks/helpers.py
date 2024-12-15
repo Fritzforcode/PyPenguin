@@ -57,13 +57,6 @@ class Token:
     def isSimilar(self, other: "Token"):
         if self.type == TokenType.CHARS:
             return self == other
-        types = [self.type, other.type]
-        if (TokenType.TEXT_OR_BLOCK_INPUT in types) and ((TokenType.TEXT_INPUT in types) or (TokenType.NUMBER_OR_BLOCK_INPUT in types)):
-            return True
-        return self.type == other.type
-    def isSimilar2(self, other: "Token"):
-        if self.type == TokenType.CHARS:
-            return self == other
         if self.isInput() and other.isInput():
             return True
         types = [self.type, other.type]
@@ -74,6 +67,11 @@ class Token:
         if self.type in [TokenType.BOOLEAN_BLOCK_INPUT,  TokenType.SCRIPT_INPUT, TokenType.ROUND_MENU_INPUT, TokenType.NUMBER_OR_BLOCK_INPUT, TokenType.TEXT_INPUT, TokenType.TEXT_OR_BLOCK_INPUT, TokenType.INPUT_LITERAL, TokenType.INPUT_BLOCK, TokenType.INPUT_BLOCKS]:
             return True
         return False
+
+#x = Token(TokenType.INPUT_BLOCK, {'opcode': '(OPERAND1) = (OPERAND2)', 'inputs': {'OPERAND1': {'block': {'opcode': 'timer', 'inputs': {}, 'options': {}}, 'text': ''}, 'OPERAND2': {'block': None, 'text': '0'}}, 'options': {}})
+#y = Token(TokenType.BOOLEAN_BLOCK_INPUT, None)
+#print(x, y, x.isSimilar(y))
+
 
 class PathItemType(Enum):
     LINE_NUMBER           = 0
@@ -102,9 +100,6 @@ class Symbol(Enum):
     CURLY_BRACKET  = 1
     ROUND_BRACKET  = 2
     SQUARE_BRACKET = 3
-#x = Token(TokenType.OPTION_LITERAL, "jhi")
-#y = Token(TokenType.ROUND_MENU_INPUT, None)
-#print(x, y, x.isSimilar2(y))
 
 from pypenguin.database import opcodeDatabase, getPredefinedTokens
 from pypenguin.helper_functions import ikv
@@ -116,7 +111,6 @@ def getAllTokenOpcodes():
         newOpcodeChars = []
         for j, char in enumerate(newOpcode):
             lastChar = newOpcode[j-1] if j-1 in range(len(newOpcode)) else None
-            nextChar = newOpcode[j+1] if j+1 in range(len(newOpcode)) else None
             if   lastChar == "(" and char == "[":
                 newOpcodeChars.pop()
                 newOpcodeChars.append("([")
@@ -155,7 +149,8 @@ def getAllTokenOpcodes():
                 else:
                     tokens.append(Token(TokenType[token], None))
 
-        #print("-", newOpcode, tokens)
+        #if newOpcode == "repeat until <CONDITION> {BODY}":
+        print("-", newOpcode, tokens)
         tokenOpcodes.append((oldOpcode, tokens))
     return tokenOpcodes
 

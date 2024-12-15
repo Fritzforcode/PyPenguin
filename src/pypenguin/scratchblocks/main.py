@@ -209,7 +209,7 @@ def parseBlock(tokens: list[Token]):
             for token, opcodeToken in zip(tokens, opcodeTokens):
                 token: Token
                 opcodeToken: Token
-                isSimilar  = token.isSimilar2(opcodeToken)
+                isSimilar = token.isSimilar(opcodeToken)
                 if not isSimilar:
                     break
         if isSimilar:
@@ -242,7 +242,7 @@ def parseBlock(tokens: list[Token]):
             inputMode = inputModes[inputID]
             inputIndex += 1
             
-            if inputMode == "block-and-text":
+            if   inputMode == "block-and-text":
                 if   token.type == TokenType.INPUT_LITERAL:
                     block = None
                     text = token.value
@@ -253,6 +253,15 @@ def parseBlock(tokens: list[Token]):
                     "block": block,
                     "text" : text,
                 }
+            elif inputMode == "block-only":
+                inputValue = {
+                    "block": token.value,
+                }
+            elif inputMode == "script":
+                inputValue = {
+                    "blocks": token.value
+                }
+            else: raise Exception()
             
             print(".", inputID, inputMode, token, inputValue)
             inputs[inputID] = inputValue
@@ -288,3 +297,6 @@ def parseBlock(tokens: list[Token]):
 
 string = open(insureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read().strip()
 parse(string)
+
+
+#TODO: Add scoring for matches to tell apart

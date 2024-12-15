@@ -3,6 +3,16 @@
         {
             "name": "Stage",
             "isStage": true,
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [],
+            "sounds": [],
+            "volume": 100
+        },
+        {
+            "name": "Sprite1",
+            "isStage": false,
             "scripts": [
                 {
                     "position": [
@@ -28,40 +38,45 @@
                             }
                         },
                         {
-                            "opcode": "say (MESSAGE) for (SECONDS) seconds",
-                            "inputs": {
-                                "MESSAGE": {
-                                    "block": null,
-                                    "text": "Click to increase score!"
-                                },
-                                "SECONDS": {
-                                    "block": null,
-                                    "text": "2"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "wait (SECONDS) seconds",
-                            "inputs": {
-                                "SECONDS": {
-                                    "block": null,
-                                    "text": "1"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
                                 "VALUE": {
                                     "block": null,
-                                    "text": "1"
+                                    "text": "10"
                                 }
                             },
                             "options": {
-                                "VARIABLE": "score"
+                                "VARIABLE": "timer"
                             }
+                        },
+                        {
+                            "opcode": "add (ITEM) to [LIST]",
+                            "inputs": {
+                                "ITEM": {
+                                    "block": null,
+                                    "text": "Player 1"
+                                }
+                            },
+                            "options": {
+                                "LIST": "players"
+                            }
+                        },
+                        {
+                            "opcode": "delete all of [LIST]",
+                            "inputs": {},
+                            "options": {
+                                "LIST": "points"
+                            }
+                        },
+                        {
+                            "opcode": "ask (QUESTION) and wait",
+                            "inputs": {
+                                "QUESTION": {
+                                    "block": null,
+                                    "text": "What is your name?"
+                                }
+                            },
+                            "options": {}
                         },
                         {
                             "opcode": "say (MESSAGE) for (SECONDS) seconds",
@@ -72,15 +87,13 @@
                                         "inputs": {
                                             "STRING1": {
                                                 "block": null,
-                                                "text": "Score: "
+                                                "text": "Hello, "
                                             },
                                             "STRING2": {
                                                 "block": {
-                                                    "opcode": "value of [VARIABLE]",
+                                                    "opcode": "answer",
                                                     "inputs": {},
-                                                    "options": {
-                                                        "VARIABLE": "score"
-                                                    }
+                                                    "options": {}
                                                 },
                                                 "text": ""
                                             }
@@ -95,6 +108,36 @@
                                 }
                             },
                             "options": {}
+                        },
+                        {
+                            "opcode": "broadcast ([MESSAGE])",
+                            "inputs": {
+                                "MESSAGE": {
+                                    "block": null,
+                                    "option": "start game"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "create clone of ([TARGET])",
+                            "inputs": {
+                                "TARGET": {
+                                    "block": null,
+                                    "option": "_myself_"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "play sound ([SOUND]) until done",
+                            "inputs": {
+                                "SOUND": {
+                                    "block": null,
+                                    "option": "pop"
+                                }
+                            },
+                            "options": {}
                         }
                     ]
                 }
@@ -102,17 +145,14 @@
             "comments": [],
             "currentCostume": 0,
             "costumes": [],
-            "sounds": [],
-            "volume": 100
-        },
-        {
-            "name": "Sprite1",
-            "isStage": false,
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
-            "sounds": [],
+            "sounds": [
+                {
+                    "name": "pop",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 1123
+                }
+            ],
             "localVariables": [
                 {
                     "name": "loc var",
@@ -163,6 +203,21 @@
             "isCloudVariable": true
         },
         {
+            "name": "timer",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "go to",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "points",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
             "name": "var",
             "currentValue": "",
             "isCloudVariable": false
@@ -172,30 +227,21 @@
         {
             "name": "list",
             "currentValue": []
+        },
+        {
+            "name": "players",
+            "currentValue": []
+        },
+        {
+            "name": "points",
+            "currentValue": []
         }
     ],
     "tempo": 60,
     "videoTransparency": 0,
     "videoState": "off",
     "textToSpeechLanguage": null,
-    "monitors": [
-        {
-            "opcode": "value of [LIST]",
-            "options": {
-                "LIST": "list"
-            },
-            "position": [
-                10,
-                10
-            ],
-            "spriteName": null,
-            "visible": true,
-            "size": [
-                0,
-                0
-            ]
-        }
-    ],
+    "monitors": [],
     "extensionData": {},
     "extensions": [
         "jgJSON"
