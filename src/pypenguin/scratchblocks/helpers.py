@@ -66,7 +66,7 @@ class Token:
             return self == other
         if self.isInput() and other.isInput():
             return True
-        types = []
+        types = [self.type, other.type]
         if (TokenType.OPTION_LITERAL in types) and ((TokenType.ROUND_MENU_INPUT in types) or (TokenType.SQUARE_MENU_INPUT in types)):
             return True
         return self.type == other.type
@@ -102,8 +102,9 @@ class Symbol(Enum):
     CURLY_BRACKET  = 1
     ROUND_BRACKET  = 2
     SQUARE_BRACKET = 3
-
-print(Token(TokenType.OPTION_LITERAL, "jhi").isSimilar2(Token(TokenType.ROUND_MENU_INPUT, None)))
+#x = Token(TokenType.OPTION_LITERAL, "jhi")
+#y = Token(TokenType.ROUND_MENU_INPUT, None)
+#print(x, y, x.isSimilar2(y))
 
 from pypenguin.database import opcodeDatabase, getPredefinedTokens
 from pypenguin.helper_functions import ikv
@@ -154,7 +155,7 @@ def getAllTokenOpcodes():
                 else:
                     tokens.append(Token(TokenType[token], None))
 
-        print("-", newOpcode, tokens)
+        #print("-", newOpcode, tokens)
         tokenOpcodes.append((oldOpcode, tokens))
     return tokenOpcodes
 

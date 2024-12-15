@@ -4,207 +4,9 @@
             "isStage": true,
             "name": "Stage",
             "variables": {
-                "lOD}BiZGzRs-XFW^NR}E": [
-                    "score",
-                    "G\u00fcnter J\u00fcchen",
-                    true
-                ],
-                "UBL?|@#qHJ(eWlv-MTZl": [
-                    "var",
-                    ""
-                ]
-            },
-            "lists": {
-                "jW*pMl+(GQ%hDynMm;^O": [
-                    "list",
-                    []
-                ]
-            },
-            "broadcasts": {},
-            "customVars": [],
-            "blocks": {
-                "a": {
-                    "opcode": "event_whenflagclicked",
-                    "next": "b",
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 0,
-                    "y": 0
-                },
-                "b": {
-                    "opcode": "data_setvariableto",
-                    "next": "c",
-                    "parent": "a",
-                    "inputs": {
-                        "VALUE": [
-                            1,
-                            [
-                                10,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "VARIABLE": [
-                            "score",
-                            "[%,ilOD}BiZGzRs-XFW^",
-                            ""
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "c": {
-                    "opcode": "looks_sayforsecs",
-                    "next": "d",
-                    "parent": "b",
-                    "inputs": {
-                        "MESSAGE": [
-                            1,
-                            [
-                                10,
-                                "Click to increase score!"
-                            ]
-                        ],
-                        "SECS": [
-                            1,
-                            [
-                                4,
-                                "2"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "d": {
-                    "opcode": "control_wait",
-                    "next": "e",
-                    "parent": "c",
-                    "inputs": {
-                        "DURATION": [
-                            1,
-                            [
-                                5,
-                                "1"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "e": {
-                    "opcode": "data_changevariableby",
-                    "next": "f",
-                    "parent": "d",
-                    "inputs": {
-                        "VALUE": [
-                            1,
-                            [
-                                4,
-                                "1"
-                            ]
-                        ]
-                    },
-                    "fields": {
-                        "VARIABLE": [
-                            "score",
-                            "[%,ilOD}BiZGzRs-XFW^",
-                            ""
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "g": {
-                    "opcode": "operator_join",
-                    "next": null,
-                    "parent": "f",
-                    "inputs": {
-                        "STRING1": [
-                            1,
-                            [
-                                10,
-                                "Score: "
-                            ]
-                        ],
-                        "STRING2": [
-                            3,
-                            [
-                                12,
-                                "score",
-                                "[%,ilOD}BiZGzRs-XFW^"
-                            ],
-                            [
-                                10,
-                                ""
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "f": {
-                    "opcode": "looks_sayforsecs",
-                    "next": null,
-                    "parent": "e",
-                    "inputs": {
-                        "MESSAGE": [
-                            3,
-                            "g",
-                            [
-                                10,
-                                ""
-                            ]
-                        ],
-                        "SECS": [
-                            1,
-                            [
-                                4,
-                                "2"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                }
-            },
-            "comments": {},
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "empty costume",
-                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
-                    "dataFormat": "svg",
-                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
-                    "rotationCenterX": 1.0,
-                    "rotationCenterY": 1.0,
-                    "bitmapResolution": 1
-                }
-            ],
-            "sounds": [],
-            "id": "nAkI`?tY/Vqn|(Xh.]zf",
-            "volume": 100,
-            "layerOrder": 0,
-            "tempo": 60,
-            "videoTransparency": 0,
-            "videoState": "off",
-            "textToSpeechLanguage": null
-        },
-        {
-            "isStage": false,
-            "name": "Sprite1",
-            "variables": {
-                "oTDHR`;})Ttg=CmUtenv": [
-                    "loc var",
-                    "www"
+                "AP#jU[:mkdOmU^%;j-m@": [
+                    "my variable",
+                    0
                 ]
             },
             "lists": {},
@@ -215,30 +17,27 @@
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "empty costume",
+                    "name": "backdrop1",
                     "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
                     "dataFormat": "svg",
                     "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
-                    "rotationCenterX": 1.0,
-                    "rotationCenterY": 1.0,
+                    "rotationCenterX": 240.0,
+                    "rotationCenterY": 180.0,
                     "bitmapResolution": 1
                 }
             ],
             "sounds": [],
-            "id": "oTDHQbL~wA;YdpAys^y/",
+            "id": "nAkI`?tY/Vqn|(Xh.]zf",
             "volume": 100,
-            "visible": true,
-            "x": 77,
-            "y": 0,
-            "size": 100,
-            "direction": 90,
-            "draggable": true,
-            "rotationStyle": "all around",
-            "layerOrder": 1
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 50,
+            "videoState": "on",
+            "textToSpeechLanguage": null
         },
         {
             "isStage": false,
-            "name": "Sprite6",
+            "name": "Sprite1",
             "variables": {},
             "lists": {},
             "broadcasts": {},
@@ -248,49 +47,40 @@
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "empty costume",
-                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "name": "costume1",
+                    "assetId": "c434b674f2da18ba13cdfe51dbc05ecc",
                     "dataFormat": "svg",
-                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
-                    "rotationCenterX": 1.0,
-                    "rotationCenterY": 1.0,
+                    "md5ext": "c434b674f2da18ba13cdfe51dbc05ecc.svg",
+                    "rotationCenterX": 26.0,
+                    "rotationCenterY": 46.0,
                     "bitmapResolution": 1
                 }
             ],
-            "sounds": [],
-            "id": "WtwnYplag`pOBLsiI.d]",
+            "sounds": [
+                {
+                    "name": "Pop",
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "dataFormat": "wav",
+                    "rate": 48000,
+                    "sampleCount": 1123,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "id": "oTDHQbL~wA;YdpAys^y/",
             "volume": 100,
             "visible": true,
             "x": 0,
             "y": 0,
             "size": 100,
             "direction": 90,
-            "draggable": true,
+            "draggable": false,
             "rotationStyle": "all around",
             "layerOrder": 1
         }
     ],
-    "monitors": [
-        {
-            "id": "jW*pMl+(GQ%hDynMm;^O",
-            "mode": "list",
-            "opcode": "data_listcontents",
-            "params": {
-                "LIST": "list"
-            },
-            "spriteName": null,
-            "value": [],
-            "width": 0,
-            "height": 0,
-            "x": 10,
-            "y": 10,
-            "visible": true
-        }
-    ],
+    "monitors": [],
     "extensionData": {},
-    "extensions": [
-        "jgJSON"
-    ],
+    "extensions": [],
     "meta": {
         "semver": "3.0.0",
         "vm": "0.2.0",

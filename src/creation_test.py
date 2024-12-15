@@ -1,4 +1,4 @@
-A = [
+scripts = [
     {'position': [0, 0],
  'blocks': [{'opcode': 'when green flag clicked', 'inputs': {}, 'options': {}},
             {'opcode': 'set [VARIABLE] to (VALUE)',
@@ -10,8 +10,11 @@ A = [
             {'opcode': 'add (ITEM) to [LIST]',
              'inputs': {'ITEM': {'block': None, 'text': 'Player 1'}},
              'options': {'LIST': 'players'}},
-            {'opcode': 'delete all of [LIST]',
-             'inputs': {},
+            {'opcode': 'delete (INDEX) of [LIST]',
+             'inputs': {'INDEX': {'block': {'opcode': 'value of [VARIABLE]',
+                                            'inputs': {},
+                                            'options': {'VARIABLE': 'all'}},
+                                  'text': ''}},
              'options': {'LIST': 'points'}},
             {'opcode': 'ask (QUESTION) and wait',
              'inputs': {'QUESTION': {'block': None,
@@ -30,15 +33,15 @@ A = [
                                     'text': ''},
                         'SECONDS': {'block': None, 'text': '2'}},
              'options': {}},
-            {'opcode': 'value of [VARIABLE]',
-             'inputs': {},
-             'options': {'VARIABLE': 'broadcast'}},
-            {'opcode': 'value of [VARIABLE]',
-             'inputs': {},
-             'options': {'VARIABLE': 'create clone of'}},
-            {'opcode': 'value of [VARIABLE]',
-             'inputs': {},
-             'options': {'VARIABLE': 'play sound'}},
+            {'opcode': 'broadcast ([MESSAGE])',
+             'inputs': {'MESSAGE': {'block': None, 'option': 'start game'}},
+             'options': {}},
+            {'opcode': 'create clone of ([TARGET])',
+             'inputs': {'TARGET': {'block': None, 'option': '_myself_'}},
+             'options': {}},
+            {'opcode': 'play sound ([SOUND]) until done',
+             'inputs': {'SOUND': {'block': None, 'option': 'pop'}},
+             'options': {}},
             {'opcode': 'when I start as a clone', 'inputs': {}, 'options': {}},
             {'opcode': 'value of [VARIABLE]',
              'inputs': {},
@@ -125,7 +128,7 @@ projectData = {
         {
             "name": "Stage",
             "isStage": True,
-            "scripts": A,
+            "scripts": [],
             "comments": [],
             "currentCostume": 0,
             "costumes": [],
@@ -135,11 +138,18 @@ projectData = {
         {
             "name": "Sprite1",
             "isStage": False,
-            "scripts": [],
+            "scripts": scripts,
             "comments": [],
             "currentCostume": 0,
             "costumes": [],
-            "sounds": [],
+            "sounds": [
+                {
+                    "name": "pop",
+                    "extension": "mp3",
+                    "rate": 48000,
+                    "sampleCount": 1123,
+                },
+            ],
             "localVariables": [
                 {
                     "name": "loc var",
@@ -188,6 +198,12 @@ projectData = {
             "currentValue": "",
             "isCloudVariable": False,
         },
+        {
+            "name": "all",
+            "currentValue": "",
+            "isCloudVariable": False,
+        },
+        
         {
             "name": "var",
             "currentValue": "",

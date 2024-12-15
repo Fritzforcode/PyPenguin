@@ -1,149 +1,53 @@
 {
     "sprites": [
         {
-            "name": "Stage",
             "isStage": true,
-            "scripts": [
+            "name": "Stage",
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [
                 {
-                    "position": [
-                        0,
-                        0
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when green flag clicked",
-                            "inputs": {},
-                            "options": {}
-                        },
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "block": null,
-                                    "text": "0"
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "score"
-                            }
-                        },
-                        {
-                            "opcode": "say (MESSAGE) for (SECONDS) seconds",
-                            "inputs": {
-                                "MESSAGE": {
-                                    "block": null,
-                                    "text": "Click to increase score!"
-                                },
-                                "SECONDS": {
-                                    "block": null,
-                                    "text": "2"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "wait (SECONDS) seconds",
-                            "inputs": {
-                                "SECONDS": {
-                                    "block": null,
-                                    "text": "1"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "change [VARIABLE] by (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "block": null,
-                                    "text": "1"
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": "score"
-                            }
-                        },
-                        {
-                            "opcode": "say (MESSAGE) for (SECONDS) seconds",
-                            "inputs": {
-                                "MESSAGE": {
-                                    "block": {
-                                        "opcode": "join (STRING1) (STRING2)",
-                                        "inputs": {
-                                            "STRING1": {
-                                                "block": null,
-                                                "text": "Score: "
-                                            },
-                                            "STRING2": {
-                                                "block": {
-                                                    "opcode": "value of [VARIABLE]",
-                                                    "inputs": {},
-                                                    "options": {
-                                                        "VARIABLE": "score"
-                                                    }
-                                                },
-                                                "text": ""
-                                            }
-                                        },
-                                        "options": {}
-                                    },
-                                    "text": ""
-                                },
-                                "SECONDS": {
-                                    "block": null,
-                                    "text": "2"
-                                }
-                            },
-                            "options": {}
-                        }
+                    "name": "backdrop1",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        239.0,
+                        179.0
                     ]
                 }
             ],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
             "sounds": [],
             "volume": 100
         },
         {
-            "name": "Sprite1",
             "isStage": false,
+            "name": "Sprite1",
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [],
-            "sounds": [],
-            "localVariables": [
+            "costumes": [
                 {
-                    "name": "loc var",
-                    "currentValue": "www",
-                    "monitor": null
+                    "name": "costume1",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        0.24433326721191406,
+                        -0.21725082397460938
+                    ]
                 }
             ],
-            "localLists": [],
-            "volume": 100,
-            "layerOrder": 1,
-            "visible": true,
-            "position": [
-                77,
-                0
+            "sounds": [
+                {
+                    "name": "Pop",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 1123
+                }
             ],
-            "size": 100,
-            "direction": 90,
-            "draggable": true,
-            "rotationStyle": "all around"
-        },
-        {
-            "name": "Sprite6",
-            "isStage": false,
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
-            "sounds": [],
+            "volume": 100,
             "localVariables": [],
             "localLists": [],
-            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -152,52 +56,23 @@
             ],
             "size": 100,
             "direction": 90,
-            "draggable": true,
+            "draggable": false,
             "rotationStyle": "all around"
         }
     ],
     "globalVariables": [
         {
-            "name": "score",
-            "currentValue": "G\u00fcnter J\u00fcchen",
-            "isCloudVariable": true
-        },
-        {
-            "name": "var",
-            "currentValue": "",
+            "name": "my variable",
+            "currentValue": 0,
             "isCloudVariable": false
         }
     ],
-    "globalLists": [
-        {
-            "name": "list",
-            "currentValue": []
-        }
-    ],
+    "globalLists": [],
     "tempo": 60,
-    "videoTransparency": 0,
-    "videoState": "off",
+    "videoTransparency": 50,
+    "videoState": "on",
     "textToSpeechLanguage": null,
-    "monitors": [
-        {
-            "opcode": "value of [LIST]",
-            "options": {
-                "LIST": "list"
-            },
-            "position": [
-                10,
-                10
-            ],
-            "spriteName": null,
-            "visible": true,
-            "size": [
-                0,
-                0
-            ]
-        }
-    ],
+    "monitors": [],
     "extensionData": {},
-    "extensions": [
-        "jgJSON"
-    ]
+    "extensions": []
 }

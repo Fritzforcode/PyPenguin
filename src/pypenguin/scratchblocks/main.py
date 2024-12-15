@@ -184,7 +184,8 @@ def parse(string: str, returnScript:bool=True):
     pp(lines)
     blocks = []
     for line in lines:
-        blocks.append(parseBlock(line))
+        if line != []:
+            blocks.append(parseBlock(line))
     if returnScript:
         result = {
             "position": [0, 0], # placeholder
@@ -257,12 +258,26 @@ def parseBlock(tokens: list[Token]):
             inputs[inputID] = inputValue
         
         elif token.type == TokenType.OPTION_LITERAL:
-            optionID = optionIDs[optionIndex]
-            #optionType = opionTypes[optionID] # has no effect currently
-            optionIndex += 1
-            
-            optionValue = token.value
-            options[optionID] = optionValue
+            canBeSpecialInput = inputIndex in range(len(inputIDs))
+            if canBeSpecialInput:
+                inputID   = inputIDs[inputIndex]
+                inputMode = inputModes[inputID]
+                canBeSpecialInput = inputMode in ["block-and-option", "block-and-hybrid-option"]
+            if canBeSpecialInput:
+                # A Round Menu Case
+                inputIndex += 1
+                inputValue = {
+                    "block": None,
+                    "option": token.value,
+                }
+                inputs[inputID] = inputValue
+            else:
+                optionID = optionIDs[optionIndex]
+                #optionType = opionTypes[optionID] # has no effect currently
+                optionIndex += 1
+                
+                optionValue = token.value
+                options[optionID] = optionValue
     block = {
         "opcode" : newOpcode,
         "inputs" : inputs,
@@ -272,4 +287,4 @@ def parseBlock(tokens: list[Token]):
     return block
 
 string = open(insureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read().strip()
-pp(parse(string))
+parse(string)
