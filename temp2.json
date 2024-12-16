@@ -1,128 +1,481 @@
 {
     "sprites": [
         {
-            "name": "Stage",
             "isStage": true,
+            "name": "Stage",
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [],
+            "costumes": [
+                {
+                    "name": "backdrop1",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        239.0,
+                        179.0
+                    ]
+                }
+            ],
             "sounds": [],
             "volume": 100
         },
         {
-            "name": "Sprite1",
             "isStage": false,
+            "name": "Sprite1",
             "scripts": [
                 {
                     "position": [
-                        0,
-                        0
+                        228,
+                        513
                     ],
                     "blocks": [
                         {
-                            "opcode": "when green flag clicked",
+                            "opcode": "escape loop",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        238,
+                        608
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "continue loop",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        248,
+                        694
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "switch (CONDITION) {CASES}",
+                            "inputs": {
+                                "CASES": {
+                                    "mode": "script",
+                                    "blocks": []
+                                },
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": null
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "switch (CONDITION) {CASES} default {DEFAULT}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": null
+                                },
+                                "CASES": {
+                                    "mode": "script",
+                                    "blocks": []
+                                },
+                                "DEFAULT": {
+                                    "mode": "script",
+                                    "blocks": []
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "exit case",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        236,
+                        1054
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "run next case when (CONDITION)",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "ello"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "case (CONDITION) {BODY}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "ello"
+                                },
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": []
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        610,
+                        1798
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "if <CONDITION> then (TRUEVALUE) else (FALSEVALUE)",
+                            "inputs": {
+                                "TRUEVALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "foo"
+                                },
+                                "FALSEVALUE": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "bar"
+                                },
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": null
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        503,
+                        2152
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "error",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        494,
+                        2391
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "stop script [TARGET]",
+                            "inputs": {},
+                            "options": {
+                                "TARGET": "this script"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        703,
+                        2378
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "stop script [TARGET]",
+                            "inputs": {},
+                            "options": {
+                                "TARGET": "other scripts in sprite"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        325,
+                        2802
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "run flag",
                             "inputs": {},
                             "options": {}
                         },
                         {
-                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "opcode": "stop sprite [TARGET]",
                             "inputs": {
-                                "VALUE": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
                                     "block": null,
-                                    "text": "0"
+                                    "option": "_stage_"
                                 }
                             },
-                            "options": {
-                                "VARIABLE": "score"
-                            }
+                            "options": {}
                         },
                         {
-                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "opcode": "stop script [TARGET]",
+                            "inputs": {},
+                            "options": {
+                                "TARGET": "all"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        284,
+                        1254
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "if <CONDITION> then {THEN}",
                             "inputs": {
-                                "VALUE": {
+                                "THEN": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "exit case",
+                                            "inputs": {},
+                                            "options": {}
+                                        }
+                                    ]
+                                },
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": null
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "if <CONDITION> then {THEN} else {ELSE}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": null
+                                },
+                                "THEN": {
+                                    "mode": "script",
+                                    "blocks": []
+                                },
+                                "ELSE": {
+                                    "mode": "script",
+                                    "blocks": []
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "wait until <CONDITION>",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": null
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "repeat until <CONDITION> {BODY}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": null
+                                },
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": []
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "while <CONDITION> {BODY}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": null
+                                },
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": []
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "for each [VARIABLE] in (RANGE) {BODY}",
+                            "inputs": {
+                                "RANGE": {
+                                    "mode": "block-and-text",
                                     "block": null,
                                     "text": "10"
+                                },
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": []
                                 }
                             },
                             "options": {
-                                "VARIABLE": "timer"
+                                "VARIABLE": "my variable"
                             }
                         },
                         {
-                            "opcode": "add (ITEM) to [LIST]",
+                            "opcode": "all at once {BODY}",
                             "inputs": {
-                                "ITEM": {
-                                    "block": null,
-                                    "text": "Player 1"
-                                }
-                            },
-                            "options": {
-                                "LIST": "players"
-                            }
-                        },
-                        {
-                            "opcode": "delete all of [LIST]",
-                            "inputs": {},
-                            "options": {
-                                "LIST": "points"
-                            }
-                        },
-                        {
-                            "opcode": "ask (QUESTION) and wait",
-                            "inputs": {
-                                "QUESTION": {
-                                    "block": null,
-                                    "text": "What is your name?"
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": []
                                 }
                             },
                             "options": {}
                         },
                         {
-                            "opcode": "say (MESSAGE) for (SECONDS) seconds",
+                            "opcode": "as [TARGET] {BODY}",
                             "inputs": {
-                                "MESSAGE": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": null,
+                                    "option": "_stage_"
+                                },
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": []
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "as [TARGET] {BODY}",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
                                     "block": {
-                                        "opcode": "join (STRING1) (STRING2)",
-                                        "inputs": {
-                                            "STRING1": {
-                                                "block": null,
-                                                "text": "Hello, "
-                                            },
-                                            "STRING2": {
-                                                "block": {
-                                                    "opcode": "answer",
-                                                    "inputs": {},
-                                                    "options": {}
-                                                },
-                                                "text": ""
-                                            }
-                                        },
+                                        "opcode": "error",
+                                        "inputs": {},
                                         "options": {}
                                     },
-                                    "text": ""
+                                    "option": "_stage_"
                                 },
-                                "SECONDS": {
-                                    "block": null,
-                                    "text": "2"
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": []
                                 }
                             },
                             "options": {}
                         },
                         {
-                            "opcode": "broadcast ([MESSAGE])",
+                            "opcode": "try to do {TRY} if a block errors {IFERROR}",
                             "inputs": {
-                                "MESSAGE": {
-                                    "block": null,
-                                    "option": "start game"
+                                "TRY": {
+                                    "mode": "script",
+                                    "blocks": []
+                                },
+                                "IFERROR": {
+                                    "mode": "script",
+                                    "blocks": []
                                 }
                             },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "throw error (ERROR)",
+                            "inputs": {
+                                "ERROR": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "Hello!"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        251,
+                        111
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "wait (SECONDS) seconds",
+                            "inputs": {
+                                "SECONDS": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "wait (SECONDS) seconds or until <CONDITION>",
+                            "inputs": {
+                                "SECONDS": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "1"
+                                },
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": null
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "repeat (TIMES) {BODY}",
+                            "inputs": {
+                                "TIMES": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "10"
+                                },
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": []
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "forever {BODY}",
+                            "inputs": {
+                                "BODY": {
+                                    "mode": "script",
+                                    "blocks": []
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        303,
+                        2514
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "when I start as a clone",
+                            "inputs": {},
                             "options": {}
                         },
                         {
                             "opcode": "create clone of ([TARGET])",
                             "inputs": {
                                 "TARGET": {
+                                    "mode": "block-and-option",
                                     "block": null,
                                     "option": "_myself_"
                                 }
@@ -130,11 +483,118 @@
                             "options": {}
                         },
                         {
-                            "opcode": "play sound ([SOUND]) until done",
+                            "opcode": "delete clones of ([TARGET])",
                             "inputs": {
-                                "SOUND": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
                                     "block": null,
-                                    "option": "pop"
+                                    "option": "_myself_"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "delete this clone",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        519,
+                        2695
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "is clone?",
+                            "inputs": {},
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        733,
+                        2542
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "create clone of ([TARGET])",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": {
+                                        "opcode": "value of [VARIABLE]",
+                                        "inputs": {},
+                                        "options": {
+                                            "VARIABLE": "my variable"
+                                        }
+                                    },
+                                    "option": "_myself_"
+                                }
+                            },
+                            "options": {}
+                        },
+                        {
+                            "opcode": "delete clones of ([TARGET])",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": {
+                                        "opcode": "error",
+                                        "inputs": {},
+                                        "options": {}
+                                    },
+                                    "option": "_myself_"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        564,
+                        2835
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "stop sprite [TARGET]",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": {
+                                        "opcode": "error",
+                                        "inputs": {},
+                                        "options": {}
+                                    },
+                                    "option": "_stage_"
+                                }
+                            },
+                            "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        786,
+                        2840
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "stop sprite [TARGET]",
+                            "inputs": {
+                                "TARGET": {
+                                    "mode": "block-and-option",
+                                    "block": {
+                                        "opcode": "value of [VARIABLE]",
+                                        "inputs": {},
+                                        "options": {
+                                            "VARIABLE": "my variable"
+                                        }
+                                    },
+                                    "option": "_stage_"
                                 }
                             },
                             "options": {}
@@ -144,46 +604,28 @@
             ],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [],
+            "costumes": [
+                {
+                    "name": "costume1",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        0.24433326721191406,
+                        -0.21725082397460938
+                    ]
+                }
+            ],
             "sounds": [
                 {
-                    "name": "pop",
+                    "name": "Squawk",
                     "extension": "wav",
                     "rate": 48000,
-                    "sampleCount": 1123
+                    "sampleCount": 17867
                 }
             ],
-            "localVariables": [
-                {
-                    "name": "loc var",
-                    "currentValue": "www",
-                    "monitor": null
-                }
-            ],
-            "localLists": [],
             "volume": 100,
-            "layerOrder": 1,
-            "visible": true,
-            "position": [
-                77,
-                0
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": true,
-            "rotationStyle": "all around"
-        },
-        {
-            "name": "Sprite6",
-            "isStage": false,
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
-            "sounds": [],
             "localVariables": [],
             "localLists": [],
-            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -192,54 +634,21 @@
             ],
             "size": 100,
             "direction": 90,
-            "draggable": true,
+            "draggable": false,
             "rotationStyle": "all around"
         }
     ],
     "globalVariables": [
         {
-            "name": "score",
-            "currentValue": "G\u00fcnter J\u00fcchen",
-            "isCloudVariable": true
-        },
-        {
-            "name": "timer",
-            "currentValue": "",
-            "isCloudVariable": false
-        },
-        {
-            "name": "go to",
-            "currentValue": "",
-            "isCloudVariable": false
-        },
-        {
-            "name": "points",
-            "currentValue": "",
-            "isCloudVariable": false
-        },
-        {
-            "name": "var",
-            "currentValue": "",
+            "name": "my variable",
+            "currentValue": 0,
             "isCloudVariable": false
         }
     ],
-    "globalLists": [
-        {
-            "name": "list",
-            "currentValue": []
-        },
-        {
-            "name": "players",
-            "currentValue": []
-        },
-        {
-            "name": "points",
-            "currentValue": []
-        }
-    ],
+    "globalLists": [],
     "tempo": 60,
-    "videoTransparency": 0,
-    "videoState": "off",
+    "videoTransparency": 50,
+    "videoState": "on",
     "textToSpeechLanguage": null,
     "monitors": [],
     "extensionData": {},

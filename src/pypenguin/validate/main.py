@@ -66,21 +66,21 @@ def validateProject(projectData):
         spriteName = None if i == 0 else sprite["name"] # None for the stage
         if spriteName in spriteNames: # If there is the same sprite name twice
             raise formatError(path=["sprites"]+[i]+["name"], message="Sprite names mustn't be the same.")
-        spriteNames.append(spriteName)
+        spriteNames.append(["sprite", spriteName])
         
 
         if i == 0:
             if "costumes" not in sprite:
                 raise formatError(path=["sprites"]+[i], message="Must have the 'costumes' attribute.")
             if sprite["costumes"] == []:
-                backdrops = [defaultCostume["name"]]
+                backdrops = [["costume", defaultCostume["name"]]]
             else:
-                backdrops = [costume["name"] for costume in sprite["costumes"]]
+                backdrops = [["costume", costume["name"]] for costume in sprite["costumes"]]
         else:
-            cloningTargets.append(spriteName)
-            otherSprites.append(spriteName)
-            localVariables[spriteName] = [item["name"] for item in sprite["localVariables"]]
-            localLists    [spriteName] = [item["name"] for item in sprite["localLists"    ]]
+            cloningTargets.append(["sprite", spriteName])
+            otherSprites  .append(["sprite", spriteName])
+            localVariables[spriteName] = [["variable", item["name"]] for item in sprite["localVariables"]]
+            localLists    [spriteName] = [["list"    , item["name"]] for item in sprite["localLists"    ]]
     
     contexts = {}
     for i, sprite in enumerate(projectDataCopy["sprites"]):
@@ -88,25 +88,23 @@ def validateProject(projectData):
             scopeVariables    = [item["name"] for item in projectDataCopy["globalVariables"]]
             scopeLists        = [item["name"] for item in projectDataCopy["globalLists"    ]]
             if cloningTargets == []:
-                newCloningTargets = [" "] # When there are no sprites; make " " the fallback value
-            else:
-                newCloningTargets = cloningTargets
+                cloningTargets = [["value", " "]] # When there are no sprites; make " " the fallback value
             nameKey = None
         else:
-            newCloningTargets = ["_myself_"] + cloningTargets
-            scopeVariables    = [item["name"] for item in sprite["localVariables"] + projectDataCopy["globalVariables"]]
-            scopeLists        = [item["name"] for item in sprite["localLists"    ] + projectDataCopy["globalLists"    ]]
+            cloningTargets.insert(0, ["myself", "myself"])
+            scopeVariables    = [["variable", item["name"]] for item in sprite["localVariables"] + projectDataCopy["globalVariables"]]
+            scopeLists        = [["list"    , item["name"]] for item in sprite["localLists"    ] + projectDataCopy["globalLists"    ]]
             nameKey           = sprite["name"]
 
         context = {
             "scopeVariables" : scopeVariables, 
             "scopeLists"     : scopeLists, 
-            "globalVariables": [item["name"] for item in projectDataCopy["globalVariables"]],
+            "globalVariables": [["variable", item["name"]] for item in projectDataCopy["globalVariables"]],
             "localVariables" : localVariables,
             "localLists"     : localLists,
-            "cloningTargets" : newCloningTargets,
+            "cloningTargets" : cloningTargets,
             "otherSprites": [
-                target for target in otherSprites if target != sprite["name"]
+                target for target in otherSprites if target[1] != sprite["name"]
             ],
             "backdrops": backdrops,
         }

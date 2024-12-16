@@ -153,7 +153,7 @@ opcodes = {
     "control_run_as_sprite": {
         "type": "instruction",
         "category": "Control",
-        "newOpcode": "as [TARGET] {BODY}",
+        "newOpcode": "as ([TARGET]) {BODY}",
         "inputTypes": {"TARGET": "other sprite or stage", "BODY": "script"},
         "inputTranslation": {"SUBSTACK": "BODY"},
         "optionTypes": {},
@@ -193,7 +193,7 @@ opcodes = {
     "control_stop_sprite": {
         "type": "instruction",
         "category": "Control",
-        "newOpcode": "stop sprite [TARGET]", # changed for uniqueness
+        "newOpcode": "stop sprite ([TARGET])", # changed for uniqueness
         "inputTypes": {"TARGET": "other sprite or stage"},
         "optionTypes": {},
         "menus": [{"new": "TARGET", "outer": "STOP_OPTION", "inner": "STOP_OPTION", "menuOpcode": "control_stop_sprite_menu"}],
