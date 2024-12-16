@@ -46,7 +46,7 @@ opcodes = {
         "newOpcode": "(OPERAND1) * (OPERAND2) [OPERATION] (OPERAND3)",
         "inputTypes": {"OPERAND1": "number", "OPERAND2": "number", "OPERAND3": "number"},
         "inputTranslation": {"ONE": "OPERAND1", "TWO": "OPERAND2", "THREE": "OPERAND3"},
-        "optionTypes": {"OPERATION": "binary math operation small"},
+        "optionTypes": {"OPERATION": "root|log"},
         "optionTranslation": {"OPTION": "OPERATION"},
     },
     "operator_advMath": {
@@ -55,7 +55,7 @@ opcodes = {
         "newOpcode": "(OPERAND1) [OPERATION] (OPERAND2)",
         "inputTypes": {"OPERAND1": "number", "OPERAND2": "number"},
         "inputTranslation": {"ONE": "OPERAND1", "TWO": "OPERAND2"},
-        "optionTypes": {"OPERATION": "binary math operation large"},
+        "optionTypes": {"OPERATION": "power|root|log"},
         "optionTranslation": {"OPTION": "OPERATION"},
     },
     "operator_random": {
@@ -251,7 +251,7 @@ opcodes = {
         "newOpcode": "(TEXT) [OPERATION] with (SUBSTRING) ?",
         "inputTypes": {"TEXT": "text", "SUBSTRING": "text"},
         "inputTranslation": {"TEXT1": "TEXT", "TEXT2": "SUBSTRING"},
-        "optionTypes": {"OPERATION": "text operation"},
+        "optionTypes": {"OPERATION": "text method"},
         "optionTranslation": {"OPTION": "OPERATION"},
     },
     "operator_replaceAll": {

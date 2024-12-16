@@ -18,7 +18,7 @@ opcodes = {
         "category": "Motion",
         "newOpcode": "move [DIRECTION] (STEPS) steps",
         "inputTypes": {"STEPS": "number"},
-        "optionTypes": {"DIRECTION": "up or down"},
+        "optionTypes": {"DIRECTION": "up|down"},
     },
     "motion_turnright": {
         "type": "instruction",

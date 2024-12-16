@@ -50,7 +50,7 @@ opcodes = {
         "category": "Events",
         "newOpcode": "when mouse is scrolled [DIRECTION]",
         "inputTypes": {},
-        "optionTypes": {"DIRECTION": "up or down"},
+        "optionTypes": {"DIRECTION": "up|down"},
         "optionTranslation": {"KEY_OPTION": "DIRECTION"},
     },
     "event_whenthisspriteclicked": { # for sprites

@@ -200,21 +200,21 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = ["upper", "lower"]
                 case "stop script target":
                     possibleValues = ["all", "this script", "other scripts in sprite"]
-                case "stage || other sprite":
+                case "other sprite or stage":
                     possibleValues = ["_stage_"] + context["otherSprites"]
                 case "cloning target":
                     possibleValues = context["cloningTargets"]
                 case "up|down":
                     possibleValues = ["up", "down"]
-                case "loudness|timer":
+                case "loudness or timer":
                     possibleValues = ["LOUDNESS", "TIMER"]
                 case "mouse || other sprite":
                     possibleValues = ["_mouse_"] + context["otherSprites"]
                 case "mouse|edge || other sprite":
                     possibleValues = ["_mouse_", "_edge_"] + context["otherSprites"]
-                case "mouse|edge || myself || other sprite":
+                case "mouse|edge|myself || other sprite":
                     possibleValues = ["_mouse_", "_edge_", "_myself_"] + context["otherSprites"]
-                case "x|y":
+                case "coordinate":
                     possibleValues = ["x", "y"]
                 case "drag mode":
                     possibleValues = ["draggable", "not draggable"]
@@ -244,7 +244,7 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = ["YEAR", "MONTH", "DATE", "DAYOFWEEK", "HOUR", "MINUTE", "SECOND", "TIMESTAMP"]
                 case "finger index":
                     possibleValues = ["1", "2", "3", "4", "5"]
-                case "random|mouse || other sprite":
+                case "reachable target":
                     possibleValues = ["_random_", "_mouse_"] + context["otherSprites"]
                 case "rotation style":
                     possibleValues = ["left-right", "up-down", "don't rotate", "look at", "all around"]
@@ -262,15 +262,15 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = context["backdrops"]
                 case "costume property":
                     possibleValues = ["width", "height", "rotation center x", "rotation center y", "drawing mode"]
-                case "myself || other sprite":
+                case "myself or other sprite":
                     possibleValues = ["_myself_"] + context["otherSprites"]
-                case "front|back":
+                case "front or back":
                     possibleValues = ["front", "back"]
-                case "forward|backward":
+                case "forward or backward":
                     possibleValues = ["forward", "backward"]
-                case "infront|behind":
+                case "infront or behind":
                     possibleValues = ["infront", "behind"]
-                case "number|name":
+                case "number or name":
                     possibleValues = ["number", "name"]
                 case "sound":
                     possibleValues = context["sounds"]

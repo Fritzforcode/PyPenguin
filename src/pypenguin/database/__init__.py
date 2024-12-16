@@ -76,7 +76,7 @@ def getDeoptimizedOpcode(opcode):
         if opcodeData["newOpcode"] == opcode:
             found = True
             break
-    assert found, f"Opcode not found: {opcode}"
+    assert found, f"Opcode not found    : {opcode}"
     return oldOpcode
 
 def getOptimizedInputID(opcode, inputID):
@@ -195,22 +195,193 @@ inputModes = {
     "round"           : "block-only",
     "script"          : "script",
 
-    "broadcast"                      : "block-and-hybrid-option",
-    "other sprite or stage"          : "block-and-option",
-    "cloning target"                 : "block-and-option",
-    "exclusive touchable object"     : "block-and-option",
-    "half-inclusive touchable object": "block-and-option",
-    "inclusive touchable object"     : "block-and-option",
-    "key"                            : "block-and-option",
-    "up or down"                     : "block-and-option",
-    "finger index"                   : "block-and-option",
-    "reachable target"               : "block-and-option",
-    "costume"                        : "block-and-option",
-    "costume property"               : "block-and-option",
-    "backdrop"                       : "block-and-option",
-    "backdrop property"              : "block-and-option",
-    "own or other sprite"            : "block-and-option",
-    "sound"                          : "block-and-option",
+    "broadcast"                           : "block-and-hybrid-option",
+    "stage || other sprite"               : "block-and-option",
+    "cloning target"                      : "block-and-option",
+    "mouse || other sprite"               : "block-and-option",
+    "mouse|edge || other sprite"          : "block-and-option",
+    "mouse|edge || myself || other sprite": "block-and-option",
+    "key"                                 : "block-and-option",
+    "up|down"                             : "block-and-option",
+    "finger index"                        : "block-and-option",
+    "random|mouse || other sprite"        : "block-and-option",
+    "costume"                             : "block-and-option",
+    "costume property"                    : "block-and-option",
+    "backdrop"                            : "block-and-option",
+    "backdrop property"                   : "block-and-option",
+    "myself || other sprite"              : "block-and-option",
+    "sound"                               : "block-and-option",
+}
+
+optionTypeDatabase = {
+    "key"                                  : {
+        "directValues"   : [
+            "space", "up arrow", "down arrow", "right arrow", "left arrow", 
+            "enter", "any", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", 
+            "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", 
+            "x", "y", "z", "-", ",", ".", "`", "=", "[", "]", "\\", ";", "'", 
+            "/", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", 
+            "{", "}", "|", ":", '"', "?", "<", ">", "~", "backspace", "delete", 
+            "shift", "caps lock", "scroll lock", "control", "escape", "insert", 
+            "home", "end", "page up", "page down",
+        ], 
+        "valueSegments"  : [],
+    },
+    "unary math operation"                 : {
+        "directValues"   : ["abs", "floor", "ceiling", "sqrt", "sin", "cos", "tan", "asin", "acos", "atan", "ln", "log", "e ^", "10 ^"], 
+        "valueSegments"  : [],
+    },
+    "power|root|log"                       : {
+        "directValues"   : ["^", "root", "log"], 
+        "valueSegments"  : [],
+    },
+    "root|log"                             : {
+        "directValues"   : ["root", "log"], 
+        "valueSegments"  : [],
+    },
+    "text method"                          : {
+        "directValues"   : ["starts", "ends"], 
+        "valueSegments"  : [],
+    },
+    "text case"                            : {
+        "directValues"   : ["upper", "lower"], 
+        "valueSegments"  : [],
+    },
+    "stop script target"                   : {
+        "directValues"   : ["all", "this script", "other scripts in sprite"], 
+        "valueSegments"  : [],
+    },
+    "stage || other sprite"                : {
+        "directValues"   : [], 
+        "valueSegments"  : ["stage", "other sprite"],
+    },
+    "cloning target"                       : {
+        "directValues"   : [], 
+        "valueSegments"  : ["other sprite"],
+        "fallback"       : ["fallback", " "],
+    },
+    "up|down"                              : {
+        "directValues"   : ["up", "down"], 
+        "valueSegments"  : [],
+    },
+    "loudness|timer"                       : {
+        "directValues"   : ["loudness", "timer"], 
+        "oldDirectValues": ["LOUDNESS", "TIMER"],
+        "valueSegments"  : [],
+    },
+    "mouse || other sprite"                : {
+        "directValues"   : ["mouse-pointer"], 
+        "oldDirectValues": ["_mouse_"],
+        "valueSegments"  : ["other sprite"],
+    },
+    "mouse|edge || other sprite"           : {
+        "directValues"   : ["mouse-pointer", "edge"], 
+        "oldDirectValues": ["_mouse_",      "_edge_"],
+        "valueSegments"  : ["other sprite"],
+    },
+    "mouse|edge || myself || other sprite" : {
+        "directValues"   : ["mouse pointer", "edge"], 
+        "oldDirectValues": ["_mouse_",      "_edge_"],
+        "valueSegments"  : ["myself", "other sprite"],
+    },
+    "x|y"                                  : {
+        "directValues"   : ["x", "y"], 
+        "valueSegments"  : [],
+    },
+    "drag mode"                            : {
+        "directValues"   : ["draggable", "not draggable"], 
+        "valueSegments"  : [],
+    },
+    "mutable sprite property"              : {
+        "directValues"   : [], 
+        "valueSegments"  : ["mutable sprite property"],
+    },
+    "readable sprite property"             : {
+        "directValues"   : [], 
+        "valueSegments"  : ["readable sprite property"],
+    },
+    "time property"                        : {
+        "directValues"   : ["year", "month", "date", "day of week", "hour", "minute", "second", "js timestamp"], 
+        "oldDirectValues": ["YEAR", "MONTH", "DATE", "DAYOFWEEK"  , "HOUR", "MINUTE", "SECOND",    "TIMESTAMP"],
+        "valueSegments"  : [],
+    },
+    "finger index"                         : {
+        "directValues"   : ["1", "2", "3", "4", "5"], 
+        "valueSegments"  : [],
+    },
+    "random|mouse || other sprite"                     : {
+        "directValues"   : ["random position", "mouse pointer"], 
+        "oldDirectValues": ["_random_",       "_mouse_"],
+        "valueSegments"  : ["other sprite"],
+    },
+    "rotation style"                       : {
+        "directValues"   : ["left-right", "up-down", "don't rotate", "look at", "all around"], 
+        "valueSegments"  : [],
+    },
+    "stage zone"                           : {
+        "directValues"   : ["bottom-left", "bottom", "bottom-right", "top-left", "top", "top-right", "left", "right"], 
+        "valueSegments"  : [],
+    },
+    "text bubble color property"           : {
+        "directValues"   : ["border"       , "fill",        "text"     ], 
+        "oldDirectValues": ["BUBBLE_STROKE", "BUBBLE_FILL", "TEXT_FILL"],
+        "valueSegments"  : [],
+    },
+    "text bubble property"                 : {
+        "directValues"   : ["MIN_WIDTH"    , "MAX_LINE_WIDTH", "STROKE_WIDTH"     , "PADDING"     , "CORNER_RADIUS", "TAIL_HEIGHT", "FONT_HEIGHT_RATIO"  , "texlim"           ], 
+        "oldDirectValues": ["minimum width", "maximum width" , "border line width", "padding size", "corner radius", "tail height", "font pading percent", "text length limit"],
+        "valueSegments"  : [],
+    },
+    "sprite effect"                        : {
+        "directValues"   : ["color", "fisheye", "whirl", "pixelate", "mosaic", "brightness", "ghost", "saturation", "red", "green", "blue", "opaque"], 
+        "oldDirectValues": ["COLOR", "FISHEYE", "WHIRL", "PIXELATE", "MOSAIC", "BRIGHTNESS", "GHOST", "SATURATION", "RED", "GREEN", "BLUE", "OPAQUE"],
+        "valueSegments"  : [],
+    },
+    "costume"                              : {
+        "directValues"   : [], 
+        "valueSegments"  : ["costume"],
+    },
+    "backdrop"                             : {
+        "directValues"   : [], 
+        "valueSegments"  : ["backdrop"],
+    },
+    "costume property"                     : {
+        "directValues"   : ["width", "height", "rotation center x", "rotation center y", "drawing mode"], 
+        "valueSegments"  : [],
+    },
+    "myself || other sprite"               : {
+        "directValues"   : [], 
+        "valueSegments"  : ["myself", "other sprite"],
+    },
+    "front|back"                           : {
+        "directValues"   : ["front", "back"], 
+        "valueSegments"  : [],
+    },
+    "forward|backward"                     : {
+        "directValues"   : ["forward", "backward"], 
+        "valueSegments"  : [],
+    },
+    "infront|behind"                       : {
+        "directValues"   : ["infront", "behind"], 
+        "valueSegments"  : [],
+    },
+    "number|name"                          : {
+        "directValues"   : ["number", "name"], 
+        "valueSegments"  : [],
+    },
+    "sound"                                : {
+        "directValues"   : [], 
+        "valueSegments"  : ["sound"],
+    },
+    "sound effect"                         : {
+        "directValues"   : ["pitch", "pan"], 
+        "oldDirectValues": ["PITCH", "PAN"],
+        "valueSegments"  : [],
+    },
+    "blockType"                            : {
+        "directValues"   : ["instruction", "lastInstruction", "textReporter", "numberReporter", "booleanReporter"], 
+        "valueSegments"  : [],
+    },
 }
 
 

@@ -197,7 +197,7 @@ opcodes = {
         "category": None,
         "newOpcode": "value of text [ARGUMENT]",
         "inputTypes": {},
-        "optionTypes": {"ARGUMENT": "string"},
+        "optionTypes": {"ARGUMENT": "reporter name"},
         "optionTranslation": {"VALUE": "ARGUMENT"},
     },
     "argument_reporter_boolean": {
@@ -205,7 +205,7 @@ opcodes = {
         "category": None,
         "newOpcode": "value of boolean [ARGUMENT]",
         "inputTypes": {},
-        "optionTypes": {"ARGUMENT": "string"},
+        "optionTypes": {"ARGUMENT": "reporter name"},
         "optionTranslation": {"VALUE": "ARGUMENT"},
     },
 }
