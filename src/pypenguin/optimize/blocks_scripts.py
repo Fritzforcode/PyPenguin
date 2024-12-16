@@ -107,112 +107,8 @@ def nestScripts(data):
     #pp(newScriptDatas)
     return newScriptDatas
 
-def translateInputOptionValue(value, optionType):
-    table              = None
-    canBeAbstractValue = True
-    canBeSpriteName    = False
-    match optionType:
-        case "other sprite or stage":
-            table = {"_stage_": ["Stage", "Stage"]}
-            canBeSpriteName    = True
-            canBeAbstractValue = True
-        case "loudness or timer":
-            table = {"LOUDNESS": "loudness", "TIMER": "timaaargünterjauchjüchen"}
-        case "time property":
-            table = {"YEAR": "year", "MONTH": "month", "DATE": "date", "DAYOFWEEK": "day of week", "HOUR": "hour", "MINUTE": "minute", "SECOND": "second", "TIMESTAMP": "js timestamp"}
-        case "text bubble property":
-            table = {"MIN_WIDTH": "minimum width", "MAX_LINE_WIDTH": "maximum width", "STROKE_WIDTH": "border line width", "PADDING": "padding size", "CORNER_RADIUS": "corner radius", "TAIL_HEIGHT": "tail height", "FONT_HEIGHT_RATIO": "font pading percent", "texlim": "text length limit"}
-        case "text operation":
-            pass
-        case "text case":
-            pass
-        case "stop script target":
-            pass
-        case "other sprite or stage":
-            possibleValues = ["_stage_"] + context["otherSprites"]
-        case "cloning target":
-            possibleValues = context["cloningTargets"]
-        case "up or down":
-            pass
-        case "loudness or timer":
-            possibleValues = ["LOUDNESS", "TIMER"]
-        case "backdrop":
-            possibleValues = context["backdrops"]
-        case "exclusive touchable object":
-            possibleValues = ["_mouse_"] + context["otherSprites"]
-        case "half-inclusive touchable object":
-            possibleValues = ["_mouse_", "_edge_"] + context["otherSprites"]
-        case "inclusive touchable object":
-            possibleValues = ["_mouse_", "_edge_", "_myself_"] + context["otherSprites"]
-        case "coordinate":
-            possibleValues = ["x", "y"]
-        case "drag mode":
-            possibleValues = ["draggable", "not draggable"]
-        case "mutable sprite property":
-            match opcode:
-                case "set [PROPERTY] of ([TARGET]) to (VALUE)":
-                    if inputDatas["TARGET"]["option"] == "_stage_":
-                        nameKey = None
-                    else:
-                        nameKey = inputDatas["TARGET"]["option"]
-            if nameKey == None:
-                possibleValues = ["backdrop", "volume"] + context["globalVariables"]
-            else:
-                possibleValues = ["x position", "y position", "direction", "costume", "size", "volume"] + context["localVariables"][nameKey]
-        case "readable sprite property":
-            match opcode:
-                case "[PROPERTY] of ([TARGET])":
-                    if inputDatas["TARGET"]["option"] == "_stage_":
-                        nameKey = None
-                    else:
-                        nameKey = inputDatas["TARGET"]["option"]
-            if nameKey == None:
-                possibleValues = ["backdrop #", "backdrop name", "volume"] + context["globalVariables"]
-            else:
-                possibleValues = ["x position", "y position", "direction", "costume #", "costume name", "layer", "size", "volume"] + context["localVariables"][nameKey]
-        case "time property":
-            possibleValues = ["YEAR", "MONTH", "DATE", "DAYOFWEEK", "HOUR", "MINUTE", "SECOND", "TIMESTAMP"]
-        case "finger index":
-            possibleValues = ["1", "2", "3", "4", "5"]
-        case "reachable target":
-            possibleValues = ["_random_", "_mouse_"] + context["otherSprites"]
-        case "rotation style":
-            possibleValues = ["left-right", "up-down", "don't rotate", "look at", "all around"]
-        case "stage zone":
-            possibleValues = ["bottom-left", "bottom", "bottom-right", "top-left", "top", "top-right", "left", "right"]
-        case "text bubble color property":
-            possibleValues = ["BUBBLE_STROKE", "BUBBLE_FILL", "TEXT_FILL"]
-        case "text bubble property":
-            possibleValues = ["MIN_WIDTH", "MAX_LINE_WIDTH", "STROKE_WIDTH", "PADDING", "CORNER_RADIUS", "TAIL_HEIGHT", "FONT_HEIGHT_RATIO", "texlim"]
-        case "sprite effect":
-            possibleValues = ["COLOR", "FISHEYE", "WHIRL", "PIXELATE", "MOSAIC", "BRIGHTNESS", "GHOST", "SATURATION", "RED", "GREEN", "BLUE", "OPAQUE"]
-        case "costume":
-            possibleValues = context["costumes"]
-        case "backdrop":
-            possibleValues = context["backdrops"]
-        case "costume property":
-            possibleValues = ["width", "height", "rotation center x", "rotation center y", "drawing mode"]
-        case "own or other sprite":
-            possibleValues = ["_myself_"] + context["otherSprites"]
-        case "front or back":
-            possibleValues = ["front", "back"]
-        case "forward or backward":
-            possibleValues = ["forward", "backward"]
-        case "infront or behind":
-            possibleValues = ["infront", "behind"]
-        case "number or name":
-            possibleValues = ["number", "name"]
-        case "sound":
-            possibleValues = context["sounds"]
-        case "sound effect":
-            possibleValues = ["PITCH", "PAN"]
-        case "blockType":
-            possibleValues = ["instruction", "lastInstruction", "textReporter", "numberReporter", "booleanReporter"]
-        case _: raise Exception(optionType)
-
 def nestBlockRecursively(blockDatas, blockID):
     blockData = blockDatas[blockID]
-    opcode    = getDeoptimizedOpcode(blockData["opcode"])
     #print("start nbr", 50*"$", blockID)
     #pp(blockData)
     newInputDatas = {}
@@ -242,10 +138,6 @@ def nestBlockRecursively(blockDatas, blockID):
         else:
             subBlockData1 = None
         
-        inputType = getInputType(
-            opcode=opcode,
-            inputID=inputID,
-        )
         match inputData["mode"]:
             case "block-and-text"|"block-and-hybrid-option":
                 assert blockCount in [0, 1]
@@ -265,15 +157,10 @@ def nestBlockRecursively(blockDatas, blockID):
                 }
             case "block-and-option":
                 assert blockCount in [1, 2]
-                block  = None          if blockCount == 1 else subBlockData0
-                option = subBlockData0 if blockCount == 1 else subBlockData1
                 newInputData |= {
-                    "block" : block,
-                    "option": translateInputOptionValue(
-                        value=option,
-                        optionType=inputType,
-                    ),
-                }
+                    "block" : None          if blockCount == 1 else subBlockData0,
+                    "option": subBlockData0 if blockCount == 1 else subBlockData1,
+               }
         newInputDatas[inputID] = newInputData
     
     
@@ -610,4 +497,3 @@ def getCustomBlockMutations(data):
                 mutationData = blockData["mutation"]
                 mutationDatas[mutationData["proccode"]] = mutationData
     return mutationDatas
-f
