@@ -27,17 +27,19 @@ def validateSprite(path, data, context):
     costumeNames = []
     for j, costume in enumerate(data["costumes"]):
         validateCostume(path=path+["costumes"]+[j], data=costume, isStage=i==0)
-        if costume["name"] in costumeNames: # If a costume with the same name alredy exists
+        costumeName = ["costume", costume["name"]]
+        if costumeName in costumeNames: # If a costume with the same name alredy exists
             raise formatError(path=path+["costumes"]+[j]+["name"], message= "Costume names mustn't be the same.")
-        costumeNames.append(costume["name"])
+        costumeNames.append(costumeName)
     
     # Check sound formats
     soundNames = []
     for j, sound in enumerate(data["sounds"]):
         validateSound(path=path+["sounds"]+[j], data=sound)
-        if sound["name"] in soundNames: # If a sound with the same name alredy exists
+        soundName = ["sound", sound["name"]]
+        if soundName in soundNames: # If a sound with the same name alredy exists
             raise formatError(path=path+["sounds"]+[j]+["name"], message= "Sound names mustn't be the same.")
-        soundNames.append(sound["name"])
+        soundNames.append(soundName)
     
     
     # Make sure that currentCostume refers to an existing costume
@@ -48,6 +50,7 @@ def validateSprite(path, data, context):
     spriteContext = context | {
         "costumes": costumeNames,
         "sounds"  : soundNames,
+        "isStage" : i == 0,
     }
     
     for j, script in enumerate(data["scripts"]):

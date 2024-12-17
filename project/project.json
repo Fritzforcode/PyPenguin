@@ -34,7 +34,10 @@
                                 }
                             },
                             "options": {
-                                "VARIABLE": "score"
+                                "VARIABLE": [
+                                    "variable",
+                                    "score"
+                                ]
                             }
                         },
                         {
@@ -46,7 +49,10 @@
                                 }
                             },
                             "options": {
-                                "VARIABLE": "timer"
+                                "VARIABLE": [
+                                    "variable",
+                                    "timer"
+                                ]
                             }
                         },
                         {
@@ -58,14 +64,20 @@
                                 }
                             },
                             "options": {
-                                "LIST": "players"
+                                "LIST": [
+                                    "list",
+                                    "players"
+                                ]
                             }
                         },
                         {
                             "opcode": "delete all of [LIST]",
                             "inputs": {},
                             "options": {
-                                "LIST": "points"
+                                "LIST": [
+                                    "list",
+                                    "points"
+                                ]
                             }
                         },
                         {
@@ -124,7 +136,10 @@
                             "inputs": {
                                 "TARGET": {
                                     "block": null,
-                                    "option": "_myself_"
+                                    "option": [
+                                        "myself",
+                                        "myself"
+                                    ]
                                 }
                             },
                             "options": {}
@@ -134,7 +149,10 @@
                             "inputs": {
                                 "SOUND": {
                                     "block": null,
-                                    "option": "pop"
+                                    "option": [
+                                        "sound",
+                                        "pop"
+                                    ]
                                 }
                             },
                             "options": {}
@@ -224,10 +242,6 @@
         }
     ],
     "globalLists": [
-        {
-            "name": "list",
-            "currentValue": []
-        },
         {
             "name": "players",
             "currentValue": []

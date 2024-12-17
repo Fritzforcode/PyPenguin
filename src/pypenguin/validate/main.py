@@ -79,9 +79,9 @@ def validateProject(projectData):
             
         else:
             #cloningTargets.append(["sprite", spriteName])
-            otherSprites.append(["sprite", spriteName])
-            localVariables[spriteName] = [["variable", item["name"]] for item in sprite["localVariables"]]
-            localLists    [spriteName] = [["list"    , item["name"]] for item in sprite["localLists"    ]]
+            otherSprites.append(spriteName)
+            localVariables[tuple(spriteName)] = [["variable", item["name"]] for item in sprite["localVariables"]]
+            localLists    [tuple(spriteName)] = [["list"    , item["name"]] for item in sprite["localLists"    ]]
     
     contexts = {}
     for i, sprite in enumerate(projectDataCopy["sprites"]):

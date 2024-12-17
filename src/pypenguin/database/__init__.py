@@ -11,7 +11,7 @@ from pypenguin.database.lists     import opcodes as lists
 from pypenguin.database.special   import opcodes as special
 from pypenguin.database.extJSON   import opcodes as extJSON
 
-from pypenguin.helper_functions   import ikv, flipKeysAndValues
+from pypenguin.helper_functions   import ikv, pp, flipKeysAndValues
 
 import functools
 
@@ -257,7 +257,7 @@ optionTypeDatabase = {
     },
     "cloning target"                       : {
         "directValues"   : [], 
-        "valueSegments"  : ["other sprite"],
+        "valueSegments"  : ["myself if not stage", "other sprite"],
         "fallback"       : ["fallback", " "],
     },
     "up|down"                              : {
@@ -270,19 +270,19 @@ optionTypeDatabase = {
         "valueSegments"  : [],
     },
     "mouse || other sprite"                : {
-        "directValues"   : ["mouse-pointer"], 
-        "oldDirectValues": ["_mouse_"],
-        "valueSegments"  : ["other sprite"],
+        "directValues"   : [], 
+        "oldDirectValues": [],
+        "valueSegments"  : ["mouse pointer", "other sprite"],
     },
     "mouse|edge || other sprite"           : {
-        "directValues"   : ["mouse-pointer", "edge"], 
-        "oldDirectValues": ["_mouse_",      "_edge_"],
-        "valueSegments"  : ["other sprite"],
+        "directValues"   : [], 
+        "oldDirectValues": [],
+        "valueSegments"  : ["mouse pointer", "edge", "other sprite"],
     },
     "mouse|edge || myself || other sprite" : {
-        "directValues"   : ["mouse pointer", "edge"], 
-        "oldDirectValues": ["_mouse_",      "_edge_"],
-        "valueSegments"  : ["myself", "other sprite"],
+        "directValues"   : [], 
+        "oldDirectValues": [],
+        "valueSegments"  : ["mouse pointer", "edge", "myself", "other sprite"],
     },
     "x|y"                                  : {
         "directValues"   : ["x", "y"], 
@@ -309,10 +309,10 @@ optionTypeDatabase = {
         "directValues"   : ["1", "2", "3", "4", "5"], 
         "valueSegments"  : [],
     },
-    "random|mouse || other sprite"                     : {
-        "directValues"   : ["random position", "mouse pointer"], 
-        "oldDirectValues": ["_random_",       "_mouse_"],
-        "valueSegments"  : ["other sprite"],
+    "random|mouse || other sprite"         : {
+        "directValues"   : [], 
+        "oldDirectValues": [],
+        "valueSegments"  : ["random position", "mouse pointer", "other sprite"],
     },
     "rotation style"                       : {
         "directValues"   : ["left-right", "up-down", "don't rotate", "look at", "all around"], 
@@ -384,6 +384,40 @@ optionTypeDatabase = {
     },
 }
 
+def getOptimizedOptionValues(optionType, context):
+    pp(context)
+    optionTypeData = optionTypeDatabase[optionType]
+    values = optionTypeData["directValues"]
+    for segment in optionTypeData["valueSegments"]:
+        match segment:
+            case "stage":
+                values += [["stage", "stage"]]
+            case "myself":
+                values += [["myself", "myself"]]
+            case "mouse pointer":
+                values += [["object", "mouse pointer"]]
+            case "random position":
+                values += [["object", "random position"]]
+            case "edge":
+                values += [["object", "edge"]]
+            
+            case "myself if not stage":
+                if not context["isStage"]:
+                    values += [["myself", "myself"]]
+            
+            case "other sprite":
+                values += context["otherSprites"]
+            case "mutable sprite property":
+                raise NotImplementedError()
+            case "readable sprite property":
+                raise NotImplementedError()
+            case "costume":
+                values += context["costumes"]
+            case "backdrop":
+                values += context["backdrops"]
+            case "sound":
+                values += context["sounds"]
+    return values
 
 defaultCostume = {
     "name": "empty costume",

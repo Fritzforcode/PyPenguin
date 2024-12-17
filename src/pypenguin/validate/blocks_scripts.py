@@ -21,6 +21,8 @@ def validateScript(path, data, context):
             raise formatError(path, "A script whose first block is a reporter mustn't have more than one block.")
 
 def validateBlock(path, data, context):
+    print(100*"/")
+    pp(data)
     if "inputs" not in data:
         data["inputs"] = inputDefault
     if "options" not in data:
@@ -160,123 +162,38 @@ def validateOptions(path, data, opcode, context, inputDatas):
         )
 
 def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
+    def makeString(possibleValues):
+        if possibleValues == []:
+            string = "No possible values."
+        else:
+            string = ""
+            for value in possibleValues:
+                string += "\n- "
+                string += repr(value)
+        return string
     match optionType:
-        case "broadcast"|"string"|"opcode":
+        case "broadcast"|"reporter name"|"opcode":
             if not isinstance(data, str):
                 raise formatError(path, f"Must be a string.")
         case "variable":
             possibleValues = context["scopeVariables"]
+            possibleValuesString = makeString(possibleValues)
             if data not in possibleValues:
-                raise formatError(path, f"Must be a defined variable. Must be one of these: {possibleValues}")
+                raise formatError(path, f"Must be a defined variable. Must be one of these: {possibleValuesString}")
         case "list":
             possibleValues = context["scopeLists"]
+            possibleValuesString = makeString(possibleValues)
             if data not in possibleValues:
-                raise formatError(path, f"Must be a defined list. Must be one of these: {possibleValues}")
+                raise formatError(path, f"Must be a defined list. Must be one of these: {possibleValuesString}")
         case "boolean":
             if not isinstance(data, bool):
                 raise formatError(path, f"Must be a boolean.")
         case _:
-            match optionType:
-                case "key":
-                    possibleValues = [
-                        "space", "up arrow", "down arrow", "right arrow", "left arrow", 
-                        "enter", "any", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", 
-                        "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", 
-                        "x", "y", "z", "-", ",", ".", "`", "=", "[", "]", "\\", ";", "'", 
-                        "/", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", 
-                        "{", "}", "|", ":", '"', "?", "<", ">", "~", "backspace", "delete", 
-                        "shift", "caps lock", "scroll lock", "control", "escape", "insert", 
-                        "home", "end", "page up", "page down"
-                    ]
-                case "unary math operation":
-                    possibleValues = ["abs", "floor", "ceiling", "sqrt", "sin", "cos", "tan", "asin", "acos", "atan", "ln", "log", "e ^", "10 ^"]
-                case "power|root|log":
-                    possibleValues = ["^", "root", "log"]
-                case "root|log":
-                    possibleValues = ["root", "log"]
-                case "text method":
-                    possibleValues = ["starts", "ends"]
-                case "text case":
-                    possibleValues = ["upper", "lower"]
-                case "stop script target":
-                    possibleValues = ["all", "this script", "other scripts in sprite"]
-                case "stage || other sprite":
-                    possibleValues = ["_stage_"] + context["otherSprites"]
-                case "cloning target":
-                    possibleValues = context["cloningTargets"]
-                case "up|down":
-                    possibleValues = ["up", "down"]
-                case "loudness|timer":
-                    possibleValues = ["LOUDNESS", "TIMER"]
-                case "mouse || other sprite":
-                    possibleValues = ["_mouse_"] + context["otherSprites"]
-                case "mouse|edge || other sprite":
-                    possibleValues = ["_mouse_", "_edge_"] + context["otherSprites"]
-                case "mouse|edge || myself || other sprite":
-                    possibleValues = ["_mouse_", "_edge_", "_myself_"] + context["otherSprites"]
-                case "x|y":
-                    possibleValues = ["x", "y"]
-                case "drag mode":
-                    possibleValues = ["draggable", "not draggable"]
-                case "mutable sprite property":
-                    match opcode:
-                        case "set [PROPERTY] of ([TARGET]) to (VALUE)":
-                            if inputDatas["TARGET"]["option"] == "_stage_":
-                                nameKey = None
-                            else:
-                                nameKey = inputDatas["TARGET"]["option"]
-                    if nameKey == None:
-                        possibleValues = ["backdrop", "volume"] + context["globalVariables"]
-                    else:
-                        possibleValues = ["x position", "y position", "direction", "costume", "size", "volume"] + context["localVariables"][nameKey]
-                case "readable sprite property":
-                    match opcode:
-                        case "[PROPERTY] of ([TARGET])":
-                            if inputDatas["TARGET"]["option"] == "_stage_":
-                                nameKey = None
-                            else:
-                                nameKey = inputDatas["TARGET"]["option"]
-                    if nameKey == None:
-                        possibleValues = ["backdrop #", "backdrop name", "volume"] + context["globalVariables"]
-                    else:
-                        possibleValues = ["x position", "y position", "direction", "costume #", "costume name", "layer", "size", "volume"] + context["localVariables"][nameKey]
-                case "time property":
-                    possibleValues = ["YEAR", "MONTH", "DATE", "DAYOFWEEK", "HOUR", "MINUTE", "SECOND", "TIMESTAMP"]
-                case "finger index":
-                    possibleValues = ["1", "2", "3", "4", "5"]
-                case "random|mouse || other sprite":
-                    possibleValues = ["_random_", "_mouse_"] + context["otherSprites"]
-                case "rotation style":
-                    possibleValues = ["left-right", "up-down", "don't rotate", "look at", "all around"]
-                case "stage zone":
-                    possibleValues = ["bottom-left", "bottom", "bottom-right", "top-left", "top", "top-right", "left", "right"]
-                case "text bubble color property":
-                    possibleValues = ["BUBBLE_STROKE", "BUBBLE_FILL", "TEXT_FILL"]
-                case "text bubble property":
-                    possibleValues = ["MIN_WIDTH", "MAX_LINE_WIDTH", "STROKE_WIDTH", "PADDING", "CORNER_RADIUS", "TAIL_HEIGHT", "FONT_HEIGHT_RATIO", "texlim"]
-                case "sprite effect":
-                    possibleValues = ["COLOR", "FISHEYE", "WHIRL", "PIXELATE", "MOSAIC", "BRIGHTNESS", "GHOST", "SATURATION", "RED", "GREEN", "BLUE", "OPAQUE"]
-                case "costume":
-                    possibleValues = context["costumes"]
-                case "backdrop":
-                    possibleValues = context["backdrops"]
-                case "costume property":
-                    possibleValues = ["width", "height", "rotation center x", "rotation center y", "drawing mode"]
-                case "myself || other sprite":
-                    possibleValues = ["_myself_"] + context["otherSprites"]
-                case "front|back":
-                    possibleValues = ["front", "back"]
-                case "forward|backward":
-                    possibleValues = ["forward", "backward"]
-                case "infront|behind":
-                    possibleValues = ["infront", "behind"]
-                case "number|name":
-                    possibleValues = ["number", "name"]
-                case "sound":
-                    possibleValues = context["sounds"]
-                case "sound effect":
-                    possibleValues = ["PITCH", "PAN"]
-                case "blockType":
-                    possibleValues = ["instruction", "lastInstruction", "textReporter", "numberReporter", "booleanReporter"]
+            possibleValues = getOptimizedOptionValues(
+                optionType=optionType,
+                context=context,
+            )
+            possibleValuesString = makeString(possibleValues)
             if data not in possibleValues:
-                raise formatError(path, f"Must be one of {possibleValues}.")
+                raise formatError(path, f"Must be one of these: {possibleValuesString}")
+

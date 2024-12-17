@@ -237,7 +237,7 @@ inputSchema = {
         },
         "block": {"type": ["null", "object"]},
         "text": {"type": "string"},
-        "option": {"type": "string"},
+        "option": {"any": True},
         "blocks": {"type": "array", "items": {"type": "object"}},
     },
     "required": ["mode"],
