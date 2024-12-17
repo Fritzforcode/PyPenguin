@@ -42,730 +42,1642 @@
             "broadcasts": {},
             "customVars": [],
             "blocks": {
-                "R": {
-                    "opcode": "control_exitLoop",
+                "i": {
+                    "opcode": "procedures_definition",
                     "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 228,
-                    "y": 513
-                },
-                "S": {
-                    "opcode": "control_continueLoop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 238,
-                    "y": 608
-                },
-                "r": {
-                    "opcode": "control_switch",
-                    "next": "f",
                     "parent": null,
                     "inputs": {
-                        "SUBSTACK": [
+                        "custom_block": [
                             1,
-                            null
+                            "a"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 248,
-                    "y": 694
+                    "x": 78,
+                    "y": -422
                 },
-                "s": {
-                    "opcode": "control_case_next",
-                    "next": "t",
-                    "parent": null,
-                    "inputs": {
-                        "CONDITION": [
-                            1,
-                            [
-                                10,
-                                "ello"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 236,
-                    "y": 1054
-                },
-                "T": {
-                    "opcode": "control_if_return_else_return",
+                "a": {
+                    "opcode": "procedures_prototype",
                     "next": null,
-                    "parent": null,
+                    "parent": "i",
                     "inputs": {
-                        "TEXT1": [
+                        "$T+Z_K!g!u^(pLd5p/qD": [
                             1,
-                            [
-                                10,
-                                "foo"
-                            ]
+                            "j"
                         ],
-                        "TEXT2": [
+                        "Dp/[X@%|WUY]DG/nlZZ%": [
                             1,
-                            [
-                                10,
-                                "bar"
-                            ]
+                            "k"
                         ]
                     },
                     "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 610,
-                    "y": 1798
-                },
-                "U": {
-                    "opcode": "control_error",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 503,
-                    "y": 2152
-                },
-                "V": {
-                    "opcode": "control_stop",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "STOP_OPTION": [
-                            "this script",
-                            "F-T{U@%b}`a[v_)LE|2}"
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 494,
-                    "y": 2391,
+                    "shadow": true,
+                    "topLevel": false,
                     "mutation": {
                         "tagName": "mutation",
                         "children": [],
-                        "hasnext": "false"
+                        "proccode": "instr n %s %b",
+                        "argumentids": "[\"$T+Z_K!g!u^(pLd5p/qD\",\"Dp/[X@%|WUY]DG/nlZZ%\"]",
+                        "argumentnames": "[\"number or text\",\"boolean\"]",
+                        "argumentdefaults": "[\"\",\"false\"]",
+                        "warp": "false",
+                        "returns": "null",
+                        "edited": "true",
+                        "optype": "null",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
                     }
                 },
-                "W": {
-                    "opcode": "control_stop",
+                "j": {
+                    "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": null,
+                    "parent": "a",
                     "inputs": {},
                     "fields": {
-                        "STOP_OPTION": [
-                            "other scripts in sprite",
-                            "Q.RVbm~=wai|oc5N.K8_"
+                        "VALUE": [
+                            "number or text",
+                            "LBVWJJhx}^?p0.P;dKSw"
                         ]
                     },
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 703,
-                    "y": 2378,
+                    "shadow": true,
+                    "topLevel": false,
                     "mutation": {
                         "tagName": "mutation",
                         "children": [],
-                        "hasnext": "true"
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "k": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "f`3bHa#yNUh6e3gTdo2B"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "l": {
+                    "opcode": "procedures_definition",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "b"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 30,
+                    "y": -518
+                },
+                "b": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "l",
+                    "inputs": {
+                        ";C~#zT,ZWpc~cLzX9@sV": [
+                            1,
+                            "m"
+                        ],
+                        "]U-m]qhjO$y.(K|}/HzE": [
+                            1,
+                            "n"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "instr y %s %b",
+                        "argumentids": "[\";C~#zT,ZWpc~cLzX9@sV\",\"]U-m]qhjO$y.(K|}/HzE\"]",
+                        "argumentnames": "[\"number or text\",\"boolean\"]",
+                        "argumentdefaults": "[\"\",\"false\"]",
+                        "warp": "true",
+                        "returns": "null",
+                        "edited": "true",
+                        "optype": "null",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "m": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "{f{w:m`?tfk*r+X,z(jn"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "n": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            ".9#sRt_sFdVAqf0zmpdO"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "o": {
+                    "opcode": "procedures_definition",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "c"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 103,
+                    "y": -234
+                },
+                "c": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "o",
+                    "inputs": {
+                        "sG:Ht,`DD+@.J=o~.4s6": [
+                            1,
+                            "p"
+                        ],
+                        "c0M(bS/5cq3KL]9o`=nr": [
+                            1,
+                            "q"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "lastinstr n %s %b",
+                        "argumentids": "[\"sG:Ht,`DD+@.J=o~.4s6\",\"c0M(bS/5cq3KL]9o`=nr\"]",
+                        "argumentnames": "[\"number or text\",\"boolean\"]",
+                        "argumentdefaults": "[\"\",\"false\"]",
+                        "warp": "false",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"end\"",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "p": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "YVysBE7S=K;Bz@q+8Mh*"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "q": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "SQ/@pDGUr#tGx^oqxA5Z"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "L": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "P9Va+IpeMg`k}.hxSfDJ"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "M": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "(rg8B4{#Y2f%zs{.d@f^"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "N": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "#O]K,EhLOlw`}|{_=5t}"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "O": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "n*O.s3t6*_rBsLOt^q1P"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "P": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "rqco?q7V#l1azbX.K03L"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "Q": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "7Rz#Y{^G.#H}@B^xSBzC"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "r": {
+                    "opcode": "procedures_definition_return",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "d"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 111,
+                    "y": -58
+                },
+                "d": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "r",
+                    "inputs": {
+                        "QV7)*tczE)PZGYcc$FN}": [
+                            1,
+                            "s"
+                        ],
+                        "o||GIa!LD5Od1{]Du^.t": [
+                            1,
+                            "t"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "text n %s %b",
+                        "argumentids": "[\"QV7)*tczE)PZGYcc$FN}\",\"o||GIa!LD5Od1{]Du^.t\"]",
+                        "argumentnames": "[\"number or text\",\"boolean\"]",
+                        "argumentdefaults": "[\"\",\"false\"]",
+                        "warp": "false",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "s": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "-4GU@:PMme#/0%%;7a!8"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "t": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "!|{.,KhADR/{i]JlLF!k"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
                     }
                 },
                 "u": {
-                    "opcode": "control_backToGreenFlag",
-                    "next": "a",
+                    "opcode": "procedures_definition_return",
+                    "next": null,
                     "parent": null,
-                    "inputs": {},
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "e"
+                        ]
+                    },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 325,
-                    "y": 2802
+                    "x": 124,
+                    "y": 139
                 },
-                "a": {
-                    "opcode": "control_stop_sprite",
-                    "next": "v",
+                "e": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
                     "parent": "u",
                     "inputs": {
-                        "STOP_OPTION": [
+                        "._3}|T+:iK}W?GY{P|b|": [
+                            1,
+                            "v"
+                        ],
+                        "wN!+gMyhPE,4TrbFa-(F": [
                             1,
                             "w"
                         ]
                     },
                     "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "w": {
-                    "opcode": "control_stop_sprite_menu",
-                    "next": null,
-                    "parent": "a",
-                    "inputs": {},
-                    "fields": {
-                        "STOP_OPTION": [
-                            "_stage_",
-                            "~F!wMuQ@W37.N#f:tr_g"
-                        ]
-                    },
                     "shadow": true,
-                    "topLevel": false
-                },
-                "v": {
-                    "opcode": "control_stop",
-                    "next": null,
-                    "parent": "a",
-                    "inputs": {},
-                    "fields": {
-                        "STOP_OPTION": [
-                            "all",
-                            ";p6R}n6np|N(08s9^wma"
-                        ]
-                    },
-                    "shadow": false,
                     "topLevel": false,
                     "mutation": {
                         "tagName": "mutation",
                         "children": [],
-                        "hasnext": "false"
+                        "proccode": "number n %s %b",
+                        "argumentids": "[\"._3}|T+:iK}W?GY{P|b|\",\"wN!+gMyhPE,4TrbFa-(F\"]",
+                        "argumentnames": "[\"number or text\",\"boolean\"]",
+                        "argumentdefaults": "[\"\",\"false\"]",
+                        "warp": "false",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"number\"",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
                     }
                 },
-                "g": {
-                    "opcode": "control_if",
-                    "next": "h",
-                    "parent": null,
-                    "inputs": {
-                        "SUBSTACK": [
-                            2,
-                            "x"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 284,
-                    "y": 1254
-                },
-                "h": {
-                    "opcode": "control_if_else",
-                    "next": "i",
-                    "parent": "g",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "t": {
-                    "opcode": "control_case",
+                "v": {
+                    "opcode": "argument_reporter_string_number",
                     "next": null,
-                    "parent": "s",
-                    "inputs": {
-                        "CONDITION": [
-                            1,
-                            [
-                                10,
-                                "ello"
-                            ]
+                    "parent": "e",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "@~QOHDM]Y/Ai|k)BA*b("
                         ]
                     },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "w": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "e",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "Gxt@`|WaD]rr]}Npeca]"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
                 },
                 "x": {
-                    "opcode": "control_exitCase",
+                    "opcode": "procedures_definition_return",
                     "next": null,
-                    "parent": "g",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "y": {
-                    "opcode": "control_wait",
-                    "next": "j",
                     "parent": null,
                     "inputs": {
-                        "DURATION": [
+                        "custom_block": [
                             1,
-                            [
-                                5,
-                                "1"
-                            ]
+                            "f"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 251,
-                    "y": 111
-                },
-                "j": {
-                    "opcode": "control_waitsecondsoruntil",
-                    "next": "k",
-                    "parent": "y",
-                    "inputs": {
-                        "DURATION": [
-                            1,
-                            [
-                                5,
-                                "1"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "k": {
-                    "opcode": "control_repeat",
-                    "next": "z",
-                    "parent": "j",
-                    "inputs": {
-                        "TIMES": [
-                            1,
-                            [
-                                6,
-                                "10"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "z": {
-                    "opcode": "control_forever",
-                    "next": null,
-                    "parent": "k",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
+                    "x": 151,
+                    "y": 319
                 },
                 "f": {
-                    "opcode": "control_switch_default",
-                    "next": "A",
-                    "parent": "r",
-                    "inputs": {},
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "x",
+                    "inputs": {
+                        "WN_lOTF}g}a%)gS#*}d:": [
+                            1,
+                            "y"
+                        ],
+                        "5M*_v1aKGjZ%5z/h5Zd;": [
+                            1,
+                            "z"
+                        ]
+                    },
                     "fields": {},
-                    "shadow": false,
-                    "topLevel": false
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "boolean n %s %b",
+                        "argumentids": "[\"WN_lOTF}g}a%)gS#*}d:\",\"5M*_v1aKGjZ%5z/h5Zd;\"]",
+                        "argumentnames": "[\"number or text\",\"boolean\"]",
+                        "argumentdefaults": "[\"\",\"false\"]",
+                        "warp": "false",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"boolean\"",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
                 },
-                "A": {
-                    "opcode": "control_exitCase",
+                "y": {
+                    "opcode": "argument_reporter_string_number",
                     "next": null,
                     "parent": "f",
                     "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            ":y1@Bm0|xuV%C[nf9/c("
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
                 },
-                "B": {
-                    "opcode": "control_start_as_clone",
-                    "next": "b",
-                    "parent": null,
+                "z": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "f",
                     "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "+X]up(;]v2_}0=+%BWQE"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "R": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "-1[7?c!nx_m*;s3rIvi#"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "S": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "F@yeEV:;@#,I#vETWFUD"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "T": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "cZ?CO!sSSWy{HQmh~6}N"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "U": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "iV,!rt8YEu})::1O/gm5"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "V": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "i@G3S{h}cdHe)wVYqJxL"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "W": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "HAy.v`qe#-g~M.]U^anE"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "X": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "5sKw=[HJqe3WFVBi;2a3"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "Y": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "BTyb1Wb4bY9[-]YWH2(J"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "Z": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "e",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            ":%_|)wZjn4f9C)n=VwK*"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "!": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "e",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "nU9@#SPQMQ(y:~[7hO1a"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "#": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "f",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "Qz5vMsjH32c^8Fr%pE,-"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "%": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "f",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "GHLLSOj#3l.47gH4ooG4"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "(": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "Xo{#q*H6lm!1Aya%2Af9"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                ")": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "~;WdEyzq:we[|nfw4Vq,"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "*": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "?i`M(ix{o5womd.)R+me"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "+": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "Io7WE]sBG(?^@FEgb(@5"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                ",": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "n/U3O((!4:-v+hIw#(K."
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "-": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "Gnceo1`wTjuic54a4:@c"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                ".": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "p?O6%ginU+0.bpl~R}]p"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "/": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "83|L`G[/ZS(XPpgvKfxz"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                ":": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "e",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "I^kT0?@99*uEoHoCMty0"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                ";": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "e",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "[l7/9_%^1/LSX3Sg|{bx"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "=": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "f",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "nDna2ZN%[(`:(=)ToUr4"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "?": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "f",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "vLGm]KFh}+TnvN[WjPWa"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "A": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        ";C~#zT,ZWpc~cLzX9@sV": [
+                            3,
+                            [
+                                12,
+                                "my variable",
+                                "`jEk@4|i[#Fk?(8x)AV.-my variable"
+                            ],
+                            [
+                                10,
+                                "33"
+                            ]
+                        ],
+                        "]U-m]qhjO$y.(K|}/HzE": [
+                            2,
+                            "B"
+                        ]
+                    },
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 303,
-                    "y": 2514
+                    "x": 638,
+                    "y": -555,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "instr y %s %b",
+                        "argumentids": "[\";C~#zT,ZWpc~cLzX9@sV\",\"]U-m]qhjO$y.(K|}/HzE\"]",
+                        "warp": "true",
+                        "returns": "null",
+                        "edited": "true",
+                        "optype": "null",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
                 },
-                "b": {
-                    "opcode": "control_create_clone_of",
-                    "next": "c",
-                    "parent": "B",
+                "B": {
+                    "opcode": "operator_trueBoolean",
+                    "next": null,
+                    "parent": "A",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "h": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": null,
                     "inputs": {
-                        "CLONE_OPTION": [
-                            1,
-                            "C"
+                        "$T+Z_K!g!u^(pLd5p/qD": [
+                            3,
+                            "C",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "Dp/[X@%|WUY]DG/nlZZ%": [
+                            2,
+                            "g"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": false
+                    "topLevel": true,
+                    "x": 658,
+                    "y": -438,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "instr n %s %b",
+                        "argumentids": "[\"$T+Z_K!g!u^(pLd5p/qD\",\"Dp/[X@%|WUY]DG/nlZZ%\"]",
+                        "warp": "false",
+                        "returns": "null",
+                        "edited": "true",
+                        "optype": "null",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
                 },
                 "C": {
-                    "opcode": "control_create_clone_of_menu",
+                    "opcode": "operator_newLine",
                     "next": null,
-                    "parent": "b",
-                    "inputs": {},
-                    "fields": {
-                        "CLONE_OPTION": [
-                            "_myself_",
-                            "?hHg::GDVG%WNp2vPwk6"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "c": {
-                    "opcode": "control_delete_clones_of",
-                    "next": "D",
-                    "parent": "b",
-                    "inputs": {
-                        "CLONE_OPTION": [
-                            1,
-                            "E"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "E": {
-                    "opcode": "control_create_clone_of_menu",
-                    "next": null,
-                    "parent": "c",
-                    "inputs": {},
-                    "fields": {
-                        "CLONE_OPTION": [
-                            "_myself_",
-                            "buqz+:ln-GzDjQrQdXxF"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "D": {
-                    "opcode": "control_delete_this_clone",
-                    "next": null,
-                    "parent": "c",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "i": {
-                    "opcode": "control_wait_until",
-                    "next": "l",
                     "parent": "h",
                     "inputs": {},
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
-                "l": {
-                    "opcode": "control_repeat_until",
-                    "next": "m",
-                    "parent": "i",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "m": {
-                    "opcode": "control_while",
-                    "next": "n",
-                    "parent": "l",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "n": {
-                    "opcode": "control_for_each",
-                    "next": "o",
-                    "parent": "m",
+                "@": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": null,
                     "inputs": {
-                        "VALUE": [
+                        "sG:Ht,`DD+@.J=o~.4s6": [
                             1,
                             [
-                                6,
-                                "10"
+                                10,
+                                "45"
                             ]
                         ]
                     },
-                    "fields": {
-                        "VARIABLE": [
-                            "my variable",
-                            "`jEk@4|i[#Fk?(8x)AV.-my variable",
-                            ""
-                        ]
-                    },
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "o": {
-                    "opcode": "control_all_at_once",
-                    "next": "d",
-                    "parent": "n",
-                    "inputs": {},
                     "fields": {},
                     "shadow": false,
-                    "topLevel": false
+                    "topLevel": true,
+                    "x": 640,
+                    "y": -273,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "lastinstr n %s %b",
+                        "argumentids": "[\"sG:Ht,`DD+@.J=o~.4s6\",\"c0M(bS/5cq3KL]9o`=nr\"]",
+                        "warp": "false",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"end\"",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
                 },
-                "d": {
-                    "opcode": "control_run_as_sprite",
-                    "next": "e",
-                    "parent": "o",
+                "D": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": null,
                     "inputs": {
-                        "RUN_AS_OPTION": [
+                        "._3}|T+:iK}W?GY{P|b|": [
                             1,
-                            "F"
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "wN!+gMyhPE,4TrbFa-(F": [
+                            2,
+                            "E"
                         ]
                     },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 618,
+                    "y": -130,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "number n %s %b",
+                        "argumentids": "[\"._3}|T+:iK}W?GY{P|b|\",\"wN!+gMyhPE,4TrbFa-(F\"]",
+                        "warp": "false",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"number\"",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "E": {
+                    "opcode": "operator_falseBoolean",
+                    "next": null,
+                    "parent": "D",
+                    "inputs": {},
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
                 "F": {
-                    "opcode": "control_run_as_sprite_menu",
+                    "opcode": "procedures_call",
                     "next": null,
-                    "parent": "d",
-                    "inputs": {},
-                    "fields": {
-                        "RUN_AS_OPTION": [
-                            "_stage_",
-                            "nOztFACdYO#r`H4%K|x/"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": false
-                },
-                "p": {
-                    "opcode": "control_try_catch",
-                    "next": "G",
-                    "parent": "e",
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "G": {
-                    "opcode": "control_throw_error",
-                    "next": null,
-                    "parent": "p",
+                    "parent": null,
                     "inputs": {
-                        "ERROR": [
+                        "QV7)*tczE)PZGYcc$FN}": [
                             1,
                             [
                                 10,
-                                "Hello!"
+                                ""
                             ]
+                        ],
+                        "o||GIa!LD5Od1{]Du^.t": [
+                            2,
+                            "G"
                         ]
                     },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "X": {
-                    "opcode": "control_is_clone",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
                     "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 519,
-                    "y": 2695
+                    "x": 628,
+                    "y": -36,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "text n %s %b",
+                        "argumentids": "[\"QV7)*tczE)PZGYcc$FN}\",\"o||GIa!LD5Od1{]Du^.t\"]",
+                        "warp": "false",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
                 },
-                "e": {
-                    "opcode": "control_run_as_sprite",
-                    "next": "p",
-                    "parent": "d",
-                    "inputs": {
-                        "RUN_AS_OPTION": [
-                            3,
-                            "H",
-                            "I"
-                        ],
-                        "SUBSTACK": [
-                            1,
-                            null
-                        ]
-                    },
+                "G": {
+                    "opcode": "operator_falseBoolean",
+                    "next": null,
+                    "parent": "F",
+                    "inputs": {},
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
-                "I": {
-                    "opcode": "control_run_as_sprite_menu",
+                "H": {
+                    "opcode": "procedures_call",
                     "next": null,
                     "parent": null,
+                    "inputs": {
+                        "WN_lOTF}g}a%)gS#*}d:": [
+                            1,
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "5M*_v1aKGjZ%5z/h5Zd;": [
+                            2,
+                            "I"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 636,
+                    "y": 46,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "boolean n %s %b",
+                        "argumentids": "[\"WN_lOTF}g}a%)gS#*}d:\",\"5M*_v1aKGjZ%5z/h5Zd;\"]",
+                        "warp": "false",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"boolean\"",
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "I": {
+                    "opcode": "operator_falseBoolean",
+                    "next": null,
+                    "parent": "H",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "[": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "a",
                     "inputs": {},
                     "fields": {
-                        "RUN_AS_OPTION": [
-                            "_stage_",
-                            "9|s~M}r-LO/#W*?W1fAv"
+                        "VALUE": [
+                            "number or text",
+                            "Q2+o|B?,`k)0hZ1C/CQK"
                         ]
                     },
                     "shadow": true,
-                    "topLevel": true,
-                    "x": 332,
-                    "y": 2118
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
                 },
-                "H": {
-                    "opcode": "control_error",
+                "]": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "0Wi7FUag(`cTIou~9wiK"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "^": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "=0aoeMf[SpcSG6-MpZ!/"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "_": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            ".Wk=X5[z-TKsQM%~h[P^"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "`": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "`n_q0VN75ciBziVzJjIo"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "{": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "Y*b#aV:jg:W7K|58V5*L"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "|": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "hilqGopc6%@Qa8NHcG}w"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "}": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "d",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "K[_,,PmPa,IVXTFnYTNK"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "~": {
+                    "opcode": "argument_reporter_string_number",
                     "next": null,
                     "parent": "e",
                     "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "WI|r05fhUE055|^~OB?d"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
                 },
-                "J": {
-                    "opcode": "control_create_clone_of",
-                    "next": "q",
-                    "parent": null,
+                "aa": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "e",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "[rlad:HC_=!:EIUVjD;z"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "ab": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "f",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "number or text",
+                            "]#%equzD{)]S:^FexKIg"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "ac": {
+                    "opcode": "argument_reporter_boolean",
+                    "next": null,
+                    "parent": "f",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "boolean",
+                            "dUbCQd2uL(NBJ{|KVHAt"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
+                },
+                "g": {
+                    "opcode": "operator_and",
+                    "next": null,
+                    "parent": "h",
                     "inputs": {
-                        "CLONE_OPTION": [
-                            3,
-                            [
-                                12,
-                                "my variable",
-                                "`jEk@4|i[#Fk?(8x)AV.-my variable"
-                            ],
+                        "OPERAND1": [
+                            2,
+                            "J"
+                        ],
+                        "OPERAND2": [
+                            2,
                             "K"
                         ]
                     },
                     "fields": {},
                     "shadow": false,
-                    "topLevel": true,
-                    "x": 733,
-                    "y": 2542
+                    "topLevel": false
+                },
+                "J": {
+                    "opcode": "operator_trueBoolean",
+                    "next": null,
+                    "parent": "g",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
                 },
                 "K": {
-                    "opcode": "control_create_clone_of_menu",
+                    "opcode": "operator_falseBoolean",
                     "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CLONE_OPTION": [
-                            "_myself_",
-                            "*;gdZZXY#3A4VIN,WoI_"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": true,
-                    "x": 854,
-                    "y": 2550
-                },
-                "q": {
-                    "opcode": "control_delete_clones_of",
-                    "next": null,
-                    "parent": "J",
-                    "inputs": {
-                        "CLONE_OPTION": [
-                            3,
-                            "L",
-                            "M"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "M": {
-                    "opcode": "control_create_clone_of_menu",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {
-                        "CLONE_OPTION": [
-                            "_myself_",
-                            "@1anLtP8[x[}NjC,MNpd"
-                        ]
-                    },
-                    "shadow": true,
-                    "topLevel": true,
-                    "x": 861,
-                    "y": 2598
-                },
-                "L": {
-                    "opcode": "control_error",
-                    "next": null,
-                    "parent": "q",
+                    "parent": "g",
                     "inputs": {},
                     "fields": {},
                     "shadow": false,
                     "topLevel": false
                 },
-                "N": {
-                    "opcode": "control_stop_sprite",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "STOP_OPTION": [
-                            3,
-                            "O",
-                            "P"
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 564,
-                    "y": 2835
-                },
-                "P": {
-                    "opcode": "control_stop_sprite_menu",
+                "ad": {
+                    "opcode": "argument_reporter_boolean",
                     "next": null,
                     "parent": null,
                     "inputs": {},
                     "fields": {
-                        "STOP_OPTION": [
-                            "_stage_",
-                            "aa5^F#c8xp)KpqCE:/N2"
+                        "VALUE": [
+                            "boolean",
+                            "-~3V|`Y}{xJuOV_^|Q(5"
                         ]
                     },
-                    "shadow": true,
-                    "topLevel": true,
-                    "x": 612,
-                    "y": 2843
-                },
-                "Y": {
-                    "opcode": "control_stop_sprite",
-                    "next": null,
-                    "parent": null,
-                    "inputs": {
-                        "STOP_OPTION": [
-                            3,
-                            [
-                                12,
-                                "my variable",
-                                "`jEk@4|i[#Fk?(8x)AV.-my variable"
-                            ],
-                            "Q"
-                        ]
-                    },
-                    "fields": {},
                     "shadow": false,
                     "topLevel": true,
-                    "x": 786,
-                    "y": 2840
+                    "x": 765,
+                    "y": 175,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
                 },
-                "Q": {
-                    "opcode": "control_stop_sprite_menu",
+                "ae": {
+                    "opcode": "argument_reporter_string_number",
                     "next": null,
                     "parent": null,
                     "inputs": {},
                     "fields": {
-                        "STOP_OPTION": [
-                            "_stage_",
-                            "JU6T8{YgEh.WqEpUq}H`"
+                        "VALUE": [
+                            "number or text",
+                            "TygY~Q{rsN)!WvoR{b[?"
                         ]
                     },
-                    "shadow": true,
-                    "topLevel": true,
-                    "x": 834,
-                    "y": 2848
-                },
-                "O": {
-                    "opcode": "control_error",
-                    "next": null,
-                    "parent": "N",
-                    "inputs": {},
-                    "fields": {},
                     "shadow": false,
-                    "topLevel": false
+                    "topLevel": true,
+                    "x": 912,
+                    "y": 168,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#FF4D6A\",\"#FF3355\"]"
+                    }
                 }
             },
             "comments": {},

@@ -193,7 +193,11 @@ blockSchema = {
         },
         "options": {
             "type": "object",
-            "patternProperties": {".+": {"any": True}},
+            "patternProperties": {".+": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+            }},
             "additionalProperties": False,
         },
         "comment": {"type": ["null", "object"]},
@@ -237,7 +241,11 @@ inputSchema = {
         },
         "block": {"type": ["null", "object"]},
         "text": {"type": "string"},
-        "option": {"any": True},
+        "option": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+        },
         "blocks": {"type": "array", "items": {"type": "object"}},
     },
     "required": ["mode"],

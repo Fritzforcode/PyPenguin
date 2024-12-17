@@ -1,6 +1,6 @@
 import json, copy
 
-from pypenguin.helper_functions import ikv, pp, WhatIsGoingOnError, numberToLiteral, newTempSelector, generateRandomToken, parseCustomOpcode, stringToToken
+from pypenguin.helper_functions import ikv, pp, numberToLiteral, newTempSelector, generateRandomToken, parseCustomOpcode, stringToToken
 from pypenguin.deoptimize.options import translateOptions
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.database import *

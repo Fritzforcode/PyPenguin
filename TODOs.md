@@ -36,3 +36,4 @@ maybe validate:
 
 Notes:
     Comments of list blocks who are embedded in another blocks are deleted automatically. There is no way for this to change.
+    Warning about using "set [PROPERTY] of ([TARGET]) to (VALUE)" or "[PROPERTY] of ([TARGET])" blocks, because they are instable and might cause problems.

@@ -126,11 +126,10 @@ def flipKeysAndValues(obj: dict):
 def removeStringDuplicates(array):
     return dict.fromkeys(array).keys()
 
-def customHash(obj):
-    return hash(obj) % 1000
-
-class WhatIsGoingOnError(Exception): # Just means its likely the dev's fault 
-    pass
+def removeDuplicates(items):
+    newItems = []
+    [newItems.append(value) for value in items if value not in newItems]
+    return newItems
 
 def insureCorrectPath(path, targetFolderName):
     if path == None: return path
@@ -198,9 +197,6 @@ def getSVGImageSize(file):
     # Parse the SVG file
     tree = ET.parse(file)
     root = tree.getroot()
-    
-    # SVG namespace (sometimes required for proper parsing)
-    svgNS = {'svg': 'http://www.w3.org/2000/svg'}
     
     # Get width and height attributes
     width  = root.attrib.get('width')

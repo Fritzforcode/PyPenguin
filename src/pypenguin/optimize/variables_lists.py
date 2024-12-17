@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import ikv, WhatIsGoingOnError, pp
+from pypenguin.helper_functions import ikv
 
 
 def translateVariables(data):
@@ -16,7 +16,7 @@ def translateVariables(data):
             mode = "local"
             sprite = data["name"]
         if data["customVars"] != []:
-            raise WhatIsGoingOnError("Wow! I have been trying to find out what 'customVars' is used for. Can you explain how you did that? Please contact me on GitHub.")
+            raise Exception("Wow! I have been trying to find out what 'customVars' is used for. Can you explain how you did that? Please contact me on GitHub.")
         
         #monitorIDs = [i["id"] for i in monitorDatas]
         ## if there is no monitor for that variable

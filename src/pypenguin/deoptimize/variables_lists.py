@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import WhatIsGoingOnError, pp, stringToToken
+from pypenguin.helper_functions import stringToToken
 
 
 def translateVariables(data, spriteNames):

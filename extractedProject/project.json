@@ -26,578 +26,411 @@
             "scripts": [
                 {
                     "position": [
-                        228,
-                        513
+                        78,
+                        -422
                     ],
                     "blocks": [
                         {
-                            "opcode": "escape loop",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        238,
-                        608
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "continue loop",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        248,
-                        694
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "switch (CONDITION) {CASES}",
-                            "inputs": {
-                                "CASES": {
-                                    "mode": "script",
-                                    "blocks": []
-                                },
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": null
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "switch (CONDITION) {CASES} default {DEFAULT}",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": null
-                                },
-                                "CASES": {
-                                    "mode": "script",
-                                    "blocks": []
-                                },
-                                "DEFAULT": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "exit case",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        236,
-                        1054
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "run next case when (CONDITION)",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "ello"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "case (CONDITION) {BODY}",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "ello"
-                                },
-                                "BODY": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        610,
-                        1798
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "if <CONDITION> then (TRUEVALUE) else (FALSEVALUE)",
-                            "inputs": {
-                                "TRUEVALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "foo"
-                                },
-                                "FALSEVALUE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "bar"
-                                },
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": null
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        503,
-                        2152
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "error",
-                            "inputs": {},
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        494,
-                        2391
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "stop script [TARGET]",
+                            "opcode": "define custom block",
                             "inputs": {},
                             "options": {
-                                "TARGET": "this script"
+                                "customOpcode": [
+                                    "value",
+                                    "instr n (number or text) <boolean>"
+                                ],
+                                "noScreenRefresh": [
+                                    "value",
+                                    false
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "instruction"
+                                ]
                             }
                         }
                     ]
                 },
                 {
                     "position": [
-                        703,
-                        2378
+                        30,
+                        -518
                     ],
                     "blocks": [
                         {
-                            "opcode": "stop script [TARGET]",
+                            "opcode": "define custom block",
                             "inputs": {},
                             "options": {
-                                "TARGET": "other scripts in sprite"
+                                "customOpcode": [
+                                    "value",
+                                    "instr y (number or text) <boolean>"
+                                ],
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "instruction"
+                                ]
                             }
                         }
                     ]
                 },
                 {
                     "position": [
-                        325,
-                        2802
+                        103,
+                        -234
                     ],
                     "blocks": [
                         {
-                            "opcode": "run flag",
-                            "inputs": {},
-                            "options": {}
-                        },
-                        {
-                            "opcode": "stop sprite [TARGET]",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_stage_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "stop script [TARGET]",
+                            "opcode": "define custom block",
                             "inputs": {},
                             "options": {
-                                "TARGET": "all"
+                                "customOpcode": [
+                                    "value",
+                                    "lastinstr n (number or text) <boolean>"
+                                ],
+                                "noScreenRefresh": [
+                                    "value",
+                                    false
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "lastInstruction"
+                                ]
                             }
                         }
                     ]
                 },
                 {
                     "position": [
-                        284,
-                        1254
+                        111,
+                        -58
                     ],
                     "blocks": [
                         {
-                            "opcode": "if <CONDITION> then {THEN}",
-                            "inputs": {
-                                "THEN": {
-                                    "mode": "script",
-                                    "blocks": [
-                                        {
-                                            "opcode": "exit case",
-                                            "inputs": {},
-                                            "options": {}
-                                        }
-                                    ]
-                                },
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": null
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "if <CONDITION> then {THEN} else {ELSE}",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": null
-                                },
-                                "THEN": {
-                                    "mode": "script",
-                                    "blocks": []
-                                },
-                                "ELSE": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "wait until <CONDITION>",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": null
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "repeat until <CONDITION> {BODY}",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": null
-                                },
-                                "BODY": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "while <CONDITION> {BODY}",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": null
-                                },
-                                "BODY": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "for each [VARIABLE] in (RANGE) {BODY}",
-                            "inputs": {
-                                "RANGE": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "10"
-                                },
-                                "BODY": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
+                            "opcode": "define custom block",
+                            "inputs": {},
                             "options": {
-                                "VARIABLE": "my variable"
+                                "customOpcode": [
+                                    "value",
+                                    "text n (number or text) <boolean>"
+                                ],
+                                "noScreenRefresh": [
+                                    "value",
+                                    false
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "textReporter"
+                                ]
                             }
-                        },
-                        {
-                            "opcode": "all at once {BODY}",
-                            "inputs": {
-                                "BODY": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "as [TARGET] {BODY}",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_stage_"
-                                },
-                                "BODY": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "as [TARGET] {BODY}",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": {
-                                        "opcode": "error",
-                                        "inputs": {},
-                                        "options": {}
-                                    },
-                                    "option": "_stage_"
-                                },
-                                "BODY": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "try to do {TRY} if a block errors {IFERROR}",
-                            "inputs": {
-                                "TRY": {
-                                    "mode": "script",
-                                    "blocks": []
-                                },
-                                "IFERROR": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "throw error (ERROR)",
-                            "inputs": {
-                                "ERROR": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "Hello!"
-                                }
-                            },
-                            "options": {}
                         }
                     ]
                 },
                 {
                     "position": [
-                        251,
-                        111
+                        124,
+                        139
                     ],
                     "blocks": [
                         {
-                            "opcode": "wait (SECONDS) seconds",
-                            "inputs": {
-                                "SECONDS": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "wait (SECONDS) seconds or until <CONDITION>",
-                            "inputs": {
-                                "SECONDS": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "1"
-                                },
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": null
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "repeat (TIMES) {BODY}",
-                            "inputs": {
-                                "TIMES": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "10"
-                                },
-                                "BODY": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "forever {BODY}",
-                            "inputs": {
-                                "BODY": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        303,
-                        2514
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "when I start as a clone",
+                            "opcode": "define custom block",
                             "inputs": {},
-                            "options": {}
-                        },
-                        {
-                            "opcode": "create clone of ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_myself_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "delete clones of ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": "_myself_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "delete this clone",
-                            "inputs": {},
-                            "options": {}
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "number n (number or text) <boolean>"
+                                ],
+                                "noScreenRefresh": [
+                                    "value",
+                                    false
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "numberReporter"
+                                ]
+                            }
                         }
                     ]
                 },
                 {
                     "position": [
-                        519,
-                        2695
+                        151,
+                        319
                     ],
                     "blocks": [
                         {
-                            "opcode": "is clone?",
+                            "opcode": "define custom block",
                             "inputs": {},
-                            "options": {}
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "boolean n (number or text) <boolean>"
+                                ],
+                                "noScreenRefresh": [
+                                    "value",
+                                    false
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "booleanReporter"
+                                ]
+                            }
                         }
                     ]
                 },
                 {
                     "position": [
-                        733,
-                        2542
+                        638,
+                        -555
                     ],
                     "blocks": [
                         {
-                            "opcode": "create clone of ([TARGET])",
+                            "opcode": "call custom block",
                             "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
+                                "number or text": {
+                                    "mode": "block-and-text",
                                     "block": {
                                         "opcode": "value of [VARIABLE]",
                                         "inputs": {},
                                         "options": {
-                                            "VARIABLE": "my variable"
+                                            "VARIABLE": [
+                                                "variable",
+                                                "my variable"
+                                            ]
                                         }
                                     },
-                                    "option": "_myself_"
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "delete clones of ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
+                                    "text": "33"
+                                },
+                                "boolean": {
+                                    "mode": "block-only",
                                     "block": {
-                                        "opcode": "error",
+                                        "opcode": "true",
                                         "inputs": {},
                                         "options": {}
-                                    },
-                                    "option": "_myself_"
+                                    }
                                 }
                             },
-                            "options": {}
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "instr y (number or text) <boolean>"
+                                ]
+                            }
                         }
                     ]
                 },
                 {
                     "position": [
-                        564,
-                        2835
+                        658,
+                        -438
                     ],
                     "blocks": [
                         {
-                            "opcode": "stop sprite [TARGET]",
+                            "opcode": "call custom block",
                             "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
+                                "number or text": {
+                                    "mode": "block-and-text",
                                     "block": {
-                                        "opcode": "error",
+                                        "opcode": "new line",
                                         "inputs": {},
                                         "options": {}
                                     },
-                                    "option": "_stage_"
+                                    "text": ""
+                                },
+                                "boolean": {
+                                    "mode": "block-only",
+                                    "block": {
+                                        "opcode": "<OPERAND1> and <OPERAND2>",
+                                        "inputs": {
+                                            "OPERAND1": {
+                                                "mode": "block-only",
+                                                "block": {
+                                                    "opcode": "true",
+                                                    "inputs": {},
+                                                    "options": {}
+                                                }
+                                            },
+                                            "OPERAND2": {
+                                                "mode": "block-only",
+                                                "block": {
+                                                    "opcode": "false",
+                                                    "inputs": {},
+                                                    "options": {}
+                                                }
+                                            }
+                                        },
+                                        "options": {}
+                                    }
                                 }
                             },
-                            "options": {}
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "instr n (number or text) <boolean>"
+                                ]
+                            }
                         }
                     ]
                 },
                 {
                     "position": [
-                        786,
-                        2840
+                        640,
+                        -273
                     ],
                     "blocks": [
                         {
-                            "opcode": "stop sprite [TARGET]",
+                            "opcode": "call custom block",
                             "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": {
-                                        "opcode": "value of [VARIABLE]",
-                                        "inputs": {},
-                                        "options": {
-                                            "VARIABLE": "my variable"
-                                        }
-                                    },
-                                    "option": "_stage_"
+                                "number or text": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": "45"
+                                },
+                                "boolean": {
+                                    "mode": "block-only",
+                                    "block": null
                                 }
                             },
-                            "options": {}
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "lastinstr n (number or text) <boolean>"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        618,
+                        -130
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "call custom block",
+                            "inputs": {
+                                "number or text": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "boolean": {
+                                    "mode": "block-only",
+                                    "block": {
+                                        "opcode": "false",
+                                        "inputs": {},
+                                        "options": {}
+                                    }
+                                }
+                            },
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "number n (number or text) <boolean>"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        628,
+                        -36
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "call custom block",
+                            "inputs": {
+                                "number or text": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "boolean": {
+                                    "mode": "block-only",
+                                    "block": {
+                                        "opcode": "false",
+                                        "inputs": {},
+                                        "options": {}
+                                    }
+                                }
+                            },
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "text n (number or text) <boolean>"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        636,
+                        46
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "call custom block",
+                            "inputs": {
+                                "number or text": {
+                                    "mode": "block-and-text",
+                                    "block": null,
+                                    "text": ""
+                                },
+                                "boolean": {
+                                    "mode": "block-only",
+                                    "block": {
+                                        "opcode": "false",
+                                        "inputs": {},
+                                        "options": {}
+                                    }
+                                }
+                            },
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "boolean n (number or text) <boolean>"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        765,
+                        175
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "value of boolean [ARGUMENT]",
+                            "inputs": {},
+                            "options": {
+                                "ARGUMENT": [
+                                    "value",
+                                    "boolean"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        912,
+                        168
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "value of text [ARGUMENT]",
+                            "inputs": {},
+                            "options": {
+                                "ARGUMENT": [
+                                    "value",
+                                    "number or text"
+                                ]
+                            }
                         }
                     ]
                 }

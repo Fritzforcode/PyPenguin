@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import ikv, WhatIsGoingOnError, readJSONFile, removeStringDuplicates, pp, stringToToken
+from pypenguin.helper_functions import ikv, removeStringDuplicates, stringToToken
 
 from pypenguin.database import opcodeDatabase, inputDefault, inputTextDefault, optionDefault
 
@@ -7,7 +7,7 @@ def findBlockBroadcastMessages(data):
     for i,opcode,opcodeData in ikv(opcodeDatabase):
         if opcodeData["newOpcode"] == data["opcode"]:
             break
-    if not opcodeData["newOpcode"] == data["opcode"]: raise WhatIsGoingOnError(data["opcode"])
+    if not opcodeData["newOpcode"] == data["opcode"]: raise Exception(data["opcode"])
 
     broadcastMessages = []
     

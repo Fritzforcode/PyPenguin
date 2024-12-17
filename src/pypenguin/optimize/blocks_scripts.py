@@ -1,5 +1,5 @@
 from pypenguin.helper_functions import ikv, pp, generateCustomOpcode
-from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputID, getDeoptimizedInputID, getInputMode, getInputModes, getOptimizedOptionID, getBlockType
+from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputID, getDeoptimizedInputID, getInputMode, getInputModes, getOptimizedOptionID, getBlockType, optimizeOptionValue, getInputType, getOptionType
 
 import copy, json
 
@@ -46,6 +46,15 @@ def finishBlock(data):
             newInputData["option"] = finishBlock(data=inputData["option"])
         elif isinstance(inputData.get("option"), str):
             newInputData["option"] = inputData["option"]
+        if "option" in newInputData:
+            optionType = getInputType(
+                opcode=opcode,
+                inputID=inputID,
+            )
+            newInputData["option"] = optimizeOptionValue(
+                optionValue=newInputData["option"],
+                optionType=optionType,
+            )
         
         if opcode != "procedures_call":
             # A procedure call can't have a "block-and-hybrid-option" input
@@ -59,7 +68,20 @@ def finishBlock(data):
                 del newInputData["text"]
 
         newInputDatas[inputID] = newInputData
-    newData = data | {"inputs": newInputDatas}
+    
+    newOptionDatas = {}
+    for i, optionID, optionData in ikv(data["options"]):
+        optionType = getOptionType(
+            opcode=opcode,
+            optionID=optionID,
+        )
+        newOptionData = optimizeOptionValue(
+            optionValue=optionData,
+            optionType=optionType,
+        )
+        newOptionDatas[optionID] = newOptionData
+
+    newData = data | {"inputs": newInputDatas, "options": newOptionDatas}
     del newData["_info_"]
     if "comment" in newData:
         del newData["comment"]["_info_"]
@@ -137,7 +159,6 @@ def nestBlockRecursively(blockDatas, blockID):
             subBlockData1 = subBlockDatas[1][0]
         else:
             subBlockData1 = None
-        
         match inputData["mode"]:
             case "block-and-text"|"block-and-hybrid-option":
                 assert blockCount in [0, 1]
@@ -162,8 +183,6 @@ def nestBlockRecursively(blockDatas, blockID):
                     "option": subBlockData0 if blockCount == 1 else subBlockData1,
                }
         newInputDatas[inputID] = newInputData
-    
-    
     
     newBlockData = blockData | {"inputs": newInputDatas}
     newBlockDatas = [newBlockData]
@@ -422,10 +441,6 @@ def prepareInputs(data, opcode, commentDatas):
         )
     
     for i, inputID, inputMode in ikv(getInputModes(opcode)):
-        oldInputID = getDeoptimizedInputID(
-            opcode=opcode,
-            inputID=inputID
-        )
         if inputID not in newData:
             if inputMode in ["block-only", "script"]:
                 newData[inputID] = {

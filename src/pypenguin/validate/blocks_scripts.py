@@ -21,8 +21,6 @@ def validateScript(path, data, context):
             raise formatError(path, "A script whose first block is a reporter mustn't have more than one block.")
 
 def validateBlock(path, data, context):
-    print(100*"/")
-    pp(data)
     if "inputs" not in data:
         data["inputs"] = inputDefault
     if "options" not in data:
@@ -125,12 +123,12 @@ def validateInputs(path, data, opcode, context):
                     )
 
 def validateCallInputs(path, data, optionDatas):
-    proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"])
+    proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"][1])
     inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
     for i, inputID, inputType in ikv(inputTypes):
         if inputType == "text" and inputID not in data:
             raise formatError(path, f"A custom block with custom opcode '{optionDatas['customOpcode']}' must have the input '{inputID}'.")
-    
+
     # Check input formats
     for inputID in data:
         if inputID not in inputTypes:
@@ -173,7 +171,7 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
         return string
     match optionType:
         case "broadcast"|"reporter name"|"opcode":
-            if not isinstance(data, str):
+            if not isinstance(data[1], str):
                 raise formatError(path, f"Must be a string.")
         case "variable":
             possibleValues = context["scopeVariables"]
@@ -186,12 +184,13 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
             if data not in possibleValues:
                 raise formatError(path, f"Must be a defined list. Must be one of these: {possibleValuesString}")
         case "boolean":
-            if not isinstance(data, bool):
+            if not isinstance(data[1], bool):
                 raise formatError(path, f"Must be a boolean.")
         case _:
-            possibleValues = getOptimizedOptionValues(
+            possibleValues = getOptimizedOptionValuesUsingContext(
                 optionType=optionType,
                 context=context,
+                inputDatas=inputDatas,
             )
             possibleValuesString = makeString(possibleValues)
             if data not in possibleValues:

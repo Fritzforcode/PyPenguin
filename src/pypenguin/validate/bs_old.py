@@ -123,7 +123,7 @@ def validateInputs(path, data, opcode, context):
                     )
 
 def validateCallInputs(path, data, optionDatas):
-    proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"])
+    proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"][1])
     inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
     for i, inputID, inputType in ikv(inputTypes):
         if inputType == "text" and inputID not in data:
@@ -200,7 +200,7 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = ["upper", "lower"]
                 case "stop script target":
                     possibleValues = ["all", "this script", "other scripts in sprite"]
-                case "other sprite or stage":
+                case "stage || other sprite":
                     possibleValues = ["_stage_"] + context["otherSprites"]
                 case "cloning target":
                     possibleValues = context["cloningTargets"]
@@ -244,7 +244,7 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = ["YEAR", "MONTH", "DATE", "DAYOFWEEK", "HOUR", "MINUTE", "SECOND", "TIMESTAMP"]
                 case "finger index":
                     possibleValues = ["1", "2", "3", "4", "5"]
-                case "reachable target":
+                case "random|mouse || other sprite":
                     possibleValues = ["_random_", "_mouse_"] + context["otherSprites"]
                 case "rotation style":
                     possibleValues = ["left-right", "up-down", "don't rotate", "look at", "all around"]
@@ -262,7 +262,7 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                     possibleValues = context["backdrops"]
                 case "costume property":
                     possibleValues = ["width", "height", "rotation center x", "rotation center y", "drawing mode"]
-                case "myself or other sprite":
+                case ""myself || other sprite"":
                     possibleValues = ["_myself_"] + context["otherSprites"]
                 case "front or back":
                     possibleValues = ["front", "back"]
