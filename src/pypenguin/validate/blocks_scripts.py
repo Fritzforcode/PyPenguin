@@ -169,8 +169,12 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                 string += "\n- "
                 string += repr(value)
         return string
+    def validateCategory(path, data, suggestion):
+        if data != suggestion:
+            raise formatError(path, f"Must be '{suggestion}'.")
     match optionType:
         case "broadcast"|"reporter name"|"opcode":
+            validateCategory(path+[0], data[0], "value")
             if not isinstance(data[1], str):
                 raise formatError(path, f"Must be a string.")
         case "variable":
@@ -184,6 +188,7 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
             if data not in possibleValues:
                 raise formatError(path, f"Must be a defined list. Must be one of these: {possibleValuesString}")
         case "boolean":
+            validateCategory(path+[0], data[0], "value")
             if not isinstance(data[1], bool):
                 raise formatError(path, f"Must be a boolean.")
         case _:
@@ -192,6 +197,7 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                 context=context,
                 inputDatas=inputDatas,
             )
+            #pp(possibleValues)
             possibleValuesString = makeString(possibleValues)
             if data not in possibleValues:
                 raise formatError(path, f"Must be one of these: {possibleValuesString}")

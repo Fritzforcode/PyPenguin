@@ -126,7 +126,10 @@
                             "inputs": {
                                 "MESSAGE": {
                                     "block": null,
-                                    "option": "start game"
+                                    "option": [
+                                        "value",
+                                        "start game"
+                                    ]
                                 }
                             },
                             "options": {}
@@ -150,12 +153,23 @@
                                 "SOUND": {
                                     "block": null,
                                     "option": [
-                                        "sound",
-                                        "pop"
+                                        "fallback",
+                                        " "
                                     ]
                                 }
                             },
                             "options": {}
+                        },
+                        {
+                            "opcode": "switch costume to ([COSTUME])",
+                            "inputs": {
+                                "COSTUME": {
+                                    "option": [
+                                        "costume",
+                                        "empty costume"
+                                    ]
+                                }
+                            }
                         }
                     ]
                 }
@@ -163,14 +177,7 @@
             "comments": [],
             "currentCostume": 0,
             "costumes": [],
-            "sounds": [
-                {
-                    "name": "pop",
-                    "extension": "wav",
-                    "rate": 48000,
-                    "sampleCount": 1123
-                }
-            ],
+            "sounds": [],
             "localVariables": [
                 {
                     "name": "loc var",

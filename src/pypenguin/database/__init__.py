@@ -171,6 +171,7 @@ def getInputMagicNumber(inputType):
     return magicNumber
 
 def getOptionType(opcode, optionID):
+    print(opcode, optionID)
     return opcodeDatabase[opcode]["optionTypes"][optionID]
 
 def getOptionTypes(opcode):
@@ -372,6 +373,7 @@ optionTypeDatabase = {
     "sound": {
         "directValues"   : [], 
         "valueSegments"  : ["sound"],
+        "fallback"       : ["fallback", " "],
     },
     "sound effect": {
         "directValues"   : ["pitch", "pan"], 
@@ -441,6 +443,8 @@ def getOptimizedOptionValuesUsingContext(optionType, context, inputDatas):
                 values += context["backdrops"]
             case "sound":
                 values += context["sounds"]
+    if values == [] and "fallback" in optionTypeData:
+        values.append(optionTypeData["fallback"])
     return removeDuplicates(values)
 
 def getOptimizedOptionValuesUsingNoContext(optionType):
@@ -488,6 +492,8 @@ def getOptimizedOptionValuesUsingNoContext(optionType):
             case "sound":
                 # Can't be guessed
                 defaultPrefix = "sound"
+    if "fallback" in optionTypeData:
+        values.append(optionTypeData["fallback"])
     return removeDuplicates(values), defaultPrefix
 
 def getDeoptimizedOptionValues(optionType):
@@ -528,6 +534,8 @@ def getDeoptimizedOptionValues(optionType):
                 pass # Can't be guessed
             case "sound":
                 pass # Can't be guessed
+    if "fallback" in optionTypeData:
+        values.append(optionTypeData["fallback"][1])
     return removeDuplicates(values)
 
 def optimizeOptionValue(optionValue, optionType):
@@ -541,10 +549,14 @@ def optimizeOptionValue(optionValue, optionType):
         raise Exception()
     
     if optionValue in deoptimizedValues:
-        return optimizedValues[deoptimizedValues.index(optionValue)]
+        result = optimizedValues[deoptimizedValues.index(optionValue)]
     else:
         if defaultPrefix == None: raise Exception()
-        return [defaultPrefix, optionValue]
+        result = [defaultPrefix, optionValue]
+    print("\n~", optionType, repr(optionValue))
+    print("->", result)
+    print("<-", repr(deoptimizeOptionValue(result, optionType)))
+    return result
 
 def deoptimizeOptionValue(optionValue, optionType):
     if optionType in ["broadcast", "reporter name", "opcode", "variable", "list", "boolean"]:

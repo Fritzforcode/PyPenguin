@@ -5,6 +5,7 @@ literalCharSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#%()*+,-.
 charsetLength = len(literalCharSet)
 
 def stringToToken(main: str, spriteName=None) -> str:
+    print("+", main, spriteName)
     def convert(inputString: str, digits: int) -> str:
         # Character set to use in the output
         

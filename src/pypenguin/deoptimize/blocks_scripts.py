@@ -46,8 +46,9 @@ def generateMenu(data, parentOpcode, inputID):
     }"""
 
 def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None):
-    #print("start ufblock", 100*"{")
-    #pp(data)
+    print("start r block", 100*"{")
+    pp(data)
+    isMenu = False
     if isinstance(data, str):
         if not isOption: raise Exception()
         # When the block is a menu value
@@ -56,6 +57,7 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
             parentOpcode=parentOpcode,
             inputID=inputID,
         )
+        isMenu = True
     
     
     if "inputs" not in data:
@@ -70,15 +72,22 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
         if opcode == "procedures_call":
             argument  = arguments[inputID]
             if   argument == str:
+                inputType = "text"
                 inputMode = "block-and-text"
             elif argument == bool:
+                inputType = "boolean"
                 inputMode = "block-only"
         else:
+            inputType = getInputType(
+                opcode=opcode, 
+                inputID=inputID,
+            )
             inputMode = getInputMode(
                 opcode=opcode, 
-                inputID=inputID
+                inputID=inputID,
             )
-        inputData["mode"] = inputMode
+        inputData["mode"]   = inputMode
+        inputData["_type_"] = inputType
     
         if   inputMode == "block-and-text":
             required = ["block", "text"]
@@ -120,23 +129,43 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
                 parentOpcode=data["opcode"],
             ) for subBlockData in inputData["blocks"]]
         if inputData.get("option") != None:
+            newOptionData = deoptimizeOptionValue(
+                optionValue=inputData["option"],
+                optionType=inputData["_type_"],
+            )
             newInputData["option"] = restoreBlock(
-                data=inputData["option"],
+                data=newOptionData,
                 parentOpcode=data["opcode"],
                 isOption=True,
                 inputID=inputID,
             )
+        del newInputData["_type_"]    
         newInputDatas[inputID] = newInputData
         
+    if isMenu:
+        newOptionDatas = data["options"]
+    else:
+        newOptionDatas = {}
+        for i, optionID, optionData in ikv(data["options"]):
+            optionType = getOptionType(
+                opcode=opcode,
+                optionID=optionID,
+            )
+            newOptionData = deoptimizeOptionValue(
+                optionValue=optionData,
+                optionType=optionType,
+            )
+    
     newData = data | {
-        "inputs": newInputDatas,
-        "_info_": {
+        "inputs" : newInputDatas,
+        "options": newOptionDatas,
+        "_info_" : {
             "position": position,
             "topLevel": position != None,
         },
     }
-    #print("stop fblock", 100*"}")
-    #pp(newData)
+    print("stop fblock", 100*"}")
+    pp(newData)
     return newData
 
 def flattenScripts(data):

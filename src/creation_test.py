@@ -31,14 +31,23 @@ scripts = [
                         'SECONDS': {'block': None, 'text': '2'}},
              'options': {}},
             {'opcode': 'broadcast ([MESSAGE])',
-             'inputs': {'MESSAGE': {'block': None, 'option': 'start game'}},
+             'inputs': {'MESSAGE': {'block': None, 'option': ["value", "start game"]}},
              'options': {}},
             {'opcode': 'create clone of ([TARGET])',
              'inputs': {'TARGET': {'block': None, 'option': ["myself", "myself"]}},
              'options': {}},
             {'opcode': 'play sound ([SOUND]) until done',
-             'inputs': {'SOUND': {'block': None, 'option': ["sound", "pop"]}},
-             'options': {}}]}
+             'inputs': {'SOUND': {'block': None, 'option': ["fallback", " "]}},
+             'options': {}},
+            {
+                "opcode": "switch costume to ([COSTUME])",
+                "inputs": {
+                    "COSTUME": {
+                        "option": ["costume", "empty costume"],
+                    },
+                },
+            },
+            ]}
 ]
 
 
@@ -62,12 +71,12 @@ projectData = {
             "currentCostume": 0,
             "costumes": [],
             "sounds": [
-                {
-                    "name": "pop",
-                    "extension": "wav",
-                    "rate": 48000,
-                    "sampleCount": 1123,
-                },
+                #{
+                #    "name": "pop",
+                #    "extension": "wav",
+                #    "rate": 48000,
+                #    "sampleCount": 1123,
+                #},
             ],
             "localVariables": [
                 {
