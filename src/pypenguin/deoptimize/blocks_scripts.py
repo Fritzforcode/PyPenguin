@@ -46,8 +46,8 @@ def generateMenu(data, parentOpcode, inputID):
     }"""
 
 def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None):
-    print("start r block", 100*"{")
-    pp(data)
+    #print("start r block", 100*"{")
+    #pp(data)
     isMenu = False
     if isinstance(data, str):
         if not isOption: raise Exception()
@@ -155,6 +155,7 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
                 optionValue=optionData,
                 optionType=optionType,
             )
+            newOptionDatas[optionID] = newOptionData
     
     newData = data | {
         "inputs" : newInputDatas,
@@ -164,8 +165,8 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
             "topLevel": position != None,
         },
     }
-    print("stop fblock", 100*"}")
-    pp(newData)
+    #("stop fblock", 100*"}")
+    #pp(newData)
     return newData
 
 def flattenScripts(data):
@@ -444,14 +445,17 @@ def restoreInputs(data, opcode, spriteName, blockData):
         match inputMode:
             case "block-and-text"|"block-and-hybrid-option":
                 magicNumber = getInputMagicNumber(inputType=inputType)
-                textData = [magicNumber, inputData["text"]]
                 if inputMode == "block-and-hybrid-option":
-                    token = stringToToken(inputData["text"])
-                    textData.append(token)
+                    text = inputData["text"][1]
+                    token = stringToToken(text)
+                    textData = [magicNumber, text, token]
+                else:
+                    textData = [magicNumber, inputData["text"]]
                 if   subBlockCount == 0:
                     newInputData = [1, textData]
                 elif subBlockCount == 1:
                     newInputData = [3, subBlocks[0], textData]
+                textData = [magicNumber, inputData["text"]]
             case "block-only"|"script":
                 if   subBlockCount == 0:
                     newInputData = None
@@ -486,7 +490,7 @@ def restoreListBlock(data, spriteName):
         newData += data["_info_"]["position"]
     return newData
 
-def finishBlocks(data, spriteName, commentDatas):
+def unprepareBlocks(data, spriteName, commentDatas):
     mutationDatas = {}
     for j, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):

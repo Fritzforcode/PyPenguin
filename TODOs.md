@@ -4,8 +4,6 @@
 
 add testing
 
-add option value translation
-
 possibly change null to None ...
 
 both empty script and None as input should make the input value empty

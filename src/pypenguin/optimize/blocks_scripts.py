@@ -46,15 +46,6 @@ def finishBlock(data):
             newInputData["option"] = finishBlock(data=inputData["option"])
         elif isinstance(inputData.get("option"), str):
             newInputData["option"] = inputData["option"]
-        if "option" in newInputData:
-            optionType = getInputType(
-                opcode=opcode,
-                inputID=inputID,
-            )
-            newInputData["option"] = optimizeOptionValue(
-                optionValue=newInputData["option"],
-                optionType=optionType,
-            )
         
         if opcode != "procedures_call":
             # A procedure call can't have a "block-and-hybrid-option" input
@@ -66,6 +57,16 @@ def finishBlock(data):
             if inputMode == "block-and-hybrid-option":
                 newInputData["option"] = newInputData["text"]
                 del newInputData["text"]
+        
+        if "option" in newInputData:
+            optionType = getInputType(
+                opcode=opcode,
+                inputID=inputID,
+            )
+            newInputData["option"] = optimizeOptionValue(
+                optionValue=newInputData["option"],
+                optionType=optionType,
+            )
 
         newInputDatas[inputID] = newInputData
     

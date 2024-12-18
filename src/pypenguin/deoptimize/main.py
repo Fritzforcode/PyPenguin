@@ -1,7 +1,7 @@
 from pypenguin.helper_functions import newTempSelector, pp, stringToToken
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
-from pypenguin.deoptimize.blocks_scripts import restoreScripts, flattenScripts, restoreBlocks, finishBlocks
+from pypenguin.deoptimize.blocks_scripts import restoreScripts, flattenScripts, restoreBlocks, unprepareBlocks
 from pypenguin.deoptimize.broadcasts import generateBroadcasts
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
@@ -20,13 +20,14 @@ def translateVariablesLists(data):
     return translatedVariableDatas, translatedListDatas
 
 def deoptimizeProject(projectData):
-    spriteNames = [sprite["name"] for sprite in projectData["sprites"]][1:]
     translatedVariableDatas, translatedListDatas = translateVariablesLists(data=projectData)    
     broadcastDatas = generateBroadcasts(data=projectData["sprites"])
     
     newSpriteDatas = []
     for i, spriteData in enumerate(projectData["sprites"]):
+        pp(spriteData["scripts"])
         restoredScriptDatas = restoreScripts(spriteData["scripts"])
+        pp(restoredScriptDatas)
         flattendScriptDatas   = flattenScripts(restoredScriptDatas)
         newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,
@@ -42,7 +43,7 @@ def deoptimizeProject(projectData):
                 data=commentData,
                 id=None,
             )
-        newSpriteBlockDatas, newCommentDatas = finishBlocks(
+        newSpriteBlockDatas, newCommentDatas = unprepareBlocks(
             data=newSpriteBlockDatas,
             spriteName=spriteData["name"],
             commentDatas=newCommentDatas,
