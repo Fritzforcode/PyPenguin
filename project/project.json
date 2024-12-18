@@ -1,18 +1,28 @@
 {
     "sprites": [
         {
-            "name": "Stage",
             "isStage": true,
+            "name": "Stage",
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [],
+            "costumes": [
+                {
+                    "name": "empty costume",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        0.0,
+                        0.0
+                    ]
+                }
+            ],
             "sounds": [],
             "volume": 100
         },
         {
-            "name": "Sprite1",
             "isStage": false,
+            "name": "Sprite1",
             "scripts": [
                 {
                     "position": [
@@ -29,6 +39,7 @@
                             "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
                                 "VALUE": {
+                                    "mode": "block-and-text",
                                     "block": null,
                                     "text": "0"
                                 }
@@ -44,6 +55,7 @@
                             "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
                                 "VALUE": {
+                                    "mode": "block-and-text",
                                     "block": null,
                                     "text": "10"
                                 }
@@ -59,6 +71,7 @@
                             "opcode": "add (ITEM) to [LIST]",
                             "inputs": {
                                 "ITEM": {
+                                    "mode": "block-and-text",
                                     "block": null,
                                     "text": "Player 1"
                                 }
@@ -84,6 +97,7 @@
                             "opcode": "ask (QUESTION) and wait",
                             "inputs": {
                                 "QUESTION": {
+                                    "mode": "block-and-text",
                                     "block": null,
                                     "text": "What is your name?"
                                 }
@@ -94,14 +108,17 @@
                             "opcode": "say (MESSAGE) for (SECONDS) seconds",
                             "inputs": {
                                 "MESSAGE": {
+                                    "mode": "block-and-text",
                                     "block": {
                                         "opcode": "join (STRING1) (STRING2)",
                                         "inputs": {
                                             "STRING1": {
+                                                "mode": "block-and-text",
                                                 "block": null,
                                                 "text": "Hello, "
                                             },
                                             "STRING2": {
+                                                "mode": "block-and-text",
                                                 "block": {
                                                     "opcode": "answer",
                                                     "inputs": {},
@@ -115,6 +132,7 @@
                                     "text": ""
                                 },
                                 "SECONDS": {
+                                    "mode": "block-and-text",
                                     "block": null,
                                     "text": "2"
                                 }
@@ -125,6 +143,7 @@
                             "opcode": "broadcast ([MESSAGE])",
                             "inputs": {
                                 "MESSAGE": {
+                                    "mode": "block-and-hybrid-option",
                                     "block": null,
                                     "option": [
                                         "value",
@@ -138,6 +157,7 @@
                             "opcode": "create clone of ([TARGET])",
                             "inputs": {
                                 "TARGET": {
+                                    "mode": "block-and-option",
                                     "block": null,
                                     "option": [
                                         "myself",
@@ -151,6 +171,7 @@
                             "opcode": "play sound ([SOUND]) until done",
                             "inputs": {
                                 "SOUND": {
+                                    "mode": "block-and-option",
                                     "block": null,
                                     "option": [
                                         "fallback",
@@ -164,29 +185,41 @@
                             "opcode": "switch costume to ([COSTUME])",
                             "inputs": {
                                 "COSTUME": {
+                                    "mode": "block-and-option",
+                                    "block": null,
                                     "option": [
                                         "costume",
                                         "empty costume"
                                     ]
                                 }
-                            }
+                            },
+                            "options": {}
                         }
                     ]
                 }
             ],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [],
+            "costumes": [
+                {
+                    "name": "empty costume",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        0.0,
+                        0.0
+                    ]
+                }
+            ],
             "sounds": [],
+            "volume": 100,
             "localVariables": [
                 {
                     "name": "loc var",
-                    "currentValue": "www",
-                    "monitor": null
+                    "currentValue": "www"
                 }
             ],
             "localLists": [],
-            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -199,16 +232,26 @@
             "rotationStyle": "all around"
         },
         {
-            "name": "Sprite6",
             "isStage": false,
+            "name": "Sprite2",
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [],
+            "costumes": [
+                {
+                    "name": "empty costume",
+                    "extension": "svg",
+                    "bitmapResolution": 1,
+                    "rotationCenter": [
+                        0.0,
+                        0.0
+                    ]
+                }
+            ],
             "sounds": [],
+            "volume": 100,
             "localVariables": [],
             "localLists": [],
-            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
