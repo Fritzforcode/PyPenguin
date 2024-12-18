@@ -86,10 +86,10 @@ opcodes = {
     "operator_gt": {
         "type": "booleanReporter",
         "category": "Operators",
-        "newOpcode": "(OPERAND1) ### (OPERAND2)",
+        "newOpcode": "(OPERAND1) > (OPERAND2)",
         "inputTypes": {"OPERAND1": "text", "OPERAND2": "text"},
         "optionTypes": {},
-        "tokens": ["TEXT_OR_BLOCK_INPUT", '"###"', "TEXT_OR_BLOCK_INPUT"],
+        "tokens": ["TEXT_OR_BLOCK_INPUT", '">"', "TEXT_OR_BLOCK_INPUT"],
     },
     "operator_gtorequal": {
         "type": "booleanReporter",

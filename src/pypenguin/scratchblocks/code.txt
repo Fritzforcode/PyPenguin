@@ -1,5 +1,10 @@
-if <(score) \\\> (50)> then {
-    say [You win!]
-}else {
-    say [Game over!]
-}
+when green flag clicked
+set [score v] to (0)
+set [timer v] to (10)
+add [Player 1] to [players v]
+delete (all v) of [points v]
+ask [What is your name?] and wait
+say (join [Hello, ] (answer)) for (2) seconds
+broadcast [start game v]
+create clone of [myself v]
+play sound [pop v] until done

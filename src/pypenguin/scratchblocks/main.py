@@ -2,7 +2,7 @@ if __name__ == "__main__": import sys, os; sys.path.insert(0, os.path.abspath(os
 
 from helpers import *
 from pypenguin.helper_functions import pp, insureCorrectPath
-from pypenguin.database import getInputModes, getOptionTypes, getOptimizedOpcode
+from pypenguin.database import getInputModes, getOptionType, getOptionTypes, getOptimizedOpcode, autoCompleteOptionValue
 
 tokenOpcodes = getAllTokenOpcodes()
 
@@ -149,7 +149,7 @@ def parse(string: str, returnScript:bool=True):
     newTokens = []
     for token in tokens:
         token: Token
-        if   token.type in [TokenType.BOOLEAN_BLOCK_INPUT, TokenType.ROUND_MENU_INPUT]:
+        if   token.type == TokenType.BOOLEAN_BLOCK_INPUT:
             block = parse(token.value, returnScript=False)[0]
             newToken = Token(TokenType.INPUT_BLOCK, block)
         elif token.type == TokenType.TEXT_INPUT:
@@ -163,7 +163,7 @@ def parse(string: str, returnScript:bool=True):
         elif token.type == TokenType.SCRIPT_INPUT:
             blocks = parse(token.value, returnScript=False)
             newToken = Token(TokenType.INPUT_BLOCKS, blocks)
-        elif token.type == TokenType.SQUARE_MENU_INPUT:
+        elif token.type in [TokenType.SQUARE_MENU_INPUT, TokenType.ROUND_MENU_INPUT]:
             newToken = Token(TokenType.OPTION_LITERAL, token.value)
         elif token.type in [TokenType.CHARS, TokenType.NEWLINE]:
             newToken = token
@@ -200,30 +200,39 @@ def parse(string: str, returnScript:bool=True):
 def parseBlock(tokens: list[Token]):
     print("<", tokens)
 
+    hasInputs = False
+    for token in tokens:
+        if token.isInput():
+            hasInputs = True
+
     matches = []
     for opcode, opcodeTokens in tokenOpcodes:
         if len(tokens) != len(opcodeTokens):
-            isSimilar = False
+            score = -1
         else:
-            isSimilar  = True
+            score = 0
+            isDone = False
             for token, opcodeToken in zip(tokens, opcodeTokens):
                 token: Token
                 opcodeToken: Token
-                isSimilar = token.isSimilar(opcodeToken)
-                if not isSimilar:
-                    break
-        if isSimilar:
-            matches.append(opcode)
-    if len(matches) == 0:
+                if not isDone:
+                    tokenScore = token.getScore(opcodeToken)
+                    if tokenScore == None:
+                        score = 0
+                        isDone = True
+                    else:
+                        score += tokenScore
+        matches.append((opcode, score))
+    matches.sort(key=lambda x: x[1])
+    opcode = matches[-1][0] if matches[-1][1] >= 1 else None
+
+    if opcode == None:
+        if hasInputs: raise Exception(matches[-5:])
         return {
             "opcode" : getOptimizedOpcode(opcode="special_variable_value"),
             "inputs" : {},
             "options": {"VARIABLE": tokens[0].value},
         }
-    if len(matches) != 1:
-        pp(matches)
-        raise Exception()
-    opcode      = matches[0]
     newOpcode   = getOptimizedOpcode(opcode=opcode)
     inputModes  = getInputModes(opcode=opcode)
     inputIDs    = list(inputModes.keys())
@@ -275,9 +284,17 @@ def parseBlock(tokens: list[Token]):
             if canBeSpecialInput:
                 # A Round Menu Case
                 inputIndex += 1
+                optionType = getOptionType(
+                    opcode=opcode,
+                    optionID=inputID,
+                )
+                optionValue = autoCompleteOptionValue(
+                    optionValue=token.value,
+                    optionType=optionType,
+                )
                 inputValue = {
                     "block": None,
-                    "option": token.value,
+                    "option": optionValue,
                 }
                 inputs[inputID] = inputValue
             else:
@@ -298,5 +315,3 @@ def parseBlock(tokens: list[Token]):
 string = open(insureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read().strip()
 parse(string)
 
-
-#TODO: Add scoring for matches to tell apart

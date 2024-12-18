@@ -46,31 +46,68 @@ class Token:
         elif self.type == TokenType.OPTION_LITERAL       : abbr = "OL"
 
         elif self.type == TokenType.NEWLINE:
-            return f"{self.type.name}"
+            return self.type.name
         if self.value == None:
             return abbr
         return f"{abbr}:{repr(self.value)}"
-    def __eq__(self, other):
+    def __eq__(self, other: "Token"):
         if not isinstance(other, Token):
             return False
         return (self.type == other.type) and (self.value == other.value)
-    def isSimilar(self, other: "Token"):
-        if self.type == TokenType.CHARS:
-            return self == other
-        if self.isInput() and other.isInput():
-            return True
-        types = [self.type, other.type]
-        if (TokenType.OPTION_LITERAL in types) and ((TokenType.ROUND_MENU_INPUT in types) or (TokenType.SQUARE_MENU_INPUT in types)):
-            return True
-        return self.type == other.type
-    def isInput(self):
-        if self.type in [TokenType.BOOLEAN_BLOCK_INPUT,  TokenType.SCRIPT_INPUT, TokenType.ROUND_MENU_INPUT, TokenType.NUMBER_OR_BLOCK_INPUT, TokenType.TEXT_INPUT, TokenType.TEXT_OR_BLOCK_INPUT, TokenType.INPUT_LITERAL, TokenType.INPUT_BLOCK, TokenType.INPUT_BLOCKS]:
-            return True
-        return False
+    def __lt__(self, other: "Token"):
+        if not isinstance(other, Token):
+            return False
+        return self.type.value < other.type.value
+    #def isSimilar(self, other: "Token"):
+    #    if self.type == TokenType.CHARS:
+    #        return self == other
+    #    if self.isInput() and other.isInput():
+    #        return True
+    #    types = [self.type, other.type]
+    #    if (TokenType.OPTION_LITERAL in types) and ((TokenType.ROUND_MENU_INPUT in types) or (TokenType.SQUARE_MENU_INPUT in types)):
+    #        return True
+    #    return self.type == other.type
+    def getScore(self, other):
+        val = self.getScore2(other)
+        #print("--", self, other, "\t\t", val)
+        return val
+    def getScore2(self, other: "Token"):
+        tokens = sorted([self, other])
+        tokenOne, tokenTwo = tokens
+        tokenOne: Token
+        tokenTwo: Token
+        #print("#", tokenOne, tokenTwo)
+        resetScoreValue    = None
+        keepScoreValue     = 0
+        increaseScoreValue = 1
 
-#x = Token(TokenType.INPUT_BLOCK, {'opcode': '(OPERAND1) = (OPERAND2)', 'inputs': {'OPERAND1': {'block': {'opcode': 'timer', 'inputs': {}, 'options': {}}, 'text': ''}, 'OPERAND2': {'block': None, 'text': '0'}}, 'options': {}})
-#y = Token(TokenType.BOOLEAN_BLOCK_INPUT, None)
-#print(x, y, x.isSimilar(y))
+        if   tokenOne.type == TokenType.CHARS:
+            if tokenTwo.type == TokenType.CHARS:
+                if tokenOne.value == tokenTwo.value:
+                    return increaseScoreValue
+                return resetScoreValue
+            return resetScoreValue
+        elif tokenOne.isInput() and tokenTwo.isInput():
+            if tokenOne.isInputStrict() == tokenTwo.isInputStrict():
+                return increaseScoreValue
+            return keepScoreValue
+        elif tokenOne.isOption() and tokenTwo.isOption():
+            if tokenOne.type == tokenTwo.type:
+                return increaseScoreValue
+            return keepScoreValue
+        else:
+            return resetScoreValue
+    def isInput(self):
+        return (self.type in [TokenType.BOOLEAN_BLOCK_INPUT,  TokenType.SCRIPT_INPUT, TokenType.ROUND_MENU_INPUT, TokenType.NUMBER_OR_BLOCK_INPUT, TokenType.TEXT_INPUT, TokenType.TEXT_OR_BLOCK_INPUT, TokenType.INPUT_LITERAL, TokenType.INPUT_BLOCK, TokenType.INPUT_BLOCKS])
+    def isInputStrict(self):
+        return (self.type in [TokenType.BOOLEAN_BLOCK_INPUT,  TokenType.SCRIPT_INPUT, TokenType.ROUND_MENU_INPUT, TokenType.NUMBER_OR_BLOCK_INPUT, TokenType.TEXT_INPUT, TokenType.TEXT_OR_BLOCK_INPUT, TokenType.INPUT_LITERAL, TokenType.INPUT_BLOCK])
+    def isOption(self):
+        return (self.type in [TokenType.ROUND_MENU_INPUT, TokenType.SQUARE_MENU_INPUT, TokenType.OPTION_LITERAL])
+
+# IL:'50'   TB
+x = Token(TokenType.INPUT_LITERAL, "50")
+y = Token(TokenType.TEXT_OR_BLOCK_INPUT, None)
+print(x, y, x.getScore(y))
 
 
 class PathItemType(Enum):
@@ -150,7 +187,7 @@ def getAllTokenOpcodes():
                     tokens.append(Token(TokenType[token], None))
 
         #if newOpcode == "repeat until <CONDITION> {BODY}":
-        print("-", newOpcode, tokens)
+        #print("-", newOpcode, tokens)
         tokenOpcodes.append((oldOpcode, tokens))
     return tokenOpcodes
 
