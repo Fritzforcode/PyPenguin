@@ -572,8 +572,8 @@ def deoptimizeOptionValue(optionValue, optionType):
         return optionValue[1]
 
 def autoCompleteOptionValue(optionValue, optionType):
-    pass
-    #TODO HERE
+    pass#TODO HERE
+
 
 defaultCostume = {
     "name": "empty costume",
