@@ -5,7 +5,8 @@ optimizedData = extractAndOptimizeProject(
     projectFilePath           = "assets/studies/test2.pmp",
     optimizedProjectDirectory = "extractedProject",
     temporaryDirectory        = "temporary",
-    writeDebugFiles           = True,
+    deoptimizedDebugFilePath  = "temp1.json",
+    optimizedDebugFilePath    = "temp2.json",
 )
 
 validateProject(projectData=optimizedData)
@@ -22,5 +23,5 @@ deoptimizeAndCompressProject(
     projectFilePath           = "export.pmp",
     optimizedProjectDirectory = "extractedProject",
     temporaryDirectory        = "temporary",
-    writeDebugFiles           = True,
+    deoptimizedDebugFilePath  = "temp3.json"
 )

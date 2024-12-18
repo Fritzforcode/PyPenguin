@@ -82,7 +82,6 @@ projectData = {
                 {
                     "name": "loc var",
                     "currentValue": "www",
-                    "monitor": None,
                 }
             ],
             "localLists": [],
@@ -96,7 +95,7 @@ projectData = {
             "rotationStyle": "all around",
         },
         {
-            "name": "Sprite6",
+            "name": "Sprite2",
             "isStage": False,
             "scripts": [],
             "comments": [],
@@ -157,14 +156,14 @@ projectData = {
     "extensions": ["jgJSON"],
 }
 
-from pypenguin import validateProject, deoptimizeAndCompressProject
+from pypenguin import validateProject, deoptimizeAndCompressProject, extractAndOptimizeProject
 from pypenguin.helper_functions import writeJSONFile, pp
 
 validateProject(projectData=projectData)
 #pp(projectData)
 
 writeJSONFile(
-    filePath = "temp2.json",
+    filePath = "t_source.json",
     data     = projectData
 )
 
@@ -177,5 +176,12 @@ deoptimizeAndCompressProject(
     optimizedProjectDir = "project",
     projectFilePath     = "export.pmp",
     temporaryDir        = "temporary",
-    writeDebugFiles     = True,
+    deoptimizedDebugFilePath="t_deop.json",
+)
+
+extractAndOptimizeProject(
+    projectFilePath        = "export.pmp",
+    optimizedProjectDir    = "project",
+    temporaryDir           = "temporary",
+    optimizedDebugFilePath = "t_finished.json"
 )

@@ -13,6 +13,7 @@ def extractProject(
     temporaryDir      : str, # Where the zip will be extracted
     prettyFormat      : bool = True,
     deleteTemporaryDir: bool = False,
+    
 ):
     pmpFilePath  = insureCorrectPath(pmpFilePath , "PyPenguin")
     jsonFilePath = insureCorrectPath(jsonFilePath, "PyPenguin")
@@ -48,16 +49,19 @@ def extractProject(
     return json
 
 def extractAndOptimizeProject(
-    projectFilePath    : str,
-    optimizedProjectDir: str,
-    temporaryDir       : str,
-    writeDebugFiles    : bool = False,
+    projectFilePath         : str,
+    optimizedProjectDir     : str,
+    temporaryDir            : str,
+    deoptimizedDebugFilePath: str | None = None,
+    optimizedDebugFilePath  : str | None = None,
 ):
-    projectFilePath     = insureCorrectPath(projectFilePath , "PyPenguin")
-    optimizedProjectDir = insureCorrectPath(optimizedProjectDir, "PyPenguin")
-    temporaryDir        = insureCorrectPath(temporaryDir, "PyPenguin")
-    temp1FilePath       = insureCorrectPath("temp.json",  "PyPenguin")
-    temp2FilePath       = insureCorrectPath("temp2.json", "PyPenguin")
+    projectFilePath              = insureCorrectPath(projectFilePath         , "PyPenguin")
+    optimizedProjectDir          = insureCorrectPath(optimizedProjectDir     , "PyPenguin")
+    temporaryDir                 = insureCorrectPath(temporaryDir            , "PyPenguin")
+    if deoptimizedDebugFilePath != None:
+        deoptimizedDebugFilePath = insureCorrectPath(deoptimizedDebugFilePath, "PyPenguin")
+    if optimizedDebugFilePath   != None:
+        optimizedDebugFilePath   = insureCorrectPath(optimizedDebugFilePath  , "PyPenguin")
     
     # Extract the PenguinMod project
     deoptimizedData = extractProject(
@@ -65,7 +69,8 @@ def extractAndOptimizeProject(
         jsonFilePath=None, # Dont write the unoptimized version to a file
         temporaryDir=temporaryDir,
     )
-    if writeDebugFiles: writeJSONFile(temp1FilePath, data=deoptimizedData)
+    if deoptimizedDebugFilePath != None:
+        writeJSONFile(deoptimizedDebugFilePath, data=deoptimizedData)
 
     # Optimize project.json
     optimizedData = optimizeProjectJSON(
@@ -149,7 +154,9 @@ def extractAndOptimizeProject(
             )
     
     
-    if writeDebugFiles: writeJSONFile(temp2FilePath, data=optimizedData)
+    if optimizedDebugFilePath != None:
+        writeJSONFile(optimizedDebugFilePath, data=optimizedData)
+
         
     # Add the optimized project.json
     writeJSONFile(

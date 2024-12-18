@@ -9,16 +9,17 @@ from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrec
 from pypenguin.database import defaultCostumeFilePath
 
 def deoptimizeAndCompressProject(
-    optimizedProjectDir: str,
-    projectFilePath    : str,
-    temporaryDir       : str,
-    writeDebugFiles    : bool = False,
+    optimizedProjectDir     : str,
+    projectFilePath         : str,
+    temporaryDir            : str,
+    deoptimizedDebugFilePath: str | None = None
 ):
-    optimizedProjectDir = insureCorrectPath(optimizedProjectDir,    "PyPenguin")
-    projectFilePath     = insureCorrectPath(projectFilePath,        "PyPenguin")
-    temporaryDir        = insureCorrectPath(temporaryDir,           "PyPenguin")
-    temp3FilePath       = insureCorrectPath("temp3.json",           "PyPenguin")
-    defCostumeFilePath  = insureCorrectPath(defaultCostumeFilePath, "PyPenguin")
+    optimizedProjectDir          = insureCorrectPath(optimizedProjectDir     , "PyPenguin")
+    projectFilePath              = insureCorrectPath(projectFilePath         , "PyPenguin")
+    temporaryDir                 = insureCorrectPath(temporaryDir            , "PyPenguin")
+    defCostumeFilePath           = insureCorrectPath(defaultCostumeFilePath  , "PyPenguin")
+    if deoptimizedDebugFilePath != None:
+        deoptimizedDebugFilePath = insureCorrectPath(deoptimizedDebugFilePath, "PyPenguin")
     
     # Read the optimized project.json
     optimizedData = readJSONFile(
@@ -98,8 +99,8 @@ def deoptimizeAndCompressProject(
         deoptimizedSprite["sounds"] = newSounds
 
     
-    if writeDebugFiles:
-        writeJSONFile(temp3FilePath, data=deoptimizedData)
+    if deoptimizedDebugFilePath != None:
+        writeJSONFile(deoptimizedDebugFilePath, data=deoptimizedData)
     
     # Write the deoptimized project.json
     writeJSONFile(
