@@ -3,7 +3,7 @@ from pypenguin.helper_functions import readJSONFile, pp
 
 optimizedData = extractAndOptimizeProject(
     projectFilePath           = "assets/studies/test2.pmp",
-    optimizedProjectDirectory = "extractedProject",
+    optimizedProjectDirectory = "extracted_project",
     temporaryDirectory        = "temporary",
     deoptimizedDebugFilePath  = "temp1.json",
     optimizedDebugFilePath    = "temp2.json",
@@ -21,7 +21,7 @@ pp(unprepareBlocks(data=flattendScriptDatas))
 
 deoptimizeAndCompressProject(
     projectFilePath           = "export.pmp",
-    optimizedProjectDirectory = "extractedProject",
+    optimizedProjectDirectory = "extracted_project",
     temporaryDirectory        = "temporary",
     deoptimizedDebugFilePath  = "temp3.json"
 )

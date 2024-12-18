@@ -5,7 +5,7 @@ optimizedData = extractAndOptimizeProject(
 #    projectFilePath          = "assets/categories/custom_blocks.pmp",
     projectFilePath          = "assets/studies/motionOptions.pmp",
 #    projectFilePath          = "assets/from_online/my 1st platformer .pmp",
-    optimizedProjectDir      = "extractedProject",
+    optimizedProjectDir      = "extracted_project",
     temporaryDir             = "temporary",
     deoptimizedDebugFilePath = "temp1.json",
     optimizedDebugFilePath   = "temp2.json",
@@ -15,7 +15,7 @@ validateProject(projectData=optimizedData)
 
 deoptimizeAndCompressProject(
     projectFilePath          = "export.pmp",
-    optimizedProjectDir      = "extractedProject",
+    optimizedProjectDir      = "extracted_project",
     temporaryDir             = "temporary",
     deoptimizedDebugFilePath = "temp3.json"
 )
