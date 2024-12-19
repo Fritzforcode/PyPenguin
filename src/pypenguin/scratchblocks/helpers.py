@@ -83,14 +83,16 @@ class Token:
 
         if   tokenOne.type == TokenType.CHARS:
             if tokenTwo.type == TokenType.CHARS:
-                if tokenOne.value == tokenTwo.value:
+                if tokenOne.value.lower() == tokenTwo.value.lower():
                     return increaseScoreValue
                 return resetScoreValue
             return resetScoreValue
         elif tokenOne.isInput() and tokenTwo.isInput():
-            if tokenOne.isInputStrict() == tokenTwo.isInputStrict():
-                return increaseScoreValue
-            return keepScoreValue
+            if tokenOne.isInputStrict() and tokenTwo.isInputStrict():
+                return 2 * increaseScoreValue
+            if (not tokenOne.isInputStrict()) and (not tokenTwo.isInputStrict()):
+                return 2 * increaseScoreValue
+            return increaseScoreValue
         elif tokenOne.isOption() and tokenTwo.isOption():
             if tokenOne.type == tokenTwo.type:
                 return increaseScoreValue
@@ -100,14 +102,13 @@ class Token:
     def isInput(self):
         return (self.type in [TokenType.BOOLEAN_BLOCK_INPUT,  TokenType.SCRIPT_INPUT, TokenType.ROUND_MENU_INPUT, TokenType.NUMBER_OR_BLOCK_INPUT, TokenType.TEXT_INPUT, TokenType.TEXT_OR_BLOCK_INPUT, TokenType.INPUT_LITERAL, TokenType.INPUT_BLOCK, TokenType.INPUT_BLOCKS])
     def isInputStrict(self):
-        return (self.type in [TokenType.BOOLEAN_BLOCK_INPUT,  TokenType.SCRIPT_INPUT, TokenType.ROUND_MENU_INPUT, TokenType.NUMBER_OR_BLOCK_INPUT, TokenType.TEXT_INPUT, TokenType.TEXT_OR_BLOCK_INPUT, TokenType.INPUT_LITERAL, TokenType.INPUT_BLOCK])
+        return (self.type in [TokenType.BOOLEAN_BLOCK_INPUT, TokenType.ROUND_MENU_INPUT, TokenType.NUMBER_OR_BLOCK_INPUT, TokenType.TEXT_INPUT, TokenType.TEXT_OR_BLOCK_INPUT, TokenType.INPUT_LITERAL, TokenType.INPUT_BLOCK])
     def isOption(self):
         return (self.type in [TokenType.ROUND_MENU_INPUT, TokenType.SQUARE_MENU_INPUT, TokenType.OPTION_LITERAL])
 
-# IL:'50'   TB
-x = Token(TokenType.INPUT_LITERAL, "50")
-y = Token(TokenType.TEXT_OR_BLOCK_INPUT, None)
-print(x, y, x.getScore(y))
+#x = Token(TokenType.INPUT_BLOCKS, None)
+#y = Token(TokenType.TEXT_OR_BLOCK_INPUT, None)
+#print(x, y, x.getScore(y))
 
 
 class PathItemType(Enum):

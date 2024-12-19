@@ -258,7 +258,7 @@ optionTypeDatabase = {
     },
     "cloning target": {
         "directValues"   : [], 
-        "valueSegments"  : ["myself if not stage", "other sprite"],
+        "valueSegments"  : ["myself if not stage", "other sprite not stage"],
         "fallback"       : ["fallback", " "],
     },
     "up|down": {
@@ -413,9 +413,13 @@ def getOptimizedOptionValuesUsingContext(optionType, context, inputDatas):
             
             case "other sprite":
                 values += context["otherSprites"]
+            case "other sprite not stage":
+                values += context["otherSprites"]
+                if ["stage", "stage"] in values:
+                    values.remove(["stage", "stage"])
             case "mutable sprite property":
                 # works only for "set [PROPERTY] of ([TARGET]) to (VALUE)"; no other block uses this though
-                if inputDatas["TARGET"]["option"] == "_stage_":
+                if inputDatas["TARGET"]["option"] == ["stage", "stage"]:
                     nameKey = None
                 else:
                     nameKey = tuple(inputDatas["TARGET"]["option"]) # Tuples used for allowing hashing
@@ -447,7 +451,7 @@ def getOptimizedOptionValuesUsingContext(optionType, context, inputDatas):
         values.append(optionTypeData["fallback"])
     return removeDuplicates(values)
 
-def getOptimizedOptionValuesUsingNoContext(optionType):
+def getOptimizedOptionValuesUsingNoContext(optionType, addSegements:bool=True):
     optionTypeData = optionTypeDatabase[optionType]
     values         = []
     defaultPrefix  = None
@@ -456,42 +460,45 @@ def getOptimizedOptionValuesUsingNoContext(optionType):
             values.append(value)
         else:
             values.append(["value", value])
-    for segment in optionTypeData["valueSegments"]:
-        match segment:
-            case "stage":
-                values += [["stage", "stage"]]
-            case "myself":
-                values += [["myself", "myself"]]
-            case "mouse-pointer":
-                values += [["object", "mouse-pointer"]]
-            case "random position":
-                values += [["object", "random position"]]
-            case "edge":
-                values += [["object", "edge"]]
-            
-            case "myself if not stage":
-                values += [["myself", "myself"]]
-            
-            case "other sprite":
-                values += [["stage", "stage"]]
-                defaultPrefix = "sprite"
-            case "mutable sprite property":
-                values += [["value", "backdrop"], ["value", "volume"]]
-                values += [["value", "x position"], ["value", "y position"], ["value", "direction"], ["value", "costume"], ["value", "size"]] #["value", "volume"]
-                defaultPrefix = "variable"
-            case "readable sprite property":
-                values += [["value", "backdrop #"], ["value", "backdrop name"], ["value", "volume"]]
-                values += [["value", "x position"], ["value", "y position"], ["value", "direction"], ["value", "costume #"], ["value", "costume name"], ["value", "layer"], ["value", "size"]] #["value", "volume"]
-                defaultPrefix = "variable"
-            case "costume":
-                # Can't be guessed
-                defaultPrefix = "costume"
-            case "backdrop":
-                # Can't be guessed
-                defaultPrefix = "backdrop"
-            case "sound":
-                # Can't be guessed
-                defaultPrefix = "sound"
+    if addSegements:
+        for segment in optionTypeData["valueSegments"]:
+            match segment:
+                case "stage":
+                    values += [["stage", "stage"]]
+                case "myself":
+                    values += [["myself", "myself"]]
+                case "mouse-pointer":
+                    values += [["object", "mouse-pointer"]]
+                case "random position":
+                    values += [["object", "random position"]]
+                case "edge":
+                    values += [["object", "edge"]]
+                
+                case "myself if not stage":
+                    values += [["myself", "myself"]]
+                
+                case "other sprite":
+                    values += [["stage", "stage"]]
+                    defaultPrefix = "sprite"
+                case "other sprite not stage":
+                    defaultPrefix = "sprite"
+                case "mutable sprite property":
+                    values += [["value", "backdrop"], ["value", "volume"]]
+                    values += [["value", "x position"], ["value", "y position"], ["value", "direction"], ["value", "costume"], ["value", "size"]] #["value", "volume"]
+                    defaultPrefix = "variable"
+                case "readable sprite property":
+                    values += [["value", "backdrop #"], ["value", "backdrop name"], ["value", "volume"]]
+                    values += [["value", "x position"], ["value", "y position"], ["value", "direction"], ["value", "costume #"], ["value", "costume name"], ["value", "layer"], ["value", "size"]] #["value", "volume"]
+                    defaultPrefix = "variable"
+                case "costume":
+                    # Can't be guessed
+                    defaultPrefix = "costume"
+                case "backdrop":
+                    # Can't be guessed
+                    defaultPrefix = "backdrop"
+                case "sound":
+                    # Can't be guessed
+                    defaultPrefix = "sound"
     if "fallback" in optionTypeData:
         values.append(optionTypeData["fallback"])
     return removeDuplicates(values), defaultPrefix
@@ -522,6 +529,8 @@ def getDeoptimizedOptionValues(optionType):
             
             case "other sprite":
                 values += ["_stage_"]
+            case "other sprite not stage":
+                pass
             case "mutable sprite property":
                 values += ["backdrop", "volume"]
                 values += ["x position", "y position", "direction", "costume", "size"] #"volume"
@@ -571,8 +580,34 @@ def deoptimizeOptionValue(optionValue, optionType):
     else:
         return optionValue[1]
 
-def autoCompleteOptionValue(optionValue, optionType):
-    pass#TODO HERE
+def autocompleteOptionValue(optionValue, optionType):
+    if optionType in ["broadcast", "reporter name", "opcode", "boolean"]:
+        return ["value", optionValue]
+    if optionType in ["variable", "list"]:
+        return [optionType, optionValue]
+    directValues, _ = getOptimizedOptionValuesUsingNoContext(
+        optionType=optionType,
+        addSegements=False,
+    )
+    secondaryDirectValues = [value[1] for value in directValues]
+    allValues, defaultPrefix =  getOptimizedOptionValuesUsingNoContext(
+        optionType=optionType,
+        addSegements=True,
+    )
+    secondaryAllValues = [value[1] for value in allValues]
+    print("^^", optionValue, "/", optionType)
+    print("-->", directValues, defaultPrefix)
+    print("-->", allValues)
+    if   optionValue in secondaryDirectValues:
+        result = directValues[secondaryDirectValues.index(optionValue)]
+    elif optionValue in secondaryAllValues:
+        result = allValues[secondaryAllValues.index(optionValue)]
+    else:
+        if defaultPrefix == None: raise Exception()
+        result = [defaultPrefix, optionValue]
+    print(">->", result)
+    #print()
+    return result
 
 
 defaultCostume = {

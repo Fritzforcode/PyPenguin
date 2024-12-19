@@ -2,10 +2,10 @@ if __name__ == "__main__": import sys, os; sys.path.insert(0, os.path.abspath(os
 
 from helpers import *
 from pypenguin.helper_functions import pp, insureCorrectPath
-from pypenguin.database import getInputModes, getOptionType, getOptionTypes, getOptimizedOpcode, autoCompleteOptionValue
+from pypenguin.database import getInputModes, getOptionType, getOptionTypes, getOptimizedOpcode, autocompleteOptionValue, getInputType
 
 tokenOpcodes = getAllTokenOpcodes()
-
+pp(tokenOpcodes)
 def tokenize(string: str):
     def endCharToken():
         nonlocal tokenChars
@@ -145,7 +145,7 @@ def tokenize(string: str):
 
 def parse(string: str, returnScript:bool=True):
     tokens = tokenize(string)
-    print("&", tokens)
+    #print("&", tokens)
     newTokens = []
     for token in tokens:
         token: Token
@@ -181,7 +181,7 @@ def parse(string: str, returnScript:bool=True):
     if lineTokens != []:
         lines.append(lineTokens)
     
-    pp(lines)
+    #pp(lines)
     blocks = []
     for line in lines:
         if line != []:
@@ -193,12 +193,12 @@ def parse(string: str, returnScript:bool=True):
         }
     else:
         result = blocks
-    print(100*"=")
+    #print(100*"=")
     pp(result)
     return result
 
 def parseBlock(tokens: list[Token]):
-    print("<", tokens)
+    print("*", tokens)
 
     hasInputs = False
     for token in tokens:
@@ -228,17 +228,18 @@ def parseBlock(tokens: list[Token]):
 
     if opcode == None:
         if hasInputs: raise Exception(matches[-5:])
-        return {
+        block = {
             "opcode" : getOptimizedOpcode(opcode="special_variable_value"),
             "inputs" : {},
-            "options": {"VARIABLE": tokens[0].value},
+            "options": {"VARIABLE": ["variable", tokens[0].value]},
         }
+        return block
     newOpcode   = getOptimizedOpcode(opcode=opcode)
     inputModes  = getInputModes(opcode=opcode)
     inputIDs    = list(inputModes.keys())
     optionTypes = getOptionTypes(opcode=opcode)
     optionIDs   = list(optionTypes.keys())
-    print("=>", newOpcode, inputModes, optionTypes)
+    #print("=>", newOpcode, inputModes, optionTypes)
     
     inputs      = {}
     options     = {}
@@ -250,7 +251,7 @@ def parseBlock(tokens: list[Token]):
             inputID = inputIDs[inputIndex]
             inputMode = inputModes[inputID]
             inputIndex += 1
-            
+            print(inputMode, token.type)
             if   inputMode == "block-and-text":
                 if   token.type == TokenType.INPUT_LITERAL:
                     block = None
@@ -272,7 +273,7 @@ def parseBlock(tokens: list[Token]):
                 }
             else: raise Exception()
             
-            print(".", inputID, inputMode, token, inputValue)
+            #print(".", inputID, inputMode, token, inputValue)
             inputs[inputID] = inputValue
         
         elif token.type == TokenType.OPTION_LITERAL:
@@ -284,11 +285,11 @@ def parseBlock(tokens: list[Token]):
             if canBeSpecialInput:
                 # A Round Menu Case
                 inputIndex += 1
-                optionType = getOptionType(
+                optionType = getInputType(
                     opcode=opcode,
-                    optionID=inputID,
+                    inputID=inputID,
                 )
-                optionValue = autoCompleteOptionValue(
+                optionValue = autocompleteOptionValue(
                     optionValue=token.value,
                     optionType=optionType,
                 )
@@ -299,10 +300,16 @@ def parseBlock(tokens: list[Token]):
                 inputs[inputID] = inputValue
             else:
                 optionID = optionIDs[optionIndex]
-                #optionType = opionTypes[optionID] # has no effect currently
+                optionType = optionTypes[optionID] # has no effect currently
                 optionIndex += 1
                 
                 optionValue = token.value
+                print(optionValue)
+                optionValue = autocompleteOptionValue(
+                    optionValue=optionValue,
+                    optionType=optionType,
+                )
+                print(optionValue)
                 options[optionID] = optionValue
     block = {
         "opcode" : newOpcode,

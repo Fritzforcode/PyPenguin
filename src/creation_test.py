@@ -1,53 +1,38 @@
 scripts = [
 {'position': [0, 0],
- 'blocks': [{'opcode': 'when green flag clicked', 'inputs': {}, 'options': {}},
-            {'opcode': 'set [VARIABLE] to (VALUE)',
-             'inputs': {'VALUE': {'block': None, 'text': '0'}},
-             'options': {'VARIABLE': ["variable", "score"]}},
-            {'opcode': 'set [VARIABLE] to (VALUE)',
-             'inputs': {'VALUE': {'block': None, 'text': '10'}},
-             'options': {'VARIABLE': ["variable", "timer"]}},
-            {'opcode': 'add (ITEM) to [LIST]',
-             'inputs': {'ITEM': {'block': None, 'text': 'Player 1'}},
-             'options': {'LIST': ["list", "players"]}},
+ 'blocks': [{'opcode': 'if <CONDITION> then {THEN} else {ELSE}',
+             'inputs': {'CONDITION': {'block': {'opcode': '(OPERAND1) > '
+                                                          '(OPERAND2)',
+                                                'inputs': {'OPERAND1': {'block': {'opcode': 'value '
+                                                                                            'of '
+                                                                                            '[VARIABLE]',
+                                                                                  'inputs': {},
+                                                                                  'options': {'VARIABLE': ['variable',
+                                                                                                           'score']}},
+                                                                        'text': ''},
+                                                           'OPERAND2': {'block': None,
+                                                                        'text': '50'}},
+                                                'options': {}}},
+                        'THEN': {'blocks': [{'opcode': 'say (MESSAGE) for '
+                                                       '(SECONDS) seconds',
+                                             'inputs': {'MESSAGE': {'block': None,
+                                                                    'text': 'You '
+                                                                            'win!'},
+                                                        'SECONDS': {'block': None,
+                                                                    'text': '2'}},
+                                             'options': {}}]},
+                        'ELSE': {'blocks': [{'opcode': 'say (MESSAGE) for '
+                                                       '(SECONDS) seconds',
+                                             'inputs': {'MESSAGE': {'block': None,
+                                                                    'text': 'Game '
+                                                                            'over!'},
+                                                        'SECONDS': {'block': None,
+                                                                    'text': '2'}},
+                                             'options': {}}]}},
+             'options': {}},
             {'opcode': 'delete all of [LIST]',
              'inputs': {},
-             'options': {'LIST': ["list", "points"]}},
-            {'opcode': 'ask (QUESTION) and wait',
-             'inputs': {'QUESTION': {'block': None,
-                                     'text': 'What is your name?'}},
-             'options': {}},
-            {'opcode': 'say (MESSAGE) for (SECONDS) seconds',
-             'inputs': {'MESSAGE': {'block': {'opcode': 'join (STRING1) '
-                                                        '(STRING2)',
-                                              'inputs': {'STRING1': {'block': None,
-                                                                     'text': 'Hello, '},
-                                                         'STRING2': {'block': {'opcode': 'answer',
-                                                                               'inputs': {},
-                                                                               'options': {}},
-                                                                     'text': ''}},
-                                              'options': {}},
-                                    'text': ''},
-                        'SECONDS': {'block': None, 'text': '2'}},
-             'options': {}},
-            {'opcode': 'broadcast ([MESSAGE])',
-             'inputs': {'MESSAGE': {'block': None, 'option': ["value", "start game"]}},
-             'options': {}},
-            {'opcode': 'create clone of ([TARGET])',
-             'inputs': {'TARGET': {'block': None, 'option': ["myself", "myself"]}},
-             'options': {}},
-            {'opcode': 'play sound ([SOUND]) until done',
-             'inputs': {'SOUND': {'block': None, 'option': ["fallback", " "]}},
-             'options': {}},
-            {
-                "opcode": "switch costume to ([COSTUME])",
-                "inputs": {
-                    "COSTUME": {
-                        "option": ["costume", "empty costume"],
-                    },
-                },
-            },
-            ]}
+             'options': {'LIST': ['list', 'players']}}]}
 ]
 
 
@@ -71,12 +56,12 @@ projectData = {
             "currentCostume": 0,
             "costumes": [],
             "sounds": [
-                #{
-                #    "name": "pop",
-                #    "extension": "wav",
-                #    "rate": 48000,
-                #    "sampleCount": 1123,
-                #},
+                {
+                    "name": "pop",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 1123,
+                },
             ],
             "localVariables": [
                 {
