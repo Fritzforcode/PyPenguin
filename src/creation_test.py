@@ -1,38 +1,17 @@
 scripts = [
 {'position': [0, 0],
- 'blocks': [{'opcode': 'if <CONDITION> then {THEN} else {ELSE}',
-             'inputs': {'CONDITION': {'block': {'opcode': '(OPERAND1) > '
-                                                          '(OPERAND2)',
-                                                'inputs': {'OPERAND1': {'block': {'opcode': 'value '
-                                                                                            'of '
-                                                                                            '[VARIABLE]',
-                                                                                  'inputs': {},
-                                                                                  'options': {'VARIABLE': ['variable',
-                                                                                                           'score']}},
-                                                                        'text': ''},
-                                                           'OPERAND2': {'block': None,
-                                                                        'text': '50'}},
-                                                'options': {}}},
-                        'THEN': {'blocks': [{'opcode': 'say (MESSAGE) for '
-                                                       '(SECONDS) seconds',
-                                             'inputs': {'MESSAGE': {'block': None,
-                                                                    'text': 'You '
-                                                                            'win!'},
-                                                        'SECONDS': {'block': None,
-                                                                    'text': '2'}},
-                                             'options': {}}]},
-                        'ELSE': {'blocks': [{'opcode': 'say (MESSAGE) for '
-                                                       '(SECONDS) seconds',
-                                             'inputs': {'MESSAGE': {'block': None,
-                                                                    'text': 'Game '
-                                                                            'over!'},
-                                                        'SECONDS': {'block': None,
-                                                                    'text': '2'}},
-                                             'options': {}}]}},
-             'options': {}},
-            {'opcode': 'delete all of [LIST]',
+ 'blocks': [{'opcode': 'define custom block',
              'inputs': {},
-             'options': {'LIST': ['list', 'players']}}]}
+             'options': {'noScreenRefresh': ['value', True],
+                         'blockType': ['value', 'instruction'],
+                         'customOpcode': 'add points'}},
+            {'opcode': 'change [VARIABLE] by (VALUE)',
+             'inputs': {'VALUE': {'block': {'opcode': 'value of [VARIABLE]',
+                                            'inputs': {},
+                                            'options': {'VARIABLE': ['variable',
+                                                                     'points']}},
+                                  'text': ''}},
+             'options': {'VARIABLE': ['variable', 'score']}}]}
 ]
 
 
@@ -66,7 +45,7 @@ projectData = {
             "localVariables": [
                 {
                     "name": "loc var",
-                    "currentValue": "www",
+                    "currentValue": "",
                 }
             ],
             "localLists": [],
@@ -106,12 +85,7 @@ projectData = {
             "isCloudVariable": True,
         },
         {
-            "name": "timer",
-            "currentValue": "",
-            "isCloudVariable": False,
-        },
-        {
-            "name": "go to",
+            "name": "timer_var",
             "currentValue": "",
             "isCloudVariable": False,
         },

@@ -1,8 +1,12 @@
 if __name__ == "__main__": import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 from helpers import *
-from pypenguin.helper_functions import pp, insureCorrectPath
+from pypenguin.helper_functions import pp, insureCorrectPath, generateCustomOpcode
 from pypenguin.database import getInputModes, getOptionType, getOptionTypes, getOptimizedOpcode, autocompleteOptionValue, getInputType
+
+class SETTINGS:
+    CUSTOM_BLOCK_NO_SCREENREFRESH = ["value", True]
+    CUSTOM_BLOCK_BLOCK_TYPE       = ["value", "instruction"]
 
 tokenOpcodes = getAllTokenOpcodes()
 pp(tokenOpcodes)
@@ -143,25 +147,25 @@ def tokenize(string: str):
     endBracket()
     return tokens
 
-def parse(string: str, returnScript:bool=True):
+def parse(string: str, returnScript:bool=True, isNested:bool=False):
     tokens = tokenize(string)
     #print("&", tokens)
     newTokens = []
     for token in tokens:
         token: Token
         if   token.type == TokenType.BOOLEAN_BLOCK_INPUT:
-            block = parse(token.value, returnScript=False)[0]
-            newToken = Token(TokenType.INPUT_BLOCK, block)
+            block = parse(token.value, returnScript=False, isNested=True)[0]
+            newToken = Token(TokenType.INPUT_BLOCK, block, booleanBlock=True)
         elif token.type == TokenType.TEXT_INPUT:
             newToken = Token(TokenType.INPUT_LITERAL, token.value)
         elif token.type == TokenType.NUMBER_OR_BLOCK_INPUT:
             if isValidNumber(token.value):
                 newToken = Token(TokenType.INPUT_LITERAL, token.value)
             else:
-                block = parse(token.value, returnScript=False)[0]
-                newToken = Token(TokenType.INPUT_BLOCK, block)
+                block = parse(token.value, returnScript=False, isNested=True)[0]
+                newToken = Token(TokenType.INPUT_BLOCK, block, booleanBlock=False)
         elif token.type == TokenType.SCRIPT_INPUT:
-            blocks = parse(token.value, returnScript=False)
+            blocks = parse(token.value, returnScript=False, isNested=True)
             newToken = Token(TokenType.INPUT_BLOCKS, blocks)
         elif token.type in [TokenType.SQUARE_MENU_INPUT, TokenType.ROUND_MENU_INPUT]:
             newToken = Token(TokenType.OPTION_LITERAL, token.value)
@@ -185,7 +189,9 @@ def parse(string: str, returnScript:bool=True):
     blocks = []
     for line in lines:
         if line != []:
-            blocks.append(parseBlock(line))
+            blocks.append(
+                parseBlock(line, isNested=isNested)
+            )
     if returnScript:
         result = {
             "position": [0, 0], # placeholder
@@ -197,13 +203,14 @@ def parse(string: str, returnScript:bool=True):
     pp(result)
     return result
 
-def parseBlock(tokens: list[Token]):
+def parseBlock(tokens: list[Token], isNested: bool):
     print("*", tokens)
 
-    hasInputs = False
+    hasInputsOptions = False
     for token in tokens:
-        if token.isInput():
-            hasInputs = True
+        if token.isInput() or token.isOption():
+            hasInputsOptions = True
+    print("&", hasInputsOptions)
 
     matches = []
     for opcode, opcodeTokens in tokenOpcodes:
@@ -227,12 +234,52 @@ def parseBlock(tokens: list[Token]):
     opcode = matches[-1][0] if matches[-1][1] >= 1 else None
 
     if opcode == None:
-        if hasInputs: raise Exception(matches[-5:])
-        block = {
-            "opcode" : getOptimizedOpcode(opcode="special_variable_value"),
-            "inputs" : {},
-            "options": {"VARIABLE": ["variable", tokens[0].value]},
-        }
+        block = None
+        if not(hasInputsOptions) and isNested:
+            block = {
+                "opcode" : getOptimizedOpcode(opcode="special_variable_value"),
+                "inputs" : {},
+                "options": {"VARIABLE": ["variable", tokens[0].value]},
+            }
+        canBeCustomBlockDef = block == None
+        if canBeCustomBlockDef:
+            canBeCustomBlockDef = tokens[0].type == TokenType.CHARS
+        if canBeCustomBlockDef:
+            canBeCustomBlockDef == tokens[0].value.startswith("define ")
+        if canBeCustomBlockDef:
+            updatedFirstToken = Token(TokenType.CHARS, tokens[0].value.removeprefix("define "))
+            tokens = [updatedFirstToken] + tokens[1:]
+            
+            customProccode = ""
+            argumentNames  = []
+            for token in tokens:
+                match token.type:
+                    case TokenType.CHARS:
+                        customProccode += " "
+                        customProccode += token.value
+                    case TokenType.INPUT_BLOCK:
+                        if token.kwargs["booleanBlock"]:
+                            customProccode += " %b"
+                        else:
+                            customProccode += " %s"
+                        argumentNames.append(token.value)
+            
+            customOpcode = generateCustomOpcode(
+                proccode=customProccode.removeprefix(" "),
+                argumentNames=argumentNames,
+            )
+            print("?", repr(customProccode), argumentNames, repr(customOpcode))
+            block = {
+                "opcode" : getOptimizedOpcode(opcode="special_define"),
+                "inputs" : {},
+                "options": {
+                    "noScreenRefresh": SETTINGS.CUSTOM_BLOCK_NO_SCREENREFRESH,
+                    "blockType"      : SETTINGS.CUSTOM_BLOCK_BLOCK_TYPE,
+                    "customOpcode"   : customOpcode,
+                },
+            }
+
+        if block == None: raise Exception(matches[-5:])
         return block
     newOpcode   = getOptimizedOpcode(opcode=opcode)
     inputModes  = getInputModes(opcode=opcode)
@@ -320,5 +367,5 @@ def parseBlock(tokens: list[Token]):
     return block
 
 string = open(insureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read().strip()
-parse(string)
+parse(string, isNested=False)
 

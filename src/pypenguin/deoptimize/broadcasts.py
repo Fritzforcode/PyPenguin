@@ -1,6 +1,6 @@
-from pypenguin.helper_functions import ikv, removeStringDuplicates, stringToToken
+from pypenguin.helper_functions import ikv, removeDuplicates, stringToToken
 
-from pypenguin.database import opcodeDatabase, inputDefault, inputTextDefault, optionDefault
+from pypenguin.database import opcodeDatabase, inputDefault, inputTextDefault, optionDefault, deoptimizeOptionValue
 
 
 def findBlockBroadcastMessages(data):
@@ -39,9 +39,13 @@ def generateBroadcasts(data):
         for scriptData in spriteData["scripts"]:
             for blockData in scriptData["blocks"]:
                 broadcastMessages += findBlockBroadcastMessages(data=blockData)
-    broadcastMessages = removeStringDuplicates(broadcastMessages) # Remove duplicates
+    broadcastMessages = removeDuplicates(broadcastMessages) # Remove duplicates
     newDatas = {}
     for broadcastMessage in broadcastMessages:
+        broadcastMessage = deoptimizeOptionValue(
+            optionValue=broadcastMessage,
+            optionType="broadcast",
+        )
         newDatas[broadcastMessage] = stringToToken(broadcastMessage)
     # Because all broadcast messages are for all sprites (None=Stage)
     return newDatas

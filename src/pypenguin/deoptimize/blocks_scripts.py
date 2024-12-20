@@ -447,6 +447,7 @@ def restoreInputs(data, opcode, spriteName, blockData):
                 magicNumber = getInputMagicNumber(inputType=inputType)
                 if inputMode == "block-and-hybrid-option":
                     text = inputData["text"][1]
+                    print("~", text)
                     token = stringToToken(text)
                     textData = [magicNumber, text, token]
                 else:

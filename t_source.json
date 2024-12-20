@@ -1,28 +1,18 @@
 {
     "sprites": [
         {
-            "isStage": true,
             "name": "Stage",
+            "isStage": true,
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "empty costume",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0.0,
-                        0.0
-                    ]
-                }
-            ],
+            "costumes": [],
             "sounds": [],
             "volume": 100
         },
         {
-            "isStage": false,
             "name": "Sprite1",
+            "isStage": false,
             "scripts": [
                 {
                     "position": [
@@ -44,12 +34,10 @@
                             "opcode": "repeat until <CONDITION> {BODY}",
                             "inputs": {
                                 "CONDITION": {
-                                    "mode": "block-only",
                                     "block": {
                                         "opcode": "(OPERAND1) = (OPERAND2)",
                                         "inputs": {
                                             "OPERAND1": {
-                                                "mode": "block-and-text",
                                                 "block": {
                                                     "opcode": "value of [VARIABLE]",
                                                     "inputs": {},
@@ -63,7 +51,6 @@
                                                 "text": ""
                                             },
                                             "OPERAND2": {
-                                                "mode": "block-and-text",
                                                 "block": null,
                                                 "text": "0"
                                             }
@@ -72,13 +59,11 @@
                                     }
                                 },
                                 "BODY": {
-                                    "mode": "script",
                                     "blocks": [
                                         {
                                             "opcode": "change [VARIABLE] by (VALUE)",
                                             "inputs": {
                                                 "VALUE": {
-                                                    "mode": "block-and-text",
                                                     "block": null,
                                                     "text": "-1"
                                                 }
@@ -94,7 +79,6 @@
                                             "opcode": "wait (SECONDS) seconds",
                                             "inputs": {
                                                 "SECONDS": {
-                                                    "mode": "block-and-text",
                                                     "block": null,
                                                     "text": "1"
                                                 }
@@ -110,12 +94,10 @@
                             "opcode": "if <CONDITION> then {THEN} else {ELSE}",
                             "inputs": {
                                 "CONDITION": {
-                                    "mode": "block-only",
                                     "block": {
                                         "opcode": "(OPERAND1) > (OPERAND2)",
                                         "inputs": {
                                             "OPERAND1": {
-                                                "mode": "block-and-text",
                                                 "block": {
                                                     "opcode": "value of [VARIABLE]",
                                                     "inputs": {},
@@ -129,7 +111,6 @@
                                                 "text": ""
                                             },
                                             "OPERAND2": {
-                                                "mode": "block-and-text",
                                                 "block": null,
                                                 "text": "50"
                                             }
@@ -138,18 +119,15 @@
                                     }
                                 },
                                 "THEN": {
-                                    "mode": "script",
                                     "blocks": [
                                         {
                                             "opcode": "say (MESSAGE) for (SECONDS) seconds",
                                             "inputs": {
                                                 "MESSAGE": {
-                                                    "mode": "block-and-text",
                                                     "block": null,
                                                     "text": "You win!"
                                                 },
                                                 "SECONDS": {
-                                                    "mode": "block-and-text",
                                                     "block": null,
                                                     "text": "2"
                                                 }
@@ -159,18 +137,15 @@
                                     ]
                                 },
                                 "ELSE": {
-                                    "mode": "script",
                                     "blocks": [
                                         {
                                             "opcode": "say (MESSAGE) for (SECONDS) seconds",
                                             "inputs": {
                                                 "MESSAGE": {
-                                                    "mode": "block-and-text",
                                                     "block": null,
                                                     "text": "Game over!"
                                                 },
                                                 "SECONDS": {
-                                                    "mode": "block-and-text",
                                                     "block": null,
                                                     "text": "2"
                                                 }
@@ -197,17 +172,7 @@
             ],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "empty costume",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0.0,
-                        0.0
-                    ]
-                }
-            ],
+            "costumes": [],
             "sounds": [
                 {
                     "name": "pop",
@@ -216,7 +181,6 @@
                     "sampleCount": 1123
                 }
             ],
-            "volume": 100,
             "localVariables": [
                 {
                     "name": "loc var",
@@ -224,6 +188,7 @@
                 }
             ],
             "localLists": [],
+            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -236,26 +201,16 @@
             "rotationStyle": "all around"
         },
         {
-            "isStage": false,
             "name": "Sprite2",
+            "isStage": false,
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "empty costume",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0.0,
-                        0.0
-                    ]
-                }
-            ],
+            "costumes": [],
             "sounds": [],
-            "volume": 100,
             "localVariables": [],
             "localLists": [],
+            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [

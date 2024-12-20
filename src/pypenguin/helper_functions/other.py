@@ -89,12 +89,12 @@ def generateCustomOpcode(proccode: str, argumentNames: list[str]):
         char  = proccode[i]
         char2 = proccode[i + 1] if i + 1 in range(len(proccode)) else None
         char3 = proccode[i + 2] if i + 2 in range(len(proccode)) else None
-        if   char==" " and char2=="%" and char3=="s": # if the next chars are ' %s '
+        if   char==" " and char2=="%" and char3=="s": # if the next chars are ' %s'
             argumentName = escapeChars(argumentNames[j], chars_to_escape)
             customOpcode += " (" + argumentName + ")"
             j += 1
             i += 2
-        elif char==" " and char2=="%" and char3=="b": # if the next chars are ' %b '
+        elif char==" " and char2=="%" and char3=="b": # if the next chars are ' %b'
             argumentName = escapeChars(argumentNames[j], chars_to_escape)
             customOpcode += " <" + argumentName + ">"
             j += 1
@@ -122,9 +122,6 @@ def pp(*objects, sep=" ", end="\n"): # pretty print with settings i like
 
 def flipKeysAndValues(obj: dict):
     return dict(zip(obj.values(), obj.keys()))
-
-def removeStringDuplicates(array):
-    return dict.fromkeys(array).keys()
 
 def removeDuplicates(items):
     newItems = []

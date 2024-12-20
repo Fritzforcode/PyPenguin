@@ -27,9 +27,10 @@ class TokenType(Enum):
         return self.value == other.value
 
 class Token:
-    def __init__(self, type, value):
+    def __init__(self, type, value, **kwargs):
         self.type : TokenType  = type
         self.value             = value
+        self.kwargs            = kwargs
     def __repr__(self):
         if   self.type == TokenType.CHARS                : abbr = "c"
         elif self.type == TokenType.BOOLEAN_BLOCK_INPUT  : abbr = "BB"

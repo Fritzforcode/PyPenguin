@@ -1,6 +1,2 @@
-if <(score) \\\> (50)> then {
-    say [You win!] for (2) seconds
-} else {
-    say [Game over!] for (2) seconds
-}
-delete all of [players v]
+define add [points]
+change [score v] by (points)
