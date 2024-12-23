@@ -7,8 +7,6 @@ from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSou
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.deoptimize.monitors import translateMonitor
 
-from pprint import pformat
-
 def translateVariablesLists(data):
     spriteNames = [sprite["name"] for sprite in data["sprites"]][1:]
     translatedVariableDatas = translateVariables(
@@ -45,8 +43,6 @@ def deoptimizeProject(projectData):
                 data=commentData,
                 id=None,
             )
-        with open("tbef", "w") as file:
-            file.write(pformat(newSpriteBlockDatas))
         newSpriteBlockDatas, newCommentDatas = unprepareBlocks(
             data=newSpriteBlockDatas,
             spriteName=spriteData["name"],

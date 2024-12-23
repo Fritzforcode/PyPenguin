@@ -275,10 +275,10 @@ def flattenBlock(data, blockID, parentID, nextID):
 def restoreProcedureDefinitionBlock(data, blockID):
     customOpcode        = data["options"]["customOpcode"]
     proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
-    argumentIDs      = []
-    argumentNames    = []
-    argumentDefaults = []
-    argumentBlockIDs = []
+    argumentIDs         = []
+    argumentNames       = []
+    argumentDefaults    = []
+    argumentBlockIDs    = []
     for i, argumentName, argumentType in ikv(arguments):
         argumentIDs     .append(generateRandomToken())
         argumentNames   .append(argumentName)
@@ -495,11 +495,9 @@ def unprepareBlocks(data, spriteName, commentDatas):
     mutationDatas = {}
     for j, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):
-            print(".", blockData["opcode"])
             if blockData["opcode"] == "procedures_prototype":
                 mutationData = blockData["mutation"]
-                mutationDatas[mutationData["proccode"]] = mutationData
-                print("==>", mutationData["proccode"])                
+                mutationDatas[mutationData["proccode"]] = mutationData                
     additionalBlockDatas = {}
     for i, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):
@@ -507,7 +505,6 @@ def unprepareBlocks(data, spriteName, commentDatas):
                 customOpcode = blockData["fields"]["customOpcode"]
                 del blockData["fields"]["customOpcode"]
                 proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
-                pp(mutationDatas)
                 mutationData         = mutationDatas[proccode]
                 modifiedMutationData = mutationData.copy()
                 del modifiedMutationData["argumentnames"]

@@ -4,6 +4,10 @@
             "isStage": true,
             "name": "Stage",
             "variables": {
+                "B+safrZ+T+(vpJtAOvj/": [
+                    "program counter",
+                    "0"
+                ],
                 "(gZv/fNTW#AdEb=N}FP#": [
                     "register map",
                     "{\"r0\": 0, \"zero\": 0, \"r1\": 1, \"r2\": 2, \"r3\": 3, \"r4\": 4, \"r5\": 5, \"r6\": 6, \"r7\": 7, \"r8\": 8, \"r9\": 9, \"sb\": 9, \"r10\": 10, \"sl\": 10, \"r11\": 11, \"fp\": 11, \"r12\": 12, \"ip\": 12, \"r13\": 13, \"sp\": 13, \"r14\": 14, \"lr\": 14, \"r15\": 15, \"pc\": 15}"
@@ -50,6 +54,14 @@
                 ],
                 "/mbsqk[M=s%L}M}-J:xR": [
                     "address",
+                    ""
+                ],
+                "IyZt]blDR|^|i:cboemD": [
+                    "do branch",
+                    ""
+                ],
+                "So][mpu}RgrHstf[mfLT": [
+                    "target pc",
                     ""
                 ]
             },
@@ -100,11 +112,11 @@
                     "next": null,
                     "parent": "a",
                     "inputs": {
-                        "xp.Ahc]%mHiCjMS(xh;,": [
+                        "}#|J*:TkPo/}QyFcIoCV": [
                             1,
                             "d"
                         ],
-                        "mYzHT-`vAhuuR@Gp)wb-": [
+                        "vQ%hmsCf{[jdpy{pYlVo": [
                             1,
                             "e"
                         ]
@@ -116,7 +128,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "set register %s to %s",
-                        "argumentids": "[\"xp.Ahc]%mHiCjMS(xh;,\", \"mYzHT-`vAhuuR@Gp)wb-\"]",
+                        "argumentids": "[\"}#|J*:TkPo/}QyFcIoCV\", \"vQ%hmsCf{[jdpy{pYlVo\"]",
                         "argumentnames": "[\"register\", \"value\"]",
                         "argumentdefaults": "[\"\", \"\"]",
                         "warp": "true",
@@ -134,7 +146,7 @@
                     "fields": {
                         "VALUE": [
                             "register",
-                            "=NTXGt_b+kQf]JrE.TKT"
+                            "cyxp.Ahc]%mHiCjMS(xh"
                         ]
                     },
                     "shadow": true,
@@ -153,7 +165,7 @@
                     "fields": {
                         "VALUE": [
                             "value",
-                            "}qNX#kayQuEC*W`#eZ`#"
+                            ";,fmYzHT-`vAhuuR@Gp)"
                         ]
                     },
                     "shadow": true,
@@ -172,7 +184,7 @@
                     "fields": {
                         "VALUE": [
                             "register",
-                            "fv*iHu*@/_ae:PN,g#y^"
+                            "wb-!`=NTXGt_b+kQf]Jr"
                         ]
                     },
                     "shadow": false,
@@ -216,7 +228,7 @@
                     "fields": {
                         "VALUE": [
                             "value",
-                            "kqbZ#OaBba@mypzMJxm-"
+                            "E.TKT}qNX#kayQuEC*W`"
                         ]
                     },
                     "shadow": false,
@@ -275,7 +287,7 @@
                     "next": null,
                     "parent": "i",
                     "inputs": {
-                        "YkcJ*oGr?SotJcffAH_O": [
+                        "#eZ`#fv*iHu*@/_ae:PN": [
                             1,
                             "l"
                         ]
@@ -287,7 +299,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get register %s",
-                        "argumentids": "[\"YkcJ*oGr?SotJcffAH_O\"]",
+                        "argumentids": "[\"#eZ`#fv*iHu*@/_ae:PN\"]",
                         "argumentnames": "[\"register\"]",
                         "argumentdefaults": "[\"\"]",
                         "warp": "true",
@@ -305,7 +317,7 @@
                     "fields": {
                         "VALUE": [
                             "register",
-                            "f:+(V[wAW}LbrtIQRVlR"
+                            "g#y^kqbZ#OaBba@mypzM"
                         ]
                     },
                     "shadow": true,
@@ -324,7 +336,7 @@
                     "fields": {
                         "VALUE": [
                             "register",
-                            "efIut|LUY^qLo.EgNw?j"
+                            "Jxm-YkcJ*oGr?SotJcff"
                         ]
                     },
                     "shadow": false,
@@ -423,11 +435,11 @@
                     "next": null,
                     "parent": "p",
                     "inputs": {
-                        "MZQM#nm_.-RRp.o:%eMQ": [
+                        "AH_OU`f:+(V[wAW}Lbrt": [
                             1,
                             "s"
                         ],
-                        "v`WlikzChXbmY_?L*/|B": [
+                        "QRVlRefIut|LUY^qLo.E": [
                             1,
                             "t"
                         ]
@@ -439,7 +451,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "set memory %s to %s",
-                        "argumentids": "[\"MZQM#nm_.-RRp.o:%eMQ\", \"v`WlikzChXbmY_?L*/|B\"]",
+                        "argumentids": "[\"AH_OU`f:+(V[wAW}Lbrt\", \"QRVlRefIut|LUY^qLo.E\"]",
                         "argumentnames": "[\"address\", \"value\"]",
                         "argumentdefaults": "[\"\", \"\"]",
                         "warp": "true",
@@ -457,7 +469,7 @@
                     "fields": {
                         "VALUE": [
                             "address",
-                            "VCH|v(yToid@*zp:YGAf"
+                            "Nw?jMZQM#nm_.-RRp.o:"
                         ]
                     },
                     "shadow": true,
@@ -476,7 +488,7 @@
                     "fields": {
                         "VALUE": [
                             "value",
-                            "Bsnz+WU]tn/s`Z%?:P::"
+                            "%eMQtv`WlikzChXbmY_?"
                         ]
                     },
                     "shadow": true,
@@ -495,7 +507,7 @@
                     "fields": {
                         "VALUE": [
                             "address",
-                            "z]CbROPe@sGtW|L-ik?f"
+                            "L*/|B%kVCH|v(yToid@*"
                         ]
                     },
                     "shadow": false,
@@ -509,7 +521,7 @@
                     "fields": {
                         "VALUE": [
                             "value",
-                            "iCqfMb*Qut+V;W@;e{l?"
+                            "zp:YGAfBsnz+WU]tn/s`"
                         ]
                     },
                     "shadow": false,
@@ -598,7 +610,7 @@
                     "next": null,
                     "parent": "x",
                     "inputs": {
-                        "j%AL[#.X}DcaxM;`GQi:": [
+                        "Z%?:P::z]CbROPe@sGtW": [
                             1,
                             "A"
                         ]
@@ -610,7 +622,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get memory %s",
-                        "argumentids": "[\"j%AL[#.X}DcaxM;`GQi:\"]",
+                        "argumentids": "[\"Z%?:P::z]CbROPe@sGtW\"]",
                         "argumentnames": "[\"address\"]",
                         "argumentdefaults": "[\"\"]",
                         "warp": "true",
@@ -628,7 +640,7 @@
                     "fields": {
                         "VALUE": [
                             "address",
-                            "!XXhuqEKQhe.#s/ktT!e"
+                            "-ik?fiCqfMb*Qut+V;W@"
                         ]
                     },
                     "shadow": true,
@@ -647,7 +659,7 @@
                     "fields": {
                         "VALUE": [
                             "address",
-                            ",X+gm-tceqPn^SyX/oh,"
+                            ";e{l?j%AL[#.X}DcaxM;"
                         ]
                     },
                     "shadow": false,
@@ -658,7 +670,7 @@
                     "next": null,
                     "parent": "y",
                     "inputs": {
-                        "RpLqXLp?yeY)Vy+Tjff/": [
+                        "`GQi:HM!XXhuqEKQhe.#": [
                             3,
                             "B",
                             [
@@ -666,7 +678,7 @@
                                 ""
                             ]
                         ],
-                        "d?`{BDl;@#;Nos%`%kn#": [
+                        "/ktT!e,X+gm-tceqPn^S": [
                             3,
                             [
                                 12,
@@ -678,7 +690,7 @@
                                 ""
                             ]
                         ],
-                        "m#td*(#d:PGkTjpTdSSw": [
+                        "X/oh,RpLqXLp?yeY)Vy+": [
                             1,
                             [
                                 10,
@@ -693,7 +705,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get %s from %s else %s",
-                        "argumentids": "[\"RpLqXLp?yeY)Vy+Tjff/\", \"d?`{BDl;@#;Nos%`%kn#\", \"m#td*(#d:PGkTjpTdSSw\"]",
+                        "argumentids": "[\"`GQi:HM!XXhuqEKQhe.#\", \"/ktT!e,X+gm-tceqPn^S\", \"X/oh,RpLqXLp?yeY)Vy+\"]",
                         "warp": "true",
                         "returns": "true",
                         "edited": "true",
@@ -740,15 +752,15 @@
                     "next": null,
                     "parent": "D",
                     "inputs": {
-                        "RpLqXLp?yeY)Vy+Tjff/": [
+                        "`GQi:HM!XXhuqEKQhe.#": [
                             1,
                             "G"
                         ],
-                        "d?`{BDl;@#;Nos%`%kn#": [
+                        "/ktT!e,X+gm-tceqPn^S": [
                             1,
                             "H"
                         ],
-                        "m#td*(#d:PGkTjpTdSSw": [
+                        "X/oh,RpLqXLp?yeY)Vy+": [
                             1,
                             "I"
                         ]
@@ -760,7 +772,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get %s from %s else %s",
-                        "argumentids": "[\"RpLqXLp?yeY)Vy+Tjff/\", \"d?`{BDl;@#;Nos%`%kn#\", \"m#td*(#d:PGkTjpTdSSw\"]",
+                        "argumentids": "[\"`GQi:HM!XXhuqEKQhe.#\", \"/ktT!e,X+gm-tceqPn^S\", \"X/oh,RpLqXLp?yeY)Vy+\"]",
                         "argumentnames": "[\"key\", \"json\", \"default\"]",
                         "argumentdefaults": "[\"\", \"\", \"\"]",
                         "warp": "true",
@@ -778,7 +790,7 @@
                     "fields": {
                         "VALUE": [
                             "key",
-                            "UjsAaApaLVdDsx+o.SHq"
+                            "jff/Gd?`{BDl;@#;Nos%"
                         ]
                     },
                     "shadow": true,
@@ -797,7 +809,7 @@
                     "fields": {
                         "VALUE": [
                             "json",
-                            "dAUQ-LL^Px}kn[|NuWsq"
+                            "`%kn#im#td*(#d:PGkTj"
                         ]
                     },
                     "shadow": true,
@@ -816,7 +828,7 @@
                     "fields": {
                         "VALUE": [
                             "default",
-                            "CO=FExLV#fqcYjjq#M^#"
+                            "pTdSSwbDUjsAaApaLVdD"
                         ]
                     },
                     "shadow": true,
@@ -835,7 +847,7 @@
                     "fields": {
                         "VALUE": [
                             "json",
-                            "s}%MTkF)V@hW!b#P)AVL"
+                            "sx+o.SHqdAUQ-LL^Px}k"
                         ]
                     },
                     "shadow": false,
@@ -849,7 +861,7 @@
                     "fields": {
                         "VALUE": [
                             "key",
-                            "-lxnJo_t*Zx#(wF+R?sT"
+                            "n[|NuWsqCO=FExLV#fqc"
                         ]
                     },
                     "shadow": false,
@@ -889,7 +901,7 @@
                     "fields": {
                         "VALUE": [
                             "key",
-                            ",l.ALa*,aBMoM]t%-l:D"
+                            "Yjjq#M^#s}%MTkF)V@hW"
                         ]
                     },
                     "shadow": false,
@@ -903,7 +915,7 @@
                     "fields": {
                         "VALUE": [
                             "json",
-                            "]ZJcpIfaGY@|Y)nGTKzk"
+                            "!b#P)AVL-lxnJo_t*Zx#"
                         ]
                     },
                     "shadow": false,
@@ -961,7 +973,7 @@
                     "fields": {
                         "VALUE": [
                             "default",
-                            "ejHN[Rp@Fui#LK?r{?A["
+                            "(wF+R?sT,l.ALa*,aBMo"
                         ]
                     },
                     "shadow": false,
@@ -1028,7 +1040,7 @@
                     "next": null,
                     "parent": "S",
                     "inputs": {
-                        "n!]ZJL)V`ruppWZ},r_M": [
+                        "M]t%-l:D]ZJcpIfaGY@|": [
                             1,
                             "V"
                         ]
@@ -1040,7 +1052,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "execute instr %s",
-                        "argumentids": "[\"n!]ZJL)V`ruppWZ},r_M\"]",
+                        "argumentids": "[\"M]t%-l:D]ZJcpIfaGY@|\"]",
                         "argumentnames": "[\"instr\"]",
                         "argumentdefaults": "[\"\"]",
                         "warp": "true",
@@ -1058,7 +1070,7 @@
                     "fields": {
                         "VALUE": [
                             "instr",
-                            "#B./;O:h)Ms:gBdT-Yb@"
+                            ")nGTKzkejHN[Rp@Fui#L"
                         ]
                     },
                     "shadow": true,
@@ -1077,7 +1089,7 @@
                     "fields": {
                         "VALUE": [
                             "instr",
-                            "ikYaUfoaILDs{Kyn(+QX"
+                            "K?r{?A[n!]ZJL)V`rupp"
                         ]
                     },
                     "shadow": false,
@@ -1140,7 +1152,7 @@
                     "fields": {
                         "VALUE": [
                             "instr",
-                            "vQ#(s*s@OqAx)SX%/XCz"
+                            "WZ},r_MT-#B./;O:h)Ms"
                         ]
                     },
                     "shadow": false,
@@ -1203,7 +1215,7 @@
                     "fields": {
                         "VALUE": [
                             "instr",
-                            ")A}gXeDkxUhwDMl=KT!+"
+                            ":gBdT-Yb@ikYaUfoaILD"
                         ]
                     },
                     "shadow": false,
@@ -1214,14 +1226,14 @@
                     "next": null,
                     "parent": "#",
                     "inputs": {
-                        "RpLqXLp?yeY)Vy+Tjff/": [
+                        "`GQi:HM!XXhuqEKQhe.#": [
                             1,
                             [
                                 10,
                                 "arg0"
                             ]
                         ],
-                        "d?`{BDl;@#;Nos%`%kn#": [
+                        "/ktT!e,X+gm-tceqPn^S": [
                             3,
                             "%",
                             [
@@ -1229,7 +1241,7 @@
                                 ""
                             ]
                         ],
-                        "m#td*(#d:PGkTjpTdSSw": [
+                        "X/oh,RpLqXLp?yeY)Vy+": [
                             1,
                             [
                                 10,
@@ -1244,7 +1256,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get %s from %s else %s",
-                        "argumentids": "[\"RpLqXLp?yeY)Vy+Tjff/\", \"d?`{BDl;@#;Nos%`%kn#\", \"m#td*(#d:PGkTjpTdSSw\"]",
+                        "argumentids": "[\"`GQi:HM!XXhuqEKQhe.#\", \"/ktT!e,X+gm-tceqPn^S\", \"X/oh,RpLqXLp?yeY)Vy+\"]",
                         "warp": "true",
                         "returns": "true",
                         "edited": "true",
@@ -1284,7 +1296,7 @@
                     "fields": {
                         "VALUE": [
                             "instr",
-                            "g?^(|+/G-BRIffguSaLa"
+                            "s{Kyn(+QXvQ#(s*s@OqA"
                         ]
                     },
                     "shadow": false,
@@ -1295,14 +1307,14 @@
                     "next": null,
                     "parent": ")",
                     "inputs": {
-                        "RpLqXLp?yeY)Vy+Tjff/": [
+                        "`GQi:HM!XXhuqEKQhe.#": [
                             1,
                             [
                                 10,
                                 "arg1"
                             ]
                         ],
-                        "d?`{BDl;@#;Nos%`%kn#": [
+                        "/ktT!e,X+gm-tceqPn^S": [
                             3,
                             "*",
                             [
@@ -1310,7 +1322,7 @@
                                 ""
                             ]
                         ],
-                        "m#td*(#d:PGkTjpTdSSw": [
+                        "X/oh,RpLqXLp?yeY)Vy+": [
                             1,
                             [
                                 10,
@@ -1325,7 +1337,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get %s from %s else %s",
-                        "argumentids": "[\"RpLqXLp?yeY)Vy+Tjff/\", \"d?`{BDl;@#;Nos%`%kn#\", \"m#td*(#d:PGkTjpTdSSw\"]",
+                        "argumentids": "[\"`GQi:HM!XXhuqEKQhe.#\", \"/ktT!e,X+gm-tceqPn^S\", \"X/oh,RpLqXLp?yeY)Vy+\"]",
                         "warp": "true",
                         "returns": "true",
                         "edited": "true",
@@ -1365,7 +1377,7 @@
                     "fields": {
                         "VALUE": [
                             "instr",
-                            "ri%CY_C+yRnkOP[+PGd?"
+                            "x)SX%/XCz)A}gXeDkxUh"
                         ]
                     },
                     "shadow": false,
@@ -1376,14 +1388,14 @@
                     "next": null,
                     "parent": ",",
                     "inputs": {
-                        "RpLqXLp?yeY)Vy+Tjff/": [
+                        "`GQi:HM!XXhuqEKQhe.#": [
                             1,
                             [
                                 10,
                                 "arg2"
                             ]
                         ],
-                        "d?`{BDl;@#;Nos%`%kn#": [
+                        "/ktT!e,X+gm-tceqPn^S": [
                             3,
                             "-",
                             [
@@ -1391,7 +1403,7 @@
                                 ""
                             ]
                         ],
-                        "m#td*(#d:PGkTjpTdSSw": [
+                        "X/oh,RpLqXLp?yeY)Vy+": [
                             1,
                             [
                                 10,
@@ -1406,7 +1418,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get %s from %s else %s",
-                        "argumentids": "[\"RpLqXLp?yeY)Vy+Tjff/\", \"d?`{BDl;@#;Nos%`%kn#\", \"m#td*(#d:PGkTjpTdSSw\"]",
+                        "argumentids": "[\"`GQi:HM!XXhuqEKQhe.#\", \"/ktT!e,X+gm-tceqPn^S\", \"X/oh,RpLqXLp?yeY)Vy+\"]",
                         "warp": "true",
                         "returns": "true",
                         "edited": "true",
@@ -1443,7 +1455,7 @@
                     "next": null,
                     "parent": ";",
                     "inputs": {
-                        "xp.Ahc]%mHiCjMS(xh;,": [
+                        "}#|J*:TkPo/}QyFcIoCV": [
                             3,
                             [
                                 12,
@@ -1455,7 +1467,7 @@
                                 ""
                             ]
                         ],
-                        "mYzHT-`vAhuuR@Gp)wb-": [
+                        "vQ%hmsCf{[jdpy{pYlVo": [
                             3,
                             [
                                 12,
@@ -1475,7 +1487,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "set register %s to %s",
-                        "argumentids": "[\"xp.Ahc]%mHiCjMS(xh;,\", \"mYzHT-`vAhuuR@Gp)wb-\"]",
+                        "argumentids": "[\"}#|J*:TkPo/}QyFcIoCV\", \"vQ%hmsCf{[jdpy{pYlVo\"]",
                         "warp": "true",
                         "returns": "false",
                         "edited": "true",
@@ -1531,7 +1543,7 @@
                     "next": null,
                     "parent": "=",
                     "inputs": {
-                        "xp.Ahc]%mHiCjMS(xh;,": [
+                        "}#|J*:TkPo/}QyFcIoCV": [
                             3,
                             [
                                 12,
@@ -1543,7 +1555,7 @@
                                 ""
                             ]
                         ],
-                        "mYzHT-`vAhuuR@Gp)wb-": [
+                        "vQ%hmsCf{[jdpy{pYlVo": [
                             3,
                             "@",
                             [
@@ -1559,7 +1571,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "set register %s to %s",
-                        "argumentids": "[\"xp.Ahc]%mHiCjMS(xh;,\", \"mYzHT-`vAhuuR@Gp)wb-\"]",
+                        "argumentids": "[\"}#|J*:TkPo/}QyFcIoCV\", \"vQ%hmsCf{[jdpy{pYlVo\"]",
                         "warp": "true",
                         "returns": "false",
                         "edited": "true",
@@ -1636,7 +1648,7 @@
                     "next": null,
                     "parent": "`",
                     "inputs": {
-                        "YkcJ*oGr?SotJcffAH_O": [
+                        "#eZ`#fv*iHu*@/_ae:PN": [
                             3,
                             [
                                 12,
@@ -1656,7 +1668,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get register %s",
-                        "argumentids": "[\"YkcJ*oGr?SotJcffAH_O\"]",
+                        "argumentids": "[\"#eZ`#fv*iHu*@/_ae:PN\"]",
                         "warp": "true",
                         "returns": "true",
                         "edited": "true",
@@ -1743,7 +1755,7 @@
                     "next": null,
                     "parent": "aa",
                     "inputs": {
-                        "YkcJ*oGr?SotJcffAH_O": [
+                        "#eZ`#fv*iHu*@/_ae:PN": [
                             3,
                             [
                                 12,
@@ -1763,7 +1775,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get register %s",
-                        "argumentids": "[\"YkcJ*oGr?SotJcffAH_O\"]",
+                        "argumentids": "[\"#eZ`#fv*iHu*@/_ae:PN\"]",
                         "warp": "true",
                         "returns": "true",
                         "edited": "true",
@@ -2204,7 +2216,7 @@
                     "fields": {
                         "OPERATOR": [
                             "floor",
-                            "fyVkA@SyzGMN?XG.SEfN"
+                            "wDMl=KT!+g?^(|+/G-BR"
                         ]
                     },
                     "shadow": false,
@@ -2706,7 +2718,7 @@
                     "next": null,
                     "parent": "ae",
                     "inputs": {
-                        "xp.Ahc]%mHiCjMS(xh;,": [
+                        "}#|J*:TkPo/}QyFcIoCV": [
                             3,
                             [
                                 12,
@@ -2718,7 +2730,7 @@
                                 ""
                             ]
                         ],
-                        "mYzHT-`vAhuuR@Gp)wb-": [
+                        "vQ%hmsCf{[jdpy{pYlVo": [
                             3,
                             [
                                 12,
@@ -2738,7 +2750,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "set register %s to %s",
-                        "argumentids": "[\"xp.Ahc]%mHiCjMS(xh;,\", \"mYzHT-`vAhuuR@Gp)wb-\"]",
+                        "argumentids": "[\"}#|J*:TkPo/}QyFcIoCV\", \"vQ%hmsCf{[jdpy{pYlVo\"]",
                         "warp": "true",
                         "returns": "false",
                         "edited": "true",
@@ -2772,7 +2784,7 @@
                     "next": null,
                     "parent": "aM",
                     "inputs": {
-                        "YkcJ*oGr?SotJcffAH_O": [
+                        "#eZ`#fv*iHu*@/_ae:PN": [
                             3,
                             [
                                 12,
@@ -2792,7 +2804,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get register %s",
-                        "argumentids": "[\"YkcJ*oGr?SotJcffAH_O\"]",
+                        "argumentids": "[\"#eZ`#fv*iHu*@/_ae:PN\"]",
                         "warp": "true",
                         "returns": "true",
                         "edited": "true",
@@ -2904,7 +2916,7 @@
                     "next": null,
                     "parent": "aS",
                     "inputs": {
-                        "j%AL[#.X}DcaxM;`GQi:": [
+                        "Z%?:P::z]CbROPe@sGtW": [
                             3,
                             [
                                 12,
@@ -2924,7 +2936,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get memory %s",
-                        "argumentids": "[\"j%AL[#.X}DcaxM;`GQi:\"]",
+                        "argumentids": "[\"Z%?:P::z]CbROPe@sGtW\"]",
                         "warp": "true",
                         "returns": "true",
                         "edited": "true",
@@ -2937,7 +2949,7 @@
                     "next": null,
                     "parent": "aT",
                     "inputs": {
-                        "xp.Ahc]%mHiCjMS(xh;,": [
+                        "}#|J*:TkPo/}QyFcIoCV": [
                             3,
                             [
                                 12,
@@ -2949,7 +2961,7 @@
                                 ""
                             ]
                         ],
-                        "mYzHT-`vAhuuR@Gp)wb-": [
+                        "vQ%hmsCf{[jdpy{pYlVo": [
                             3,
                             "aR",
                             [
@@ -2965,7 +2977,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "set register %s to %s",
-                        "argumentids": "[\"xp.Ahc]%mHiCjMS(xh;,\", \"mYzHT-`vAhuuR@Gp)wb-\"]",
+                        "argumentids": "[\"}#|J*:TkPo/}QyFcIoCV\", \"vQ%hmsCf{[jdpy{pYlVo\"]",
                         "warp": "true",
                         "returns": "false",
                         "edited": "true",
@@ -2999,7 +3011,7 @@
                     "next": null,
                     "parent": "aW",
                     "inputs": {
-                        "YkcJ*oGr?SotJcffAH_O": [
+                        "#eZ`#fv*iHu*@/_ae:PN": [
                             3,
                             [
                                 12,
@@ -3019,7 +3031,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get register %s",
-                        "argumentids": "[\"YkcJ*oGr?SotJcffAH_O\"]",
+                        "argumentids": "[\"#eZ`#fv*iHu*@/_ae:PN\"]",
                         "warp": "true",
                         "returns": "true",
                         "edited": "true",
@@ -3032,7 +3044,7 @@
                     "next": null,
                     "parent": "aU",
                     "inputs": {
-                        "MZQM#nm_.-RRp.o:%eMQ": [
+                        "AH_OU`f:+(V[wAW}Lbrt": [
                             3,
                             [
                                 12,
@@ -3044,7 +3056,7 @@
                                 ""
                             ]
                         ],
-                        "v`WlikzChXbmY_?L*/|B": [
+                        "QRVlRefIut|LUY^qLo.E": [
                             3,
                             "aV",
                             [
@@ -3060,7 +3072,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "set memory %s to %s",
-                        "argumentids": "[\"MZQM#nm_.-RRp.o:%eMQ\", \"v`WlikzChXbmY_?L*/|B\"]",
+                        "argumentids": "[\"AH_OU`f:+(V[wAW}Lbrt\", \"QRVlRefIut|LUY^qLo.E\"]",
                         "warp": "true",
                         "returns": "false",
                         "edited": "true",
@@ -3137,7 +3149,7 @@
                     "next": null,
                     "parent": "aZ",
                     "inputs": {
-                        "YkcJ*oGr?SotJcffAH_O": [
+                        "#eZ`#fv*iHu*@/_ae:PN": [
                             3,
                             [
                                 12,
@@ -3157,7 +3169,7 @@
                         "tagName": "mutation",
                         "children": [],
                         "proccode": "get register %s",
-                        "argumentids": "[\"YkcJ*oGr?SotJcffAH_O\"]",
+                        "argumentids": "[\"#eZ`#fv*iHu*@/_ae:PN\"]",
                         "warp": "true",
                         "returns": "true",
                         "edited": "true",
@@ -3219,13 +3231,137 @@
                     "shadow": false,
                     "topLevel": false
                 },
+                "a(": {
+                    "opcode": "operator_equals",
+                    "next": null,
+                    "parent": "a)",
+                    "inputs": {
+                        "OPERAND1": [
+                            3,
+                            [
+                                12,
+                                "result",
+                                "[%,ipiuqlv;mSh{tDvPo"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "OPERAND2": [
+                            1,
+                            [
+                                10,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a*": {
+                    "opcode": "operator_lt",
+                    "next": null,
+                    "parent": "a+",
+                    "inputs": {
+                        "OPERAND1": [
+                            3,
+                            [
+                                12,
+                                "result",
+                                "[%,ipiuqlv;mSh{tDvPo"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "OPERAND2": [
+                            1,
+                            [
+                                10,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a+": {
+                    "opcode": "jgJSON_setValueToKeyInJSON",
+                    "next": null,
+                    "parent": "a)",
+                    "inputs": {
+                        "KEY": [
+                            1,
+                            [
+                                10,
+                                "negative"
+                            ]
+                        ],
+                        "VALUE": [
+                            3,
+                            "a*",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "JSON": [
+                            1,
+                            [
+                                10,
+                                "{}"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a)": {
+                    "opcode": "jgJSON_setValueToKeyInJSON",
+                    "next": null,
+                    "parent": "a#",
+                    "inputs": {
+                        "KEY": [
+                            1,
+                            [
+                                10,
+                                "zero"
+                            ]
+                        ],
+                        "VALUE": [
+                            3,
+                            "a(",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "JSON": [
+                            3,
+                            "a+",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
                 "a#": {
                     "opcode": "data_setvariableto",
                     "next": null,
                     "parent": "a!",
                     "inputs": {
                         "VALUE": [
-                            1,
+                            3,
+                            "a)",
                             [
                                 10,
                                 ""
@@ -3245,7 +3381,7 @@
                 "a%": {
                     "opcode": "control_case",
                     "next": null,
-                    "parent": "a(",
+                    "parent": "a,",
                     "inputs": {
                         "CONDITION": [
                             1,
@@ -3263,7 +3399,7 @@
                     "shadow": false,
                     "topLevel": false
                 },
-                "a(": {
+                "a,": {
                     "opcode": "control_switch",
                     "next": null,
                     "parent": "aX",
@@ -3287,7 +3423,7 @@
                 },
                 "aX": {
                     "opcode": "control_case",
-                    "next": null,
+                    "next": "a-",
                     "parent": "aK",
                     "inputs": {
                         "CONDITION": [
@@ -3299,7 +3435,269 @@
                         ],
                         "SUBSTACK": [
                             2,
-                            "a("
+                            "a,"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a.": {
+                    "opcode": "jgJSON_getValueFromJSON",
+                    "next": null,
+                    "parent": "a/",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "negative"
+                            ]
+                        ],
+                        "JSON": [
+                            3,
+                            [
+                                12,
+                                "flags",
+                                "[%,iP!u{-z.[j%O?sCk,"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a/": {
+                    "opcode": "operator_boolify",
+                    "next": null,
+                    "parent": "a:",
+                    "inputs": {
+                        "ONE": [
+                            3,
+                            "a.",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a:": {
+                    "opcode": "operator_not",
+                    "next": null,
+                    "parent": "a;",
+                    "inputs": {
+                        "OPERAND": [
+                            2,
+                            "a/"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a;": {
+                    "opcode": "data_setvariableto",
+                    "next": "a=",
+                    "parent": "a?",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "a:",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "do branch",
+                            "[%,iIyZt]blDR|^|i:cb",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a=": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "a;",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            [
+                                12,
+                                "arg0",
+                                "[%,iYDn}nMmJo/X/FP^Q"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "target pc",
+                            "[%,iSo][mpu}RgrHstf[",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a?": {
+                    "opcode": "control_case",
+                    "next": null,
+                    "parent": "a@",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "bge"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "a;"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a@": {
+                    "opcode": "control_switch",
+                    "next": "a[",
+                    "parent": "a-",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            [
+                                12,
+                                "instr",
+                                "[%,iLs[a`qyi_ZsX;|*!"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "a?"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a]": {
+                    "opcode": "operator_boolify",
+                    "next": null,
+                    "parent": "a[",
+                    "inputs": {
+                        "ONE": [
+                            3,
+                            [
+                                12,
+                                "do branch",
+                                "[%,iIyZt]blDR|^|i:cb"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a^": {
+                    "opcode": "data_setvariableto",
+                    "next": "a_",
+                    "parent": "a[",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            [
+                                12,
+                                "target pc",
+                                "[%,iSo][mpu}RgrHstf["
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "program counter",
+                            "[%,iB+safrZ+T+(vpJtA",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a_": {
+                    "opcode": "procedures_return",
+                    "next": null,
+                    "parent": "a^",
+                    "inputs": {
+                        "return": [
+                            1,
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a[": {
+                    "opcode": "control_if",
+                    "next": null,
+                    "parent": "a@",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "a]"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "a^"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a-": {
+                    "opcode": "control_case",
+                    "next": null,
+                    "parent": "aX",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "branch"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "a@"
                         ]
                     },
                     "fields": {},
@@ -3308,7 +3706,7 @@
                 },
                 "/": {
                     "opcode": "control_switch",
-                    "next": null,
+                    "next": "a`",
                     "parent": ",",
                     "inputs": {
                         "CONDITION": [
@@ -3325,6 +3723,29 @@
                         ]
                     },
                     "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a`": {
+                    "opcode": "data_changevariableby",
+                    "next": null,
+                    "parent": "/",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "program counter",
+                            "[%,iB+safrZ+T+(vpJtA",
+                            ""
+                        ]
+                    },
                     "shadow": false,
                     "topLevel": false
                 }

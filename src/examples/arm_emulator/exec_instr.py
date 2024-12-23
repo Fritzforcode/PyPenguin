@@ -1,3 +1,5 @@
+from helpers import *
+
 setArgs = [
     {
         "opcode": "set [VARIABLE] to (VALUE)",
@@ -35,10 +37,7 @@ moveCase = {
             {
                 "opcode": "switch (CONDITION) {CASES}",
                 "inputs": {
-                    "CONDITION": {"block": {
-                        "opcode": "value of [VARIABLE]",
-                        "options": {"VARIABLE": ["variable", "instr"]},
-                    }},
+                    "CONDITION": {"block": varReporterBlock("instr")},
                     "CASES": {"blocks": [
                         {
                             "opcode": "case (CONDITION) {BODY}",
@@ -48,14 +47,8 @@ moveCase = {
                                     {
                                         "opcode": "call custom block",
                                         "inputs": {
-                                            "register": {"block": {
-                                                "opcode": "value of [VARIABLE]",
-                                                "options": {"VARIABLE": ["variable", "arg0"]},
-                                            }},
-                                            "value": {"block": {
-                                                "opcode": "value of [VARIABLE]",
-                                                "options": {"VARIABLE": ["variable", "arg1"]},
-                                            }},
+                                            "register": {"block": varReporterBlock("arg0")},
+                                            "value"   : {"block": varReporterBlock("arg1")},
                                         },
                                         "options": {"customOpcode": ["value", "set register (register) to (value)"]},
                                     },
@@ -70,17 +63,11 @@ moveCase = {
                                     {
                                         "opcode": "call custom block",
                                         "inputs": {
-                                            "register": {"block": {
-                                                "opcode": "value of [VARIABLE]",
-                                                "options": {"VARIABLE": ["variable", "arg0"]},
-                                            }},
+                                            "register": {"block": varReporterBlock("arg0")},
                                             "value": {"block": {
                                                 "opcode": "not (NUM)",
                                                 "inputs": {
-                                                    "NUM": {"block": {
-                                                        "opcode": "value of [VARIABLE]",
-                                                        "options": {"VARIABLE": ["variable", "arg1"]},
-                                                    }},
+                                                    "NUM": {"block": varReporterBlock("arg1")},
                                                 },
                                             }},
                                         },
@@ -127,10 +114,7 @@ for opcode, instr in [
                                 "CONDITION": {"block": {
                                     "opcode": "(OPERAND1) = (OPERAND2)",
                                     "inputs": {
-                                        "OPERAND1": {"block": {
-                                            "opcode": "value of [VARIABLE]",
-                                            "options": {"VARIABLE": ["variable", "value2"]},
-                                        }},
+                                        "OPERAND1": {"block": varReporterBlock("value2")},
                                         "OPERAND2": {"text": "0"},
                                     },
                                 }},
@@ -141,14 +125,8 @@ for opcode, instr in [
                                         "NUM": {"block": {
                                             "opcode": opcode,
                                             "inputs": {
-                                                id1: {"block": {
-                                                    "opcode": "value of [VARIABLE]",
-                                                    "options": {"VARIABLE": ["variable", "value1"]},
-                                                }},
-                                                id2: {"block": {
-                                                    "opcode": "value of [VARIABLE]",
-                                                    "options": {"VARIABLE": ["variable", "value2"]},
-                                                }},
+                                                id1: {"block": varReporterBlock("value1")},
+                                                id2: {"block": varReporterBlock("value2")},
                                             },
                                         }},
                                     },
@@ -174,14 +152,8 @@ for opcode, instr in [
                         "VALUE": {"block": {
                             "opcode": opcode,
                             "inputs": {
-                                id1: {"block": {
-                                    "opcode": "value of [VARIABLE]",
-                                    "options": {"VARIABLE": ["variable", "value1"]},
-                                }},
-                                id2: {"block": {
-                                    "opcode": "value of [VARIABLE]",
-                                    "options": {"VARIABLE": ["variable", "value2"]},
-                                }},
+                                id1: {"block": varReporterBlock("value1")},
+                                id2: {"block": varReporterBlock("value2")},
                             },
                         }},
                     },
@@ -202,10 +174,7 @@ aluCase = {
                     "VALUE": {"block": {
                         "opcode": "call custom block",
                         "inputs": {
-                            "register": {"block": {
-                                "opcode": "value of [VARIABLE]",
-                                "options": {"VARIABLE": ["variable", "arg1"]},
-                            }},
+                            "register": {"block": varReporterBlock("arg1")},
                         },
                         "options": {"customOpcode": ["value", "get register (register)"]},
                     }},
@@ -218,20 +187,14 @@ aluCase = {
                     "CONDITION": {"block": {
                         "opcode": "(STRING) is number?",
                         "inputs": {
-                            "STRING": {"block": {
-                                "opcode": "value of [VARIABLE]",
-                                "options": {"VARIABLE": ["variable", "arg2"]},
-                            }},
+                            "STRING": {"block": varReporterBlock("arg2")},
                         },
                     }},
                     "THEN": {"blocks": [
                         {
                             "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
-                                "VALUE": {"block": {
-                                    "opcode": "value of [VARIABLE]",
-                                    "options": {"VARIABLE": ["variable", "arg2"]},
-                                }},
+                                "VALUE": {"block": varReporterBlock("arg2")},
                             },
                             "options": {"VARIABLE": ["variable", "value2"]},
                         },
@@ -243,10 +206,7 @@ aluCase = {
                                 "VALUE": {"block": {
                                     "opcode": "call custom block",
                                     "inputs": {
-                                        "register": {"block": {
-                                            "opcode": "value of [VARIABLE]",
-                                            "options": {"VARIABLE": ["variable", "arg2"]},
-                                        }},
+                                        "register": {"block": varReporterBlock("arg2")},
                                     },
                                     "options": {"customOpcode": ["value", "get register (register)"]},
                                 }},
@@ -262,10 +222,7 @@ aluCase = {
                     "CONDITION": {"block": {
                         "opcode": "(OPERAND1) = (OPERAND2)",
                         "inputs": {
-                            "OPERAND1": {"block": {
-                                "opcode": "value of [VARIABLE]",
-                                "options": {"VARIABLE": ["variable", "instr"]},
-                            }},
+                            "OPERAND1": {"block": varReporterBlock("instr")},
                             "OPERAND2": {"text": "addi"},
                         },
                     }},
@@ -281,24 +238,15 @@ aluCase = {
             {
                 "opcode": "switch (CONDITION) {CASES}",
                 "inputs": {
-                    "CONDITION": {"block": {
-                        "opcode": "value of [VARIABLE]",
-                        "options": {"VARIABLE": ["variable", "instr"]},
-                    }},
+                    "CONDITION": {"block": varReporterBlock("instr")},
                     "CASES": {"blocks": aluSubcases},
                 },
             },
             {
                 "opcode": "call custom block",
                 "inputs": {
-                    "register": {"block": {
-                        "opcode": "value of [VARIABLE]",
-                        "options": {"VARIABLE": ["variable", "arg0"]},
-                    }},
-                    "value": {"block": {
-                        "opcode": "value of [VARIABLE]",
-                        "options": {"VARIABLE": ["variable", "result"]},
-                    }},
+                    "register": {"block": varReporterBlock("arg0")},
+                    "value": {"block": varReporterBlock("result")},
                 },
                 "options": {"customOpcode": ["value", "set register (register) to (value)"]},
             },
@@ -317,10 +265,7 @@ memoryCase = {
                     "VALUE": {"block": {
                         "opcode": "call custom block",
                         "inputs": {
-                            "register": {"block": {
-                                "opcode": "value of [VARIABLE]",
-                                "options": {"VARIABLE": ["variable", "arg1"]},
-                            }},
+                            "register": {"block": varReporterBlock("arg1")},
                         },
                         "options": {"customOpcode": ["value", "get register (register)"]},
                     }},
@@ -333,10 +278,7 @@ memoryCase = {
                     "CONDITION": {"block": {
                         "opcode": "(OPERAND1) != (OPERAND2)",
                         "inputs": {
-                            "OPERAND1": {"block": {
-                                "opcode": "value of [VARIABLE]",
-                                "options": {"VARIABLE": ["variable", "arg2"]},
-                            }},
+                            "OPERAND1": {"block": varReporterBlock("arg2")},
                             "OPERAND2": {"text": "null"},
                         },
                     }},
@@ -344,10 +286,7 @@ memoryCase = {
                         {
                             "opcode": "change [VARIABLE] by (VALUE)",
                             "inputs": {
-                                "VALUE": {"block": {
-                                    "opcode": "value of [VARIABLE]",
-                                    "options": {"VARIABLE": ["variable", "arg2"]},
-                                }},
+                                "VALUE": {"block": varReporterBlock("arg2")},
                             },
                             "options": {"VARIABLE": ["variable", "address"]},
                         },
@@ -357,10 +296,7 @@ memoryCase = {
             {
                 "opcode": "switch (CONDITION) {CASES}",
                 "inputs": {
-                    "CONDITION": {"block": {
-                        "opcode": "value of [VARIABLE]",
-                        "options": {"VARIABLE": ["variable", "instr"]},
-                    }},
+                    "CONDITION": {"block": varReporterBlock("instr")},
                     "CASES": {"blocks": [
                         {
                             "opcode": "case (CONDITION) {BODY}",
@@ -370,17 +306,11 @@ memoryCase = {
                                     {
                                         "opcode": "call custom block",
                                         "inputs": {
-                                            "register": {"block": {
-                                                "opcode": "value of [VARIABLE]",
-                                                "options": {"VARIABLE": ["variable", "arg0"]},
-                                            }},
+                                            "register": {"block": varReporterBlock("arg0")},
                                             "value": {"block": {
                                                 "opcode": "call custom block",
                                                 "inputs": {
-                                                    "address": {"block": {
-                                                        "opcode": "value of [VARIABLE]",
-                                                        "options": {"VARIABLE": ["variable", "address"]},
-                                                    }},
+                                                    "address": {"block": varReporterBlock("address")},
                                                 },
                                                 "options": {"customOpcode": ["value", "get memory (address)"]},
                                             }},
@@ -398,17 +328,11 @@ memoryCase = {
                                     {
                                         "opcode": "call custom block",
                                         "inputs": {
-                                            "address": {"block": {
-                                                "opcode": "value of [VARIABLE]",
-                                                "options": {"VARIABLE": ["variable", "address"]},
-                                            }},
+                                            "address": {"block": varReporterBlock("address")},
                                             "value": {"block": {
                                                 "opcode": "call custom block",
                                                 "inputs": {
-                                                    "register": {"block": {
-                                                        "opcode": "value of [VARIABLE]",
-                                                        "options": {"VARIABLE": ["variable", "arg0"]},
-                                                    }},
+                                                    "register": {"block": varReporterBlock("arg0")},
                                                 },
                                                 "options": {"customOpcode": ["value", "get register (register)"]},
                                             }},
@@ -435,10 +359,7 @@ setFlags = {
                 "VALUE": {"block": {
                     "opcode": "(OPERAND1) = (OPERAND2)",
                     "inputs": {
-                        "OPERAND1": {"block": {
-                            "opcode": "value of [VARIABLE]",
-                            "options": {"VARIABLE": ["variable", "result"]},
-                        }},
+                        "OPERAND1": {"block": varReporterBlock("result")},
                         "OPERAND2": {"text": "0"},
                     },
                 }},
@@ -447,12 +368,9 @@ setFlags = {
                     "inputs": {
                         "KEY": {"text": "negative"},
                         "VALUE": {"block": {
-                            "opcode": "(OPERAND1) = (OPERAND2)",
+                            "opcode": "(OPERAND1) < (OPERAND2)",
                             "inputs": {
-                                "OPERAND1": {"block": {
-                                    "opcode": "value of [VARIABLE]",
-                                    "options": {"VARIABLE": ["variable", "result"]},
-                                }},
+                                "OPERAND1": {"block": varReporterBlock("result")},
                                 "OPERAND2": {"text": "0"},
                             },
                         }},
@@ -473,10 +391,7 @@ comparisonCase = {
             {
                 "opcode": "switch (CONDITION) {CASES}",
                 "inputs": {
-                    "CONDITION": {"block": {
-                        "opcode": "value of [VARIABLE]",
-                        "options": {"VARIABLE": ["variable", "instr"]},
-                    }},
+                    "CONDITION": {"block": varReporterBlock("instr")},
                     "CASES": {"blocks": [
                         {
                             "opcode": "case (CONDITION) {BODY}",
@@ -492,17 +407,11 @@ comparisonCase = {
                                                     "OPERAND1": {"block": {
                                                         "opcode": "call custom block",
                                                         "inputs": {
-                                                            "register": {"block": {
-                                                                "opcode": "value of [VARIABLE]",
-                                                                "options": {"VARIABLE": ["variable", "arg0"]},
-                                                            }},
+                                                            "register": {"block": varReporterBlock("arg0")},
                                                         },
                                                         "options": {"customOpcode": ["value", "get register (register)"]},
                                                     }},
-                                                    "OPERAND2": {"block": {
-                                                        "opcode": "value of [VARIABLE]",
-                                                        "options": {"VARIABLE": ["variable", "arg1"]},
-                                                    }},
+                                                    "OPERAND2": {"block": varReporterBlock("arg1")},
                                                 },
                                             }},
                                         },
@@ -516,6 +425,87 @@ comparisonCase = {
                 },
             },
         ]}
+    },
+}
+
+branchCase = {
+    "opcode": "case (CONDITION) {BODY}",
+    "inputs": {
+        "CONDITION": {"text": "branch"},
+        "BODY": {"blocks": [
+            {
+                "opcode": "switch (CONDITION) {CASES}",
+                "inputs": {
+                    "CONDITION": {"block": varReporterBlock("instr")},
+                    "CASES": {"blocks": [
+                        {
+                            "opcode": "case (CONDITION) {BODY}",
+                            "inputs": {
+                                "CONDITION": {"text": "bge"},
+                                "BODY": {"blocks": [
+                                    {
+                                        "opcode": "set [VARIABLE] to (VALUE)",
+                                        "inputs": {
+                                            "VALUE": {"block": {
+                                                "opcode": "not <OPERAND>",
+                                                "inputs": {
+                                                    "OPERAND": {"block": {
+                                                        "opcode": "(VALUE) as a boolean",
+                                                        "inputs": {
+                                                            "VALUE": {"block": {
+                                                                "opcode": "get (KEY) from (JSON)",
+                                                                "inputs": {
+                                                                    "KEY": {"text": "negative"},
+                                                                    "JSON": {"block": varReporterBlock("flags")},
+                                                                },
+                                                            }}
+                                                        },
+                                                    }},
+                                                },
+                                            }},
+                                        },
+                                        "options": {"VARIABLE": ["variable", "do branch"]},
+                                    },
+                                    {
+                                        "opcode": "set [VARIABLE] to (VALUE)",
+                                        "inputs": {
+                                            "VALUE": {"block": varReporterBlock("arg0")},
+                                        },
+                                        "options": {"VARIABLE": ["variable", "target pc"]},
+                                    },
+                                ]},
+                            },
+                        },
+                    ]},
+                },
+            },
+            {
+                "opcode": "if <CONDITION> then {THEN}",
+                "inputs": {
+                    "CONDITION": {"block": {
+                        "opcode": "(VALUE) as a boolean",
+                        "inputs": {
+                            "VALUE": {"block": varReporterBlock("do branch")},
+                        },
+                    }},
+                    "THEN": {"blocks": [
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {"block": varReporterBlock("target pc")},
+                            },
+                            "options": {"VARIABLE": ["variable", "program counter"]},
+                        },
+                        {
+                            "opcode": "return (VALUE)",
+                            "inputs": {
+                                "VALUE": {"text": ""},
+                            },
+                        },
+                    ]},
+                },
+            },
+        ]},
     },
 }
 
@@ -560,16 +550,21 @@ executeInstr = {"position": [0,0], "blocks": [
     {
         "opcode": "switch (CONDITION) {CASES}",
         "inputs": {
-            "CONDITION": {"block": {
-                "opcode": "value of [VARIABLE]",
-                "options": {"VARIABLE": ["variable", "instr type"]},
-            }},
+            "CONDITION": {"block": varReporterBlock("instr type")},
             "CASES": {"blocks": [
                 moveCase,
                 aluCase,
                 memoryCase,
                 comparisonCase,
+                branchCase,
             ]},
         },
+    },
+    {
+        "opcode": "change [VARIABLE] by (VALUE)",
+        "inputs": {
+            "VALUE": {"text": "1"},
+        },
+        "options": {"VARIABLE": ["variable", "program counter"]},
     },
 ]}

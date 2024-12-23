@@ -130,12 +130,12 @@ def execute_instruction(instruction):
     elif instr_type == "branch":
         # BGE: arg0 = label or instruction index
         if instr == "bge":
-            do_jump = not flags["negative"]
-            jump_target = arg0
+            do_branch = not flags["negative"]
+            target_pc = arg0
 
-            if do_jump:
-                program_counter = jump_target
-                return  # Skip the default PC increment
+        if do_branch:
+            program_counter = target_pc
+            return  # Skip the default PC increment
 
     # Default: move to the next instruction
     program_counter += 1

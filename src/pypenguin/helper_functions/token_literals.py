@@ -55,34 +55,13 @@ def generateNextKeyInDict(obj:dict, offset=0):
     biggest = max([0] + ints)
     return numberToLiteral(biggest + 1 + offset)
 
-class tempSelector:
-    def __init__(self, path):
-        if isinstance(path, tempSelector):
-            self.path = path.path
-        else:
-            self.path = path
-
-    def __eq__(self, other):
-        if isinstance(other, tempSelector):
-            return self.path == other.path
-        return False
-
-    def __hash__(self):
-        # Use a tuple of the attributes to create a unique hash
-        return hash(tuple(self.path))
-
-    def __add__(self, other):
-        if isinstance(other, list):
-            return tempSelector(path=self.path+other)
-        else:
-            raise Exception()
-
-    def __repr__(self):
-        return f"tS<{self.path}>"
-
 class newTempSelector:
+    takenIDs = []
     def __init__(self):
-        self.id = random.randint(1, 10000)
+        self.id = random.randint(1, 1000000)
+        while self.id in newTempSelector.takenIDs:
+            self.id = random.randit(1, 1000000)
+        newTempSelector.takenIDs.append(self.id)
     
     def __eq__(self, other):
         if isinstance(other, newTempSelector):
@@ -93,7 +72,7 @@ class newTempSelector:
         return hash(self.id)
 
     def __repr__(self):
-        return f"tSn<{self.id % 1000}>"
+        return f"tSn::{self.id}"
     
     def copy(self):
         new = newTempSelector()
