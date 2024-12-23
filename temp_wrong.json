@@ -1,0 +1,3374 @@
+{
+    "targets": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "variables": {
+                "(gZv/fNTW#AdEb=N}FP#": [
+                    "register map",
+                    "{\"r0\": 0, \"zero\": 0, \"r1\": 1, \"r2\": 2, \"r3\": 3, \"r4\": 4, \"r5\": 5, \"r6\": 6, \"r7\": 7, \"r8\": 8, \"r9\": 9, \"sb\": 9, \"r10\": 10, \"sl\": 10, \"r11\": 11, \"fp\": 11, \"r12\": 12, \"ip\": 12, \"r13\": 13, \"sp\": 13, \"r14\": 14, \"lr\": 14, \"r15\": 15, \"pc\": 15}"
+                ],
+                "MxuWddb@bwv{(;,O%;ZT": [
+                    "memory",
+                    "{}"
+                ],
+                "P!u{-z.[j%O?sCk,xujL": [
+                    "flags",
+                    "{\"zero\": false, \"negative\": false}"
+                ],
+                "Ls[a`qyi_ZsX;|*!C(O)": [
+                    "instr",
+                    ""
+                ],
+                "_|hiYHc`@?ilew/BOoOK": [
+                    "instr type",
+                    ""
+                ],
+                "YDn}nMmJo/X/FP^Q[)~g": [
+                    "arg0",
+                    ""
+                ],
+                "(y+,RDYkS.~bOMa(pdOa": [
+                    "arg1",
+                    ""
+                ],
+                "G]r[MYvyUzWnNjhmVtIj": [
+                    "arg2",
+                    ""
+                ],
+                "-{%bYe}m.pK@MLu:.TcF": [
+                    "value1",
+                    ""
+                ],
+                "f(+!q+OM!YZf;+svFg|c": [
+                    "value2",
+                    ""
+                ],
+                "piuqlv;mSh{tDvPoxe-B": [
+                    "result",
+                    ""
+                ],
+                "/mbsqk[M=s%L}M}-J:xR": [
+                    "address",
+                    ""
+                ]
+            },
+            "lists": {
+                "l}bkoWWT_pK.@@mFs!|Z": [
+                    "registers",
+                    [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                ]
+            },
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {
+                "a": {
+                    "opcode": "procedures_definition",
+                    "next": "b",
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "c"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 1000,
+                    "y": 0
+                },
+                "c": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {
+                        "xp.Ahc]%mHiCjMS(xh;,": [
+                            1,
+                            "d"
+                        ],
+                        "mYzHT-`vAhuuR@Gp)wb-": [
+                            1,
+                            "e"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "set register %s to %s",
+                        "argumentids": "[\"xp.Ahc]%mHiCjMS(xh;,\", \"mYzHT-`vAhuuR@Gp)wb-\"]",
+                        "argumentnames": "[\"register\", \"value\"]",
+                        "argumentdefaults": "[\"\", \"\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "d": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "register",
+                            "=NTXGt_b+kQf]JrE.TKT"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "e": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "c",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "value",
+                            "}qNX#kayQuEC*W`#eZ`#"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "f": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "g",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "register",
+                            "fv*iHu*@/_ae:PN,g#y^"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "g": {
+                    "opcode": "jgJSON_getValueFromJSON",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "f",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "JSON": [
+                            3,
+                            [
+                                12,
+                                "register map",
+                                "[%,i(gZv/fNTW#AdEb=N"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "h": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "value",
+                            "kqbZ#OaBba@mypzMJxm-"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "b": {
+                    "opcode": "data_replaceitemoflist",
+                    "next": null,
+                    "parent": "a",
+                    "inputs": {
+                        "INDEX": [
+                            3,
+                            "g",
+                            [
+                                7,
+                                ""
+                            ]
+                        ],
+                        "ITEM": [
+                            3,
+                            "h",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "registers",
+                            "[%,il}bkoWWT_pK.@@mF",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "i": {
+                    "opcode": "procedures_definition_return",
+                    "next": "j",
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "k"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 1000,
+                    "y": 250
+                },
+                "k": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "i",
+                    "inputs": {
+                        "YkcJ*oGr?SotJcffAH_O": [
+                            1,
+                            "l"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get register %s",
+                        "argumentids": "[\"YkcJ*oGr?SotJcffAH_O\"]",
+                        "argumentnames": "[\"register\"]",
+                        "argumentdefaults": "[\"\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "l": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "k",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "register",
+                            "f:+(V[wAW}LbrtIQRVlR"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "m": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "n",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "register",
+                            "efIut|LUY^qLo.EgNw?j"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "n": {
+                    "opcode": "jgJSON_getValueFromJSON",
+                    "next": null,
+                    "parent": "o",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "m",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "JSON": [
+                            3,
+                            [
+                                12,
+                                "register map",
+                                "[%,i(gZv/fNTW#AdEb=N"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "o": {
+                    "opcode": "data_itemoflist",
+                    "next": null,
+                    "parent": "j",
+                    "inputs": {
+                        "INDEX": [
+                            3,
+                            "n",
+                            [
+                                7,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "LIST": [
+                            "registers",
+                            "[%,il}bkoWWT_pK.@@mF",
+                            "list"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "j": {
+                    "opcode": "procedures_return",
+                    "next": null,
+                    "parent": "i",
+                    "inputs": {
+                        "return": [
+                            3,
+                            "o",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "p": {
+                    "opcode": "procedures_definition",
+                    "next": "q",
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "r"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 1750,
+                    "y": 0
+                },
+                "r": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "p",
+                    "inputs": {
+                        "MZQM#nm_.-RRp.o:%eMQ": [
+                            1,
+                            "s"
+                        ],
+                        "v`WlikzChXbmY_?L*/|B": [
+                            1,
+                            "t"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "set memory %s to %s",
+                        "argumentids": "[\"MZQM#nm_.-RRp.o:%eMQ\", \"v`WlikzChXbmY_?L*/|B\"]",
+                        "argumentnames": "[\"address\", \"value\"]",
+                        "argumentdefaults": "[\"\", \"\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "s": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "r",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "address",
+                            "VCH|v(yToid@*zp:YGAf"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "t": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "r",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "value",
+                            "Bsnz+WU]tn/s`Z%?:P::"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "u": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "v",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "address",
+                            "z]CbROPe@sGtW|L-ik?f"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "w": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "v",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "value",
+                            "iCqfMb*Qut+V;W@;e{l?"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "v": {
+                    "opcode": "jgJSON_setValueToKeyInJSON",
+                    "next": null,
+                    "parent": "q",
+                    "inputs": {
+                        "KEY": [
+                            3,
+                            "u",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "VALUE": [
+                            3,
+                            "w",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "JSON": [
+                            3,
+                            [
+                                12,
+                                "memory",
+                                "[%,iMxuWddb@bwv{(;,O"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "q": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "p",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "v",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "memory",
+                            "[%,iMxuWddb@bwv{(;,O",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "x": {
+                    "opcode": "procedures_definition_return",
+                    "next": "y",
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "z"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 1750,
+                    "y": 250
+                },
+                "z": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "x",
+                    "inputs": {
+                        "j%AL[#.X}DcaxM;`GQi:": [
+                            1,
+                            "A"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get memory %s",
+                        "argumentids": "[\"j%AL[#.X}DcaxM;`GQi:\"]",
+                        "argumentnames": "[\"address\"]",
+                        "argumentdefaults": "[\"\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "A": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "z",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "address",
+                            "!XXhuqEKQhe.#s/ktT!e"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "B": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "C",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "address",
+                            ",X+gm-tceqPn^SyX/oh,"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "C": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "y",
+                    "inputs": {
+                        "RpLqXLp?yeY)Vy+Tjff/": [
+                            3,
+                            "B",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "d?`{BDl;@#;Nos%`%kn#": [
+                            3,
+                            [
+                                12,
+                                "memory",
+                                "[%,iMxuWddb@bwv{(;,O"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "m#td*(#d:PGkTjpTdSSw": [
+                            1,
+                            [
+                                10,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get %s from %s else %s",
+                        "argumentids": "[\"RpLqXLp?yeY)Vy+Tjff/\", \"d?`{BDl;@#;Nos%`%kn#\", \"m#td*(#d:PGkTjpTdSSw\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "y": {
+                    "opcode": "procedures_return",
+                    "next": null,
+                    "parent": "x",
+                    "inputs": {
+                        "return": [
+                            3,
+                            "C",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "D": {
+                    "opcode": "procedures_definition_return",
+                    "next": "E",
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "F"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 2500,
+                    "y": 0
+                },
+                "F": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "D",
+                    "inputs": {
+                        "RpLqXLp?yeY)Vy+Tjff/": [
+                            1,
+                            "G"
+                        ],
+                        "d?`{BDl;@#;Nos%`%kn#": [
+                            1,
+                            "H"
+                        ],
+                        "m#td*(#d:PGkTjpTdSSw": [
+                            1,
+                            "I"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get %s from %s else %s",
+                        "argumentids": "[\"RpLqXLp?yeY)Vy+Tjff/\", \"d?`{BDl;@#;Nos%`%kn#\", \"m#td*(#d:PGkTjpTdSSw\"]",
+                        "argumentnames": "[\"key\", \"json\", \"default\"]",
+                        "argumentdefaults": "[\"\", \"\", \"\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "G": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "F",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "key",
+                            "UjsAaApaLVdDsx+o.SHq"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "H": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "F",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "json",
+                            "dAUQ-LL^Px}kn[|NuWsq"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "I": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "F",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "default",
+                            "CO=FExLV#fqcYjjq#M^#"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "J": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "K",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "json",
+                            "s}%MTkF)V@hW!b#P)AVL"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "L": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "K",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "key",
+                            "-lxnJo_t*Zx#(wF+R?sT"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "K": {
+                    "opcode": "jgJSON_json_has",
+                    "next": null,
+                    "parent": "E",
+                    "inputs": {
+                        "json": [
+                            3,
+                            "J",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "key": [
+                            3,
+                            "L",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "M": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "N",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "key",
+                            ",l.ALa*,aBMoM]t%-l:D"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "O": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "N",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "json",
+                            "]ZJcpIfaGY@|Y)nGTKzk"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "N": {
+                    "opcode": "jgJSON_getValueFromJSON",
+                    "next": null,
+                    "parent": "P",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "M",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "JSON": [
+                            3,
+                            "O",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "P": {
+                    "opcode": "procedures_return",
+                    "next": null,
+                    "parent": "E",
+                    "inputs": {
+                        "return": [
+                            3,
+                            "N",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "Q": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "R",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "default",
+                            "ejHN[Rp@Fui#LK?r{?A["
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "R": {
+                    "opcode": "procedures_return",
+                    "next": null,
+                    "parent": "E",
+                    "inputs": {
+                        "return": [
+                            3,
+                            "Q",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "E": {
+                    "opcode": "control_if_else",
+                    "next": null,
+                    "parent": "D",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "K"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "P"
+                        ],
+                        "SUBSTACK2": [
+                            2,
+                            "R"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "S": {
+                    "opcode": "procedures_definition",
+                    "next": "T",
+                    "parent": null,
+                    "inputs": {
+                        "custom_block": [
+                            1,
+                            "U"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 0,
+                    "y": 0
+                },
+                "U": {
+                    "opcode": "procedures_prototype",
+                    "next": null,
+                    "parent": "S",
+                    "inputs": {
+                        "n!]ZJL)V`ruppWZ},r_M": [
+                            1,
+                            "V"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "execute instr %s",
+                        "argumentids": "[\"n!]ZJL)V`ruppWZ},r_M\"]",
+                        "argumentnames": "[\"instr\"]",
+                        "argumentdefaults": "[\"\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "V": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "U",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            "#B./;O:h)Ms:gBdT-Yb@"
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                    }
+                },
+                "W": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "X",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            "ikYaUfoaILDs{Kyn(+QX"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "X": {
+                    "opcode": "jgJSON_getValueFromJSON",
+                    "next": null,
+                    "parent": "T",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "instr_type"
+                            ]
+                        ],
+                        "JSON": [
+                            3,
+                            "W",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "T": {
+                    "opcode": "data_setvariableto",
+                    "next": "Y",
+                    "parent": "S",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "X",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "instr type",
+                            "[%,i_|hiYHc`@?ilew/B",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "Z": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "!",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            "vQ#(s*s@OqAx)SX%/XCz"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "!": {
+                    "opcode": "jgJSON_getValueFromJSON",
+                    "next": null,
+                    "parent": "Y",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "instr"
+                            ]
+                        ],
+                        "JSON": [
+                            3,
+                            "Z",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "Y": {
+                    "opcode": "data_setvariableto",
+                    "next": "#",
+                    "parent": "T",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "!",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "instr",
+                            "[%,iLs[a`qyi_ZsX;|*!",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "%": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "(",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            ")A}gXeDkxUhwDMl=KT!+"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "(": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "#",
+                    "inputs": {
+                        "RpLqXLp?yeY)Vy+Tjff/": [
+                            1,
+                            [
+                                10,
+                                "arg0"
+                            ]
+                        ],
+                        "d?`{BDl;@#;Nos%`%kn#": [
+                            3,
+                            "%",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "m#td*(#d:PGkTjpTdSSw": [
+                            1,
+                            [
+                                10,
+                                "null"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get %s from %s else %s",
+                        "argumentids": "[\"RpLqXLp?yeY)Vy+Tjff/\", \"d?`{BDl;@#;Nos%`%kn#\", \"m#td*(#d:PGkTjpTdSSw\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "#": {
+                    "opcode": "data_setvariableto",
+                    "next": ")",
+                    "parent": "Y",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "(",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "arg0",
+                            "[%,iYDn}nMmJo/X/FP^Q",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "*": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": "+",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            "g?^(|+/G-BRIffguSaLa"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "+": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": ")",
+                    "inputs": {
+                        "RpLqXLp?yeY)Vy+Tjff/": [
+                            1,
+                            [
+                                10,
+                                "arg1"
+                            ]
+                        ],
+                        "d?`{BDl;@#;Nos%`%kn#": [
+                            3,
+                            "*",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "m#td*(#d:PGkTjpTdSSw": [
+                            1,
+                            [
+                                10,
+                                "null"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get %s from %s else %s",
+                        "argumentids": "[\"RpLqXLp?yeY)Vy+Tjff/\", \"d?`{BDl;@#;Nos%`%kn#\", \"m#td*(#d:PGkTjpTdSSw\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                ")": {
+                    "opcode": "data_setvariableto",
+                    "next": ",",
+                    "parent": "#",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "+",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "arg1",
+                            "[%,i(y+,RDYkS.~bOMa(",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "-": {
+                    "opcode": "argument_reporter_string_number",
+                    "next": null,
+                    "parent": ".",
+                    "inputs": {},
+                    "fields": {
+                        "VALUE": [
+                            "instr",
+                            "ri%CY_C+yRnkOP[+PGd?"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                ".": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": ",",
+                    "inputs": {
+                        "RpLqXLp?yeY)Vy+Tjff/": [
+                            1,
+                            [
+                                10,
+                                "arg2"
+                            ]
+                        ],
+                        "d?`{BDl;@#;Nos%`%kn#": [
+                            3,
+                            "-",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "m#td*(#d:PGkTjpTdSSw": [
+                            1,
+                            [
+                                10,
+                                "null"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get %s from %s else %s",
+                        "argumentids": "[\"RpLqXLp?yeY)Vy+Tjff/\", \"d?`{BDl;@#;Nos%`%kn#\", \"m#td*(#d:PGkTjpTdSSw\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                ",": {
+                    "opcode": "data_setvariableto",
+                    "next": "/",
+                    "parent": ")",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            ".",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "arg2",
+                            "[%,iG]r[MYvyUzWnNjhm",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                ":": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": ";",
+                    "inputs": {
+                        "xp.Ahc]%mHiCjMS(xh;,": [
+                            3,
+                            [
+                                12,
+                                "arg0",
+                                "[%,iYDn}nMmJo/X/FP^Q"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "mYzHT-`vAhuuR@Gp)wb-": [
+                            3,
+                            [
+                                12,
+                                "arg1",
+                                "[%,i(y+,RDYkS.~bOMa("
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "set register %s to %s",
+                        "argumentids": "[\"xp.Ahc]%mHiCjMS(xh;,\", \"mYzHT-`vAhuuR@Gp)wb-\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                ";": {
+                    "opcode": "control_case",
+                    "next": "=",
+                    "parent": "?",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "mov"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            ":"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "@": {
+                    "opcode": "Bitwise_bitwiseNot",
+                    "next": null,
+                    "parent": "[",
+                    "inputs": {
+                        "CENTRAL": [
+                            3,
+                            [
+                                12,
+                                "arg1",
+                                "[%,i(y+,RDYkS.~bOMa("
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "[": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "=",
+                    "inputs": {
+                        "xp.Ahc]%mHiCjMS(xh;,": [
+                            3,
+                            [
+                                12,
+                                "arg0",
+                                "[%,iYDn}nMmJo/X/FP^Q"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "mYzHT-`vAhuuR@Gp)wb-": [
+                            3,
+                            "@",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "set register %s to %s",
+                        "argumentids": "[\"xp.Ahc]%mHiCjMS(xh;,\", \"mYzHT-`vAhuuR@Gp)wb-\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "=": {
+                    "opcode": "control_case",
+                    "next": null,
+                    "parent": ";",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "mvn"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "["
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "?": {
+                    "opcode": "control_switch",
+                    "next": null,
+                    "parent": "]",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            [
+                                12,
+                                "instr",
+                                "[%,iLs[a`qyi_ZsX;|*!"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            ";"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "]": {
+                    "opcode": "control_case",
+                    "next": "^",
+                    "parent": "/",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "move"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "?"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "_": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "`",
+                    "inputs": {
+                        "YkcJ*oGr?SotJcffAH_O": [
+                            3,
+                            [
+                                12,
+                                "arg1",
+                                "[%,i(y+,RDYkS.~bOMa("
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get register %s",
+                        "argumentids": "[\"YkcJ*oGr?SotJcffAH_O\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "`": {
+                    "opcode": "data_setvariableto",
+                    "next": "{",
+                    "parent": "^",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "_",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "value1",
+                            "[%,i-{%bYe}m.pK@MLu:",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "|": {
+                    "opcode": "sensing_thing_is_number",
+                    "next": null,
+                    "parent": "{",
+                    "inputs": {
+                        "TEXT1": [
+                            3,
+                            [
+                                12,
+                                "arg2",
+                                "[%,iG]r[MYvyUzWnNjhm"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "}": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "{",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            [
+                                12,
+                                "arg2",
+                                "[%,iG]r[MYvyUzWnNjhm"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "value2",
+                            "[%,if(+!q+OM!YZf;+sv",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "~": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "aa",
+                    "inputs": {
+                        "YkcJ*oGr?SotJcffAH_O": [
+                            3,
+                            [
+                                12,
+                                "arg2",
+                                "[%,iG]r[MYvyUzWnNjhm"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get register %s",
+                        "argumentids": "[\"YkcJ*oGr?SotJcffAH_O\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "aa": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "{",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "~",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "value2",
+                            "[%,if(+!q+OM!YZf;+sv",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "{": {
+                    "opcode": "control_if_else",
+                    "next": "ab",
+                    "parent": "`",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "|"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "}"
+                        ],
+                        "SUBSTACK2": [
+                            2,
+                            "aa"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ac": {
+                    "opcode": "operator_equals",
+                    "next": null,
+                    "parent": "ab",
+                    "inputs": {
+                        "OPERAND1": [
+                            3,
+                            [
+                                12,
+                                "instr",
+                                "[%,iLs[a`qyi_ZsX;|*!"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "OPERAND2": [
+                            1,
+                            [
+                                10,
+                                "addi"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ad": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "ab",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "add"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "instr",
+                            "[%,iLs[a`qyi_ZsX;|*!",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ab": {
+                    "opcode": "control_if",
+                    "next": "ae",
+                    "parent": "{",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "ac"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "ad"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "af": {
+                    "opcode": "operator_add",
+                    "next": null,
+                    "parent": "ag",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            [
+                                12,
+                                "value1",
+                                "[%,i-{%bYe}m.pK@MLu:"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "NUM2": [
+                            3,
+                            [
+                                12,
+                                "value2",
+                                "[%,if(+!q+OM!YZf;+sv"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ag": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "ah",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "af",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "result",
+                            "[%,ipiuqlv;mSh{tDvPo",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ah": {
+                    "opcode": "control_case",
+                    "next": "ai",
+                    "parent": "ae",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "add"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "ag"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aj": {
+                    "opcode": "operator_subtract",
+                    "next": null,
+                    "parent": "ak",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            [
+                                12,
+                                "value1",
+                                "[%,i-{%bYe}m.pK@MLu:"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "NUM2": [
+                            3,
+                            [
+                                12,
+                                "value2",
+                                "[%,if(+!q+OM!YZf;+sv"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ak": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "ai",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "aj",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "result",
+                            "[%,ipiuqlv;mSh{tDvPo",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ai": {
+                    "opcode": "control_case",
+                    "next": "al",
+                    "parent": "ah",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "sub"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "ak"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "am": {
+                    "opcode": "operator_multiply",
+                    "next": null,
+                    "parent": "an",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            [
+                                12,
+                                "value1",
+                                "[%,i-{%bYe}m.pK@MLu:"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "NUM2": [
+                            3,
+                            [
+                                12,
+                                "value2",
+                                "[%,if(+!q+OM!YZf;+sv"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "an": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "al",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "am",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "result",
+                            "[%,ipiuqlv;mSh{tDvPo",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "al": {
+                    "opcode": "control_case",
+                    "next": "ao",
+                    "parent": "ai",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "mul"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "an"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ap": {
+                    "opcode": "operator_equals",
+                    "next": null,
+                    "parent": "aq",
+                    "inputs": {
+                        "OPERAND1": [
+                            3,
+                            [
+                                12,
+                                "value2",
+                                "[%,if(+!q+OM!YZf;+sv"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "OPERAND2": [
+                            1,
+                            [
+                                10,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ar": {
+                    "opcode": "operator_divide",
+                    "next": null,
+                    "parent": "as",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            [
+                                12,
+                                "value1",
+                                "[%,i-{%bYe}m.pK@MLu:"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "NUM2": [
+                            3,
+                            [
+                                12,
+                                "value2",
+                                "[%,if(+!q+OM!YZf;+sv"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "as": {
+                    "opcode": "operator_mathop",
+                    "next": null,
+                    "parent": "aq",
+                    "inputs": {
+                        "NUM": [
+                            3,
+                            "ar",
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "OPERATOR": [
+                            "floor",
+                            "fyVkA@SyzGMN?XG.SEfN"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aq": {
+                    "opcode": "control_if_return_else_return",
+                    "next": null,
+                    "parent": "at",
+                    "inputs": {
+                        "boolean": [
+                            2,
+                            "ap"
+                        ],
+                        "TEXT1": [
+                            1,
+                            [
+                                10,
+                                "0"
+                            ]
+                        ],
+                        "TEXT2": [
+                            3,
+                            "as",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "at": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "ao",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "aq",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "result",
+                            "[%,ipiuqlv;mSh{tDvPo",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ao": {
+                    "opcode": "control_case",
+                    "next": "au",
+                    "parent": "al",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "div"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "at"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "av": {
+                    "opcode": "Bitwise_bitwiseAnd",
+                    "next": null,
+                    "parent": "aw",
+                    "inputs": {
+                        "LEFT": [
+                            3,
+                            [
+                                12,
+                                "value1",
+                                "[%,i-{%bYe}m.pK@MLu:"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "RIGHT": [
+                            3,
+                            [
+                                12,
+                                "value2",
+                                "[%,if(+!q+OM!YZf;+sv"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aw": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "au",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "av",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "result",
+                            "[%,ipiuqlv;mSh{tDvPo",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "au": {
+                    "opcode": "control_case",
+                    "next": "ax",
+                    "parent": "ao",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "and"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "aw"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ay": {
+                    "opcode": "Bitwise_bitwiseOr",
+                    "next": null,
+                    "parent": "az",
+                    "inputs": {
+                        "LEFT": [
+                            3,
+                            [
+                                12,
+                                "value1",
+                                "[%,i-{%bYe}m.pK@MLu:"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "RIGHT": [
+                            3,
+                            [
+                                12,
+                                "value2",
+                                "[%,if(+!q+OM!YZf;+sv"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "az": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "ax",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "ay",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "result",
+                            "[%,ipiuqlv;mSh{tDvPo",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ax": {
+                    "opcode": "control_case",
+                    "next": "aA",
+                    "parent": "au",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "orr"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "az"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aB": {
+                    "opcode": "Bitwise_bitwiseXor",
+                    "next": null,
+                    "parent": "aC",
+                    "inputs": {
+                        "LEFT": [
+                            3,
+                            [
+                                12,
+                                "value1",
+                                "[%,i-{%bYe}m.pK@MLu:"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "RIGHT": [
+                            3,
+                            [
+                                12,
+                                "value2",
+                                "[%,if(+!q+OM!YZf;+sv"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aC": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "aA",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "aB",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "result",
+                            "[%,ipiuqlv;mSh{tDvPo",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aA": {
+                    "opcode": "control_case",
+                    "next": "aD",
+                    "parent": "ax",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "eor"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "aC"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aE": {
+                    "opcode": "Bitwise_bitwiseLeftShift",
+                    "next": null,
+                    "parent": "aF",
+                    "inputs": {
+                        "LEFT": [
+                            3,
+                            [
+                                12,
+                                "value1",
+                                "[%,i-{%bYe}m.pK@MLu:"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "RIGHT": [
+                            3,
+                            [
+                                12,
+                                "value2",
+                                "[%,if(+!q+OM!YZf;+sv"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aF": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "aD",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "aE",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "result",
+                            "[%,ipiuqlv;mSh{tDvPo",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aD": {
+                    "opcode": "control_case",
+                    "next": "aG",
+                    "parent": "aA",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "lsl"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "aF"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aH": {
+                    "opcode": "Bitwise_bitwiseRightShift",
+                    "next": null,
+                    "parent": "aI",
+                    "inputs": {
+                        "LEFT": [
+                            3,
+                            [
+                                12,
+                                "value1",
+                                "[%,i-{%bYe}m.pK@MLu:"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "RIGHT": [
+                            3,
+                            [
+                                12,
+                                "value2",
+                                "[%,if(+!q+OM!YZf;+sv"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aI": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "aG",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "aH",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "result",
+                            "[%,ipiuqlv;mSh{tDvPo",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aG": {
+                    "opcode": "control_case",
+                    "next": null,
+                    "parent": "aD",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "lsr"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "aI"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ae": {
+                    "opcode": "control_switch",
+                    "next": "aJ",
+                    "parent": "ab",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            [
+                                12,
+                                "instr",
+                                "[%,iLs[a`qyi_ZsX;|*!"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "ah"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aJ": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "ae",
+                    "inputs": {
+                        "xp.Ahc]%mHiCjMS(xh;,": [
+                            3,
+                            [
+                                12,
+                                "arg0",
+                                "[%,iYDn}nMmJo/X/FP^Q"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "mYzHT-`vAhuuR@Gp)wb-": [
+                            3,
+                            [
+                                12,
+                                "result",
+                                "[%,ipiuqlv;mSh{tDvPo"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "set register %s to %s",
+                        "argumentids": "[\"xp.Ahc]%mHiCjMS(xh;,\", \"mYzHT-`vAhuuR@Gp)wb-\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "^": {
+                    "opcode": "control_case",
+                    "next": "aK",
+                    "parent": "]",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "alu"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "`"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aL": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "aM",
+                    "inputs": {
+                        "YkcJ*oGr?SotJcffAH_O": [
+                            3,
+                            [
+                                12,
+                                "arg1",
+                                "[%,i(y+,RDYkS.~bOMa("
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get register %s",
+                        "argumentids": "[\"YkcJ*oGr?SotJcffAH_O\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "aM": {
+                    "opcode": "data_setvariableto",
+                    "next": "aN",
+                    "parent": "aK",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "aL",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "address",
+                            "[%,i/mbsqk[M=s%L}M}-",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aO": {
+                    "opcode": "operator_notequal",
+                    "next": null,
+                    "parent": "aN",
+                    "inputs": {
+                        "OPERAND1": [
+                            3,
+                            [
+                                12,
+                                "arg2",
+                                "[%,iG]r[MYvyUzWnNjhm"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "OPERAND2": [
+                            1,
+                            [
+                                10,
+                                "null"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aP": {
+                    "opcode": "data_changevariableby",
+                    "next": null,
+                    "parent": "aN",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            [
+                                12,
+                                "arg2",
+                                "[%,iG]r[MYvyUzWnNjhm"
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "address",
+                            "[%,i/mbsqk[M=s%L}M}-",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aN": {
+                    "opcode": "control_if",
+                    "next": "aQ",
+                    "parent": "aM",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "aO"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "aP"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aR": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "aS",
+                    "inputs": {
+                        "j%AL[#.X}DcaxM;`GQi:": [
+                            3,
+                            [
+                                12,
+                                "address",
+                                "[%,i/mbsqk[M=s%L}M}-"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get memory %s",
+                        "argumentids": "[\"j%AL[#.X}DcaxM;`GQi:\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "aS": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "aT",
+                    "inputs": {
+                        "xp.Ahc]%mHiCjMS(xh;,": [
+                            3,
+                            [
+                                12,
+                                "arg0",
+                                "[%,iYDn}nMmJo/X/FP^Q"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "mYzHT-`vAhuuR@Gp)wb-": [
+                            3,
+                            "aR",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "set register %s to %s",
+                        "argumentids": "[\"xp.Ahc]%mHiCjMS(xh;,\", \"mYzHT-`vAhuuR@Gp)wb-\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "aT": {
+                    "opcode": "control_case",
+                    "next": "aU",
+                    "parent": "aQ",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "ldr"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "aS"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aV": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "aW",
+                    "inputs": {
+                        "YkcJ*oGr?SotJcffAH_O": [
+                            3,
+                            [
+                                12,
+                                "arg0",
+                                "[%,iYDn}nMmJo/X/FP^Q"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get register %s",
+                        "argumentids": "[\"YkcJ*oGr?SotJcffAH_O\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "aW": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "aU",
+                    "inputs": {
+                        "MZQM#nm_.-RRp.o:%eMQ": [
+                            3,
+                            [
+                                12,
+                                "address",
+                                "[%,i/mbsqk[M=s%L}M}-"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "v`WlikzChXbmY_?L*/|B": [
+                            3,
+                            "aV",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "set memory %s to %s",
+                        "argumentids": "[\"MZQM#nm_.-RRp.o:%eMQ\", \"v`WlikzChXbmY_?L*/|B\"]",
+                        "warp": "true",
+                        "returns": "false",
+                        "edited": "true",
+                        "optype": "\"statement\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "aU": {
+                    "opcode": "control_case",
+                    "next": null,
+                    "parent": "aT",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "str"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "aW"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aQ": {
+                    "opcode": "control_switch",
+                    "next": null,
+                    "parent": "aN",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            [
+                                12,
+                                "instr",
+                                "[%,iLs[a`qyi_ZsX;|*!"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "aT"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aK": {
+                    "opcode": "control_case",
+                    "next": "aX",
+                    "parent": "^",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "memory"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "aM"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aY": {
+                    "opcode": "procedures_call",
+                    "next": null,
+                    "parent": "aZ",
+                    "inputs": {
+                        "YkcJ*oGr?SotJcffAH_O": [
+                            3,
+                            [
+                                12,
+                                "arg0",
+                                "[%,iYDn}nMmJo/X/FP^Q"
+                            ],
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "mutation": {
+                        "tagName": "mutation",
+                        "children": [],
+                        "proccode": "get register %s",
+                        "argumentids": "[\"YkcJ*oGr?SotJcffAH_O\"]",
+                        "warp": "true",
+                        "returns": "true",
+                        "edited": "true",
+                        "optype": "\"string\"",
+                        "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                    }
+                },
+                "aZ": {
+                    "opcode": "operator_subtract",
+                    "next": null,
+                    "parent": "a!",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            "aY",
+                            [
+                                4,
+                                ""
+                            ]
+                        ],
+                        "NUM2": [
+                            3,
+                            [
+                                12,
+                                "arg1",
+                                "[%,i(y+,RDYkS.~bOMa("
+                            ],
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a!": {
+                    "opcode": "data_setvariableto",
+                    "next": "a#",
+                    "parent": "a%",
+                    "inputs": {
+                        "VALUE": [
+                            3,
+                            "aZ",
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "result",
+                            "[%,ipiuqlv;mSh{tDvPo",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a#": {
+                    "opcode": "data_setvariableto",
+                    "next": null,
+                    "parent": "a!",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "flags",
+                            "[%,iP!u{-z.[j%O?sCk,",
+                            ""
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a%": {
+                    "opcode": "control_case",
+                    "next": null,
+                    "parent": "a(",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "cmp"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "a!"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "a(": {
+                    "opcode": "control_switch",
+                    "next": null,
+                    "parent": "aX",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            [
+                                12,
+                                "instr",
+                                "[%,iLs[a`qyi_ZsX;|*!"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "a%"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "aX": {
+                    "opcode": "control_case",
+                    "next": null,
+                    "parent": "aK",
+                    "inputs": {
+                        "CONDITION": [
+                            1,
+                            [
+                                10,
+                                "comparison"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "a("
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "/": {
+                    "opcode": "control_switch",
+                    "next": null,
+                    "parent": ",",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            [
+                                12,
+                                "instr type",
+                                "[%,i_|hiYHc`@?ilew/B"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "]"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "empty costume",
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "dataFormat": "svg",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 1.0,
+                    "rotationCenterY": 1.0,
+                    "bitmapResolution": 1
+                }
+            ],
+            "sounds": [],
+            "id": "nAkI`?tY/Vqn|(Xh.]zf",
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 0,
+            "videoState": "off",
+            "textToSpeechLanguage": null
+        }
+    ],
+    "monitors": [],
+    "extensionData": {},
+    "extensions": [
+        "jgJSON",
+        "Bitwise"
+    ],
+    "extensionURLs": {
+        "Bitwise": "https://extensions.turbowarp.org/bitwise.js"
+    },
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": "",
+        "platform": {
+            "name": "PenguinMod",
+            "url": "https://penguinmod.com/",
+            "version": "stable"
+        }
+    }
+}

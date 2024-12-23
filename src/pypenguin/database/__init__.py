@@ -1,25 +1,26 @@
-from pypenguin.database.motion    import opcodes as motion
-from pypenguin.database.looks     import opcodes as looks
-from pypenguin.database.sounds    import opcodes as sounds
-from pypenguin.database.events    import opcodes as events
-from pypenguin.database.control   import opcodes as control
-from pypenguin.database.sensing   import opcodes as sensing
-from pypenguin.database.operators import opcodes as operators
-from pypenguin.database.variables import opcodes as variables
-from pypenguin.database.lists     import opcodes as lists
+from pypenguin.database.motion     import opcodes as motion
+from pypenguin.database.looks      import opcodes as looks
+from pypenguin.database.sounds     import opcodes as sounds
+from pypenguin.database.events     import opcodes as events
+from pypenguin.database.control    import opcodes as control
+from pypenguin.database.sensing    import opcodes as sensing
+from pypenguin.database.operators  import opcodes as operators
+from pypenguin.database.variables  import opcodes as variables
+from pypenguin.database.lists      import opcodes as lists
 
-from pypenguin.database.special   import opcodes as special
-from pypenguin.database.extJSON   import opcodes as extJSON
+from pypenguin.database.special    import opcodes as special
+from pypenguin.database.extJSON    import opcodes as extJSON
+from pypenguin.database.extBitwise import opcodes as extBitwise
 
-from pypenguin.helper_functions   import ikv, pp, flipKeysAndValues, removeDuplicates
+from pypenguin.helper_functions    import ikv, pp, flipKeysAndValues, removeDuplicates
 
 import functools
 
 """
 Category      Status ('.'=some 'x'=all)
-    Motion    [ ]
-    Looks     [ ]
-    Sound     [ ]
+    Motion    [x]
+    Looks     [x]
+    Sound     [x]
     Events    [x]
     Control   [x]
     Sensing   [x]
@@ -28,6 +29,7 @@ Category      Status ('.'=some 'x'=all)
     Lists     [x]
 Extension     Status ('.'=some 'x'=all)
     (jg)JSON  [x]
+    Bitwise   [x] (Turbowarp)
     others aren't implemented (yet)
 """
 
@@ -38,7 +40,7 @@ opcodeDatabase = (
     operators | variables | lists   |
     special   |
 # EXTENSIONS
-    extJSON
+    extJSON   | extBitwise
 )
 
 def getAllDeoptimizedOpcodes():
@@ -171,7 +173,7 @@ def getInputMagicNumber(inputType):
     return magicNumber
 
 def getOptionType(opcode, optionID):
-    print(opcode, optionID)
+    #print(opcode, optionID)
     return opcodeDatabase[opcode]["optionTypes"][optionID]
 
 def getOptionTypes(opcode):
@@ -387,6 +389,7 @@ optionTypeDatabase = {
 }
 
 def getOptimizedOptionValuesUsingContext(optionType, context, inputDatas):
+    #pp(context)
     optionTypeData = optionTypeDatabase[optionType]
     values = []
     for value in optionTypeData["directValues"]:
@@ -562,9 +565,9 @@ def optimizeOptionValue(optionValue, optionType):
     else:
         if defaultPrefix == None: raise Exception()
         result = [defaultPrefix, optionValue]
-    print("\n~", optionType, repr(optionValue))
-    print("->", result)
-    print("<-", repr(deoptimizeOptionValue(result, optionType)))
+    #print("\n~", optionType, repr(optionValue))
+    #print("->", result)
+    #print("<-", repr(deoptimizeOptionValue(result, optionType)))
     return result
 
 def deoptimizeOptionValue(optionValue, optionType):
@@ -595,9 +598,9 @@ def autocompleteOptionValue(optionValue, optionType):
         addSegements=True,
     )
     secondaryAllValues = [value[1] for value in allValues]
-    print("^^", optionValue, "/", optionType)
-    print("-->", directValues, defaultPrefix)
-    print("-->", allValues)
+    #print("^^", optionValue, "/", optionType)
+    #print("-->", directValues, defaultPrefix)
+    #print("-->", allValues)
     if   optionValue in secondaryDirectValues:
         result = directValues[secondaryDirectValues.index(optionValue)]
     elif optionValue in secondaryAllValues:
@@ -605,7 +608,7 @@ def autocompleteOptionValue(optionValue, optionType):
     else:
         if defaultPrefix == None: raise Exception()
         result = [defaultPrefix, optionValue]
-    print(">->", result)
+    #print(">->", result)
     #print()
     return result
 

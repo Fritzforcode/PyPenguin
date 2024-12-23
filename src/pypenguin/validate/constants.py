@@ -44,6 +44,7 @@ projectSchema = {
         "monitors": {"type": "array"},
         "extensionData": {"type": "object"},
         "extensions": {"type": "array"},
+        "extensionURLs": {"type": "object"},
     },
     "required": [
         "sprites",

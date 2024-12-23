@@ -1,17 +1,60 @@
+getRegister = {"position": [1000, 250], "blocks": [
+    {
+        "opcode": "define custom block",
+        "options": {
+            "noScreenRefresh": ["value", True],
+            "blockType": ["value", "textReporter"],
+            "customOpcode": ["value", "get register (register)"]
+        },
+    },
+    {
+        "opcode": "return (VALUE)",
+        "inputs": {
+            "VALUE": {"block": {
+                "opcode": "item (INDEX) of [LIST]",
+                "inputs": {
+                    "INDEX": {"block": {
+                        "opcode": "get (KEY) from (JSON)",
+                        "inputs": {
+                            "KEY": {"block": {
+                                "opcode": "value of text [ARGUMENT]",
+                                "options": {"ARGUMENT": ["value", "register"]},
+                            }},
+                            "JSON": {"block": {
+                                "opcode": "value of [VARIABLE]",
+                                "options": {"VARIABLE": ["variable", "register map"]},
+                            }},
+                        },
+                    }},
+                },
+                "options": {"LIST": ["list", "registers"]},
+            }},
+        },
+    },
+]}
+
+main = {"position": [0,0], "blocks": [
+    {
+                "opcode": "set [VARIABLE] to (VALUE)",
+                "inputs": {
+                    "VALUE": {"block": {
+                        "opcode": "call custom block",
+                        "inputs": {
+                            "register": {"block": {
+                                "opcode": "value of [VARIABLE]",
+                                "options": {"VARIABLE": ["variable", "arg0"]},
+                            }},
+                        },
+                        "options": {"customOpcode": ["value", "get register (register)"]},
+                    }},
+                },
+                "options": {"VARIABLE": ["variable", "value1"]},
+            }
+]}
+
 scripts = [
-{'position': [0, 0],
- 'blocks': [{'opcode': 'define custom block',
-             'inputs': {},
-             'options': {'noScreenRefresh': ['value', True],
-                         'blockType': ['value', 'instruction'],
-                         'customOpcode': 'add points'}},
-            {'opcode': 'change [VARIABLE] by (VALUE)',
-             'inputs': {'VALUE': {'block': {'opcode': 'value of [VARIABLE]',
-                                            'inputs': {},
-                                            'options': {'VARIABLE': ['variable',
-                                                                     'points']}},
-                                  'text': ''}},
-             'options': {'VARIABLE': ['variable', 'score']}}]}
+getRegister,
+main
 ]
 
 
@@ -85,24 +128,24 @@ projectData = {
             "isCloudVariable": True,
         },
         {
-            "name": "timer_var",
+            "name": "arg0",
             "currentValue": "",
             "isCloudVariable": False,
         },
         {
-            "name": "points",
+            "name": "value1",
             "currentValue": "",
             "isCloudVariable": False,
         },
         
         {
-            "name": "var",
+            "name": "register map",
             "currentValue": "",
             "isCloudVariable": False,
         },
     ],
     "globalLists": [
-        {"name": "players", "currentValue": []},
+        {"name": "registers", "currentValue": []},
         {"name": "points", "currentValue": []},
     ],
     "tempo": 60,

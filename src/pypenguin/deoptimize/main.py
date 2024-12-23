@@ -7,6 +7,8 @@ from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSou
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.deoptimize.monitors import translateMonitor
 
+from pprint import pformat
+
 def translateVariablesLists(data):
     spriteNames = [sprite["name"] for sprite in data["sprites"]][1:]
     translatedVariableDatas = translateVariables(
@@ -25,9 +27,9 @@ def deoptimizeProject(projectData):
     
     newSpriteDatas = []
     for i, spriteData in enumerate(projectData["sprites"]):
-        pp(spriteData["scripts"])
+        #pp(spriteData["scripts"])
         restoredScriptDatas = restoreScripts(spriteData["scripts"])
-        pp(restoredScriptDatas)
+        #pp(restoredScriptDatas)
         flattendScriptDatas   = flattenScripts(restoredScriptDatas)
         newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,
@@ -43,6 +45,8 @@ def deoptimizeProject(projectData):
                 data=commentData,
                 id=None,
             )
+        with open("tbef", "w") as file:
+            file.write(pformat(newSpriteBlockDatas))
         newSpriteBlockDatas, newCommentDatas = unprepareBlocks(
             data=newSpriteBlockDatas,
             spriteName=spriteData["name"],
@@ -109,6 +113,7 @@ def deoptimizeProject(projectData):
         "monitors"     : newMonitorDatas,
         "extensionData": projectData["extensionData"],
         "extensions"   : projectData["extensions"],
+        "extensionURLs": projectData.get("extensionURLs", {}),
         "meta"         : {
             "semver": "3.0.0",
             "vm"    : "0.2.0",

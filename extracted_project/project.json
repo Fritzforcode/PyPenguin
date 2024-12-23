@@ -3,172 +3,964 @@
         {
             "isStage": true,
             "name": "Stage",
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "backdrop1",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        239.0,
-                        179.0
-                    ]
-                }
-            ],
-            "sounds": [],
-            "volume": 100
-        },
-        {
-            "isStage": false,
-            "name": "Sprite1",
             "scripts": [
                 {
                     "position": [
-                        207,
-                        137
+                        0,
+                        0
                     ],
                     "blocks": [
                         {
-                            "opcode": "move [DIRECTION] (STEPS) steps",
-                            "inputs": {
-                                "STEPS": {
-                                    "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "10"
-                                }
-                            },
+                            "opcode": "define custom block",
+                            "inputs": {},
                             "options": {
-                                "DIRECTION": [
+                                "customOpcode": [
                                     "value",
-                                    "up"
+                                    "execute instr (instr)"
+                                ],
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "instruction"
                                 ]
                             }
                         },
                         {
-                            "opcode": "move [DIRECTION] (STEPS) steps",
+                            "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
-                                "STEPS": {
+                                "VALUE": {
                                     "mode": "block-and-text",
-                                    "block": null,
-                                    "text": "10"
+                                    "block": {
+                                        "opcode": "get (KEY) from (JSON)",
+                                        "inputs": {
+                                            "KEY": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "instr_type"
+                                            },
+                                            "JSON": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "instr"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            }
+                                        },
+                                        "options": {}
+                                    },
+                                    "text": ""
                                 }
                             },
                             "options": {
-                                "DIRECTION": [
-                                    "value",
-                                    "down"
+                                "VARIABLE": [
+                                    "variable",
+                                    "instr type"
                                 ]
                             }
                         },
                         {
-                            "opcode": "go to ([TARGET])",
+                            "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": [
-                                        "object",
-                                        "random position"
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "get (KEY) from (JSON)",
+                                        "inputs": {
+                                            "KEY": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "instr"
+                                            },
+                                            "JSON": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "instr"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            }
+                                        },
+                                        "options": {}
+                                    },
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": [
+                                    "variable",
+                                    "instr"
+                                ]
+                            }
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "call custom block",
+                                        "inputs": {
+                                            "key": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "arg0"
+                                            },
+                                            "json": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "instr"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            },
+                                            "default": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "null"
+                                            }
+                                        },
+                                        "options": {
+                                            "customOpcode": [
+                                                "value",
+                                                "get (key) from (json) else (default)"
+                                            ]
+                                        }
+                                    },
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": [
+                                    "variable",
+                                    "arg0"
+                                ]
+                            }
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "call custom block",
+                                        "inputs": {
+                                            "key": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "arg1"
+                                            },
+                                            "json": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "instr"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            },
+                                            "default": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "null"
+                                            }
+                                        },
+                                        "options": {
+                                            "customOpcode": [
+                                                "value",
+                                                "get (key) from (json) else (default)"
+                                            ]
+                                        }
+                                    },
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": [
+                                    "variable",
+                                    "arg1"
+                                ]
+                            }
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "call custom block",
+                                        "inputs": {
+                                            "key": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "arg2"
+                                            },
+                                            "json": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "instr"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            },
+                                            "default": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "null"
+                                            }
+                                        },
+                                        "options": {
+                                            "customOpcode": [
+                                                "value",
+                                                "get (key) from (json) else (default)"
+                                            ]
+                                        }
+                                    },
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": [
+                                    "variable",
+                                    "arg2"
+                                ]
+                            }
+                        },
+                        {
+                            "opcode": "switch (CONDITION) {CASES}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": null
+                                },
+                                "CASES": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "case (CONDITION) {BODY}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-and-text",
+                                                    "block": null,
+                                                    "text": "move"
+                                                },
+                                                "BODY": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "switch (CONDITION) {CASES}",
+                                                            "inputs": {
+                                                                "CONDITION": {
+                                                                    "mode": "block-only",
+                                                                    "block": null
+                                                                },
+                                                                "CASES": {
+                                                                    "mode": "script",
+                                                                    "blocks": [
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "mode": "block-and-text",
+                                                                                    "block": null,
+                                                                                    "text": "mov"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "mode": "script",
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "call custom block",
+                                                                                            "inputs": {
+                                                                                                "register": {
+                                                                                                    "mode": "block-and-text",
+                                                                                                    "block": {
+                                                                                                        "opcode": "value of [VARIABLE]",
+                                                                                                        "inputs": {},
+                                                                                                        "options": {
+                                                                                                            "VARIABLE": [
+                                                                                                                "variable",
+                                                                                                                "arg0"
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    },
+                                                                                                    "text": ""
+                                                                                                },
+                                                                                                "value": {
+                                                                                                    "mode": "block-and-text",
+                                                                                                    "block": {
+                                                                                                        "opcode": "value of [VARIABLE]",
+                                                                                                        "inputs": {},
+                                                                                                        "options": {
+                                                                                                            "VARIABLE": [
+                                                                                                                "variable",
+                                                                                                                "arg1"
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    },
+                                                                                                    "text": ""
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "customOpcode": [
+                                                                                                    "value",
+                                                                                                    "set register (register) to (value)"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            },
+                                                                            "options": {}
+                                                                        },
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "mode": "block-and-text",
+                                                                                    "block": null,
+                                                                                    "text": "mvn"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "mode": "script",
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "call custom block",
+                                                                                            "inputs": {
+                                                                                                "register": {
+                                                                                                    "mode": "block-and-text",
+                                                                                                    "block": {
+                                                                                                        "opcode": "value of [VARIABLE]",
+                                                                                                        "inputs": {},
+                                                                                                        "options": {
+                                                                                                            "VARIABLE": [
+                                                                                                                "variable",
+                                                                                                                "arg0"
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    },
+                                                                                                    "text": ""
+                                                                                                },
+                                                                                                "value": {
+                                                                                                    "mode": "block-and-text",
+                                                                                                    "block": {
+                                                                                                        "opcode": "not (NUM)",
+                                                                                                        "inputs": {
+                                                                                                            "NUM": {
+                                                                                                                "mode": "block-and-text",
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "inputs": {},
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "arg1"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                },
+                                                                                                                "text": ""
+                                                                                                            }
+                                                                                                        },
+                                                                                                        "options": {}
+                                                                                                    },
+                                                                                                    "text": ""
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "customOpcode": [
+                                                                                                    "value",
+                                                                                                    "set register (register) to (value)"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            },
+                                                                            "options": {}
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "options": {}
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        },
+                                        {
+                                            "opcode": "case (CONDITION) {BODY}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "mode": "block-and-text",
+                                                    "block": null,
+                                                    "text": "alu"
+                                                },
+                                                "BODY": {
+                                                    "mode": "script",
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "mode": "block-and-text",
+                                                                    "block": {
+                                                                        "opcode": "call custom block",
+                                                                        "inputs": {
+                                                                            "register": {
+                                                                                "mode": "block-and-text",
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "inputs": {},
+                                                                                    "options": {
+                                                                                        "VARIABLE": [
+                                                                                            "variable",
+                                                                                            "arg0"
+                                                                                        ]
+                                                                                    }
+                                                                                },
+                                                                                "text": ""
+                                                                            }
+                                                                        },
+                                                                        "options": {
+                                                                            "customOpcode": [
+                                                                                "value",
+                                                                                "get register (register)"
+                                                                            ]
+                                                                        }
+                                                                    },
+                                                                    "text": ""
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "VARIABLE": [
+                                                                    "variable",
+                                                                    "value1"
+                                                                ]
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "options": {}
+                                        }
                                     ]
                                 }
                             },
                             "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        1000,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "inputs": {},
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "set register (register) to (value)"
+                                ],
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "instruction"
+                                ]
+                            }
                         },
                         {
-                            "opcode": "go to ([TARGET])",
+                            "opcode": "replace item (INDEX) of [LIST] with (ITEM)",
                             "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": [
-                                        "object",
-                                        "mouse-pointer"
-                                    ]
+                                "INDEX": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "get (KEY) from (JSON)",
+                                        "inputs": {
+                                            "KEY": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "register"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            },
+                                            "JSON": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of [VARIABLE]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "VARIABLE": [
+                                                            "variable",
+                                                            "register map"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            }
+                                        },
+                                        "options": {}
+                                    },
+                                    "text": ""
+                                },
+                                "ITEM": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "value of text [ARGUMENT]",
+                                        "inputs": {},
+                                        "options": {
+                                            "ARGUMENT": [
+                                                "value",
+                                                "value"
+                                            ]
+                                        }
+                                    },
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "LIST": [
+                                    "list",
+                                    "registers"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        1000,
+                        250
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "inputs": {},
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "get register (register)"
+                                ],
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "textReporter"
+                                ]
+                            }
+                        },
+                        {
+                            "opcode": "return (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "item (INDEX) of [LIST]",
+                                        "inputs": {
+                                            "INDEX": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "get (KEY) from (JSON)",
+                                                    "inputs": {
+                                                        "KEY": {
+                                                            "mode": "block-and-text",
+                                                            "block": {
+                                                                "opcode": "value of text [ARGUMENT]",
+                                                                "inputs": {},
+                                                                "options": {
+                                                                    "ARGUMENT": [
+                                                                        "value",
+                                                                        "register"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "text": ""
+                                                        },
+                                                        "JSON": {
+                                                            "mode": "block-and-text",
+                                                            "block": {
+                                                                "opcode": "value of [VARIABLE]",
+                                                                "inputs": {},
+                                                                "options": {
+                                                                    "VARIABLE": [
+                                                                        "variable",
+                                                                        "register map"
+                                                                    ]
+                                                                }
+                                                            },
+                                                            "text": ""
+                                                        }
+                                                    },
+                                                    "options": {}
+                                                },
+                                                "text": ""
+                                            }
+                                        },
+                                        "options": {
+                                            "LIST": [
+                                                "list",
+                                                "registers"
+                                            ]
+                                        }
+                                    },
+                                    "text": ""
                                 }
                             },
                             "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        1750,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "inputs": {},
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "set memory (address) to (value)"
+                                ],
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "instruction"
+                                ]
+                            }
                         },
                         {
-                            "opcode": "go to ([TARGET])",
+                            "opcode": "set [VARIABLE] to (VALUE)",
                             "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": [
-                                        "sprite",
-                                        "Sprite2"
-                                    ]
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "set (KEY) to (VALUE) in (JSON)",
+                                        "inputs": {
+                                            "KEY": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "address"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            },
+                                            "VALUE": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "value"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            },
+                                            "JSON": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of [VARIABLE]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "VARIABLE": [
+                                                            "variable",
+                                                            "memory"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            }
+                                        },
+                                        "options": {}
+                                    },
+                                    "text": ""
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": [
+                                    "variable",
+                                    "memory"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        1750,
+                        250
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "inputs": {},
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "get memory (address)"
+                                ],
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "textReporter"
+                                ]
+                            }
+                        },
+                        {
+                            "opcode": "return (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "mode": "block-and-text",
+                                    "block": {
+                                        "opcode": "call custom block",
+                                        "inputs": {
+                                            "key": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "address"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            },
+                                            "json": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of [VARIABLE]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "VARIABLE": [
+                                                            "variable",
+                                                            "memory"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            },
+                                            "default": {
+                                                "mode": "block-and-text",
+                                                "block": null,
+                                                "text": "0"
+                                            }
+                                        },
+                                        "options": {
+                                            "customOpcode": [
+                                                "value",
+                                                "get (key) from (json) else (default)"
+                                            ]
+                                        }
+                                    },
+                                    "text": ""
                                 }
                             },
                             "options": {}
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        2500,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "inputs": {},
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "get (key) from (json) else (default)"
+                                ],
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "textReporter"
+                                ]
+                            }
                         },
                         {
-                            "opcode": "go to ([TARGET])",
+                            "opcode": "if <CONDITION> then {THEN} else {ELSE}",
                             "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": [
-                                        "sprite",
-                                        "myself"
+                                "CONDITION": {
+                                    "mode": "block-only",
+                                    "block": {
+                                        "opcode": "json (JSON) has key (KEY) ?",
+                                        "inputs": {
+                                            "JSON": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "json"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            },
+                                            "KEY": {
+                                                "mode": "block-and-text",
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "inputs": {},
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "key"
+                                                        ]
+                                                    }
+                                                },
+                                                "text": ""
+                                            }
+                                        },
+                                        "options": {}
+                                    }
+                                },
+                                "THEN": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "return (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "mode": "block-and-text",
+                                                    "block": {
+                                                        "opcode": "get (KEY) from (JSON)",
+                                                        "inputs": {
+                                                            "KEY": {
+                                                                "mode": "block-and-text",
+                                                                "block": {
+                                                                    "opcode": "value of text [ARGUMENT]",
+                                                                    "inputs": {},
+                                                                    "options": {
+                                                                        "ARGUMENT": [
+                                                                            "value",
+                                                                            "key"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                "text": ""
+                                                            },
+                                                            "JSON": {
+                                                                "mode": "block-and-text",
+                                                                "block": {
+                                                                    "opcode": "value of text [ARGUMENT]",
+                                                                    "inputs": {},
+                                                                    "options": {
+                                                                        "ARGUMENT": [
+                                                                            "value",
+                                                                            "json"
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                "text": ""
+                                                            }
+                                                        },
+                                                        "options": {}
+                                                    },
+                                                    "text": ""
+                                                }
+                                            },
+                                            "options": {}
+                                        }
                                     ]
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "point towards ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": [
-                                        "object",
-                                        "mouse-pointer"
-                                    ]
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "point towards ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": [
-                                        "object",
-                                        "random position"
-                                    ]
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "point towards ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": [
-                                        "sprite",
-                                        "Sprite2"
-                                    ]
-                                }
-                            },
-                            "options": {}
-                        },
-                        {
-                            "opcode": "point towards ([TARGET])",
-                            "inputs": {
-                                "TARGET": {
-                                    "mode": "block-and-option",
-                                    "block": null,
-                                    "option": [
-                                        "sprite",
-                                        "myself"
+                                },
+                                "ELSE": {
+                                    "mode": "script",
+                                    "blocks": [
+                                        {
+                                            "opcode": "return (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "mode": "block-and-text",
+                                                    "block": {
+                                                        "opcode": "value of text [ARGUMENT]",
+                                                        "inputs": {},
+                                                        "options": {
+                                                            "ARGUMENT": [
+                                                                "value",
+                                                                "default"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "text": ""
+                                                }
+                                            },
+                                            "options": {}
+                                        }
                                     ]
                                 }
                             },
@@ -181,46 +973,7 @@
             "currentCostume": 0,
             "costumes": [
                 {
-                    "name": "costume1",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0.24433326721191406,
-                        -0.21725082397460938
-                    ]
-                }
-            ],
-            "sounds": [
-                {
-                    "name": "Squawk",
-                    "extension": "wav",
-                    "rate": 48000,
-                    "sampleCount": 17867
-                }
-            ],
-            "volume": 100,
-            "localVariables": [],
-            "localLists": [],
-            "layerOrder": 1,
-            "visible": true,
-            "position": [
-                0,
-                0
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": false,
-            "rotationStyle": "all around"
-        },
-        {
-            "isStage": false,
-            "name": "Sprite2",
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "costume1",
+                    "name": "empty costume",
                     "extension": "svg",
                     "bitmapResolution": 1,
                     "rotationCenter": [
@@ -230,66 +983,90 @@
                 }
             ],
             "sounds": [],
-            "volume": 100,
-            "localVariables": [],
-            "localLists": [],
-            "layerOrder": 2,
-            "visible": true,
-            "position": [
-                36,
-                28
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": false,
-            "rotationStyle": "all around"
-        },
-        {
-            "isStage": false,
-            "name": "myself",
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "costume1",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0.0,
-                        0.0
-                    ]
-                }
-            ],
-            "sounds": [],
-            "volume": 100,
-            "localVariables": [],
-            "localLists": [],
-            "layerOrder": 3,
-            "visible": true,
-            "position": [
-                36,
-                28
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": false,
-            "rotationStyle": "all around"
+            "volume": 100
         }
     ],
     "globalVariables": [
         {
-            "name": "my variable",
-            "currentValue": 0,
+            "name": "register map",
+            "currentValue": "{\"r0\": 0, \"zero\": 0, \"r1\": 1, \"r2\": 2, \"r3\": 3, \"r4\": 4, \"r5\": 5, \"r6\": 6, \"r7\": 7, \"r8\": 8, \"r9\": 9, \"sb\": 9, \"r10\": 10, \"sl\": 10, \"r11\": 11, \"fp\": 11, \"r12\": 12, \"ip\": 12, \"r13\": 13, \"sp\": 13, \"r14\": 14, \"lr\": 14, \"r15\": 15, \"pc\": 15}",
+            "isCloudVariable": false
+        },
+        {
+            "name": "memory",
+            "currentValue": "{}",
+            "isCloudVariable": false
+        },
+        {
+            "name": "instr",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "instr type",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "arg0",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "arg1",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "arg2",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "value1",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "value2",
+            "currentValue": "",
             "isCloudVariable": false
         }
     ],
-    "globalLists": [],
+    "globalLists": [
+        {
+            "name": "registers",
+            "currentValue": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    ],
     "tempo": 60,
-    "videoTransparency": 50,
-    "videoState": "on",
+    "videoTransparency": 0,
+    "videoState": "off",
     "textToSpeechLanguage": null,
     "monitors": [],
     "extensionData": {},
-    "extensions": []
+    "extensions": [
+        "jgJSON",
+        "Bitwise"
+    ],
+    "extensionURLs": {
+        "Bitwise": "https://extensions.turbowarp.org/bitwise.js"
+    }
 }

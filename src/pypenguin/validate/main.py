@@ -86,8 +86,8 @@ def validateProject(projectData):
     contexts = {}
     for i, sprite in enumerate(projectDataCopy["sprites"]):
         if i == 0:
-            scopeVariables    = [item["name"] for item in projectDataCopy["globalVariables"]]
-            scopeLists        = [item["name"] for item in projectDataCopy["globalLists"    ]]
+            scopeVariables    = [["variable", item["name"]] for item in projectDataCopy["globalVariables"]]
+            scopeLists        = [["list"    , item["name"]] for item in projectDataCopy["globalLists"    ]]
             #if cloningTargets == []:
             #    cloningTargets = [["value", " "]] # When there are no sprites; make " " the fallback value
             nameKey           = None

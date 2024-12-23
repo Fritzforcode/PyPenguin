@@ -66,7 +66,7 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
         data["options"] = optionDefault
     opcode = getDeoptimizedOpcode(opcode=data["opcode"])
     if opcode == "procedures_call":
-        proccode, arguments = parseCustomOpcode(customOpcode=data["options"]["customOpcode"])
+        proccode, arguments = parseCustomOpcode(customOpcode=data["options"]["customOpcode"][1])
     newInputDatas = {}
     for i, inputID, inputData in ikv(data["inputs"]):
         if opcode == "procedures_call":
@@ -165,7 +165,7 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
             "topLevel": position != None,
         },
     }
-    #("stop fblock", 100*"}")
+    #print("stop fblock", 100*"}")
     #pp(newData)
     return newData
 
@@ -447,7 +447,7 @@ def restoreInputs(data, opcode, spriteName, blockData):
                 magicNumber = getInputMagicNumber(inputType=inputType)
                 if inputMode == "block-and-hybrid-option":
                     text = inputData["text"][1]
-                    print("~", text)
+                    #print("~", text)
                     token = stringToToken(text)
                     textData = [magicNumber, text, token]
                 else:
@@ -495,9 +495,11 @@ def unprepareBlocks(data, spriteName, commentDatas):
     mutationDatas = {}
     for j, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):
+            print(".", blockData["opcode"])
             if blockData["opcode"] == "procedures_prototype":
                 mutationData = blockData["mutation"]
                 mutationDatas[mutationData["proccode"]] = mutationData
+                print("==>", mutationData["proccode"])                
     additionalBlockDatas = {}
     for i, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):
@@ -505,6 +507,7 @@ def unprepareBlocks(data, spriteName, commentDatas):
                 customOpcode = blockData["fields"]["customOpcode"]
                 del blockData["fields"]["customOpcode"]
                 proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
+                pp(mutationDatas)
                 mutationData         = mutationDatas[proccode]
                 modifiedMutationData = mutationData.copy()
                 del modifiedMutationData["argumentnames"]
@@ -573,4 +576,6 @@ def unprepareBlocks(data, spriteName, commentDatas):
     table = {selector: numberToLiteral(i+1) for i,selector in enumerate(cutSelectors)}
     data = replaceSelectors(data, table=table)
     commentDatas = replaceSelectors(commentDatas, table=table)
+    #print(100*"&")
+    #pp(data)
     return data, commentDatas

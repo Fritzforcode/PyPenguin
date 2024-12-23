@@ -74,5 +74,7 @@ def optimizeProjectJSON(projectData):
         "extensionData"       : projectData["extensionData"],
         "extensions"          : projectData["extensions"],
     }
+    if projectData["extensionURLs"] != {}:
+        newData["extensionURLs"] = projectData["extensionURLs"]
     return newData
     
