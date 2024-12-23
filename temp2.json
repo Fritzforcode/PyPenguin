@@ -32,29 +32,39 @@
                             "inputs": {
                                 "INDEX": {
                                     "block": {
-                                        "opcode": "get (KEY) from (JSON)",
+                                        "opcode": "(OPERAND1) + (OPERAND2)",
                                         "inputs": {
-                                            "KEY": {
+                                            "OPERAND1": {
                                                 "block": {
-                                                    "opcode": "value of text [ARGUMENT]",
-                                                    "options": {
-                                                        "ARGUMENT": [
-                                                            "value",
-                                                            "register"
-                                                        ]
+                                                    "opcode": "get (KEY) from (JSON)",
+                                                    "inputs": {
+                                                        "KEY": {
+                                                            "block": {
+                                                                "opcode": "value of text [ARGUMENT]",
+                                                                "options": {
+                                                                    "ARGUMENT": [
+                                                                        "value",
+                                                                        "register"
+                                                                    ]
+                                                                }
+                                                            }
+                                                        },
+                                                        "JSON": {
+                                                            "block": {
+                                                                "opcode": "value of [VARIABLE]",
+                                                                "options": {
+                                                                    "VARIABLE": [
+                                                                        "variable",
+                                                                        "register map"
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             },
-                                            "JSON": {
-                                                "block": {
-                                                    "opcode": "value of [VARIABLE]",
-                                                    "options": {
-                                                        "VARIABLE": [
-                                                            "variable",
-                                                            "register map"
-                                                        ]
-                                                    }
-                                                }
+                                            "OPERAND2": {
+                                                "text": "1"
                                             }
                                         }
                                     }
@@ -112,29 +122,39 @@
                                         "inputs": {
                                             "INDEX": {
                                                 "block": {
-                                                    "opcode": "get (KEY) from (JSON)",
+                                                    "opcode": "(OPERAND1) + (OPERAND2)",
                                                     "inputs": {
-                                                        "KEY": {
+                                                        "OPERAND1": {
                                                             "block": {
-                                                                "opcode": "value of text [ARGUMENT]",
-                                                                "options": {
-                                                                    "ARGUMENT": [
-                                                                        "value",
-                                                                        "register"
-                                                                    ]
+                                                                "opcode": "get (KEY) from (JSON)",
+                                                                "inputs": {
+                                                                    "KEY": {
+                                                                        "block": {
+                                                                            "opcode": "value of text [ARGUMENT]",
+                                                                            "options": {
+                                                                                "ARGUMENT": [
+                                                                                    "value",
+                                                                                    "register"
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    },
+                                                                    "JSON": {
+                                                                        "block": {
+                                                                            "opcode": "value of [VARIABLE]",
+                                                                            "options": {
+                                                                                "VARIABLE": [
+                                                                                    "variable",
+                                                                                    "register map"
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
                                                         },
-                                                        "JSON": {
-                                                            "block": {
-                                                                "opcode": "value of [VARIABLE]",
-                                                                "options": {
-                                                                    "VARIABLE": [
-                                                                        "variable",
-                                                                        "register map"
-                                                                    ]
-                                                                }
-                                                            }
+                                                        "OPERAND2": {
+                                                            "text": "1"
                                                         }
                                                     }
                                                 }
@@ -2108,6 +2128,136 @@
                             }
                         }
                     ]
+                },
+                {
+                    "position": [
+                        -1000,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "options": {
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "instruction"
+                                ],
+                                "customOpcode": [
+                                    "value",
+                                    "run program"
+                                ]
+                            }
+                        },
+                        {
+                            "opcode": "while <CONDITION> {BODY}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "block": {
+                                        "opcode": "(OPERAND1) < (OPERAND2)",
+                                        "inputs": {
+                                            "OPERAND1": {
+                                                "block": {
+                                                    "opcode": "value of [VARIABLE]",
+                                                    "options": {
+                                                        "VARIABLE": [
+                                                            "variable",
+                                                            "program counter"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "OPERAND2": {
+                                                "block": {
+                                                    "opcode": "length of [LIST]",
+                                                    "options": {
+                                                        "LIST": [
+                                                            "list",
+                                                            "instructions"
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "BODY": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "block": {
+                                                        "opcode": "item (INDEX) of [LIST]",
+                                                        "inputs": {
+                                                            "INDEX": {
+                                                                "block": {
+                                                                    "opcode": "(OPERAND1) + (OPERAND2)",
+                                                                    "inputs": {
+                                                                        "OPERAND1": {
+                                                                            "block": {
+                                                                                "opcode": "value of [VARIABLE]",
+                                                                                "options": {
+                                                                                    "VARIABLE": [
+                                                                                        "variable",
+                                                                                        "program counter"
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "OPERAND2": {
+                                                                            "text": "1"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "options": {
+                                                            "LIST": [
+                                                                "list",
+                                                                "instructions"
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "options": {
+                                                "VARIABLE": [
+                                                    "variable",
+                                                    "current instruction"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "opcode": "call custom block",
+                                            "inputs": {
+                                                "instr": {
+                                                    "block": {
+                                                        "opcode": "value of [VARIABLE]",
+                                                        "options": {
+                                                            "VARIABLE": [
+                                                                "variable",
+                                                                "current instruction"
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "options": {
+                                                "customOpcode": [
+                                                    "value",
+                                                    "execute instr (instr)"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    ]
                 }
             ],
             "comments": [],
@@ -2192,9 +2342,29 @@
             "name": "target pc",
             "currentValue": "",
             "isCloudVariable": false
+        },
+        {
+            "name": "current instruction",
+            "currentValue": "",
+            "isCloudVariable": false
         }
     ],
     "globalLists": [
+        {
+            "name": "instructions",
+            "currentValue": [
+                "{\"type\": \"move\", \"instr\": \"mov\", \"arg0\": \"r0\", \"arg1\": 10}",
+                "{\"type\": \"alu\", \"instr\": \"addi\", \"arg0\": \"r1\", \"arg1\": \"r0\", \"arg2\": 5}",
+                "{\"type\": \"alu\", \"instr\": \"sub\", \"arg0\": \"r2\", \"arg1\": \"r1\", \"arg2\": 3}",
+                "{\"type\": \"alu\", \"instr\": \"mul\", \"arg0\": \"r3\", \"arg1\": \"r2\", \"arg2\": 2}",
+                "{\"type\": \"memory\", \"instr\": \"str\", \"arg0\": \"r3\", \"arg1\": \"r0\", \"arg2\": 4}",
+                "{\"type\": \"comparison\", \"instr\": \"cmp\", \"arg0\": \"r3\", \"arg1\": 14}",
+                "{\"type\": \"branch\", \"instr\": \"bge\", \"arg0\": 9}",
+                "{\"type\": \"move\", \"instr\": \"mov\", \"arg0\": \"r4\", \"arg1\": 1}",
+                "{\"type\": \"branch\", \"instr\": \"b\", \"arg0\": 10}",
+                "{\"type\": \"move\", \"instr\": \"mov\", \"arg0\": \"r4\", \"arg1\": 0}"
+            ]
+        },
         {
             "name": "registers",
             "currentValue": [

@@ -1,3 +1,5 @@
+from helpers import varReporterBlock
+
 setRegister = {"position": [1000, 0], "blocks": [
     {
         "opcode": "define custom block",
@@ -11,16 +13,19 @@ setRegister = {"position": [1000, 0], "blocks": [
         "opcode": "replace item (INDEX) of [LIST] with (ITEM)",
         "inputs": {
             "INDEX": {"block": {
-                "opcode": "get (KEY) from (JSON)",
+                "opcode": "(OPERAND1) + (OPERAND2)",
                 "inputs": {
-                    "KEY": {"block": {
-                        "opcode": "value of text [ARGUMENT]",
-                        "options": {"ARGUMENT": ["value", "register"]},
+                    "OPERAND1": {"block": {
+                        "opcode": "get (KEY) from (JSON)",
+                        "inputs": {
+                            "KEY": {"block": {
+                                "opcode": "value of text [ARGUMENT]",
+                                "options": {"ARGUMENT": ["value", "register"]},
+                            }},
+                            "JSON": {"block": varReporterBlock("register map")},
+                        },
                     }},
-                    "JSON": {"block": {
-                        "opcode": "value of [VARIABLE]",
-                        "options": {"VARIABLE": ["variable", "register map"]},
-                    }},
+                    "OPERAND2": {"text": "1"},
                 },
             }},
             "ITEM": {"block": {
@@ -48,16 +53,19 @@ getRegister = {"position": [1000, 250], "blocks": [
                 "opcode": "item (INDEX) of [LIST]",
                 "inputs": {
                     "INDEX": {"block": {
-                        "opcode": "get (KEY) from (JSON)",
+                        "opcode": "(OPERAND1) + (OPERAND2)",
                         "inputs": {
-                            "KEY": {"block": {
-                                "opcode": "value of text [ARGUMENT]",
-                                "options": {"ARGUMENT": ["value", "register"]},
+                            "OPERAND1": {"block": {
+                                "opcode": "get (KEY) from (JSON)",
+                                "inputs": {
+                                    "KEY": {"block": {
+                                        "opcode": "value of text [ARGUMENT]",
+                                        "options": {"ARGUMENT": ["value", "register"]},
+                                    }},
+                                    "JSON": {"block": varReporterBlock("register map")},
+                                },
                             }},
-                            "JSON": {"block": {
-                                "opcode": "value of [VARIABLE]",
-                                "options": {"VARIABLE": ["variable", "register map"]},
-                            }},
+                            "OPERAND2": {"text": "1"},
                         },
                     }},
                 },

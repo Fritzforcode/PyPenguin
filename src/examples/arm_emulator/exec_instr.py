@@ -1,18 +1,10 @@
-from helpers import *
+from helpers import varReporterBlock
 
 setArgs = [
     {
         "opcode": "set [VARIABLE] to (VALUE)",
         "inputs": {
             "VALUE": {"block": {
-                "opcode": "get (KEY) from (JSON)",
-                "inputs": {
-                    "KEY": {"text": "instr_type"},
-                    "JSON": {"block": {
-                        "opcode": "value of text [ARGUMENT]",
-                        "options": {"ARGUMENT": ["value", "instr"]},
-                    }},
-                },
                 "opcode": "call custom block",
                 "inputs": {
                     "key": {"text": id},
@@ -520,7 +512,7 @@ executeInstr = {"position": [0,0], "blocks": [
             "VALUE": {"block": {
                 "opcode": "get (KEY) from (JSON)",
                 "inputs": {
-                    "KEY": {"text": "instr_type"},
+                    "KEY": {"text": "type"},
                     "JSON": {"block": {
                         "opcode": "value of text [ARGUMENT]",
                         "options": {"ARGUMENT": ["value", "instr"]},

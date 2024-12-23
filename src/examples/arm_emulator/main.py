@@ -1,21 +1,26 @@
 from exec_instr import executeInstr
 from utility import *
+from helpers import varReporterBlock
 import json
 
 instructions = [
-    {"type": "move", "instr": "mov", "arg0": "r0", "arg1": 10},  # r0 = 10
-    {"type": "alu", "instr": "addi", "arg0": "r1", "arg1": "r0", "arg2": 5},  # r1 = r0 + 5
-    {"type": "alu", "instr": "sub", "arg0": "r2", "arg1": "r1", "arg2": 3},  # r2 = r1 - 3
-    {"type": "alu", "instr": "mul", "arg0": "r3", "arg1": "r2", "arg2": 2},  # r3 = r2 * 2
-    {"type": "memory", "instr": "str", "arg0": "r3", "arg1": "r0", "arg2": 4},  # Store r3 at r0 + 4
-    {"type": "comparison", "instr": "cmp", "arg0": "r3", "arg1": 14},  # Compare r3 with 14
-    {"type": "branch", "instr": "bge", "arg0": 9},  # Branch if r3 >= 14
-    {"type": "move", "instr": "mov", "arg0": "r4", "arg1": 1},  # r4 = 1 (won't execute if branch is taken)
-    {"type": "branch", "instr": "b", "arg0": 10},  # Unconditional branch
-    {"type": "move", "instr": "mov", "arg0": "r4", "arg1": 0},  # r4 = 0
+    {"type": "move"      , "instr": "mov" , "arg0": "r0", "arg1": 10},  # r0 = 10
+    {"type": "alu"       , "instr": "addi", "arg0": "r1", "arg1": "r0", "arg2": 5},  # r1 = r0 + 5
+    {"type": "alu"       , "instr": "sub" , "arg0": "r2", "arg1": "r1", "arg2": 3},  # r2 = r1 - 3
+    {"type": "alu"       , "instr": "mul" , "arg0": "r3", "arg1": "r2", "arg2": 2},  # r3 = r2 * 2
+    {"type": "memory"    , "instr": "str" , "arg0": "r3", "arg1": "r0", "arg2": 4},  # Store r3 at r0 + 4
+    {"type": "comparison", "instr": "cmp" , "arg0": "r3", "arg1": 14},  # Compare r3 with 14
+    {"type": "branch"    , "instr": "bge" , "arg0": 9},  # Branch if r3 >= 14
+    {"type": "move"      , "instr": "mov" , "arg0": "r4", "arg1": 1},  # r4 = 1 (won't execute if branch is taken)
+    {"type": "branch"    , "instr": "b"   , "arg0": 10},  # Unconditional branch
+    {"type": "move"      , "instr": "mov" , "arg0": "r4", "arg1": 0},  # r4 = 0
 ]
 
 runProgram = {"position": [-1000, 0], "blocks": [
+    {
+        "opcode": "define custom block",
+        "options": {"noScreenRefresh": ["value", True], "blockType": ["value", "instruction"], "customOpcode": ["value", "run program"]},
+    },
     {
         "opcode": "while <CONDITION> {BODY}",
         "inputs": {
@@ -31,8 +36,31 @@ runProgram = {"position": [-1000, 0], "blocks": [
             }},
             "BODY": {"blocks": [
                 {
-                    "opcode": "set [VARIABLE] to (VALUE)"
-                },            
+                    "opcode": "set [VARIABLE] to (VALUE)",
+                    "inputs": {
+                        "VALUE": {"block": {
+                            "opcode": "item (INDEX) of [LIST]",
+                            "inputs": {
+                                "INDEX": {"block": {
+                                    "opcode": "(OPERAND1) + (OPERAND2)",
+                                    "inputs": {
+                                        "OPERAND1": {"block": varReporterBlock("program counter")},
+                                        "OPERAND2": {"text": "1"},
+                                    },
+                                }},
+                            },
+                            "options": {"LIST": ["list", "instructions"]},
+                        }},
+                    },
+                    "options": {"VARIABLE": ["variable", "current instruction"]},
+                },
+                {
+                    "opcode": "call custom block",
+                    "inputs": {
+                        "instr": {"block": varReporterBlock("current instruction")},
+                    },
+                    "options": {"customOpcode": ["value", "execute instr (instr)"]},
+                },
             ]},
         },
     },
@@ -85,7 +113,7 @@ projectData = {
     "globalLists": [
         {
             "name": "instructions",
-            "currentValue": json.dumps(instructions),
+            "currentValue": [json.dumps(instr) for instr in instructions],
         },
         {
             "name": "registers",
