@@ -3,7 +3,7 @@ from pypenguin.validate.constants import validateSchema, formatError, inputSchem
 from pypenguin.validate.comments import validateComment
 from pypenguin.database import *
 
-def validateScript(path, data, context):
+def validateScript(path, data, context, isNested=True):
     # Check script format
     validateSchema(pathToData=path, data=data, schema=scriptSchema)
 
@@ -17,10 +17,21 @@ def validateScript(path, data, context):
         
         oldOpcode = getDeoptimizedOpcode(opcode=block["opcode"])
         blockType = getBlockType(opcode=oldOpcode)
-        if (blockType in ["textReporter", "numberReporter", "booleanReporter"]) and (len(data["blocks"]) > 1):
-            raise formatError(path, "A script whose first block is a reporter mustn't have more than one block.")
+        print(block, blockType)
+        if isNested:
+            if blockType in ["stringReporter", "numberReporter", "booleanReporter"]:
+                raise formatError(path+[i], "Reporter blocks are not allowed in the 'blocks' attribute of an input.")
+            if blockType == "hat":
+                raise formatError(path+[i], "Hat blocks are not allowed in the 'blocks' attribute of an input.")
+        
+        if   (blockType in ["stringReporter", "numberReporter", "booleanReporter"]) and (len(data["blocks"]) > 1):
+            raise formatError(path+[i], "A reporter block must be the only block in it's script.")
+        elif blockType == "hat" and i > 0:
+            raise formatError(path+[i], "A hat block must to be the first block in it's script.")
+        elif blockType == "lastInstruction" and i+1 in range(len(data["blocks"])): # when there is a next block
+            raise formatError(path+[i], "An ending block must be the last block in it's script.")
 
-def validateBlock(path, data, context):
+def validateBlock(path, data, context, expectedShape=None):
     if "inputs" not in data:
         data["inputs"] = inputDefault
     if "options" not in data:
@@ -106,11 +117,16 @@ def validateInputs(path, data, opcode, context):
                                 raise formatError(path=path+[inputID], message="Must have the attribute 'option'.")
 
                 if inputValue.get("block") != None: # When the input has a block and it isn't None, check the block format
-                    validateBlock(path=path+[inputID]+["block"], data=inputValue["block"], context=context)
+                    validateBlock(
+                        path=path+[inputID]+["block"], 
+                        data=inputValue["block"], 
+                        context=context,
+                        expectedShape="booleanReporter" if inputType == "boolean" else "stringReporter",
+                    )
                 
                 if inputValue.get("blocks", []) != []:
                     preparedData = {"position": [0,0], "blocks": inputValue["blocks"]}
-                    validateScript(path=path+[inputID], data=preparedData, context=context)
+                    validateScript(path=path+[inputID], data=preparedData, context=context, isNested=True)
                 
                 if inputValue.get("option") != None:
                     validateOptionValue(

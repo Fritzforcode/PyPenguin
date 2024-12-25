@@ -1,62 +1,17 @@
-getRegister = {"position": [1000, 250], "blocks": [
-    {
-        "opcode": "define custom block",
-        "options": {
-            "noScreenRefresh": ["value", True],
-            "blockType": ["value", "textReporter"],
-            "customOpcode": ["value", "get register (register)"]
-        },
-    },
-    {
-        "opcode": "return (VALUE)",
-        "inputs": {
-            "VALUE": {"block": {
-                "opcode": "item (INDEX) of [LIST]",
-                "inputs": {
-                    "INDEX": {"block": {
-                        "opcode": "get (KEY) from (JSON)",
-                        "inputs": {
-                            "KEY": {"block": {
-                                "opcode": "value of text [ARGUMENT]",
-                                "options": {"ARGUMENT": ["value", "register"]},
-                            }},
-                            "JSON": {"block": {
-                                "opcode": "value of [VARIABLE]",
-                                "options": {"VARIABLE": ["variable", "register map"]},
-                            }},
-                        },
-                    }},
-                },
-                "options": {"LIST": ["list", "registers"]},
-            }},
-        },
-    },
-]}
-
-main = {"position": [0,0], "blocks": [
-    {
-                "opcode": "set [VARIABLE] to (VALUE)",
-                "inputs": {
-                    "VALUE": {"block": {
-                        "opcode": "call custom block",
-                        "inputs": {
-                            "register": {"block": {
-                                "opcode": "value of [VARIABLE]",
-                                "options": {"VARIABLE": ["variable", "arg0"]},
-                            }},
-                        },
-                        "options": {"customOpcode": ["value", "get register (register)"]},
-                    }},
-                },
-                "options": {"VARIABLE": ["variable", "value1"]},
-            }
-]}
-
 scripts = [
-getRegister,
-main
+    {"position": [0,0], "blocks": [
+        {
+            "opcode": "if <CONDITION> then {THEN}",
+            "inputs": {
+                "CONDITION": {"block": {
+                    "opcode": "play all sounds"
+                }},
+                "THEN": {"blocks": [
+                ]},
+            },
+        },
+    ]},
 ]
-
 
 projectData = {
     "sprites": [

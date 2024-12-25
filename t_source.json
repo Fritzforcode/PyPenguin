@@ -1,28 +1,18 @@
 {
     "sprites": [
         {
-            "isStage": true,
             "name": "Stage",
+            "isStage": true,
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "empty costume",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0.0,
-                        0.0
-                    ]
-                }
-            ],
+            "costumes": [],
             "sounds": [],
             "volume": 100
         },
         {
-            "isStage": false,
             "name": "Sprite1",
+            "isStage": false,
             "scripts": [
                 {
                     "position": [
@@ -34,36 +24,21 @@
                             "opcode": "if <CONDITION> then {THEN}",
                             "inputs": {
                                 "CONDITION": {
-                                    "mode": "block-only",
                                     "block": {
-                                        "opcode": "play all sounds",
-                                        "inputs": {},
-                                        "options": {}
+                                        "opcode": "play all sounds"
                                     }
                                 },
                                 "THEN": {
-                                    "mode": "script",
                                     "blocks": []
                                 }
-                            },
-                            "options": {}
+                            }
                         }
                     ]
                 }
             ],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "empty costume",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0.0,
-                        0.0
-                    ]
-                }
-            ],
+            "costumes": [],
             "sounds": [
                 {
                     "name": "pop",
@@ -72,7 +47,6 @@
                     "sampleCount": 1123
                 }
             ],
-            "volume": 100,
             "localVariables": [
                 {
                     "name": "loc var",
@@ -80,6 +54,7 @@
                 }
             ],
             "localLists": [],
+            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -92,26 +67,16 @@
             "rotationStyle": "all around"
         },
         {
-            "isStage": false,
             "name": "Sprite2",
+            "isStage": false,
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "empty costume",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0.0,
-                        0.0
-                    ]
-                }
-            ],
+            "costumes": [],
             "sounds": [],
-            "volume": 100,
             "localVariables": [],
             "localLists": [],
+            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -164,6 +129,5 @@
     "extensionData": {},
     "extensions": [
         "jgJSON"
-    ],
-    "credit": "https://github.com/Fritzforcode/PyPenguin"
+    ]
 }

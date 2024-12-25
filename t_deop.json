@@ -1,0 +1,184 @@
+{
+    "targets": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "variables": {
+                "lOD}BiZGzRs-XFW^NR}E": [
+                    "score",
+                    "G\u00fcnter J\u00fcchen",
+                    true
+                ],
+                "YDn}nMmJo/X/FP^Q[)~g": [
+                    "arg0",
+                    ""
+                ],
+                "-{%bYe}m.pK@MLu:.TcF": [
+                    "value1",
+                    ""
+                ],
+                "(gZv/fNTW#AdEb=N}FP#": [
+                    "register map",
+                    ""
+                ]
+            },
+            "lists": {
+                "l}bkoWWT_pK.@@mFs!|Z": [
+                    "registers",
+                    []
+                ],
+                "R|gDvNLXweHyBpdp-q^;": [
+                    "points",
+                    []
+                ]
+            },
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "empty costume",
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "dataFormat": "svg",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 1.0,
+                    "rotationCenterY": 1.0,
+                    "bitmapResolution": 1
+                }
+            ],
+            "sounds": [],
+            "id": "nAkI`?tY/Vqn|(Xh.]zf",
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 0,
+            "videoState": "off",
+            "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "variables": {
+                "oTDHR`;})Ttg=CmUtenv": [
+                    "loc var",
+                    ""
+                ]
+            },
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {
+                "a": {
+                    "opcode": "sound_playallsounds",
+                    "next": null,
+                    "parent": "b",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "b": {
+                    "opcode": "control_if",
+                    "next": null,
+                    "parent": null,
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "a"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 0,
+                    "y": 0
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "empty costume",
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "dataFormat": "svg",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 1.0,
+                    "rotationCenterY": 1.0,
+                    "bitmapResolution": 1
+                }
+            ],
+            "sounds": [
+                {
+                    "name": "pop",
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "dataFormat": "wav",
+                    "rate": 48000,
+                    "sampleCount": 1123,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "id": "oTDHQbL~wA;YdpAys^y/",
+            "volume": 100,
+            "visible": true,
+            "x": 77,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": true,
+            "rotationStyle": "all around",
+            "layerOrder": 1
+        },
+        {
+            "isStage": false,
+            "name": "Sprite2",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "customVars": [],
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "name": "empty costume",
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "dataFormat": "svg",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "rotationCenterX": 1.0,
+                    "rotationCenterY": 1.0,
+                    "bitmapResolution": 1
+                }
+            ],
+            "sounds": [],
+            "id": "JZ[pcxv.fz+M;+W|tWBT",
+            "volume": 100,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100,
+            "direction": 90,
+            "draggable": true,
+            "rotationStyle": "all around",
+            "layerOrder": 1
+        }
+    ],
+    "monitors": [],
+    "extensionData": {},
+    "extensions": [
+        "jgJSON"
+    ],
+    "extensionURLs": {},
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0",
+        "agent": "",
+        "platform": {
+            "name": "PenguinMod",
+            "url": "https://penguinmod.com/",
+            "version": "stable"
+        }
+    },
+    "credit": "https://github.com/Fritzforcode/PyPenguin"
+}
