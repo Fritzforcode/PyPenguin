@@ -31,21 +31,18 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "if <CONDITION> then {THEN}",
-                            "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
-                                    "block": {
-                                        "opcode": "play all sounds",
-                                        "inputs": {},
-                                        "options": {}
-                                    }
-                                },
-                                "THEN": {
-                                    "mode": "script",
-                                    "blocks": []
-                                }
-                            },
+                            "opcode": "stop script [TARGET]",
+                            "inputs": {},
+                            "options": {
+                                "TARGET": [
+                                    "value",
+                                    "other scripts in sprite"
+                                ]
+                            }
+                        },
+                        {
+                            "opcode": "play all sounds",
+                            "inputs": {},
                             "options": {}
                         }
                     ]

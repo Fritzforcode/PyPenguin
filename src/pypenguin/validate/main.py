@@ -58,7 +58,6 @@ def validateProject(projectData):
 
     # Check sprite formats
     spriteNames    = []
-    #cloningTargets = []
     localVariables = {}
     localLists     = {}
     otherSprites   = []
@@ -78,7 +77,6 @@ def validateProject(projectData):
                 backdrops.insert(0, ["costume", defaultCostume["name"]])
             
         else:
-            #cloningTargets.append(["sprite", spriteName])
             otherSprites.append(spriteName)
             localVariables[tuple(spriteName)] = [["variable", item["name"]] for item in sprite["localVariables"]]
             localLists    [tuple(spriteName)] = [["list"    , item["name"]] for item in sprite["localLists"    ]]
@@ -88,11 +86,8 @@ def validateProject(projectData):
         if i == 0:
             scopeVariables    = [["variable", item["name"]] for item in projectDataCopy["globalVariables"]]
             scopeLists        = [["list"    , item["name"]] for item in projectDataCopy["globalLists"    ]]
-            #if cloningTargets == []:
-            #    cloningTargets = [["value", " "]] # When there are no sprites; make " " the fallback value
             nameKey           = None
         else:
-            #cloningTargets.insert(0, ["myself", "myself"])
             scopeVariables    = [["variable", item["name"]] for item in sprite["localVariables"] + projectDataCopy["globalVariables"]]
             scopeLists        = [["list"    , item["name"]] for item in sprite["localLists"    ] + projectDataCopy["globalLists"    ]]
             nameKey           = sprite["name"]
@@ -103,7 +98,6 @@ def validateProject(projectData):
             "globalVariables": [["variable", item["name"]] for item in projectDataCopy["globalVariables"]],
             "localVariables" : localVariables,
             "localLists"     : localLists,
-           #"cloningTargets" : cloningTargets,
             "otherSprites": [
                 target for target in otherSprites if target[1] != sprite["name"]
             ],

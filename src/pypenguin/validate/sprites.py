@@ -1,7 +1,7 @@
 from pypenguin.database import defaultCostume
 from pypenguin.validate.constants import validateSchema, formatError, stageSchema, spriteSchema
 from pypenguin.validate.costumes_sounds import validateCostume, validateSound
-from pypenguin.validate.blocks_scripts import validateScript
+from pypenguin.validate.blocks_scripts import validateScript, validateCustomBlocksInScript
 from pypenguin.validate.comments import validateComment
 
 def validateSprite(path, data, context):
@@ -53,11 +53,22 @@ def validateSprite(path, data, context):
         "isStage" : i == 0,
     }
     
+    CBTypes = {} 
     for j, script in enumerate(data["scripts"]):
-        validateScript(
+        CBInfo = validateScript(
             path=path+["scripts"]+[j], 
             data=script, 
             context=spriteContext, 
+        )
+        if CBInfo == None:
+            continue
+        CBTypes[CBInfo[0]] = CBInfo[1]
+    
+    for j, script in enumerate(data["scripts"]):
+        validateCustomBlocksInScript(
+            path=path+["scripts"]+[j], 
+            data=script, 
+            CBTypes=CBTypes
         )
     
     # Check comment formats

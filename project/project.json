@@ -1,28 +1,18 @@
 {
     "sprites": [
         {
-            "isStage": true,
             "name": "Stage",
+            "isStage": true,
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "empty costume",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0.0,
-                        0.0
-                    ]
-                }
-            ],
+            "costumes": [],
             "sounds": [],
             "volume": 100
         },
         {
-            "isStage": false,
             "name": "Sprite1",
+            "isStage": false,
             "scripts": [
                 {
                     "position": [
@@ -31,39 +21,76 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "if <CONDITION> then {THEN}",
+                            "opcode": "call custom block",
                             "inputs": {
-                                "CONDITION": {
-                                    "mode": "block-only",
+                                "f": {
                                     "block": {
-                                        "opcode": "play all sounds",
+                                        "opcode": "call custom block",
                                         "inputs": {},
-                                        "options": {}
+                                        "options": {
+                                            "customOpcode": [
+                                                "value",
+                                                ""
+                                            ]
+                                        }
                                     }
-                                },
-                                "THEN": {
-                                    "mode": "script",
-                                    "blocks": []
                                 }
                             },
-                            "options": {}
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "abcease <f>"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        500,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "options": {
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "instruction"
+                                ],
+                                "customOpcode": [
+                                    "value",
+                                    "abcease <f>"
+                                ]
+                            }
+                        },
+                        {
+                            "opcode": "define custom block",
+                            "options": {
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "instruction"
+                                ],
+                                "customOpcode": [
+                                    "value",
+                                    "bolli"
+                                ]
+                            }
                         }
                     ]
                 }
             ],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "empty costume",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0.0,
-                        0.0
-                    ]
-                }
-            ],
+            "costumes": [],
             "sounds": [
                 {
                     "name": "pop",
@@ -72,7 +99,6 @@
                     "sampleCount": 1123
                 }
             ],
-            "volume": 100,
             "localVariables": [
                 {
                     "name": "loc var",
@@ -80,6 +106,7 @@
                 }
             ],
             "localLists": [],
+            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -92,26 +119,16 @@
             "rotationStyle": "all around"
         },
         {
-            "isStage": false,
             "name": "Sprite2",
+            "isStage": false,
             "scripts": [],
             "comments": [],
             "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "empty costume",
-                    "extension": "svg",
-                    "bitmapResolution": 1,
-                    "rotationCenter": [
-                        0.0,
-                        0.0
-                    ]
-                }
-            ],
+            "costumes": [],
             "sounds": [],
-            "volume": 100,
             "localVariables": [],
             "localLists": [],
+            "volume": 100,
             "layerOrder": 1,
             "visible": true,
             "position": [
@@ -164,6 +181,5 @@
     "extensionData": {},
     "extensions": [
         "jgJSON"
-    ],
-    "credit": "https://github.com/Fritzforcode/PyPenguin"
+    ]
 }

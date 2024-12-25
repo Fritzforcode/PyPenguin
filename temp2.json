@@ -464,7 +464,7 @@
                                         "opcode": "get (KEY) from (JSON)",
                                         "inputs": {
                                             "KEY": {
-                                                "text": "instr_type"
+                                                "text": "type"
                                             },
                                             "JSON": {
                                                 "block": {

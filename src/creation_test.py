@@ -1,18 +1,36 @@
 scripts = [
     {"position": [0,0], "blocks": [
         {
-            "opcode": "if <CONDITION> then {THEN}",
+            "opcode": "call custom block",
             "inputs": {
-                "CONDITION": {"block": {
-                    "opcode": "play all sounds"
+                "f": {"block": {
+                    "opcode": "call custom block",
+                    "inputs": {},
+                    "options": {"customOpcode": ["value", ""]},
                 }},
-                "THEN": {"blocks": [
-                ]},
             },
+            "options": {"customOpcode": ["value", "abcease <f>"]},
+        },
+    ]},
+    {"position": [500, 0], "blocks": [
+        {
+            "opcode": "define custom block",
+            "options": {
+                "noScreenRefresh": ["value", True],
+                "blockType": ['value', 'instruction'],
+                "customOpcode": ["value", "abcease <f>"],
+            }
+        },
+        {
+            "opcode": "define custom block",
+            "options": {
+                "noScreenRefresh": ["value", True],
+                "blockType": ['value', 'instruction'],
+                "customOpcode": ["value", "bolli"],
+            }
         },
     ]},
 ]
-
 projectData = {
     "sprites": [
         {
@@ -135,10 +153,10 @@ deoptimizeAndCompressProject(
     temporaryDir        = "temporary",
     deoptimizedDebugFilePath="t_deop.json",
 )
-
-extractAndOptimizeProject(
-    projectFilePath        = "export.pmp",
-    optimizedProjectDir    = "project",
-    temporaryDir           = "temporary",
-    optimizedDebugFilePath = "t_finished.json"
-)
+#
+#extractAndOptimizeProject(
+#    projectFilePath        = "export.pmp",
+#    optimizedProjectDir    = "project",
+#    temporaryDir           = "temporary",
+#    optimizedDebugFilePath = "t_finished.json"
+#)

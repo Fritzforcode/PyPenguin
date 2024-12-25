@@ -3,7 +3,7 @@ from pypenguin.validate.constants import validateSchema, formatError, inputSchem
 from pypenguin.validate.comments import validateComment
 from pypenguin.database import *
 
-def validateScript(path, data, context, isNested=True):
+def validateScript(path, data, context, isNested=False):
     # Check script format
     validateSchema(pathToData=path, data=data, schema=scriptSchema)
 
@@ -17,19 +17,43 @@ def validateScript(path, data, context, isNested=True):
         
         oldOpcode = getDeoptimizedOpcode(opcode=block["opcode"])
         blockType = getBlockType(opcode=oldOpcode)
-        print(block, blockType)
+        if blockType == "dynamic":
+            match oldOpcode:
+                case "control_stop":
+                    optionID = getOptimizedOptionID(opcode=oldOpcode, optionID="STOP_OPTION")
+                    match block["options"][optionID][1]:
+                        case "all" | "this script"    : blockType = "lastInstruction"
+                        case "other scripts in sprite": blockType = "instruction"
+                case "procedures_call":
+                    pass # Is checked in the second iteration
+        validateBlockType(
+            path=path,
+            blockType=blockType,
+            isNested=isNested,
+            isFirst=(i == 0),
+            isLast=not(i+1 in range(len(data["blocks"]))),
+            isOnly=(len(data["blocks"]) == 1),
+        )
+
+        if oldOpcode == "special_define":
+            return (
+                block["options"]["customOpcode"][1],
+                block["options"]["blockType"][1],
+            )
+
+def validateBlockType(path, blockType, isNested, isFirst, isLast, isOnly):
         if isNested:
             if blockType in ["stringReporter", "numberReporter", "booleanReporter"]:
-                raise formatError(path+[i], "Reporter blocks are not allowed in the 'blocks' attribute of an input.")
+                raise formatError(path, "Reporter blocks are not allowed in the 'blocks' attribute of an input.")
             if blockType == "hat":
-                raise formatError(path+[i], "Hat blocks are not allowed in the 'blocks' attribute of an input.")
+                raise formatError(path, "Hat blocks are not allowed in the 'blocks' attribute of an input.")
         
-        if   (blockType in ["stringReporter", "numberReporter", "booleanReporter"]) and (len(data["blocks"]) > 1):
-            raise formatError(path+[i], "A reporter block must be the only block in it's script.")
-        elif blockType == "hat" and i > 0:
-            raise formatError(path+[i], "A hat block must to be the first block in it's script.")
-        elif blockType == "lastInstruction" and i+1 in range(len(data["blocks"])): # when there is a next block
-            raise formatError(path+[i], "An ending block must be the last block in it's script.")
+        if   (blockType in ["stringReporter", "numberReporter", "booleanReporter"]) and not(isOnly):
+            raise formatError(path, "A reporter block must be the only block in it's script.")
+        elif blockType == "hat" and not(isFirst):
+            raise formatError(path, "A hat block must to be the first block in it's script.")
+        elif blockType == "lastInstruction" and not(isLast): # when there is a next block
+            raise formatError(path, "An ending block must be the last block in it's script.")
 
 def validateBlock(path, data, context, expectedShape=None):
     if "inputs" not in data:
@@ -45,6 +69,7 @@ def validateBlock(path, data, context, expectedShape=None):
     validateComment(path=path+["comment"], data=data["comment"])
     
     opcode = data["opcode"]
+    oldOpcode = getDeoptimizedOpcode(opcode=opcode)
     validateInputs(
         path=path+["inputs"], 
         data=data["inputs"],
@@ -62,8 +87,22 @@ def validateBlock(path, data, context, expectedShape=None):
         validateCallInputs(
             path=path+["inputs"], 
             data=data["inputs"],
+            opcode=opcode,
             optionDatas=data["options"],
+            context=context,
         )
+    
+    blockType = getBlockType(opcode=oldOpcode)
+    if   expectedShape == "stringReporter":
+        possibleValues = ["stringReporter", "booleanReporter"]
+        message = "Must be either a string or boolean reporter block."
+    elif expectedShape == "booleanReporter":
+        possibleValues = ["booleanReporter"]
+        message = "Must be a boolean reporter block."
+    else:
+        return
+    if blockType not in possibleValues+["dynamic"]:
+        raise formatError(path, message)
 
 def validateInputs(path, data, opcode, context):
     oldOpcode       = getDeoptimizedOpcode(opcode=opcode)
@@ -89,56 +128,71 @@ def validateInputs(path, data, opcode, context):
 
             if inputID in data:
                 inputMode = inputModes[inputType]
-
                 inputValue = data[inputID]
-                if "mode" not in inputValue:
-                    inputValue["mode"] = inputMode
-                # Check input value format
-                validateSchema(pathToData=path+[inputID], data=inputValue, schema=inputSchema)
-                if   inputMode == "block-and-text":
-                    required = ["block", "text"]
-                elif inputMode == "block-only":
-                    required = ["block"]
-                elif inputMode == "script":
-                    required = ["blocks"]
-                elif inputMode in ["block-and-option", "block-and-hybrid-option"]:
-                    required = ["option"]
-                
-                for attribute in required:
-                    if attribute not in inputValue:
-                        match attribute:
-                            case "block":
-                                inputValue["block"] = inputBlockDefault
-                            case "text":
-                                inputValue["text"] = inputTextDefault
-                            case "blocks":
-                                inputValue["blocks"] = inputBlocksDefault
-                            case "option":
-                                raise formatError(path=path+[inputID], message="Must have the attribute 'option'.")
+                validateInputValue(
+                    path=path+[inputID],
+                    inputValue=inputValue,
+                    inputType=inputType,
+                    inputMode=inputMode,
+                    opcode=opcode,
+                    inputDatas=data,
+                    context=context,
+                )
 
-                if inputValue.get("block") != None: # When the input has a block and it isn't None, check the block format
-                    validateBlock(
-                        path=path+[inputID]+["block"], 
-                        data=inputValue["block"], 
-                        context=context,
-                        expectedShape="booleanReporter" if inputType == "boolean" else "stringReporter",
-                    )
-                
-                if inputValue.get("blocks", []) != []:
-                    preparedData = {"position": [0,0], "blocks": inputValue["blocks"]}
-                    validateScript(path=path+[inputID], data=preparedData, context=context, isNested=True)
-                
-                if inputValue.get("option") != None:
-                    validateOptionValue(
-                        path=path+[inputID]+["option"],
-                        data=inputValue["option"],
-                        opcode=opcode,
-                        optionType=inputType, # Might need to be changed
-                        context=context,
-                        inputDatas=data,
-                    )
+def validateInputValue(path, inputValue, inputType, inputMode, opcode, inputDatas, context):
+    if "mode" not in inputValue:
+        inputValue["mode"] = inputMode
+    # Check input value format
+    validateSchema(pathToData=path, data=inputValue, schema=inputSchema)
+    if   inputMode == "block-and-text":
+        required = ["block", "text"]
+    elif inputMode == "block-only":
+        required = ["block"]
+    elif inputMode == "script":
+        required = ["blocks"]
+    elif inputMode in ["block-and-option", "block-and-hybrid-option"]:
+        required = ["option"]
+    
+    for attribute in required:
+        if attribute not in inputValue:
+            match attribute:
+                case "block":
+                    inputValue["block"] = inputBlockDefault
+                case "text":
+                    inputValue["text"] = inputTextDefault
+                case "blocks":
+                    inputValue["blocks"] = inputBlocksDefault
+                case "option":
+                    raise formatError(path=path, message="Must have the attribute 'option'.")
 
-def validateCallInputs(path, data, optionDatas):
+    if inputValue.get("block") != None: # When the input has a block and it isn't None, check the block format
+        validateBlock(
+            path=path+["block"], 
+            data=inputValue["block"], 
+            context=context,
+            expectedShape="booleanReporter" if inputType == "boolean" else "stringReporter",
+        )
+    
+    if inputValue.get("blocks", []) != []:
+        preparedData = {"position": [0,0], "blocks": inputValue["blocks"]}
+        validateScript(
+            path=path, 
+            data=preparedData, 
+            context=context,
+            isNested=True
+        )
+    
+    if inputValue.get("option") != None:
+        validateOptionValue(
+            path=path+["option"],
+            data=inputValue["option"],
+            opcode=opcode,
+            optionType=inputType, # Might need to be changed
+            context=context,
+            inputDatas=inputDatas,
+        )
+
+def validateCallInputs(path, data, opcode, optionDatas, context):
     proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"][1])
     inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
     for i, inputID, inputType in ikv(inputTypes):
@@ -149,6 +203,17 @@ def validateCallInputs(path, data, optionDatas):
     for inputID in data:
         if inputID not in inputTypes:
             raise formatError(path, f"Input '{inputID}' is not defined for a custom block with custom opcode '{optionDatas['customOpcode']}'.")
+    
+    for i, inputID, inputValue in ikv(data):
+        validateInputValue(
+            path=path+[inputID],
+            inputValue=inputValue,
+            inputType=inputType,
+            inputMode=inputModes[inputType],
+            opcode=opcode,
+            inputDatas=data,
+            context=context,
+        )
 
 def validateOptions(path, data, opcode, context, inputDatas):
     oldOpcode        = getDeoptimizedOpcode(opcode=opcode)
@@ -217,4 +282,76 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
             possibleValuesString = makeString(possibleValues)
             if data not in possibleValues:
                 raise formatError(path, f"Must be one of these: {possibleValuesString}")
+
+def validateCustomBlocksInScript(path, data, CBTypes, isNested=False):
+    for i, block in enumerate(data["blocks"]):
+        if "inputs" in block:
+            validateCustomBlocksInInputs(
+                path=path+["blocks"]+[i]+["inputs"],
+                data=block["inputs"],
+                opcode=block["opcode"],
+                optionDatas=block["options"],
+                CBTypes=CBTypes,
+            )
+
+        oldOpcode = getDeoptimizedOpcode(opcode=block["opcode"])
+        if oldOpcode != "procedures_call":
+            continue
+        
+        customOpcode = block["options"]["customOpcode"][1]
+        if customOpcode not in CBTypes:
+            raise formatError(path+[i], f"Custom block '{customOpcode}' is not defined.")
+        blockType = CBTypes[customOpcode]
+        validateBlockType(
+            path=path,
+            blockType=blockType,
+            isNested=isNested,
+            isFirst=(i == 0),
+            isLast=not(i+1 in range(len(data["blocks"]))),
+            isOnly=(len(data["blocks"]) == 1),
+        )
+
+def validateCustomBlocksInInputs(path, data, opcode, optionDatas, CBTypes):
+    oldOpcode = getDeoptimizedOpcode(opcode=opcode)
+    isCall = False
+    if oldOpcode == "procedures_call":
+        isCall = True
+        proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"][1])
+        inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
+    for i, inputID, inputValue in ikv(data):
+        #inputType = inputTypes[inputID]
+        if inputValue.get("block") != None:
+            subBlock = inputValue["block"]
+            subBlockType = getBlockType(opcode=getDeoptimizedOpcode(subBlock["opcode"]))
+            # HERE
+            validateCustomBlocksInInputs(
+                path=path+[inputID]+["block"]+["inputs"],
+                data=subBlock["inputs"],
+                opcode=subBlock["opcode"],
+                optionDatas=subBlock["options"],
+                CBTypes=CBTypes,
+            )
+
+            if isCall:
+                inputType = inputTypes[inputID]
+                expectedShape = "booleanReporter" if inputType == "boolean" else "stringReporter"
+                if   expectedShape == "stringReporter":
+                    possibleValues = ["stringReporter", "booleanReporter"]
+                    message = "Must be either a string or boolean reporter block."
+                elif expectedShape == "booleanReporter":
+                    possibleValues = ["booleanReporter"]
+                    message = "Must be a boolean reporter block."
+                else:
+                    continue
+                if subBlockType not in possibleValues:
+                    raise formatError(path+[inputID]+["block"], message)
+        
+        if inputValue.get("blocks", []) != []:
+            preparedData = {"position": [0,0], "blocks": inputValue["blocks"]}
+            validateCustomBlocksInScript(
+                path=path+["blocks"],
+                data=preparedData,
+                CBTypes=CBTypes,
+                isNested=True,
+            )
 

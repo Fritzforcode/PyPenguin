@@ -1173,7 +1173,7 @@
                             1,
                             [
                                 10,
-                                "instr_type"
+                                "type"
                             ]
                         ],
                         "JSON": [
@@ -4071,5 +4071,6 @@
             "url": "https://penguinmod.com/",
             "version": "stable"
         }
-    }
+    },
+    "credit": "https://github.com/Fritzforcode/PyPenguin"
 }

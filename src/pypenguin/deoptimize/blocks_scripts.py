@@ -519,7 +519,7 @@ def unprepareBlocks(data, spriteName, commentDatas):
                 }
 
             elif blockData["opcode"] == "control_stop":
-                #pp(blockData)
+                pp(blockData)
                 match blockData["fields"]["STOP_OPTION"][0]:
                     case "all" | "this script"    : hasNext = False
                     case "other scripts in sprite": hasNext = True

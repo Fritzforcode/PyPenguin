@@ -21,16 +21,68 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "if <CONDITION> then {THEN}",
+                            "opcode": "call custom block",
                             "inputs": {
-                                "CONDITION": {
+                                "f": {
                                     "block": {
-                                        "opcode": "play all sounds"
+                                        "opcode": "call custom block",
+                                        "inputs": {},
+                                        "options": {
+                                            "customOpcode": [
+                                                "value",
+                                                ""
+                                            ]
+                                        }
                                     }
-                                },
-                                "THEN": {
-                                    "blocks": []
                                 }
+                            },
+                            "options": {
+                                "customOpcode": [
+                                    "value",
+                                    "abcease <f>"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        500,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "options": {
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "instruction"
+                                ],
+                                "customOpcode": [
+                                    "value",
+                                    "abcease <f>"
+                                ]
+                            }
+                        },
+                        {
+                            "opcode": "define custom block",
+                            "options": {
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "instruction"
+                                ],
+                                "customOpcode": [
+                                    "value",
+                                    "bolli"
+                                ]
                             }
                         }
                     ]
