@@ -21,6 +21,8 @@ scripts = [
                 "customOpcode": ["value", "abcease <f>"],
             }
         },
+    ]},
+    {"position": [1000, 0], "blocks": [
         {
             "opcode": "define custom block",
             "options": {

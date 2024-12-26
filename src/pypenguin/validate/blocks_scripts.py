@@ -4,14 +4,15 @@ from pypenguin.validate.comments import validateComment
 from pypenguin.database import *
 
 def validateScript(path, data, context, isNested=False):
+    returnValue = None
     # Check script format
     validateSchema(pathToData=path, data=data, schema=scriptSchema)
 
     # Check block formats
     for i, block in enumerate(data["blocks"]):
         validateBlock(
-            path=path+["blocks"]+[i], 
-            data=block, 
+            path=path + ["blocks"] + [i],
+            data=block,
             context=context,
         )
         
@@ -36,14 +37,15 @@ def validateScript(path, data, context, isNested=False):
         )
 
         if oldOpcode == "special_define":
-            return (
+            returnValue = (
                 block["options"]["customOpcode"][1],
                 block["options"]["blockType"][1],
             )
+    return returnValue
 
 def validateBlockType(path, blockType, isNested, isFirst, isLast, isOnly):
-    print(100*"5", path)
-    print(blockType, "n", isNested, "[", isFirst, "]", isLast, "O", isOnly)
+    #print(100*"5", path)
+    #print(blockType, "n", isNested, "[", isFirst, "]", isLast, "O", isOnly)
     if isNested:
         if blockType in ["stringReporter", "numberReporter", "booleanReporter"]:
             raise formatError(path, "Reporter blocks are not allowed in the 'blocks' attribute of an input.")
@@ -326,7 +328,7 @@ def validateBlockCustomBlocks(path, data, CBTypes, expectedShape=None):
     oldOpcode = getDeoptimizedOpcode(opcode=data["opcode"])
     if "inputs" in data:
         if oldOpcode == "call custom block":
-            proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"][1])
+            proccode, inputTypes = parseCustomOpcode(data["options"]["customOpcode"][1])
             inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
         else:
             inputTypes = getInputTypes(opcode=oldOpcode)
