@@ -21,12 +21,11 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "call custom block",
+                            "opcode": "not <OPERAND>",
                             "inputs": {
-                                "f": {
+                                "OPERAND": {
                                     "block": {
                                         "opcode": "call custom block",
-                                        "inputs": {},
                                         "options": {
                                             "customOpcode": [
                                                 "value",
@@ -35,12 +34,6 @@
                                         }
                                     }
                                 }
-                            },
-                            "options": {
-                                "customOpcode": [
-                                    "value",
-                                    "abcease <f>"
-                                ]
                             }
                         }
                     ]

@@ -1,7 +1,7 @@
 from pypenguin.database import defaultCostume
 from pypenguin.validate.constants import validateSchema, formatError, stageSchema, spriteSchema
 from pypenguin.validate.costumes_sounds import validateCostume, validateSound
-from pypenguin.validate.blocks_scripts import validateScript, validateCustomBlocksInScript
+from pypenguin.validate.blocks_scripts import validateScript, validateScriptCustomBlocks
 from pypenguin.validate.comments import validateComment
 
 def validateSprite(path, data, context):
@@ -22,7 +22,6 @@ def validateSprite(path, data, context):
         
     # Check costume formats
     if len(data["costumes"]) < 1:
-        #raise formatError(path=path+["costumes"], message="Each sprite must have at least one costume.")
         data["costumes"].append(defaultCostume)
     costumeNames = []
     for j, costume in enumerate(data["costumes"]):
@@ -65,12 +64,12 @@ def validateSprite(path, data, context):
         CBTypes[CBInfo[0]] = CBInfo[1]
     
     for j, script in enumerate(data["scripts"]):
-        validateCustomBlocksInScript(
-            path=path+["scripts"]+[j], 
-            data=script, 
+        validateScriptCustomBlocks(
+            path=path+["scripts"]+[j]+["blocks"], 
+            data=script["blocks"], 
             CBTypes=CBTypes
         )
-    
+        
     # Check comment formats
     for j, comment in enumerate(data["comments"]):
         validateComment(

@@ -1,15 +1,15 @@
 scripts = [
     {"position": [0,0], "blocks": [
         {
-            "opcode": "call custom block",
+            "opcode": "not <OPERAND>",
             "inputs": {
-                "f": {"block": {
+                "OPERAND": {"block": {
                     "opcode": "call custom block",
-                    "inputs": {},
-                    "options": {"customOpcode": ["value", ""]},
+                    "options": {
+                        "customOpcode": ["value", ""],
+                    },
                 }},
             },
-            "options": {"customOpcode": ["value", "abcease <f>"]},
         },
     ]},
     {"position": [500, 0], "blocks": [
@@ -137,6 +137,8 @@ from pypenguin.helper_functions import writeJSONFile, pp
 validateProject(projectData=projectData)
 #pp(projectData)
 
+print("[VALIDATION SUCCESS]")
+
 writeJSONFile(
     filePath = "t_source.json",
     data     = projectData
@@ -146,13 +148,13 @@ writeJSONFile(
     filePath = "project/project.json",
     data     = projectData
 )
-
+"""
 deoptimizeAndCompressProject(
     optimizedProjectDir = "project",
     projectFilePath     = "export.pmp",
     temporaryDir        = "temporary",
     deoptimizedDebugFilePath="t_deop.json",
-)
+)"""
 #
 #extractAndOptimizeProject(
 #    projectFilePath        = "export.pmp",
