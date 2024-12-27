@@ -1,5 +1,3 @@
-from pypenguin.validate.errors import ValidationError
-
 from pypenguin.database import getAllMonitorOpcodes#, getAllOptimizedOpcodes
 
 #allowedOpcodes = getAllOptimizedOpcodes()
@@ -350,11 +348,11 @@ def getHelpLink(path):
         pass # Needs completion
 
 
-def formatError(path, message):
+def formatError(cls, path, message):
     path = [str(i) for i in path]  # Convert all indexes to string
     if path == []:
         pathString = ""
     else:
         pathString = "at [" + "/".join(path) + "] - "
     link = getHelpLink(path=path)
-    return ValidationError(f"{pathString}HELP: {link} - ERROR: {message}")
+    return cls(f"{pathString}HELP: {link} - ERROR: {message}")

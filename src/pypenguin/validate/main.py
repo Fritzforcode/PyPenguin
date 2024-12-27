@@ -1,5 +1,6 @@
 from pypenguin.helper_functions import pp
 from pypenguin.validate.constants import validateSchema, formatError, projectSchema
+from pypenguin.validate.errors import doubleVariableDefinitionError, doubleListDefinitionError, equalSpriteNameError
 from pypenguin.validate.variables_lists import validateVariable, validateList
 from pypenguin.validate.sprites import validateSprite
 from pypenguin.validate.monitors import validateMonitor
@@ -18,20 +19,15 @@ def validateProject(projectData):
         validateVariable(path=["globalVariables"]+[j], data=variable, isGlobal=True)
         variableName = variable["name"]
         if variableName in globalVariableNames: # if var name alredy exists globally
-            raise formatError(path=["globalVariables"]+[j]+["name"], message=errorMessage)
+            raise formatError(doubleVariableDefinitionError, ["globalVariables"]+[j]+["name"], errorMessage)
     
     localVariableNames = [[] for i in range(  len( projectDataCopy["sprites"][1:] )  )]
     for i, sprite in enumerate(projectDataCopy["sprites"][1:]):
-        if "localVariables" not in sprite:
-            raise formatError(path=["sprites"]+[i], message="Each sprite (but not the stage) must have the 'localVariables' attribute.")
-        if not isinstance(sprite["localVariables"], list):
-            raise formatError(path=["sprites"]+[i]+["localVariables"], message="Must be an array.")
-        
         for j, variable in enumerate(sprite["localVariables"]):
             validateVariable(path=["sprites"]+[i]+["localVariables"]+[j], data=variable, isGlobal=False)
             variableName = variable["name"]
             if variableName in globalVariableNames or variableName in localVariableNames[i]: # if var name alredy exists globally or in the same sprite
-                raise formatError(path=["sprites"]+[i]+["localVariables"]+[j]+["name"], message=errorMessage)
+                raise formatError(doubleVariableDefinitionError, ["sprites"]+[i]+["localVariables"]+[j]+["name"], errorMessage)
     
     
     errorMessage = "List names mustn't be the same. Please check 'globalLists' and 'localLists' of the same sprite."
@@ -40,20 +36,15 @@ def validateProject(projectData):
         validateList(path=["globalLists"]+[j], data=list_)
         listName = list_["name"]
         if listName in globalListNames: # if list name alredy exists globally
-            raise formatError(path=["globalLists"]+[j]+["name"], message=errorMessage)
+            raise formatError(doubleListDefinitionError, ["globalLists"]+[j]+["name"], errorMessage)
     
     localListNames = [[] for i in range(  len( projectDataCopy["sprites"][1:] )  )]
     for i, sprite in enumerate(projectDataCopy["sprites"][1:]):
-        if "localLists" not in sprite:
-            raise formatError(path=["sprites"]+[i], message="Each sprite (but not the stage) must have the 'localLists' attribute.")
-        if not isinstance(sprite["localLists"], list):
-            raise formatError(path=["sprites"]+[i]+["localLists"], message="Must be an array.")
-        
         for j, list_ in enumerate(sprite["localLists"]):
             validateList(path=["sprites"]+[i]+["localLists"]+[j], data=list_)
             listName = list_["name"]
             if listName in globalListNames or listName in localListNames[i]: # if list name alredy exists globally or in the same sprite
-                raise formatError(path=["sprites"]+[i]+["localLists"]+[j]+["name"], message=errorMessage)
+                raise formatError(doubleListDefintionError, ["sprites"]+[i]+["localLists"]+[j]+["name"], errorMessage)
     
 
     # Check sprite formats
@@ -65,13 +56,11 @@ def validateProject(projectData):
         if i == 0: spriteName = ["stage", "stage"]
         else:      spriteName = ["sprite", sprite["name"]]
         if spriteName in spriteNames: # If there is the same sprite name twice
-            raise formatError(path=["sprites"]+[i]+["name"], message="Sprite names mustn't be the same.")
+            raise formatError(equalSpriteNameError, ["sprites"]+[i]+["name"], "Sprite names mustn't be the same.")
         spriteNames.append(spriteName)
         
 
         if i == 0:
-            if "costumes" not in sprite:
-                raise formatError(path=["sprites"]+[i], message="Must have the 'costumes' attribute.")
             backdrops = [["costume", costume["name"]] for costume in sprite["costumes"]]
             if sprite["costumes"] == []:
                 backdrops.insert(0, ["costume", defaultCostume["name"]])
