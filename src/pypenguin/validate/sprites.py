@@ -1,5 +1,5 @@
 from pypenguin.database import defaultCostume
-from pypenguin.validate.errors import spriteNameError, layerOrderError, equalCostumeName, equalSoundName, currentCostumeError, doubleCustomBlockDefinition
+from pypenguin.validate.errors import spriteNameError, layerOrderError, equalCostumeName, equalSoundName, currentCostumeError, doubleCustomBlockDefinitionError
 from pypenguin.validate.constants import validateSchema, formatError, stageSchema, spriteSchema
 from pypenguin.validate.costumes_sounds import validateCostume, validateSound
 from pypenguin.validate.blocks_scripts import validateScript, validateScriptCustomBlocks

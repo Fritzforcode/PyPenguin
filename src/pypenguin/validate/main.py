@@ -44,7 +44,7 @@ def validateProject(projectData):
             validateList(path=["sprites"]+[i]+["localLists"]+[j], data=list_)
             listName = list_["name"]
             if listName in globalListNames or listName in localListNames[i]: # if list name alredy exists globally or in the same sprite
-                raise formatError(doubleListDefintionError, ["sprites"]+[i]+["localLists"]+[j]+["name"], errorMessage)
+                raise formatError(doubleListDefinitionError, ["sprites"]+[i]+["localLists"]+[j]+["name"], errorMessage)
     
 
     # Check sprite formats
