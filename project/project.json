@@ -21,61 +21,16 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "not <OPERAND>",
+                            "opcode": "(OPERAND1) = (OPERAND2)",
                             "inputs": {
-                                "OPERAND": {
+                                "OPERAND1": {
                                     "block": {
-                                        "opcode": "call custom block",
-                                        "options": {
-                                            "customOpcode": [
-                                                "value",
-                                                ""
-                                            ]
-                                        }
+                                        "opcode": "new line"
                                     }
+                                },
+                                "OPERAND2": {
+                                    "text": "\n\r"
                                 }
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        500,
-                        0
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": [
-                                    "value",
-                                    true
-                                ],
-                                "blockType": [
-                                    "value",
-                                    "instruction"
-                                ],
-                                "customOpcode": [
-                                    "value",
-                                    "abcease <f>"
-                                ]
-                            }
-                        },
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": [
-                                    "value",
-                                    true
-                                ],
-                                "blockType": [
-                                    "value",
-                                    "instruction"
-                                ],
-                                "customOpcode": [
-                                    "value",
-                                    "bolli"
-                                ]
                             }
                         }
                     ]

@@ -1,37 +1,13 @@
 scripts = [
-    {"position": [0,0], "blocks": [
-        {
-            "opcode": "not <OPERAND>",
-            "inputs": {
-                "OPERAND": {"block": {
-                    "opcode": "call custom block",
-                    "options": {
-                        "customOpcode": ["value", ""],
-                    },
-                }},
-            },
-        },
-    ]},
-    {"position": [500, 0], "blocks": [
-        {
-            "opcode": "define custom block",
-            "options": {
-                "noScreenRefresh": ["value", True],
-                "blockType": ['value', 'instruction'],
-                "customOpcode": ["value", "abcease <f>"],
-            }
-        },
-    ]},
-    {"position": [1000, 0], "blocks": [
-        {
-            "opcode": "define custom block",
-            "options": {
-                "noScreenRefresh": ["value", True],
-                "blockType": ['value', 'instruction'],
-                "customOpcode": ["value", "bolli"],
-            }
-        },
-    ]},
+   {"position": [0,0], "blocks": [
+       {
+           "opcode": "(OPERAND1) = (OPERAND2)",
+           "inputs": {
+               "OPERAND1": {"block": {"opcode": "new line"}},
+               "OPERAND2": {"text": "\n\r"},
+           },
+       },
+   ]},
 ]
 projectData = {
     "sprites": [
@@ -150,13 +126,13 @@ writeJSONFile(
     filePath = "project/project.json",
     data     = projectData
 )
-"""
+
 deoptimizeAndCompressProject(
     optimizedProjectDir = "project",
     projectFilePath     = "export.pmp",
     temporaryDir        = "temporary",
     deoptimizedDebugFilePath="t_deop.json",
-)"""
+)
 #
 #extractAndOptimizeProject(
 #    projectFilePath        = "export.pmp",

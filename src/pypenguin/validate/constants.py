@@ -1,8 +1,8 @@
 from pypenguin.validate.errors import ValidationError
 
-from pypenguin.database import getAllOptimizedOpcodes, getAllMonitorOpcodes
+from pypenguin.database import getAllMonitorOpcodes#, getAllOptimizedOpcodes
 
-allowedOpcodes = getAllOptimizedOpcodes()
+#allowedOpcodes = getAllOptimizedOpcodes()
 allowedMenuOpcodes = getAllMonitorOpcodes()
 textToSpeechLanguages = [
     None,
@@ -186,7 +186,7 @@ soundSchema = {
 blockSchema = {
     "type": "object",
     "properties": {
-        "opcode": {"type": "string", "enum": allowedOpcodes},
+        "opcode": {"type": "string"},
         "inputs": {
             "type": "object",
             "patternProperties": {".+": {"type": "object"}},

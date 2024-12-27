@@ -61,6 +61,8 @@ def validateSprite(path, data, context):
         )
         if CBInfo == None:
             continue
+        if CBInfo[0] in CBTypes:
+            raise formatError(path+["scripts"]+[j]+[0], f"Custom block '{CBInfo[0]}' is defined twice.")
         CBTypes[CBInfo[0]] = CBInfo[1]
     
     for j, script in enumerate(data["scripts"]):

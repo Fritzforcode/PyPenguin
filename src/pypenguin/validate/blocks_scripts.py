@@ -1,13 +1,15 @@
-from pypenguin.helper_functions import ikv, parseCustomOpcode, pp
+from pypenguin.helper_functions import ikv, parseCustomOpcode, pp, getListOfClosestStrings
 from pypenguin.validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema
 from pypenguin.validate.comments import validateComment
 from pypenguin.database import *
+
+allowedOpcodes = getAllOptimizedOpcodes()
 
 def validateScript(path, data, context, isNested=False):
     returnValue = None
     # Check script format
     validateSchema(pathToData=path, data=data, schema=scriptSchema)
-
+    
     # Check block formats
     for i, block in enumerate(data["blocks"]):
         validateBlock(
@@ -69,6 +71,14 @@ def validateBlock(path, data, context, expectedShape=None):
     
     # Check block format
     validateSchema(pathToData=path, data=data, schema=blockSchema)
+    # Check block opcode
+    if data["opcode"] not in allowedOpcodes:
+        listOfClosest = getListOfClosestStrings(
+            string=data["opcode"],
+            possibleValues=allowedOpcodes,
+        )
+        raise formatError(path+["opcode"], f"Unknown opcode: '{data['opcode']}'. Most Similar Opcodes: {listOfClosest}")
+
 
     validateComment(path=path+["comment"], data=data["comment"])
     
@@ -87,7 +97,7 @@ def validateBlock(path, data, context, expectedShape=None):
         context=context,
         inputDatas=data["inputs"],
     )
-    if opcode == "call custom block":
+    if oldOpcode == "procedures_call":
         validateCallInputs(
             path=path+["inputs"], 
             data=data["inputs"],
@@ -118,7 +128,7 @@ def validateBlockShape(path, oldOpcode, expectedShape):
 def validateInputs(path, data, opcode, context):
     oldOpcode       = getDeoptimizedOpcode(opcode=opcode)
     allowedInputIDs = list(getInputTypes(opcode=oldOpcode).keys()) # List of inputs which are defined for the specific opcode
-    if opcode == "call custom block": # Inputs in the call custom block block are custom
+    if oldOpcode == "procedures_call": # Inputs in the call custom block block are custom
         return
     for i, inputID, inputValue in ikv(data):
         if inputID not in allowedInputIDs:
@@ -300,7 +310,7 @@ def validateScriptCustomBlocks(path, data, CBTypes, isNested=False):
     pp(data)
     for i, block in enumerate(data):
         validateBlockCustomBlocks(
-            path=path, 
+            path=path+[i], 
             data=block, 
             CBTypes=CBTypes,
         )
@@ -309,9 +319,12 @@ def validateScriptCustomBlocks(path, data, CBTypes, isNested=False):
         if oldOpcode != "procedures_call":
             continue
         
-        customOpcode = block["options"]["customOpcode"][1]
-        if customOpcode not in CBTypes:
-            raise formatError(path+[i], f"Custom block '{customOpcode}' is not defined.")
+        customOpcode = validateCustomOpcode(
+            path=path+[i],
+            block=block,
+            CBTypes=CBTypes,
+        )
+        
         blockType = CBTypes[customOpcode]
         validateBlockType(
             path=path+[i],
@@ -322,12 +335,19 @@ def validateScriptCustomBlocks(path, data, CBTypes, isNested=False):
             isOnly=(len(data) == 1),
         )
 
+def validateCustomOpcode(path, block, CBTypes):
+    customOpcode = block["options"]["customOpcode"][1]
+    if customOpcode not in CBTypes:
+        customOpcodesString = ""
+        for co in CBTypes.keys():
+            customOpcodesString += f"\n- {['value', co]}"
+        raise formatError(path+["options"]+["customOpcode"], f"Custom block '{customOpcode}' is not defined. Defined custom opcodes: {customOpcodesString}")
+    return customOpcode
+
 def validateBlockCustomBlocks(path, data, CBTypes, expectedShape=None):
-    print(50*"(")
-    pp(data)
     oldOpcode = getDeoptimizedOpcode(opcode=data["opcode"])
     if "inputs" in data:
-        if oldOpcode == "call custom block":
+        if oldOpcode == "procedures_call":
             proccode, inputTypes = parseCustomOpcode(data["options"]["customOpcode"][1])
             inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
         else:
@@ -335,7 +355,6 @@ def validateBlockCustomBlocks(path, data, CBTypes, expectedShape=None):
         
         for i, inputID, inputValue in ikv(data["inputs"]):
             inputType = inputTypes[inputID]
-            print(inputID, inputType, inputValue)
             
             inputBlock = inputValue.get("block")
             if inputBlock != None:
@@ -354,12 +373,26 @@ def validateBlockCustomBlocks(path, data, CBTypes, expectedShape=None):
                     CBTypes=CBTypes,
                     isNested=True,
                 )
-        
-        validateBlockShape(
+    if   expectedShape == "stringReporter":
+        possibleValues = ["stringReporter", "booleanReporter"]
+        message = "Must be either a string or boolean reporter block."
+    elif expectedShape == "booleanReporter":
+        possibleValues = ["booleanReporter"]
+        message = "Must be a boolean reporter block."
+    else:
+        return
+    blockType = getBlockType(opcode=oldOpcode)
+    if blockType == "dynamic" and oldOpcode == "procedures_call":
+        customOpcode = validateCustomOpcode(
             path=path,
-            oldOpcode=oldOpcode,
-            expectedShape=expectedShape,
+            block=data,
+            CBTypes=CBTypes,
         )
+        blockType = CBTypes[customOpcode]
+        if blockType in ["textReporter", "numberReporter"]:
+            blockType = "stringReporter"
+    if blockType not in possibleValues:
+        raise formatError(path, message)
 
 """
 def validateCustomBlocksInScript(path, data, CBTypes, isNested=False):

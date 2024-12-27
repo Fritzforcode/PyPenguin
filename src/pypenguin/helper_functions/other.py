@@ -1,5 +1,5 @@
 from pprint import pformat
-import re, os, hashlib
+import re, os, hashlib, difflib
 from PIL import Image
 
 def escapeChars(inputString: str, charsToEscape: list) -> str:
@@ -207,4 +207,18 @@ def getSVGImageSize(file):
             _, _, width, height = map(float, viewBox.split())
     
     return float(width), float(height)
+
+def getListOfClosestStrings(string, possibleValues) -> str:
+    # Calculate similarity scores
+    similarityScores = [(item, difflib.SequenceMatcher(None, string, item).ratio()) for item in possibleValues]
+    
+    # Sort by similarity score in descending order
+    sortedMatches = sorted(similarityScores, key=lambda x: x[1], reverse=True)
+    
+    # Get the top 10 matches
+    topTenMatches = [i[0] for i in sortedMatches[:10]]
+    result = ""
+    for match in topTenMatches:
+        result += f"\n- '{match}'"
+    return result
 
