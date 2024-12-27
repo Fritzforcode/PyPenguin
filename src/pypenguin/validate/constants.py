@@ -326,8 +326,26 @@ def getHelpLink(path):
     primary = path[0]
 
     if   primary == "sprites":
-        tertiary = path[2]
-        # Needs completion
+        isStage = path[1] == 0
+        secondary = path[2]
+        if   secondary == "isStage"       : pass
+        elif secondary == "name"          : pass
+        elif secondary == "scripts"       : pass
+        elif secondary == "comments"      : pass
+        elif secondary == "currentCostume": pass
+        elif secondary == "costumes"      : pass
+        elif secondary == "sounds"        : pass
+        elif secondary == "volume"        : pass
+        elif secondary == "layerOrder"    : pass
+        elif secondary == "visible"       : pass
+        elif secondary == "position"      : pass
+        elif secondary == "size"          : pass
+        elif secondary == "direction"     : pass
+        elif secondary == "draggable"     : pass
+        elif secondary == "rotationStyle" : pass
+        elif secondary == "localVariables": pass
+        elif secondary == "localLists"    : pass
+    
     elif primary == "globalVariables":
         pass # Needs completion
     elif primary == "globalLists":
@@ -345,6 +363,8 @@ def getHelpLink(path):
     elif primary == "extensionData":
         pass # Needs completion
     elif primary == "extensions":
+        pass # Needs completion
+    elif primary == "extensionURLs":
         pass # Needs completion
 
 
