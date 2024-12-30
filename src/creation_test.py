@@ -1,13 +1,40 @@
 scripts = [
-   {"position": [0,0], "blocks": [
-       {
-           "opcode": "(OPERAND1) = (OPERAND2)",
-           "inputs": {
-               "OPERAND1": {"block": {"opcode": "new line"}},
-               "OPERAND2": {"text": "\n\r"},
-           },
-       },
-   ]},
+{   'position': [0, 0],
+    'blocks': [   {   '_type': 'BLOCK',
+                      'opcode': 'call custom block',
+                      'inputs': {   'value': {   'block': {   '_type': 'BLOCK',
+                                                              'opcode': '(OPERAND1) '
+                                                                        '+ '
+                                                                        '(OPERAND2)',
+                                                              'inputs': {   'OPERAND1': {   'text': '4'},
+                                                                            'OPERAND2': {   'block': {   '_type': 'BLOCK',
+                                                                                                         'opcode': '(OPERAND1) '
+                                                                                                                   '* '
+                                                                                                                   '(OPERAND2)',
+                                                                                                         'inputs': {   'OPERAND1': {   'text': '3'},
+                                                                                                                       'OPERAND2': {   'text': '5'}}}}}}}},
+                      'options': {'customOpcode': ['value', 'VOID (value)']}}]},
+    {
+        "position": [500, 0],
+        "blocks": [
+            {
+                "opcode": "define custom block",
+                "options": {
+                    "noScreenRefresh": ["value", True], 
+                    "blockType": ["value", "instruction"], 
+                    "customOpcode": ["value", "VOID (value)"],
+                },
+            },
+            {
+                "opcode": "set [VARIABLE] to (VALUE)",
+                "inputs": {"VALUE": {"block": {
+                    "opcode": "value of text [ARGUMENT]",
+                    "options": {"ARGUMENT": ["value", "value"]},
+                }}},
+                "options": {"VARIABLE": ["variable", "__VOID__"]},
+            },
+        ]
+    },
 ]
 projectData = {
     "sprites": [
@@ -74,25 +101,9 @@ projectData = {
     ],
     "globalVariables": [
         {
-            "name": "score",
-            "currentValue": "Günter Jüchen",
+            "name": "__VOID__",
+            "currentValue": "",
             "isCloudVariable": True,
-        },
-        {
-            "name": "arg0",
-            "currentValue": "",
-            "isCloudVariable": False,
-        },
-        {
-            "name": "value1",
-            "currentValue": "",
-            "isCloudVariable": False,
-        },
-        
-        {
-            "name": "register map",
-            "currentValue": "",
-            "isCloudVariable": False,
         },
     ],
     "globalLists": [

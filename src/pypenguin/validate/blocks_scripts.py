@@ -334,9 +334,12 @@ def validateScriptCustomBlocks(path, data, CBTypes, isNested=False):
 def validateCustomOpcode(path, block, CBTypes):
     customOpcode = block["options"]["customOpcode"][1]
     if customOpcode not in CBTypes:
-        customOpcodesString = ""
-        for co in CBTypes.keys():
-            customOpcodesString += f"\n- {['value', co]}"
+        if CBTypes == {}:
+            customOpcodesString = "No defined custom blocks."
+        else:
+            customOpcodesString = ""
+            for co in CBTypes.keys():
+                customOpcodesString += f"\n- {['value', co]}"
         raise formatError(undefinedCustomOpcodeError, path+["options"]+["customOpcode"], f"Custom block '{customOpcode}' is not defined. Defined custom opcodes: {customOpcodesString}")
     return customOpcode
 
