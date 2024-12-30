@@ -1,4 +1,5 @@
 from pypenguin.database import getAllMonitorOpcodes#, getAllOptimizedOpcodes
+from pypenguin.validate.errors import *
 
 #allowedOpcodes = getAllOptimizedOpcodes()
 allowedMenuOpcodes = getAllMonitorOpcodes()
@@ -310,7 +311,7 @@ def validateSchema(pathToData, data, schema):
     except exceptions.ValidationError as err:
         # Custom error message
         error_path = list(map(str, pathToData + list(err.absolute_path)))
-        error = formatError(path=error_path, message=err.message)
+        error = formatError(ValidationError, error_path, err.message)
     if error != None:
         raise error
 

@@ -128,7 +128,7 @@ projectData = {
     "extensionData": {},
     "extensions": ["jgJSON", "Bitwise"],
     "extensionURLs": {"Bitwise": "https://extensions.turbowarp.org/bitwise.js"},
-} # L was here
+} # I was here
 
 import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from pypenguin import validateProject, deoptimizeAndCompressProject

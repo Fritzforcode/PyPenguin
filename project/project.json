@@ -3,16 +3,6 @@
         {
             "name": "Stage",
             "isStage": true,
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
-            "sounds": [],
-            "volume": 100
-        },
-        {
-            "name": "Sprite1",
-            "isStage": false,
             "scripts": [
                 {
                     "position": [
@@ -21,15 +11,142 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "(OPERAND1) = (OPERAND2)",
+                            "opcode": "if <CONDITION> then {THEN}",
                             "inputs": {
-                                "OPERAND1": {
+                                "CONDITION": {
                                     "block": {
-                                        "opcode": "new line"
+                                        "opcode": "(OPERAND1) != (OPERAND2)",
+                                        "inputs": {
+                                            "OPERAND1": {
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "xcv"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "OPERAND2": {
+                                                "block": {
+                                                    "opcode": "value of [VARIABLE]",
+                                                    "options": {
+                                                        "VARIABLE": [
+                                                            "variable",
+                                                            "xcv cached"
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 },
-                                "OPERAND2": {
-                                    "text": "\n\r"
+                                "THEN": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "block": {
+                                                        "opcode": "value of text [ARGUMENT]",
+                                                        "options": {
+                                                            "ARGUMENT": [
+                                                                "value",
+                                                                "xcv"
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "options": {
+                                                "VARIABLE": [
+                                                    "variable",
+                                                    "xcv cached"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "opcode": "switch (CONDITION) {CASES}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "block": {
+                                        "opcode": "value of [VARIABLE]",
+                                        "options": {
+                                            "VARIABLE": [
+                                                "variable",
+                                                "xcv cached"
+                                            ]
+                                        }
+                                    }
+                                },
+                                "CASES": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "case (CONDITION) {BODY}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "text": "a"
+                                                },
+                                                "BODY": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "say (MESSAGE)",
+                                                            "inputs": {
+                                                                "MESSAGE": {
+                                                                    "text": "Hello"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "opcode": "case (CONDITION) {BODY}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "text": "b"
+                                                },
+                                                "BODY": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "say (MESSAGE)",
+                                                            "inputs": {
+                                                                "MESSAGE": {
+                                                                    "text": "Moin"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "opcode": "case (CONDITION) {BODY}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "text": "c"
+                                                },
+                                                "BODY": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "say (MESSAGE)",
+                                                            "inputs": {
+                                                                "MESSAGE": {
+                                                                    "text": "Salve"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -39,93 +156,23 @@
             "comments": [],
             "currentCostume": 0,
             "costumes": [],
-            "sounds": [
-                {
-                    "name": "pop",
-                    "extension": "wav",
-                    "rate": 48000,
-                    "sampleCount": 1123
-                }
-            ],
-            "localVariables": [
-                {
-                    "name": "loc var",
-                    "currentValue": ""
-                }
-            ],
-            "localLists": [],
-            "volume": 100,
-            "layerOrder": 1,
-            "visible": true,
-            "position": [
-                77,
-                0
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": true,
-            "rotationStyle": "all around"
-        },
-        {
-            "name": "Sprite2",
-            "isStage": false,
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
             "sounds": [],
-            "localVariables": [],
-            "localLists": [],
-            "volume": 100,
-            "layerOrder": 1,
-            "visible": true,
-            "position": [
-                0,
-                0
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": true,
-            "rotationStyle": "all around"
+            "volume": 100
         }
     ],
     "globalVariables": [
         {
-            "name": "score",
-            "currentValue": "G\u00fcnter J\u00fcchen",
-            "isCloudVariable": true
-        },
-        {
-            "name": "arg0",
-            "currentValue": "",
-            "isCloudVariable": false
-        },
-        {
-            "name": "value1",
-            "currentValue": "",
-            "isCloudVariable": false
-        },
-        {
-            "name": "register map",
+            "name": "xcv cached",
             "currentValue": "",
             "isCloudVariable": false
         }
     ],
-    "globalLists": [
-        {
-            "name": "registers",
-            "currentValue": []
-        },
-        {
-            "name": "points",
-            "currentValue": []
-        }
-    ],
+    "globalLists": [],
+    "monitors": [],
     "tempo": 60,
     "videoTransparency": 0,
     "videoState": "off",
     "textToSpeechLanguage": null,
-    "monitors": [],
     "extensionData": {},
     "extensions": [
         "jgJSON"
