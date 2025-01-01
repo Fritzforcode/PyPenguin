@@ -59,6 +59,8 @@ def validateBlockType(path, blockType, isNested, isFirst, isLast, isOnly):
         raise formatError(blockTypeError, path, "A hat block must to be the first block in it's script.")
     elif blockType == "lastInstruction" and not(isLast): # when there is a next block
         raise formatError(blockTypeError, path, "An ending block must be the last block in it's script.")
+    elif blockType == "embeddedMenu":
+        raise formatError(blockTypeError, path, "An embedded menu must be embedded in another block.")
 
 def validateBlock(path, data, context, expectedShape=None):
     if "inputs" not in data:
@@ -114,14 +116,17 @@ def validateBlock(path, data, context, expectedShape=None):
 def validateBlockShape(path, oldOpcode, expectedShape):
     blockType = getBlockType(opcode=oldOpcode)
     if   expectedShape == "stringReporter":
-        possibleValues = ["stringReporter", "booleanReporter"]
+        possibleValues = ["stringReporter", "booleanReporter", "dynamic"]
         message = "Must be either a string or boolean reporter block."
     elif expectedShape == "booleanReporter":
-        possibleValues = ["booleanReporter"]
+        possibleValues = ["booleanReporter", "dynamic"]
         message = "Must be a boolean reporter block."
+    elif expectedShape == "embeddedMenu":
+        possibleValues = ["embeddedMenu"]
+        message = "Must be an embedded menu block."
     else:
         return
-    if blockType not in possibleValues+["dynamic"]:
+    if blockType not in possibleValues:
         raise formatError(blockTypeError, path, message)
 
 def validateInputs(path, data, opcode, context):
@@ -133,11 +138,15 @@ def validateInputs(path, data, opcode, context):
         if inputID not in allowedInputIDs:
             raise formatError(inputIdError, path, f"Input '{inputID}' is not defined for a block with opcode '{opcode}'.")
     for inputID in allowedInputIDs:
+        inputType = getInputType(
+            opcode=oldOpcode,
+            inputID=inputID,
+        )
         inputMode = getInputMode(
             opcode=oldOpcode,
             inputID=inputID,
         )
-        if inputMode not in ["block-only", "script"]:
+        if (inputMode not in ["block-only", "script"]) or (inputType == "embeddedMenu"):
             if inputID not in data:
                 raise formatError(inputIdError, path, f"A block with opcode '{opcode}' must have the input '{inputID}'.")
 
@@ -194,7 +203,7 @@ def validateInputValue(path, inputValue, inputType, inputMode, opcode, inputData
             path=path+["block"], 
             data=inputValue["block"], 
             context=context,
-            expectedShape="booleanReporter" if inputType == "boolean" else "stringReporter",
+            expectedShape="booleanReporter" if inputType == "boolean" else ("embeddedMenu" if inputType == "embeddedMenu" else "stringReporter"),
         )
     
     if inputValue.get("blocks", []) != []:

@@ -2,8 +2,8 @@ from pypenguin import extractAndOptimizeProject, deoptimizeAndCompressProject, v
 from pypenguin.helper_functions import readJSONFile, pp
 
 optimizedData = extractAndOptimizeProject(
-    projectFilePath          = "assets/categories/extension_music.pmp",
-#    projectFilePath          = "assets/studies/test.pmp",
+#    projectFilePath          = "assets/categories/extension_pen.pmp",
+    projectFilePath          = "assets/studies/pen.pmp",
 #    projectFilePath          = "assets/from_online/my 1st platformer .pmp",
     optimizedProjectDir      = "extracted_project",
     temporaryDir             = "temporary",

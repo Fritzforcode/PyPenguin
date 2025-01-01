@@ -29,7 +29,7 @@ def finishBlock(data):
         {
             "opcode": "#TOUCHING OBJECT MENU",
             "inputs": {},
-            "options": {"TOUCHINGOBJECTMENU": "_mouse_"},
+            "options": {"TOUCHINGOBJECTMENU": ["object", "_mouse_"]},
             "_info_": ...,
         }
         --> "_mouse_" """

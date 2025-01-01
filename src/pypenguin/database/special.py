@@ -160,12 +160,28 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    # Pen Extension
+    "pen_menu_FONT": {
+        "type": "menu",
+        "category": "Pen",
+        "newOpcode": "#FONT MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    # Others
     "note": {
         "type": "menu",
         "category": "Music",
         "newOpcode": "#NOTE MENU",
         "inputTypes": {},
         "optionTypes": {},
+    },
+    "polygon": { # Exception: This block may be used.
+        "type": "embeddedMenu",
+        "category": "Pen",
+        "newOpcode": "TRIANGLE MENU",
+        "inputTypes": {"x1": "number", "y1": "number", "x2": "number", "y2": "number", "x3": "number", "y3": "number"},
+        "optionTypes": {"button": "shown|hidden"},
     },
 # SPECIAL: Variables and Lists
     "special_variable_value": {

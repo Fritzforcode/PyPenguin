@@ -3,16 +3,10 @@ scripts = [
         "position": [0,0],
         "blocks": [
             {
-                "opcode": "set instrument to ([INSTRUMENT])",
+                "opcode": "draw triangle (TRIANGLE) with fill (COLOR)",
                 "inputs": {
-                    "INSTRUMENT": {"option": ["value", "(4) Guitar"]},
-                },
-            },
-            {
-                "opcode": "play note (NOTE) for (BEATS) beats",
-                "inputs": {
-                    "NOTE": {},
-                    "BEATS": {"text": "5"},
+                    "TRIANGLE": {"block": {"opcode": "x position"}},
+                    "COLOR": {"text": "#000000"},
                 },
             },
         ],
@@ -120,12 +114,12 @@ writeJSONFile(
     data     = projectData
 )
 
-deoptimizeAndCompressProject(
-    optimizedProjectDir = "project",
-    projectFilePath     = "export.pmp",
-    temporaryDir        = "temporary",
-    deoptimizedDebugFilePath="t_deop.json",
-)
+#deoptimizeAndCompressProject(
+#    optimizedProjectDir = "project",
+#    projectFilePath     = "export.pmp",
+#    temporaryDir        = "temporary",
+#    deoptimizedDebugFilePath="t_deop.json",
+#)
 #
 #extractAndOptimizeProject(
 #    projectFilePath        = "export.pmp",
