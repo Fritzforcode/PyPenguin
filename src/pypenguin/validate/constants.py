@@ -234,6 +234,7 @@ inputSchema = {
             "enum": [
                 "block-only",
                 "block-and-text",
+                "block-and-menu-text",
                 "script",
                 "block-and-option",
                 "block-and-broadcast-option",

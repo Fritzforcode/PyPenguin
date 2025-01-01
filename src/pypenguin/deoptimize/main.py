@@ -120,7 +120,7 @@ def deoptimizeProject(projectData):
                 "version": "stable",
             },
         }, # Hardcoded because there is no use in changing it
-        "credit": "https://github.com/Fritzforcode/PyPenguin",
+        "credit": "Made using https://github.com/Fritzforcode/PyPenguin",
     }
     return newProjectData
     

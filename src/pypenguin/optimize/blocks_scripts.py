@@ -48,15 +48,21 @@ def finishBlock(data):
             newInputData["option"] = inputData["option"]
         
         if opcode != "procedures_call":
-            # A procedure call can't have a "block-and-broadcast-option" input
-            # Otherwise rename 'text' to 'option'
+            # A procedure call can't have an input like this
             inputMode = getInputMode(
                 opcode=opcode,
                 inputID=inputID,
             )
+            # rename 'text' to 'option'
             if inputMode == "block-and-broadcast-option":
                 newInputData["option"] = newInputData["text"]
                 del newInputData["text"]
+            # replace 'option' with 'text'
+            if inputMode == "block-and-menu-text":
+                newInputData["text"] = newInputData["option"]
+                del newInputData["option"]
+
+            
         
         if "option" in newInputData:
             optionType = getInputType(
@@ -177,7 +183,7 @@ def nestBlockRecursively(blockDatas, blockID):
                 newInputData |= {
                     "blocks": subScriptData if blockCount == 1 else [],
                 }
-            case "block-and-option":
+            case "block-and-option"|"block-and-menu-text":
                 assert blockCount in [1, 2]
                 newInputData |= {
                     "block" : None          if blockCount == 1 else subBlockData0,

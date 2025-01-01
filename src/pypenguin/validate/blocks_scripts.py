@@ -165,7 +165,7 @@ def validateInputValue(path, inputValue, inputType, inputMode, opcode, inputData
         inputValue["mode"] = inputMode
     # Check input value format
     validateSchema(pathToData=path, data=inputValue, schema=inputSchema)
-    if   inputMode == "block-and-text":
+    if   inputMode in ["block-and-text", "block-and-menu-text"]:
         required = ["block", "text"]
     elif inputMode == "block-only":
         required = ["block"]
@@ -180,7 +180,10 @@ def validateInputValue(path, inputValue, inputType, inputMode, opcode, inputData
                 case "block":
                     inputValue["block"] = inputBlockDefault
                 case "text":
-                    inputValue["text"] = inputTextDefault
+                    if inputType == "note":
+                        inputValue["text"] = inputNodeTextDefault
+                    else:
+                        inputValue["text"] = inputTextDefault
                 case "blocks":
                     inputValue["blocks"] = inputBlocksDefault
                 case "option":

@@ -89,7 +89,7 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
         inputData["mode"]   = inputMode
         inputData["_type_"] = inputType
     
-        if   inputMode == "block-and-text":
+        if   inputMode in ["block-and-text", "block-and-menu-text"]:
             required = ["block", "text"]
         elif inputMode == "block-only":
             required = ["block"]
@@ -104,7 +104,10 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
                     case "block":
                         inputData["block"] = inputBlockDefault
                     case "text":
-                        inputData["text"] = inputTextDefault
+                        if inputType == "note":
+                            inputData["text"] = inputNodeTextDefault
+                        else:
+                            inputData["text"] = inputTextDefault
                     case "blocks":
                         inputData["blocks"] = inputBlocksDefault
                     case "option":
@@ -117,6 +120,9 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
         if inputData["mode"] == "block-and-broadcast-option":
             inputData["text"] = inputData["option"]
             del inputData["option"]
+        if inputData["mode"] == "block-and-menu-text":
+            inputData["option"] = ["value", inputData["text"]]
+            del inputData["text"]
         newInputData = copy.deepcopy(inputData)
         if inputData.get("block") != None:
             newInputData["block"]  = restoreBlock(
@@ -447,7 +453,6 @@ def restoreInputs(data, opcode, spriteName, blockData):
                 magicNumber = getInputMagicNumber(inputType=inputType)
                 if inputMode == "block-and-broadcast-option":
                     text = inputData["text"][1]
-                    #print("~", text)
                     token = stringToToken(text)
                     textData = [magicNumber, text, token]
                 else:
@@ -462,7 +467,7 @@ def restoreInputs(data, opcode, spriteName, blockData):
                     newInputData = None
                 elif subBlockCount == 1:
                     newInputData = [2, subBlocks[0]]
-            case "block-and-option":
+            case "block-and-option"|"block-and-menu-text":
                 if   subBlockCount == 1:
                     newInputData = [1, subBlocks[0]]
                 elif subBlockCount == 2:

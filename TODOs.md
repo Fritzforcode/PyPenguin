@@ -25,6 +25,7 @@ maybe translate currentValue for certain types
 maybe validate json files before reading them
 
 maybe validate:
+- note inputs must be `in range(0, 131)`
 - extension names
 - layerOrder to be at most 4 - needs research 
 - asset names matching

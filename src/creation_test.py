@@ -1,39 +1,21 @@
 scripts = [
-{   'position': [0, 0],
-    'blocks': [   {   '_type': 'BLOCK',
-                      'opcode': 'call custom block',
-                      'inputs': {   'value': {   'block': {   '_type': 'BLOCK',
-                                                              'opcode': '(OPERAND1) '
-                                                                        '+ '
-                                                                        '(OPERAND2)',
-                                                              'inputs': {   'OPERAND1': {   'text': '4'},
-                                                                            'OPERAND2': {   'block': {   '_type': 'BLOCK',
-                                                                                                         'opcode': '(OPERAND1) '
-                                                                                                                   '* '
-                                                                                                                   '(OPERAND2)',
-                                                                                                         'inputs': {   'OPERAND1': {   'text': '3'},
-                                                                                                                       'OPERAND2': {   'text': '5'}}}}}}}},
-                      'options': {'customOpcode': ['value', 'VOID (value)']}}]},
     {
-        "position": [500, 0],
+        "position": [0,0],
         "blocks": [
             {
-                "opcode": "define custom block",
-                "options": {
-                    "noScreenRefresh": ["value", True], 
-                    "blockType": ["value", "instruction"], 
-                    "customOpcode": ["value", "VOID (value)"],
+                "opcode": "set instrument to ([INSTRUMENT])",
+                "inputs": {
+                    "INSTRUMENT": {"option": ["value", "(4) Guitar"]},
                 },
             },
             {
-                "opcode": "set [VARIABLE] to (VALUE)",
-                "inputs": {"VALUE": {"block": {
-                    "opcode": "value of text [ARGUMENT]",
-                    "options": {"ARGUMENT": ["value", "value"]},
-                }}},
-                "options": {"VARIABLE": ["variable", "__VOID__"]},
+                "opcode": "play note (NOTE) for (BEATS) beats",
+                "inputs": {
+                    "NOTE": {},
+                    "BEATS": {"text": "5"},
+                },
             },
-        ]
+        ],
     },
 ]
 projectData = {
@@ -117,7 +99,7 @@ projectData = {
     "monitors": [],
  
     "extensionData": {},
-    "extensions": ["jgJSON"],
+    "extensions": ["music", "jgJSON"],
 }
 
 from pypenguin import validateProject, deoptimizeAndCompressProject, extractAndOptimizeProject

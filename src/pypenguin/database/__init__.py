@@ -188,6 +188,7 @@ def getOptionTypes(opcode):
 inputDefault = {}
 inputBlockDefault = None
 inputTextDefault = ""
+inputNodeTextDefault = "0"
 inputBlocksDefault = []
 optionDefault = {}
 commentDefault = None
@@ -200,8 +201,12 @@ inputModes = {
     "number"          : "block-and-text",
     "text"            : "block-and-text",
     "color"           : "block-and-text",
+
+    "note"            : "block-and-menu-text",
+
     "boolean"         : "block-only",
     "round"           : "block-only",
+
     "script"          : "script",
 
     "broadcast"                           : "block-and-broadcast-option",
@@ -223,7 +228,6 @@ inputModes = {
     "sound"                               : "block-and-option",
     "drum"                                : "block-and-option",
     "instrument"                          : "block-and-option",
-    "note"                                : "block-and-option",
 }
 
 optionTypeDatabase = {
