@@ -48,13 +48,13 @@ def finishBlock(data):
             newInputData["option"] = inputData["option"]
         
         if opcode != "procedures_call":
-            # A procedure call can't have a "block-and-hybrid-option" input
+            # A procedure call can't have a "block-and-broadcast-option" input
             # Otherwise rename 'text' to 'option'
             inputMode = getInputMode(
                 opcode=opcode,
                 inputID=inputID,
             )
-            if inputMode == "block-and-hybrid-option":
+            if inputMode == "block-and-broadcast-option":
                 newInputData["option"] = newInputData["text"]
                 del newInputData["text"]
         
@@ -161,7 +161,7 @@ def nestBlockRecursively(blockDatas, blockID):
         else:
             subBlockData1 = None
         match inputData["mode"]:
-            case "block-and-text"|"block-and-hybrid-option":
+            case "block-and-text"|"block-and-broadcast-option":
                 assert blockCount in [0, 1]
                 newInputData |= {
                     "block": subBlockData0 if blockCount == 1 else None,

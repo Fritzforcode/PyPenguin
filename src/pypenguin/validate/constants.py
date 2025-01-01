@@ -236,7 +236,7 @@ inputSchema = {
                 "block-and-text",
                 "script",
                 "block-and-option",
-                "block-and-hybrid-option",
+                "block-and-broadcast-option",
             ],
         },
         "block": {"type": ["null", "object"]},

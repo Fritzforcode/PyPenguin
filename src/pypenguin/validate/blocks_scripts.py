@@ -171,7 +171,7 @@ def validateInputValue(path, inputValue, inputType, inputMode, opcode, inputData
         required = ["block"]
     elif inputMode == "script":
         required = ["blocks"]
-    elif inputMode in ["block-and-option", "block-and-hybrid-option"]:
+    elif inputMode in ["block-and-option", "block-and-broadcast-option"]:
         required = ["option"]
     
     for attribute in required:

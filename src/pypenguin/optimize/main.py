@@ -75,7 +75,7 @@ def optimizeProjectJSON(projectData):
         "extensions"          : projectData["extensions"],
         "credit"              : "https://github.com/Fritzforcode/PyPenguin"
     }
-    if projectData["extensionURLs"] != {}:
+    if projectData.get("extensionURLs", {}) != {}:
         newData["extensionURLs"] = projectData["extensionURLs"]
     return newData
     

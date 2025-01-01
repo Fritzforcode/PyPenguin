@@ -93,7 +93,7 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
             required = ["block", "text"]
         elif inputMode == "block-only":
             required = ["block"]
-        elif inputMode in ["block-and-option", "block-and-hybrid-option"]:
+        elif inputMode in ["block-and-option", "block-and-broadcast-option"]:
             required = ["option"]
         elif inputMode == "script":
             required = ["blocks"]
@@ -114,7 +114,7 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
     inputDatas = newInputDatas
     newInputDatas = {}
     for i, inputID, inputData in ikv(inputDatas):
-        if inputData["mode"] == "block-and-hybrid-option":
+        if inputData["mode"] == "block-and-broadcast-option":
             inputData["text"] = inputData["option"]
             del inputData["option"]
         newInputData = copy.deepcopy(inputData)
@@ -443,9 +443,9 @@ def restoreInputs(data, opcode, spriteName, blockData):
             ))
         subBlockCount = len(subBlocks)
         match inputMode:
-            case "block-and-text"|"block-and-hybrid-option":
+            case "block-and-text"|"block-and-broadcast-option":
                 magicNumber = getInputMagicNumber(inputType=inputType)
-                if inputMode == "block-and-hybrid-option":
+                if inputMode == "block-and-broadcast-option":
                     text = inputData["text"][1]
                     #print("~", text)
                     token = stringToToken(text)

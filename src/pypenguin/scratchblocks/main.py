@@ -328,7 +328,7 @@ def parseBlock(tokens: list[Token], isNested: bool):
             if canBeSpecialInput:
                 inputID   = inputIDs[inputIndex]
                 inputMode = inputModes[inputID]
-                canBeSpecialInput = inputMode in ["block-and-option", "block-and-hybrid-option"]
+                canBeSpecialInput = inputMode in ["block-and-option", "block-and-broadcast-option"]
             if canBeSpecialInput:
                 # A Round Menu Case
                 inputIndex += 1

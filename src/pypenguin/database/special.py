@@ -145,6 +145,28 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    # Music Extension
+    "music_menu_DRUM": {
+        "type": "menu",
+        "category": "Music",
+        "newOpcode": "#DRUM MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "music_menu_INSTRUMENT": {
+        "type": "menu",
+        "category": "Music",
+        "newOpcode": "#INSTRUMENT MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "note": {
+        "type": "menu",
+        "category": "Music",
+        "newOpcode": "#NOTE MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
 # SPECIAL: Variables and Lists
     "special_variable_value": {
         "type": "stringReporter",
