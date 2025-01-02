@@ -1,21 +1,22 @@
-from pypenguin.database.motion            import opcodes as motion
-from pypenguin.database.looks             import opcodes as looks
-from pypenguin.database.sounds            import opcodes as sounds
-from pypenguin.database.events            import opcodes as events
-from pypenguin.database.control           import opcodes as control
-from pypenguin.database.sensing           import opcodes as sensing
-from pypenguin.database.operators         import opcodes as operators
-from pypenguin.database.variables         import opcodes as variables
-from pypenguin.database.lists             import opcodes as lists
+from pypenguin.database.motion                  import opcodes as motion
+from pypenguin.database.looks                   import opcodes as looks
+from pypenguin.database.sounds                  import opcodes as sounds
+from pypenguin.database.events                  import opcodes as events
+from pypenguin.database.control                 import opcodes as control
+from pypenguin.database.sensing                 import opcodes as sensing
+from pypenguin.database.operators               import opcodes as operators
+from pypenguin.database.variables               import opcodes as variables
+from pypenguin.database.lists                   import opcodes as lists
 
-from pypenguin.database.special           import opcodes as special
-from pypenguin.database.extension_music   import opcodes as extension_music
-from pypenguin.database.extension_pen     import opcodes as extension_pen
-from pypenguin.database.extension_bitwise import opcodes as extension_bitwise
-from pypenguin.database.extension_text    import opcodes as extension_text
-from pypenguin.database.extension_json    import opcodes as extension_json
+from pypenguin.database.special                 import opcodes as special
+from pypenguin.database.extension_music         import opcodes as extension_music
+from pypenguin.database.extension_pen           import opcodes as extension_pen
+from pypenguin.database.extension_video_sensing import opcodes as extension_video_sensing
+from pypenguin.database.extension_bitwise       import opcodes as extension_bitwise
+from pypenguin.database.extension_text          import opcodes as extension_text
+from pypenguin.database.extension_json          import opcodes as extension_json
 
-from pypenguin.helper_functions           import ikv, pp, flipKeysAndValues, removeDuplicates
+from pypenguin.helper_functions                 import ikv, flipKeysAndValues, removeDuplicates
 
 import functools
 
@@ -47,7 +48,7 @@ opcodeDatabase = (
     special   |
 # EXTENSIONS
 # Scratch Extensions
-    extension_music   | extension_pen  |
+    extension_music   | extension_pen  | extension_video_sensing |
 # Turbowarp Extensions
     extension_bitwise |
 # Penguinmod Extensions
@@ -184,7 +185,6 @@ def getInputMagicNumber(inputType):
     return magicNumber
 
 def getOptionType(opcode, optionID):
-    #print(opcode, optionID)
     return opcodeDatabase[opcode]["optionTypes"][optionID]
 
 def getOptionTypes(opcode):
@@ -239,6 +239,9 @@ inputModes = {
     "instrument"                          : "block-and-option",
     "font"                                : "block-and-option",
     "pen property"                        : "block-and-option",
+    "video sensing property"              : "block-and-option",
+    "video sensing target"                : "block-and-option",
+    "video state"                         : "block-and-option",
 }
 
 optionTypeDatabase = {
@@ -453,6 +456,20 @@ optionTypeDatabase = {
     },
     "left|center|right"  : {
         "directValues"   : ["left", "center", "right"],
+        "valueSegments"  : [],
+    },
+    "video sensing property": {
+        "directValues"   : ["motion", "direction"],
+        "valueSegments"  : [],
+    },
+    "video sensing target": {
+        "oldDirectValues": ["this sprite", "Stage"],
+        "directValues"   : ["this sprite", "stage"],
+        "valueSegments"  : [],
+    },
+    "video state": {
+        "oldDirectValues": ["on", "off", "on-flipped"],
+        "directValues"   : ["on", "off", "on flipped"],
         "valueSegments"  : [],
     },
 }

@@ -183,6 +183,35 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    # Video Sensing Extension
+    "videoSensing_menu_ATTRIBUTE": {
+        "type": "menu",
+        "category": "Pen",
+        "newOpcode": "#VIDEO SENSING PROPERTY",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "videoSensing_menu_SUBJECT": {
+        "type": "menu",
+        "category": "Pen",
+        "newOpcode": "#VIDEO SENSING TARGET",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "videoSensing_menu_VIDEO_STATE": {
+        "type": "menu",
+        "category": "Pen",
+        "newOpcode": "#VIDEO STATE",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "videoSensing_menu_SUBJECT": {
+        "type": "menu",
+        "category": "Pen",
+        "newOpcode": "#VIDEO SENSING TARGET",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
     # Others
     "note": {
         "type": "menu",
