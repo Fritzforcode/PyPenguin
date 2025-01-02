@@ -1,2 +1,6 @@
 *.pyc
 .vscode/
+/*.json
+/*.pmp
+export.pmp
+extracted_project/
