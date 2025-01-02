@@ -1,22 +1,23 @@
-from pypenguin.database.motion                  import opcodes as motion
-from pypenguin.database.looks                   import opcodes as looks
-from pypenguin.database.sounds                  import opcodes as sounds
-from pypenguin.database.events                  import opcodes as events
-from pypenguin.database.control                 import opcodes as control
-from pypenguin.database.sensing                 import opcodes as sensing
-from pypenguin.database.operators               import opcodes as operators
-from pypenguin.database.variables               import opcodes as variables
-from pypenguin.database.lists                   import opcodes as lists
+from pypenguin.database.motion                   import opcodes as motion
+from pypenguin.database.looks                    import opcodes as looks
+from pypenguin.database.sounds                   import opcodes as sounds
+from pypenguin.database.events                   import opcodes as events
+from pypenguin.database.control                  import opcodes as control
+from pypenguin.database.sensing                  import opcodes as sensing
+from pypenguin.database.operators                import opcodes as operators
+from pypenguin.database.variables                import opcodes as variables
+from pypenguin.database.lists                    import opcodes as lists
 
-from pypenguin.database.special                 import opcodes as special
-from pypenguin.database.extension_music         import opcodes as extension_music
-from pypenguin.database.extension_pen           import opcodes as extension_pen
-from pypenguin.database.extension_video_sensing import opcodes as extension_video_sensing
-from pypenguin.database.extension_bitwise       import opcodes as extension_bitwise
-from pypenguin.database.extension_text          import opcodes as extension_text
-from pypenguin.database.extension_json          import opcodes as extension_json
+from pypenguin.database.special                  import opcodes as special
+from pypenguin.database.extension_music          import opcodes as extension_music
+from pypenguin.database.extension_pen            import opcodes as extension_pen
+from pypenguin.database.extension_video_sensing  import opcodes as extension_video_sensing
+from pypenguin.database.extension_text_to_speech import opcodes as extension_text_to_speech
+from pypenguin.database.extension_bitwise        import opcodes as extension_bitwise
+from pypenguin.database.extension_text           import opcodes as extension_text
+from pypenguin.database.extension_json           import opcodes as extension_json
 
-from pypenguin.helper_functions                 import ikv, flipKeysAndValues, removeDuplicates
+from pypenguin.helper_functions                  import ikv, flipKeysAndValues, removeDuplicates
 
 import functools
 
@@ -48,7 +49,7 @@ opcodeDatabase = (
     special   |
 # EXTENSIONS
 # Scratch Extensions
-    extension_music   | extension_pen  | extension_video_sensing |
+    extension_music   | extension_pen  | extension_video_sensing | extension_text_to_speech |
 # Turbowarp Extensions
     extension_bitwise |
 # Penguinmod Extensions
