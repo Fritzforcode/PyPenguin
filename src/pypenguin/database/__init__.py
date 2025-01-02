@@ -12,6 +12,7 @@ from pypenguin.database.special           import opcodes as special
 from pypenguin.database.extension_music   import opcodes as extension_music
 from pypenguin.database.extension_pen     import opcodes as extension_pen
 from pypenguin.database.extension_bitwise import opcodes as extension_bitwise
+from pypenguin.database.extension_text    import opcodes as extension_text
 from pypenguin.database.extension_json    import opcodes as extension_json
 
 from pypenguin.helper_functions           import ikv, pp, flipKeysAndValues, removeDuplicates
@@ -19,21 +20,22 @@ from pypenguin.helper_functions           import ikv, pp, flipKeysAndValues, rem
 import functools
 
 """
-Category      Status ('.'=some 'x'=all)
-    Motion    [x]
-    Looks     [x]
-    Sound     [x]
-    Events    [x]
-    Control   [x]
-    Sensing   [x]
-    Operators [x]
-    Variables [x]
-    Lists     [x]
-Extension     Status ('.'=some 'x'=all)
-    Music     [x] (Scratch)
-    Pen       [x] (Scratch; extended by Penguinmod)
-    Bitwise   [x] (Turbowarp)
-    (jg)JSON  [x] (Penguinmod)
+Category            Status ('.'=some 'x'=all)
+    Motion          [x]
+    Looks           [x]
+    Sound           [x]
+    Events          [x]
+    Control         [x]
+    Sensing         [x]
+    Operators       [x]
+    Variables       [x]
+    Lists           [x]
+Extension           Status ('.'=some 'x'=all)
+    Music           [x] (Scratch)
+    Pen             [x] (Scratch; extended by Penguinmod)
+    Bitwise         [x] (Turbowarp)
+    (Animated) Text [x] (Penguinmod)
+    (jg)JSON        [x] (Penguinmod)
     others aren't implemented (yet)
 """
 
@@ -45,11 +47,11 @@ opcodeDatabase = (
     special   |
 # EXTENSIONS
 # Scratch Extensions
-    extension_music | extension_pen |
+    extension_music   | extension_pen  |
 # Turbowarp Extensions
     extension_bitwise |
 # Penguinmod Extensions
-    extension_json
+    extension_text    | extension_json
 )
 
 def getAllDeoptimizedOpcodes():
@@ -443,6 +445,14 @@ optionTypeDatabase = {
     },
     "pen property": {
         "directValues"   : ["color", "saturation", "brightness", "transparency"],
+        "valueSegments"  : [],
+    },
+    "animation technique": {
+        "directValues"   : ["type", "rainbow", "zoom"],
+        "valueSegments"  : [],
+    },
+    "left|center|right"  : {
+        "directValues"   : ["left", "center", "right"],
         "valueSegments"  : [],
     },
 }

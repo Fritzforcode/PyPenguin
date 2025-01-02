@@ -164,7 +164,7 @@ opcodes = {
     "pen_menu_FONT": {
         "type": "menu",
         "category": "Pen",
-        "newOpcode": "#FONT MENU",
+        "newOpcode": "#PEN FONT MENU",
         "inputTypes": {},
         "optionTypes": {},
     },
@@ -172,6 +172,14 @@ opcodes = {
         "type": "menu",
         "category": "Pen",
         "newOpcode": "#PEN PROPERTY MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    # Animated Text Extension
+    "text_menu_FONT": {
+        "type": "menu",
+        "category": "Pen",
+        "newOpcode": "#TEXT FONT MENU",
         "inputTypes": {},
         "optionTypes": {},
     },
