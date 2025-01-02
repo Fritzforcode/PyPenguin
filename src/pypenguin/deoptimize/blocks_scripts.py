@@ -105,7 +105,7 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
                         inputData["block"] = inputBlockDefault
                     case "text":
                         if inputType == "note":
-                            inputData["text"] = inputNodeTextDefault
+                            inputData["text"] = noteInputTextDefault
                         else:
                             inputData["text"] = inputTextDefault
                     case "blocks":
@@ -377,7 +377,6 @@ def restoreBlocks(data, spriteName):
                 blockID=blockID,
             )
         else:
-            print("--*", opcode)
             blockType = getBlockType(opcode=opcode)
             if blockType == "menu":
                 hasShadow = True
@@ -540,12 +539,13 @@ def unprepareBlocks(data, spriteName, commentDatas):
                 blockData["mutation"] = { # seems to alwys be constant
                     "tagName": "mutation",
                     "children": [],
-                    "points": json.dumps(3), # TODO: research
+                    "points": json.dumps(blockData["fields"]["VERTEX_COUNT"][0]), # TODO: research
                     "color": "#0FBD8C",
                     "midle": "[0,0]",
                     "scale": "50",
                     "expanded": "false"
                 }
+                del blockData["fields"]["VERTEX_COUNT"]
     
     
     def getSelectors(obj):

@@ -236,6 +236,7 @@ inputModes = {
     "drum"                                : "block-and-option",
     "instrument"                          : "block-and-option",
     "font"                                : "block-and-option",
+    "pen property"                        : "block-and-option",
 }
 
 optionTypeDatabase = {
@@ -433,7 +434,15 @@ optionTypeDatabase = {
     },
     "expanded|minimized": {
         "directValues"   : ["expanded", "minimized"],
-        "oldDirectValues": [True      , "FALSE"    ], # Yes that is correct. I guess the dev of the pen extension must've messed up.
+        "oldDirectValues": [True      , False      ], # Yes that is correct. I guess the dev of the pen extension must've messed up.
+        "valueSegments"  : [],
+    },
+    "vertex count": {
+        "directValues"   : [3, 4],
+        "valueSegments"  : [],
+    },
+    "pen property": {
+        "directValues"   : ["color", "saturation", "brightness", "transparency"],
         "valueSegments"  : [],
     },
 }
@@ -612,6 +621,8 @@ def optimizeOptionValue(optionValue, optionType):
         return ["value", optionValue]
     if optionType in ["variable", "list"]:
         return [optionType, optionValue]
+    if optionType == "expanded|minimized" and optionValue == "FALSE": # To patch a mistake of the pen extension dev
+        optionValue = False
     optimizedValues, defaultPrefix = getOptimizedOptionValuesUsingNoContext(optionType=optionType)
     deoptimizedValues              = getDeoptimizedOptionValues            (optionType=optionType)
     if len(optimizedValues) != len(deoptimizedValues):

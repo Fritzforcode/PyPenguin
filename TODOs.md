@@ -1,6 +1,12 @@
 # TODO
 
-[WORKING ON] update documentation
+update documentation
+
+insure input magic numbers match (eg. block-only inputs)
+
+add custom colors for custom block stuff
+
+improve error handling
 
 add testing
 
@@ -19,8 +25,6 @@ move cloud emoji validation from deoptimize/varables_lists.py into validator.py
 explore other text input fields (if they require a min length of 1)
 
 maybe remove "sampleCount"
-
-maybe translate currentValue for certain types
 
 maybe validate json files before reading them
 

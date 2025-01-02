@@ -3,125 +3,50 @@
         {
             "name": "Stage",
             "isStage": true,
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [],
+            "sounds": [],
+            "volume": 100
+        },
+        {
+            "name": "Sprite1",
+            "isStage": false,
             "scripts": [
                 {
-                    "_type": "SCRIPT",
                     "position": [
                         0,
-                        500
-                    ],
-                    "blocks": [
-                        {
-                            "_type": "BLOCK",
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": [
-                                    "value",
-                                    true
-                                ],
-                                "blockType": [
-                                    "value",
-                                    "textReporter"
-                                ],
-                                "customOpcode": [
-                                    "value",
-                                    "custom::set_register (register) (value)"
-                                ]
-                            }
-                        },
-                        {
-                            "_type": "BLOCK",
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "block": {
-                                        "_type": "BLOCK",
-                                        "opcode": "value of text [ARGUMENT]",
-                                        "options": {
-                                            "ARGUMENT": [
-                                                "value",
-                                                "register"
-                                            ]
-                                        }
-                                    }
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": [
-                                    "variable",
-                                    "custom::register"
-                                ]
-                            }
-                        },
-                        {
-                            "_type": "BLOCK",
-                            "opcode": "set [VARIABLE] to (VALUE)",
-                            "inputs": {
-                                "VALUE": {
-                                    "block": {
-                                        "_type": "BLOCK",
-                                        "opcode": "value of text [ARGUMENT]",
-                                        "options": {
-                                            "ARGUMENT": [
-                                                "value",
-                                                "value"
-                                            ]
-                                        }
-                                    }
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": [
-                                    "variable",
-                                    "custom::value"
-                                ]
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        -1000,
                         0
                     ],
                     "blocks": [
                         {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": [
-                                    "value",
-                                    true
-                                ],
-                                "blockType": [
-                                    "value",
-                                    "instruction"
-                                ],
-                                "customOpcode": [
-                                    "value",
-                                    "VOID (value)"
-                                ]
-                            }
-                        },
-                        {
-                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "opcode": "draw triangle (TRIANGLE) with fill (COLOR)",
                             "inputs": {
-                                "VALUE": {
+                                "TRIANGLE": {
                                     "block": {
-                                        "opcode": "value of text [ARGUMENT]",
+                                        "opcode": "POLYGON MENU",
+                                        "inputs": {
+                                            "x1": {},
+                                            "y1": {},
+                                            "x2": {},
+                                            "y2": {},
+                                            "x3": {},
+                                            "y3": {}
+                                        },
                                         "options": {
-                                            "ARGUMENT": [
+                                            "EXPANDED_MINIMIZED": [
                                                 "value",
-                                                "value"
+                                                "expanded"
+                                            ],
+                                            "VERTEX_COUNT": [
+                                                "value",
+                                                4
                                             ]
                                         }
                                     }
-                                }
-                            },
-                            "options": {
-                                "VARIABLE": [
-                                    "variable",
-                                    "__VOID__"
-                                ]
+                                },
+                                "COLOR": {}
                             }
                         }
                     ]
@@ -130,35 +55,81 @@
             "comments": [],
             "currentCostume": 0,
             "costumes": [],
+            "sounds": [
+                {
+                    "name": "pop",
+                    "extension": "wav",
+                    "rate": 48000,
+                    "sampleCount": 1123
+                }
+            ],
+            "localVariables": [
+                {
+                    "name": "loc var",
+                    "currentValue": ""
+                }
+            ],
+            "localLists": [],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "position": [
+                77,
+                0
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": true,
+            "rotationStyle": "all around"
+        },
+        {
+            "name": "Sprite2",
+            "isStage": false,
+            "scripts": [],
+            "comments": [],
+            "currentCostume": 0,
+            "costumes": [],
             "sounds": [],
-            "volume": 100
+            "localVariables": [],
+            "localLists": [],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "position": [
+                0,
+                0
+            ],
+            "size": 100,
+            "direction": 90,
+            "draggable": true,
+            "rotationStyle": "all around"
         }
     ],
     "globalVariables": [
         {
-            "name": "custom::register",
-            "currentValue": "",
-            "isCloudVariable": false
-        },
-        {
-            "name": "custom::value",
-            "currentValue": "",
-            "isCloudVariable": false
-        },
-        {
             "name": "__VOID__",
             "currentValue": "",
-            "isCloudVariable": false
+            "isCloudVariable": true
         }
     ],
-    "globalLists": [],
-    "monitors": [],
+    "globalLists": [
+        {
+            "name": "registers",
+            "currentValue": []
+        },
+        {
+            "name": "points",
+            "currentValue": []
+        }
+    ],
     "tempo": 60,
     "videoTransparency": 0,
     "videoState": "off",
     "textToSpeechLanguage": null,
+    "monitors": [],
     "extensionData": {},
     "extensions": [
+        "music",
         "jgJSON"
     ]
 }

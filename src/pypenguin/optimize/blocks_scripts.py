@@ -1,5 +1,5 @@
 from pypenguin.helper_functions import ikv, pp, generateCustomOpcode
-from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputID, getDeoptimizedInputID, getInputMode, getInputModes, getOptimizedOptionID, getBlockType, optimizeOptionValue, getInputType, getOptionType
+from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputID, getInputMode, getInputModes, getOptimizedOptionID, getBlockType, optimizeOptionValue, getInputType, getOptionType, inputTextDefault
 
 import copy, json
 
@@ -73,7 +73,9 @@ def finishBlock(data):
                 optionValue=newInputData["option"],
                 optionType=optionType,
             )
-
+        if opcode == "polygon" and inputID in ["x4", "y4"]:
+            if data["options"]["VERTEX_COUNT"] == 3: 
+                continue # When the polygon block has only 3 not 4 vertecies do not keep x4, y4
         newInputDatas[inputID] = newInputData
     
     newOptionDatas = {}
@@ -349,6 +351,9 @@ def prepareBlocks(data, commentDatas, mutationDatas):
                     "topLevel": blockData["topLevel"],
                 },
             }
+            if blockData["opcode"] == "polygon":
+                vertext_count = json.loads(blockData["mutation"]["points"])
+                newBlockData["options"]["VERTEX_COUNT"] = vertext_count
         if not isListBlock and blockData["topLevel"] == True:
             newBlockData["_info_"]["position"] = [blockData["x"], blockData["y"]]
         if not isListBlock and "comment" in blockData:
@@ -455,6 +460,13 @@ def prepareInputs(data, opcode, commentDatas):
                     "references": [],
                     "listBlock" : None,
                     "text"      : None,
+                }
+            elif opcode == "polygon" and inputID in ["x4", "y4"]:
+                newData[inputID] = {
+                    "mode"      : inputMode,
+                    "references": [],
+                    "listBlock" : None,
+                    "text"      : inputTextDefault,
                 }
             else:
                 raise Exception(inputMode)

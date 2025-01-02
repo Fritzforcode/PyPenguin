@@ -168,6 +168,13 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    "pen_menu_colorParam": {
+        "type": "menu",
+        "category": "Pen",
+        "newOpcode": "#PEN PROPERTY MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
     # Others
     "note": {
         "type": "menu",
@@ -179,10 +186,10 @@ opcodes = {
     "polygon": { # Exception: This block may be used.
         "type": "embeddedMenu",
         "category": "Pen",
-        "newOpcode": "TRIANGLE MENU",
-        "inputTypes": {"x1": "number", "y1": "number", "x2": "number", "y2": "number", "x3": "number", "y3": "number"},
-        "optionTypes": {"EXPANDED_MINIMIZED": "expanded|minimized"},
-        "optionTranslation": {"button": "EXPANDED_MINIMIZED"},
+        "newOpcode": "POLYGON MENU",
+        "inputTypes": {"x1": "number", "y1": "number", "x2": "number", "y2": "number", "x3": "number", "y3": "number", "x4": "number", "y4": "number"},
+        "optionTypes": {"EXPANDED_MINIMIZED": "expanded|minimized", "VERTEX_COUNT": "vertex count"},
+        "optionTranslation": {"button": "EXPANDED_MINIMIZED"}, # "VERTEX_COUNT": "VERTEX_COUNT"
     },
 # SPECIAL: Variables and Lists
     "special_variable_value": {

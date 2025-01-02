@@ -6,7 +6,7 @@ scripts = [
                 "opcode": "draw triangle (TRIANGLE) with fill (COLOR)",
                 "inputs": {
                     "TRIANGLE": {"block": {
-                        "opcode": "TRIANGLE MENU",
+                        "opcode": "POLYGON MENU",
                         "inputs": {
                             "x1": {},
                             "y1": {},
@@ -17,6 +17,7 @@ scripts = [
                         },
                         "options": {
                             "EXPANDED_MINIMIZED": ["value", "expanded"],
+                            "VERTEX_COUNT": ["value", 4],
                         },
                     }},
                     "COLOR": {},

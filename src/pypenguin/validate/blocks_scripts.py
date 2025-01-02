@@ -90,6 +90,7 @@ def validateBlock(path, data, context, expectedShape=None, embeddedMenuOpcode=No
         data=data["inputs"],
         opcode=opcode, 
         context=context, 
+        options=data["options"],
     )
     validateOptions(
         path=path+["options"],
@@ -131,7 +132,7 @@ def validateBlockShape(path, oldOpcode, expectedShape, embeddedMenuOpcode=None):
     if blockType not in possibleValues:
         raise formatError(blockTypeError, path, message)
 
-def validateInputs(path, data, opcode, context):
+def validateInputs(path, data, opcode, context, options):
     oldOpcode       = getDeoptimizedOpcode(opcode=opcode)
     allowedInputIDs = list(getInputTypes(opcode=oldOpcode).keys()) # List of inputs which are defined for the specific opcode
     if oldOpcode == "procedures_call": # Inputs in the call custom block block are custom
@@ -149,7 +150,11 @@ def validateInputs(path, data, opcode, context):
             inputID=inputID,
         )
         if (inputMode not in ["block-only", "script"]) or (inputType == "embeddedMenu"):
-            if inputID not in data:
+            canPassAnyway = False
+            if (oldOpcode == "polygon" and inputID in ["x4", "y4"]):
+                if options["VERTEX_COUNT"] != 4:
+                    canPassAnyway  = True # x4 and y4 are only required when VERTEX_COUNT is 4 
+            if (inputID not in data) and not(canPassAnyway):
                 raise formatError(inputIdError, path, f"A block with opcode '{opcode}' must have the input '{inputID}'.")
 
     inputTypes = getInputTypes(opcode=oldOpcode)
