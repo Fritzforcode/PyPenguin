@@ -181,7 +181,8 @@ opcodes = {
         "category": "Pen",
         "newOpcode": "TRIANGLE MENU",
         "inputTypes": {"x1": "number", "y1": "number", "x2": "number", "y2": "number", "x3": "number", "y3": "number"},
-        "optionTypes": {"button": "shown|hidden"},
+        "optionTypes": {"EXPANDED_MINIMIZED": "expanded|minimized"},
+        "optionTranslation": {"button": "EXPANDED_MINIMIZED"},
     },
 # SPECIAL: Variables and Lists
     "special_variable_value": {

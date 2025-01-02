@@ -188,10 +188,13 @@ def getOptionType(opcode, optionID):
 def getOptionTypes(opcode):
     return opcodeDatabase[opcode]["optionTypes"]
 
+def getEmbeddedMenuOpcode(opcode):
+    return opcodeDatabase[opcode].get("embeddedMenuOpcode")
+
 inputDefault = {}
 inputBlockDefault = None
 inputTextDefault = ""
-inputNodeTextDefault = "0"
+noteInputTextDefault = "0"
 inputBlocksDefault = []
 optionDefault = {}
 commentDefault = None
@@ -428,9 +431,9 @@ optionTypeDatabase = {
         "directValues"   : ["on", "off"],
         "valueSegments"  : [],
     },
-    "shown|hidden": {
-        "directValues"   : ["shown", "hidden"],
-        "oldDirectValues": ["FALSE", True], # Yes that is correct. I guess the dev of the pen extension must've messed up.
+    "expanded|minimized": {
+        "directValues"   : ["expanded", "minimized"],
+        "oldDirectValues": [True      , "FALSE"    ], # Yes that is correct. I guess the dev of the pen extension must've messed up.
         "valueSegments"  : [],
     },
 }

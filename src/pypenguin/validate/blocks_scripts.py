@@ -1,6 +1,6 @@
 from pypenguin.helper_functions import ikv, parseCustomOpcode, pp, getListOfClosestStrings
 from pypenguin.validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema
-from pypenguin.validate.errors import blockTypeError, unknownOpcodeError, inputIdError, missingInputAttributeError, optionIdError, optionValueCategoryError, optionValueError, undefinedVariableError, undefinedListError, undefinedCustomOpcodeError
+from pypenguin.validate.errors import blockTypeError, unknownOpcodeError, inputIdError, missingInputAttributeError, optionIdError, optionValueCategoryError, optionValueError, undefinedVariableError, undefinedListError, undefinedCustomOpcodeError, embeddedMenuError
 from pypenguin.validate.comments import validateComment
 from pypenguin.database import *
 
@@ -62,7 +62,7 @@ def validateBlockType(path, blockType, isNested, isFirst, isLast, isOnly):
     elif blockType == "embeddedMenu":
         raise formatError(blockTypeError, path, "An embedded menu must be embedded in another block.")
 
-def validateBlock(path, data, context, expectedShape=None):
+def validateBlock(path, data, context, expectedShape=None, embeddedMenuOpcode=None):
     if "inputs" not in data:
         data["inputs"] = inputDefault
     if "options" not in data:
@@ -111,9 +111,10 @@ def validateBlock(path, data, context, expectedShape=None):
         path=path,
         oldOpcode=oldOpcode,
         expectedShape=expectedShape,
+        embeddedMenuOpcode=embeddedMenuOpcode,
     )
 
-def validateBlockShape(path, oldOpcode, expectedShape):
+def validateBlockShape(path, oldOpcode, expectedShape, embeddedMenuOpcode=None):
     blockType = getBlockType(opcode=oldOpcode)
     if   expectedShape == "stringReporter":
         possibleValues = ["stringReporter", "booleanReporter", "dynamic"]
@@ -121,10 +122,11 @@ def validateBlockShape(path, oldOpcode, expectedShape):
     elif expectedShape == "booleanReporter":
         possibleValues = ["booleanReporter", "dynamic"]
         message = "Must be a boolean reporter block."
-    elif expectedShape == "embeddedMenu":
-        possibleValues = ["embeddedMenu"]
-        message = "Must be an embedded menu block."
     else:
+        if expectedShape == "embeddedMenu":
+            if oldOpcode != embeddedMenuOpcode:
+                emo = getOptimizedOpcode(embeddedMenuOpcode)
+                raise formatError(embeddedMenuError, path+["opcode"], f"Must be '{emo}'.")
         return
     if blockType not in possibleValues:
         raise formatError(blockTypeError, path, message)
@@ -170,8 +172,9 @@ def validateInputs(path, data, opcode, context):
             )
 
 def validateInputValue(path, inputValue, inputType, inputMode, opcode, inputDatas, context):
-    if "mode" not in inputValue:
-        inputValue["mode"] = inputMode
+    oldOpcode = getDeoptimizedOpcode(opcode)
+    #if "mode" not in inputValue:
+    inputValue["mode"] = inputMode
     # Check input value format
     validateSchema(pathToData=path, data=inputValue, schema=inputSchema)
     if   inputMode in ["block-and-text", "block-and-menu-text"]:
@@ -187,23 +190,29 @@ def validateInputValue(path, inputValue, inputType, inputMode, opcode, inputData
         if attribute not in inputValue:
             match attribute:
                 case "block":
+                    if inputType == "embeddedMenu":
+                        raise formatError(missingInputAttributeError, path, "Must have the attribute 'block' in this case.")
                     inputValue["block"] = inputBlockDefault
                 case "text":
                     if inputType == "note":
-                        inputValue["text"] = inputNodeTextDefault
+                        inputValue["text"] = noteInputTextDefault
                     else:
                         inputValue["text"] = inputTextDefault
                 case "blocks":
                     inputValue["blocks"] = inputBlocksDefault
                 case "option":
                     raise formatError(missingInputAttributeError, path, "Must have the attribute 'option'.")
-
-    if inputValue.get("block") != None: # When the input has a block and it isn't None, check the block format
+    if inputValue.get("block") == None:
+        if inputType == "embeddedMenu":
+            raise formatError(embeddedMenuError, path+["block"], "Mustn't be None in this case.")
+    else: # When the input has a block and it isn't None, check the block format
+        emo = getEmbeddedMenuOpcode(oldOpcode)
         validateBlock(
             path=path+["block"], 
             data=inputValue["block"], 
             context=context,
             expectedShape="booleanReporter" if inputType == "boolean" else ("embeddedMenu" if inputType == "embeddedMenu" else "stringReporter"),
+            embeddedMenuOpcode=emo,
         )
     
     if inputValue.get("blocks", []) != []:
@@ -373,7 +382,7 @@ def validateBlockCustomBlocks(path, data, CBTypes, expectedShape=None):
                     path=path+["inputs"]+[inputID]+["block"],
                     data=inputBlock,
                     CBTypes=CBTypes,
-                    expectedShape="booleanReporter" if inputType == "boolean" else "stringReporter",
+                    expectedShape="booleanReporter" if inputType == "boolean" else ("embeddedMenu" if inputType == "embeddedMenu" else "stringReporter"),
                 )
             
             inputBlocks = inputValue.get("blocks")

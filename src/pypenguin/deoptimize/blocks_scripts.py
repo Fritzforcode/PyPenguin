@@ -377,8 +377,11 @@ def restoreBlocks(data, spriteName):
                 blockID=blockID,
             )
         else:
+            print("--*", opcode)
             blockType = getBlockType(opcode=opcode)
             if blockType == "menu":
+                hasShadow = True
+            elif opcode in ["polygon"]:
                 hasShadow = True
             else:
                 hasShadow = False
@@ -524,7 +527,6 @@ def unprepareBlocks(data, spriteName, commentDatas):
                 }
 
             elif blockData["opcode"] == "control_stop":
-                pp(blockData)
                 match blockData["fields"]["STOP_OPTION"][0]:
                     case "all" | "this script"    : hasNext = False
                     case "other scripts in sprite": hasNext = True
@@ -533,7 +535,17 @@ def unprepareBlocks(data, spriteName, commentDatas):
                     "children": [],
                     "hasnext": json.dumps(hasNext)
                 }
-    
+            
+            elif blockData["opcode"] == "polygon":
+                blockData["mutation"] = { # seems to alwys be constant
+                    "tagName": "mutation",
+                    "children": [],
+                    "points": json.dumps(3), # TODO: research
+                    "color": "#0FBD8C",
+                    "midle": "[0,0]",
+                    "scale": "50",
+                    "expanded": "false"
+                }
     
     
     def getSelectors(obj):

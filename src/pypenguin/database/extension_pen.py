@@ -107,5 +107,6 @@ opcodes = {
         "inputTypes": {"TRIANGLE": "embeddedMenu", "COLOR": "color"},
         "inputTranslation": {"SHAPE": "TRIANGLE"},
         "optionTypes": {},
+        "embeddedMenuOpcode": "polygon",
     },
 }

@@ -32,6 +32,9 @@ class undefinedListError(ValidationError):
 class undefinedCustomOpcodeError(ValidationError):
     pass
 
+class embeddedMenuError(ValidationError):
+    pass
+
 class commentSizeError(ValidationError):
     pass
 

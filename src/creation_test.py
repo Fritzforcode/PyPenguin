@@ -5,8 +5,23 @@ scripts = [
             {
                 "opcode": "draw triangle (TRIANGLE) with fill (COLOR)",
                 "inputs": {
-                    "TRIANGLE": {"block": {"opcode": "x position"}},
-                    "COLOR": {"text": "#000000"},
+                    "TRIANGLE": {"block": {
+                        "opcode": "TRIANGLE MENU",
+                        "inputs": {
+                            "x1": {},
+                            "y1": {},
+                            "x2": {},
+                            "y2": {},
+                            "x3": {},
+                            "y3": {},
+                        },
+                        "options": {
+                            "EXPANDED_MINIMIZED": ["value", "expanded"],
+                        },
+                    }},
+                    "COLOR": {},
+                    #"TRIANGLE": {"block": {"opcode": "x position"}},
+                    #"COLOR": {"text": "#000000"},
                 },
             },
         ],
@@ -114,12 +129,12 @@ writeJSONFile(
     data     = projectData
 )
 
-#deoptimizeAndCompressProject(
-#    optimizedProjectDir = "project",
-#    projectFilePath     = "export.pmp",
-#    temporaryDir        = "temporary",
-#    deoptimizedDebugFilePath="t_deop.json",
-#)
+deoptimizeAndCompressProject(
+    optimizedProjectDir = "project",
+    projectFilePath     = "export.pmp",
+    temporaryDir        = "temporary",
+    deoptimizedDebugFilePath="t_deop.json",
+)
 #
 #extractAndOptimizeProject(
 #    projectFilePath        = "export.pmp",

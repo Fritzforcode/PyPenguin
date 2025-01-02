@@ -13,9 +13,9 @@ optimizedData = extractAndOptimizeProject(
 
 validateProject(projectData=optimizedData)
 
-deoptimizeAndCompressProject(
-    projectFilePath          = "export.pmp",
-    optimizedProjectDir      = "extracted_project",
-    temporaryDir             = "temporary",
-    deoptimizedDebugFilePath = "temp3.json"
-)
+#deoptimizeAndCompressProject(
+#    projectFilePath          = "export.pmp",
+#    optimizedProjectDir      = "extracted_project",
+#    temporaryDir             = "temporary",
+#    deoptimizedDebugFilePath = "temp3.json"
+#)
