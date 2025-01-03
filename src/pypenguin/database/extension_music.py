@@ -50,5 +50,6 @@ opcodes = {
         "newOpcode": "tempo",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
 }

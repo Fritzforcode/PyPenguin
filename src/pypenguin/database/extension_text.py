@@ -78,6 +78,7 @@ opcodes = {
         "newOpcode": "is text visible?",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "text_getWidth": {
         "type": "stringReporter",
@@ -85,6 +86,7 @@ opcodes = {
         "newOpcode": "get width of the text",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "text_getHeight": {
         "type": "stringReporter",
@@ -92,6 +94,7 @@ opcodes = {
         "newOpcode": "get height of the text",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "text_getDisplayedText": {
         "type": "stringReporter",
@@ -99,6 +102,7 @@ opcodes = {
         "newOpcode": "displayed text",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
     "text_getRender": {
         "type": "stringReporter",
@@ -106,5 +110,6 @@ opcodes = {
         "newOpcode": "get data uri of last rendered text",
         "inputTypes": {},
         "optionTypes": {},
+        "canHaveMonitor": True,
     },
 }
