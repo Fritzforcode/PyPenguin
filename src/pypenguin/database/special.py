@@ -235,6 +235,21 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    # Makey Makey Extension
+    "makeymakey_menu_KEY": {
+        "type": "menu",
+        "category": "Makey Makey",
+        "newOpcode": "#MAKEY KEY MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "makeymakey_menu_SEQUENCE": {
+        "type": "menu",
+        "category": "Makey Makey",
+        "newOpcode": "#MAKEY KEY SEQUENCE",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
     # Others
     "note": {
         "type": "menu",
