@@ -3,26 +3,11 @@ scripts = [
         "position": [0,0],
         "blocks": [
             {
-                "opcode": "draw triangle (TRIANGLE) with fill (COLOR)",
-                "inputs": {
-                    "TRIANGLE": {"block": {
-                        "opcode": "POLYGON MENU",
-                        "inputs": {
-                            "x1": {},
-                            "y1": {},
-                            "x2": {},
-                            "y2": {},
-                            "x3": {},
-                            "y3": {},
-                        },
-                        "options": {
-                            "EXPANDED_MINIMIZED": ["value", "expanded"],
-                            "VERTEX_COUNT": ["value", 4],
-                        },
-                    }},
-                    "COLOR": {},
-                    #"TRIANGLE": {"block": {"opcode": "x position"}},
-                    #"COLOR": {"text": "#000000"},
+                "opcode": "define custom block",
+                "options": {
+                    "noScreenRefresh": ["value", True],
+                    "blockType": ["value", "instruction"],
+                    "customOpcode": ["value", "hello"],
                 },
             },
         ],
@@ -113,7 +98,7 @@ projectData = {
 }
 
 from pypenguin import validateProject, deoptimizeAndCompressProject, extractAndOptimizeProject
-from pypenguin.helper_functions import writeJSONFile, pp
+from pypenguin.helper_functions import writeJSONFile, pp, Platform
 
 validateProject(projectData=projectData)
 #pp(projectData)
@@ -132,8 +117,9 @@ writeJSONFile(
 
 deoptimizeAndCompressProject(
     optimizedProjectDir = "project",
-    projectFilePath     = "export.pmp",
+    projectFilePath     = "export.sb3",
     temporaryDir        = "temporary",
+    targetPlatform      = Platform.PENGUINMOD,
     deoptimizedDebugFilePath="t_deop.json",
 )
 #

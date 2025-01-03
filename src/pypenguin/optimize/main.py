@@ -1,13 +1,16 @@
-from pypenguin.helper_functions         import pp, ikv
+from pypenguin.helper_functions          import ikv, Platform
 
-from pypenguin.optimize.costumes_sounds import translateCostumes, translateSounds
-from pypenguin.optimize.variables_lists import translateVariables, translateLists
-from pypenguin.optimize.blocks_scripts  import getCustomBlockMutations, prepareBlocks, nestScripts, finishScripts
-from pypenguin.optimize.comments        import translateComment
-from pypenguin.optimize.monitors        import translateMonitors
-from pypenguin.database                 import optimizeOptionValue
+from pypenguin.optimize.costumes_sounds  import translateCostumes, translateSounds
+from pypenguin.optimize.variables_lists  import translateVariables, translateLists
+from pypenguin.optimize.blocks_scripts   import getCustomBlockMutations, prepareBlocks, nestScripts, finishScripts
+from pypenguin.optimize.comments         import translateComment
+from pypenguin.optimize.monitors         import translateMonitors
+from pypenguin.optimize.scratch_adaption import adaptProject
+from pypenguin.database                  import optimizeOptionValue
 
-def optimizeProjectJSON(projectData):
+def optimizeProjectJSON(projectData, sourcePlatform):
+    if sourcePlatform == Platform.SCRATCH:
+        projectData = adaptProject(projectData)
     newSpriteDatas = []
     for i, spriteData in enumerate(projectData["targets"]):
         mutationDatas = getCustomBlockMutations(data=spriteData["blocks"])

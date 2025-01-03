@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import newTempSelector, pp, stringToToken
+from pypenguin.helper_functions import newTempSelector, stringToToken, Platform
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
 from pypenguin.deoptimize.blocks_scripts import restoreScripts, flattenScripts, restoreBlocks, unprepareBlocks
@@ -6,6 +6,7 @@ from pypenguin.deoptimize.broadcasts import generateBroadcasts
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.deoptimize.monitors import translateMonitor
+from pypenguin.deoptimize.scratch_adaption import adaptProject
 from pypenguin.database import deoptimizeOptionValue
 
 def translateVariablesLists(data):
@@ -20,7 +21,7 @@ def translateVariablesLists(data):
     )
     return translatedVariableDatas, translatedListDatas
 
-def deoptimizeProject(projectData):
+def deoptimizeProject(projectData, targetPlatform):
     translatedVariableDatas, translatedListDatas = translateVariablesLists(data=projectData)    
     broadcastDatas = generateBroadcasts(data=projectData["sprites"])
     
@@ -44,8 +45,8 @@ def deoptimizeProject(projectData):
             )
         newSpriteBlockDatas, newCommentDatas = unprepareBlocks(
             data=newSpriteBlockDatas,
-            spriteName=spriteData["name"],
             commentDatas=newCommentDatas,
+            targetPlatform=targetPlatform,
         )
         
         newCostumeDatas = translateCostumes(
@@ -128,5 +129,7 @@ def deoptimizeProject(projectData):
         }, # Hardcoded because there is no use in changing it
         "credit": "Made using https://github.com/Fritzforcode/PyPenguin",
     }
+    if targetPlatform == Platform.SCRATCH:
+        newProjectData = adaptProject(newProjectData)
     return newProjectData
     

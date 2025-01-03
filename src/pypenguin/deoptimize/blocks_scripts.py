@@ -1,6 +1,6 @@
 import json, copy
 
-from pypenguin.helper_functions import ikv, pp, numberToLiteral, newTempSelector, generateRandomToken, parseCustomOpcode, stringToToken
+from pypenguin.helper_functions import ikv, pp, numberToLiteral, newTempSelector, generateRandomToken, parseCustomOpcode, stringToToken, Platform
 from pypenguin.deoptimize.options import translateOptions
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.database import *
@@ -498,14 +498,13 @@ def restoreListBlock(data, spriteName):
         newData += data["_info_"]["position"]
     return newData
 
-def unprepareBlocks(data, spriteName, commentDatas):
+def unprepareBlocks(data, commentDatas, targetPlatform):
     mutationDatas = {}
     for j, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):
             if blockData["opcode"] == "procedures_prototype":
                 mutationData = blockData["mutation"]
-                mutationDatas[mutationData["proccode"]] = mutationData                
-    additionalBlockDatas = {}
+                mutationDatas[mutationData["proccode"]] = mutationData
     for i, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):
             if blockData["opcode"] == "procedures_call":
@@ -587,9 +586,10 @@ def unprepareBlocks(data, spriteName, commentDatas):
         if selector not in cutSelectors:
             cutSelectors.append(selector)
     # Translation table from selector object to literal
-    table = {selector: numberToLiteral(i+1) for i,selector in enumerate(cutSelectors)}
+    if   targetPlatform == Platform.PENGUINMOD:
+        table = {selector: numberToLiteral(i+1)  for i, selector in enumerate(cutSelectors)}
+    elif targetPlatform == Platform.SCRATCH:
+        table = {selector: generateRandomToken() for    selector in           cutSelectors }
     data = replaceSelectors(data, table=table)
     commentDatas = replaceSelectors(commentDatas, table=table)
-    #print(100*"&")
-    #pp(data)
     return data, commentDatas

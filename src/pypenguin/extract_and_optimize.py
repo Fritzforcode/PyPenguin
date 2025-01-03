@@ -1,11 +1,10 @@
-from pypenguin.validate import validateProject, ValidationError
 from pypenguin.optimize import optimizeProjectJSON
 from pypenguin.optimize.costumes_sounds import finalizeCostume
 
 import urllib.parse
 import os, shutil, zipfile
 
-from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrectPath, getImageSize
+from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrectPath, getImageSize, Platform
 
 def extractProject(
     pmpFilePath       : str, # Path to your .pmp file
@@ -13,7 +12,6 @@ def extractProject(
     temporaryDir      : str, # Where the zip will be extracted
     prettyFormat      : bool = True,
     deleteTemporaryDir: bool = False,
-    
 ):
     pmpFilePath  = insureCorrectPath(pmpFilePath , "PyPenguin")
     jsonFilePath = insureCorrectPath(jsonFilePath, "PyPenguin")
@@ -52,6 +50,7 @@ def extractAndOptimizeProject(
     projectFilePath         : str,
     optimizedProjectDir     : str,
     temporaryDir            : str,
+    sourcePlatform          : Platform,
     deoptimizedDebugFilePath: str | None = None,
     optimizedDebugFilePath  : str | None = None,
 ):
@@ -75,6 +74,7 @@ def extractAndOptimizeProject(
     # Optimize project.json
     optimizedData = optimizeProjectJSON(
         projectData=deoptimizedData,
+        sourcePlatform=sourcePlatform,
     )
     
     # Make sure the project Dir exists

@@ -4,7 +4,7 @@ import urllib.parse
 from pypenguin.deoptimize import deoptimizeProject
 from pypenguin.deoptimize.costumes_sounds import finalizeCostume, finalizeSound
 
-from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrectPath, generateMd5, getImageSize
+from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrectPath, generateMd5, getImageSize, Platform
 
 from pypenguin.database import defaultCostumeFilePath
 
@@ -12,7 +12,8 @@ def deoptimizeAndCompressProject(
     optimizedProjectDir     : str,
     projectFilePath         : str,
     temporaryDir            : str,
-    deoptimizedDebugFilePath: str | None = None
+    targetPlatform          : Platform,
+    deoptimizedDebugFilePath: str | None = None,
 ):
     optimizedProjectDir          = insureCorrectPath(optimizedProjectDir     , "PyPenguin")
     projectFilePath              = insureCorrectPath(projectFilePath         , "PyPenguin")
@@ -28,6 +29,7 @@ def deoptimizeAndCompressProject(
     # Deoptimize the project data
     deoptimizedData = deoptimizeProject(
         projectData=optimizedData,
+        targetPlatform=targetPlatform
     )
     # Make sure the temporary Dir exists
     os.makedirs(temporaryDir, exist_ok=True)

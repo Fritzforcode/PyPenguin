@@ -1,6 +1,7 @@
 from pprint import pformat
 import re, os, hashlib, difflib
 from PIL import Image
+from enum import Enum
 
 def escapeChars(inputString: str, charsToEscape: list) -> str:
     # Escape backslashes first by doubling them up
@@ -222,3 +223,7 @@ def getListOfClosestStrings(string, possibleValues) -> str:
         result += f"\n- '{match}'"
     return result
 
+
+class Platform(Enum):
+    PENGUINMOD = 0
+    SCRATCH    = 1
