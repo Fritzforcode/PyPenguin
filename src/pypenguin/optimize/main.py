@@ -1,4 +1,4 @@
-from pypenguin.helper_functions          import ikv, Platform
+from pypenguin.helper_functions          import ikv, pp, Platform
 
 from pypenguin.optimize.costumes_sounds  import translateCostumes, translateSounds
 from pypenguin.optimize.variables_lists  import translateVariables, translateLists
@@ -12,7 +12,10 @@ def optimizeProjectJSON(projectData, sourcePlatform):
     if sourcePlatform == Platform.SCRATCH:
         projectData = adaptProject(projectData)
     newSpriteDatas = []
+    spriteNames    = [] # needed for monitor translation
     for i, spriteData in enumerate(projectData["targets"]):
+        if i == 0: spriteNames.append(None              )
+        else     : spriteNames.append(spriteData["name"])
         mutationDatas = getCustomBlockMutations(data=spriteData["blocks"])
         commentDatas = spriteData["comments"]
         floatingCommentDatas = [] # The comments that aren't connected to any blocks
@@ -64,6 +67,7 @@ def optimizeProjectJSON(projectData, sourcePlatform):
     stageData = projectData["targets"][0]
     newMonitorDatas = translateMonitors(
         data=projectData["monitors"],
+        spriteNames=spriteNames,
     )
     if stageData["textToSpeechLanguage"] == None:
         newTextToSpeechLanguage = None

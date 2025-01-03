@@ -14,8 +14,8 @@ def validateMonitor(path, data, contexts):
     
     context = contexts[data["spriteName"]]
     if data["spriteName"] != None: # Disallow local variables/lists for a local variable/list monitor
-        context["scopeVariables"] = context["localVariables"][data["spriteName"]]
-        context["scopeLists"    ] = context["localLists"    ][data["spriteName"]]
+        context["scopeVariables"] = context["localVariables"]["sprite", (data["spriteName"])]
+        context["scopeLists"    ] = context["localLists"    ]["sprite", (data["spriteName"])]
 
     validateOptions(
         path=path+["options"],

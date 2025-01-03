@@ -1,7 +1,7 @@
 from pypenguin.helper_functions import pp, ikv
-from pypenguin.database import getOptimizedOpcode, getOptimizedOptionID
+from pypenguin.database import getOptimizedOpcode, getOptimizedOptionID, optimizeOptionValue, getOptionType
 
-def translateMonitors(data):
+def translateMonitors(data, spriteNames):
     newMonitorDatas = []
     for monitorData in data:
         #pp(monitor)
@@ -17,14 +17,24 @@ def translateMonitors(data):
         for i, optionID, optionData in ikv(monitorData["params"]):
             if   opcode == "data_variable":
                 newOptionID = "VARIABLE"
+                optionType  = "variable"
             elif opcode == "data_listcontents":
                 newOptionID = "LIST"
+                optionType  = "list"
             else:
                 newOptionID = getOptimizedOptionID(
                     opcode=opcode,
                     optionID=optionID,
                 )
-            newOptionDatas[newOptionID] = optionData
+                optionType = getOptionType(
+                    opcode=opcode, 
+                    optionID=optionID
+                )
+            newOptionData = optimizeOptionValue(
+                optionValue=optionData,
+                optionType=optionType,
+            )
+            newOptionDatas[newOptionID] = newOptionData
 
         newMonitorData = {
             "opcode"    : newOpcode,
@@ -39,6 +49,8 @@ def translateMonitors(data):
             newMonitorData["onlyIntegers"] = monitorData["isDiscrete"]
         elif opcode == "data_listcontents":
             newMonitorData["size"] = [monitorData["width"], monitorData["height"]]
+        if (newMonitorData["spriteName"] not in spriteNames) and not(newMonitorData["visible"]):
+            continue
         newMonitorDatas.append(newMonitorData)
 
     return newMonitorDatas
