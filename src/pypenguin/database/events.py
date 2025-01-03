@@ -79,7 +79,7 @@ opcodes = {
         "category": "Events",
         "newOpcode": "when [OPTION] > (VALUE)",
         "inputTypes": {"VALUE": "number"},
-        "optionTypes": {"OPTION": "loudness or timer"},
+        "optionTypes": {"OPTION": "loudness|timer"},
         "optionTranslation": {"WHENGREATERTHANMENU": "OPTION"},
     },
     "event_whenbroadcastreceived": {
