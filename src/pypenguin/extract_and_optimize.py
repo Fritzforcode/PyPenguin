@@ -89,9 +89,9 @@ def extractAndOptimizeProject(
         deoptimizedSprite  = deoptimizedData["targets"][i]
         # Encode the sprite name
         if sprite["isStage"]:
-            encodedSpriteName = "#Stage"
+            encodedSpriteName = "stage"
         else:
-            encodedSpriteName = urllib.parse.quote(sprite["name"])
+            encodedSpriteName = "sprite_" + urllib.parse.quote(sprite["name"])
     
         # Make sure the sprite dir has the costume dir
         os.makedirs(

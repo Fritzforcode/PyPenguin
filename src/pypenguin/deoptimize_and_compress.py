@@ -40,9 +40,9 @@ def deoptimizeAndCompressProject(
 
         # Encode the sprite name
         if sprite["isStage"]:
-            encodedSpriteName = "#Stage"
+            encodedSpriteName = "stage"
         else:
-            encodedSpriteName = urllib.parse.quote(sprite["name"])
+            encodedSpriteName = "sprite_" + urllib.parse.quote(sprite["name"])
         
         # Copy and rename costumes
         newCostumes = []
