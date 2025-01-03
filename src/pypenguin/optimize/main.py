@@ -62,10 +62,13 @@ def optimizeProjectJSON(projectData):
     newMonitorDatas = translateMonitors(
         data=projectData["monitors"],
     )
-    newTextToSpeechLanguage = optimizeOptionValue(
-        optionType="text to speech language",
-        optionValue=stageData["textToSpeechLanguage"],
-    )[1] # eg. "en" -> "English (en)"
+    if stageData["textToSpeechLanguage"] == None:
+        newTextToSpeechLanguage = None
+    else:
+        newTextToSpeechLanguage = optimizeOptionValue(
+            optionType="text to speech language",
+            optionValue=stageData["textToSpeechLanguage"],
+        )[1] # eg. "en" -> "English (en)"
     newData = {
         "sprites"             : newSpriteDatas,
         "globalVariables"     : globalVariableDatas,

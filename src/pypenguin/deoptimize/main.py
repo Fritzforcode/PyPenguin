@@ -77,10 +77,13 @@ def deoptimizeProject(projectData):
             "volume"        : spriteData["volume"],
         }
         if spriteData["isStage"]:
-            newTextToSpeechLanguage = deoptimizeOptionValue(
-                optionType="text to speech language",
-                optionValue=["value", projectData["textToSpeechLanguage"]]
-            ) # eg. "English (en)" -> "en"
+            if projectData["textToSpeechLanguage"] == None:
+                newTextToSpeechLanguage = None
+            else:
+                newTextToSpeechLanguage = deoptimizeOptionValue(
+                    optionType="text to speech language",
+                    optionValue=["value", projectData["textToSpeechLanguage"]]
+                ) # eg. "English (en)" -> "en"
             newSpriteData |= {
                 "broadcasts"          : broadcastDatas,
                 "layerOrder"          : 0,
