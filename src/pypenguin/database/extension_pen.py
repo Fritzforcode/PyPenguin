@@ -16,7 +16,7 @@ opcodes = {
     "pen_setPrintFont": {
         "type": "instruction",
         "category": "Pen",
-        "newOpcode": "set print font to (FONT)",
+        "newOpcode": "set print font to ([FONT])",
         "inputTypes": {"FONT": "font"},
         "optionTypes": {},
         "menus": [{"new": "FONT", "outer": "FONT", "inner": "FONT", "menuOpcode": "pen_menu_FONT"}],

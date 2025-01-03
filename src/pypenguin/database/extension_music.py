@@ -17,7 +17,7 @@ opcodes = {
     "music_playNoteForBeats": {
         "type": "instruction",
         "category": "Music",
-        "newOpcode": "play note (NOTE) for (BEATS) beats",
+        "newOpcode": "play note ([NOTE]) for (BEATS) beats",
         "inputTypes": {"NOTE": "note", "BEATS": "number"},
         "optionTypes": {},
         "menus": [{"new": "NOTE", "outer": "NOTE", "inner": "NOTE", "menuOpcode": "note"}],

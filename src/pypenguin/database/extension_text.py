@@ -24,7 +24,7 @@ opcodes = {
     "text_setFont": {
         "type": "instruction",
         "category": "Animated Text",
-        "newOpcode": "set font to (FONT)",
+        "newOpcode": "set font to ([FONT])",
         "inputTypes": {"FONT": "font"},
         "optionTypes": {},
         "menus": [{"new": "FONT", "outer": "FONT", "inner": "FONT", "menuOpcode": "text_menu_FONT"}],
