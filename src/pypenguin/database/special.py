@@ -178,7 +178,7 @@ opcodes = {
     # Animated Text Extension
     "text_menu_FONT": {
         "type": "menu",
-        "category": "Pen",
+        "category": "Animated Text",
         "newOpcode": "#TEXT FONT MENU",
         "inputTypes": {},
         "optionTypes": {},
@@ -186,28 +186,28 @@ opcodes = {
     # Video Sensing Extension
     "videoSensing_menu_ATTRIBUTE": {
         "type": "menu",
-        "category": "Pen",
+        "category": "Video Sensing",
         "newOpcode": "#VIDEO SENSING PROPERTY",
         "inputTypes": {},
         "optionTypes": {},
     },
     "videoSensing_menu_SUBJECT": {
         "type": "menu",
-        "category": "Pen",
+        "category": "Video Sensing",
         "newOpcode": "#VIDEO SENSING TARGET",
         "inputTypes": {},
         "optionTypes": {},
     },
     "videoSensing_menu_VIDEO_STATE": {
         "type": "menu",
-        "category": "Pen",
+        "category": "Video Sensing",
         "newOpcode": "#VIDEO STATE",
         "inputTypes": {},
         "optionTypes": {},
     },
     "videoSensing_menu_SUBJECT": {
         "type": "menu",
-        "category": "Pen",
+        "category": "Video Sensing",
         "newOpcode": "#VIDEO SENSING TARGET",
         "inputTypes": {},
         "optionTypes": {},
@@ -215,15 +215,23 @@ opcodes = {
     # Text to Speech Extension
     "text2speech_menu_voices": {
         "type": "menu",
-        "category": "Pen",
+        "category": "Text to Speech",
         "newOpcode": "#TEXT TO SPEECH VOICE MENU",
         "inputTypes": {},
         "optionTypes": {},
     },
     "text2speech_menu_languages": {
         "type": "menu",
-        "category": "Pen",
+        "category": "Text to Speech",
         "newOpcode": "#TEXT TO SPEECH LANGUAGE MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    # Translate Extension
+    "translate_menu_languages": {
+        "type": "menu",
+        "category": "Translate",
+        "newOpcode": "#TRANSLATE LANGUAGE MENU",
         "inputTypes": {},
         "optionTypes": {},
     },

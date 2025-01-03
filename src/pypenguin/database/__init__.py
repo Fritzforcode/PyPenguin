@@ -13,6 +13,7 @@ from pypenguin.database.extension_music          import opcodes as extension_mus
 from pypenguin.database.extension_pen            import opcodes as extension_pen
 from pypenguin.database.extension_video_sensing  import opcodes as extension_video_sensing
 from pypenguin.database.extension_text_to_speech import opcodes as extension_text_to_speech
+from pypenguin.database.extension_translate      import opcodes as extension_translate
 from pypenguin.database.extension_bitwise        import opcodes as extension_bitwise
 from pypenguin.database.extension_text           import opcodes as extension_text
 from pypenguin.database.extension_json           import opcodes as extension_json
@@ -35,6 +36,9 @@ Category            Status ('.'=some 'x'=all)
 Extension           Status ('.'=some 'x'=all)
     Music           [x] (Scratch)
     Pen             [x] (Scratch; extended by Penguinmod)
+    Video Sensing   [x] (Scratch)
+    Text to Speech  [x] (Scratch)  
+    Translate       [x] (Scratch)
     Bitwise         [x] (Turbowarp)
     (Animated) Text [x] (Penguinmod)
     (jg)JSON        [x] (Penguinmod)
@@ -49,11 +53,12 @@ opcodeDatabase = (
     special   |
 # EXTENSIONS
 # Scratch Extensions
-    extension_music   | extension_pen  | extension_video_sensing | extension_text_to_speech |
+    extension_music     | extension_pen  | extension_video_sensing | extension_text_to_speech |
+    extension_translate |
 # Turbowarp Extensions
-    extension_bitwise |
+    extension_bitwise   |
 # Penguinmod Extensions
-    extension_text    | extension_json
+    extension_text      | extension_json
 )
 
 def getAllDeoptimizedOpcodes():
@@ -244,7 +249,8 @@ inputModes = {
     "video sensing target"                : "block-and-option",
     "video state"                         : "block-and-option",
     "text to speech voice"                : "block-and-option",
-    "text to speech language"             : "block-and-option"
+    "text to speech language"             : "block-and-option",
+    "translate language"                  : "block-and-option",
 }
 
 optionTypeDatabase = {
@@ -485,6 +491,11 @@ optionTypeDatabase = {
         "directValues"   : ["Arabic (ar)", "Chinese (Mandarin) (zh-cn)", "Danish (da)", "Dutch (nl)", "English (en)", "French (fr)", "German (de)", "Hindi (hi)", "Icelandic (is)", "Italian (it)", "Japanese (ja)", "Korean (ko)", "Norwegian (nb)", "Polish (pl)", "Portuguese (Brazilian) (pt-br)", "Portuguese (pt)", "Romanian (ro)", "Russian (ru)", "Spanish (es)", "Spanish (Latin American) (es-419)", "Swedish (sv)", "Turkish (tr)", "Welsh (cy)"],
         "valueSegments"  : [],
     },
+    "translate language": {
+        "oldDirectValues": ["am", "ar", "az", "eu", "bg", "ca", "zh-cn", "zh-tw", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "gl", "de", "el", "he", "hu", "is", "id", "ga", "it", "ja", "ko", "lv", "lt", "mi", "nb", "fa", "pl", "pt", "ro", "ru", "gd", "sr", "sk", "sl", "es", "sv", "th", "tr", "uk", "vi", "cy", "zu"],
+        "directValues"   : ["Amharic (am)", "Arabic (ar)", "Azerbaijani (az)", "Basque (eu)", "Bulgarian (bg)", "Catalan (ca)", "Chinese (Mandarin) (zh-cn)", "Chinese (Traditional) (zh-tw)", "Croatian (hr)", "Czech (cs)", "Danish (da)", "Dutch (nl)", "English (en)", "Estonian (en)", "Finnish (fi)", "French (fr)", "Galician (gl)", "German (de)", "Greek (el)", "Hebrew (he)", "Hungarian (hu)", "Icelandic (is)", "Indonesian (id)", "Irish (ga)", "Italian (it)", "Japanese (ja)", "Korean (ko)", "Lativan (lv)", "Lithuanian (lt)", "Maori (mi)", "Norwegian (nb)", "Persian (fa)", "Polish (pl)", "Portuguese (pt)", "Romanian (ro)", "Russian (ru)", "Scots Gaelic (gd)", "Serbian (sr)", "Slovak (sk)", "Slovenian (sl)", "Spanish (es)", "Swedish (sv)", "Thai (th)", "Turkish (tr)", "Ukrainian (uk)", "Viatnamese (vi)",  "Welsh (cy)", "Zulu (zu)"],
+        "valueSegments"  : [],
+    },
 }
 
 def getOptimizedOptionValuesUsingContext(optionType, context, inputDatas):
@@ -671,6 +682,7 @@ def optimizeOptionValue(optionValue, optionType):
     if optionValue in deoptimizedValues:
         result = optimizedValues[deoptimizedValues.index(optionValue)]
     else:
+        print(optionType, optionValue)
         if defaultPrefix == None: raise Exception()
         result = [defaultPrefix, optionValue]
     return result
