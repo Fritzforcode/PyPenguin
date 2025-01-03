@@ -258,6 +258,13 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    "twFiles_menu_automaticallyOpen": {
+        "type": "menu",
+        "category": "Files",
+        "newOpcode": "#FILE SELECTOR MODE MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
     # Others
     "note": {
         "type": "menu",

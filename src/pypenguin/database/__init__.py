@@ -261,6 +261,7 @@ inputModes = {
     "makey key"                           : "block-and-option",
     "makey sequence"                      : "block-and-option",
     "read file mode"                      : "block-and-option",
+    "file selector mode"                  : "block-and-option",
 }
 
 optionTypeDatabase = {
@@ -519,6 +520,11 @@ optionTypeDatabase = {
     "read file mode": {
         "oldDirectValues": ["text", "url",       "buffer"      ],
         "directValues"   : ["text", "data: URL", "array buffer"],
+        "valueSegments"  : [],
+    },
+    "file selector mode": {
+        "oldDirectValues": ["modal",      "selector"                 ],
+        "directValues"   : ["show modal", "open selector immediately"],
         "valueSegments"  : [],
     },
 }
