@@ -16,7 +16,10 @@ from pypenguin.database.extension_video_sensing  import opcodes as extension_vid
 from pypenguin.database.extension_text_to_speech import opcodes as extension_text_to_speech
 from pypenguin.database.extension_translate      import opcodes as extension_translate
 from pypenguin.database.extension_makey_makey    import opcodes as extension_makey_makey
+
+from pypenguin.database.extension_files          import opcodes as extension_files
 from pypenguin.database.extension_bitwise        import opcodes as extension_bitwise
+
 from pypenguin.database.extension_json           import opcodes as extension_json
 
 from pypenguin.helper_functions                  import ikv, flipKeysAndValues, removeDuplicates
@@ -42,7 +45,8 @@ Extension           Status ('.'=some 'x'=all)
     Text to Speech  [x] (Scratch)  
     Translate       [x] (Scratch)
     Makey Makey     [x] (Scratch)
-    Bitwise         [x] (Turbowarp)
+    Files           [x] (Turbowarp)
+    Bitwise         [x] (using Turbowarp link)
     (jg)JSON        [x] (Penguinmod)
     others aren't implemented (yet)
 """
@@ -59,7 +63,7 @@ opcodeDatabase = (
     extension_video_sensing | extension_text_to_speech | extension_translate |
     extension_makey_makey   |
     # Turbowarp Extensions
-    extension_bitwise       |
+    extension_files         | extension_bitwise        |
     # Penguinmod Extensions
     extension_json
 )
@@ -256,6 +260,7 @@ inputModes = {
     "translate language"                  : "block-and-option",
     "makey key"                           : "block-and-option",
     "makey sequence"                      : "block-and-option",
+    "read file mode"                      : "block-and-option",
 }
 
 optionTypeDatabase = {
@@ -509,6 +514,11 @@ optionTypeDatabase = {
     "makey sequence": {
         "oldDirectValues": ["LEFT UP RIGHT", "RIGHT UP LEFT", "LEFT RIGHT", "RIGHT LEFT", "UP DOWN", "DOWN UP", "UP RIGHT DOWN LEFT", "UP LEFT DOWN RIGHT", "UP UP DOWN DOWN LEFT RIGHT LEFT RIGHT"],
         "directValues"   : ["left up right", "right up left", "left right", "right left", "up down", "down up", "up right down left", "up left down right", "up up down down left right left right"],
+        "valueSegments"  : [],
+    },
+    "read file mode": {
+        "oldDirectValues": ["text", "url",       "buffer"      ],
+        "directValues"   : ["text", "data: URL", "array buffer"],
         "valueSegments"  : [],
     },
 }

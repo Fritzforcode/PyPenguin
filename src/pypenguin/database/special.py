@@ -246,7 +246,15 @@ opcodes = {
     "makeymakey_menu_SEQUENCE": {
         "type": "menu",
         "category": "Makey Makey",
-        "newOpcode": "#MAKEY KEY SEQUENCE",
+        "newOpcode": "#MAKEY KEY SEQUENCE MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    # Files Extension
+    "twFiles_menu_encoding": {
+        "type": "menu",
+        "category": "Files",
+        "newOpcode": "#FILE ENCODING MENU",
         "inputTypes": {},
         "optionTypes": {},
     },
