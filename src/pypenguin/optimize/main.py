@@ -5,6 +5,7 @@ from pypenguin.optimize.variables_lists import translateVariables, translateList
 from pypenguin.optimize.blocks_scripts  import getCustomBlockMutations, prepareBlocks, nestScripts, finishScripts
 from pypenguin.optimize.comments        import translateComment
 from pypenguin.optimize.monitors        import translateMonitors
+from pypenguin.database                 import optimizeOptionValue
 
 def optimizeProjectJSON(projectData):
     newSpriteDatas = []
@@ -61,6 +62,10 @@ def optimizeProjectJSON(projectData):
     newMonitorDatas = translateMonitors(
         data=projectData["monitors"],
     )
+    newTextToSpeechLanguage = optimizeOptionValue(
+        optionType="text to speech language",
+        optionValue=stageData["textToSpeechLanguage"],
+    )[1] # eg. "en" -> "English (en)"
     newData = {
         "sprites"             : newSpriteDatas,
         "globalVariables"     : globalVariableDatas,
@@ -68,7 +73,7 @@ def optimizeProjectJSON(projectData):
         "tempo"               : stageData["tempo"], # I moved these from the stage to the project because they influence the whole project
         "videoTransparency"   : stageData["videoTransparency"],
         "videoState"          : stageData["videoState"],
-        "textToSpeechLanguage": stageData["textToSpeechLanguage"],
+        "textToSpeechLanguage": newTextToSpeechLanguage,
 
         "monitors"            : newMonitorDatas,
         "extensionData"       : projectData["extensionData"],

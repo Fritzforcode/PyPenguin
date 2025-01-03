@@ -243,6 +243,8 @@ inputModes = {
     "video sensing property"              : "block-and-option",
     "video sensing target"                : "block-and-option",
     "video state"                         : "block-and-option",
+    "text to speech voice"                : "block-and-option",
+    "text to speech language"             : "block-and-option"
 }
 
 optionTypeDatabase = {
@@ -471,6 +473,16 @@ optionTypeDatabase = {
     "video state": {
         "oldDirectValues": ["on", "off", "on-flipped"],
         "directValues"   : ["on", "off", "on flipped"],
+        "valueSegments"  : [],
+    },
+    "text to speech voice": {
+        "oldDirectValues": ["ALTO", "TENOR", "SQUEAK", "GIANT", "KITTEN", "GOOGLE"],
+        "directValues"   : ["alto", "tenor", "squeak", "giant", "kitten", "google"],
+        "valueSegments"  : [],
+    },
+    "text to speech language": {
+        "oldDirectValues": ["ar", "zh-cn", "da", "nl", "en", "fr", "de", "hi", "is", "it", "ja", "ko", "nb", "pl", "pt-br", "pt", "ro", "ru", "es", "es-419", "sv", "tr", "cy"],
+        "directValues"   : ["Arabic (ar)", "Chinese (Mandarin) (zh-cn)", "Danish (da)", "Dutch (nl)", "English (en)", "French (fr)", "German (de)", "Hindi (hi)", "Icelandic (is)", "Italian (it)", "Japanese (ja)", "Korean (ko)", "Norwegian (nb)", "Polish (pl)", "Portuguese (Brazilian) (pt-br)", "Portuguese (pt)", "Romanian (ro)", "Russian (ru)", "Spanish (es)", "Spanish (Latin American) (es-419)", "Swedish (sv)", "Turkish (tr)", "Welsh (cy)"],
         "valueSegments"  : [],
     },
 }

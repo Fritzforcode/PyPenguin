@@ -1,16 +1,25 @@
 from pypenguin.database import getAllMonitorOpcodes#, getAllOptimizedOpcodes
 from pypenguin.validate.errors import *
 
-#allowedOpcodes = getAllOptimizedOpcodes()
 allowedMenuOpcodes = getAllMonitorOpcodes()
+#textToSpeechLanguages = [
+#    None,
+#    "ar", "zh-cn", "da", "nl", "en", 
+#    "fr", "de", "hi", "is", "it", 
+#    "ja", "ko", "nb", "pl", "pt-br",
+#    "pt", "ro", "ru", "es", "es-419", 
+#    "sv", "tr", "cy",
+#] # language abbreviations
+
 textToSpeechLanguages = [
     None,
-    "ar", "zh-cn", "da", "nl", "en", 
-    "fr", "de", "hi", "is", "it", 
-    "ja", "ko", "nb", "pl", "pt-br",
-    "pt", "ro", "ru", "es", "es-419", 
-    "sv", "tr", "cy",
-] # language abbreviations
+    "Arabic (ar)", "Chinese (Mandarin) (zh-cn)", "Danish (da)", "Dutch (nl)", "English (en)", 
+    "French (fr)", "German (de)", "Hindi (hi)", "Icelandic (is)", "Italian (it)", 
+    "Japanese (ja)", "Korean (ko)", "Norwegian (nb)", "Polish (pl)", "Portuguese (Brazilian) (pt-br)", 
+    "Portuguese (pt)", "Romanian (ro)", "Russian (ru)", "Spanish (es)", "Spanish (Latin American) (es-419)", 
+    "Swedish (sv)", "Turkish (tr)", "Welsh (cy)"
+]
+
 from pypenguin.helper_functions import pp
 
 projectSchema = {

@@ -212,6 +212,21 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {},
     },
+    # Text to Speech Extension
+    "text2speech_menu_voices": {
+        "type": "menu",
+        "category": "Pen",
+        "newOpcode": "#TEXT TO SPEECH VOICE MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
+    "text2speech_menu_languages": {
+        "type": "menu",
+        "category": "Pen",
+        "newOpcode": "#TEXT TO SPEECH LANGUAGE MENU",
+        "inputTypes": {},
+        "optionTypes": {},
+    },
     # Others
     "note": {
         "type": "menu",

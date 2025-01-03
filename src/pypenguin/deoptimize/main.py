@@ -6,6 +6,7 @@ from pypenguin.deoptimize.broadcasts import generateBroadcasts
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.deoptimize.monitors import translateMonitor
+from pypenguin.database import deoptimizeOptionValue
 
 def translateVariablesLists(data):
     spriteNames = [sprite["name"] for sprite in data["sprites"]][1:]
@@ -25,9 +26,7 @@ def deoptimizeProject(projectData):
     
     newSpriteDatas = []
     for i, spriteData in enumerate(projectData["sprites"]):
-        #pp(spriteData["scripts"])
         restoredScriptDatas = restoreScripts(spriteData["scripts"])
-        #pp(restoredScriptDatas)
         flattendScriptDatas   = flattenScripts(restoredScriptDatas)
         newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,
@@ -78,13 +77,17 @@ def deoptimizeProject(projectData):
             "volume"        : spriteData["volume"],
         }
         if spriteData["isStage"]:
+            newTextToSpeechLanguage = deoptimizeOptionValue(
+                optionType="text to speech language",
+                optionValue=["value", projectData["textToSpeechLanguage"]]
+            ) # eg. "English (en)" -> "en"
             newSpriteData |= {
                 "broadcasts"          : broadcastDatas,
                 "layerOrder"          : 0,
                 "tempo"               : projectData["tempo"],
                 "videoTransparency"   : projectData["videoTransparency"],
                 "videoState"          : projectData["videoState"],
-                "textToSpeechLanguage": projectData["textToSpeechLanguage"],
+                "textToSpeechLanguage": newTextToSpeechLanguage,
             }
         else:
             newSpriteData |= {
