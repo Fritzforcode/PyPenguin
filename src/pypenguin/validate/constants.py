@@ -2,15 +2,6 @@ from pypenguin.database import getAllMonitorOpcodes#, getAllOptimizedOpcodes
 from pypenguin.validate.errors import *
 
 allowedMenuOpcodes = getAllMonitorOpcodes()
-#textToSpeechLanguages = [
-#    None,
-#    "ar", "zh-cn", "da", "nl", "en", 
-#    "fr", "de", "hi", "is", "it", 
-#    "ja", "ko", "nb", "pl", "pt-br",
-#    "pt", "ro", "ru", "es", "es-419", 
-#    "sv", "tr", "cy",
-#] # language abbreviations
-
 textToSpeechLanguages = [
     None,
     "Arabic (ar)", "Chinese (Mandarin) (zh-cn)", "Danish (da)", "Dutch (nl)", "English (en)", 
@@ -42,6 +33,8 @@ projectSchema = {
         "globalLists": {
             "type": "array",
         },
+        "monitors": {"type": "array"},
+        "extensions": {"type": "array"},
         "tempo": {"type": "integer", "minimum": 20, "maximum": 500},
         "videoTransparency": {"type": "number"},
         "videoState": {"type": "string", "enum": ["on", "on flipped", "off"]},
@@ -49,22 +42,21 @@ projectSchema = {
             "type": ["null", "string"],
             "enum": textToSpeechLanguages,
         },
-        "monitors": {"type": "array"},
         "extensionData": {"type": "object"},
-        "extensions": {"type": "array"},
         "extensionURLs": {"type": "object"},
     },
     "required": [
         "sprites",
         "globalVariables",
         "globalLists",
-        "tempo",
-        "videoTransparency",
-        "videoState",
-        "textToSpeechLanguage",
         "monitors",
-        "extensionData",
         "extensions",
+        #"tempo",
+        #"videoTransparency",
+        #"videoState",
+        #"textToSpeechLanguage",
+        #"extensionData",
+        ###"extensionURLs",
     ],
 }
 

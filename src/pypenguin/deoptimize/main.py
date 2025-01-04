@@ -78,7 +78,7 @@ def deoptimizeProject(projectData, targetPlatform):
             "volume"        : spriteData["volume"],
         }
         if spriteData["isStage"]:
-            if projectData["textToSpeechLanguage"] == None:
+            if projectData.get("textToSpeechLanguage", None) == None:
                 newTextToSpeechLanguage = None
             else:
                 newTextToSpeechLanguage = deoptimizeOptionValue(
@@ -88,9 +88,9 @@ def deoptimizeProject(projectData, targetPlatform):
             newSpriteData |= {
                 "broadcasts"          : broadcastDatas,
                 "layerOrder"          : 0,
-                "tempo"               : projectData["tempo"],
-                "videoTransparency"   : projectData["videoTransparency"],
-                "videoState"          : projectData["videoState"],
+                "tempo"               : projectData.get("tempo", 60),
+                "videoTransparency"   : projectData.get("videoTransparency", 50),
+                "videoState"          : projectData.get("videoState", "on"),
                 "textToSpeechLanguage": newTextToSpeechLanguage,
             }
         else:
@@ -114,8 +114,8 @@ def deoptimizeProject(projectData, targetPlatform):
     newProjectData = {
         "targets"      : newSpriteDatas,
         "monitors"     : newMonitorDatas,
-        "extensionData": projectData["extensionData"],
-        "extensions"   : projectData["extensions"],
+        "extensionData": projectData.get("extensionData", {}),
+        "extensions"   : projectData["extensions"],    
         "extensionURLs": projectData.get("extensionURLs", {}),
         "meta"         : {
             "semver": "3.0.0",
