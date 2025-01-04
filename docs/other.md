@@ -1,28 +1,44 @@
-[GO BACK](main.md)
+[BACK TO START](main.md)  
+[BACK TO MONITORS](monitors.md)  
 
-* ˋ"Arabic (ar)"ˋ
-* ˋ"Chinese (Mandarin) (zh-cn)"ˋ
-* ˋ"Danish (da)"ˋ
-* ˋ"Dutch (nl)"ˋ
-* ˋ"English (en)"ˋ
-* ˋ"French (fr)"ˋ
-* ˋ"German (de)"ˋ
-* ˋ"Hindi (hi)"ˋ
-* ˋ"Icelandic (is)"ˋ
-* ˋ"Italian (it)"ˋ
-* ˋ"Japanese (ja)"ˋ
-* ˋ"Korean (ko)"ˋ
-* ˋ"Norwegian (nb)"ˋ
-* ˋ"Polish (pl)"ˋ
-* ˋ"Portuguese (Brazilian) (pt-br)"ˋ
-* ˋ"Portuguese (pt)"ˋ
-* ˋ"Romanian (ro)"ˋ
-* ˋ"Russian (ru)"ˋ
-* ˋ"Spanish (es)"ˋ
-* ˋ"Spanish (Latin American) (es-419)"ˋ
-* ˋ"Swedish (sv)"ˋ
-* ˋ"Turkish (tr)"ˋ
-* ˋ"Welsh (cy)"ˋ
+# Text to Speech Languages
+* `"Arabic (ar)"`
+* `"Chinese (Mandarin) (zh-cn)"`
+* `"Danish (da)"`
+* `"Dutch (nl)"`
+* `"English (en)"`
+* `"French (fr)"`
+* `"German (de)"`
+* `"Hindi (hi)"`
+* `"Icelandic (is)"`
+* `"Italian (it)"`
+* `"Japanese (ja)"`
+* `"Korean (ko)"`
+* `"Norwegian (nb)"`
+* `"Polish (pl)"`
+* `"Portuguese (Brazilian) (pt-br)"`
+* `"Portuguese (pt)"`
+* `"Romanian (ro)"`
+* `"Russian (ru)"`
+* `"Spanish (es)"`
+* `"Spanish (Latin American) (es-419)"`
+* `"Swedish (sv)"`
+* `"Turkish (tr)"`
+* `"Welsh (cy)"`
+
+# Extensions
+To add an extension to your project add the extension's id to `"extensions"`. External extensions(eg. **Bitwise**) require a link being added to `"extensionURLs"`
+* **Music** id: `"music"`
+* **Pen** id: `"pen"`
+* **Animated Text** id: `"text"`
+* **Video Sensing** id: `"videoSensing"`
+* **Text to Speech** id: `"text2speech"`
+* **Translate** id: `"translate"`
+* **Makey Makey** id: `"makeymakey"`
+* **Files** id: `"twFiles"`
+* **Bitwise** id: `"Bitwise"` + add to extension urls: `{"Bitwise": "https://extensions.turbowarp.org/bitwise.js"}`
+* **JSON** id: `"jgJSON"`
+
 
 # Menu Opcodes (not updated)
 * `"x position"`

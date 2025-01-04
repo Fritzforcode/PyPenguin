@@ -1,9 +1,9 @@
-[GO BACK](main.md)
+[BACK](main.md)
 
 # Format of Monitors
 
 Must be an object with the following properties:
-* `"opcode"`: The opcode of the block reporter, whose value is shown. [Possible Opcodes](other.md#menu-opcodes)
+* `"opcode"`: The opcode of the block reporter, whose value is shown. [Possible Opcodes](other.md#menu-opcodes-not-updated)
 
 * `"options"`: The dropdowns of the block, whose value is shown. Must be an object of block specific keys and values.
 
@@ -22,5 +22,5 @@ Variable Monitors must have these additional properties:
 * `"onlyIntegers"`: If `true` only integers are allowed in the slider.
 
 ## List Monitors
-* `"size"`: The size of a list monitor, because their size can be changed by the user. Must be an array coordinate. e.g. `[100, 200]`
+* `"size"`: The size of a list monitor, because their size can be changed in the editor. Must be an array coordinate. e.g. `[100, 200]`
 

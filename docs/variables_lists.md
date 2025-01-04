@@ -1,17 +1,15 @@
 [BACK TO START](main.md)  
 [BACK TO SPRITES](sprites.md)  
 
-# Format of Variables/Lists
-
-## Format of Variables
+## What Variable Definitions look like
 Must be an object with the following properties:
 * `"name"`: The name of the variable. Must be a non-empty string.
 
-* `"currentValue"`: The value the variable currently has. For a variable this must be a string or a number. 
+* `"currentValue"`: The value the variable currently has as a string or number. 
 
 * `"isCloudVariable"`: Wether the variable is a cloud variable. Must be a boolean. Only exists for global variables (variables in the `"globalVariables"` array).
 
-## Format of Lists
+## What List Definitions look like
 Must be an object with the following properties:
 * `"name"`: The name of the list. Must be a non-empty string.
 
