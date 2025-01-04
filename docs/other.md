@@ -1,31 +1,30 @@
 [GO BACK](main.md)
 
-# Text to Speech Languages
-* `"ar"` (Arabic)
-* `"zh-cn"` (Chinese (Mandarin))
-* `"da"` (Danish)
-* `"nl"` (Dutch)
-* `"en"` (English)
-* `"fr"` (French)
-* `"de"` (German)
-* `"hi"` (Hindi)
-* `"is"` (Icelandic)
-* `"it"` (Italian)
-* `"ja"` (Japanese)
-* `"ko"` (Korean)
-* `"nb"` (Norgwegian)
-* `"pl"` (Polish)
-* `"pt-br"` (Porturguese (Brazilian))
-* `"pt"` (Protuguese)
-* `"ro"` (Romanian)
-* `"ru"` (Russian)
-* `"es"` (Spanish)
-* `"es-419"` (Spanish (Latin American))
-* `"sv"` (Swedish)
-* `"tr"` (Turkish)
-* `"cy"` (Welsh)
+* ˋ"Arabic (ar)"ˋ
+* ˋ"Chinese (Mandarin) (zh-cn)"ˋ
+* ˋ"Danish (da)"ˋ
+* ˋ"Dutch (nl)"ˋ
+* ˋ"English (en)"ˋ
+* ˋ"French (fr)"ˋ
+* ˋ"German (de)"ˋ
+* ˋ"Hindi (hi)"ˋ
+* ˋ"Icelandic (is)"ˋ
+* ˋ"Italian (it)"ˋ
+* ˋ"Japanese (ja)"ˋ
+* ˋ"Korean (ko)"ˋ
+* ˋ"Norwegian (nb)"ˋ
+* ˋ"Polish (pl)"ˋ
+* ˋ"Portuguese (Brazilian) (pt-br)"ˋ
+* ˋ"Portuguese (pt)"ˋ
+* ˋ"Romanian (ro)"ˋ
+* ˋ"Russian (ru)"ˋ
+* ˋ"Spanish (es)"ˋ
+* ˋ"Spanish (Latin American) (es-419)"ˋ
+* ˋ"Swedish (sv)"ˋ
+* ˋ"Turkish (tr)"ˋ
+* ˋ"Welsh (cy)"ˋ
 
-# Menu Opcodes
+# Menu Opcodes (not updated)
 * `"x position"`
 * `"y position"`
 * `"direction"`
