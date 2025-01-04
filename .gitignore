@@ -1,4 +1,5 @@
 *.pyc
+*.local
 .vscode/
 /*.json
 /*.pmp
