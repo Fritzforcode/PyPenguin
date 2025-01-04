@@ -46,8 +46,8 @@ Extension           Status ('.'=some 'x'=all)
     Translate       [x] (Scratch)
     Makey Makey     [x] (Scratch)
     Files           [x] (Turbowarp)
-    Bitwise         [x] (using Turbowarp link)
-    (jg)JSON        [x] (Penguinmod)
+    Bitwise         [x] (imported using Turbowarp link)
+    JSON            [x] (Penguinmod)
     others aren't implemented (yet)
 """
 

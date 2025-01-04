@@ -69,9 +69,7 @@ spriteSchema = {
         "comments": {"type": "array"},
         "currentCostume": {"type": "integer", "minimum": 0},
         "costumes": {"type": "array"},
-        "sounds": {
-            "type": "array",
-        },
+        "sounds": {"type": "array"},
         "volume": {"type": "number", "minimum": 0, "maximum": 100},
         "localVariables": {"type": "array"},
         "localLists": {"type": "array"},
@@ -100,6 +98,8 @@ spriteSchema = {
         "costumes",
         "sounds",
         "volume",
+        "localVariables",
+        "localLists",
         "layerOrder",
         "visible",
         "position",
@@ -107,8 +107,6 @@ spriteSchema = {
         "direction",
         "draggable",
         "rotationStyle",
-        "localVariables",
-        "localLists",
     ],
 }
 

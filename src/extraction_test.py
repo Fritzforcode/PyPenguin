@@ -3,13 +3,13 @@ from pypenguin.helper_functions import readJSONFile, pp, Platform
 
 optimizedData = extractAndOptimizeProject(
 #    projectFilePath          = "assets/categories/extension_files.pmp",
-#    projectFilePath          = "assets/studies/pen.pmp",
-    projectFilePath          = "assets/from_online/The Tale of the Three Shapes.sb3",
+    projectFilePath          = "assets/studies/extensionIds.pmp",
+#    projectFilePath          = "assets/from_online/The Tale of the Three Shapes.sb3",
     optimizedProjectDir      = "tale",
     temporaryDir             = "temporary",
     deoptimizedDebugFilePath = "temp_extracted.json",
     optimizedDebugFilePath   = "temp2.json",
-    sourcePlatform           = Platform.SCRATCH,
+    sourcePlatform           = Platform.PENGUINMOD,
 )
 
 validateProject(projectData=optimizedData)
