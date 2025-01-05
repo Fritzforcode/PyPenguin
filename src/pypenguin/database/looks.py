@@ -190,7 +190,7 @@ opcodes = {
     },
     "looks_getEffectValue": {
         "type": "stringReporter",
-        "catgeory": "Looks",
+        "catgory": "Looks",
         "newOpcode": "[EFFECT] sprite effect",
         "inputTypes": {},
         "optionTypes": {"EFFECT": "sprite effect"},
