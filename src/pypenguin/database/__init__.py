@@ -176,6 +176,9 @@ def getDeoptimizedOptionID(opcode, optionID):
 def getBlockType(opcode):
     return opcodeDatabase[opcode]["type"]
 
+def getBlockCategory(opcode):
+    return opcodeDatabase[opcode]["category"]
+
 def getMenu(opcode, inputID):
     if "menus" not in opcodeDatabase[opcode]:
         return None
