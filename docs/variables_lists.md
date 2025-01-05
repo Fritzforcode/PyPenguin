@@ -1,7 +1,7 @@
 [BACK TO START](main.md)  
 [BACK TO SPRITES](sprites.md)  
 
-## What Variable Definitions look like
+## What a Variable Definition looks like
 Must be an object with the following properties:
 * `"name"`: The name of the variable. Must be a non-empty string.
 
@@ -9,7 +9,7 @@ Must be an object with the following properties:
 
 * `"isCloudVariable"`: Wether the variable is a cloud variable. Must be a boolean. Only exists for global variables (variables in the `"globalVariables"` array).
 
-## What List Definitions look like
+## What a List Definition looks like
 Must be an object with the following properties:
 * `"name"`: The name of the list. Must be a non-empty string.
 

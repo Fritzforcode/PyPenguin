@@ -23,6 +23,7 @@ def validateProject(projectData):
     
     localVariableNames = [[] for i in range(  len( projectDataCopy["sprites"][1:] )  )]
     for i, sprite in enumerate(projectDataCopy["sprites"][1:]):
+        if not isinstance(sprite.get("localVariables"), list): continue
         for j, variable in enumerate(sprite["localVariables"]):
             validateVariable(path=["sprites"]+[i]+["localVariables"]+[j], data=variable, isGlobal=False)
             variableName = variable["name"]
@@ -40,6 +41,7 @@ def validateProject(projectData):
     
     localListNames = [[] for i in range(  len( projectDataCopy["sprites"][1:] )  )]
     for i, sprite in enumerate(projectDataCopy["sprites"][1:]):
+        if not isinstance(sprite.get("localLists"), list): continue
         for j, list_ in enumerate(sprite["localLists"]):
             validateList(path=["sprites"]+[i]+["localLists"]+[j], data=list_)
             listName = list_["name"]
@@ -61,25 +63,39 @@ def validateProject(projectData):
         
 
         if i == 0:
-            backdrops = [["costume", costume["name"]] for costume in sprite["costumes"]]
-            if sprite["costumes"] == []:
-                backdrops.insert(0, ["costume", defaultCostume["name"]])
-            
+            if not isinstance(sprite.get("costumes"), list):
+                backdrops = None #An error will be raised later
+            else:
+                backdrops = [["costume", costume["name"]] for costume in sprite["costumes"]]
+                if sprite["costumes"] == []:
+                    backdrops.insert(0, ["costume", defaultCostume["name"]])
         else:
             otherSprites.append(spriteName)
-            localVariables[tuple(spriteName)] = [["variable", item["name"]] for item in sprite["localVariables"]]
-            localLists    [tuple(spriteName)] = [["list"    , item["name"]] for item in sprite["localLists"    ]]
+            if not isinstance(sprite.get("localVariables"), list):
+                localVariables[tuple(spriteName)] = None #An error will be raised later
+            else:
+                localVariables[tuple(spriteName)] = [["variable", item["name"]] for item in sprite["localVariables"]]
+            if not isinstance(sprite.get("localLists"), list):
+                localLists    [tuple(spriteName)] = None #An error will be raised later
+            else:
+                localLists    [tuple(spriteName)] = [["list"    , item["name"]] for item in sprite["localLists"    ]]
     
     contexts = {}
     for i, sprite in enumerate(projectDataCopy["sprites"]):
+        scopeVariables    = [["variable", item["name"]] for item in projectDataCopy["globalVariables"]]
+        scopeLists        = [["list"    , item["name"]] for item in projectDataCopy["globalLists"    ]]
         if i == 0:
-            scopeVariables    = [["variable", item["name"]] for item in projectDataCopy["globalVariables"]]
-            scopeLists        = [["list"    , item["name"]] for item in projectDataCopy["globalLists"    ]]
             nameKey           = None
         else:
-            scopeVariables    = [["variable", item["name"]] for item in sprite["localVariables"] + projectDataCopy["globalVariables"]]
-            scopeLists        = [["list"    , item["name"]] for item in sprite["localLists"    ] + projectDataCopy["globalLists"    ]]
             nameKey           = sprite["name"]
+            if not isinstance(sprite.get("localVariables"), list):
+                scopeVariables = None
+            else:
+                scopeVariables += [["variable", item["name"]] for item in sprite["localVariables"]]
+            if not isinstance(sprite.get("localLists"    ), list):
+                scopeLists     = None
+            else:
+                scopeLists     += [["list"    , item["name"]] for item in sprite["localLists"    ]]
 
         context = {
             "scopeVariables" : scopeVariables, 

@@ -80,8 +80,8 @@ def validateBlock(path, data, context, expectedShape=None, embeddedMenuOpcode=No
         )
         raise formatError(unknownOpcodeError, path+["opcode"], f"Unknown opcode: '{data['opcode']}'. Most Similar Opcodes: {listOfClosest}")
 
-
-    validateComment(path=path+["comment"], data=data["comment"])
+    if data["comment"] != None:
+        validateComment(path=path+["comment"], data=data["comment"])
     
     opcode = data["opcode"]
     oldOpcode = getDeoptimizedOpcode(opcode=opcode)

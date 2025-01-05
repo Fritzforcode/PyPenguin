@@ -39,8 +39,7 @@
 
 # What inputs looks like
 ### Each block has its own inputs. There are 5 kinds of inputs:
-* **`"block-and-text"`**: An input, which has a text and optionally a block on top of the text.  
-    - eg. `{"block": {"opcode": "timer"}, "text": "1"}`
+* **`"block-and-text"`**: An input, which has a text and optionally a block on top of the text.     - eg. `{"block": {"opcode": "timer"}, "text": "1"}`
 * **[RARE]`"block-and-menu-text"`** An input which contains a menu block with only one valid `"opcode"`  
     - eg. `{"block": {"opcode": "polygon" ...}}`
 * **`"block-only"`**: An input which may contain a block(often used for boolean inputs). 
@@ -48,7 +47,7 @@
 * **`"script"`**: An input which contains a substack of blocks.  
     - eg. `{"blocks": [  {"opcode": "glide (SECONDS) secs to ([TARGET])" ...}  ]}`
 * **`"block-and-option"`/`"block-and-broadcast-option"`**: An input which has a dropdown and optionally a block on top.
-    - eg, `{"block": }`
+    - eg, `{"block": {"opcode": "value of [VARIABLE]" ...}, "option": "random position"}`
 
 ![](images/inputs_example_seperated.png)
 
@@ -67,7 +66,7 @@
                     "SECONDS": {"block": {
                         "opcode": "timer",
                     }},
-                    "TARGET": {"block": (see example below)},
+                    "TARGET": {"block": (see setting option example)},
                 },
             },
         ]},

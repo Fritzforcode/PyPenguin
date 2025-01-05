@@ -1,8 +1,8 @@
 [BACK](main.md)
 
-# Format of Monitors
+# What a monitor looks like
 
-Must be an object with the following properties:
+###ˋ"monitors"ˋ must be an array of monitors. A monitor must be an object with the following properties:
 * `"opcode"`: The opcode of the block reporter, whose value is shown. [Possible Opcodes](other.md#menu-opcodes-not-updated)
 
 * `"options"`: The dropdowns of the block, whose value is shown. Must be an object of block specific keys and values.

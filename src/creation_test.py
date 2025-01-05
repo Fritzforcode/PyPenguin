@@ -1,18 +1,3 @@
-scripts = [
-    {
-        "position": [0,0],
-        "blocks": [
-            {
-                "opcode": "define custom block",
-                "options": {
-                    "noScreenRefresh": ["value", True],
-                    "blockType": ["value", "instruction"],
-                    "customOpcode": ["value", "hello"],
-                },
-            },
-        ],
-    },
-]
 projectData = {
     "sprites": [
         {
@@ -26,95 +11,47 @@ projectData = {
             "volume": 100,
         },
         {
-            "name": "Sprite1",
+            "name": "t",
             "isStage": False,
-            "scripts": scripts,
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
-            "sounds": [
+            "scripts": [
                 {
-                    "name": "pop",
-                    "extension": "wav",
-                    "rate": 48000,
-                    "sampleCount": 1123,
-                },
-            ],
-            "localVariables": [
-                {
-                    "name": "loc var",
-                    "currentValue": "",
+                    "position": [0, 0],
+                    "blocks"  : [
+                        {
+                            "opcode": "length of (TEXT)"
+                        }
+                    ],
                 }
             ],
-            "localLists": [],
-            "volume": 100,
-            "layerOrder": 1,
-            "visible": True,
-            "position": [77,0],
-            "size": 100,
-            "direction": 90,
-            "draggable": True,
-            "rotationStyle": "all around",
-        },
-        {
-            "name": "Sprite2",
-            "isStage": False,
-            "scripts": [],
-            "comments": [],
+            "comments": [{"position": [8, 9], "size": [52, 32], "isMinimized": True, "text": "hi"}],
             "currentCostume": 0,
             "costumes": [],
             "sounds": [],
+            "volume": 99,
+            "layerOrder": 5,
+            "visible": True,
+            "position": [0, 0],
+            "size": 100,
+            "direction": 0,
+            "draggable": True,
+            "rotationStyle": "left-right",
             "localVariables": [],
             "localLists": [],
-            "volume": 100,
-            "layerOrder": 1,
-            "visible": True,
-            "position": [0,0],
-            "size": 100,
-            "direction": 90,
-            "draggable": True,
-            "rotationStyle": "all around",
         },
     ],
-    "globalVariables": [
-        {
-            "name": "__VOID__",
-            "currentValue": "",
-            "isCloudVariable": True,
-        },
-    ],
-    "globalLists": [
-        {"name": "registers", "currentValue": []},
-        {"name": "points", "currentValue": []},
-    ],
-    "tempo": 60,
-    "videoTransparency": 0,
-    "videoState": "off",
-    "textToSpeechLanguage": None,
+    "globalVariables": [],
+    "globalLists": [],
     "monitors": [],
- 
-    "extensionData": {},
-    "extensions": ["music", "jgJSON"],
+    "extensions": [""],
 }
+#TODO sprites[1].name
 
 from pypenguin import validateProject, deoptimizeAndCompressProject, extractAndOptimizeProject
 from pypenguin.helper_functions import writeJSONFile, pp, Platform
-
 validateProject(projectData=projectData)
-#pp(projectData)
-
 print("[VALIDATION SUCCESS]")
-
-writeJSONFile(
-    filePath = "t_source.json",
-    data     = projectData
-)
-
-writeJSONFile(
-    filePath = "project/project.json",
-    data     = projectData
-)
-
+writeJSONFile(filePath="t_source.json", data=projectData)
+writeJSONFile(filePath="project/project.json", data=projectData)
 deoptimizeAndCompressProject(
     optimizedProjectDir = "project",
     projectFilePath     = "export.sb3",
@@ -122,10 +59,3 @@ deoptimizeAndCompressProject(
     targetPlatform      = Platform.PENGUINMOD,
     deoptimizedDebugFilePath="t_deop.json",
 )
-#
-#extractAndOptimizeProject(
-#    projectFilePath        = "export.pmp",
-#    optimizedProjectDir    = "project",
-#    temporaryDir           = "temporary",
-#    optimizedDebugFilePath = "t_finished.json"
-#)

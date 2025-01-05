@@ -11,7 +11,7 @@
             "volume": 100
         },
         {
-            "name": "Sprite1",
+            "name": "t",
             "isStage": false,
             "scripts": [
                 {
@@ -21,115 +21,47 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "draw triangle (TRIANGLE) with fill (COLOR)",
-                            "inputs": {
-                                "TRIANGLE": {
-                                    "block": {
-                                        "opcode": "POLYGON MENU",
-                                        "inputs": {
-                                            "x1": {},
-                                            "y1": {},
-                                            "x2": {},
-                                            "y2": {},
-                                            "x3": {},
-                                            "y3": {}
-                                        },
-                                        "options": {
-                                            "EXPANDED_MINIMIZED": [
-                                                "value",
-                                                "expanded"
-                                            ],
-                                            "VERTEX_COUNT": [
-                                                "value",
-                                                4
-                                            ]
-                                        }
-                                    }
-                                },
-                                "COLOR": {}
-                            }
+                            "opcode": "timer"
                         }
                     ]
                 }
             ],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
-            "sounds": [
+            "comments": [
                 {
-                    "name": "pop",
-                    "extension": "wav",
-                    "rate": 48000,
-                    "sampleCount": 1123
+                    "position": [
+                        8,
+                        9
+                    ],
+                    "size": [
+                        52,
+                        32
+                    ],
+                    "isMinimized": true,
+                    "text": "hi"
                 }
             ],
-            "localVariables": [
-                {
-                    "name": "loc var",
-                    "currentValue": ""
-                }
-            ],
-            "localLists": [],
-            "volume": 100,
-            "layerOrder": 1,
-            "visible": true,
-            "position": [
-                77,
-                0
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": true,
-            "rotationStyle": "all around"
-        },
-        {
-            "name": "Sprite2",
-            "isStage": false,
-            "scripts": [],
-            "comments": [],
             "currentCostume": 0,
             "costumes": [],
             "sounds": [],
-            "localVariables": [],
-            "localLists": [],
-            "volume": 100,
-            "layerOrder": 1,
+            "volume": 99,
+            "layerOrder": 5,
             "visible": true,
             "position": [
                 0,
                 0
             ],
             "size": 100,
-            "direction": 90,
+            "direction": 0,
             "draggable": true,
-            "rotationStyle": "all around"
+            "rotationStyle": "left-right",
+            "localVariables": [],
+            "localLists": []
         }
     ],
-    "globalVariables": [
-        {
-            "name": "__VOID__",
-            "currentValue": "",
-            "isCloudVariable": true
-        }
-    ],
-    "globalLists": [
-        {
-            "name": "registers",
-            "currentValue": []
-        },
-        {
-            "name": "points",
-            "currentValue": []
-        }
-    ],
-    "tempo": 60,
-    "videoTransparency": 0,
-    "videoState": "off",
-    "textToSpeechLanguage": null,
+    "globalVariables": [],
+    "globalLists": [],
     "monitors": [],
-    "extensionData": {},
     "extensions": [
-        "music",
-        "jgJSON"
+        ""
     ]
 }

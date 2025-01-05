@@ -33,7 +33,7 @@ My PyPenguin Project
 
 * `"globalLists"`: An array of the defined "For all sprites" lists. [Docs](variables_lists.md#what-list-definitions-look-like)
 
-* `"extensions"`: An array of the ids of the included extensions. [Docs](other.md#extensions)
+* `"extensions"`: An array of the string ids of the included extensions. [Docs](other.md#extensions)
 
 * `"monitors"`: An array of shown and hidden reporters. eg. a reporter for the "my variable" variable. [Docs](monitors.md)
 

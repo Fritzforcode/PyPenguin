@@ -11,7 +11,7 @@
 
 * `"comments"`: An array of comments, that are not attached to a block. [Docs](comments.md)
 
-* `"currentCostume"`: The costume number of the sprite. Must be an integer and at least `0`.
+* `"currentCostume"`: The costume number of the sprite. Must be an integer and at least `0`. Must refer to the index of an existing costume in ˋ"costumes"ˋ.
 
 * `"costumes"`: An array of the costumes/brackdrops of the sprite. [Docs](assets.md#what-a-costume-looks-like)
 
@@ -20,9 +20,9 @@
 * `"volume"`: The sprite volume(applies to its sounds). Must be a number between `0` and `100`.
 
 ### Sprites, who are not the stage, must have these properties too:
-* `"localVariables"`: An array of the `"For this sprite only"` variables of this sprite. [Docs](variables_lists.md).
+* `"localVariables"`: An array of the `"For this sprite only"` variables of this sprite. [Docs](variables_lists.md#what-a-variable-definition-looks-like).
 
-* `"localLists"`: An array of the `"For this sprite only"` lists of this sprite. [Docs](variables_lists.md).
+* `"localLists"`: An array of the `"For this sprite only"` lists of this sprite. [Docs](variables_lists.md#what-a-list-definition-looks-like).
 
 * `"layerOrder"`: The layer the sprite is on. Must be an integer and at least `1`. eg. Sprite A is on top of Sprite B because it has a higher `"layerOrder"`.
 
