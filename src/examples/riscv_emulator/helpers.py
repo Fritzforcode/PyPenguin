@@ -17,9 +17,9 @@ class BlockCls:
         return self
     def addSmartInput(self, id, data):
         if isinstance(data, str):
-            self.addInput(id, text=data)
+            return self.addInput(id, text=data)
         else:
-            self.addInput(id, blockArg=data)
+            return self.addInput(id, blockArg=data)
     def addOption(self, id, *args):
         if len(args) == 2:
             prefix = args[0]
@@ -103,6 +103,16 @@ def defineCustomBlock(customOpcode, blockType, noScreenRefresh=True):
     block.addOption("customOpcode"   , "value", customOpcode   )
     return block
 
+def callCustomBlock(customOpcode):
+    block = Block("call custom block")
+    block.addOption("customOpcode", customOpcode)
+    return block
+
+def returnValue(value):
+    block = Block("return (VALUE)")
+    block.addSmartInput("VALUE", value)
+    return block
+
 def switchCases(switch, cases):
     caseValues = list(cases.keys())
     caseBodies = list(cases.values())
@@ -114,8 +124,8 @@ def switchCases(switch, cases):
         cases.append(caseBlock)
     
     block = Block("switch (CONDITION) {CASES}")
-    block.addSmartInput("CONDITION", blockArg=switch)
-    block.addSmartInput("CASES", blockArg=cases)
+    block.addSmartInput("CONDITION", switch)
+    block.addSmartInput("CASES", cases)
     return block
 
 def setArrayIndexTo(array, index, value):
@@ -123,4 +133,29 @@ def setArrayIndexTo(array, index, value):
     block.addSmartInput("ARRAY", array)
     block.addSmartInput("INDEX", index)
     block.addSmartInput("VALUE", value)
+    return block
+
+def getArrayIndex(array, index):
+    block = Block("in array (ARRAY) get (INDEX)")
+    block.addSmartInput("ARRAY", array)
+    block.addSmartInput("INDEX", index)
+    return block
+
+def getJSONKey(json, key):
+    block = Block("get (KEY) from (JSON)")
+    block.addSmartInput("KEY" , key )
+    block.addSmartInput("JSON", json)
+    return block
+
+def setJSONKeyTo(json, key, value):
+    block = Block("set (KEY) to (VALUE) in (JSON)")
+    block.addSmartInput("KEY"  , key  )
+    block.addSmartInput("VALUE", value)
+    block.addSmartInput("JSON" , json )
+    return block
+
+def ifThen(condition, then):
+    block = Block("if <CONDITION> then {THEN}")
+    block.addSmartInput("CONDITION", condition)
+    block.addSmartInput("THEN"     , then     )
     return block
