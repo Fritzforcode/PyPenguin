@@ -33,9 +33,7 @@ maybe validate:
 - extension names
 - layerOrder to be at most 4 - needs research 
 - asset names matching
-- block types being in the correct place in script or input
 - no duplicate custom block input names
-- custom opcodes
 
 Notes:
     Comments of list blocks who are embedded in another blocks are deleted automatically. There is no way for this to change.
