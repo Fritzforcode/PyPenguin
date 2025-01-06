@@ -74,7 +74,7 @@ def parseCustomOpcode(customOpcode: str):
             if char == " " and justCompletedArgument:
                 pass
             else:
-                justCompletedArgument
+                justCompletedArgument = False
                 isEscaped = False
                 part += char
     proccode += part
