@@ -1109,6 +1109,610 @@
                                                 "BODY": {
                                                     "blocks": [
                                                         {
+                                                            "opcode": "switch (CONDITION) {CASES}",
+                                                            "inputs": {
+                                                                "CONDITION": {
+                                                                    "block": {
+                                                                        "opcode": "value of [VARIABLE]",
+                                                                        "options": {
+                                                                            "VARIABLE": [
+                                                                                "variable",
+                                                                                "instr"
+                                                                            ]
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "CASES": {
+                                                                    "blocks": [
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "lui"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "call custom block",
+                                                                                            "inputs": {
+                                                                                                "register": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "value of [VARIABLE]",
+                                                                                                        "options": {
+                                                                                                            "VARIABLE": [
+                                                                                                                "variable",
+                                                                                                                "arg0"
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    }
+                                                                                                },
+                                                                                                "value": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(NUM) << (BITS)",
+                                                                                                        "inputs": {
+                                                                                                            "NUM": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "arg1"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "BITS": {
+                                                                                                                "text": "12"
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "customOpcode": [
+                                                                                                    "value",
+                                                                                                    "set register (register) to (value)"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "lw"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "call custom block",
+                                                                                                        "inputs": {
+                                                                                                            "register": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "arg1"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        },
+                                                                                                        "options": {
+                                                                                                            "customOpcode": [
+                                                                                                                "value",
+                                                                                                                "get register (register)"
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp2"
+                                                                                                ]
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "opcode": "if <CONDITION> then {THEN} else {ELSE}",
+                                                                                            "inputs": {
+                                                                                                "CONDITION": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(STRING) is number?",
+                                                                                                        "inputs": {
+                                                                                                            "STRING": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "arg2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                },
+                                                                                                "THEN": {
+                                                                                                    "blocks": [
+                                                                                                        {
+                                                                                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                                                                                            "inputs": {
+                                                                                                                "VALUE": {
+                                                                                                                    "block": {
+                                                                                                                        "opcode": "value of [VARIABLE]",
+                                                                                                                        "options": {
+                                                                                                                            "VARIABLE": [
+                                                                                                                                "variable",
+                                                                                                                                "arg2"
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "options": {
+                                                                                                                "VARIABLE": [
+                                                                                                                    "variable",
+                                                                                                                    "temp2"
+                                                                                                                ]
+                                                                                                            }
+                                                                                                        }
+                                                                                                    ]
+                                                                                                },
+                                                                                                "ELSE": {
+                                                                                                    "blocks": [
+                                                                                                        {
+                                                                                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                                                                                            "inputs": {
+                                                                                                                "VALUE": {
+                                                                                                                    "block": {
+                                                                                                                        "opcode": "call custom block",
+                                                                                                                        "inputs": {
+                                                                                                                            "register": {
+                                                                                                                                "block": {
+                                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                                    "options": {
+                                                                                                                                        "VARIABLE": [
+                                                                                                                                            "variable",
+                                                                                                                                            "arg2"
+                                                                                                                                        ]
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        },
+                                                                                                                        "options": {
+                                                                                                                            "customOpcode": [
+                                                                                                                                "value",
+                                                                                                                                "get register (register)"
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "options": {
+                                                                                                                "VARIABLE": [
+                                                                                                                    "variable",
+                                                                                                                    "temp2"
+                                                                                                                ]
+                                                                                                            }
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "opcode": "call custom block",
+                                                                                            "inputs": {
+                                                                                                "register": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "value of [VARIABLE]",
+                                                                                                        "options": {
+                                                                                                            "VARIABLE": [
+                                                                                                                "variable",
+                                                                                                                "arg0"
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    }
+                                                                                                },
+                                                                                                "value": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "call custom block",
+                                                                                                        "inputs": {
+                                                                                                            "address": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        },
+                                                                                                        "options": {
+                                                                                                            "customOpcode": [
+                                                                                                                "value",
+                                                                                                                "get memory (address)"
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "customOpcode": [
+                                                                                                    "value",
+                                                                                                    "set register (register) to (value)"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "opcode": "case (CONDITION) {BODY}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "text": "store"
+                                                },
+                                                "BODY": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "switch (CONDITION) {CASES}",
+                                                            "inputs": {
+                                                                "CONDITION": {
+                                                                    "block": {
+                                                                        "opcode": "value of [VARIABLE]",
+                                                                        "options": {
+                                                                            "VARIABLE": [
+                                                                                "variable",
+                                                                                "instr"
+                                                                            ]
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "CASES": {
+                                                                    "blocks": [
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "sw"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "call custom block",
+                                                                                                        "inputs": {
+                                                                                                            "register": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "arg1"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        },
+                                                                                                        "options": {
+                                                                                                            "customOpcode": [
+                                                                                                                "value",
+                                                                                                                "get register (register)"
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp2"
+                                                                                                ]
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "opcode": "if <CONDITION> then {THEN} else {ELSE}",
+                                                                                            "inputs": {
+                                                                                                "CONDITION": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(STRING) is number?",
+                                                                                                        "inputs": {
+                                                                                                            "STRING": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "arg2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                },
+                                                                                                "THEN": {
+                                                                                                    "blocks": [
+                                                                                                        {
+                                                                                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                                                                                            "inputs": {
+                                                                                                                "VALUE": {
+                                                                                                                    "block": {
+                                                                                                                        "opcode": "value of [VARIABLE]",
+                                                                                                                        "options": {
+                                                                                                                            "VARIABLE": [
+                                                                                                                                "variable",
+                                                                                                                                "arg2"
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "options": {
+                                                                                                                "VARIABLE": [
+                                                                                                                    "variable",
+                                                                                                                    "temp2"
+                                                                                                                ]
+                                                                                                            }
+                                                                                                        }
+                                                                                                    ]
+                                                                                                },
+                                                                                                "ELSE": {
+                                                                                                    "blocks": [
+                                                                                                        {
+                                                                                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                                                                                            "inputs": {
+                                                                                                                "VALUE": {
+                                                                                                                    "block": {
+                                                                                                                        "opcode": "call custom block",
+                                                                                                                        "inputs": {
+                                                                                                                            "register": {
+                                                                                                                                "block": {
+                                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                                    "options": {
+                                                                                                                                        "VARIABLE": [
+                                                                                                                                            "variable",
+                                                                                                                                            "arg2"
+                                                                                                                                        ]
+                                                                                                                                    }
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        },
+                                                                                                                        "options": {
+                                                                                                                            "customOpcode": [
+                                                                                                                                "value",
+                                                                                                                                "get register (register)"
+                                                                                                                            ]
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "options": {
+                                                                                                                "VARIABLE": [
+                                                                                                                    "variable",
+                                                                                                                    "temp2"
+                                                                                                                ]
+                                                                                                            }
+                                                                                                        }
+                                                                                                    ]
+                                                                                                }
+                                                                                            }
+                                                                                        },
+                                                                                        {
+                                                                                            "opcode": "call custom block",
+                                                                                            "inputs": {
+                                                                                                "address": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "value of [VARIABLE]",
+                                                                                                        "options": {
+                                                                                                            "VARIABLE": [
+                                                                                                                "variable",
+                                                                                                                "temp2"
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    }
+                                                                                                },
+                                                                                                "value": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "call custom block",
+                                                                                                        "inputs": {
+                                                                                                            "register": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "arg0"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        },
+                                                                                                        "options": {
+                                                                                                            "customOpcode": [
+                                                                                                                "value",
+                                                                                                                "get register (register)"
+                                                                                                            ]
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "customOpcode": [
+                                                                                                    "value",
+                                                                                                    "set memory (address) to (value)"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "opcode": "case (CONDITION) {BODY}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "text": "arith"
+                                                },
+                                                "BODY": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "block": {
+                                                                        "opcode": "call custom block",
+                                                                        "inputs": {
+                                                                            "register": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": [
+                                                                                            "variable",
+                                                                                            "arg1"
+                                                                                        ]
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "options": {
+                                                                            "customOpcode": [
+                                                                                "value",
+                                                                                "get register (register)"
+                                                                            ]
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "VARIABLE": [
+                                                                    "variable",
+                                                                    "temp2"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "opcode": "if <CONDITION> then {THEN} else {ELSE}",
+                                                            "inputs": {
+                                                                "CONDITION": {
+                                                                    "block": {
+                                                                        "opcode": "(STRING) is number?",
+                                                                        "inputs": {
+                                                                            "STRING": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": [
+                                                                                            "variable",
+                                                                                            "arg2"
+                                                                                        ]
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "THEN": {
+                                                                    "blocks": [
+                                                                        {
+                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                            "inputs": {
+                                                                                "VALUE": {
+                                                                                    "block": {
+                                                                                        "opcode": "value of [VARIABLE]",
+                                                                                        "options": {
+                                                                                            "VARIABLE": [
+                                                                                                "variable",
+                                                                                                "arg2"
+                                                                                            ]
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "options": {
+                                                                                "VARIABLE": [
+                                                                                    "variable",
+                                                                                    "temp3"
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "ELSE": {
+                                                                    "blocks": [
+                                                                        {
+                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                            "inputs": {
+                                                                                "VALUE": {
+                                                                                    "block": {
+                                                                                        "opcode": "call custom block",
+                                                                                        "inputs": {
+                                                                                            "register": {
+                                                                                                "block": {
+                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                    "options": {
+                                                                                                        "VARIABLE": [
+                                                                                                            "variable",
+                                                                                                            "arg2"
+                                                                                                        ]
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        },
+                                                                                        "options": {
+                                                                                            "customOpcode": [
+                                                                                                "value",
+                                                                                                "get register (register)"
+                                                                                            ]
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "options": {
+                                                                                "VARIABLE": [
+                                                                                    "variable",
+                                                                                    "temp3"
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        },
+                                                        {
                                                             "opcode": "if <CONDITION> then {THEN}",
                                                             "inputs": {
                                                                 "CONDITION": {
@@ -1127,7 +1731,7 @@
                                                                                 }
                                                                             },
                                                                             "OPERAND2": {
-                                                                                "text": "lui"
+                                                                                "text": "addi"
                                                                             }
                                                                         }
                                                                     }
@@ -1135,46 +1739,843 @@
                                                                 "THEN": {
                                                                     "blocks": [
                                                                         {
-                                                                            "opcode": "call custom block",
+                                                                            "opcode": "set [VARIABLE] to (VALUE)",
                                                                             "inputs": {
-                                                                                "register": {
-                                                                                    "block": {
-                                                                                        "opcode": "value of [VARIABLE]",
-                                                                                        "options": {
-                                                                                            "VARIABLE": [
-                                                                                                "variable",
-                                                                                                "arg0"
-                                                                                            ]
-                                                                                        }
-                                                                                    }
+                                                                                "VALUE": {
+                                                                                    "text": "add"
+                                                                                }
+                                                                            },
+                                                                            "options": {
+                                                                                "VARIABLE": [
+                                                                                    "variable",
+                                                                                    "instr"
+                                                                                ]
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "opcode": "switch (CONDITION) {CASES}",
+                                                            "inputs": {
+                                                                "CONDITION": {
+                                                                    "block": {
+                                                                        "opcode": "value of [VARIABLE]",
+                                                                        "options": {
+                                                                            "VARIABLE": [
+                                                                                "variable",
+                                                                                "instr"
+                                                                            ]
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "CASES": {
+                                                                    "blocks": [
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "add"
                                                                                 },
-                                                                                "value": {
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(OPERAND1) + (OPERAND2)",
+                                                                                                        "inputs": {
+                                                                                                            "OPERAND1": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "OPERAND2": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp3"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp4"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "sub"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(OPERAND1) - (OPERAND2)",
+                                                                                                        "inputs": {
+                                                                                                            "OPERAND1": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "OPERAND2": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp3"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp4"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "and"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(OPERAND1) and (OPERAND2)",
+                                                                                                        "inputs": {
+                                                                                                            "OPERAND1": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "OPERAND2": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp3"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp4"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "or"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(OPERAND1) or (OPERAND2)",
+                                                                                                        "inputs": {
+                                                                                                            "OPERAND1": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "OPERAND2": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp3"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp4"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "xor"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(OPERAND1) xor (OPERAND2)",
+                                                                                                        "inputs": {
+                                                                                                            "OPERAND1": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "OPERAND2": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp3"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp4"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "opcode": "call custom block",
+                                                            "inputs": {
+                                                                "register": {
+                                                                    "block": {
+                                                                        "opcode": "value of [VARIABLE]",
+                                                                        "options": {
+                                                                            "VARIABLE": [
+                                                                                "variable",
+                                                                                "arg0"
+                                                                            ]
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "value": {
+                                                                    "block": {
+                                                                        "opcode": "value of [VARIABLE]",
+                                                                        "options": {
+                                                                            "VARIABLE": [
+                                                                                "variable",
+                                                                                "temp4"
+                                                                            ]
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "customOpcode": [
+                                                                    "value",
+                                                                    "set register (register) to (value)"
+                                                                ]
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "opcode": "case (CONDITION) {BODY}",
+                                            "inputs": {
+                                                "CONDITION": {
+                                                    "text": "branch"
+                                                },
+                                                "BODY": {
+                                                    "blocks": [
+                                                        {
+                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "block": {
+                                                                        "opcode": "call custom block",
+                                                                        "inputs": {
+                                                                            "register": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": [
+                                                                                            "variable",
+                                                                                            "arg0"
+                                                                                        ]
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "options": {
+                                                                            "customOpcode": [
+                                                                                "value",
+                                                                                "get register (register)"
+                                                                            ]
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "VARIABLE": [
+                                                                    "variable",
+                                                                    "temp2"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "block": {
+                                                                        "opcode": "call custom block",
+                                                                        "inputs": {
+                                                                            "register": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": [
+                                                                                            "variable",
+                                                                                            "arg1"
+                                                                                        ]
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "options": {
+                                                                            "customOpcode": [
+                                                                                "value",
+                                                                                "get register (register)"
+                                                                            ]
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "VARIABLE": [
+                                                                    "variable",
+                                                                    "temp3"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                            "inputs": {
+                                                                "VALUE": {
+                                                                    "block": {
+                                                                        "opcode": "(OPERAND1) * (OPERAND2)",
+                                                                        "inputs": {
+                                                                            "OPERAND1": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": [
+                                                                                            "variable",
+                                                                                            "arg2"
+                                                                                        ]
+                                                                                    }
+                                                                                }
+                                                                            },
+                                                                            "OPERAND2": {
+                                                                                "text": "2"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            },
+                                                            "options": {
+                                                                "VARIABLE": [
+                                                                    "variable",
+                                                                    "temp4"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "opcode": "switch (CONDITION) {CASES}",
+                                                            "inputs": {
+                                                                "CONDITION": {
+                                                                    "block": {
+                                                                        "opcode": "value of [VARIABLE]",
+                                                                        "options": {
+                                                                            "VARIABLE": [
+                                                                                "variable",
+                                                                                "instr"
+                                                                            ]
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "CASES": {
+                                                                    "blocks": [
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "beq"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(OPERAND1) = (OPERAND2)",
+                                                                                                        "inputs": {
+                                                                                                            "OPERAND1": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "OPERAND2": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp3"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp5"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "bne"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(OPERAND1) != (OPERAND2)",
+                                                                                                        "inputs": {
+                                                                                                            "OPERAND1": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "OPERAND2": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp3"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp5"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "blt"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(OPERAND1) < (OPERAND2)",
+                                                                                                        "inputs": {
+                                                                                                            "OPERAND1": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "OPERAND2": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp3"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp5"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "ble"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(OPERAND1) <= (OPERAND2)",
+                                                                                                        "inputs": {
+                                                                                                            "OPERAND1": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "OPERAND2": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp3"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp5"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "bgt"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(OPERAND1) > (OPERAND2)",
+                                                                                                        "inputs": {
+                                                                                                            "OPERAND1": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "OPERAND2": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp3"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp5"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "opcode": "case (CONDITION) {BODY}",
+                                                                            "inputs": {
+                                                                                "CONDITION": {
+                                                                                    "text": "bge"
+                                                                                },
+                                                                                "BODY": {
+                                                                                    "blocks": [
+                                                                                        {
+                                                                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                                                                            "inputs": {
+                                                                                                "VALUE": {
+                                                                                                    "block": {
+                                                                                                        "opcode": "(OPERAND1) >= (OPERAND2)",
+                                                                                                        "inputs": {
+                                                                                                            "OPERAND1": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp2"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            },
+                                                                                                            "OPERAND2": {
+                                                                                                                "block": {
+                                                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                                                    "options": {
+                                                                                                                        "VARIABLE": [
+                                                                                                                            "variable",
+                                                                                                                            "temp3"
+                                                                                                                        ]
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            "options": {
+                                                                                                "VARIABLE": [
+                                                                                                    "variable",
+                                                                                                    "temp5"
+                                                                                                ]
+                                                                                            }
+                                                                                        }
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        },
+                                                        {
+                                                            "opcode": "if <CONDITION> then {THEN}",
+                                                            "inputs": {
+                                                                "CONDITION": {
+                                                                    "block": {
+                                                                        "opcode": "(VALUE) as a boolean",
+                                                                        "inputs": {
+                                                                            "VALUE": {
+                                                                                "block": {
+                                                                                    "opcode": "value of [VARIABLE]",
+                                                                                    "options": {
+                                                                                        "VARIABLE": [
+                                                                                            "variable",
+                                                                                            "temp5"
+                                                                                        ]
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                },
+                                                                "THEN": {
+                                                                    "blocks": [
+                                                                        {
+                                                                            "opcode": "change [VARIABLE] by (VALUE)",
+                                                                            "inputs": {
+                                                                                "VALUE": {
                                                                                     "block": {
-                                                                                        "opcode": "(NUM) << (BITS)",
+                                                                                        "opcode": "(OPERAND1) + (OPERAND2)",
                                                                                         "inputs": {
-                                                                                            "NUM": {
+                                                                                            "OPERAND1": {
+                                                                                                "text": "4"
+                                                                                            },
+                                                                                            "OPERAND2": {
                                                                                                 "block": {
                                                                                                     "opcode": "value of [VARIABLE]",
                                                                                                     "options": {
                                                                                                         "VARIABLE": [
                                                                                                             "variable",
-                                                                                                            "arg0"
+                                                                                                            "temp4"
                                                                                                         ]
                                                                                                     }
                                                                                                 }
-                                                                                            },
-                                                                                            "BITS": {
-                                                                                                "text": "12"
                                                                                             }
                                                                                         }
                                                                                     }
                                                                                 }
                                                                             },
                                                                             "options": {
-                                                                                "customOpcode": [
-                                                                                    "value",
-                                                                                    "set register (register) to (value)"
+                                                                                "VARIABLE": [
+                                                                                    "variable",
+                                                                                    "program_counter"
                                                                                 ]
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "opcode": "return (VALUE)",
+                                                                            "inputs": {
+                                                                                "VALUE": {
+                                                                                    "text": ""
+                                                                                }
                                                                             }
                                                                         }
                                                                     ]
@@ -1183,6 +2584,204 @@
                                                         }
                                                     ]
                                                 }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        {
+                            "opcode": "change [VARIABLE] by (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "text": "4"
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": [
+                                    "variable",
+                                    "program_counter"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "position": [
+                        -1000,
+                        0
+                    ],
+                    "blocks": [
+                        {
+                            "opcode": "define custom block",
+                            "options": {
+                                "noScreenRefresh": [
+                                    "value",
+                                    true
+                                ],
+                                "blockType": [
+                                    "value",
+                                    "instruction"
+                                ],
+                                "customOpcode": [
+                                    "value",
+                                    "run program (json_data)"
+                                ]
+                            }
+                        },
+                        {
+                            "opcode": "set [VARIABLE] to (VALUE)",
+                            "inputs": {
+                                "VALUE": {
+                                    "block": {
+                                        "opcode": "get (KEY) from (JSON)",
+                                        "inputs": {
+                                            "KEY": {
+                                                "text": "instructions"
+                                            },
+                                            "JSON": {
+                                                "block": {
+                                                    "opcode": "value of text [ARGUMENT]",
+                                                    "options": {
+                                                        "ARGUMENT": [
+                                                            "value",
+                                                            "json_data"
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "options": {
+                                "VARIABLE": [
+                                    "variable",
+                                    "instructions"
+                                ]
+                            }
+                        },
+                        {
+                            "opcode": "while <CONDITION> {BODY}",
+                            "inputs": {
+                                "CONDITION": {
+                                    "block": {
+                                        "opcode": "(OPERAND1) < (OPERAND2)",
+                                        "inputs": {
+                                            "OPERAND1": {
+                                                "block": {
+                                                    "opcode": "(OPERAND1) / (OPERAND2)",
+                                                    "inputs": {
+                                                        "OPERAND1": {
+                                                            "block": {
+                                                                "opcode": "value of [VARIABLE]",
+                                                                "options": {
+                                                                    "VARIABLE": [
+                                                                        "variable",
+                                                                        "program_counter"
+                                                                    ]
+                                                                }
+                                                            }
+                                                        },
+                                                        "OPERAND2": {
+                                                            "text": "4"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "OPERAND2": {
+                                                "block": {
+                                                    "opcode": "length of array (ARRAY)",
+                                                    "inputs": {
+                                                        "ARRAY": {
+                                                            "block": {
+                                                                "opcode": "value of [VARIABLE]",
+                                                                "options": {
+                                                                    "VARIABLE": [
+                                                                        "variable",
+                                                                        "instructions"
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "BODY": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "set [VARIABLE] to (VALUE)",
+                                            "inputs": {
+                                                "VALUE": {
+                                                    "block": {
+                                                        "opcode": "in array (ARRAY) get (INDEX)",
+                                                        "inputs": {
+                                                            "ARRAY": {
+                                                                "block": {
+                                                                    "opcode": "value of [VARIABLE]",
+                                                                    "options": {
+                                                                        "VARIABLE": [
+                                                                            "variable",
+                                                                            "instructions"
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            },
+                                                            "INDEX": {
+                                                                "block": {
+                                                                    "opcode": "(OPERAND1) / (OPERAND2)",
+                                                                    "inputs": {
+                                                                        "OPERAND1": {
+                                                                            "block": {
+                                                                                "opcode": "value of [VARIABLE]",
+                                                                                "options": {
+                                                                                    "VARIABLE": [
+                                                                                        "variable",
+                                                                                        "program_counter"
+                                                                                    ]
+                                                                                }
+                                                                            }
+                                                                        },
+                                                                        "OPERAND2": {
+                                                                            "text": "4"
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "options": {
+                                                "VARIABLE": [
+                                                    "variable",
+                                                    "current_instruction"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "opcode": "call custom block",
+                                            "inputs": {
+                                                "instruction": {
+                                                    "block": {
+                                                        "opcode": "value of [VARIABLE]",
+                                                        "options": {
+                                                            "VARIABLE": [
+                                                                "variable",
+                                                                "current_instruction"
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "options": {
+                                                "customOpcode": [
+                                                    "value",
+                                                    "execute instruction (instruction)"
+                                                ]
                                             }
                                         }
                                     ]
@@ -1202,6 +2801,26 @@
     "globalVariables": [
         {
             "name": "temp1",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "temp2",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "temp3",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "temp4",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "temp5",
             "currentValue": "",
             "isCloudVariable": false
         },
@@ -1231,6 +2850,16 @@
             "isCloudVariable": false
         },
         {
+            "name": "instructions",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
+            "name": "current_instruction",
+            "currentValue": "",
+            "isCloudVariable": false
+        },
+        {
             "name": "register_map",
             "currentValue": "{\"x0\": 0, \"x1\": 1, \"x2\": 2, \"x3\": 3, \"x4\": 4, \"x5\": 5, \"x6\": 6, \"x7\": 7, \"x8\": 8, \"x9\": 9, \"x10\": 10, \"x11\": 11, \"x12\": 12, \"x13\": 13, \"x14\": 14, \"x15\": 15, \"x16\": 16, \"x17\": 17, \"x18\": 18, \"x19\": 19, \"x20\": 20, \"x21\": 21, \"x22\": 22, \"x23\": 23, \"x24\": 24, \"x25\": 25, \"x26\": 26, \"x27\": 27, \"x28\": 28, \"x29\": 29, \"x30\": 30, \"x31\": 31, \"zero\": 0, \"ra\": 1, \"sp\": 2, \"gp\": 3, \"tp\": 4, \"t0\": 5, \"t1\": 6, \"t2\": 7, \"s0\": 8, \"s1\": 9, \"a0\": 10, \"a1\": 11, \"a2\": 12, \"a3\": 13, \"a4\": 14, \"a5\": 15, \"a6\": 16, \"a7\": 17, \"s2\": 18, \"s3\": 19, \"s4\": 20, \"s5\": 21, \"s6\": 22, \"s7\": 23, \"s8\": 24, \"s9\": 25, \"s10\": 26, \"s11\": 27, \"t3\": 28, \"t4\": 29, \"t5\": 30, \"t6\": 31, \"fp\": 8}",
             "isCloudVariable": false
@@ -1243,6 +2872,16 @@
         {
             "name": "memory",
             "currentValue": "[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]",
+            "isCloudVariable": false
+        },
+        {
+            "name": "program_counter",
+            "currentValue": "0",
+            "isCloudVariable": false
+        },
+        {
+            "name": "json_data",
+            "currentValue": "{\"description\": \"Memory load/store test\", \"instructions\": [{\"type\": \"arith\", \"instr\": \"addi\", \"arg0\": \"x5\", \"arg1\": \"x0\", \"arg2\": 100}, {\"type\": \"store\", \"instr\": \"sw\", \"arg0\": \"x5\", \"arg1\": \"x0\", \"arg2\": 0}, {\"type\": \"load\", \"instr\": \"lw\", \"arg0\": \"x6\", \"arg1\": \"x0\", \"arg2\": 0}], \"expected\": {\"x6\": 100}}",
             "isCloudVariable": false
         }
     ],

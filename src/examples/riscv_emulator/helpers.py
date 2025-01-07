@@ -74,6 +74,12 @@ def setVar(variable, value):
     block.addOption("VARIABLE", "variable", variable)
     return block    
 
+def changeVar(variable, value):
+    block = Block("change [VARIABLE] by (VALUE)")
+    block.addSmartInput("VALUE", value)
+    block.addOption("VARIABLE", "variable", variable)
+    return block    
+
 def getVar(variable):
     block = Block("value of [VARIABLE]")
     block.addOption("VARIABLE", "variable", variable)
@@ -141,6 +147,11 @@ def getArrayIndex(array, index):
     block.addSmartInput("INDEX", index)
     return block
 
+def getArrayLength(array):
+    block = Block("length of array (ARRAY)")
+    block.addSmartInput("ARRAY", array)
+    return block
+
 def getJSONKey(json, key):
     block = Block("get (KEY) from (JSON)")
     block.addSmartInput("KEY" , key )
@@ -158,4 +169,23 @@ def ifThen(condition, then):
     block = Block("if <CONDITION> then {THEN}")
     block.addSmartInput("CONDITION", condition)
     block.addSmartInput("THEN"     , then     )
+    return block
+
+def ifThenElse(condition, then, otherwise):
+    block = Block("if <CONDITION> then {THEN} else {ELSE}")
+    block.addSmartInput("CONDITION", condition)
+    block.addSmartInput("THEN"     , then     )
+    block.addSmartInput("ELSE"     , otherwise)
+    return block
+
+def repeatUntil(condition, body):
+    block = Block("repeat until <CONDITION> {BODY}")
+    block.addSmartInput("CONDITION", condition)
+    block.addSmartInput("BODY"     , body     )
+    return block
+
+def whileBlock(condition, body):
+    block = Block("while <CONDITION> {BODY}")
+    block.addSmartInput("CONDITION", condition)
+    block.addSmartInput("BODY"     , body     )
     return block

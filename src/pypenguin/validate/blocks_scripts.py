@@ -244,12 +244,12 @@ def validateCallInputs(path, data, opcode, optionDatas, context):
     inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
     for i, inputID, inputType in ikv(inputTypes):
         if inputType == "text" and inputID not in data:
-            raise formatError(inputIdError, path, f"A custom block with custom opcode '{optionDatas['customOpcode']}' must have the input '{inputID}'.")
+            raise formatError(inputIdError, path, f"A custom block with custom opcode '{optionDatas['customOpcode'][1]}' must have the input '{inputID}'.")
 
     # Check input formats
     for inputID in data:
         if inputID not in inputTypes:
-            raise formatError(inputIdError, path, f"Input '{inputID}' is not defined for a custom block with custom opcode '{optionDatas['customOpcode']}'.")
+            raise formatError(inputIdError, path, f"Input '{inputID}' is not defined for a custom block with custom opcode '{optionDatas['customOpcode'][1]}'.")
     
     for i, inputID, inputValue in ikv(data):
         validateInputValue(

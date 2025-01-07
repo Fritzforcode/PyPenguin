@@ -8,7 +8,7 @@ registers = [0] * 32  # Simulated registers
 memory = bytearray(16)  # 16 bytes simulated memory
 program_counter = 0  # Instruction pointer (PC)
 
-DEBUG = False
+DEBUG = True
 
 # Memory functions
 def set_memory(address, value, size=4):
@@ -40,11 +40,6 @@ def get_register(register):
     else:
         raise ValueError(f"Invalid register key: {register}")
 
-# Load and execute functions
-def load_instructions(json_data):
-    """Load and parse JSON instructions."""
-    return json_data["instructions"]
-
 def execute_instruction(instruction):
     """Execute a single instruction."""
     global program_counter
@@ -72,9 +67,9 @@ def execute_instruction(instruction):
         value1 = get_register(arg1)
         value2 = arg2 if isinstance(arg2, int) else get_register(arg2)
 
-        if instr == "add":
-            result = value1 + value2
-        elif instr == "addi":
+        if instr == "addi": instr = "add"
+
+        if   instr == "add":
             result = value1 + value2
         elif instr == "sub":
             result = value1 - value2
@@ -84,16 +79,15 @@ def execute_instruction(instruction):
             result = value1 | value2
         elif instr == "xor":
             result = value1 ^ value2
-            
 
         set_register(arg0, result)
 
     elif instr_type == "branch":
         value1 = get_register(arg0)
         value2 = get_register(arg1)
-        offset_bytes = arg2 * 4  # Branch offset is in instruction half-words
+        offset_bytes = arg2 * 2  # Branch offset is in instruction half-words
 
-        if instr == "beq":
+        if   instr == "beq":
             condition_met = value1 == value2
         elif instr == "bne":
             condition_met = value1 != value2
@@ -115,7 +109,7 @@ def execute_instruction(instruction):
 def run_program(json_data):
     """Run the RISC-V program."""
     global program_counter, DEBUG
-    instructions = load_instructions(json_data)
+    instructions = json_data["instructions"]
 
     while program_counter // 4 < len(instructions):
         current_instruction = instructions[program_counter // 4]
@@ -133,15 +127,23 @@ test_programs = [
     {
         "description": "Sum of numbers 1 to 10",
         "instructions": [
-            {"type": "load", "instr": "li", "arg0": "x10", "arg1": 0},  # x10 = 0
-            {"type": "load", "instr": "li", "arg0": "x11", "arg1": 1},  # x11 = 1
-            {"type": "load", "instr": "li", "arg0": "x12", "arg1": 10},  # x12 = 10
-            {"type": "arith", "instr": "add", "arg0": "x10", "arg1": "x10", "arg2": "x11"},  # x10 += x11
-            {"type": "arith", "instr": "addi", "arg0": "x11", "arg1": "x11", "arg2": 1},  # x11++
-            {"type": "branch", "instr": "ble", "arg0": "x11", "arg1": "x12", "arg2": -4},  # Loop back
+            {"type": "arith" , "instr": "addi", "arg0": "x10", "arg1": "x0" , "arg2": 0},  # x10 = 0
+            {"type": "arith" , "instr": "addi", "arg0": "x11", "arg1": "x0" , "arg2": 1},  # x11 = 1
+            {"type": "arith" , "instr": "addi", "arg0": "x12", "arg1": "x0" , "arg2": 10},  # x12 = 10
+            {"type": "arith" , "instr": "add" , "arg0": "x10", "arg1": "x10", "arg2": "x11"},  # x10 += x11
+            {"type": "arith" , "instr": "addi", "arg0": "x11", "arg1": "x11", "arg2": 1},  # x11++
+            {"type": "branch", "instr": "ble" , "arg0": "x11", "arg1": "x12", "arg2": -6},  # Loop back
         ],
         "expected": {"x10": 55},  # Sum of 1 to 10,
         "pseudo": """
+            addi x10, x0, #0
+            addi x11, x0, #1
+            addi x12, x0, #10
+            loop:
+                add x10, x10, x11
+                addi x11, x11, #1
+                ble x11, x12, loop
+
             x10 = 0
             x11 = 1
             x12 = 10
@@ -154,7 +156,7 @@ test_programs = [
     {
         "description": "Memory load/store test",
         "instructions": [
-            {"type": "load", "instr": "li", "arg0": "x5", "arg1": 100},  # x5 = 100
+            {"type": "arith", "instr": "addi", "arg0": "x5", "arg1": "x0", "arg2": 100},  # x5 = 100
             {"type": "store", "instr": "sw", "arg0": "x5", "arg1": "x0", "arg2": 0},  # Memory[0] = x5
             {"type": "load", "instr": "lw", "arg0": "x6", "arg1": "x0", "arg2": 0},  # x6 = Memory[0]
         ],
@@ -182,5 +184,6 @@ def run_tests():
         if passed:
             print("  Test passed!")
 
-run_program({"instructions": [{"type": "load", "instr": "lui", "arg0": "x0", "arg1": 0xFFFFF}]})
-print(hex(registers[1]))
+run_program(test_programs[1])
+print(list(memory))
+print(registers)
