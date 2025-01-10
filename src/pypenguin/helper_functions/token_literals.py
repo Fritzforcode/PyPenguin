@@ -56,13 +56,10 @@ def generateNextKeyInDict(obj:dict, offset=0):
     return numberToLiteral(biggest + 1 + offset)
 
 class newTempSelector:
-    takenIDs = []
+    count = 0
     def __init__(self):
-        self.id = random.randint(1, 1000000)
-        while self.id in newTempSelector.takenIDs:
-            self.id = random.randit(1, 1000000)
-        newTempSelector.takenIDs.append(self.id)
-    
+        self.id = newTempSelector.count
+        newTempSelector.count += 1
     def __eq__(self, other):
         if isinstance(other, newTempSelector):
             return self.id == other.id
