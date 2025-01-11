@@ -23,61 +23,63 @@ definedVariables   = {
     })
 }
 
+reset = Script([-1500, 0]).addBlocks([
+    defineCustomBlock(customOpcode="reset", blockType="instruction"),
+    setVar("registers", json.dumps([0]*32)),
+    setVar("memory", json.dumps([0]*16)),
+    setVar("program_counter", "0"),
+])
+
+regOrImm = Script([-1500, 500]).addBlocks([
+    defineCustomBlock(customOpcode="reg or imm (value)", blockType="numberReporter"),
+    ifThenElse(
+        condition=Block("(STRING) is number?").addSmartInput("STRING", getArg("value")),
+        then=[returnValue(getArg("value"))],
+        otherwise=[returnValue(
+            callCustomBlock("get register (register)")
+            .addSmartInput("register", getArg("value"))
+        )],
+    ),
+])
+
 setMemory = Script([1000, 0]).addBlocks([
-    defineCustomBlock(customOpcode="set memory (address) to (value)", blockType="instruction"),
-    setVar("memory", setArrayIndexTo(
-        array=getVar("memory"),
-        index=operation("+", left=getArg("address"), right="0"),
-        value=operation("and", left=bitwise(">>", num=getArg("value"), bits="0"), right="255"),
-    )),
-    setVar("memory", setArrayIndexTo(
-        array=getVar("memory"),
-        index=operation("+", left=getArg("address"), right="1"),
-        value=operation("and", left=bitwise(">>", num=getArg("value"), bits="8"), right="255"),
-    )),
-    setVar("memory", setArrayIndexTo(
-        array=getVar("memory"),
-        index=operation("+", left=getArg("address"), right="2"),
-        value=operation("and", left=bitwise(">>", num=getArg("value"), bits="16"), right="255"),
-    )),
-    setVar("memory", setArrayIndexTo(
-        array=getVar("memory"),
-        index=operation("+", left=getArg("address"), right="3"),
-        value=operation("and", left=bitwise(">>", num=getArg("value"), bits="24"), right="255"),
-    )),
+    defineCustomBlock(customOpcode="set memory (address) (size) to (value)", blockType="instruction"),
+    *[ifThen(
+        condition=operation(">=", left=getArg("size"), right=json.dumps(i+1)),
+        then=[setVar("memory", setArrayIndexTo(
+            array=getVar("memory"),
+            index=operation("+", left=getArg("address"), right=json.dumps(i)),
+            value=operation("and", left=bitwise(">>", num=getArg("value"), bits=json.dumps(8*i)), right="255"),
+        ))],
+    ) for i in range(4)],
 ])
 
 getMemory = Script([2000, 0]).addBlocks([
-    defineCustomBlock(customOpcode="get memory (address)", blockType="numberReporter"),
-    setVar("temp1", getArrayIndex(
-        array=getVar("memory"),
-        index=operation("+", left=getArg("address"), right="0"),
-    )),
-    setVar("temp1", operation(
-        "+", left=getVar("temp1"),
-        right=bitwise("<<", num=getArrayIndex(
+    defineCustomBlock(customOpcode="get memory (address) (size) <signed>", blockType="numberReporter"),
+    setVar("temp1", "0"),
+    *[ifThen(
+        condition=operation(">=", left=getArg("size"), right=json.dumps(i+1)),
+        then=[changeVar("temp1", bitwise("<<", num=getArrayIndex(
             array=getVar("memory"),
-            index=operation("+", left=getArg("address"), right="1"),
-        ), bits="8"),
-    )),
-    setVar("temp1", operation(
-        "+", left=getVar("temp1"),
-        right=bitwise("<<", num=getArrayIndex(
-            array=getVar("memory"),
-            index=operation("+", left=getArg("address"), right="2"),
-        ), bits="816"),
-    )),
-    setVar("temp1", operation(
-        "+", left=getVar("temp1"),
-        right=bitwise("<<", num=getArrayIndex(
-            array=getVar("memory"),
-            index=operation("+", left=getArg("address"), right="3"),
-        ), bits="24"),
-    )),
+            index=operation("+", left=getArg("address"), right=json.dumps(i)),
+        ), bits=json.dumps(8*i)))],
+    ) for i in range(4)],
+    setVar("temp2", operation("*", left=getArg("size"), right="8")),
+    ifThen(
+        condition=boolOperation("and",
+            left=getArg("signed", isBoolean=True),
+            right=operation(">", left=getVar("temp1"), right=operation(
+                "-", right="1", left=operation("^", left="2", right=operation(
+                    "-", left=getVar("temp2"), right="1",
+                ))
+            ))
+        ),
+        then=[changeVar("temp1", operation("-", left="", right=operation("^", left="2", right=getVar("temp2"))))],
+    ),
     returnValue(value=getVar("temp1"))
 ])
 
-setRegister = Script([1000, 500]).addBlocks([
+setRegister = Script([1000, 1200]).addBlocks([
     defineCustomBlock(customOpcode="set register (register) to (value)", blockType="instruction"),
     setVar("temp1", getJSONKey(json=getVar("register_map"), key=getArg("register"))),
     ifThen(
@@ -85,12 +87,12 @@ setRegister = Script([1000, 500]).addBlocks([
         then=[setVar("registers", setArrayIndexTo(
             array=getVar("registers"),
             index=getVar("temp1"),
-            value=getArg("value"),
+            value=operation("mod", left=getArg("value"), right=operation("^", "2", "32")),
         ))],
     )
 ])
 
-getRegister = Script([2000, 500]).addBlocks([
+getRegister = Script([2000, 1200]).addBlocks([
     defineCustomBlock(customOpcode="get register (register)", blockType="numberReporter"),
     returnValue(value=getArrayIndex(
         array=getVar("registers"),
@@ -107,22 +109,19 @@ executeInstruction = Script([0, 0]).addBlocks([
     setVar("arg2", getJSONKey(json=getArg("instruction"), key="arg2")),
     switchCases(switch=getVar("instr_type"), cases={
         "load": [
+            ifThen(condition=operation("!=", left=getVar("instr"), right="lui"), then=[
+                setVar("temp2", operation("+",
+                    left=callCustomBlock("get register (register)").addSmartInput("register", getVar("arg1")),
+                    right=callCustomBlock("reg or imm (value)").addSmartInput("value", getVar("arg2")),
+                ))
+            ]),
             switchCases(switch=getVar("instr"), cases={
-                "lui": [
-                    callCustomBlock("set register (register) to (value)")
-                    .addSmartInput("register", getVar("arg0"))
-                    .addSmartInput("value", bitwise("<<", num=getVar("arg1"), bits="12"))
-                ],
+                "lui": [setVar("temp3", bitwise("<<", num=getVar("arg1"), bits="12"))],
                 "lw": [
-                    setVar("temp2", callCustomBlock(customOpcode="get register (register)").addSmartInput("register", getVar("arg1"))),
-                    ifThenElse(
-                        condition=Block("(STRING) is number?").addSmartInput("STRING", getVar("arg2")),
-                        then=[changeVar("temp2", getVar("arg2"))],
-                        otherwise=[changeVar("temp2", callCustomBlock(customOpcode="get register (register)").addSmartInput("register", getVar("arg2")))],
-                    ),
-                    callCustomBlock(customOpcode="set register (register) to (value)")
-                    .addSmartInput("register", getVar("arg0"))
-                    .addSmartInput("value", callCustomBlock(customOpcode="get memory (address)").addSmartInput("address", getVar("temp2")))
+                    setVar("temp3", callCustomBlock(customOpcode="get memory (address) (size) <signed>")
+                    .addSmartInput("address", getVar("temp2"))
+                    .addSmartInput("size", "4")
+                    .addSmartInput("signed", Block("true")))
                 ],
             }),
         ],
@@ -135,8 +134,9 @@ executeInstruction = Script([0, 0]).addBlocks([
                         then=[changeVar("temp2", getVar("arg2"))],
                         otherwise=[changeVar("temp2", callCustomBlock(customOpcode="get register (register)").addSmartInput("register", getVar("arg2")))],
                     ),
-                    callCustomBlock(customOpcode="set memory (address) to (value)")
+                    callCustomBlock(customOpcode="set memory (address) (size) to (value)")
                     .addSmartInput("address", getVar("temp2"))
+                    .addSmartInput("size", "__TEMP__")
                     .addSmartInput("value", callCustomBlock(customOpcode="get register (register)").addSmartInput("register", getVar("arg0")))
                 ],
             }),
@@ -196,10 +196,11 @@ runProgram = Script([-1000, 0]).addBlocks([
 ])
 
 pp(runProgram.toJSON())
-scripts = [setMemory, getMemory, setRegister, getRegister, executeInstruction, runProgram]
+scripts = [setMemory, getMemory, setRegister, getRegister, executeInstruction, runProgram, reset, regOrImm]
 
 project["sprites"][0]["scripts"] = [script.toJSON() for script in scripts]
 project["globalVariables"] = [{"name":variable, "currentValue":"", "isCloudVariable":False} for variable in undefinedVariables] + [{"name":variable, "currentValue":value, "isCloudVariable":False} for variable, value in definedVariables.items()]
+#pp(project["sprites"][0]["scripts"][4]["blocks"][6]["inputs"]["CASES"]["blocks"][0]["inputs"]["BODY"]["blocks"][1]["inputs"]["CASES"]["blocks"][1]["inputs"]["BODY"]["blocks"][0]["inputs"]["VALUE"]["block"])
 validateProject(projectData=project)
 
 writeJSONFile(

@@ -85,6 +85,12 @@ def getVar(variable):
     block.addOption("VARIABLE", "variable", variable)
     return block
 
+def setArg(arg, value, isBoolean=False):
+    block = Block("set (PARAM) to (VALUE)")
+    block.addSmartInput("PARAM", getArg(arg, isBoolean=isBoolean))
+    block.addSmartInput("VALUE", value)
+    return block
+
 def getArg(arg, isBoolean=False):
     block = Block("value of boolean [ARGUMENT]" if isBoolean else "value of text [ARGUMENT]")
     block.addOption("ARGUMENT", "value", arg)
@@ -96,10 +102,21 @@ def operation(operation, left, right):
     block.addSmartInput("OPERAND2", right)
     return block
 
+def boolOperation(operation, left, right):
+    block = Block("<OPERAND1> " + operation + " <OPERAND2>")
+    block.addSmartInput("OPERAND1", left )
+    block.addSmartInput("OPERAND2", right)
+    return block
+
 def bitwise(operation, num, bits):
     block = Block("(NUM) " + operation + " (BITS)")
     block.addSmartInput("NUM" , num )
     block.addSmartInput("BITS", bits)
+    return block
+
+def asBoolean(value):
+    block = Block("(VALUE) as a boolean")
+    block.addSmartInput("VALUE", value)
     return block
 
 def defineCustomBlock(customOpcode, blockType, noScreenRefresh=True):

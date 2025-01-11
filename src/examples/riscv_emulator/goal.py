@@ -4,24 +4,46 @@ register_map = {f"x{i}": i for i in range(32)}
 register_map |= dict(zip(register_names, range(len(register_names))))
 register_map["fp"] = 8  # Third name for x8
 
-registers = [0] * 32  # Simulated registers
-memory = bytearray(16)  # 16 bytes simulated memory
-program_counter = 0  # Instruction pointer (PC)
+def reset():
+    global registers, memory, program_counter, DEBUG
+    registers = [0] * 32  # Simulated registers
+    memory = [0] * 16  # 16 bytes simulated memory
+    program_counter = 0  # Instruction pointer (PC)
+    DEBUG = False
 
-DEBUG = True
+# Helper functions
+def reg_or_imm(value):
+    return value if isinstance(value, int) else get_register(value)
 
 # Memory functions
-def set_memory(address, value, size=4):
+def set_memory(address, value, size):
     """Set a value in memory."""
     if address % size != 0:
         raise ValueError(f"Unaligned memory access at address {address}")
-    memory[address:address + size] = value.to_bytes(size, byteorder='little', signed=True)
-
-def get_memory(address, size=4):
+    
+    # Store the value byte by byte
+    if size >= 1: memory[address + 0] = (value >>  0) & 0xFF
+    if size >= 2: memory[address + 1] = (value >>  8) & 0xFF
+    if size >= 3: memory[address + 2] = (value >> 16) & 0xFF
+    if size >= 4: memory[address + 3] = (value >> 24) & 0xFF
+    
+def get_memory(address, size, signed):
     """Get a value from memory."""
     if address % size != 0:
         raise ValueError(f"Unaligned memory access at address {address}")
-    return int.from_bytes(memory[address:address + size], byteorder='little', signed=True)
+
+    value = 0
+    # Read byte by byte
+    if size >= 1: value += memory[address + 0] <<  0
+    if size >= 2: value += memory[address + 1] <<  8
+    if size >= 2: value += memory[address + 2] <<  16
+    if size >= 2: value += memory[address + 3] <<  24
+    
+    # Convert to signed if necessary
+    bits = size * 8
+    if signed and (value > ((2**(bits-1)) - 1)): # eg. (2**31)-1 if size=4
+        value -= (2**bits)  # Convert to signed
+    return value
 
 # Register functions
 def set_register(register, value):
@@ -51,21 +73,42 @@ def execute_instruction(instruction):
     arg2 = instruction.get("arg2")
 
     if instr_type == "load":
-        if instr == "lui":  # Load Upper Immediate
+        if instr != "lui":
+            address = get_register(arg1) + reg_or_imm(arg2)
+        if  instr == "lui":  # Load Upper Immediate
             # arg1 is immediate
-            set_register(arg0, (arg1 << 12))
+            load_value = arg1 << 12
         elif instr == "lw":  # Load Word
-            address = get_register(arg1) + (arg2 if isinstance(arg2, int) else get_register(arg2))
-            set_register(arg0, get_memory(address))
+            load_value = get_memory(address, size=4, signed=True)
+        elif instr == "lh":  # Load Halfword (signed)
+            #set_register(arg0, int.from_bytes(memory[address:address + 2], byteorder='little', signed=True))
+            load_value = get_memory(address, size=2, signed=True)
+        elif instr == "lhu":  # Load Halfword (unsigned)
+            #set_register(arg0, int.from_bytes(memory[address:address + 2], byteorder='little', signed=False))
+            load_value = get_memory(address, size=2, signed=False)
+        elif instr == "lb":  # Load Byte (signed)
+            #set_register(arg0, int.from_bytes(memory[address:address + 1], byteorder='little', signed=True))
+            load_value = get_memory(address, size=1, signed=True)
+        elif instr == "lbu":  # Load Byte (unsigned)
+            #set_register(arg0, int.from_bytes(memory[address:address + 1], byteorder='little', signed=False))
+            load_value = get_memory(address, size=1, signed=False)
+        
+        set_register(arg0, load_value)
 
     elif instr_type == "store":
+        address = get_register(arg1) + reg_or_imm(arg2)
         if instr == "sw":  # Store Word
-            address = get_register(arg1) + (arg2 if isinstance(arg2, int) else get_register(arg2))
-            set_memory(address, get_register(arg0))
+            set_memory(address, get_register(arg0), size=4)
+        elif instr == "sh":  # Store Halfword
+            #memory[address:address + 2] = get_register(arg0).to_bytes(2, byteorder='little', signed=True)
+            set_memory(address, get_register(arg0), size=2)
+        elif instr == "sb":  # Store Byte
+            #memory[address:address + 1] = get_register(arg0).to_bytes(1, byteorder='little', signed=True)
+            set_memory(address, get_register(arg0), size=1)
 
     elif instr_type == "arith":
         value1 = get_register(arg1)
-        value2 = arg2 if isinstance(arg2, int) else get_register(arg2)
+        value2 = reg_or_imm(arg2)
 
         if instr == "addi": instr = "add"
 
@@ -101,9 +144,19 @@ def execute_instruction(instruction):
             condition_met = value1 >= value2
         
         if condition_met:
-            program_counter = program_counter + 4 + offset_bytes
+            program_counter += 4 + offset_bytes
             return
-        
+
+    elif instr_type == "jump":
+        if instr == "jal":  # Jump and Link
+            set_register(arg0, program_counter + 4)
+            program_counter += arg1 * 2  # Jump offset is in instruction half-words
+            return
+        elif instr == "jalr":  # Jump and Link Register
+            temp = program_counter + 4
+            program_counter = (get_register(arg1) + arg2) & ~1
+            set_register(arg0, temp)
+            return
     program_counter += 4  # Increment PC by 4 bytes (size of one instruction)
 
 def run_program(json_data):
@@ -116,6 +169,7 @@ def run_program(json_data):
         if DEBUG:
             #print(dict(zip(register_names, registers)))
             print(dict(zip([f"x{i}" for i in range(32)], registers)))
+            print(list(memory))
             print(300*"-")
             print(program_counter, current_instruction)
             input()
@@ -168,9 +222,7 @@ def run_tests():
     # Run Tests
     for i, test in enumerate(test_programs):
         # Reset state
-        registers = [0] * 32
-        memory = bytearray(16) # 16 bytes
-        program_counter = 0
+        reset()
     
         # Run the test program
         print(f"Running test {i + 1}: {test['description']}")
@@ -183,7 +235,9 @@ def run_tests():
                 passed = False
         if passed:
             print("  Test passed!")
+        
 
-run_program(test_programs[1])
-print(list(memory))
-print(registers)
+run_tests()
+
+#reset()
+#run_program()
