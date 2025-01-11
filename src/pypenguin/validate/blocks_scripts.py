@@ -255,8 +255,8 @@ def validateCallInputs(path, data, opcode, optionDatas, context):
         validateInputValue(
             path=path+[inputID],
             inputValue=inputValue,
-            inputType=inputType,
-            inputMode=inputModes[inputType],
+            inputType=inputTypes[inputID],
+            inputMode=inputModes[inputTypes[inputID]],
             opcode=opcode,
             inputDatas=data,
             context=context,

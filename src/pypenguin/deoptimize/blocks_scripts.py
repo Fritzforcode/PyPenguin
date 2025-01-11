@@ -6,12 +6,12 @@ from pypenguin.deoptimize.comments import translateComment
 from pypenguin.database import *
 
 
-def restoreScripts(data):
+def prepareScripts(data):
     newScriptDatas = []
     for scriptData in data:
         newBlockDatas = []
         for i, blockData in enumerate(scriptData["blocks"]):
-            newBlockDatas.append(restoreBlock(
+            newBlockDatas.append(prepareBlock(
                 data=blockData,
                 parentOpcode=None,
                 position=scriptData["position"] if i == 0 else None
@@ -37,7 +37,7 @@ def generateMenu(data, parentOpcode, inputID):
         },
     }
     return newData
-    """ "_mouse_" ->
+    """ eg. "_mouse_" ->
     {
         "opcode": "#TOUCHING OBJECT MENU",
         "inputs": {},
@@ -45,9 +45,7 @@ def generateMenu(data, parentOpcode, inputID):
         "_info_": ...,
     }"""
 
-def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None):
-    #print("start r block", 100*"{")
-    #pp(data)
+def prepareBlock(data, parentOpcode, position=None, isOption=False, inputID=None):
     isMenu = False
     if isinstance(data, str):
         if not isOption: raise Exception()
@@ -125,12 +123,12 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
             del inputData["text"]
         newInputData = copy.deepcopy(inputData)
         if inputData.get("block") != None:
-            newInputData["block"]  = restoreBlock(
+            newInputData["block"]  = prepareBlock(
                 data=inputData["block"],
                 parentOpcode=data["opcode"],
             )
         if inputData.get("blocks") != None:
-            newInputData["blocks"] = [restoreBlock(
+            newInputData["blocks"] = [prepareBlock(
                 data=subBlockData,
                 parentOpcode=data["opcode"],
             ) for subBlockData in inputData["blocks"]]
@@ -139,7 +137,7 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
                 optionValue=inputData["option"],
                 optionType=inputData["_type_"],
             )
-            newInputData["option"] = restoreBlock(
+            newInputData["option"] = prepareBlock(
                 data=newOptionData,
                 parentOpcode=data["opcode"],
                 isOption=True,
@@ -171,20 +169,19 @@ def restoreBlock(data, parentOpcode, position=None, isOption=False, inputID=None
             "topLevel": position != None,
         },
     }
-    #print("stop fblock", 100*"}")
-    #pp(newData)
     return newData
 
 def flattenScripts(data):
     newBlockDatas = {}
-    for scriptData in data:
+    for i, scriptData in enumerate(data):
         # Generate IDs for the blocks
         newBlockDatas |= flattenBlocks(
             data=scriptData["blocks"],
+            scriptContext=i,
         )
     return newBlockDatas
 
-def flattenBlocks(data, parentID=None, firstID=None):
+def flattenBlocks(data, scriptContext, parentID=None, firstID=None):
     range_ = range(len(data))
     blockIDs = [newTempSelector() for i in range_]
     if firstID != None:
@@ -206,12 +203,11 @@ def flattenBlocks(data, parentID=None, firstID=None):
             blockID=blockID,
             parentID=parentID,
             nextID=nextID,
+            scriptContext=scriptContext,
         )
     return newBlockDatas
 
-def flattenBlock(data, blockID, parentID, nextID):
-    #print(100*"{")
-    #pp(data)
+def flattenBlock(data, blockID, parentID, nextID, scriptContext):
     # Transform inputs
     newBlockDatas = {}
     newInputDatas = {}
@@ -235,6 +231,7 @@ def flattenBlock(data, blockID, parentID, nextID):
                 references.append(subBlockID)
                 newBlockDatas |= flattenBlock(
                     data=inputData["block"],
+                    scriptContext=scriptContext,
                     blockID=subBlockID,
                     parentID=blockID,
                     nextID=None,
@@ -244,6 +241,7 @@ def flattenBlock(data, blockID, parentID, nextID):
             references.append(subBlockID)
             newBlockDatas |= flattenBlocks(
                 data=inputData["blocks"],
+                scriptContext=scriptContext,
                 parentID=blockID,
                 firstID=subBlockID,
             )
@@ -252,6 +250,7 @@ def flattenBlock(data, blockID, parentID, nextID):
             references.append(subBlockID)
             newBlockDatas |= flattenBlock(
                 data=inputData["option"],
+                scriptContext=scriptContext,
                 blockID=subBlockID,
                 parentID=blockID,
                 nextID=None,
@@ -271,11 +270,10 @@ def flattenBlock(data, blockID, parentID, nextID):
         "_info_" : data["_info_"] | {
             "parent"  : parentID,
             "next"    : nextID,
-        }
+        },
+        "_scriptContext_": scriptContext, #eg. 1 indicates an origin from the 1st script 
     }
     newBlockDatas[blockID] = newBlockData
-    #print(100*"}")
-    #pp(newBlockDatas)
     return newBlockDatas
 
 def restoreProcedureDefinitionBlock(data, blockID):
@@ -312,6 +310,7 @@ def restoreProcedureDefinitionBlock(data, blockID):
         "topLevel": True,
         "x": position[0],
         "y": position[1],
+        "_scriptContext_": data["_scriptContext_"],
     }
     prototypeData = {
         "opcode"  : "procedures_prototype",
@@ -333,7 +332,8 @@ def restoreProcedureDefinitionBlock(data, blockID):
             "edited"          : json.dumps(True),
             "optype"          : json.dumps(optype),
             "color"           : json.dumps(["#FF6680", "#eb3d5b", "#df2847"]),
-        }
+        },
+        "_scriptContext_": data["_scriptContext_"],
     }
     newBlockDatas = {}
     newBlockDatas[definitionID] = definitionData
@@ -353,7 +353,8 @@ def restoreProcedureDefinitionBlock(data, blockID):
                 "tagName": "mutation",
                 "children": [],
                 "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
-            }
+            },
+            "_scriptContext_": data["_scriptContext_"],
         }
     return newBlockDatas
 
@@ -402,6 +403,7 @@ def restoreBlocks(data, spriteName):
                 ),
                 "shadow"  : hasShadow,
                 "topLevel": blockData["_info_"]["topLevel"],
+                "_scriptContext_": blockData["_scriptContext_"],
             }
             if blockData["_info_"]["position"] != None:
                 position = blockData["_info_"]["position"]
@@ -496,6 +498,7 @@ def restoreListBlock(data, spriteName):
     newData = [magicNumber, value, token]
     if data["_info_"]["topLevel"]:
         newData += data["_info_"]["position"]
+    # No _scriptContext_ needed. In cases, where list blocks are not contained within other blocks, they shouldn't impact performance too much.
     return newData
 
 def unprepareBlocks(data, commentDatas, targetPlatform):
@@ -590,6 +593,7 @@ def unprepareBlocks(data, commentDatas, targetPlatform):
         table = {selector: numberToLiteral(i+1)  for i, selector in enumerate(cutSelectors)}
     elif targetPlatform == Platform.SCRATCH:
         table = {selector: generateRandomToken() for    selector in           cutSelectors }
+    print()
     data = replaceSelectors(data, table=table)
     commentDatas = replaceSelectors(commentDatas, table=table)
     return data, commentDatas

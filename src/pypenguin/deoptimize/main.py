@@ -1,7 +1,7 @@
-from pypenguin.helper_functions import newTempSelector, stringToToken, Platform
+from pypenguin.helper_functions import newTempSelector, stringToToken, Platform, pp
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
-from pypenguin.deoptimize.blocks_scripts import restoreScripts, flattenScripts, restoreBlocks, unprepareBlocks
+from pypenguin.deoptimize.blocks_scripts import prepareScripts, flattenScripts, restoreBlocks, unprepareBlocks
 from pypenguin.deoptimize.broadcasts import generateBroadcasts
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
@@ -27,13 +27,14 @@ def deoptimizeProject(projectData, targetPlatform):
     
     newSpriteDatas = []
     for i, spriteData in enumerate(projectData["sprites"]):
-        restoredScriptDatas = restoreScripts(spriteData["scripts"])
-        flattendScriptDatas   = flattenScripts(restoredScriptDatas)
+        preparedScriptDatas = prepareScripts(spriteData["scripts"])
+        flattendScriptDatas = flattenScripts(preparedScriptDatas)
+        pp(flattendScriptDatas)
         newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,
             spriteName=spriteData["name"],
         )
-
+        pp(newSpriteBlockDatas)
         newCommentDatas = scriptCommentDatas
         
         nameKey = None if spriteData["isStage"] else spriteData["name"]
