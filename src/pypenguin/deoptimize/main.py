@@ -29,12 +29,13 @@ def deoptimizeProject(projectData, targetPlatform):
     for i, spriteData in enumerate(projectData["sprites"]):
         preparedScriptDatas = prepareScripts(spriteData["scripts"])
         flattendScriptDatas = flattenScripts(preparedScriptDatas)
-        pp(flattendScriptDatas)
         newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,
             spriteName=spriteData["name"],
         )
-        pp(newSpriteBlockDatas)
+        print(100*"#")
+        #pp(flattendScriptDatas)
+        #pp(newSpriteBlockDatas)
         newCommentDatas = scriptCommentDatas
         
         nameKey = None if spriteData["isStage"] else spriteData["name"]

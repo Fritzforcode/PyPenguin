@@ -177,11 +177,11 @@ def flattenScripts(data):
         # Generate IDs for the blocks
         newBlockDatas |= flattenBlocks(
             data=scriptData["blocks"],
-            scriptContext=i,
+            placementPath=[i]+["blocks"],
         )
     return newBlockDatas
 
-def flattenBlocks(data, scriptContext, parentID=None, firstID=None):
+def flattenBlocks(data, placementPath, parentID=None, firstID=None):
     range_ = range(len(data))
     blockIDs = [newTempSelector() for i in range_]
     if firstID != None:
@@ -203,11 +203,11 @@ def flattenBlocks(data, scriptContext, parentID=None, firstID=None):
             blockID=blockID,
             parentID=parentID,
             nextID=nextID,
-            scriptContext=scriptContext,
+            placementPath=placementPath+[i],
         )
     return newBlockDatas
 
-def flattenBlock(data, blockID, parentID, nextID, scriptContext):
+def flattenBlock(data, blockID, parentID, nextID, placementPath):
     # Transform inputs
     newBlockDatas = {}
     newInputDatas = {}
@@ -231,7 +231,7 @@ def flattenBlock(data, blockID, parentID, nextID, scriptContext):
                 references.append(subBlockID)
                 newBlockDatas |= flattenBlock(
                     data=inputData["block"],
-                    scriptContext=scriptContext,
+                    placementPath=placementPath+["inputs"]+[inputID]+["block"],
                     blockID=subBlockID,
                     parentID=blockID,
                     nextID=None,
@@ -241,7 +241,7 @@ def flattenBlock(data, blockID, parentID, nextID, scriptContext):
             references.append(subBlockID)
             newBlockDatas |= flattenBlocks(
                 data=inputData["blocks"],
-                scriptContext=scriptContext,
+                placementPath=placementPath+["inputs"]+[inputID]+["blocks"],
                 parentID=blockID,
                 firstID=subBlockID,
             )
@@ -250,7 +250,7 @@ def flattenBlock(data, blockID, parentID, nextID, scriptContext):
             references.append(subBlockID)
             newBlockDatas |= flattenBlock(
                 data=inputData["option"],
-                scriptContext=scriptContext,
+                placementPath=placementPath+["inputs"]+[inputID]+["option"],
                 blockID=subBlockID,
                 parentID=blockID,
                 nextID=None,
@@ -271,7 +271,7 @@ def flattenBlock(data, blockID, parentID, nextID, scriptContext):
             "parent"  : parentID,
             "next"    : nextID,
         },
-        "_scriptContext_": scriptContext, #eg. 1 indicates an origin from the 1st script 
+        "_placementPath_": placementPath, #eg. 1 indicates an origin from the 1st script 
     }
     newBlockDatas[blockID] = newBlockData
     return newBlockDatas
@@ -310,7 +310,7 @@ def restoreProcedureDefinitionBlock(data, blockID):
         "topLevel": True,
         "x": position[0],
         "y": position[1],
-        "_scriptContext_": data["_scriptContext_"],
+        "_placementPath_": data["_placementPath_"]+["CB_DEFINITION"],
     }
     prototypeData = {
         "opcode"  : "procedures_prototype",
@@ -333,19 +333,20 @@ def restoreProcedureDefinitionBlock(data, blockID):
             "optype"          : json.dumps(optype),
             "color"           : json.dumps(["#FF6680", "#eb3d5b", "#df2847"]),
         },
-        "_scriptContext_": data["_scriptContext_"],
+        "_placementPath_": data["_placementPath_"]+["CB_PROTOTYPE"],
     }
     newBlockDatas = {}
     newBlockDatas[definitionID] = definitionData
     newBlockDatas[prototypeID]  = prototypeData
     for j in range(len(argumentIDs)):
+        argumentName = argumentNames[j]
         newBlockDatas[argumentBlockIDs[j]] = {
             "opcode": "argument_reporter_string_number" if argumentDefaults[j] == "" else "argument_reporter_boolean",
             "next": None,
             "parent": prototypeID,
             "inputs": {},
             "fields": {
-                "VALUE": [argumentNames[j], generateRandomToken()]
+                "VALUE": [argumentName, generateRandomToken()]
             },
             "shadow": True,
             "topLevel": False,
@@ -354,7 +355,7 @@ def restoreProcedureDefinitionBlock(data, blockID):
                 "children": [],
                 "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
             },
-            "_scriptContext_": data["_scriptContext_"],
+            "_placementPath_": data["_placementPath_"]+["CB_PROTOTYPE_ARGS"]+[argumentName],
         }
     return newBlockDatas
 
@@ -403,7 +404,7 @@ def restoreBlocks(data, spriteName):
                 ),
                 "shadow"  : hasShadow,
                 "topLevel": blockData["_info_"]["topLevel"],
-                "_scriptContext_": blockData["_scriptContext_"],
+                "_placementPath_": blockData["_placementPath_"],
             }
             if blockData["_info_"]["position"] != None:
                 position = blockData["_info_"]["position"]
@@ -498,7 +499,7 @@ def restoreListBlock(data, spriteName):
     newData = [magicNumber, value, token]
     if data["_info_"]["topLevel"]:
         newData += data["_info_"]["position"]
-    # No _scriptContext_ needed. In cases, where list blocks are not contained within other blocks, they shouldn't impact performance too much.
+    # No _placementPath_ needed. In cases, where list blocks are not contained within other blocks, they shouldn't impact performance too much.
     return newData
 
 def unprepareBlocks(data, commentDatas, targetPlatform):
@@ -593,7 +594,6 @@ def unprepareBlocks(data, commentDatas, targetPlatform):
         table = {selector: numberToLiteral(i+1)  for i, selector in enumerate(cutSelectors)}
     elif targetPlatform == Platform.SCRATCH:
         table = {selector: generateRandomToken() for    selector in           cutSelectors }
-    print()
     data = replaceSelectors(data, table=table)
     commentDatas = replaceSelectors(commentDatas, table=table)
     return data, commentDatas
