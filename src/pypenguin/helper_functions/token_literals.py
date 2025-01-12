@@ -95,8 +95,6 @@ def getSelectors(obj):
     return selectors
 
 def replaceSelectors(obj, table):
-    print("replace", obj, table)
-    print()
     def getNew(ref):
         return None if table == None else table[ref]
     if isinstance(obj, dict):
