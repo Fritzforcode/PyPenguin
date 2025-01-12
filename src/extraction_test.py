@@ -3,7 +3,7 @@ from pypenguin.helper_functions import readJSONFile, pp, Platform
 
 optimizedData = extractAndOptimizeProject(
 #    projectFilePath          = "assets/categories/extension_files.pmp",
-    projectFilePath          = "assets/studies/customExtension.pmp",
+    projectFilePath          = "assets/studies/commentTest.pmp",
 #    projectFilePath          = "assets/from_online/The Tale of the Three Shapes.sb3",
     optimizedProjectDir      = "tale",
     temporaryDir             = "temporary",

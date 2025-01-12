@@ -1,4 +1,4 @@
-script = {"position": [0, 0], "blocks": [
+scriptA = {"position": [0, 0], "blocks": [
     {
         "opcode": "ask (QUESTION) and wait",
         "inputs": {
@@ -6,6 +6,12 @@ script = {"position": [0, 0], "blocks": [
                 "opcode": "value of [VARIABLE]",
                 "options": {"VARIABLE": ["variable", "globVar"]}
             }},
+        },
+        "comment": {
+            "position": [50,0],
+            "size": [60, 60],
+            "isMinimized": False,
+            "text": "ABC 123 TESt"
         },
     },
     {
@@ -25,10 +31,21 @@ script = {"position": [0, 0], "blocks": [
                 },
                 {
                     "opcode": "change [VARIABLE] by (VALUE)",
-                    "inputs": {"VALUE": {"text": "33"}},
+                    "inputs": {"VALUE": {"block": {"opcode": "value of text [ARGUMENT]", "options": {"ARGUMENT": ["value", "scripts.compiled"]}}}},
                     "options": {"VARIABLE": ["variable", "locVar"]},
                 },
             ]},
+        },
+    },
+]}
+
+scriptB = {"position": [1000, 0], "blocks": [
+    {
+        "opcode": "define custom block",
+        "options": {
+            "noScreenRefresh": ["value", True],
+            "blockType":    ["value", "instruction"],
+            "customOpcode": ["value", "hi (u)"]
         },
     },
 ]}
@@ -45,7 +62,7 @@ projectData = {
             "sounds": [],
             "volume": 100,
         },
-        {"name": "Sprite123", "isStage": False, "scripts": [script], "comments": [], "currentCostume": 0, "costumes": [], "sounds": [], "volume": 100, "layerOrder": 1, "visible": True, "position": [0,0], "size": 100, "direction": 90, "draggable": True, "rotationStyle": "all around", 
+        {"name": "Sprite123", "isStage": False, "scripts": [scriptA, scriptB], "comments": [], "currentCostume": 0, "costumes": [], "sounds": [], "volume": 100, "layerOrder": 1, "visible": True, "position": [0,0], "size": 100, "direction": 90, "draggable": True, "rotationStyle": "all around", 
         "localVariables": [{"name": "locVar", "currentValue": ""}], "localLists": [{"name": "locList", "currentValue": []}],
         },
     ],

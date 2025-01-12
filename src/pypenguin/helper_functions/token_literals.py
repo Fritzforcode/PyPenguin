@@ -75,3 +75,42 @@ class newTempSelector:
         new = newTempSelector()
         new.id = self.id
         return new
+
+def getSelectors(obj):
+    selectors = []
+    if isinstance(obj, dict):
+        for k,v in obj.items():
+            if isinstance(k, newTempSelector):
+                selectors.append(k)
+            if isinstance(v, newTempSelector):
+                selectors.append(v)
+            else:
+                selectors += getSelectors(v)
+    elif isinstance(obj, list):
+        for v in obj:
+            if isinstance(v, newTempSelector):
+                selectors.append(v)
+            else:
+                selectors += getSelectors(v)
+    return selectors
+
+def replaceSelectors(obj, table):
+    print("replace", obj, table)
+    print()
+    def getNew(ref):
+        return None if table == None else table[ref]
+    if isinstance(obj, dict):
+        newObj = {}
+        for k,v in obj.items():
+            if isinstance(v, newTempSelector): newV = getNew(v)
+            else                             : newV = replaceSelectors(v, table=table)
+            if isinstance(k, newTempSelector): newObj[getNew(k)] = newV
+            else                             : newObj[k] = newV
+    elif isinstance(obj, list):
+        newObj = []
+        for i,v in enumerate(obj):
+            if isinstance(v, newTempSelector): newObj.append(getNew(v))
+            else                             : newObj.append(replaceSelectors(v, table=table))
+    else:
+        newObj = obj
+    return newObj

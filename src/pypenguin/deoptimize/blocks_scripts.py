@@ -1,6 +1,6 @@
 import json, copy
 
-from pypenguin.helper_functions import ikv, pp, numberToLiteral, newTempSelector, generateRandomToken, parseCustomOpcode, stringToToken, Platform
+from pypenguin.helper_functions import ikv, pp, numberToLiteral, newTempSelector, generateRandomToken, parseCustomOpcode, stringToToken, Platform, getSelectors, replaceSelectors
 from pypenguin.deoptimize.options import translateOptions
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.database import *
@@ -267,6 +267,7 @@ def flattenBlock(data, blockID, parentID, nextID, placementPath):
         "opcode" : data["opcode"],
         "inputs" : newInputDatas,
         "options": data["options"],
+        "comment": data.get("comment"),
         "_info_" : data["_info_"] | {
             "parent"  : parentID,
             "next"    : nextID,
@@ -417,6 +418,7 @@ def restoreBlocks(data, spriteName):
             )
             newCommentID = newTempSelector()
             newCommentDatas[newCommentID] = newCommentData
+            newBlockData["comment"] = newCommentID
         
         if newBlockData != None:
             newBlockDatas[blockID] = newBlockData
@@ -502,7 +504,7 @@ def restoreListBlock(data, spriteName):
     # No _placementPath_ needed. In cases, where list blocks are not contained within other blocks, they shouldn't impact performance too much.
     return newData
 
-def unprepareBlocks(data, commentDatas, targetPlatform):
+def unprepareBlocks(data):
     mutationDatas = {}
     for j, blockID, blockData in ikv(data):
         if isinstance(blockData, dict):
@@ -549,41 +551,10 @@ def unprepareBlocks(data, commentDatas, targetPlatform):
                     "expanded": "false"
                 }
                 del blockData["fields"]["VERTEX_COUNT"]
-    
-    
-    def getSelectors(obj):
-        selectors = []
-        if isinstance(obj, dict):
-            for i,k,v in ikv(obj):
-                if isinstance(k, newTempSelector):
-                    selectors.append(k)
-                if isinstance(v, newTempSelector):
-                    selectors.append(v)
-                else:
-                    selectors += getSelectors(v)
-        elif isinstance(obj, list):
-            for v in obj:
-                if isinstance(v, newTempSelector):
-                    selectors.append(v)
-                else:
-                    selectors += getSelectors(v)
-        return selectors
-    def replaceSelectors(obj, table):
-        if isinstance(obj, dict):
-            newObj = {}
-            for i,k,v in ikv(obj):
-                if isinstance(v, newTempSelector): newV = table[v]
-                else                             : newV = replaceSelectors(v, table=table)
-                if isinstance(k, newTempSelector): newObj[table[k]] = newV
-                else                             : newObj[k] = newV
-        elif isinstance(obj, list):
-            newObj = []
-            for i,v in enumerate(obj):
-                if isinstance(v, newTempSelector): newObj.append(table[v])
-                else                             : newObj.append(replaceSelectors(v, table=table))
-        else:
-            newObj = obj
-        return newObj
+    return data
+
+# Replaces block selectors with literals eg. "t"
+def convertSelectorsToLiterals(data, commentDatas, targetPlatform):  
     selectors = getSelectors(data) + getSelectors(commentDatas)
     cutSelectors = []
     for selector in selectors:
