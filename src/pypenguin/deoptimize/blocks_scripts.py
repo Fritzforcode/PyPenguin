@@ -311,7 +311,7 @@ def restoreProcedureDefinitionBlock(data, blockID):
         "topLevel": True,
         "x": position[0],
         "y": position[1],
-        "_placementPath_": data["_placementPath_"]+["CB_DEFINITION"],
+        "_placementPath_": data["_placementPath_"],
     }
     prototypeData = {
         "opcode"  : "procedures_prototype",

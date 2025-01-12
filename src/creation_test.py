@@ -48,6 +48,10 @@ scriptB = {"position": [1000, 0], "blocks": [
             "customOpcode": ["value", "hi (u)"]
         },
     },
+    {
+        "opcode": "go to ([TARGET])",
+        "inputs": {"TARGET": {"option": ['object', 'random position']}},
+    },
 ]}
 
 projectData = {

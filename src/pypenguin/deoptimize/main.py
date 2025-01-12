@@ -51,7 +51,7 @@ def deoptimizeProject(projectData, targetPlatform):
             data=newSpriteBlockDatas,
         )
         
-        convertScripts(newSpriteBlockDatas)
+        convertScripts(newSpriteBlockDatas, newCommentDatas)
         
         newSpriteBlockDatas, newCommentDatas = convertSelectorsToLiterals(
             data=newSpriteBlockDatas,
