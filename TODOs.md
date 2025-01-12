@@ -1,5 +1,7 @@
 # TODO
 
+research sprite property "broadcasts"
+
 update documentation
 
 insure input magic numbers match (eg. block-only inputs)
