@@ -173,8 +173,14 @@ def getDeoptimizedOptionID(opcode, optionID):
                 return menuData["inner"]
     return optionID
 
-def getBlockType(opcode):
-    return opcodeDatabase[opcode]["type"]
+def getBlockType(opcode, defaultNone=False):
+    if defaultNone:
+        try:
+            return opcodeDatabase[opcode]["type"]
+        except KeyError:
+            return None
+    else:
+        return opcodeDatabase[opcode]["type"]
 
 def getBlockCategory(opcode):
     return opcodeDatabase[opcode]["category"]
