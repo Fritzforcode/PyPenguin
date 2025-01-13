@@ -129,6 +129,7 @@ def deoptimizeAndCompressProject(
     )
 
     # Remove the temporary dir
+    #input()
     shutil.rmtree(temporaryDir)
 
 if __name__ == "__main__":

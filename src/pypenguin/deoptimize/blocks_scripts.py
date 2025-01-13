@@ -1,6 +1,6 @@
 import json, copy
 
-from pypenguin.helper_functions import ikv, pp, numberToLiteral, newTempSelector, generateRandomToken, parseCustomOpcode, stringToToken, Platform, getSelectors, replaceSelectors
+from pypenguin.helper_functions import ikv, pp, numberToLiteral, newTempSelector, generateRandomToken, parseCustomOpcode, stringToToken, localStringToToken, Platform, getSelectors, replaceSelectors, replaceClasses
 from pypenguin.deoptimize.options import translateOptions
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.database import *
@@ -497,7 +497,7 @@ def restoreListBlock(data, spriteName):
         magicNumber = 13
         value = data["options"]["LIST"]
     
-    token = stringToToken(value, spriteName=spriteName)
+    token = localStringToToken(value, spriteName=spriteName)
     newData = [magicNumber, value, token]
     if data["_info_"]["topLevel"]:
         newData += data["_info_"]["position"]
@@ -554,7 +554,7 @@ def unprepareBlocks(data):
     return data
 
 # Replaces block selectors with literals eg. "t"
-def convertSelectorsToLiterals(data, commentDatas, targetPlatform):  
+def makeJsonCompatible(data, commentDatas, targetPlatform):  
     selectors = getSelectors(data) + getSelectors(commentDatas)
     cutSelectors = []
     for selector in selectors:
@@ -565,6 +565,13 @@ def convertSelectorsToLiterals(data, commentDatas, targetPlatform):
         table = {selector: numberToLiteral(i+1)  for i, selector in enumerate(cutSelectors)}
     elif targetPlatform == Platform.SCRATCH:
         table = {selector: generateRandomToken() for    selector in           cutSelectors }
-    data = replaceSelectors(data, table=table)
-    commentDatas = replaceSelectors(commentDatas, table=table)
+    def convertionFunc(obj):
+        nonlocal table
+        if isinstance(obj, newTempSelector):
+            return table[obj]
+        if isinstance(obj, localStringToToken):
+            return obj.toJSON()
+
+    data         = replaceClasses(data        , classes=[newTempSelector, localStringToToken], convertionFunc=convertionFunc)
+    commentDatas = replaceClasses(commentDatas, classes=[newTempSelector, localStringToToken], convertionFunc=convertionFunc)
     return data, commentDatas

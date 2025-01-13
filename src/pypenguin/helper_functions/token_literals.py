@@ -4,6 +4,15 @@ random.seed(0)
 literalCharSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#%()*+,-./:;=?@[]^_`{|}~"
 charsetLength = len(literalCharSet)
 
+class localStringToToken:
+    def __init__(self, main: str, spriteName=None):
+        self.main = main
+        self.spriteName = spriteName
+    def toToken(self):
+        return stringToToken(main=self.main, spriteName=self.spriteName)
+    def toJSON(self):
+        return {"_custom_": True, "_type_": "localStringToToken", "main": self.main}
+
 def stringToToken(main: str, spriteName=None) -> str:
     def convert(inputString: str, digits: int) -> str:
         # Character set to use in the output
@@ -94,21 +103,24 @@ def getSelectors(obj):
                 selectors += getSelectors(v)
     return selectors
 
-def replaceSelectors(obj, table):
-    def getNew(ref):
-        return None if table == None else table[ref]
+def replaceClasses(obj, classes:list[type], convertionFunc:callable):
     if isinstance(obj, dict):
         newObj = {}
-        for k,v in obj.items():
-            if isinstance(v, newTempSelector): newV = getNew(v)
-            else                             : newV = replaceSelectors(v, table=table)
-            if isinstance(k, newTempSelector): newObj[getNew(k)] = newV
-            else                             : newObj[k] = newV
-    elif isinstance(obj, list):
-        newObj = []
-        for i,v in enumerate(obj):
-            if isinstance(v, newTempSelector): newObj.append(getNew(v))
-            else                             : newObj.append(replaceSelectors(v, table=table))
-    else:
-        newObj = obj
-    return newObj
+        for key, value in obj.items():
+            if type(key  ) in classes: newKey = convertionFunc(key)
+            else                     : newKey = replaceClasses(key, classes=classes, convertionFunc=convertionFunc)
+
+            if type(value) in classes: newValue = convertionFunc(value)
+            else                     : newValue = replaceClasses(value, classes=classes, convertionFunc=convertionFunc)
+            
+            newObj[newKey] = newValue
+        return newObj
+    if isinstance(obj, (list, tuple, set)):
+        newObj = type(obj)() # Creates a new object of the same type as the old object
+        for item in obj:
+            if type(item) in classes: newItem = convertionFunc(item)
+            else                    : newItem = replaceClasses(item, classes=classes, convertionFunc=convertionFunc)
+
+            newObj.append(newItem)
+        return newObj
+    return obj # Otherwise just return the old object

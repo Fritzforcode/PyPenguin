@@ -1,7 +1,7 @@
 import json
 from enum import Enum
-from pypenguin.helper_functions import pp, replaceSelectors
-from pypenguin.database import getDeoptimizedOpcode, getBlockType
+from pypenguin.helper_functions import pp, replaceClasses, newTempSelector
+from pypenguin.database import getBlockType
 
 class PathConstant(Enum):
     CB_PROTOTYPE_ARGS      = "CB_PROTOTYPE_ARGS"
@@ -49,11 +49,16 @@ def convertScripts(data, commentDatas):
                 
 
         # Replace remaining block selectors with paths
-        table = {selector:{"_selector_": True, "path": pathString} for selector, pathString in scriptData["table"].items()}
-        scriptData["blocks"  ] = replaceSelectors(scriptData["blocks"  ], table=table)
-        scriptData["comments"] = replaceSelectors(scriptData["comments"], table=table)
+        table = {selector:{"_custom_": True, "_type_": "selector", "path": pathString} for selector, pathString in scriptData["table"].items()}
+
+        def convertionFunc(obj):
+            nonlocal table
+            return table[obj]
+        
+        scriptData["blocks"  ] = replaceClasses(scriptData["blocks"  ], classes=[newTempSelector], convertionFunc=convertionFunc)
+        scriptData["comments"] = replaceClasses(scriptData["comments"], classes=[newTempSelector], convertionFunc=convertionFunc)
         del scriptData["table"]
     
-    pp(scripts)
+    #pp(scripts)
 
 

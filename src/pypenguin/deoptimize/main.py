@@ -1,7 +1,7 @@
 from pypenguin.helper_functions import newTempSelector, stringToToken, Platform, pp
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
-from pypenguin.deoptimize.blocks_scripts import prepareScripts, flattenScripts, restoreBlocks, unprepareBlocks, convertSelectorsToLiterals
+from pypenguin.deoptimize.blocks_scripts import prepareScripts, flattenScripts, restoreBlocks, unprepareBlocks, makeJsonCompatible
 from pypenguin.deoptimize.broadcasts import generateBroadcasts
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
@@ -53,7 +53,7 @@ def deoptimizeProject(projectData, targetPlatform):
         
         convertScripts(newSpriteBlockDatas, newCommentDatas)
         
-        newSpriteBlockDatas, newCommentDatas = convertSelectorsToLiterals(
+        newSpriteBlockDatas, newCommentDatas = makeJsonCompatible(
             data=newSpriteBlockDatas,
             commentDatas=newCommentDatas,
             targetPlatform=targetPlatform,
