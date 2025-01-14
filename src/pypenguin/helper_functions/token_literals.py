@@ -8,6 +8,8 @@ class localStringToToken:
     def __init__(self, main: str, spriteName=None):
         self.main = main
         self.spriteName = spriteName
+    def __repr__(self):
+        return f"lStT(main={repr(self.main)} spriteName={repr(self.spriteName)})"
     def toToken(self):
         return stringToToken(main=self.main, spriteName=self.spriteName)
     def toJSON(self):
@@ -103,23 +105,25 @@ def getSelectors(obj):
                 selectors += getSelectors(v)
     return selectors
 
-def replaceClasses(obj, classes:list[type], convertionFunc:callable):
+def editDataStructure(obj, conditionFunc:callable, convertionFunc:callable):
+    # edits a multi-layer data structure
     if isinstance(obj, dict):
         newObj = {}
         for key, value in obj.items():
-            if type(key  ) in classes: newKey = convertionFunc(key)
-            else                     : newKey = replaceClasses(key, classes=classes, convertionFunc=convertionFunc)
+            print("--", key, conditionFunc(key))
+            if conditionFunc(key  ): newKey   = convertionFunc(key  )
+            else                   : newKey   = editDataStructure(key  , conditionFunc=conditionFunc, convertionFunc=convertionFunc)
 
-            if type(value) in classes: newValue = convertionFunc(value)
-            else                     : newValue = replaceClasses(value, classes=classes, convertionFunc=convertionFunc)
+            if conditionFunc(value): newValue = convertionFunc(value)
+            else                   : newValue = editDataStructure(value, conditionFunc=conditionFunc, convertionFunc=convertionFunc)
             
             newObj[newKey] = newValue
         return newObj
     if isinstance(obj, (list, tuple, set)):
         newObj = type(obj)() # Creates a new object of the same type as the old object
         for item in obj:
-            if type(item) in classes: newItem = convertionFunc(item)
-            else                    : newItem = replaceClasses(item, classes=classes, convertionFunc=convertionFunc)
+            if conditionFunc(item): newItem = convertionFunc(item)
+            else                  : newItem = editDataStructure(item, conditionFunc=conditionFunc, convertionFunc=convertionFunc)
 
             newObj.append(newItem)
         return newObj

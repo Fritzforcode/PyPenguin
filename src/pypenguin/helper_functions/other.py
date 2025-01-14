@@ -1,4 +1,4 @@
-from pprint import pformat
+import pprint
 import re, os, hashlib, difflib
 from PIL import Image
 from enum import Enum
@@ -112,14 +112,17 @@ def ikv(data:dict): # Iterate through a dict with i(ndex of the pair), k(ey) and
         data.values(),
     )
 
-def pp(*objects, sep=" ", end="\n"): # pretty print with settings i like
+def pformat(*objects, sep=" ", end="\n"):
     string = ""
     for i, object in enumerate(objects):
-        string += pformat(object, sort_dicts=False)
+        string += pprint.pformat(object, sort_dicts=False)
         if i+1 in range(len(objects)):
             string += sep
     string += end
-    print(string)
+    return string
+
+def pp(*objects, sep=" ", end="\n"): # pretty print with settings i like
+    print(pformat(objects, sep=sep, end=end))
 
 def flipKeysAndValues(obj: dict):
     return dict(zip(obj.values(), obj.keys()))
