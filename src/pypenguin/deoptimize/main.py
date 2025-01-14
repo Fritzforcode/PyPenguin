@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import newTempSelector, stringToToken, Platform, pp
+from pypenguin.helper_functions import newTempSelector, stringToToken, Platform, pp, writeJSONFile, pformat
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
 from pypenguin.deoptimize.blocks_scripts import prepareScripts, flattenScripts, restoreBlocks, unprepareBlocks, makeJsonCompatible
@@ -7,7 +7,7 @@ from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSou
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.deoptimize.monitors import translateMonitor
 from pypenguin.deoptimize.scratch_adaption import adaptProject
-from pypenguin.deoptimize.precompilation import convertScripts
+from pypenguin.deoptimize.precompilation import exportScripts, loadScript
 from pypenguin.database import deoptimizeOptionValue
 
 def translateVariablesLists(data):
@@ -30,17 +30,17 @@ def deoptimizeProject(projectData, targetPlatform):
     for i, spriteData in enumerate(projectData["sprites"]):
         preparedScriptDatas = prepareScripts(spriteData["scripts"])
         flattendScriptDatas = flattenScripts(preparedScriptDatas)
-        pp(preparedScriptDatas)
+        spriteName = None if spriteData["isStage"] else spriteData["name"]
+        #pp(preparedScriptDatas)
         newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,
-            spriteName=spriteData["name"],
+            spriteName=spriteName,
         )
-        print(100*"#")
+        #print(100*"#")
         #pp(flattendScriptDatas)
         #pp(newSpriteBlockDatas)
         newCommentDatas = scriptCommentDatas
         
-        nameKey = None if spriteData["isStage"] else spriteData["name"]
         for i, commentData in enumerate(spriteData["comments"]):
             commentID = newTempSelector()
             newCommentDatas[commentID] = translateComment(
@@ -51,7 +51,21 @@ def deoptimizeProject(projectData, targetPlatform):
             data=newSpriteBlockDatas,
         )
         
-        convertScripts(newSpriteBlockDatas, newCommentDatas, spriteData["scripts"])
+        exportedScripts = exportScripts(
+            data=newSpriteBlockDatas, 
+            commentDatas=newCommentDatas, 
+            optimizedScriptDatas=spriteData["scripts"]
+        )
+        if i == 1:
+            #writeJSONFile("scripts.compiled.json", exportedScripts)
+            with open("s_pre.txt", "w") as file:
+                file.write((pformat(newSpriteBlockDatas)))
+            with open("s_mid.txt", "w") as file:
+                file.write((pformat(exportedScripts[0])))
+            loadedScript = loadScript(data=exportedScripts[0], spriteName=spriteData["name"])
+            with open("s_aft.txt", "w") as file:
+                file.write((pformat(loadedScript["blocks"])))
+
         
         newSpriteBlockDatas, newCommentDatas = makeJsonCompatible(
             data=newSpriteBlockDatas,
@@ -75,8 +89,8 @@ def deoptimizeProject(projectData, targetPlatform):
         newSpriteData = {
             "isStage"       : spriteData["isStage"],
             "name"          : spriteData["name"],
-            "variables"     : translatedVariableDatas[nameKey],
-            "lists"         : translatedListDatas    [nameKey],
+            "variables"     : translatedVariableDatas[spriteName],
+            "lists"         : translatedListDatas    [spriteName],
             "broadcasts"    : {},
             "customVars"    : [], # NO MEANING FOUND
             "blocks"        : newSpriteBlockDatas,

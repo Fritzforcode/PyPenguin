@@ -1,13 +1,12 @@
 import json
 from enum import Enum
-from pypenguin.helper_functions import pp, replaceClasses, newTempSelector, localStringToToken, getDataAtPath, writeJSONFile
+from pypenguin.helper_functions import pp, editDataStructure, newTempSelector, localStringToToken, getDataAtPath, writeJSONFile
 from pypenguin.database import getBlockType
 
 class PathConstant(Enum):
-    CB_PROTOTYPE_ARGS      = "CB_PROTOTYPE_ARGS"
+    CB_PROTOTYPE_ARGS = "CB_PROTOTYPE_ARGS"
     
-def convertScripts(data, commentDatas, optimizedScriptDatas):
-    pp(data)
+def exportScripts(data, commentDatas, optimizedScriptDatas):
     scripts = []
     for blockSelector, blockData in data.items():
         path = blockData["_placementPath_"]
@@ -27,7 +26,6 @@ def convertScripts(data, commentDatas, optimizedScriptDatas):
             scripts[scriptIndex]["table"   ][blockData["comment"]] = commentPathString
             #blockData["comment"] = commentPathString
     
-    pp(scripts)
     for scriptIndex, scriptData in enumerate(scripts):
         # Combine blocks needed for a custom block definition
          
@@ -58,11 +56,40 @@ def convertScripts(data, commentDatas, optimizedScriptDatas):
                 return table[obj]
             if isinstance(obj, localStringToToken):
                 return obj.toJSON()
-        
-        scriptData["blocks"  ] = replaceClasses(scriptData["blocks"  ], classes=[newTempSelector, localStringToToken], convertionFunc=convertionFunc)
-        scriptData["comments"] = replaceClasses(scriptData["comments"], classes=[newTempSelector, localStringToToken], convertionFunc=convertionFunc)
+        conditionFunc = lambda obj: isinstance(obj, (newTempSelector, localStringToToken))
+        scriptData["blocks"  ] = editDataStructure(scriptData["blocks"  ], conditionFunc=conditionFunc, convertionFunc=convertionFunc)
+        scriptData["comments"] = editDataStructure(scriptData["comments"], conditionFunc=conditionFunc, convertionFunc=convertionFunc)
         del scriptData["table"]
+    return scripts
+
+def loadScript(data, spriteName):
+    blockDatas   = data["blocks"  ]
+    commentDatas = data["comments"]
+    table = {itemPath: newTempSelector() for itemPath in (blockDatas|commentDatas).keys()}
+
+    def convertionFunc(obj):
+        nonlocal table, spriteName
+        if obj["_type_"] == newTempSelector.__name__:
+            return table[obj["path"]]
+        if obj["_type_"] == localStringToToken.__name__:
+            return localStringToToken(main=obj["main"], spriteName=spriteName)
+        
+    conditionFunc = lambda obj: (
+        False if not isinstance(obj, dict) else (
+            (obj.get("_custom_") == True) and ("_type_" in obj)
+        )
+    )
+    blockDatas   = editDataStructure(blockDatas  , conditionFunc=conditionFunc, convertionFunc=convertionFunc)
+    commentDatas = editDataStructure(commentDatas, conditionFunc=conditionFunc, convertionFunc=convertionFunc)
+    newBlockDatas = {}
+    for blockPath, blockData in blockDatas.items():
+        newBlockDatas[table[blockPath]] = blockData["deoptimized"]
+    newCommentDatas = {}
+    for commentPath, commentData in commentDatas.items():
+        newCommentDatas[table[commentPath]] = commentData
+    return {"blocks": newBlockDatas, "comments": commentDatas}
     
-    pp(scripts)
-    writeJSONFile("scripts.compiled", scripts)
+
+def compareScript():
+    pass
 

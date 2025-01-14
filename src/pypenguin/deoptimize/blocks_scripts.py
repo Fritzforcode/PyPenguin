@@ -1,6 +1,6 @@
 import json, copy
 
-from pypenguin.helper_functions import ikv, pp, numberToLiteral, newTempSelector, generateRandomToken, parseCustomOpcode, stringToToken, localStringToToken, Platform, getSelectors, replaceClasses
+from pypenguin.helper_functions import ikv, pp, numberToLiteral, newTempSelector, generateRandomToken, parseCustomOpcode, stringToToken, localStringToToken, Platform, getSelectors, editDataStructure
 from pypenguin.deoptimize.options import translateOptions
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.database import *
@@ -571,7 +571,7 @@ def makeJsonCompatible(data, commentDatas, targetPlatform):
             return table[obj]
         if isinstance(obj, localStringToToken):
             return obj.toToken()
-
-    data         = replaceClasses(data        , classes=[newTempSelector, localStringToToken], convertionFunc=convertionFunc)
-    commentDatas = replaceClasses(commentDatas, classes=[newTempSelector, localStringToToken], convertionFunc=convertionFunc)
+    conditionFunc = lambda obj: isinstance(obj, (newTempSelector, localStringToToken))
+    data         = editDataStructure(data        , conditionFunc=conditionFunc, convertionFunc=convertionFunc)
+    commentDatas = editDataStructure(commentDatas, conditionFunc=conditionFunc, convertionFunc=convertionFunc)
     return data, commentDatas
