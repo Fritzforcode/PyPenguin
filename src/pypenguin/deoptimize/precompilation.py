@@ -1,12 +1,12 @@
 import json
 from enum import Enum
-from pypenguin.helper_functions import pp, replaceClasses, newTempSelector
+from pypenguin.helper_functions import pp, replaceClasses, newTempSelector, localStringToToken, getDataAtPath, writeJSONFile
 from pypenguin.database import getBlockType
 
 class PathConstant(Enum):
     CB_PROTOTYPE_ARGS      = "CB_PROTOTYPE_ARGS"
     
-def convertScripts(data, commentDatas):
+def convertScripts(data, commentDatas, optimizedScriptDatas):
     pp(data)
     scripts = []
     for blockSelector, blockData in data.items():
@@ -28,10 +28,11 @@ def convertScripts(data, commentDatas):
             #blockData["comment"] = commentPathString
     
     pp(scripts)
-    for scriptData in scripts:
+    for scriptIndex, scriptData in enumerate(scripts):
         # Combine blocks needed for a custom block definition
          
         for pathString, blockData in scriptData["blocks"].items():
+            path = json.loads(pathString)
             oldOpcode = blockData["deoptimized"]["opcode"]
             blockType = getBlockType(opcode=oldOpcode, defaultNone=True)
             # Sign menu blocks and custom block definition prototype and args to not be compared later on. That is because these blocks do not exist in the optimized version
@@ -39,26 +40,29 @@ def convertScripts(data, commentDatas):
             if blockType == "menu" or oldOpcode == "procedures_prototype":
                 doCompare = False
             if oldOpcode in ["argument_reporter_string_number", "argument_reporter_boolean"]:
-                path = json.loads(pathString)
                 if path[-2] == PathConstant.CB_PROTOTYPE_ARGS.value:
                     doCompare = False
             
             if not doCompare:
                 blockData["doCompare"] = False
-
+            if blockData.get("doCompare", True):
+                blockData["optimized"] = getDataAtPath(data=optimizedScriptDatas, path=[scriptIndex]+path)
                 
 
         # Replace remaining block selectors with paths
-        table = {selector:{"_custom_": True, "_type_": "selector", "path": pathString} for selector, pathString in scriptData["table"].items()}
+        table = {selector:{"_custom_": True, "_type_": "newTempSelector", "path": pathString} for selector, pathString in scriptData["table"].items()}
 
         def convertionFunc(obj):
             nonlocal table
-            return table[obj]
+            if isinstance(obj, newTempSelector):
+                return table[obj]
+            if isinstance(obj, localStringToToken):
+                return obj.toJSON()
         
-        scriptData["blocks"  ] = replaceClasses(scriptData["blocks"  ], classes=[newTempSelector], convertionFunc=convertionFunc)
-        scriptData["comments"] = replaceClasses(scriptData["comments"], classes=[newTempSelector], convertionFunc=convertionFunc)
+        scriptData["blocks"  ] = replaceClasses(scriptData["blocks"  ], classes=[newTempSelector, localStringToToken], convertionFunc=convertionFunc)
+        scriptData["comments"] = replaceClasses(scriptData["comments"], classes=[newTempSelector, localStringToToken], convertionFunc=convertionFunc)
         del scriptData["table"]
     
-    #pp(scripts)
-
+    pp(scripts)
+    writeJSONFile("scripts.compiled", scripts)
 

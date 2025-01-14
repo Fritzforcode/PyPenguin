@@ -51,7 +51,7 @@ def deoptimizeProject(projectData, targetPlatform):
             data=newSpriteBlockDatas,
         )
         
-        convertScripts(newSpriteBlockDatas, newCommentDatas)
+        convertScripts(newSpriteBlockDatas, newCommentDatas, spriteData["scripts"])
         
         newSpriteBlockDatas, newCommentDatas = makeJsonCompatible(
             data=newSpriteBlockDatas,

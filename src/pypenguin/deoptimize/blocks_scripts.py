@@ -570,7 +570,7 @@ def makeJsonCompatible(data, commentDatas, targetPlatform):
         if isinstance(obj, newTempSelector):
             return table[obj]
         if isinstance(obj, localStringToToken):
-            return obj.toJSON()
+            return obj.toToken()
 
     data         = replaceClasses(data        , classes=[newTempSelector, localStringToToken], convertionFunc=convertionFunc)
     commentDatas = replaceClasses(commentDatas, classes=[newTempSelector, localStringToToken], convertionFunc=convertionFunc)

@@ -227,3 +227,15 @@ def getListOfClosestStrings(string, possibleValues) -> str:
 class Platform(Enum):
     PENGUINMOD = 0
     SCRATCH    = 1
+
+def getDataAtPath(data, path:list[str|int]):
+    """
+    Retrieve data from a nested structure (dictionaries/lists) using a path.
+    """
+    current = data
+    for key in path:
+        try:
+            current = current[key]
+        except (KeyError, IndexError, TypeError):
+            return None
+    return current
