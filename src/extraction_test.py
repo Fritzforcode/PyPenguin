@@ -1,6 +1,12 @@
 from pypenguin import extractAndOptimizeProject, deoptimizeAndCompressProject, validateProject
 from pypenguin.utility import Platform
 
+# Import time module
+import time
+ 
+# record start time
+start = time.time()
+
 optimizedData = extractAndOptimizeProject(
 #    projectFilePath          = "assets/categories/extension_files.pmp",
     projectFilePath          = "assets/studies/commentTest.pmp",
@@ -13,6 +19,9 @@ optimizedData = extractAndOptimizeProject(
 )
 
 validateProject(projectData=optimizedData)
+
+end = time.time()
+print("The time of execution of above program is :", (end-start) * 10**3, "ms")
 
 #deoptimizeAndCompressProject(
 #    projectFilePath          = "export.pmp",
