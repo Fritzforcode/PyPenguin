@@ -110,7 +110,6 @@ def editDataStructure(obj, conditionFunc:callable, convertionFunc:callable):
     if isinstance(obj, dict):
         newObj = {}
         for key, value in obj.items():
-            print("--", key, conditionFunc(key))
             if conditionFunc(key  ): newKey   = convertionFunc(key  )
             else                   : newKey   = editDataStructure(key  , conditionFunc=conditionFunc, convertionFunc=convertionFunc)
 
