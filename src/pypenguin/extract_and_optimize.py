@@ -46,6 +46,19 @@ def extractProject(
         shutil.rmtree(temporaryDir)
     return json
 
+def ensureDirIsEmpty(directoryPath):
+    # Ensure the directory exists
+    if not os.path.exists(directoryPath):
+        os.makedirs(directoryPath)
+    else:
+        # If it exists, clear its contents
+        for item in os.listdir(directoryPath):
+            itemPath = os.path.join(directoryPath, item)
+            if os.path.isfile(itemPath) or os.path.islink(itemPath):
+                os.unlink(itemPath)  # Remove file or symlink
+            elif os.path.isdir(itemPath):
+                shutil.rmtree(itemPath)  # Remove directory
+
 def extractAndOptimizeProject(
     projectFilePath         : str,
     optimizedProjectDir     : str,
@@ -77,12 +90,8 @@ def extractAndOptimizeProject(
         sourcePlatform=sourcePlatform,
     )
     
-    # Make sure the project Dir exists
-    os.makedirs(optimizedProjectDir, exist_ok=True)
-    
-    # Clear the project Dir
-    os.makedirs(optimizedProjectDir, exist_ok=True)
-    shutil.rmtree(path=optimizedProjectDir)
+    # Make sure the project dir exists and is empty
+    ensureDirIsEmpty(optimizedProjectDir)
     
     # Reorganize Assets
     for i, sprite in enumerate(optimizedData["sprites"]):

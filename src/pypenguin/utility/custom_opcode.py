@@ -1,7 +1,6 @@
 import pprint
 import re
 import difflib
-from tokenization import LocalStringToToken
 
 # -----------------------
 # Custom Opcode Functions

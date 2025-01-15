@@ -4,7 +4,6 @@ import hashlib
 # -----------------------
 # Constants
 # -----------------------
-random.seed(0)
 literalCharSet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#%()*+,-./:;=?@[]^_`{|}~"
 charsetLength = len(literalCharSet)
 

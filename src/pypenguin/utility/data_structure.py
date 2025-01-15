@@ -1,4 +1,4 @@
-from tokenization import BlockSelector
+from pypenguin.utility.utility import BlockSelector
 
 # -----------------------
 # Utility Classes
