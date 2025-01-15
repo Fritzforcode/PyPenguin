@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import ikv, pp, generateCustomOpcode
+from pypenguin.utility import generateCustomOpcode
 from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputID, getInputMode, getInputModes, getOptimizedOptionID, getBlockType, optimizeOptionValue, getInputType, getOptionType, inputTextDefault
 
 import copy, json
@@ -16,8 +16,6 @@ def finishScripts(data):
     return newScriptDatas
 
 def finishBlock(data):
-    #print("start fblock", 100*"{")
-    #pp(data)
     blockType = getBlockType(
         opcode=getDeoptimizedOpcode(
             opcode=data["opcode"]
@@ -36,7 +34,7 @@ def finishBlock(data):
     opcode = getDeoptimizedOpcode(opcode=data["opcode"])
 
     newInputDatas = {}
-    for i, inputID, inputData in ikv(data["inputs"]):
+    for inputID, inputData in data["inputs"].items():
         newInputData = copy.deepcopy(inputData)
         if inputData.get("block") != None:
             newInputData["block"]  = finishBlock(data=inputData["block"])
@@ -79,7 +77,7 @@ def finishBlock(data):
         newInputDatas[inputID] = newInputData
     
     newOptionDatas = {}
-    for i, optionID, optionData in ikv(data["options"]):
+    for optionID, optionData in data["options"].items():
         optionType = getOptionType(
             opcode=opcode,
             optionID=optionID,
@@ -94,26 +92,20 @@ def finishBlock(data):
     del newData["_info_"]
     if "comment" in newData:
         del newData["comment"]["_info_"]
-    #print("stop fblock", 100*"}")
-    #pp(newData)
     return newData
 
 
 def nestScripts(data):
-    #print("start scripts", 100*"(")
-    #pp(data)
     # Get all top level block ids
     topLevelIDs = []
-    for i, blockID, blockData in ikv(data):
+    for blockID, blockData in data.items():
         if isinstance(blockData, list): continue
         if blockData["_info_"]["topLevel"]:
             topLevelIDs.append(blockID)
     
     # Account for that one bug(not my fault), where a block is falsely independent
-    for i, blockID, blockData in ikv(data):
-        #print(blockID, blockData)
-        for j, inputID, inputData in ikv(blockData["inputs"]):
-            #print(inputID, inputData)
+    for blockID, blockData in data.items():
+        for inputData in blockData["inputs"].values():
             for reference in inputData["references"]:
                 subBlockData = data[reference]
                 if subBlockData["_info_"]["topLevel"]:
@@ -122,7 +114,7 @@ def nestScripts(data):
                     topLevelIDs.remove(reference)
 
     newScriptDatas = []
-    for i, topLevelID in enumerate(topLevelIDs):
+    for topLevelID in topLevelIDs:
         scriptData = nestBlockRecursively(
             blockDatas=data,
             blockID=topLevelID,
@@ -132,21 +124,14 @@ def nestScripts(data):
             "blocks": scriptData,
         }
         newScriptDatas.append(newScriptData)
-        #print("script end", 100*")")
-        #pp(newScriptData)
-    #print("stop scripts", 100*")")
-    #pp(newScriptDatas)
     return newScriptDatas
 
 def nestBlockRecursively(blockDatas, blockID):
     blockData = blockDatas[blockID]
-    #print("start nbr", 50*"$", blockID)
-    #pp(blockData)
     newInputDatas = {}
-    for i, inputID, inputData in ikv(blockData["inputs"]):
+    for inputID, inputData in blockData["inputs"].items():
         subBlockDatas = []
-        #print(inputID, inputData)
-        for j, reference in enumerate(inputData["references"]): 
+        for reference in inputData["references"]: 
             subBlockDatas.append(nestBlockRecursively(
                 blockDatas=blockDatas,
                 blockID=reference,
@@ -155,7 +140,6 @@ def nestBlockRecursively(blockDatas, blockID):
         if inputData["listBlock"] != None:
             subBlockDatas.insert(0, [inputData["listBlock"]])
         
-        #print("subBlocks", subBlockDatas)
         blockCount = len(subBlockDatas)
         newInputData = {"mode": inputData["mode"]}
         if 0 in range(len(subBlockDatas)):
@@ -200,8 +184,6 @@ def nestBlockRecursively(blockDatas, blockID):
             blockDatas=blockDatas,
             blockID=blockData["_info_"]["next"],
         )
-    #print("stop nbr", 50*"&")
-    #pp(newBlockDatas)
     return newBlockDatas
 
 def prepareProcedureDefinitionBlock(blockDatas, definitionID):
@@ -212,7 +194,6 @@ def prepareProcedureDefinitionBlock(blockDatas, definitionID):
     mutationData   = prototypeData["mutation"]
     proccode       = mutationData["proccode"]
     argumentNames  = json.loads(mutationData["argumentnames"])
-    argumentTokens = json.loads(mutationData["argumentids"])
     customOpcode  = generateCustomOpcode(
         proccode=proccode, 
         argumentNames=argumentNames
@@ -246,12 +227,8 @@ def prepareProcedureDefinitionBlock(blockDatas, definitionID):
 
     # Mark the prototype and the arguments display blocks to be deleted in the future
     prototypeData["doDelete"] = True
-    #for i, argumentToken, argumentTemp in ikv(prototypeData["inputs"]):
-    #    if argumentToken in argumentTokens: # make sure the input is not a phantom(a leftover of a deleted)
-    #        argumentID = argumentTemp[-1]
-    #        blockDatas[argumentID]["doDelete"] = True
 
-    for i, blockID, blockData in ikv(blockDatas):
+    for blockData in blockDatas.values():
         if blockData["parent"] == prototypeID:
             blockData["doDelete"] = True
 
@@ -308,11 +285,8 @@ def prepareProcedureCallBlock(blockDatas, blockID, commentDatas, mutationDatas):
     return newBlockData
 
 def prepareBlocks(data, commentDatas, mutationDatas):
-    #print(100*"(")
-    #pp(data)
     newBlockDatas = {}
-    for i, blockID, blockData in ikv(data):
-        #print(".", blockData)
+    for blockID, blockData in data.items():
         isListBlock = isinstance(blockData, list)
         if isListBlock: # For list blocks e.g. value of a variable
             newBlockData = prepareListBlock(
@@ -358,18 +332,11 @@ def prepareBlocks(data, commentDatas, mutationDatas):
             newBlockData["_info_"]["position"] = [blockData["x"], blockData["y"]]
         if not isListBlock and "comment" in blockData:
             newBlockData["comment"] = commentDatas[blockData["comment"]]
-            #TODO: implement comments, custom blocks
-            #if comment != None:
-            #    newData["comment"] = comment
-            #if mutation != None:
-            #    newData["mutation"] = mutation
         if newBlockData != None:
             newBlockDatas[blockID] = newBlockData
-    #print(100*")")
-    #pp(newBlockDatas)
     blockDatas = newBlockDatas
     newBlockDatas = {}
-    for i, blockID, blockData in ikv(blockDatas):
+    for blockID, blockData in blockDatas.items():
         if blockData.get("doDelete") == True:
             continue
         newBlockDatas[blockID] = blockData
@@ -427,11 +394,9 @@ def prepareInputValue(data, inputMode, commentDatas):
     return newInputData
 
 def prepareInputs(data, opcode, commentDatas):
-    #print(100*"<")
-    #pp(data)
     # Replace the old with the new input ids
     newData = {}
-    for i, inputID, inputData in ikv(data):
+    for inputID, inputData in data.items():
         newInputID = getOptimizedInputID(
             opcode=opcode, 
             inputID=inputID,
@@ -441,7 +406,7 @@ def prepareInputs(data, opcode, commentDatas):
     
     # Optimize the input values
     newData = {}
-    for i, inputID, inputData in ikv(data):
+    for inputID, inputData in data.items():
         inputMode = getInputMode(
             opcode=opcode,
             inputID=inputID,
@@ -452,7 +417,7 @@ def prepareInputs(data, opcode, commentDatas):
             commentDatas=commentDatas,
         )
     
-    for i, inputID, inputMode in ikv(getInputModes(opcode)):
+    for inputID, inputMode in getInputModes(opcode).items():
         if inputID not in newData:
             if inputMode in ["block-only", "script"]:
                 newData[inputID] = {
@@ -470,13 +435,11 @@ def prepareInputs(data, opcode, commentDatas):
                 }
             else:
                 raise Exception(inputMode)
-    #print(100*">")
-    #pp(newData)
     return newData
 
 def prepareOptions(data, opcode):
     newData = {}
-    for i,optionID,optionData in ikv(data):
+    for optionID, optionData in data.items():
         newOptionID = getOptimizedOptionID(
             optionID=optionID,
             opcode=opcode,
@@ -514,7 +477,7 @@ def prepareListBlock(data, blockID, commentDatas):
     
     # Get the comment attached to the block
     blockCommentData = None
-    for i, commentID, commentData in ikv(commentDatas):
+    for commentData in commentDatas.values():
         if commentData["_info_"]["block"] == blockID:
             blockCommentData = commentData
             break
@@ -525,7 +488,7 @@ def prepareListBlock(data, blockID, commentDatas):
 
 def getCustomBlockMutations(data):
     mutationDatas = {}
-    for i, blockID, blockData in ikv(data):
+    for blockData in data.values():
         if isinstance(blockData, dict):
             if blockData["opcode"] == "procedures_prototype":
                 mutationData = blockData["mutation"]

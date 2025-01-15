@@ -22,7 +22,7 @@ from pypenguin.database.extension_bitwise        import opcodes as extension_bit
 
 from pypenguin.database.extension_json           import opcodes as extension_json
 
-from pypenguin.helper_functions                  import ikv, flipKeysAndValues, removeDuplicates
+from pypenguin.utility                           import flipKeysAndValues, removeDuplicates
 
 import functools
 
@@ -73,7 +73,7 @@ def getAllDeoptimizedOpcodes():
 
 def getAllOptimizedOpcodes():
     opcodes = {}
-    for i, oldOpcode, opcodeData in ikv(opcodeDatabase):
+    for oldOpcode, opcodeData in opcodeDatabase.items():
         if opcodeData["newOpcode"] in opcodes.values():
             index       = list(opcodes.values()).index(opcodeData["newOpcode"])
             otherOpcode = list(opcodes.keys  ())[index]
@@ -83,7 +83,7 @@ def getAllOptimizedOpcodes():
 
 def getAllMonitorOpcodes():
     opcodes = {}
-    for i, oldOpcode, opcodeData in ikv(opcodeDatabase):
+    for oldOpcode, opcodeData in opcodeDatabase.items():
         if opcodeData["newOpcode"] in opcodes.values():
             index       = list(opcodes.values()).index(opcodeData["newOpcode"])
             otherOpcode = list(opcodes.keys  ())[index]
@@ -99,7 +99,7 @@ def getOptimizedOpcode(opcode):
 @functools.cache
 def getDeoptimizedOpcode(opcode):
     found = False
-    for i, oldOpcode, opcodeData in ikv(opcodeDatabase):
+    for oldOpcode, opcodeData in opcodeDatabase.items():
         if opcodeData["newOpcode"] == opcode:
             found = True
             break

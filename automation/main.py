@@ -1,6 +1,6 @@
 import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src/')))
 from pypenguin.database import getAllDeoptimizedOpcodes, getOptimizedOpcode, getBlockCategory, getInputModes
-from pypenguin.helper_functions import pp, insureCorrectPath
+from pypenguin.utility import insureCorrectPath
 
 def toFileId(string: str):
     return (string.lower()

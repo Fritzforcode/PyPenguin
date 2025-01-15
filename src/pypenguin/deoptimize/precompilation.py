@@ -1,6 +1,6 @@
 import json
 from enum import Enum
-from pypenguin.helper_functions import pp, editDataStructure, newTempSelector, localStringToToken, getDataAtPath, writeJSONFile
+from pypenguin.utility import editDataStructure, BlockSelector, LocalStringToToken, getDataAtPath
 from pypenguin.database import getBlockType
 
 class PathConstant(Enum):
@@ -24,7 +24,6 @@ def exportScripts(data, commentDatas, optimizedScriptDatas):
             commentPathString = json.dumps(path+["comment"])
             scripts[scriptIndex]["comments"][commentPathString   ] = commentDatas[blockData["comment"]]
             scripts[scriptIndex]["table"   ][blockData["comment"]] = commentPathString
-            #blockData["comment"] = commentPathString
     
     for scriptIndex, scriptData in enumerate(scripts):
         # Combine blocks needed for a custom block definition
@@ -52,11 +51,11 @@ def exportScripts(data, commentDatas, optimizedScriptDatas):
 
         def convertionFunc(obj):
             nonlocal table
-            if isinstance(obj, newTempSelector):
+            if isinstance(obj, blockSelector):
                 return table[obj]
-            if isinstance(obj, localStringToToken):
+            if isinstance(obj, LocalStringToToken):
                 return obj.toJSON()
-        conditionFunc = lambda obj: isinstance(obj, (newTempSelector, localStringToToken))
+        conditionFunc = lambda obj: isinstance(obj, (blockSelector, LocalStringToToken))
         scriptData["blocks"  ] = editDataStructure(scriptData["blocks"  ], conditionFunc=conditionFunc, convertionFunc=convertionFunc)
         scriptData["comments"] = editDataStructure(scriptData["comments"], conditionFunc=conditionFunc, convertionFunc=convertionFunc)
         del scriptData["table"]
@@ -65,14 +64,14 @@ def exportScripts(data, commentDatas, optimizedScriptDatas):
 def loadScript(data, spriteName):
     blockDatas   = data["blocks"  ]
     commentDatas = data["comments"]
-    table = {itemPath: newTempSelector() for itemPath in (blockDatas|commentDatas).keys()}
+    table = {itemPath: BlockSelector() for itemPath in (blockDatas|commentDatas).keys()}
 
     def convertionFunc(obj):
         nonlocal table, spriteName
-        if obj["_type_"] == newTempSelector.__name__:
+        if obj["_type_"] == BlockSelector.__name__:
             return table[obj["path"]]
-        if obj["_type_"] == localStringToToken.__name__:
-            return localStringToToken(main=obj["main"], spriteName=spriteName)
+        if obj["_type_"] == LocalStringToToken.__name__:
+            return LocalStringToToken(main=obj["main"], spriteName=spriteName)
         
     conditionFunc = lambda obj: (
         False if not isinstance(obj, dict) else (

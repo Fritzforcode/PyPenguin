@@ -1,4 +1,3 @@
-from pypenguin.helper_functions import pp
 from pypenguin.validate.constants import validateSchema, formatError, projectSchema
 from pypenguin.validate.errors import doubleVariableDefinitionError, doubleListDefinitionError, equalSpriteNameError
 from pypenguin.validate.variables_lists import validateVariable, validateList

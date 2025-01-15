@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import newTempSelector, stringToToken, Platform, pp, writeJSONFile, pformat
+from pypenguin.utility import BlockSelector, stringToToken, Platform, pformat
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
 from pypenguin.deoptimize.blocks_scripts import prepareScripts, flattenScripts, restoreBlocks, unprepareBlocks, makeJsonCompatible
@@ -31,18 +31,14 @@ def deoptimizeProject(projectData, targetPlatform):
         preparedScriptDatas = prepareScripts(spriteData["scripts"])
         flattendScriptDatas = flattenScripts(preparedScriptDatas)
         spriteName = None if spriteData["isStage"] else spriteData["name"]
-        #pp(preparedScriptDatas)
         newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,
             spriteName=spriteName,
         )
-        #print(100*"#")
-        #pp(flattendScriptDatas)
-        #pp(newSpriteBlockDatas)
         newCommentDatas = scriptCommentDatas
         
         for i, commentData in enumerate(spriteData["comments"]):
-            commentID = newTempSelector()
+            commentID = BlockSelector()
             newCommentDatas[commentID] = translateComment(
                 data=commentData,
                 id=None,
@@ -57,7 +53,6 @@ def deoptimizeProject(projectData, targetPlatform):
             optimizedScriptDatas=spriteData["scripts"]
         )
         if i == 1:
-            #writeJSONFile("scripts.compiled.json", exportedScripts)
             with open("s_pre.txt", "w") as file:
                 file.write((pformat(newSpriteBlockDatas)))
             with open("s_mid.txt", "w") as file:

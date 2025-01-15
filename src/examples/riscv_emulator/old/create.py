@@ -87,7 +87,7 @@ project["sprites"][0]["scripts"] = scripts
 project["globalVariables"] = [{"name":variable, "currentValue":"", "isCloudVariable":False} for variable in variables]
 
 from pypenguin.validate import validateProject
-from pypenguin.helper_functions import writeJSONFile
+from pypenguin.utility import writeJSONFile
 from pypenguin.deoptimize_and_compress import deoptimizeAndCompressProject
 validateProject(projectData=project)
 

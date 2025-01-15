@@ -141,11 +141,10 @@ class Symbol(Enum):
     SQUARE_BRACKET = 3
 
 from pypenguin.database import opcodeDatabase, getPredefinedTokens
-from pypenguin.helper_functions import ikv
 
 def getAllTokenOpcodes():
     tokenOpcodes = []
-    for i, oldOpcode, opcodeData in ikv(opcodeDatabase):
+    for oldOpcode, opcodeData in opcodeDatabase.items():
         newOpcode = opcodeData["newOpcode"]
         newOpcodeChars = []
         for j, char in enumerate(newOpcode):
@@ -188,8 +187,6 @@ def getAllTokenOpcodes():
                 else:
                     tokens.append(Token(TokenType[token], None))
 
-        #if newOpcode == "repeat until <CONDITION> {BODY}":
-        #print("-", newOpcode, tokens)
         tokenOpcodes.append((oldOpcode, tokens))
     return tokenOpcodes
 

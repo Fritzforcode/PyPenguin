@@ -4,7 +4,7 @@ import urllib.parse
 from pypenguin.deoptimize import deoptimizeProject
 from pypenguin.deoptimize.costumes_sounds import finalizeCostume, finalizeSound
 
-from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrectPath, generateMd5, getImageSize, Platform
+from pypenguin.utility import readJSONFile, writeJSONFile, insureCorrectPath, generateMd5, getImageSize, Platform
 
 from pypenguin.database import defaultCostumeFilePath
 
@@ -46,7 +46,7 @@ def deoptimizeAndCompressProject(
         
         # Copy and rename costumes
         newCostumes = []
-        for j, costume in enumerate(deoptimizedSprite["costumes"]):
+        for costume in deoptimizedSprite["costumes"]:
             encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
             if costume.get("isDefault") == True:
                 srcPath = defCostumeFilePath
@@ -78,7 +78,7 @@ def deoptimizeAndCompressProject(
         
         # Copy and rename sounds
         newSounds = []
-        for j, sound in enumerate(deoptimizedSprite["sounds"]):
+        for sound in deoptimizedSprite["sounds"]:
             encodedSoundName = urllib.parse.quote(sound["name"] + "." + sound["dataFormat"])
             srcPath = os.path.join(
                 optimizedProjectDir, 

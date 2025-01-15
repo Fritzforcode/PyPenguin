@@ -1,8 +1,8 @@
 if __name__ == "__main__": import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 from helpers import *
-from pypenguin.helper_functions import pp, insureCorrectPath, generateCustomOpcode
-from pypenguin.database import getInputModes, getOptionType, getOptionTypes, getOptimizedOpcode, autocompleteOptionValue, getInputType
+from pypenguin.utility  import pp, insureCorrectPath, generateCustomOpcode
+from pypenguin.database import getInputModes, getOptionTypes, getOptimizedOpcode, autocompleteOptionValue, getInputType
 
 class SETTINGS:
     CUSTOM_BLOCK_NO_SCREENREFRESH = ["value", True]

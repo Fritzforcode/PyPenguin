@@ -1,4 +1,4 @@
-from pypenguin.database import getAllMonitorOpcodes#, getAllOptimizedOpcodes
+from pypenguin.database import getAllMonitorOpcodes
 from pypenguin.validate.errors import *
 
 allowedMenuOpcodes = getAllMonitorOpcodes()
@@ -11,8 +11,6 @@ textToSpeechLanguages = [
     "Swedish (sv)", "Turkish (tr)", "Welsh (cy)"
 ]
 
-from pypenguin.helper_functions import pp
-
 projectSchema = {
     "type": "object",
     "properties": {
@@ -23,10 +21,8 @@ projectSchema = {
                 "type": "object",
                 "properties": {
                     "name": {"type": "string"},
-                    #"localVariables": {"type": "array"},
-                    #"localLists": {"type": "array"},
                 },
-                "required": ["name"],#, "localVariables", "localLists"],
+                "required": ["name"],
             },
         },
         "globalVariables": {
@@ -311,7 +307,7 @@ from jsonschema import validate, exceptions
 
 
 def validateSchema(pathToData, data, schema):
-    from pypenguin.helper_functions import pp
+    from pypenguin.utility import pp
 
     try:
         validate(instance=data, schema=schema)
@@ -382,7 +378,6 @@ def getHelpLink(path):
     if   primary == "sprites":
         if len(path) == 1: # ["sprites"]
             return combine(file=SPRITE_DOCS, section=None)
-        isStage = path[1] == 0
         if len(path) == 2: # eg. ["sprites", 0]
             return combine(file=SPRITE_DOCS, section=None)
         

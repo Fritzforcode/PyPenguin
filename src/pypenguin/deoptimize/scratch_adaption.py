@@ -1,5 +1,5 @@
 def adaptProject(data):
-    for i, targetData in enumerate(data["targets"]):
+    for targetData in data["targets"]:
         del targetData["customVars"]
         del targetData["id"]
     

@@ -4,7 +4,7 @@ from pypenguin.optimize.costumes_sounds import finalizeCostume
 import urllib.parse
 import os, shutil, zipfile
 
-from pypenguin.helper_functions import readJSONFile, writeJSONFile, insureCorrectPath, getImageSize, Platform
+from pypenguin.utility import readJSONFile, writeJSONFile, insureCorrectPath, getImageSize, Platform
 
 def extractProject(
     pmpFilePath       : str, # Path to your .pmp file

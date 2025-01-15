@@ -226,7 +226,7 @@ def translate_node(node):
     return node
 
 
-from pypenguin.helper_functions import insureCorrectPath, removeDuplicates
+from pypenguin.utility import insureCorrectPath, removeDuplicates
 def updatePyFile(string):
     startLiteral = "###INSERT_START###"
     endLiteral   = "###INSERT_END###"

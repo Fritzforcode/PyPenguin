@@ -1,6 +1,5 @@
 from pypenguin.validate.constants import validateSchema, monitorSchema, formatError
 from pypenguin.validate.blocks_scripts import validateOptions
-from pypenguin.helper_functions import pp
 from pypenguin.database import getDeoptimizedOpcode
 from pypenguin.validate.errors import monitorSpriteNameError, missingMonitorAttributeError, monitorSliderRangeError
 

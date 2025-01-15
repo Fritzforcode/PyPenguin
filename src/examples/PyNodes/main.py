@@ -137,7 +137,7 @@ scripts = [script]
 
 import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from pypenguin import validateProject, deoptimizeAndCompressProject
-from pypenguin.helper_functions import writeJSONFile
+from pypenguin.utility import writeJSONFile
 project["sprites"][0]["scripts"] = [script.toJSON() for script in scripts]
 project["globalVariables"] = [{"name":variable, "currentValue":"", "isCloudVariable":False} for variable in variables]
 validateProject(projectData=project)

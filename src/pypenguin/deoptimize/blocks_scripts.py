@@ -1,6 +1,6 @@
 import json, copy
 
-from pypenguin.helper_functions import ikv, pp, numberToLiteral, newTempSelector, generateRandomToken, parseCustomOpcode, stringToToken, localStringToToken, Platform, getSelectors, editDataStructure
+from pypenguin.utility import numberToLiteral, BlockSelector, generateRandomToken, parseCustomOpcode, stringToToken, LocalStringToToken, Platform, getSelectors, editDataStructure
 from pypenguin.deoptimize.options import translateOptions
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.database import *
@@ -66,7 +66,7 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputID=None
     if opcode == "procedures_call":
         proccode, arguments = parseCustomOpcode(customOpcode=data["options"]["customOpcode"][1])
     newInputDatas = {}
-    for i, inputID, inputData in ikv(data["inputs"]):
+    for inputID, inputData in data["inputs"].items():
         if opcode == "procedures_call":
             argument  = arguments[inputID]
             if   argument == str:
@@ -114,7 +114,7 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputID=None
     
     inputDatas = newInputDatas
     newInputDatas = {}
-    for i, inputID, inputData in ikv(inputDatas):
+    for inputID, inputData in inputDatas.items():
         if inputData["mode"] == "block-and-broadcast-option":
             inputData["text"] = inputData["option"]
             del inputData["option"]
@@ -150,7 +150,7 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputID=None
         newOptionDatas = data["options"]
     else:
         newOptionDatas = {}
-        for i, optionID, optionData in ikv(data["options"]):
+        for optionID, optionData in data["options"].items():
             optionType = getOptionType(
                 opcode=opcode,
                 optionID=optionID,
@@ -183,7 +183,7 @@ def flattenScripts(data):
 
 def flattenBlocks(data, placementPath, parentID=None, firstID=None):
     range_ = range(len(data))
-    blockIDs = [newTempSelector() for i in range_]
+    blockIDs = [BlockSelector() for i in range_]
     if firstID != None:
         blockIDs[0] = firstID
     newBlockDatas = {}
@@ -211,7 +211,7 @@ def flattenBlock(data, blockID, parentID, nextID, placementPath):
     # Transform inputs
     newBlockDatas = {}
     newInputDatas = {}
-    for j, inputID, inputData in ikv(data["inputs"]):
+    for inputID, inputData in data["inputs"].items():
         references = []
         listBlock = None
         if inputData.get("block") != None:
@@ -227,7 +227,7 @@ def flattenBlock(data, blockID, parentID, nextID, placementPath):
                     "next"  : None
                 }
             else:
-                subBlockID = newTempSelector()
+                subBlockID = BlockSelector()
                 references.append(subBlockID)
                 newBlockDatas |= flattenBlock(
                     data=inputData["block"],
@@ -237,7 +237,7 @@ def flattenBlock(data, blockID, parentID, nextID, placementPath):
                     nextID=None,
                 )
         if inputData.get("blocks", []) != []:
-            subBlockID = newTempSelector()
+            subBlockID = BlockSelector()
             references.append(subBlockID)
             newBlockDatas |= flattenBlocks(
                 data=inputData["blocks"],
@@ -246,7 +246,7 @@ def flattenBlock(data, blockID, parentID, nextID, placementPath):
                 firstID=subBlockID,
             )
         if inputData.get("option") != None:
-            subBlockID = newTempSelector()
+            subBlockID = BlockSelector()
             references.append(subBlockID)
             newBlockDatas |= flattenBlock(
                 data=inputData["option"],
@@ -284,12 +284,12 @@ def restoreProcedureDefinitionBlock(data, blockID):
     argumentNames       = []
     argumentDefaults    = []
     argumentBlockIDs    = []
-    for i, argumentName, argumentType in ikv(arguments):
+    for argumentName, argumentType in arguments.items():
         argumentIDs     .append(generateRandomToken())
         argumentNames   .append(argumentName)
         # The argument reporter defaults
         argumentDefaults.append("" if argumentType==str else json.dumps(False))
-        argumentBlockIDs.append(newTempSelector())
+        argumentBlockIDs.append(BlockSelector())
     
     match data["options"]["blockType"]:
         case "instruction"    : returns, optype, opcode = False, "statement", "procedures_definition"
@@ -299,7 +299,7 @@ def restoreProcedureDefinitionBlock(data, blockID):
         case "booleanReporter": returns, optype, opcode = True , "boolean"  , "procedures_definition_return"
     
     definitionID = blockID
-    prototypeID  = newTempSelector()
+    prototypeID  = BlockSelector()
     position     = data["_info_"]["position"]
     definitionData = {
         "opcode": opcode,
@@ -361,11 +361,9 @@ def restoreProcedureDefinitionBlock(data, blockID):
     return newBlockDatas
 
 def restoreBlocks(data, spriteName):
-    #print("rbs", 100*"{")
-    #pp(data)
     newBlockDatas = {}
     newCommentDatas = {}
-    for i, blockID, blockData in ikv(data):
+    for blockID, blockData in data.items():
         opcode = getDeoptimizedOpcode(opcode=blockData["opcode"])
         
         if opcode in ["special_variable_value", "special_list_value"]:
@@ -416,7 +414,7 @@ def restoreBlocks(data, spriteName):
                 data=blockData["comment"],
                 id=blockID,
             )
-            newCommentID = newTempSelector()
+            newCommentID = BlockSelector()
             newCommentDatas[newCommentID] = newCommentData
             newBlockData["comment"] = newCommentID
         
@@ -428,7 +426,7 @@ def restoreInputs(data, opcode, spriteName, blockData):
     newInputDatas = {}
     if opcode == "procedures_call":
         proccode, arguments = parseCustomOpcode(customOpcode=blockData["options"]["customOpcode"])
-    for i, inputID, inputData in ikv(data):
+    for inputID, inputData in data.items():
         if opcode == "procedures_call":
             argument = arguments[inputID]
             if   argument == str:
@@ -446,7 +444,6 @@ def restoreInputs(data, opcode, spriteName, blockData):
                 opcode=opcode,
                 inputID=inputID
             )
-        #print(inputID, inputType, inputMode, inputData)
         
         subBlocks     = inputData["references"]
         if inputData["listBlock"] != None:
@@ -497,7 +494,7 @@ def restoreListBlock(data, spriteName):
         magicNumber = 13
         value = data["options"]["LIST"]
     
-    token = localStringToToken(value, spriteName=spriteName)
+    token = LocalStringToToken(value, spriteName=spriteName)
     newData = [magicNumber, value, token]
     if data["_info_"]["topLevel"]:
         newData += data["_info_"]["position"]
@@ -506,12 +503,12 @@ def restoreListBlock(data, spriteName):
 
 def unprepareBlocks(data):
     mutationDatas = {}
-    for j, blockID, blockData in ikv(data):
+    for blockData in data.values():
         if isinstance(blockData, dict):
             if blockData["opcode"] == "procedures_prototype":
                 mutationData = blockData["mutation"]
                 mutationDatas[mutationData["proccode"]] = mutationData
-    for i, blockID, blockData in ikv(data):
+    for blockData in data.values():
         if isinstance(blockData, dict):
             if blockData["opcode"] == "procedures_call":
                 customOpcode = blockData["fields"]["customOpcode"]
@@ -527,7 +524,7 @@ def unprepareBlocks(data):
                 argumentNames = json.loads(mutationData["argumentnames"])
                 blockData["inputs"] = {
                     argumentIDs[argumentNames.index(inputID)]: 
-                    inputValue for j,inputID,inputValue in ikv(blockData["inputs"]) 
+                    inputValue for inputID,inputValue in blockData["inputs"].items() 
                 }
 
             elif blockData["opcode"] == "control_stop":
@@ -567,11 +564,11 @@ def makeJsonCompatible(data, commentDatas, targetPlatform):
         table = {selector: generateRandomToken() for    selector in           cutSelectors }
     def convertionFunc(obj):
         nonlocal table
-        if isinstance(obj, newTempSelector):
+        if isinstance(obj, BlockSelector):
             return table[obj]
-        if isinstance(obj, localStringToToken):
+        if isinstance(obj, LocalStringToToken):
             return obj.toToken()
-    conditionFunc = lambda obj: isinstance(obj, (newTempSelector, localStringToToken))
+    conditionFunc = lambda obj: isinstance(obj, (BlockSelector, LocalStringToToken))
     data         = editDataStructure(data        , conditionFunc=conditionFunc, convertionFunc=convertionFunc)
     commentDatas = editDataStructure(commentDatas, conditionFunc=conditionFunc, convertionFunc=convertionFunc)
     return data, commentDatas

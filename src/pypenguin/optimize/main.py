@@ -1,4 +1,4 @@
-from pypenguin.helper_functions          import ikv, pp, Platform
+from pypenguin.utility                   import Platform
 
 from pypenguin.optimize.costumes_sounds  import translateCostumes, translateSounds
 from pypenguin.optimize.variables_lists  import translateVariables, translateLists
@@ -20,7 +20,7 @@ def optimizeProjectJSON(projectData, sourcePlatform):
         commentDatas = spriteData["comments"]
         floatingCommentDatas = [] # The comments that aren't connected to any blocks
         attachedCommentDatas = {}
-        for j, commentID, commentData in ikv(commentDatas):
+        for commentID, commentData in commentDatas.items():
             if commentData["blockId"] == None: # No Block connection
                 floatingCommentDatas.append(translateComment(data=commentData))
             else:

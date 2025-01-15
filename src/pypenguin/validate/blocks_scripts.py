@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import ikv, parseCustomOpcode, pp, getListOfClosestStrings
+from pypenguin.utility import parseCustomOpcode, getListOfClosestStrings
 from pypenguin.validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema
 from pypenguin.validate.errors import blockTypeError, unknownOpcodeError, inputIdError, missingInputAttributeError, optionIdError, optionValueCategoryError, optionValueError, undefinedVariableError, undefinedListError, undefinedCustomOpcodeError, embeddedMenuError
 from pypenguin.validate.comments import validateComment
@@ -137,7 +137,7 @@ def validateInputs(path, data, opcode, context, options):
     allowedInputIDs = list(getInputTypes(opcode=oldOpcode).keys()) # List of inputs which are defined for the specific opcode
     if oldOpcode == "procedures_call": # Inputs in the call custom block block are custom
         return
-    for i, inputID, inputValue in ikv(data):
+    for inputID, inputValue in data.items():
         if inputID not in allowedInputIDs:
             raise formatError(inputIdError, path, f"Input '{inputID}' is not defined for a block with opcode '{opcode}'.")
     for inputID in allowedInputIDs:
@@ -178,7 +178,6 @@ def validateInputs(path, data, opcode, context, options):
 
 def validateInputValue(path, inputValue, inputType, inputMode, opcode, inputDatas, context):
     oldOpcode = getDeoptimizedOpcode(opcode)
-    #if "mode" not in inputValue:
     inputValue["mode"] = inputMode
     # Check input value format
     validateSchema(pathToData=path, data=inputValue, schema=inputSchema)
@@ -241,8 +240,8 @@ def validateInputValue(path, inputValue, inputType, inputMode, opcode, inputData
 
 def validateCallInputs(path, data, opcode, optionDatas, context):
     proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"][1])
-    inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
-    for i, inputID, inputType in ikv(inputTypes):
+    inputTypes = {k: ("text" if v==str else "boolean") for k,v in inputTypes.items()}
+    for inputID, inputType in inputTypes.items():
         if inputType == "text" and inputID not in data:
             raise formatError(inputIdError, path, f"A custom block with custom opcode '{optionDatas['customOpcode'][1]}' must have the input '{inputID}'.")
 
@@ -251,7 +250,7 @@ def validateCallInputs(path, data, opcode, optionDatas, context):
         if inputID not in inputTypes:
             raise formatError(inputIdError, path, f"Input '{inputID}' is not defined for a custom block with custom opcode '{optionDatas['customOpcode'][1]}'.")
     
-    for i, inputID, inputValue in ikv(data):
+    for inputID, inputValue in data:
         validateInputValue(
             path=path+[inputID],
             inputValue=inputValue,
@@ -265,7 +264,7 @@ def validateCallInputs(path, data, opcode, optionDatas, context):
 def validateOptions(path, data, opcode, context, inputDatas):
     oldOpcode        = getDeoptimizedOpcode(opcode=opcode)
     allowedOptionIDs = list(getOptionTypes(opcode=oldOpcode).keys()) # List of inputs which are defined for the specific opcode
-    for i, optionID, optionValue in ikv(data):
+    for optionID, optionValue in data.items():
         if optionID not in allowedOptionIDs:
             raise formatError(optionIdError, path, f"Option '{optionID}' is not defined for a block with opcode '{opcode}'.")
     for optionID in allowedOptionIDs:
@@ -374,11 +373,11 @@ def validateBlockCustomBlocks(path, data, CBTypes, expectedShape=None):
     if "inputs" in data:
         if oldOpcode == "procedures_call":
             proccode, inputTypes = parseCustomOpcode(data["options"]["customOpcode"][1])
-            inputTypes = {k: ("text" if v==str else "boolean") for i,k,v in ikv(inputTypes)}
+            inputTypes = {k: ("text" if v==str else "boolean") for k,v in inputTypes.items()}
         else:
             inputTypes = getInputTypes(opcode=oldOpcode)
         
-        for i, inputID, inputValue in ikv(data["inputs"]):
+        for inputID, inputValue in data["inputs"].items():
             inputType = inputTypes[inputID]
             
             inputBlock = inputValue.get("block")

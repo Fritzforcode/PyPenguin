@@ -1,10 +1,8 @@
-from pypenguin.helper_functions import pp, ikv
 from pypenguin.database import getOptimizedOpcode, getOptimizedOptionID, optimizeOptionValue, getOptionType
 
 def translateMonitors(data, spriteNames):
     newMonitorDatas = []
     for monitorData in data:
-        #pp(monitor)
         opcode = monitorData["opcode"]
         if   opcode == "data_variable":
             newOpcode = getOptimizedOpcode(opcode="special_variable_value")
@@ -14,7 +12,7 @@ def translateMonitors(data, spriteNames):
             newOpcode = getOptimizedOpcode(opcode=opcode)
         
         newOptionDatas = {}
-        for i, optionID, optionData in ikv(monitorData["params"]):
+        for optionID, optionData in monitorData["params"].items():
             if   opcode == "data_variable":
                 newOptionID = "VARIABLE"
                 optionType  = "variable"

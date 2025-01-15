@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import ikv, generateRandomToken, stringToToken, localStringToToken
+from pypenguin.utility import generateRandomToken, stringToToken, LocalStringToToken
 
 from pypenguin.database import getOptionType, getBlockType, getDeoptimizedOptionID
 
@@ -11,17 +11,17 @@ def translateOptions(data, opcode, spriteName):
         return {key: [value, generateRandomToken()]}
     
     newData = {}
-    for i,optionID,optionData in ikv(data):
+    for optionID, optionData in data.items():
         mode = getOptionType(
             opcode=opcode,
             optionID=optionID,
         )
         if mode in ["variable", "list", "broadcast"]:
             if mode == "variable":
-                token = localStringToToken(optionData, spriteName=spriteName)
+                token = LocalStringToToken(optionData, spriteName=spriteName)
                 magicString = ""
             elif mode == "list":
-                token = localStringToToken(optionData, spriteName=spriteName)
+                token = LocalStringToToken(optionData, spriteName=spriteName)
                 magicString = "list"
             elif mode == "broadcast":
                 token = stringToToken(optionData)

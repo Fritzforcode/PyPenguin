@@ -1,10 +1,10 @@
-from pypenguin.helper_functions import ikv, removeDuplicates, stringToToken
+from pypenguin.utility import removeDuplicates, stringToToken
 
 from pypenguin.database import opcodeDatabase, inputDefault, inputTextDefault, optionDefault, deoptimizeOptionValue
 
 
 def findBlockBroadcastMessages(data):
-    for i,opcode,opcodeData in ikv(opcodeDatabase):
+    for opcode,opcodeData in opcodeDatabase.items():
         if opcodeData["newOpcode"] == data["opcode"]:
             break
     if not opcodeData["newOpcode"] == data["opcode"]: raise Exception(data["opcode"])
@@ -13,7 +13,7 @@ def findBlockBroadcastMessages(data):
     
     if "inputs" not in data:
         data["inputs"] = inputDefault
-    for i,inputID,inputData in  ikv(data["inputs"]):
+    for inputID, inputData in data["inputs"].items():
         if opcode != "procedures_call":
             if opcodeData["inputTypes"][inputID] == "broadcast":
                 if "text" not in inputData:
@@ -27,7 +27,7 @@ def findBlockBroadcastMessages(data):
     
     if "options" not in data:
         data["options"] = optionDefault
-    for i,optionID,optionData in  ikv(data["options"]):
+    for optionID, optionData in data["options"].items():
         if opcodeData["optionTypes"][optionID] == "broadcast":
             if optionData not in broadcastMessages:
                 broadcastMessages.append(optionData)

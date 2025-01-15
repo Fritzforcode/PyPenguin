@@ -78,7 +78,7 @@ projectData = {
 #TODO sprites[1].name
 
 from pypenguin import validateProject, deoptimizeAndCompressProject, extractAndOptimizeProject
-from pypenguin.helper_functions import writeJSONFile, pp, Platform
+from pypenguin.utility import writeJSONFile, Platform
 validateProject(projectData=projectData)
 print("[VALIDATION SUCCESS]")
 writeJSONFile(filePath="t_source.json", data=projectData)

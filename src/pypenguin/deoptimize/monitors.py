@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import pp, ikv, stringToToken
+from pypenguin.utility import stringToToken
 from pypenguin.database import getDeoptimizedOpcode, getDeoptimizedOptionID
 
 def translateMonitor(data):
@@ -8,7 +8,7 @@ def translateMonitor(data):
     elif opcode == "special_list_value":
         opcode = "data_listcontents"
     newOptionDatas = {}
-    for i, optionID, optionData in ikv(data["options"]):
+    for optionID, optionData in data["options"].items():
         if   opcode == "data_variable":
             newOptionID = "VARIABLE"
         elif opcode == "data_listcontents":

@@ -1,4 +1,4 @@
-from pypenguin.helper_functions import stringToToken
+from pypenguin.utility import stringToToken
 import json
 
 def adaptProject(data):
@@ -10,7 +10,7 @@ def adaptProject(data):
             token = stringToToken(spriteData["name"])
         spriteData["id"        ] = token
 
-        for blockID, blockData in spriteData["blocks"].items():
+        for blockData in spriteData["blocks"].values():
             if blockData["opcode"] == "procedures_prototype":
                 blockData["mutation"]["optype"] = json.dumps("statement") # Scratch custom blocks are always "instruction" blocks
     

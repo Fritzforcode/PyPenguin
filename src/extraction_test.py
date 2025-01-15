@@ -1,5 +1,5 @@
 from pypenguin import extractAndOptimizeProject, deoptimizeAndCompressProject, validateProject
-from pypenguin.helper_functions import readJSONFile, pp, Platform
+from pypenguin.utility import Platform
 
 optimizedData = extractAndOptimizeProject(
 #    projectFilePath          = "assets/categories/extension_files.pmp",
