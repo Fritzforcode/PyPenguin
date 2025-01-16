@@ -1,7 +1,7 @@
 if __name__ == "__main__": import sys, os; sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 from helpers import *
-from pypenguin.utility  import pp, insureCorrectPath, generateCustomOpcode
+from pypenguin.utility  import pp, ensureCorrectPath, generateCustomOpcode
 from pypenguin.database import getInputModes, getOptionTypes, getOptimizedOpcode, autocompleteOptionValue, getInputType
 
 class SETTINGS:
@@ -366,6 +366,6 @@ def parseBlock(tokens: list[Token], isNested: bool):
     pp(">>>", block)
     return block
 
-string = open(insureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read().strip()
+string = open(ensureCorrectPath("src/pypenguin/scratchblocks/code.txt", "PyPenguin")).read().strip()
 parse(string, isNested=False)
 

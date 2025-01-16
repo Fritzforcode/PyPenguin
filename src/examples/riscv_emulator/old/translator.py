@@ -226,12 +226,12 @@ def translate_node(node):
     return node
 
 
-from pypenguin.utility import insureCorrectPath, removeDuplicates
+from pypenguin.utility import ensureCorrectPath, removeDuplicates
 def updatePyFile(string):
     startLiteral = "###INSERT_START###"
     endLiteral   = "###INSERT_END###"
 
-    filePath = insureCorrectPath("src/examples/riscv_emulator/create.py", "PyPenguin")
+    filePath = ensureCorrectPath("src/examples/riscv_emulator/create.py", "PyPenguin")
     with open(filePath, "r") as file:
         fileString = file.read()
     startIndex = fileString.index(startLiteral) + len(startLiteral)

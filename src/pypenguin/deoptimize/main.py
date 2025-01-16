@@ -7,8 +7,10 @@ from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSou
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.deoptimize.monitors import translateMonitor
 from pypenguin.deoptimize.scratch_adaption import adaptProject
-from pypenguin.deoptimize.precompilation import exportBlocks, loadScript, findMatchingScript
+from pypenguin.deoptimize.precompilation import exportBlocks, findMatchingScript
 from pypenguin.database import deoptimizeOptionValue
+
+import os
 
 def translateVariablesLists(data):
     spriteNames = [sprite["name"] for sprite in data["sprites"]][1:]
@@ -23,7 +25,10 @@ def translateVariablesLists(data):
     return translatedVariableDatas, translatedListDatas
 
 def deoptimizeProject(projectData, targetPlatform):
-    precompiledScriptDatas = readJSONFile("precompiled.json")
+    if os.path.exists("precompiled.json"):
+        precompiledScriptDatas = readJSONFile("precompiled.json")
+    else:
+        precompiledScriptDatas = []
     translatedVariableDatas, translatedListDatas = translateVariablesLists(data=projectData)    
     broadcastDatas = generateBroadcasts(data=projectData["sprites"])
     

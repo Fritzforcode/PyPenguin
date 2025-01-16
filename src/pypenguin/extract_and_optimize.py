@@ -4,7 +4,7 @@ from pypenguin.optimize.costumes_sounds import finalizeCostume
 import urllib.parse
 import os, shutil, zipfile
 
-from pypenguin.utility import readJSONFile, writeJSONFile, insureCorrectPath, getImageSize, Platform
+from pypenguin.utility import readJSONFile, writeJSONFile, ensureCorrectPath, getImageSize, Platform
 
 def extractProject(
     pmpFilePath       : str, # Path to your .pmp file
@@ -12,22 +12,9 @@ def extractProject(
     temporaryDir      : str, # Where the zip will be extracted
     prettyFormat      : bool = True,
     deleteTemporaryDir: bool = False,
-):
-    pmpFilePath  = insureCorrectPath(pmpFilePath , "PyPenguin")
-    jsonFilePath = insureCorrectPath(jsonFilePath, "PyPenguin")
-    temporaryDir = insureCorrectPath(temporaryDir, "PyPenguin")
-    zipFilePath  = insureCorrectPath("source.zip", "PyPenguin")
-    
-    # Copy the .pmp to file and rename it .zip
-    shutil.copy(pmpFilePath, zipFilePath)
-    
-    # Ensure the extraction Dir exists
-    os.makedirs(temporaryDir, exist_ok=True)
-    shutil.rmtree(temporaryDir)
-    os.makedirs(temporaryDir, exist_ok=True)
-    
+):        
     # Open and extract the zip file
-    with zipfile.ZipFile(zipFilePath, 'r') as zip_ref:
+    with zipfile.ZipFile(pmpFilePath, 'r') as zip_ref:
         zip_ref.extractall(temporaryDir)
     
     
@@ -41,23 +28,19 @@ def extractProject(
     
     
     # Delete temporary files
-    os.remove(zipFilePath)
     if deleteTemporaryDir:
         shutil.rmtree(temporaryDir)
     return json
 
-def ensureDirIsEmpty(directoryPath):
-    # Ensure the directory exists
-    if not os.path.exists(directoryPath):
-        os.makedirs(directoryPath)
-    else:
-        # If it exists, clear its contents
-        for item in os.listdir(directoryPath):
-            itemPath = os.path.join(directoryPath, item)
-            if os.path.isfile(itemPath) or os.path.islink(itemPath):
-                os.unlink(itemPath)  # Remove file or symlink
-            elif os.path.isdir(itemPath):
-                shutil.rmtree(itemPath)  # Remove directory
+def ensureEmptyDir(directoryPath):
+    # Ensure a directory exists and is empty
+    # Remove the directory if it exists
+    if os.path.exists(directoryPath):
+        shutil.rmtree(directoryPath)  # Deletes the directory and all its contents
+    
+    # (Re)Create the directory
+    os.makedirs(directoryPath)
+        
 
 def extractAndOptimizeProject(
     projectFilePath         : str,
@@ -67,13 +50,11 @@ def extractAndOptimizeProject(
     deoptimizedDebugFilePath: str | None = None,
     optimizedDebugFilePath  : str | None = None,
 ):
-    projectFilePath              = insureCorrectPath(projectFilePath         , "PyPenguin")
-    optimizedProjectDir          = insureCorrectPath(optimizedProjectDir     , "PyPenguin")
-    temporaryDir                 = insureCorrectPath(temporaryDir            , "PyPenguin")
-    if deoptimizedDebugFilePath != None:
-        deoptimizedDebugFilePath = insureCorrectPath(deoptimizedDebugFilePath, "PyPenguin")
-    if optimizedDebugFilePath   != None:
-        optimizedDebugFilePath   = insureCorrectPath(optimizedDebugFilePath  , "PyPenguin")
+    projectFilePath          = ensureCorrectPath(projectFilePath         , "PyPenguin", ensureExists    =True, allowNone=False)
+    optimizedProjectDir      = ensureCorrectPath(optimizedProjectDir     , "PyPenguin", ensureDirIsValid=True, allowNone=False)
+    temporaryDir             = ensureCorrectPath(temporaryDir            , "PyPenguin", ensureDirIsValid=True, allowNone=False)
+    deoptimizedDebugFilePath = ensureCorrectPath(deoptimizedDebugFilePath, "PyPenguin", ensureExists    =True, allowNone=True )
+    optimizedDebugFilePath   = ensureCorrectPath(optimizedDebugFilePath  , "PyPenguin", ensureExists    =True, allowNone=True )
     
     # Extract the PenguinMod project
     deoptimizedData = extractProject(
@@ -91,7 +72,7 @@ def extractAndOptimizeProject(
     )
     
     # Make sure the project dir exists and is empty
-    ensureDirIsEmpty(optimizedProjectDir)
+    ensureEmptyDir(optimizedProjectDir)
     
     # Reorganize Assets
     for i, sprite in enumerate(optimizedData["sprites"]):
@@ -176,10 +157,3 @@ def extractAndOptimizeProject(
     # Remove the temporary Dir
     shutil.rmtree(temporaryDir)
     return optimizedData
-
-if __name__ == "__main__":
-    extractAndOptimizeProject(
-        projectFilePath           = "assets/studies/jsonBlocks.pmp",
-        optimizedProjectDir = "optimizedProject/",
-        temporaryDir        = "temporary/",
-    )

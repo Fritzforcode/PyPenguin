@@ -4,7 +4,7 @@ import urllib.parse
 from pypenguin.deoptimize import deoptimizeProject
 from pypenguin.deoptimize.costumes_sounds import finalizeCostume, finalizeSound
 
-from pypenguin.utility import readJSONFile, writeJSONFile, insureCorrectPath, generateMd5, getImageSize, Platform
+from pypenguin.utility import readJSONFile, writeJSONFile, ensureCorrectPath, generateMd5, getImageSize, Platform
 
 from pypenguin.database import defaultCostumeFilePath
 
@@ -15,12 +15,11 @@ def deoptimizeAndCompressProject(
     targetPlatform          : Platform,
     deoptimizedDebugFilePath: str | None = None,
 ):
-    optimizedProjectDir          = insureCorrectPath(optimizedProjectDir     , "PyPenguin")
-    projectFilePath              = insureCorrectPath(projectFilePath         , "PyPenguin")
-    temporaryDir                 = insureCorrectPath(temporaryDir            , "PyPenguin")
-    defCostumeFilePath           = insureCorrectPath(defaultCostumeFilePath  , "PyPenguin")
-    if deoptimizedDebugFilePath != None:
-        deoptimizedDebugFilePath = insureCorrectPath(deoptimizedDebugFilePath, "PyPenguin")
+    optimizedProjectDir      = ensureCorrectPath(optimizedProjectDir     , "PyPenguin", ensureExists     =True, allowNone=False)
+    projectFilePath          = ensureCorrectPath(projectFilePath         , "PyPenguin", ensureFileIsValid=True, allowNone=False)
+    temporaryDir             = ensureCorrectPath(temporaryDir            , "PyPenguin", ensureDirIsValid =True, allowNone=False)
+    defCostumeFilePath       = ensureCorrectPath(defaultCostumeFilePath  , "PyPenguin")
+    deoptimizedDebugFilePath = ensureCorrectPath(deoptimizedDebugFilePath, "PyPenguin", ensureFileIsValid=True, allowNone=True )
     
     # Read the optimized project.json
     optimizedData = readJSONFile(
@@ -109,7 +108,6 @@ def deoptimizeAndCompressProject(
         filePath=os.path.join(temporaryDir, "project.json"),
         data=deoptimizedData,
     )
-
     # Make sure projectFilePath does not exist
     if os.path.exists(projectFilePath):
         os.remove(projectFilePath)
@@ -129,12 +127,4 @@ def deoptimizeAndCompressProject(
     )
 
     # Remove the temporary dir
-    #input()
     shutil.rmtree(temporaryDir)
-
-if __name__ == "__main__":
-    deoptimizeAndCompressProject(
-        projectFilePath           = "assets/studies/example.pmp",
-        optimizedProjectDir = "optimizedProject/",
-        temporaryDir        = "temporary/",
-    )

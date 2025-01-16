@@ -4,15 +4,25 @@ from PIL import Image
 import xml.etree.ElementTree as ET
 from json import dump
 from jsoncomment import JsonComment
+from pathlib import Path
 
 # -----------------------
 # File and Image Handling Functions
 # -----------------------
 parser = JsonComment()
 
-def insureCorrectPath(path, targetFolderName):
+def ensureCorrectPath(path, targetFolderName, ensureExists=False, ensureDirIsValid=False, ensureFileIsValid=False, allowNone=True):
     if path is None:
+        if not allowNone:
+            raise FileNotFoundError(path)
         return path
+    if ensureExists and not(os.path.exists(path)):
+        raise FileNotFoundError(path)
+    pathObj = Path(path)
+    if ensureDirIsValid  and not(pathObj.is_dir() or (pathObj != '' and not pathObj.is_reserved())):
+        raise NotADirectoryError(path)
+    if ensureFileIsValid and not(isValidFilePath):
+        raise FileNotFoundError(path)
 
     initialPath = __file__
     currentPath = os.path.normpath(initialPath)
@@ -32,6 +42,35 @@ def insureCorrectPath(path, targetFolderName):
 
     finalPath = os.path.join(currentPath, path)
     return finalPath
+
+from pathlib import Path
+
+def isValidFilePath(filePath):
+    # Create a Path object
+    path = Path(filePath)
+
+    # Check if the path is well-formed (i.e., it's not an empty string)
+    if not filePath:
+        return False
+
+    # For Windows, check if the path contains invalid characters
+    if os.name == 'nt':  # Windows-specific
+        invalidChars = '<>:"/\\|?*'
+        if any(char in filePath for char in invalidChars):
+            return False
+
+        # Check for reserved filenames (Windows)
+        reservedNames = {"CON", "PRN", "AUX", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", 
+                         "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9"}
+        if path.name.upper() in reservedNames:
+            return False
+
+    # Check the length of the path (for OS limitations)
+    if len(filePath) > 255:
+        return False
+
+    # If the path passes all checks, it is considered valid
+    return True
 
 def generateMd5(file):
     md5Hash = hashlib.md5()
@@ -68,14 +107,14 @@ def getSVGImageSize(file):
     return float(width), float(height)
 
 def readJSONFile(filePath):
-    filePath = insureCorrectPath(filePath, "PyPenguin")
+    filePath = ensureCorrectPath(filePath, "PyPenguin")
     print("read", filePath)
     with open(filePath, "r", encoding="utf-8") as file:
         string = file.read()
     return parser.loads(string)
 
 def writeJSONFile(filePath, data, beautiful: bool = True):
-    filePath = insureCorrectPath(filePath, "PyPenguin")
+    filePath = ensureCorrectPath(filePath, "PyPenguin")
     print("write", filePath)
     with open(filePath, "w") as file:
         if beautiful:
