@@ -1,6 +1,4 @@
-import pprint
 import re
-import difflib
 
 # -----------------------
 # Custom Opcode Functions
@@ -97,29 +95,3 @@ def generateCustomOpcode(proccode: str, argumentNames: list[str]):
         i += 1
     
     return customOpcode.removesuffix(" ")
-
-def pformat(*objects, sep=" ", end="\n"):
-    string = ""
-    for i, object in enumerate(objects):
-        string += pprint.pformat(object, sort_dicts=False)
-        if i + 1 < len(objects):
-            string += sep
-    string += end
-    return string
-
-def pp(*objects, sep=" ", end="\n"):
-    print(pformat(objects, sep=sep, end=end))
-
-def flipKeysAndValues(obj: dict):
-    return dict(zip(obj.values(), obj.keys()))
-
-def removeDuplicates(items):
-    newItems = []
-    [newItems.append(value) for value in items if value not in newItems]
-    return newItems
-
-def getListOfClosestStrings(string, possibleValues) -> str:
-    similarityScores = [(item, difflib.SequenceMatcher(None, string, item).ratio()) for item in possibleValues]
-    sortedMatches = sorted(similarityScores, key=lambda x: x[1], reverse=True)
-    topTenMatches = [i[0] for i in sortedMatches[:10]]
-    return "".join([f"\n- '{match}'" for match in topTenMatches])

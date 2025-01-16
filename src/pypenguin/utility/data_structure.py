@@ -1,50 +1,6 @@
-from pypenguin.utility.utility import BlockSelector
-
-# -----------------------
-# Utility Classes
-# -----------------------
-class BlockSelector:
-    count = 0
-
-    def __init__(self):
-        self.id = BlockSelector.count
-        BlockSelector.count += 1
-
-    def __eq__(self, other):
-        return isinstance(other, BlockSelector) and self.id == other.id
-
-    def __hash__(self):
-        return hash(self.id)
-
-    def __repr__(self):
-        return f"BlockSelector::{self.id}"
-    
-    def copy(self):
-        new = BlockSelector()
-        new.id = self.id
-        return new
-
 # -----------------------
 # Data Structure Manipulation Functions
 # -----------------------
-def getSelectors(obj):
-    selectors = []
-    if isinstance(obj, dict):
-        for k, v in obj.items():
-            if isinstance(k, BlockSelector):
-                selectors.append(k)
-            if isinstance(v, BlockSelector):
-                selectors.append(v)
-            else:
-                selectors += getSelectors(v)
-    elif isinstance(obj, list):
-        for v in obj:
-            if isinstance(v, BlockSelector):
-                selectors.append(v)
-            else:
-                selectors += getSelectors(v)
-    return selectors
-
 def editDataStructure(obj, conditionFunc: callable, conversionFunc: callable):
     if isinstance(obj, dict):
         newObj = {}
