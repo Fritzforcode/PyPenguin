@@ -1,4 +1,4 @@
-from pypenguin.utility import BlockSelector, stringToToken, Platform, pformat
+from pypenguin.utility import BlockSelector, stringToToken, Platform, pformat, pp, writeJSONFile, readJSONFile
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
 from pypenguin.deoptimize.blocks_scripts import prepareScripts, flattenScripts, restoreBlocks, unprepareBlocks, makeJsonCompatible
@@ -7,7 +7,7 @@ from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSou
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.deoptimize.monitors import translateMonitor
 from pypenguin.deoptimize.scratch_adaption import adaptProject
-from pypenguin.deoptimize.precompilation import exportScripts, loadScript
+from pypenguin.deoptimize.precompilation import exportBlocks, loadScript, findMatchingScript
 from pypenguin.database import deoptimizeOptionValue
 
 def translateVariablesLists(data):
@@ -23,11 +23,18 @@ def translateVariablesLists(data):
     return translatedVariableDatas, translatedListDatas
 
 def deoptimizeProject(projectData, targetPlatform):
+    precompiledScriptDatas = readJSONFile("precompiled.json")
     translatedVariableDatas, translatedListDatas = translateVariablesLists(data=projectData)    
     broadcastDatas = generateBroadcasts(data=projectData["sprites"])
     
-    newSpriteDatas = []
+    newSpriteDatas  = []
+    exportedScripts = []
     for i, spriteData in enumerate(projectData["sprites"]):
+        for scriptData in spriteData["scripts"]:
+            print(200*"/")
+            pp(scriptData)
+            print(findMatchingScript(scriptData, precompiledScriptDatas))
+        
         preparedScriptDatas = prepareScripts(spriteData["scripts"])
         flattendScriptDatas = flattenScripts(preparedScriptDatas)
         spriteName = None if spriteData["isStage"] else spriteData["name"]
@@ -46,20 +53,19 @@ def deoptimizeProject(projectData, targetPlatform):
         newSpriteBlockDatas = unprepareBlocks(
             data=newSpriteBlockDatas,
         )
-        
-        exportedScripts = exportScripts(
+        exportedScripts += exportBlocks(
             data=newSpriteBlockDatas, 
             commentDatas=newCommentDatas, 
-            optimizedScriptDatas=spriteData["scripts"]
+            optimizedScriptDatas=spriteData["scripts"],
         )
         if i == 1:
-            with open("s_pre.txt", "w") as file:
-                file.write((pformat(newSpriteBlockDatas)))
-            with open("s_mid.txt", "w") as file:
-                file.write((pformat(exportedScripts[0])))
-            loadedScript = loadScript(data=exportedScripts[0], spriteName=spriteData["name"])
-            with open("s_aft.txt", "w") as file:
-                file.write((pformat(loadedScript["blocks"])))
+            pass#with open("s_pre.txt", "w") as file:
+            #    file.write((pformat((newSpriteBlockDatas, newCommentDatas))))
+            #with open("s_mid.txt", "w") as file:
+            #    file.write((pformat(exportedScripts[1])))
+            #loadedScript = loadScript(data=exportedScripts[1], spriteName=spriteData["name"])
+            #with open("s_aft.txt", "w") as file:
+            #    file.write((pformat(loadedScript)))
 
         
         newSpriteBlockDatas, newCommentDatas = makeJsonCompatible(
@@ -124,6 +130,8 @@ def deoptimizeProject(projectData, targetPlatform):
                 "layerOrder"   : spriteData["layerOrder"],
             }
         newSpriteDatas.append(newSpriteData)
+    
+    writeJSONFile("precompiled.json", exportedScripts)    
     
     # Translate monitors
     newMonitorDatas = []

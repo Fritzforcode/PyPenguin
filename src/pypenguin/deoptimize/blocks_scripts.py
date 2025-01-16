@@ -1,10 +1,77 @@
 import json, copy
 
-from pypenguin.utility import numberToLiteral, BlockSelector, generateRandomToken, parseCustomOpcode, stringToToken, LocalStringToToken, Platform, getSelectors, editDataStructure
+from pypenguin.utility import numberToLiteral, BlockSelector, generateRandomToken, parseCustomOpcode, stringToToken, LocalStringToToken, Platform, getSelectors, editDataStructure, removeDuplicates
 from pypenguin.deoptimize.options import translateOptions
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.database import *
 
+def completeScripts(data):
+    def completeBlock(data):
+        newInputDatas = {}
+        for inputID, inputData in data.get("inputs", {}).items():
+            if opcode == "procedures_call":
+                argument  = arguments[inputID]
+                if   argument == str:
+                    inputType = "text"
+                    inputMode = "block-and-text"
+                elif argument == bool:
+                    inputType = "boolean"
+                    inputMode = "block-only"
+            else:
+                inputType = getInputType(
+                    opcode=opcode, 
+                    inputID=inputID,
+                )
+                inputMode = getInputMode(
+                    opcode=opcode, 
+                    inputID=inputID,
+                )
+            inputData["mode"]   = inputMode
+            inputData["_type_"] = inputType
+        
+            if   inputMode in ["block-and-text", "block-and-menu-text"]:
+                required = ["block", "text"]
+            elif inputMode == "block-only":
+                required = ["block"]
+            elif inputMode in ["block-and-option", "block-and-broadcast-option"]:
+                required = ["option"]
+            elif inputMode == "script":
+                required = ["blocks"]
+            
+            for attribute in required:
+                if attribute not in inputData:
+                    match attribute:
+                        case "block":
+                            inputData["block"] = inputBlockDefault
+                        case "text":
+                            if inputType == "note":
+                                inputData["text"] = noteInputTextDefault
+                            else:
+                                inputData["text"] = inputTextDefault
+                        case "blocks":
+                            inputData["blocks"] = inputBlocksDefault
+                        case "option":
+                            raise Exception()
+            newInputDatas[inputID] = inputData
+          
+        newBlockData = {
+            "opcode": data["opcode"],
+            "inputs": newInputDatas,
+            "options": newOptionDatas,
+            "comment": data.get("comment", None),
+        }
+    
+    def completeBlocks(data):
+        newBlockDatas = []
+        for blockData in data:
+            newBlockDatas.append(completeBlock(blockData))
+        
+    newScriptDatas = []
+    for scriptData in data:
+        newScriptDatas.append({
+            "position": scriptData["position"],
+            "blocks": completeBlocks(scriptData["blocks"]),
+        })
 
 def prepareScripts(data):
     newScriptDatas = []
@@ -508,7 +575,8 @@ def unprepareBlocks(data):
             if blockData["opcode"] == "procedures_prototype":
                 mutationData = blockData["mutation"]
                 mutationDatas[mutationData["proccode"]] = mutationData
-    for blockData in data.values():
+    newBlockDatas = {}
+    for blockID, blockData in data.items():
         if isinstance(blockData, dict):
             if blockData["opcode"] == "procedures_call":
                 customOpcode = blockData["fields"]["customOpcode"]
@@ -548,27 +616,26 @@ def unprepareBlocks(data):
                     "expanded": "false"
                 }
                 del blockData["fields"]["VERTEX_COUNT"]
-    return data
+            newBlockDatas[blockID] = blockData
+    return newBlockDatas
+
+from pypenguin.utility import pp
 
 # Replaces block selectors with literals eg. "t"
 def makeJsonCompatible(data, commentDatas, targetPlatform):  
-    selectors = getSelectors(data) + getSelectors(commentDatas)
-    cutSelectors = []
-    for selector in selectors:
-        if selector not in cutSelectors:
-            cutSelectors.append(selector)
+    selectors = removeDuplicates(getSelectors(data) + getSelectors(commentDatas))
     # Translation table from selector object to literal
     if   targetPlatform == Platform.PENGUINMOD:
-        table = {selector: numberToLiteral(i+1)  for i, selector in enumerate(cutSelectors)}
+        table = {selector: numberToLiteral(i+1)  for i, selector in enumerate(selectors)}
     elif targetPlatform == Platform.SCRATCH:
-        table = {selector: generateRandomToken() for    selector in           cutSelectors }
-    def convertionFunc(obj):
+        table = {selector: generateRandomToken() for    selector in           selectors }
+    def conversionFunc(obj):
         nonlocal table
         if isinstance(obj, BlockSelector):
             return table[obj]
         if isinstance(obj, LocalStringToToken):
             return obj.toToken()
     conditionFunc = lambda obj: isinstance(obj, (BlockSelector, LocalStringToToken))
-    data         = editDataStructure(data        , conditionFunc=conditionFunc, convertionFunc=convertionFunc)
-    commentDatas = editDataStructure(commentDatas, conditionFunc=conditionFunc, convertionFunc=convertionFunc)
+    data         = editDataStructure(data        , conditionFunc=conditionFunc, conversionFunc=conversionFunc)
+    commentDatas = editDataStructure(commentDatas, conditionFunc=conditionFunc, conversionFunc=conversionFunc)
     return data, commentDatas

@@ -21,12 +21,12 @@ scriptA = {"position": [0, 0], "blocks": [
                 "opcode": "(OPERAND1) = (OPERAND2)",
                 "inputs": {"OPERAND1": {"text": "5"}, "OPERAND2": {"text": "-6"}},
             }},
-            "THEN": {"blocks": [
+           "THEN": {"blocks": [
                 {
                     "opcode": "say (MESSAGE)",
                     "inputs": {"MESSAGE": {"block": {
                         "opcode": "value of [VARIABLE]",
-                        "options": {"VARIABLE": ["variable", "locVar"]},
+                       "options": {"VARIABLE": ["variable", "locVar"]},
                     }}},
                 },
                 {
