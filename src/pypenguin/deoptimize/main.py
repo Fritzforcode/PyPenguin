@@ -1,7 +1,7 @@
 from pypenguin.utility import BlockSelector, stringToToken, Platform, pformat, pp, writeJSONFile, readJSONFile
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
-from pypenguin.deoptimize.blocks_scripts import prepareScripts, flattenScripts, restoreBlocks, unprepareBlocks, makeJsonCompatible
+from pypenguin.deoptimize.blocks_scripts import prepareScripts, flattenScripts, restoreBlocks, unprepareBlocks, makeJsonCompatible, completeScripts
 from pypenguin.deoptimize.broadcasts import generateBroadcasts
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
@@ -35,14 +35,15 @@ def deoptimizeProject(projectData, targetPlatform):
     newSpriteDatas  = []
     exportedScripts = []
     for i, spriteData in enumerate(projectData["sprites"]):
-        for scriptData in spriteData["scripts"]:
-            print(200*"/")
-            pp(scriptData)
-            print(findMatchingScript(scriptData, precompiledScriptDatas))
-        
-        preparedScriptDatas = prepareScripts(spriteData["scripts"])
-        flattendScriptDatas = flattenScripts(preparedScriptDatas)
         spriteName = None if spriteData["isStage"] else spriteData["name"]
+        completedScripts = completeScripts(spriteData["scripts"])
+        for scriptData in completedScripts:
+            foundMatch, matchingScript = findMatchingScript(scriptData, precompiledScriptDatas, spriteName=spriteName)
+            print(foundMatch)
+            if foundMatch: pp(matchingScript)
+        
+        preparedScriptDatas = prepareScripts(completedScripts)
+        flattendScriptDatas = flattenScripts(preparedScriptDatas)
         newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,
             spriteName=spriteName,
@@ -61,7 +62,7 @@ def deoptimizeProject(projectData, targetPlatform):
         exportedScripts += exportBlocks(
             data=newSpriteBlockDatas, 
             commentDatas=newCommentDatas, 
-            optimizedScriptDatas=spriteData["scripts"],
+            optimizedScriptDatas=completedScripts,
         )
         if i == 1:
             pass#with open("s_pre.txt", "w") as file:

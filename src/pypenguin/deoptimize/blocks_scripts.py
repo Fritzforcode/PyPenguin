@@ -7,6 +7,9 @@ from pypenguin.database import *
 
 def completeScripts(data):
     def completeBlock(data):
+        opcode = getDeoptimizedOpcode(opcode=data["opcode"])
+        if opcode == "procedures_call":
+            proccode, arguments = parseCustomOpcode(customOpcode=data["options"]["customOpcode"][1])
         newInputDatas = {}
         for inputID, inputData in data.get("inputs", {}).items():
             if opcode == "procedures_call":
@@ -26,8 +29,7 @@ def completeScripts(data):
                     opcode=opcode, 
                     inputID=inputID,
                 )
-            inputData["mode"]   = inputMode
-            inputData["_type_"] = inputType
+            inputData["mode"] = inputMode
         
             if   inputMode in ["block-and-text", "block-and-menu-text"]:
                 required = ["block", "text"]
@@ -39,32 +41,41 @@ def completeScripts(data):
                 required = ["blocks"]
             
             for attribute in required:
-                if attribute not in inputData:
-                    match attribute:
-                        case "block":
+                match attribute:
+                    case "block":
+                        if attribute in inputData:
+                            inputData["block"] = completeBlock(inputData["block"])
+                        else:
                             inputData["block"] = inputBlockDefault
-                        case "text":
+                    case "text":
+                        if attribute not in inputData:
                             if inputType == "note":
                                 inputData["text"] = noteInputTextDefault
                             else:
                                 inputData["text"] = inputTextDefault
-                        case "blocks":
+                    case "blocks":
+                        if attribute in inputData:
+                            inputData["blocks"] = completeBlocks(inputData["blocks"])
+                        else:
                             inputData["blocks"] = inputBlocksDefault
-                        case "option":
+                    case "option":
+                        if attribute not in inputData:
                             raise Exception()
             newInputDatas[inputID] = inputData
-          
+        
         newBlockData = {
             "opcode": data["opcode"],
             "inputs": newInputDatas,
-            "options": newOptionDatas,
+            "options": data.get("options", {}),
             "comment": data.get("comment", None),
         }
+        return newBlockData
     
     def completeBlocks(data):
         newBlockDatas = []
         for blockData in data:
             newBlockDatas.append(completeBlock(blockData))
+        return newBlockDatas
         
     newScriptDatas = []
     for scriptData in data:
@@ -72,6 +83,7 @@ def completeScripts(data):
             "position": scriptData["position"],
             "blocks": completeBlocks(scriptData["blocks"]),
         })
+    return newScriptDatas
 
 def prepareScripts(data):
     newScriptDatas = []
@@ -125,63 +137,16 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputID=None
         isMenu = True
     
     
-    if "inputs" not in data:
-        data["inputs"] = inputDefault
+    #if "inputs" not in data:
+    #    data["inputs"] = inputDefault
     if "options" not in data:
         data["options"] = optionDefault
     opcode = getDeoptimizedOpcode(opcode=data["opcode"])
     if opcode == "procedures_call":
         proccode, arguments = parseCustomOpcode(customOpcode=data["options"]["customOpcode"][1])
+    
     newInputDatas = {}
     for inputID, inputData in data["inputs"].items():
-        if opcode == "procedures_call":
-            argument  = arguments[inputID]
-            if   argument == str:
-                inputType = "text"
-                inputMode = "block-and-text"
-            elif argument == bool:
-                inputType = "boolean"
-                inputMode = "block-only"
-        else:
-            inputType = getInputType(
-                opcode=opcode, 
-                inputID=inputID,
-            )
-            inputMode = getInputMode(
-                opcode=opcode, 
-                inputID=inputID,
-            )
-        inputData["mode"]   = inputMode
-        inputData["_type_"] = inputType
-    
-        if   inputMode in ["block-and-text", "block-and-menu-text"]:
-            required = ["block", "text"]
-        elif inputMode == "block-only":
-            required = ["block"]
-        elif inputMode in ["block-and-option", "block-and-broadcast-option"]:
-            required = ["option"]
-        elif inputMode == "script":
-            required = ["blocks"]
-        
-        for attribute in required:
-            if attribute not in inputData:
-                match attribute:
-                    case "block":
-                        inputData["block"] = inputBlockDefault
-                    case "text":
-                        if inputType == "note":
-                            inputData["text"] = noteInputTextDefault
-                        else:
-                            inputData["text"] = inputTextDefault
-                    case "blocks":
-                        inputData["blocks"] = inputBlocksDefault
-                    case "option":
-                        raise Exception()
-        newInputDatas[inputID] = inputData
-    
-    inputDatas = newInputDatas
-    newInputDatas = {}
-    for inputID, inputData in inputDatas.items():
         if inputData["mode"] == "block-and-broadcast-option":
             inputData["text"] = inputData["option"]
             del inputData["option"]
@@ -200,17 +165,23 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputID=None
                 parentOpcode=data["opcode"],
             ) for subBlockData in inputData["blocks"]]
         if inputData.get("option") != None:
+            if opcode == "procedures_call":
+                inputType = "text" if arguments[inputID]==str else ("boolean" if arguments[inputID]==bool else None)
+            else:
+                inputType = getInputType(
+                    opcode=opcode,
+                    inputID=inputID,                
+                )
             newOptionData = deoptimizeOptionValue(
                 optionValue=inputData["option"],
-                optionType=inputData["_type_"],
+                optionType=inputType,
             )
             newInputData["option"] = prepareBlock(
                 data=newOptionData,
                 parentOpcode=data["opcode"],
                 isOption=True,
                 inputID=inputID,
-            )
-        del newInputData["_type_"]    
+            ) 
         newInputDatas[inputID] = newInputData
         
     if isMenu:

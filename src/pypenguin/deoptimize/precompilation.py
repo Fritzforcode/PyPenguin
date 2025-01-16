@@ -27,15 +27,8 @@ def exportBlocks(data, commentDatas, optimizedScriptDatas):
             scripts[scriptIndex]["table"   ][blockData["comment"]] = commentPathString
     
     for scriptIndex, scriptData in enumerate(scripts):
-        # Combine blocks needed for a custom block definition
-         
-        for pathString, blockData in scriptData["deoptimizedBlocks"].items():
-            path = json.loads(pathString)
-            oldOpcode = blockData["opcode"]
-            blockType = getBlockType(opcode=oldOpcode, defaultNone=True)
-        scriptData["optimized"] = optimizedScriptDatas[scriptIndex]
-                
-
+        scriptData["optimized"] = optimizedScriptDatas[scriptIndex]["blocks"]
+        
         # Replace remaining block selectors with paths
         table = {selector:{"_custom_": True, "_type_": BlockSelector.__name__, "path": pathString} for selector, pathString in scriptData["table"].items()}
 
@@ -82,11 +75,11 @@ def loadScript(data, spriteName):
     
 # Takes and optimized script as input and looks for a matching precompiled script
 # If exactly the same script is deoptimized for the second time, the precompiled script can be adapted and used.
-def findMatchingScript(scriptData, precompiledScriptDatas):
+def findMatchingScript(scriptData, precompiledScriptDatas, spriteName):
     scriptBlockDatas = scriptData["blocks"]
-    for i, precompiledScriptData in enumerate(precompiledScriptDatas):
+    for precompiledScriptData in precompiledScriptDatas:
         print(100*"-")
         pp(precompiledScriptData["optimized"])
         if scriptBlockDatas == precompiledScriptData["optimized"]:
-            return True, i#loadScript(precompiledScriptData)
+            return True, loadScript(precompiledScriptData, spriteName=spriteName)
     return False, None
