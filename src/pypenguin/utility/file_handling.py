@@ -1,29 +1,41 @@
 import os
 import hashlib
+import shutil
 from PIL import Image
 import xml.etree.ElementTree as ET
 from json import dump
 from jsoncomment import JsonComment
 from pathlib import Path
 
+# ------
+# Errors
+# ------
+class PathError      (Exception): pass
+class FileNotFound   (PathError): pass
+class DirNotFound    (PathError): pass
+class InvalidFilePath(PathError): pass
+class InvalidDirPath (PathError): pass
+
 # -----------------------
 # File and Image Handling Functions
 # -----------------------
 parser = JsonComment()
 
-def ensureCorrectPath(path, targetFolderName, ensureExists=False, ensureDirIsValid=False, ensureFileIsValid=False, allowNone=True):
-    if path is None:
-        if not allowNone:
-            raise FileNotFoundError(path)
-        return path
-    if ensureExists and not(os.path.exists(path)):
-        raise FileNotFoundError(path)
-    pathObj = Path(path)
-    if ensureDirIsValid  and not(pathObj.is_dir() or (pathObj != '' and not pathObj.is_reserved())):
-        raise NotADirectoryError(path)
-    if ensureFileIsValid and not(isValidFilePath):
-        raise FileNotFoundError(path)
-
+def ensureCorrectPath(path, targetFolderName, ensureIsValid=False, ensureExists=False, isDir=False, allowNone=False):
+    if allowNone and (path == None): return path
+    
+    if ensureIsValid:
+        isValid = type(path) == str
+        if isValid:
+            if isDir:
+                pathObj = Path(path)
+                isValid = pathObj.is_dir() or (pathObj != '' and not pathObj.is_reserved())
+            else:
+                isValid = isValidFilePath(path)
+        if not isValid:
+            if isDir: raise InvalidDirPath ("Invalid directory path: "+repr(path))
+            else    : raise InvalidFilePath("Invalid file path: "     +repr(path))
+    
     initialPath = __file__
     currentPath = os.path.normpath(initialPath)
 
@@ -36,14 +48,25 @@ def ensureCorrectPath(path, targetFolderName, ensureExists=False, ensureDirIsVal
         parentPath = os.path.dirname(currentPath)
         
         if parentPath == currentPath:
-            raise ValueError(f"Target folder '{targetFolderName}' not found in the path '{initialPath}'")
+            raise PathError(f"Target folder '{targetFolderName}' not found in the path '{initialPath}'")
         
         currentPath = parentPath
 
     finalPath = os.path.join(currentPath, path)
-    return finalPath
-
-from pathlib import Path
+    
+    if ensureExists and not(os.path.exists(finalPath)):
+        if isDir: raise DirNotFound (f"Couldn't find directory: "+repr(path))
+        else    : raise FileNotFound(f"Couldn't find file: "     +repr(path))    
+    return finalPath    
+    
+def ensureEmptyDir(directoryPath):
+    # Ensure a directory exists and is empty
+    # Remove the directory if it exists
+    if os.path.exists(directoryPath):
+        shutil.rmtree(directoryPath)  # Deletes the directory and all its contents
+    
+    # (Re)Create the directory
+    os.makedirs(directoryPath)
 
 def isValidFilePath(filePath):
     # Create a Path object
@@ -71,6 +94,30 @@ def isValidFilePath(filePath):
 
     # If the path passes all checks, it is considered valid
     return True
+
+def getUniqueFilename(baseName):
+    """
+    Generate a unique filename by appending a numeric suffix if needed.
+
+    Args:
+        baseName (str): Desired filename (e.g., "abc").
+
+    Returns:
+        str: A unique filename.
+    """
+    if not os.path.exists(baseName):
+        return baseName  # If the file doesn't exist, return it directly
+    
+    # Extract name and extension
+    name, ext = os.path.splitext(baseName)
+    counter = 1
+
+    # Generate a new filename with a numeric suffix
+    while True:
+        newName = f"{name}-{counter}{ext}"
+        if not os.path.exists(newName):
+            return newName
+        counter += 1
 
 def generateMd5(file):
     md5Hash = hashlib.md5()
