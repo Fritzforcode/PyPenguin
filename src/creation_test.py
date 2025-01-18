@@ -77,16 +77,15 @@ projectData = {
 }
 #TODO sprites[1].name
 
-from pypenguin import validateProject, deoptimizeAndCompressProject, extractAndOptimizeProject
+from pypenguin import validateProject, compressProject
 from pypenguin.utility import writeJSONFile, Platform
 validateProject(projectData=projectData)
 print("[VALIDATION SUCCESS]")
 writeJSONFile(filePath="t_source.json", data=projectData)
 writeJSONFile(filePath="project/project.json", data=projectData)
-deoptimizeAndCompressProject(
+compressProject(
     optimizedProjectDir = "project",
     projectFilePath     = "export.pmp",
-    temporaryDir        = "temporary",
     targetPlatform      = Platform.PENGUINMOD,
     deoptimizedDebugFilePath="t_deop.json",
 )

@@ -6,7 +6,7 @@ import os, shutil, zipfile
 
 from pypenguin.utility import readJSONFile, writeJSONFile, ensureCorrectPath, getUniqueFilename, ensureEmptyDir, getImageSize, Platform
 
-def extractAndOptimizeProject(
+def extractProject(
     projectFilePath         : str,
     optimizedProjectDir     : str,
     sourcePlatform          : Platform,

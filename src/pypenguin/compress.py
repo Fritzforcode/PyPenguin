@@ -8,7 +8,7 @@ from pypenguin.utility import readJSONFile, writeJSONFile, ensureCorrectPath, ge
 
 from pypenguin.database import defaultCostumeFilePath
 
-def deoptimizeAndCompressProject(
+def compressProject(
     optimizedProjectDir     : str,
     projectFilePath         : str,
     targetPlatform          : Platform,
