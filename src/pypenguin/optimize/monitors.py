@@ -1,4 +1,4 @@
-from pypenguin.database import getOptimizedOpcode, getOptimizedOptionID, optimizeOptionValue, getOptionType
+from pypenguin.database import getOptimizedOpcode, getOptimizedOptionId, optimizeOptionValue, getOptionType
 
 def translateMonitors(data, spriteNames):
     newMonitorDatas = []
@@ -12,27 +12,27 @@ def translateMonitors(data, spriteNames):
             newOpcode = getOptimizedOpcode(opcode=opcode)
         
         newOptionDatas = {}
-        for optionID, optionData in monitorData["params"].items():
+        for optionId, optionData in monitorData["params"].items():
             if   opcode == "data_variable":
-                newOptionID = "VARIABLE"
+                newOptionId = "VARIABLE"
                 optionType  = "variable"
             elif opcode == "data_listcontents":
-                newOptionID = "LIST"
+                newOptionId = "LIST"
                 optionType  = "list"
             else:
-                newOptionID = getOptimizedOptionID(
+                newOptionId = getOptimizedOptionId(
                     opcode=opcode,
-                    optionID=optionID,
+                    optionId=optionId,
                 )
                 optionType = getOptionType(
                     opcode=opcode, 
-                    optionID=optionID
+                    optionId=optionId
                 )
             newOptionData = optimizeOptionValue(
                 optionValue=optionData,
                 optionType=optionType,
             )
-            newOptionDatas[newOptionID] = newOptionData
+            newOptionDatas[newOptionId] = newOptionData
 
         newMonitorData = {
             "opcode"    : newOpcode,

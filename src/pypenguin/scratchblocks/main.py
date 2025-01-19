@@ -283,9 +283,9 @@ def parseBlock(tokens: list[Token], isNested: bool):
         return block
     newOpcode   = getOptimizedOpcode(opcode=opcode)
     inputModes  = getInputModes(opcode=opcode)
-    inputIDs    = list(inputModes.keys())
+    inputIds    = list(inputModes.keys())
     optionTypes = getOptionTypes(opcode=opcode)
-    optionIDs   = list(optionTypes.keys())
+    optionIds   = list(optionTypes.keys())
     #print("=>", newOpcode, inputModes, optionTypes)
     
     inputs      = {}
@@ -295,8 +295,8 @@ def parseBlock(tokens: list[Token], isNested: bool):
     for token in tokens:
         token: Token
         if   token.isInput():
-            inputID = inputIDs[inputIndex]
-            inputMode = inputModes[inputID]
+            inputId = inputIds[inputIndex]
+            inputMode = inputModes[inputId]
             inputIndex += 1
             print(inputMode, token.type)
             if   inputMode == "block-and-text":
@@ -320,21 +320,21 @@ def parseBlock(tokens: list[Token], isNested: bool):
                 }
             else: raise Exception()
             
-            #print(".", inputID, inputMode, token, inputValue)
-            inputs[inputID] = inputValue
+            #print(".", inputId, inputMode, token, inputValue)
+            inputs[inputId] = inputValue
         
         elif token.type == TokenType.OPTION_LITERAL:
-            canBeSpecialInput = inputIndex in range(len(inputIDs))
+            canBeSpecialInput = inputIndex in range(len(inputIds))
             if canBeSpecialInput:
-                inputID   = inputIDs[inputIndex]
-                inputMode = inputModes[inputID]
+                inputId   = inputIds[inputIndex]
+                inputMode = inputModes[inputId]
                 canBeSpecialInput = inputMode in ["block-and-option", "block-and-broadcast-option"]
             if canBeSpecialInput:
                 # A Round Menu Case
                 inputIndex += 1
                 optionType = getInputType(
                     opcode=opcode,
-                    inputID=inputID,
+                    inputId=inputId,
                 )
                 optionValue = autocompleteOptionValue(
                     optionValue=token.value,
@@ -344,10 +344,10 @@ def parseBlock(tokens: list[Token], isNested: bool):
                     "block": None,
                     "option": optionValue,
                 }
-                inputs[inputID] = inputValue
+                inputs[inputId] = inputValue
             else:
-                optionID = optionIDs[optionIndex]
-                optionType = optionTypes[optionID] # has no effect currently
+                optionId = optionIds[optionIndex]
+                optionType = optionTypes[optionId] # has no effect currently
                 optionIndex += 1
                 
                 optionValue = token.value
@@ -357,7 +357,7 @@ def parseBlock(tokens: list[Token], isNested: bool):
                     optionType=optionType,
                 )
                 print(optionValue)
-                options[optionID] = optionValue
+                options[optionId] = optionValue
     block = {
         "opcode" : newOpcode,
         "inputs" : inputs,

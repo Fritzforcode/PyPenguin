@@ -63,8 +63,8 @@ def deoptimizeProject(projectData, targetPlatform):
         newCommentDatas = scriptCommentDatas
         
         for i, commentData in enumerate(spriteData["comments"]):
-            commentID = BlockSelector()
-            newCommentDatas[commentID] = translateComment(
+            commentId = BlockSelector()
+            newCommentDatas[commentId] = translateComment(
                 data=commentData,
                 id=None,
             )

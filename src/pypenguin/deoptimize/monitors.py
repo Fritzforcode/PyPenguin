@@ -1,5 +1,5 @@
 from pypenguin.utility import stringToToken
-from pypenguin.database import getDeoptimizedOpcode, getDeoptimizedOptionID
+from pypenguin.database import getDeoptimizedOpcode, getDeoptimizedOptionId
 
 def translateMonitor(data):
     opcode = getDeoptimizedOpcode(opcode=data["opcode"])
@@ -8,17 +8,17 @@ def translateMonitor(data):
     elif opcode == "special_list_value":
         opcode = "data_listcontents"
     newOptionDatas = {}
-    for optionID, optionData in data["options"].items():
+    for optionId, optionData in data["options"].items():
         if   opcode == "data_variable":
-            newOptionID = "VARIABLE"
+            newOptionId = "VARIABLE"
         elif opcode == "data_listcontents":
-            newOptionID = "LIST"
+            newOptionId = "LIST"
         else:
-            newOptionID = getDeoptimizedOptionID(
+            newOptionId = getDeoptimizedOptionId(
                 opcode=opcode,
-                optionID=optionID,
+                optionId=optionId,
             )
-        newOptionDatas[newOptionID] = optionData
+        newOptionDatas[newOptionId] = optionData
 
     opcodeMainPart     = "_".join(opcode.split("_")[1:]) # e.g. "motion_xposition" -> "xposition"
 

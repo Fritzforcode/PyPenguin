@@ -1,6 +1,6 @@
 from pypenguin.utility import generateRandomToken, stringToToken, LocalStringToToken
 
-from pypenguin.database import getOptionType, getBlockType, getDeoptimizedOptionID
+from pypenguin.database import getOptionType, getBlockType, getDeoptimizedOptionId
 
 
 def translateOptions(data, opcode, spriteName):
@@ -11,10 +11,10 @@ def translateOptions(data, opcode, spriteName):
         return {key: [value, generateRandomToken()]}
     
     newData = {}
-    for optionID, optionData in data.items():
+    for optionId, optionData in data.items():
         mode = getOptionType(
             opcode=opcode,
-            optionID=optionID,
+            optionId=optionId,
         )
         if mode in ["variable", "list", "broadcast"]:
             if mode == "variable":
@@ -33,9 +33,9 @@ def translateOptions(data, opcode, spriteName):
         else:
             newOptionData = [optionData, generateRandomToken()]
         
-        newOptionID = getDeoptimizedOptionID(
+        newOptionId = getDeoptimizedOptionId(
             opcode=opcode,
-            optionID=optionID,
+            optionId=optionId,
         )
-        newData[newOptionID] = newOptionData
+        newData[newOptionId] = newOptionData
     return newData

@@ -24,8 +24,8 @@ def validateScript(path, data, context, isNested=False):
         if blockType == "dynamic":
             match oldOpcode:
                 case "control_stop":
-                    optionID = getOptimizedOptionID(opcode=oldOpcode, optionID="STOP_OPTION")
-                    match block["options"][optionID][1]:
+                    optionId = getOptimizedOptionId(opcode=oldOpcode, optionId="STOP_OPTION")
+                    match block["options"][optionId][1]:
                         case "all" | "this script"    : blockType = "lastInstruction"
                         case "other scripts in sprite": blockType = "instruction"
                 case "procedures_call":
@@ -134,40 +134,40 @@ def validateBlockShape(path, oldOpcode, expectedShape, embeddedMenuOpcode=None):
 
 def validateInputs(path, data, opcode, context, options):
     oldOpcode       = getDeoptimizedOpcode(opcode=opcode)
-    allowedInputIDs = list(getInputTypes(opcode=oldOpcode).keys()) # List of inputs which are defined for the specific opcode
+    allowedInputIds = list(getInputTypes(opcode=oldOpcode).keys()) # List of inputs which are defined for the specific opcode
     if oldOpcode == "procedures_call": # Inputs in the call custom block block are custom
         return
-    for inputID, inputValue in data.items():
-        if inputID not in allowedInputIDs:
-            raise formatError(inputIdError, path, f"Input '{inputID}' is not defined for a block with opcode '{opcode}'.")
-    for inputID in allowedInputIDs:
+    for inputId, inputValue in data.items():
+        if inputId not in allowedInputIds:
+            raise formatError(inputIdError, path, f"Input '{inputId}' is not defined for a block with opcode '{opcode}'.")
+    for inputId in allowedInputIds:
         inputType = getInputType(
             opcode=oldOpcode,
-            inputID=inputID,
+            inputId=inputId,
         )
         inputMode = getInputMode(
             opcode=oldOpcode,
-            inputID=inputID,
+            inputId=inputId,
         )
         if (inputMode not in ["block-only", "script"]) or (inputType == "embeddedMenu"):
             canPassAnyway = False
-            if (oldOpcode == "polygon" and inputID in ["x4", "y4"]):
+            if (oldOpcode == "polygon" and inputId in ["x4", "y4"]):
                 if options["VERTEX_COUNT"] != 4:
                     canPassAnyway  = True # x4 and y4 are only required when VERTEX_COUNT is 4 
-            if (inputID not in data) and not(canPassAnyway):
-                raise formatError(inputIdError, path, f"A block with opcode '{opcode}' must have the input '{inputID}'.")
+            if (inputId not in data) and not(canPassAnyway):
+                raise formatError(inputIdError, path, f"A block with opcode '{opcode}' must have the input '{inputId}'.")
 
     inputTypes = getInputTypes(opcode=oldOpcode)
 
     # Check input formats
-    for inputID in data:
-        inputType = inputTypes[inputID]
+    for inputId in data:
+        inputType = inputTypes[inputId]
 
-        if inputID in data:
+        if inputId in data:
             inputMode = inputModes[inputType]
-            inputValue = data[inputID]
+            inputValue = data[inputId]
             validateInputValue(
-                path=path+[inputID],
+                path=path+[inputId],
                 inputValue=inputValue,
                 inputType=inputType,
                 inputMode=inputMode,
@@ -241,21 +241,21 @@ def validateInputValue(path, inputValue, inputType, inputMode, opcode, inputData
 def validateCallInputs(path, data, opcode, optionDatas, context):
     proccode, inputTypes = parseCustomOpcode(optionDatas["customOpcode"][1])
     inputTypes = {k: ("text" if v==str else "boolean") for k,v in inputTypes.items()}
-    for inputID, inputType in inputTypes.items():
-        if inputType == "text" and inputID not in data:
-            raise formatError(inputIdError, path, f"A custom block with custom opcode '{optionDatas['customOpcode'][1]}' must have the input '{inputID}'.")
+    for inputId, inputType in inputTypes.items():
+        if inputType == "text" and inputId not in data:
+            raise formatError(inputIdError, path, f"A custom block with custom opcode '{optionDatas['customOpcode'][1]}' must have the input '{inputId}'.")
 
     # Check input formats
-    for inputID in data:
-        if inputID not in inputTypes:
-            raise formatError(inputIdError, path, f"Input '{inputID}' is not defined for a custom block with custom opcode '{optionDatas['customOpcode'][1]}'.")
+    for inputId in data:
+        if inputId not in inputTypes:
+            raise formatError(inputIdError, path, f"Input '{inputId}' is not defined for a custom block with custom opcode '{optionDatas['customOpcode'][1]}'.")
     
-    for inputID, inputValue in data.items():
+    for inputId, inputValue in data.items():
         validateInputValue(
-            path=path+[inputID],
+            path=path+[inputId],
             inputValue=inputValue,
-            inputType=inputTypes[inputID],
-            inputMode=inputModes[inputTypes[inputID]],
+            inputType=inputTypes[inputId],
+            inputMode=inputModes[inputTypes[inputId]],
             opcode=opcode,
             inputDatas=data,
             context=context,
@@ -263,22 +263,22 @@ def validateCallInputs(path, data, opcode, optionDatas, context):
 
 def validateOptions(path, data, opcode, context, inputDatas):
     oldOpcode        = getDeoptimizedOpcode(opcode=opcode)
-    allowedOptionIDs = list(getOptionTypes(opcode=oldOpcode).keys()) # List of inputs which are defined for the specific opcode
-    for optionID, optionValue in data.items():
-        if optionID not in allowedOptionIDs:
-            raise formatError(optionIdError, path, f"Option '{optionID}' is not defined for a block with opcode '{opcode}'.")
-    for optionID in allowedOptionIDs:
-        if optionID not in data:
-            raise formatError(optionIdError, path, f"A block with opcode '{opcode}' must have the option '{optionID}'.")
+    allowedOptionIds = list(getOptionTypes(opcode=oldOpcode).keys()) # List of inputs which are defined for the specific opcode
+    for optionId, optionValue in data.items():
+        if optionId not in allowedOptionIds:
+            raise formatError(optionIdError, path, f"Option '{optionId}' is not defined for a block with opcode '{opcode}'.")
+    for optionId in allowedOptionIds:
+        if optionId not in data:
+            raise formatError(optionIdError, path, f"A block with opcode '{opcode}' must have the option '{optionId}'.")
 
         
         optionType = getOptionType(
             opcode=oldOpcode,
-            optionID=optionID,
+            optionId=optionId,
         )
-        optionValue = data[optionID]
+        optionValue = data[optionId]
         validateOptionValue(
-            path=path+[optionID],
+            path=path+[optionId],
             data=optionValue,
             opcode=opcode,
             optionType=optionType,
@@ -377,13 +377,13 @@ def validateBlockCustomBlocks(path, data, CBTypes, expectedShape=None):
         else:
             inputTypes = getInputTypes(opcode=oldOpcode)
         
-        for inputID, inputValue in data["inputs"].items():
-            inputType = inputTypes[inputID]
+        for inputId, inputValue in data["inputs"].items():
+            inputType = inputTypes[inputId]
             
             inputBlock = inputValue.get("block")
             if inputBlock != None:
                 validateBlockCustomBlocks(
-                    path=path+["inputs"]+[inputID]+["block"],
+                    path=path+["inputs"]+[inputId]+["block"],
                     data=inputBlock,
                     CBTypes=CBTypes,
                     expectedShape="booleanReporter" if inputType == "boolean" else ("embeddedMenu" if inputType == "embeddedMenu" else "stringReporter"),
@@ -392,7 +392,7 @@ def validateBlockCustomBlocks(path, data, CBTypes, expectedShape=None):
             inputBlocks = inputValue.get("blocks")
             if inputBlocks != None:
                 validateScriptCustomBlocks(
-                    path=path+["inputs"]+[inputID]+["blocks"],
+                    path=path+["inputs"]+[inputId]+["blocks"],
                     data=inputBlocks,
                     CBTypes=CBTypes,
                     isNested=True,

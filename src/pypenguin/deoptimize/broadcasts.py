@@ -13,9 +13,9 @@ def findBlockBroadcastMessages(data):
     
     if "inputs" not in data:
         data["inputs"] = inputDefault
-    for inputID, inputData in data["inputs"].items():
+    for inputId, inputData in data["inputs"].items():
         if opcode != "procedures_call":
-            if opcodeData["inputTypes"][inputID] == "broadcast":
+            if opcodeData["inputTypes"][inputId] == "broadcast":
                 if "text" not in inputData:
                     inputData["text"] = inputTextDefault
                 if inputData["text"] not in broadcastMessages:
@@ -27,8 +27,8 @@ def findBlockBroadcastMessages(data):
     
     if "options" not in data:
         data["options"] = optionDefault
-    for optionID, optionData in data["options"].items():
-        if opcodeData["optionTypes"][optionID] == "broadcast":
+    for optionId, optionData in data["options"].items():
+        if opcodeData["optionTypes"][optionId] == "broadcast":
             if optionData not in broadcastMessages:
                 broadcastMessages.append(optionData)
     return broadcastMessages

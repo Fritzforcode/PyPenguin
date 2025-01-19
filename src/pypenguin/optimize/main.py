@@ -20,11 +20,11 @@ def optimizeProjectJSON(projectData, sourcePlatform):
         commentDatas = spriteData["comments"]
         floatingCommentDatas = [] # The comments that aren't connected to any blocks
         attachedCommentDatas = {}
-        for commentID, commentData in commentDatas.items():
+        for commentId, commentData in commentDatas.items():
             if commentData["blockId"] == None: # No Block connection
                 floatingCommentDatas.append(translateComment(data=commentData))
             else:
-                attachedCommentDatas[commentID] = translateComment(data=commentData)
+                attachedCommentDatas[commentId] = translateComment(data=commentData)
         
         preparedBlockDatas = prepareBlocks(
             data=spriteData["blocks"], 

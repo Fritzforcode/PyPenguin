@@ -11,9 +11,9 @@ def standardizeScripts(data):
         if opcode == "procedures_call":
             proccode, arguments = parseCustomOpcode(customOpcode=data["options"]["customOpcode"][1])
         newInputDatas = {}
-        for inputID, inputData in data.get("inputs", {}).items():
+        for inputId, inputData in data.get("inputs", {}).items():
             if opcode == "procedures_call":
-                argument  = arguments[inputID]
+                argument  = arguments[inputId]
                 if   argument == str:
                     inputType = "text"
                     inputMode = "block-and-text"
@@ -23,11 +23,11 @@ def standardizeScripts(data):
             else:
                 inputType = getInputType(
                     opcode=opcode, 
-                    inputID=inputID,
+                    inputId=inputId,
                 )
                 inputMode = getInputMode(
                     opcode=opcode, 
-                    inputID=inputID,
+                    inputId=inputId,
                 )
             inputData["mode"] = inputMode
         
@@ -61,7 +61,7 @@ def standardizeScripts(data):
                     case "option":
                         if attribute not in inputData:
                             raise Exception()
-            newInputDatas[inputID] = inputData
+            newInputDatas[inputId] = inputData
         
         newBlockData = {
             "opcode": data["opcode"],
@@ -101,11 +101,11 @@ def prepareScripts(data):
         })
     return newScriptDatas
 
-def generateMenu(data, parentOpcode, inputID):
+def generateMenu(data, parentOpcode, inputId):
     opcode = getDeoptimizedOpcode(opcode=parentOpcode)
     menu = getMenu(
         opcode=opcode,
-        inputID=inputID,
+        inputId=inputId,
     )
     menuOpcode = getOptimizedOpcode(opcode=menu["menuOpcode"])
     newData = {
@@ -124,7 +124,7 @@ def generateMenu(data, parentOpcode, inputID):
         "_info_": ...,
     }"""
 
-def prepareBlock(data, parentOpcode, position=None, isOption=False, inputID=None):
+def prepareBlock(data, parentOpcode, position=None, isOption=False, inputId=None):
     isMenu = False
     if isinstance(data, str):
         if not isOption: raise Exception()
@@ -132,7 +132,7 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputID=None
         data = generateMenu(
             data=data,
             parentOpcode=parentOpcode,
-            inputID=inputID,
+            inputId=inputId,
         )
         isMenu = True
     
@@ -146,7 +146,7 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputID=None
         proccode, arguments = parseCustomOpcode(customOpcode=data["options"]["customOpcode"][1])
     
     newInputDatas = {}
-    for inputID, inputData in data["inputs"].items():
+    for inputId, inputData in data["inputs"].items():
         if inputData["mode"] == "block-and-broadcast-option":
             inputData["text"] = inputData["option"]
             del inputData["option"]
@@ -166,11 +166,11 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputID=None
             ) for subBlockData in inputData["blocks"]]
         if inputData.get("option") != None:
             if opcode == "procedures_call":
-                inputType = "text" if arguments[inputID]==str else ("boolean" if arguments[inputID]==bool else None)
+                inputType = "text" if arguments[inputId]==str else ("boolean" if arguments[inputId]==bool else None)
             else:
                 inputType = getInputType(
                     opcode=opcode,
-                    inputID=inputID,                
+                    inputId=inputId,                
                 )
             newOptionData = deoptimizeOptionValue(
                 optionValue=inputData["option"],
@@ -180,24 +180,24 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputID=None
                 data=newOptionData,
                 parentOpcode=data["opcode"],
                 isOption=True,
-                inputID=inputID,
+                inputId=inputId,
             ) 
-        newInputDatas[inputID] = newInputData
+        newInputDatas[inputId] = newInputData
         
     if isMenu:
         newOptionDatas = data["options"]
     else:
         newOptionDatas = {}
-        for optionID, optionData in data["options"].items():
+        for optionId, optionData in data["options"].items():
             optionType = getOptionType(
                 opcode=opcode,
-                optionID=optionID,
+                optionId=optionId,
             )
             newOptionData = deoptimizeOptionValue(
                 optionValue=optionData,
                 optionType=optionType,
             )
-            newOptionDatas[optionID] = newOptionData
+            newOptionDatas[optionId] = newOptionData
     
     newData = data | {
         "inputs" : newInputDatas,
@@ -212,44 +212,44 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputID=None
 def flattenScripts(data):
     newBlockDatas = {}
     for i, scriptData in enumerate(data):
-        # Generate IDs for the blocks
+        # Generate Ids for the blocks
         newBlockDatas |= flattenBlocks(
             data=scriptData["blocks"],
             placementPath=[i]+["blocks"],
         )
     return newBlockDatas
 
-def flattenBlocks(data, placementPath, parentID=None, firstID=None):
+def flattenBlocks(data, placementPath, parentId=None, firstId=None):
     range_ = range(len(data))
-    blockIDs = [BlockSelector() for i in range_]
-    if firstID != None:
-        blockIDs[0] = firstID
+    blockIds = [BlockSelector() for i in range_]
+    if firstId != None:
+        blockIds[0] = firstId
     newBlockDatas = {}
     for i, blockData in enumerate(data):
-        blockID = blockIDs[i]
+        blockId = blockIds[i]
         if i - 1 in range_: # When the block has a upwards neighbour
-            parentID = blockIDs[i - 1]
+            parentId = blockIds[i - 1]
         elif i == 0:
-            parentID = parentID
+            parentId = parentId
         if i + 1 in range_: # When the block has a downwards neighbour
-            nextID = blockIDs[i + 1]
+            nextId = blockIds[i + 1]
         else:
-            nextID = None
+            nextId = None
         
         newBlockDatas |= flattenBlock(
             data=blockData,
-            blockID=blockID,
-            parentID=parentID,
-            nextID=nextID,
+            blockId=blockId,
+            parentId=parentId,
+            nextId=nextId,
             placementPath=placementPath+[i],
         )
     return newBlockDatas
 
-def flattenBlock(data, blockID, parentID, nextID, placementPath):
+def flattenBlock(data, blockId, parentId, nextId, placementPath):
     # Transform inputs
     newBlockDatas = {}
     newInputDatas = {}
-    for inputID, inputData in data["inputs"].items():
+    for inputId, inputData in data["inputs"].items():
         references = []
         listBlock = None
         if inputData.get("block") != None:
@@ -261,37 +261,37 @@ def flattenBlock(data, blockID, parentID, nextID, placementPath):
                 listBlock = inputData["block"]
                 # Optional just in case
                 listBlock["_info_"] |= {
-                    "parent": blockID,
+                    "parent": blockId,
                     "next"  : None
                 }
             else:
-                subBlockID = BlockSelector()
-                references.append(subBlockID)
+                subBlockId = BlockSelector()
+                references.append(subBlockId)
                 newBlockDatas |= flattenBlock(
                     data=inputData["block"],
-                    placementPath=placementPath+["inputs"]+[inputID]+["block"],
-                    blockID=subBlockID,
-                    parentID=blockID,
-                    nextID=None,
+                    placementPath=placementPath+["inputs"]+[inputId]+["block"],
+                    blockId=subBlockId,
+                    parentId=blockId,
+                    nextId=None,
                 )
         if inputData.get("blocks", []) != []:
-            subBlockID = BlockSelector()
-            references.append(subBlockID)
+            subBlockId = BlockSelector()
+            references.append(subBlockId)
             newBlockDatas |= flattenBlocks(
                 data=inputData["blocks"],
-                placementPath=placementPath+["inputs"]+[inputID]+["blocks"],
-                parentID=blockID,
-                firstID=subBlockID,
+                placementPath=placementPath+["inputs"]+[inputId]+["blocks"],
+                parentId=blockId,
+                firstId=subBlockId,
             )
         if inputData.get("option") != None:
-            subBlockID = BlockSelector()
-            references.append(subBlockID)
+            subBlockId = BlockSelector()
+            references.append(subBlockId)
             newBlockDatas |= flattenBlock(
                 data=inputData["option"],
-                placementPath=placementPath+["inputs"]+[inputID]+["option"],
-                blockID=subBlockID,
-                parentID=blockID,
-                nextID=None,
+                placementPath=placementPath+["inputs"]+[inputId]+["option"],
+                blockId=subBlockId,
+                parentId=blockId,
+                nextId=None,
             )
         newInputData = {
             "mode"      : inputData["mode"],
@@ -299,7 +299,7 @@ def flattenBlock(data, blockID, parentID, nextID, placementPath):
             "listBlock" : listBlock,
             "text"      : inputData.get("text"),
         }
-        newInputDatas[inputID] = newInputData
+        newInputDatas[inputId] = newInputData
 
     newBlockData = {
         "opcode" : data["opcode"],
@@ -307,27 +307,27 @@ def flattenBlock(data, blockID, parentID, nextID, placementPath):
         "options": data["options"],
         "comment": data.get("comment"),
         "_info_" : data["_info_"] | {
-            "parent"  : parentID,
-            "next"    : nextID,
+            "parent"  : parentId,
+            "next"    : nextId,
         },
         "_placementPath_": placementPath, #eg. 1 indicates an origin from the 1st script 
     }
-    newBlockDatas[blockID] = newBlockData
+    newBlockDatas[blockId] = newBlockData
     return newBlockDatas
 
-def restoreProcedureDefinitionBlock(data, blockID):
+def restoreProcedureDefinitionBlock(data, blockId):
     customOpcode        = data["options"]["customOpcode"]
     proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
-    argumentIDs         = []
+    argumentIds         = []
     argumentNames       = []
     argumentDefaults    = []
-    argumentBlockIDs    = []
+    argumentBlockIds    = []
     for argumentName, argumentType in arguments.items():
-        argumentIDs     .append(generateRandomToken())
+        argumentIds     .append(generateRandomToken())
         argumentNames   .append(argumentName)
         # The argument reporter defaults
         argumentDefaults.append("" if argumentType==str else json.dumps(False))
-        argumentBlockIDs.append(BlockSelector())
+        argumentBlockIds.append(BlockSelector())
     
     match data["options"]["blockType"]:
         case "instruction"    : returns, optype, opcode = False, "statement", "procedures_definition"
@@ -336,14 +336,14 @@ def restoreProcedureDefinitionBlock(data, blockID):
         case "numberReporter" : returns, optype, opcode = True , "number"   , "procedures_definition_return"
         case "booleanReporter": returns, optype, opcode = True , "boolean"  , "procedures_definition_return"
     
-    definitionID = blockID
-    prototypeID  = BlockSelector()
+    definitionId = blockId
+    prototypeId  = BlockSelector()
     position     = data["_info_"]["position"]
     definitionData = {
         "opcode": opcode,
         "next": data["_info_"]["next"],
         "parent": None,
-        "inputs": {"custom_block": [1, prototypeID]},
+        "inputs": {"custom_block": [1, prototypeId]},
         "fields": {},
         "shadow": False,
         "topLevel": True,
@@ -354,8 +354,8 @@ def restoreProcedureDefinitionBlock(data, blockID):
     prototypeData = {
         "opcode"  : "procedures_prototype",
         "next"    : None,
-        "parent"  : definitionID,
-        "inputs"  : { argumentIDs[j]: [1, argumentBlockIDs[j]] for j in range(len(argumentIDs)) }, 
+        "parent"  : definitionId,
+        "inputs"  : { argumentIds[j]: [1, argumentBlockIds[j]] for j in range(len(argumentIds)) }, 
         "fields"  : {},
         "shadow"  : True,
         "topLevel": False,
@@ -363,7 +363,7 @@ def restoreProcedureDefinitionBlock(data, blockID):
             "tagName"         : "mutation",
             "children"        : [],
             "proccode"        : proccode,
-            "argumentids"     : json.dumps(argumentIDs),
+            "argumentids"     : json.dumps(argumentIds),
             "argumentnames"   : json.dumps(argumentNames),
             "argumentdefaults": json.dumps(argumentDefaults),
             "warp"            : json.dumps(data["options"]["noScreenRefresh"]),
@@ -375,14 +375,14 @@ def restoreProcedureDefinitionBlock(data, blockID):
         "_placementPath_": data["_placementPath_"]+["CB_PROTOTYPE"],
     }
     newBlockDatas = {}
-    newBlockDatas[definitionID] = definitionData
-    newBlockDatas[prototypeID]  = prototypeData
-    for j in range(len(argumentIDs)):
+    newBlockDatas[definitionId] = definitionData
+    newBlockDatas[prototypeId]  = prototypeData
+    for j in range(len(argumentIds)):
         argumentName = argumentNames[j]
-        newBlockDatas[argumentBlockIDs[j]] = {
+        newBlockDatas[argumentBlockIds[j]] = {
             "opcode": "argument_reporter_string_number" if argumentDefaults[j] == "" else "argument_reporter_boolean",
             "next": None,
-            "parent": prototypeID,
+            "parent": prototypeId,
             "inputs": {},
             "fields": {
                 "VALUE": [argumentName, generateRandomToken()]
@@ -401,7 +401,7 @@ def restoreProcedureDefinitionBlock(data, blockID):
 def restoreBlocks(data, spriteName):
     newBlockDatas = {}
     newCommentDatas = {}
-    for blockID, blockData in data.items():
+    for blockId, blockData in data.items():
         opcode = getDeoptimizedOpcode(opcode=blockData["opcode"])
         
         if opcode in ["special_variable_value", "special_list_value"]:
@@ -413,7 +413,7 @@ def restoreBlocks(data, spriteName):
             newBlockData = None
             newBlockDatas |= restoreProcedureDefinitionBlock(
                 data=blockData,
-                blockID=blockID,
+                blockId=blockId,
             )
         else:
             blockType = getBlockType(opcode=opcode)
@@ -450,23 +450,23 @@ def restoreBlocks(data, spriteName):
         if blockData.get("comment") != None:
             newCommentData = translateComment(
                 data=blockData["comment"],
-                id=blockID,
+                id=blockId,
             )
-            newCommentID = BlockSelector()
-            newCommentDatas[newCommentID] = newCommentData
-            newBlockData["comment"] = newCommentID
+            newCommentId = BlockSelector()
+            newCommentDatas[newCommentId] = newCommentData
+            newBlockData["comment"] = newCommentId
         
         if newBlockData != None:
-            newBlockDatas[blockID] = newBlockData
+            newBlockDatas[blockId] = newBlockData
     return newBlockDatas, newCommentDatas
 
 def restoreInputs(data, opcode, spriteName, blockData):
     newInputDatas = {}
     if opcode == "procedures_call":
         proccode, arguments = parseCustomOpcode(customOpcode=blockData["options"]["customOpcode"])
-    for inputID, inputData in data.items():
+    for inputId, inputData in data.items():
         if opcode == "procedures_call":
-            argument = arguments[inputID]
+            argument = arguments[inputId]
             if   argument == str:
                 inputType = "text"
                 inputMode = "block-and-text"
@@ -476,11 +476,11 @@ def restoreInputs(data, opcode, spriteName, blockData):
         else:
             inputType = getInputType(
                 opcode=opcode,
-                inputID=inputID
+                inputId=inputId
             )
             inputMode = getInputMode(
                 opcode=opcode,
-                inputID=inputID
+                inputId=inputId
             )
         
         subBlocks     = inputData["references"]
@@ -516,12 +516,12 @@ def restoreInputs(data, opcode, spriteName, blockData):
                     newInputData = [3, subBlocks[0],  subBlocks[1]]
         
         
-        newInputID = getDeoptimizedInputID(
+        newInputId = getDeoptimizedInputId(
             opcode=opcode,
-            inputID=inputID,
+            inputId=inputId,
         )
         if newInputData != None:
-            newInputDatas[newInputID] = newInputData
+            newInputDatas[newInputId] = newInputData
     return newInputDatas
 
 def restoreListBlock(data, spriteName):
@@ -547,7 +547,7 @@ def unprepareBlocks(data):
                 mutationData = blockData["mutation"]
                 mutationDatas[mutationData["proccode"]] = mutationData
     newBlockDatas = {}
-    for blockID, blockData in data.items():
+    for blockId, blockData in data.items():
         if isinstance(blockData, dict):
             if blockData["opcode"] == "procedures_call":
                 customOpcode = blockData["fields"]["customOpcode"]
@@ -559,11 +559,11 @@ def unprepareBlocks(data):
                 del modifiedMutationData["argumentdefaults"]
                 blockData["mutation"] = modifiedMutationData
         
-                argumentIDs   = json.loads(mutationData["argumentids"])
+                argumentIds   = json.loads(mutationData["argumentids"])
                 argumentNames = json.loads(mutationData["argumentnames"])
                 blockData["inputs"] = {
-                    argumentIDs[argumentNames.index(inputID)]: 
-                    inputValue for inputID,inputValue in blockData["inputs"].items() 
+                    argumentIds[argumentNames.index(inputId)]: 
+                    inputValue for inputId,inputValue in blockData["inputs"].items() 
                 }
 
             elif blockData["opcode"] == "control_stop":
@@ -587,7 +587,7 @@ def unprepareBlocks(data):
                     "expanded": "false"
                 }
                 del blockData["fields"]["VERTEX_COUNT"]
-            newBlockDatas[blockID] = blockData
+            newBlockDatas[blockId] = blockData
     return newBlockDatas
 
 from pypenguin.utility import pp

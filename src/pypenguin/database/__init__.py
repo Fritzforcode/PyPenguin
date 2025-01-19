@@ -106,72 +106,72 @@ def getDeoptimizedOpcode(opcode):
     assert found, f"Opcode not found    : {opcode}"
     return oldOpcode
 
-def getOptimizedInputID(opcode, inputID):
+def getOptimizedInputId(opcode, inputId):
     if "inputTranslation" in opcodeDatabase[opcode]:
-        if inputID in opcodeDatabase[opcode]["inputTranslation"]:
-            return opcodeDatabase[opcode]["inputTranslation"][inputID]
+        if inputId in opcodeDatabase[opcode]["inputTranslation"]:
+            return opcodeDatabase[opcode]["inputTranslation"][inputId]
     if "menus" in opcodeDatabase[opcode]:
         for menuData in opcodeDatabase[opcode]["menus"]:
-            if menuData["outer"] == inputID:
+            if menuData["outer"] == inputId:
                 return menuData["new"]
-    return inputID
+    return inputId
 
-def getDeoptimizedInputID(opcode, inputID):
+def getDeoptimizedInputId(opcode, inputId):
     if "inputTranslation" in opcodeDatabase[opcode]:
         table = flipKeysAndValues(
             opcodeDatabase[opcode]["inputTranslation"]
         )
-        if inputID in table:
-            return table[inputID]
+        if inputId in table:
+            return table[inputId]
     if "menus" in opcodeDatabase[opcode]:
         for menuData in opcodeDatabase[opcode]["menus"]:
-            if menuData["new"] == inputID:
+            if menuData["new"] == inputId:
                 return menuData["outer"]
-    return inputID
+    return inputId
 
 def getPredefinedTokens(opcode):
     return opcodeDatabase[opcode].get("tokens", None)
 
-def getInputType(opcode, inputID):
+def getInputType(opcode, inputId):
     try:
-        return opcodeDatabase[opcode]["inputTypes"][inputID]
+        return opcodeDatabase[opcode]["inputTypes"][inputId]
     except KeyError:
-        raise Exception(f"Could not find input '{inputID}' for a block with opcode '{opcode}'")
+        raise Exception(f"Could not find input '{inputId}' for a block with opcode '{opcode}'")
 
 def getInputTypes(opcode):
     return opcodeDatabase[opcode]["inputTypes"]
 
-def getInputMode(opcode, inputID):
+def getInputMode(opcode, inputId):
     return inputModes[getInputType(
         opcode=opcode, 
-        inputID=inputID,
+        inputId=inputId,
     )]
 
 def getInputModes(opcode):
-    return {inputID: getInputMode(
+    return {inputId: getInputMode(
         opcode=opcode,
-        inputID=inputID,
-    ) for inputID in getInputTypes(opcode).keys()}
+        inputId=inputId,
+    ) for inputId in getInputTypes(opcode).keys()}
 
-def getOptimizedOptionID(opcode, optionID):
+def getOptimizedOptionId(opcode, optionId):
     if "optionTranslation" not in opcodeDatabase[opcode]:
-        return optionID
-    if optionID not in opcodeDatabase[opcode]["optionTranslation"]:
-        return optionID
-    return opcodeDatabase[opcode]["optionTranslation"][optionID]
+        return optionId
+    if optionId not in opcodeDatabase[opcode]["optionTranslation"]:
+        return optionId
+    return opcodeDatabase[opcode]["optionTranslation"][optionId]
 
-def getDeoptimizedOptionID(opcode, optionID):
+def getDeoptimizedOptionId(opcode, optionId):
     if "optionTranslation" in opcodeDatabase[opcode]:
         table = flipKeysAndValues(
             opcodeDatabase[opcode]["optionTranslation"]
         )
-        if optionID in table:
-            return table[optionID]
+        if optionId in table:
+            return table[optionId]
     if "menus" in opcodeDatabase[opcode]:
         for menuData in opcodeDatabase[opcode]["menus"]:
-            if menuData["new"] == optionID:
+            if menuData["new"] == optionId:
                 return menuData["inner"]
-    return optionID
+    return optionId
 
 def getBlockType(opcode, defaultNone=False):
     if defaultNone:
@@ -185,11 +185,11 @@ def getBlockType(opcode, defaultNone=False):
 def getBlockCategory(opcode):
     return opcodeDatabase[opcode]["category"]
 
-def getMenu(opcode, inputID):
+def getMenu(opcode, inputId):
     if "menus" not in opcodeDatabase[opcode]:
         return None
     for menu in opcodeDatabase[opcode]["menus"]:
-        if menu["new"] == inputID:
+        if menu["new"] == inputId:
             return menu
     return None
 
@@ -206,8 +206,8 @@ def getInputMagicNumber(inputType):
         case "boolean"         : pass
     return magicNumber
 
-def getOptionType(opcode, optionID):
-    return opcodeDatabase[opcode]["optionTypes"][optionID]
+def getOptionType(opcode, optionId):
+    return opcodeDatabase[opcode]["optionTypes"][optionId]
 
 def getOptionTypes(opcode):
     return opcodeDatabase[opcode]["optionTypes"]

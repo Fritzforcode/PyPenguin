@@ -1,5 +1,5 @@
 from pypenguin.utility import generateCustomOpcode
-from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputID, getInputMode, getInputModes, getOptimizedOptionID, getBlockType, optimizeOptionValue, getInputType, getOptionType, inputTextDefault
+from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputId, getInputMode, getInputModes, getOptimizedOptionId, getBlockType, optimizeOptionValue, getInputType, getOptionType, inputTextDefault
 
 import copy, json
 
@@ -34,7 +34,7 @@ def finishBlock(data):
     opcode = getDeoptimizedOpcode(opcode=data["opcode"])
 
     newInputDatas = {}
-    for inputID, inputData in data["inputs"].items():
+    for inputId, inputData in data["inputs"].items():
         newInputData = copy.deepcopy(inputData)
         if inputData.get("block") != None:
             newInputData["block"]  = finishBlock(data=inputData["block"])
@@ -49,7 +49,7 @@ def finishBlock(data):
             # A procedure call can't have an input like this
             inputMode = getInputMode(
                 opcode=opcode,
-                inputID=inputID,
+                inputId=inputId,
             )
             # rename 'text' to 'option'
             if inputMode == "block-and-broadcast-option":
@@ -65,28 +65,28 @@ def finishBlock(data):
         if "option" in newInputData:
             optionType = getInputType(
                 opcode=opcode,
-                inputID=inputID,
+                inputId=inputId,
             )
             newInputData["option"] = optimizeOptionValue(
                 optionValue=newInputData["option"],
                 optionType=optionType,
             )
-        if opcode == "polygon" and inputID in ["x4", "y4"]:
+        if opcode == "polygon" and inputId in ["x4", "y4"]:
             if data["options"]["VERTEX_COUNT"] == 3: 
                 continue # When the polygon block has only 3 not 4 vertecies do not keep x4, y4
-        newInputDatas[inputID] = newInputData
+        newInputDatas[inputId] = newInputData
     
     newOptionDatas = {}
-    for optionID, optionData in data["options"].items():
+    for optionId, optionData in data["options"].items():
         optionType = getOptionType(
             opcode=opcode,
-            optionID=optionID,
+            optionId=optionId,
         )
         newOptionData = optimizeOptionValue(
             optionValue=optionData,
             optionType=optionType,
         )
-        newOptionDatas[optionID] = newOptionData
+        newOptionDatas[optionId] = newOptionData
 
     newData = data | {"inputs": newInputDatas, "options": newOptionDatas}
     del newData["_info_"]
@@ -97,27 +97,27 @@ def finishBlock(data):
 
 def nestScripts(data):
     # Get all top level block ids
-    topLevelIDs = []
-    for blockID, blockData in data.items():
+    topLevelIds = []
+    for blockId, blockData in data.items():
         if isinstance(blockData, list): continue
         if blockData["_info_"]["topLevel"]:
-            topLevelIDs.append(blockID)
+            topLevelIds.append(blockId)
     
     # Account for that one bug(not my fault), where a block is falsely independent
-    for blockID, blockData in data.items():
+    for blockId, blockData in data.items():
         for inputData in blockData["inputs"].values():
             for reference in inputData["references"]:
                 subBlockData = data[reference]
                 if subBlockData["_info_"]["topLevel"]:
                     subBlockData["_info_"]["topLevel"] = False
                     del subBlockData["_info_"]["position"]
-                    topLevelIDs.remove(reference)
+                    topLevelIds.remove(reference)
 
     newScriptDatas = []
-    for topLevelID in topLevelIDs:
+    for topLevelId in topLevelIds:
         scriptData = nestBlockRecursively(
             blockDatas=data,
-            blockID=topLevelID,
+            blockId=topLevelId,
         )
         newScriptData = {
             "position": scriptData[0]["_info_"]["position"],
@@ -126,15 +126,15 @@ def nestScripts(data):
         newScriptDatas.append(newScriptData)
     return newScriptDatas
 
-def nestBlockRecursively(blockDatas, blockID):
-    blockData = blockDatas[blockID]
+def nestBlockRecursively(blockDatas, blockId):
+    blockData = blockDatas[blockId]
     newInputDatas = {}
-    for inputID, inputData in blockData["inputs"].items():
+    for inputId, inputData in blockData["inputs"].items():
         subBlockDatas = []
         for reference in inputData["references"]: 
             subBlockDatas.append(nestBlockRecursively(
                 blockDatas=blockDatas,
-                blockID=reference,
+                blockId=reference,
             ))
 
         if inputData["listBlock"] != None:
@@ -175,21 +175,21 @@ def nestBlockRecursively(blockDatas, blockID):
                     "block" : None          if blockCount == 1 else subBlockData0,
                     "option": subBlockData0 if blockCount == 1 else subBlockData1,
                }
-        newInputDatas[inputID] = newInputData
+        newInputDatas[inputId] = newInputData
     
     newBlockData = blockData | {"inputs": newInputDatas}
     newBlockDatas = [newBlockData]
     if blockData["_info_"]["next"] != None:
         newBlockDatas += nestBlockRecursively(
             blockDatas=blockDatas,
-            blockID=blockData["_info_"]["next"],
+            blockId=blockData["_info_"]["next"],
         )
     return newBlockDatas
 
-def prepareProcedureDefinitionBlock(blockDatas, definitionID):
-    definitionData = blockDatas[definitionID]
-    prototypeID    = definitionData["inputs"]["custom_block"][1]
-    prototypeData  = blockDatas[prototypeID]
+def prepareProcedureDefinitionBlock(blockDatas, definitionId):
+    definitionData = blockDatas[definitionId]
+    prototypeId    = definitionData["inputs"]["custom_block"][1]
+    prototypeData  = blockDatas[prototypeId]
 
     mutationData   = prototypeData["mutation"]
     proccode       = mutationData["proccode"]
@@ -229,13 +229,13 @@ def prepareProcedureDefinitionBlock(blockDatas, definitionID):
     prototypeData["doDelete"] = True
 
     for blockData in blockDatas.values():
-        if blockData["parent"] == prototypeID:
+        if blockData["parent"] == prototypeId:
             blockData["doDelete"] = True
 
     return newBlockData
 
-def prepareProcedureCallBlock(blockDatas, blockID, commentDatas, mutationDatas):
-    data             = blockDatas[blockID]
+def prepareProcedureCallBlock(blockDatas, blockId, commentDatas, mutationDatas):
+    data             = blockDatas[blockId]
     proccode         = data["mutation"]["proccode"]
     mutationData     = mutationDatas[proccode]
     argumentNames    = json.loads(mutationData["argumentnames"])
@@ -244,7 +244,7 @@ def prepareProcedureCallBlock(blockDatas, blockID, commentDatas, mutationDatas):
 
     newInputDatas = {}
     for i, argumentToken in enumerate(argumentTokens):
-        inputID         = argumentNames[i]
+        inputId         = argumentNames[i]
         argumentDefault = argumentDefaults[i]
         if argumentDefault == "":
             inputMode = "block-and-text" # is of text type
@@ -264,7 +264,7 @@ def prepareProcedureCallBlock(blockDatas, blockID, commentDatas, mutationDatas):
                 "listBlock" : None,
                 "text"      : None,
             }
-        newInputDatas[inputID] = newInputData
+        newInputDatas[inputId] = newInputData
 
     customOpcode  = generateCustomOpcode(
         proccode=proccode, 
@@ -286,25 +286,25 @@ def prepareProcedureCallBlock(blockDatas, blockID, commentDatas, mutationDatas):
 
 def prepareBlocks(data, commentDatas, mutationDatas):
     newBlockDatas = {}
-    for blockID, blockData in data.items():
+    for blockId, blockData in data.items():
         isListBlock = isinstance(blockData, list)
         if isListBlock: # For list blocks e.g. value of a variable
             newBlockData = prepareListBlock(
                 data=blockData, 
-                blockID=blockID,
+                blockId=blockId,
                 commentDatas=commentDatas,
             )
         elif blockData["opcode"] in ["procedures_definition", "procedures_definition_return"]:
             newBlockData = prepareProcedureDefinitionBlock(
                 blockDatas=data,
-                definitionID=blockID,
+                definitionId=blockId,
             )
         elif blockData["opcode"] == "procedures_prototype":
             newBlockData = None # The valuable information of the prototype is alredy being transfered into the optimized definition block
         elif blockData["opcode"] == "procedures_call":
             newBlockData = prepareProcedureCallBlock(
                 blockDatas=data,
-                blockID=blockID,
+                blockId=blockId,
                 commentDatas=commentDatas,
                 mutationDatas=mutationDatas,
             )
@@ -333,13 +333,13 @@ def prepareBlocks(data, commentDatas, mutationDatas):
         if not isListBlock and "comment" in blockData:
             newBlockData["comment"] = commentDatas[blockData["comment"]]
         if newBlockData != None:
-            newBlockDatas[blockID] = newBlockData
+            newBlockDatas[blockId] = newBlockData
     blockDatas = newBlockDatas
     newBlockDatas = {}
-    for blockID, blockData in blockDatas.items():
+    for blockId, blockData in blockDatas.items():
         if blockData.get("doDelete") == True:
             continue
-        newBlockDatas[blockID] = blockData
+        newBlockDatas[blockId] = blockData
     return newBlockDatas
 
 def prepareInputValue(data, inputMode, commentDatas):
@@ -373,7 +373,7 @@ def prepareInputValue(data, inputMode, commentDatas):
             # one list block and text
             listBlock = prepareListBlock(
                 data=data[1], 
-                blockID=None,
+                blockId=None,
                 commentDatas=commentDatas,
             ) #translate list blocks into standard blocks
             text      = data[2][1]
@@ -381,7 +381,7 @@ def prepareInputValue(data, inputMode, commentDatas):
             # two blocks(a menu, and a list block) and no text
             listBlock = prepareListBlock(
                 data=data[1], 
-                blockID=None,
+                blockId=None,
                 commentDatas=commentDatas,
             )
             references.append(data[2])
@@ -396,38 +396,38 @@ def prepareInputValue(data, inputMode, commentDatas):
 def prepareInputs(data, opcode, commentDatas):
     # Replace the old with the new input ids
     newData = {}
-    for inputID, inputData in data.items():
-        newInputID = getOptimizedInputID(
+    for inputId, inputData in data.items():
+        newInputId = getOptimizedInputId(
             opcode=opcode, 
-            inputID=inputID,
+            inputId=inputId,
         )
-        newData[newInputID] = inputData
+        newData[newInputId] = inputData
     data = newData
     
     # Optimize the input values
     newData = {}
-    for inputID, inputData in data.items():
+    for inputId, inputData in data.items():
         inputMode = getInputMode(
             opcode=opcode,
-            inputID=inputID,
+            inputId=inputId,
         )
-        newData[inputID] = prepareInputValue(
+        newData[inputId] = prepareInputValue(
             data=inputData,
             inputMode=inputMode,
             commentDatas=commentDatas,
         )
     
-    for inputID, inputMode in getInputModes(opcode).items():
-        if inputID not in newData:
+    for inputId, inputMode in getInputModes(opcode).items():
+        if inputId not in newData:
             if inputMode in ["block-only", "script"]:
-                newData[inputID] = {
+                newData[inputId] = {
                     "mode"      : inputMode,
                     "references": [],
                     "listBlock" : None,
                     "text"      : None,
                 }
-            elif opcode == "polygon" and inputID in ["x4", "y4"]:
-                newData[inputID] = {
+            elif opcode == "polygon" and inputId in ["x4", "y4"]:
+                newData[inputId] = {
                     "mode"      : inputMode,
                     "references": [],
                     "listBlock" : None,
@@ -439,15 +439,15 @@ def prepareInputs(data, opcode, commentDatas):
 
 def prepareOptions(data, opcode):
     newData = {}
-    for optionID, optionData in data.items():
-        newOptionID = getOptimizedOptionID(
-            optionID=optionID,
+    for optionId, optionData in data.items():
+        newOptionId = getOptimizedOptionId(
+            optionId=optionId,
             opcode=opcode,
         )
-        newData[newOptionID] = optionData[0]
+        newData[newOptionId] = optionData[0]
     return newData
 
-def prepareListBlock(data, blockID, commentDatas):
+def prepareListBlock(data, blockId, commentDatas):
     # A variable or list block
     if data[0] == 12: # A magic value
         newData = {
@@ -478,7 +478,7 @@ def prepareListBlock(data, blockID, commentDatas):
     # Get the comment attached to the block
     blockCommentData = None
     for commentData in commentDatas.values():
-        if commentData["_info_"]["block"] == blockID:
+        if commentData["_info_"]["block"] == blockId:
             blockCommentData = commentData
             break
     if blockCommentData != None:
