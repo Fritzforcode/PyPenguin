@@ -79,7 +79,6 @@ projectData = {
     "monitors": [],
     "extensions": [],
 }
-#TODO sprites[1].name
 
 from pypenguin import validateProject, compressProject
 from pypenguin.utility import writeJSONFile, Platform
