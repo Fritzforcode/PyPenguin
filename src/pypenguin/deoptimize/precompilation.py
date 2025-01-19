@@ -1,4 +1,4 @@
-import json
+import json, copy
 from enum import Enum
 from pypenguin.utility import editDataStructure, BlockSelector, LocalStringToToken, getDataAtPath, pp
 from pypenguin.database import getBlockType
@@ -9,9 +9,12 @@ class PathConstant(Enum):
 # Groups blocks into scripts and converts them into a consistent format 
 def exportBlocks(data, commentDatas, optimizedScriptDatas):
     scripts = []
-    for blockSelector, blockData in data.items():
+    for blockSelector, blockData in copy.deepcopy(data).items():
         path = blockData["_placementPath_"]
         del blockData["_placementPath_"]
+        if blockData["topLevel"]:
+            del blockData["x"]
+            del blockData["y"]
         scriptIndex, path = path[0], path[1:]
         pathString = json.dumps(path)
         
@@ -46,7 +49,7 @@ def exportBlocks(data, commentDatas, optimizedScriptDatas):
 
 
 # Loads a script 
-def loadScript(data, spriteName):
+def loadScript(data, spriteName, scriptPosition):
     blockDatas   = data["deoptimizedBlocks"  ]
     commentDatas = data["deoptimizedComments"]
     table = {itemPath: BlockSelector() for itemPath in (blockDatas|commentDatas).keys()}
@@ -64,6 +67,11 @@ def loadScript(data, spriteName):
         )
     )
     blockDatas   = editDataStructure(blockDatas  , conditionFunc=conditionFunc, conversionFunc=conversionFunc)
+    for blockData in blockDatas.values():
+        if blockData["topLevel"]:
+            blockData["x"], blockData["y"] = scriptPosition
+            break
+    
     commentDatas = editDataStructure(commentDatas, conditionFunc=conditionFunc, conversionFunc=conversionFunc)
     newBlockDatas = {}
     for blockPath, blockData in blockDatas.items():
@@ -78,8 +86,12 @@ def loadScript(data, spriteName):
 def findMatchingScript(scriptData, precompiledScriptDatas, spriteName):
     scriptBlockDatas = scriptData["blocks"]
     for precompiledScriptData in precompiledScriptDatas:
-        print(100*"-")
-        pp(precompiledScriptData["optimized"])
+        #print(100*"-")
+        #pp(precompiledScriptData["optimized"])
         if scriptBlockDatas == precompiledScriptData["optimized"]:
-            return True, loadScript(precompiledScriptData, spriteName=spriteName)
-    return False, None
+            return (*loadScript(
+                precompiledScriptData, 
+                spriteName=spriteName,
+                scriptPosition=scriptData["position"],
+            ), precompiledScriptData)
+    return None, None, None

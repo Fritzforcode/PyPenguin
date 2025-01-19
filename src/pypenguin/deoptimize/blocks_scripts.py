@@ -5,8 +5,8 @@ from pypenguin.deoptimize.options import translateOptions
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.database import *
 
-def completeScripts(data):
-    def completeBlock(data):
+def standardizeScripts(data):
+    def standardizeBlock(data):
         opcode = getDeoptimizedOpcode(opcode=data["opcode"])
         if opcode == "procedures_call":
             proccode, arguments = parseCustomOpcode(customOpcode=data["options"]["customOpcode"][1])
@@ -44,7 +44,7 @@ def completeScripts(data):
                 match attribute:
                     case "block":
                         if attribute in inputData:
-                            inputData["block"] = completeBlock(inputData["block"])
+                            inputData["block"] = standardizeBlock(inputData["block"])
                         else:
                             inputData["block"] = inputBlockDefault
                     case "text":
@@ -55,7 +55,7 @@ def completeScripts(data):
                                 inputData["text"] = inputTextDefault
                     case "blocks":
                         if attribute in inputData:
-                            inputData["blocks"] = completeBlocks(inputData["blocks"])
+                            inputData["blocks"] = standardizeBlocks(inputData["blocks"])
                         else:
                             inputData["blocks"] = inputBlocksDefault
                     case "option":
@@ -71,17 +71,17 @@ def completeScripts(data):
         }
         return newBlockData
     
-    def completeBlocks(data):
+    def standardizeBlocks(data):
         newBlockDatas = []
         for blockData in data:
-            newBlockDatas.append(completeBlock(blockData))
+            newBlockDatas.append(standardizeBlock(blockData))
         return newBlockDatas
         
     newScriptDatas = []
     for scriptData in data:
         newScriptDatas.append({
             "position": scriptData["position"],
-            "blocks": completeBlocks(scriptData["blocks"]),
+            "blocks": standardizeBlocks(scriptData["blocks"]),
         })
     return newScriptDatas
 

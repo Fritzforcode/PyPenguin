@@ -1,7 +1,7 @@
-from pypenguin.utility import BlockSelector, stringToToken, Platform, pformat, pp, writeJSONFile, readJSONFile
+from pypenguin.utility import BlockSelector, stringToToken, Platform, pformat, pp, writeJSONFile, readJSONFile, ensureCorrectPath
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
-from pypenguin.deoptimize.blocks_scripts import prepareScripts, flattenScripts, restoreBlocks, unprepareBlocks, makeJsonCompatible, completeScripts
+from pypenguin.deoptimize.blocks_scripts import prepareScripts, flattenScripts, restoreBlocks, unprepareBlocks, makeJsonCompatible, standardizeScripts
 from pypenguin.deoptimize.broadcasts import generateBroadcasts
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
@@ -25,26 +25,38 @@ def translateVariablesLists(data):
     return translatedVariableDatas, translatedListDatas
 
 def deoptimizeProject(projectData, targetPlatform):
-    if os.path.exists("precompiled.json"):
-        precompiledScriptDatas = readJSONFile("precompiled.json")
+    precompiledFilePath = ensureCorrectPath("precompiled.json", "PyPenguin")
+    if os.path.exists(precompiledFilePath):
+        precompiledScriptDatas = readJSONFile(precompiledFilePath)
     else:
         precompiledScriptDatas = []
     translatedVariableDatas, translatedListDatas = translateVariablesLists(data=projectData)    
     broadcastDatas = generateBroadcasts(data=projectData["sprites"])
     
     newSpriteDatas  = []
-    exportedScripts = []
+    exportedScriptDatas = []
     for i, spriteData in enumerate(projectData["sprites"]):
         spriteName = None if spriteData["isStage"] else spriteData["name"]
-        completedScripts = completeScripts(spriteData["scripts"])
-        for scriptData in completedScripts:
-            foundMatch, matchingScript = findMatchingScript(scriptData, precompiledScriptDatas, spriteName=spriteName)
-            print(foundMatch)
-            if foundMatch: pp(matchingScript)
+        standardizedScriptDatas    = standardizeScripts(spriteData["scripts"])
+        unfinishedScriptDatas      = [] # The scripts that couldn't be precompiled
+        finalBlockDatas            = {} # The blocks of the precompiled or converted scripts
+        finalCommentDatas          = {} # The comments of the precompiled or converted scripts
         
-        preparedScriptDatas = prepareScripts(completedScripts)
+        for scriptData in standardizedScriptDatas:
+            precompiledBlockDatas, precompiledCommentDatas, usedScriptData = findMatchingScript(scriptData, precompiledScriptDatas, spriteName=spriteName)
+            #print(100*"*")
+            if precompiledBlockDatas == None:
+                unfinishedScriptDatas.append(scriptData)
+                #print("MANUAL", scriptData)
+            else:
+                finalBlockDatas           |= precompiledBlockDatas
+                finalCommentDatas         |= precompiledCommentDatas
+                exportedScriptDatas.append(usedScriptData)
+                #print("PRECOMP", scriptData)
+                    
+        preparedScriptDatas = prepareScripts(unfinishedScriptDatas)
         flattendScriptDatas = flattenScripts(preparedScriptDatas)
-        newSpriteBlockDatas, scriptCommentDatas = restoreBlocks(
+        newBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,
             spriteName=spriteName,
         )
@@ -56,29 +68,24 @@ def deoptimizeProject(projectData, targetPlatform):
                 data=commentData,
                 id=None,
             )
-        newSpriteBlockDatas = unprepareBlocks(
-            data=newSpriteBlockDatas,
-        )
-        exportedScripts += exportBlocks(
-            data=newSpriteBlockDatas, 
-            commentDatas=newCommentDatas, 
-            optimizedScriptDatas=completedScripts,
-        )
-        if i == 1:
-            pass#with open("s_pre.txt", "w") as file:
-            #    file.write((pformat((newSpriteBlockDatas, newCommentDatas))))
-            #with open("s_mid.txt", "w") as file:
-            #    file.write((pformat(exportedScripts[1])))
-            #loadedScript = loadScript(data=exportedScripts[1], spriteName=spriteData["name"])
-            #with open("s_aft.txt", "w") as file:
-            #    file.write((pformat(loadedScript)))
-
         
-        newSpriteBlockDatas, newCommentDatas = makeJsonCompatible(
-            data=newSpriteBlockDatas,
-            commentDatas=newCommentDatas,
+        unpreparedBlockDatas = unprepareBlocks(
+            data=newBlockDatas,
+        )
+        finalBlockDatas |= unpreparedBlockDatas
+        
+        compatibleBlockDatas, compatibleCommentDatas = makeJsonCompatible(
+            data=finalBlockDatas,
+            commentDatas=finalCommentDatas,
             targetPlatform=targetPlatform,
         )
+        
+        exportedScriptDatas += exportBlocks(
+            data=unpreparedBlockDatas, 
+            commentDatas=newCommentDatas, 
+            optimizedScriptDatas=unfinishedScriptDatas,
+        )
+        
         
         newCostumeDatas = translateCostumes(
             data=spriteData["costumes"],
@@ -100,8 +107,8 @@ def deoptimizeProject(projectData, targetPlatform):
             "lists"         : translatedListDatas    [spriteName],
             "broadcasts"    : {},
             "customVars"    : [], # NO MEANING FOUND
-            "blocks"        : newSpriteBlockDatas,
-            "comments"      : newCommentDatas,
+            "blocks"        : compatibleBlockDatas,
+            "comments"      : compatibleCommentDatas,
             "currentCostume": spriteData["currentCostume"],
             "costumes"      : newCostumeDatas,
             "sounds"        : newSoundDatas,
@@ -137,7 +144,7 @@ def deoptimizeProject(projectData, targetPlatform):
             }
         newSpriteDatas.append(newSpriteData)
     
-    writeJSONFile("precompiled.json", exportedScripts)    
+    writeJSONFile("precompiled.json", exportedScriptDatas)    
     
     # Translate monitors
     newMonitorDatas = []
