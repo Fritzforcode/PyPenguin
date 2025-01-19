@@ -250,7 +250,7 @@ def validateCallInputs(path, data, opcode, optionDatas, context):
         if inputID not in inputTypes:
             raise formatError(inputIdError, path, f"Input '{inputID}' is not defined for a custom block with custom opcode '{optionDatas['customOpcode'][1]}'.")
     
-    for inputID, inputValue in data:
+    for inputID, inputValue in data.items():
         validateInputValue(
             path=path+[inputID],
             inputValue=inputValue,
