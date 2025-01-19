@@ -52,6 +52,10 @@ scriptB = {"position": [1000, 0], "blocks": [
         "opcode": "go to ([TARGET])",
         "inputs": {"TARGET": {"option": ['object', 'random position']}},
     },
+    {
+        "opcode": "go to ([TARGET])",
+        "inputs": {"TARGET": {"option": ['object', 'mouse-pointer']}},
+    },
 ]}
 
 projectData = {
@@ -79,13 +83,17 @@ projectData = {
 
 from pypenguin import validateProject, compressProject
 from pypenguin.utility import writeJSONFile, Platform
+import time
 validateProject(projectData=projectData)
 print("[VALIDATION SUCCESS]")
 writeJSONFile(filePath="t_source.json", data=projectData)
 writeJSONFile(filePath="project/project.json", data=projectData)
+start = time.time()
 compressProject(
     optimizedProjectDir = "project",
     projectFilePath     = "export.pmp",
     targetPlatform      = Platform.PENGUINMOD,
     deoptimizedDebugFilePath="t_deop.json",
 )
+stop = time.time()
+print(stop-start)

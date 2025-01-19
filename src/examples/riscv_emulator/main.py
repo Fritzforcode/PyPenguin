@@ -1,5 +1,5 @@
 import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
-from pypenguin import validateProject, deoptimizeAndCompressProject
+from pypenguin import validateProject, compressProject
 from pypenguin.utility import writeJSONFile, pp, Platform
 from helpers import *
 import json
@@ -212,11 +212,22 @@ writeJSONFile(
     filePath = "temp2.json",
     data     = project
 )
-
-deoptimizeAndCompressProject(
+writeJSONFile("precompiled.json", [])
+import time
+start = time.time()
+compressProject(
     optimizedProjectDir      = "project",
     projectFilePath          = "export.pmp",
-    temporaryDir             = "temporary",
     deoptimizedDebugFilePath = "temp_wrong.json",
     targetPlatform           = Platform.PENGUINMOD,
 )
+mid = time.time()
+compressProject(
+    optimizedProjectDir      = "project",
+    projectFilePath          = "export.pmp",
+    deoptimizedDebugFilePath = "temp_wrong.json",
+    targetPlatform           = Platform.PENGUINMOD,
+)
+end=time.time()
+print(mid-start)
+print(end-mid)
