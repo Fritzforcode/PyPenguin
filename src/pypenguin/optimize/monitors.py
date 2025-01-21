@@ -12,7 +12,8 @@ def translateMonitors(data, spriteNames):
             newOpcode = getOptimizedOpcode(opcode=opcode)
         
         newOptionDatas = {}
-        for optionId, optionData in monitorData["params"].items():
+        paramDatas = {} if monitorData["params"]==None else monitorData["params"]
+        for optionId, optionData in paramDatas.items():
             if   opcode == "data_variable":
                 newOptionId = "VARIABLE"
                 optionType  = "variable"

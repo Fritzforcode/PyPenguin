@@ -1,4 +1,4 @@
-from pypenguin.utility import generateCustomOpcode
+from pypenguin.utility import generateCustomOpcode, pp
 from pypenguin.database import getOptimizedOpcode, getDeoptimizedOpcode, getOptimizedInputId, getInputMode, getInputModes, getOptimizedOptionId, getBlockType, optimizeOptionValue, getInputType, getOptionType, inputTextDefault
 
 import copy, json
@@ -200,7 +200,7 @@ def prepareProcedureDefinitionBlock(blockDatas, definitionId):
     )
 
     # Find out which block type the custom block is
-    optype = json.loads(mutationData["optype"])
+    optype = json.loads(mutationData["optype"]) if "optype" in mutationData else None
     match optype:
         case None       : blockType = "instruction"
         case "statement": blockType = "instruction"
@@ -208,13 +208,14 @@ def prepareProcedureDefinitionBlock(blockDatas, definitionId):
         case "string"   : blockType = "textReporter"
         case "number"   : blockType = "numberReporter"
         case "boolean"  : blockType = "booleanReporter"
-    
+    warp = mutationData["warp"] if isinstance(mutationData["warp"], bool) else json.loads(mutationData["warp"]) # Wether "no screen refresh is ticked"
+
     newBlockData = {
         "opcode": "define custom block",
         "inputs": {},
         "options": {
             "customOpcode"   : customOpcode,
-            "noScreenRefresh": json.loads(mutationData["warp"]),
+            "noScreenRefresh": warp,
             "blockType"      : blockType,
         },
         "_info_"      : {

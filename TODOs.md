@@ -1,5 +1,7 @@
 # TODO
 
+do more scratch research
+
 research sprite property "broadcasts"
 
 update documentation
