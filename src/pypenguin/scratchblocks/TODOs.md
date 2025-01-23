@@ -1,2 +1,0 @@
-- fix "[] effect" duplicate block
-- test all blocks

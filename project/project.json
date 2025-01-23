@@ -3,16 +3,6 @@
         {
             "name": "Stage",
             "isStage": true,
-            "scripts": [],
-            "comments": [],
-            "currentCostume": 0,
-            "costumes": [],
-            "sounds": [],
-            "volume": 100
-        },
-        {
-            "name": "Sprite123",
-            "isStage": false,
             "scripts": [
                 {
                     "position": [
@@ -21,35 +11,37 @@
                     ],
                     "blocks": [
                         {
-                            "opcode": "ask (QUESTION) and wait",
+                            "opcode": "move (STEPS) steps",
                             "inputs": {
-                                "QUESTION": {
+                                "STEPS": {
                                     "block": {
-                                        "opcode": "value of [VARIABLE]",
-                                        "options": {
-                                            "VARIABLE": [
-                                                "variable",
-                                                "globVar"
-                                            ]
-                                        }
+                                        "opcode": "length of (TEXT)",
+                                        "inputs": {
+                                            "TEXT": {
+                                                "text": "abcx"
+                                            }
+                                        },
+                                        "options": {}
                                     }
                                 }
-                            }
+                            },
+                            "options": {}
                         },
                         {
-                            "opcode": "if <CONDITION> then {THEN}",
+                            "opcode": "if <CONDITION> then {THEN} else {ELSE}",
                             "inputs": {
                                 "CONDITION": {
                                     "block": {
                                         "opcode": "(OPERAND1) = (OPERAND2)",
                                         "inputs": {
                                             "OPERAND1": {
-                                                "text": "5"
+                                                "text": "hi"
                                             },
                                             "OPERAND2": {
-                                                "text": "-6"
+                                                "text": "bye"
                                             }
-                                        }
+                                        },
+                                        "options": {}
                                     }
                                 },
                                 "THEN": {
@@ -58,68 +50,28 @@
                                             "opcode": "say (MESSAGE)",
                                             "inputs": {
                                                 "MESSAGE": {
-                                                    "block": {
-                                                        "opcode": "value of [VARIABLE]",
-                                                        "options": {
-                                                            "VARIABLE": [
-                                                                "variable",
-                                                                "locVar"
-                                                            ]
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        {
-                                            "opcode": "change [VARIABLE] by (VALUE)",
-                                            "inputs": {
-                                                "VALUE": {
-                                                    "block": {
-                                                        "opcode": "value of text [ARGUMENT]",
-                                                        "options": {
-                                                            "ARGUMENT": [
-                                                                "value",
-                                                                "scripts.compiled"
-                                                            ]
-                                                        }
-                                                    }
+                                                    "text": "hi"
                                                 }
                                             },
-                                            "options": {
-                                                "VARIABLE": [
-                                                    "variable",
-                                                    "locVar"
-                                                ]
-                                            }
+                                            "options": {}
+                                        }
+                                    ]
+                                },
+                                "ELSE": {
+                                    "blocks": [
+                                        {
+                                            "opcode": "broadcast ([MESSAGE])",
+                                            "inputs": {
+                                                "MESSAGE": {
+                                                    "text": "abc"
+                                                }
+                                            },
+                                            "options": {}
                                         }
                                     ]
                                 }
-                            }
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        1000,
-                        0
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "options": {
-                                "noScreenRefresh": [
-                                    "value",
-                                    true
-                                ],
-                                "blockType": [
-                                    "value",
-                                    "instruction"
-                                ],
-                                "customOpcode": [
-                                    "value",
-                                    "hi (u)"
-                                ]
-                            }
+                            },
+                            "options": {}
                         }
                     ]
                 }
@@ -128,44 +80,22 @@
             "currentCostume": 0,
             "costumes": [],
             "sounds": [],
-            "volume": 100,
-            "layerOrder": 1,
-            "visible": true,
-            "position": [
-                0,
-                0
-            ],
-            "size": 100,
-            "direction": 90,
-            "draggable": true,
-            "rotationStyle": "all around",
-            "localVariables": [
-                {
-                    "name": "locVar",
-                    "currentValue": ""
-                }
-            ],
-            "localLists": [
-                {
-                    "name": "locList",
-                    "currentValue": []
-                }
-            ]
+            "volume": 100
         }
     ],
-    "globalVariables": [
-        {
-            "name": "globVar",
-            "currentValue": "",
-            "isCloudVariable": false
-        }
-    ],
-    "globalLists": [
-        {
-            "name": "globList",
-            "currentValue": []
-        }
-    ],
+    "globalVariables": [],
+    "globalLists": [],
     "monitors": [],
-    "extensions": []
+    "tempo": 60,
+    "videoTransparency": 0,
+    "videoState": "off",
+    "textToSpeechLanguage": null,
+    "extensionData": {},
+    "extensions": [
+        "jgJSON",
+        "Bitwise"
+    ],
+    "extensionURLs": {
+        "Bitwise": "https://extensions.turbowarp.org/bitwise.js"
+    }
 }

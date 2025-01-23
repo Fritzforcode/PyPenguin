@@ -24,7 +24,7 @@ from pypenguin.database.extension_json           import opcodes as extension_jso
 
 from pypenguin.utility                           import flipKeysAndValues, removeDuplicates
 
-import functools
+import functools, re
 
 """
 Category            Status ('.'=some 'x'=all)
@@ -103,7 +103,7 @@ def getDeoptimizedOpcode(opcode):
         if opcodeData["newOpcode"] == opcode:
             found = True
             break
-    assert found, f"Opcode not found    : {opcode}"
+    assert found, f"Opcode not found: {opcode}"
     return oldOpcode
 
 def getOptimizedInputId(opcode, inputId):
@@ -214,6 +214,27 @@ def getOptionTypes(opcode):
 
 def getEmbeddedMenuOpcode(opcode):
     return opcodeDatabase[opcode].get("embeddedMenuOpcode")
+
+def getArgumentOrder(opcode) -> list[tuple[str, str]]:
+    newOpcode = getOptimizedOpcode(opcode)
+    arguments = getInputModes(opcode) | {optionId: "OPTION" for optionId in getOptionTypes(opcode)}
+    # Escape special characters in each argumentId
+    escapedArgumentIds = [re.escape(argumentId) for argumentId in arguments.keys()]
+    
+    # Combine patterns to match each argumentId with surrounding brackets
+    pattern = r"[\[\(\{<](?:" + "|".join(escapedArgumentIds) + r")[\]\)\}>]"
+    
+    # Find all matches in the string
+    matches = []
+    for match in re.finditer(pattern, newOpcode):
+        argumentId = match.group()[1:-1]  # Extract argumentId (remove brackets)
+        matches.append((argumentId, match.start()))  # Store argumentId and its index
+    
+    # Sort matches by their indices
+    matches.sort(key=lambda arg: arg[1])
+    
+    return [(pair[0], arguments[pair[0]]) for pair in matches]
+
 
 inputDefault = {}
 inputBlockDefault = None

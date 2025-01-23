@@ -1,0 +1,73 @@
+[
+    {
+        "position": [
+            0,
+            0
+        ],
+        "blocks": [
+            {
+                "opcode": "move (STEPS) steps",
+                "inputs": {
+                    "STEPS": {
+                        "block": {
+                            "opcode": "length of (TEXT)",
+                            "inputs": {
+                                "TEXT": {
+                                    "text": "abcx"
+                                }
+                            },
+                            "options": {}
+                        }
+                    }
+                },
+                "options": {}
+            },
+            {
+                "opcode": "if <CONDITION> then {THEN} else {ELSE}",
+                "inputs": {
+                    "CONDITION": {
+                        "block": {
+                            "opcode": "(OPERAND1) = (OPERAND2)",
+                            "inputs": {
+                                "OPERAND1": {
+                                    "text": "hi"
+                                },
+                                "OPERAND2": {
+                                    "text": "bye"
+                                }
+                            },
+                            "options": {}
+                        }
+                    },
+                    "THEN": {
+                        "blocks": [
+                            {
+                                "opcode": "say (MESSAGE)",
+                                "inputs": {
+                                    "MESSAGE": {
+                                        "text": "hi"
+                                    }
+                                },
+                                "options": {}
+                            }
+                        ]
+                    },
+                    "ELSE": {
+                        "blocks": [
+                            {
+                                "opcode": "broadcast ([MESSAGE])",
+                                "inputs": {
+                                    "MESSAGE": {
+                                        "text": "abc"
+                                    }
+                                },
+                                "options": {}
+                            }
+                        ]
+                    }
+                },
+                "options": {}
+            }
+        ]
+    }
+]

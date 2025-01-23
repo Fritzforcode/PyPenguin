@@ -1,1 +1,1 @@
-from pypenguin.scratchblocks import main
+from pypenguin.penguinblocks.run import *

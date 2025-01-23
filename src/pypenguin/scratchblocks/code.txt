@@ -1,2 +1,0 @@
-define add [points]
-change [score v] by (points)
