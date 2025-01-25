@@ -561,7 +561,6 @@ optionTypeDatabase = {
 }
 
 def getOptimizedOptionValuesUsingContext(optionType, context, inputDatas):
-    #pp(context)
     optionTypeData = optionTypeDatabase[optionType]
     values = []
     for value in optionTypeData["directValues"]:
@@ -618,8 +617,10 @@ def getOptimizedOptionValuesUsingContext(optionType, context, inputDatas):
                     values += context["localVariables"][nameKey]
             case "costume":
                 values += context["costumes"]
+                values += [["costume", i] for i in range(len(context["costumes"]))]
             case "backdrop":
                 values += context["backdrops"]
+                values += [["costume", i] for i in range(len(context["costumes"]))]
             case "sound":
                 values += context["sounds"]
             case "font":
@@ -749,7 +750,8 @@ def optimizeOptionValue(optionValue, optionType):
         result = [defaultPrefix, optionValue]
     return result
 
-def deoptimizeOptionValue(optionValue, optionType):
+def deoptimizeOptionValue(optionValue, optionType, context=None):
+    print(optionType, optionValue)
     if optionType in ["broadcast", "reporter name", "opcode", "variable", "list", "boolean"]:
         return optionValue[1]
     optimizedValues, defaultPrefix = getOptimizedOptionValuesUsingNoContext(optionType=optionType)
@@ -757,7 +759,11 @@ def deoptimizeOptionValue(optionValue, optionType):
     if len(optimizedValues) != len(deoptimizedValues):
         raise Exception()
     
-    if optionValue in optimizedValues:
+    if optionType in ["costume", "backdrop"] and isinstance(optionValue[1], int):
+        names = context["costumes"] if optionType=="costumes" else context["backdrops"]
+        if names == []: names = [defaultCostume["name"]]
+        return names[optionValue[1]]
+    elif optionValue in optimizedValues:
         return deoptimizedValues[optimizedValues.index(optionValue)]
     else:
         return optionValue[1]
@@ -787,9 +793,11 @@ def autocompleteOptionValue(optionValue, optionType):
     return result
 
 def getOptionValueDefault(optionType):
-    posssibleValues = getOptimizedOptionValuesUsingNoContext(optionType=optionType)
-    assert len(posssibleValues) > 0, "No default option value found."
-    return posssibleValues[0]
+    possibleValues, _ = getOptimizedOptionValuesUsingNoContext(optionType=optionType)
+    if possibleValues==[] and optionType in ["costume", "backdrop"]:
+        return [optionType, 0] # the first costume is the default
+    assert len(possibleValues) > 0, "No default option value found."
+    return possibleValues[0]
         
 
 defaultCostume = {

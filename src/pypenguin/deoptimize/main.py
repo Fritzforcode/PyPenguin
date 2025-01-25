@@ -54,7 +54,10 @@ def deoptimizeProject(projectData, targetPlatform):
                 exportedScriptDatas.append(usedScriptData)
                 #print("PRECOMP", scriptData)
                     
-        preparedScriptDatas = prepareScripts(unfinishedScriptDatas)
+        preparedScriptDatas = prepareScripts(unfinishedScriptDatas, context={
+            "costumes" : [item["name"] for item in spriteData               ["costumes"]],
+            "backdrops": [item["name"] for item in projectData["sprites"][0]["costumes"]],
+        })
         flattendScriptDatas = flattenScripts(preparedScriptDatas)
         newBlockDatas, scriptCommentDatas = restoreBlocks(
             data=flattendScriptDatas,

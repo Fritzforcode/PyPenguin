@@ -36,7 +36,7 @@ def standardizeScripts(data):
             elif inputMode == "block-only":
                 required = ["block"]
             elif inputMode in ["block-and-option", "block-and-broadcast-option"]:
-                required = ["option"]
+                required = ["block", "option"]
             elif inputMode == "script":
                 required = ["blocks"]
             
@@ -83,9 +83,11 @@ def standardizeScripts(data):
             "position": scriptData["position"],
             "blocks": standardizeBlocks(scriptData["blocks"]),
         })
+    pp(newScriptDatas)
+    input("std")
     return newScriptDatas
 
-def prepareScripts(data):
+def prepareScripts(data, context):
     newScriptDatas = []
     for scriptData in data:
         newBlockDatas = []
@@ -93,6 +95,7 @@ def prepareScripts(data):
             newBlockDatas.append(prepareBlock(
                 data=blockData,
                 parentOpcode=None,
+                context=context,
                 position=scriptData["position"] if i == 0 else None
             ))
         newScriptDatas.append({
@@ -124,7 +127,7 @@ def generateMenu(data, parentOpcode, inputId):
         "_info_": ...,
     }"""
 
-def prepareBlock(data, parentOpcode, position=None, isOption=False, inputId=None):
+def prepareBlock(data, parentOpcode, context, position=None, isOption=False, inputId=None):
     isMenu = False
     if isinstance(data, str):
         if not isOption: raise Exception()
@@ -137,14 +140,15 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputId=None
         isMenu = True
     
     
-    #if "inputs" not in data:
-    #    data["inputs"] = inputDefault
+    if "inputs" not in data:
+        data["inputs"] = inputDefault
     if "options" not in data:
         data["options"] = optionDefault
     opcode = getDeoptimizedOpcode(opcode=data["opcode"])
     if opcode == "procedures_call":
         proccode, arguments = parseCustomOpcode(customOpcode=data["options"]["customOpcode"][1])
     
+    pp(data)
     newInputDatas = {}
     for inputId, inputData in data["inputs"].items():
         if inputData["mode"] == "block-and-broadcast-option":
@@ -158,11 +162,13 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputId=None
             newInputData["block"]  = prepareBlock(
                 data=inputData["block"],
                 parentOpcode=data["opcode"],
+                context=context,
             )
         if inputData.get("blocks") != None:
             newInputData["blocks"] = [prepareBlock(
                 data=subBlockData,
                 parentOpcode=data["opcode"],
+                context=context,
             ) for subBlockData in inputData["blocks"]]
         if inputData.get("option") != None:
             if opcode == "procedures_call":
@@ -175,10 +181,12 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputId=None
             newOptionData = deoptimizeOptionValue(
                 optionValue=inputData["option"],
                 optionType=inputType,
+                context=context,
             )
             newInputData["option"] = prepareBlock(
                 data=newOptionData,
                 parentOpcode=data["opcode"],
+                context=context,
                 isOption=True,
                 inputId=inputId,
             ) 
@@ -196,6 +204,7 @@ def prepareBlock(data, parentOpcode, position=None, isOption=False, inputId=None
             newOptionData = deoptimizeOptionValue(
                 optionValue=optionData,
                 optionType=optionType,
+                context=context,
             )
             newOptionDatas[optionId] = newOptionData
     
