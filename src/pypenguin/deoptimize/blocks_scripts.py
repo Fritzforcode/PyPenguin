@@ -322,7 +322,7 @@ def flattenBlock(data, blockId, parentId, nextId, placementPath):
     newBlockDatas[blockId] = newBlockData
     return newBlockDatas
 
-def restoreProcedureDefinitionBlock(data, blockId):
+def restoreProcedureDefinitionBlock(data, blockId, commentId):
     customOpcode        = data["options"]["customOpcode"]
     proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
     argumentIds         = []
@@ -356,6 +356,7 @@ def restoreProcedureDefinitionBlock(data, blockId):
         "topLevel": True,
         "x": position[0],
         "y": position[1],
+        "comment": commentId,
         "_placementPath_": data["_placementPath_"],
     }
     prototypeData = {
@@ -411,6 +412,17 @@ def restoreBlocks(data, spriteName):
     for blockId, blockData in data.items():
         opcode = getDeoptimizedOpcode(opcode=blockData["opcode"])
         
+        if blockData.get("comment") == None:
+            newCommentId = None
+        else:
+            newCommentData = translateComment(
+                data=blockData["comment"],
+                id=blockId,
+            )
+            newCommentId = BlockSelector()
+            newCommentDatas[newCommentId] = newCommentData
+        
+
         if opcode in ["special_variable_value", "special_list_value"]:
             newBlockData = restoreListBlock(
                 data=blockData,
@@ -421,6 +433,7 @@ def restoreBlocks(data, spriteName):
             newBlockDatas |= restoreProcedureDefinitionBlock(
                 data=blockData,
                 blockId=blockId,
+                commentId=newCommentId,
             )
         else:
             blockType = getBlockType(opcode=opcode)
@@ -454,16 +467,9 @@ def restoreBlocks(data, spriteName):
                 position = blockData["_info_"]["position"]
                 newBlockData |= {"x": position[0], "y": position[1]}
         
-        if blockData.get("comment") != None:
-            newCommentData = translateComment(
-                data=blockData["comment"],
-                id=blockId,
-            )
-            newCommentId = BlockSelector()
-            newCommentDatas[newCommentId] = newCommentData
-            newBlockData["comment"] = newCommentId
-        
         if newBlockData != None:
+            if newCommentId != None:
+                newBlockData["comment"] = newCommentId
             newBlockDatas[blockId] = newBlockData
     return newBlockDatas, newCommentDatas
 
