@@ -6,6 +6,12 @@ scriptA = {"position": [0, 0], "blocks": [
                 "option": ["costume", 0],
             },
         },
+        "comment": {
+            "position": [400, 0],
+            "size": [200, 100],
+            "isMinimized": False,
+            "text": "Hi from a comment",
+        }
     },
 ]}
 
@@ -39,6 +45,7 @@ validateProject(projectData=projectData)
 print("[VALIDATION SUCCESS]")
 writeJSONFile(filePath="t_source.json", data=projectData)
 writeJSONFile(filePath="project/project.json", data=projectData)
+writeJSONFile(filePath="precompiled.json", data=[])
 start = time.time()
 compressProject(
     optimizedProjectDir = "project",

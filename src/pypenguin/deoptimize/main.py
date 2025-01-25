@@ -63,20 +63,22 @@ def deoptimizeProject(projectData, targetPlatform):
             data=flattendScriptDatas,
             spriteName=spriteName,
         )
-        newCommentDatas = scriptCommentDatas
+        newCommentDatas    = scriptCommentDatas
+        finalCommentDatas |= scriptCommentDatas
         
         for i, commentData in enumerate(spriteData["comments"]):
             commentId = BlockSelector()
-            newCommentDatas[commentId] = translateComment(
+            newCommentData = translateComment(
                 data=commentData,
                 id=None,
-            )
+            ) 
+            newCommentDatas  [commentId] = newCommentData
+            finalCommentDatas[commentId] = newCommentData
         
         unpreparedBlockDatas = unprepareBlocks(
             data=newBlockDatas,
         )
         finalBlockDatas |= unpreparedBlockDatas
-        
         compatibleBlockDatas, compatibleCommentDatas = makeJsonCompatible(
             data=finalBlockDatas,
             commentDatas=finalCommentDatas,

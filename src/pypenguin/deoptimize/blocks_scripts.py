@@ -83,8 +83,6 @@ def standardizeScripts(data):
             "position": scriptData["position"],
             "blocks": standardizeBlocks(scriptData["blocks"]),
         })
-    pp(newScriptDatas)
-    input("std")
     return newScriptDatas
 
 def prepareScripts(data, context):
