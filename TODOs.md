@@ -1,5 +1,7 @@
 # TODO
 
+fix comments not work
+
 do more scratch research
 
 research sprite property "broadcasts"

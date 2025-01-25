@@ -24,7 +24,7 @@ def findBlockBroadcastMessages(data):
     if "options" not in data:
         data["options"] = optionDefault
     for optionId, optionData in data["options"].items():
-        if getOptionType(optionId) == "broadcast":
+        if getOptionType(opcode=opcode, optionId=optionId) == "broadcast":
             if optionData not in broadcastMessages:
                 broadcastMessages.append(optionData)
     return broadcastMessages

@@ -1,7 +1,7 @@
 from pypenguin.utility import BlockSelector, stringToToken, Platform, pformat, pp, writeJSONFile, readJSONFile, ensureCorrectPath
 
 from pypenguin.deoptimize.variables_lists import translateVariables, translateLists
-from pypenguin.deoptimize.blocks_scripts import prepareScripts, flattenScripts, restoreBlocks, unprepareBlocks, makeJsonCompatible, standardizeScripts
+from pypenguin.deoptimize.blocks_scripts import prepareScripts, flattenScripts, restoreBlocks, unprepareBlocks, makeJsonCompatible, standardizeScripts, removeTemporaryAttrs
 from pypenguin.deoptimize.broadcasts import generateBroadcasts
 from pypenguin.deoptimize.costumes_sounds import translateCostumes, translateSounds
 from pypenguin.deoptimize.comments import translateComment
@@ -85,8 +85,9 @@ def deoptimizeProject(projectData, targetPlatform):
             commentDatas=newCommentDatas, 
             optimizedScriptDatas=unfinishedScriptDatas,
         )
-        
-        
+
+        removeTemporaryAttrs(compatibleBlockDatas)
+                
         newCostumeDatas = translateCostumes(
             data=spriteData["costumes"],
         )

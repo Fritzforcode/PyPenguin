@@ -610,3 +610,8 @@ def makeJsonCompatible(data, commentDatas, targetPlatform):
     data         = editDataStructure(data        , conditionFunc=conditionFunc, conversionFunc=conversionFunc)
     commentDatas = editDataStructure(commentDatas, conditionFunc=conditionFunc, conversionFunc=conversionFunc)
     return data, commentDatas
+
+def removeTemporaryAttrs(data):
+    for block in data.values():
+        if "_placementPath_" in block:
+            del block["_placementPath_"]

@@ -661,11 +661,11 @@ def getOptimizedOptionValuesUsingNoContext(optionType, addSegements:bool=True):
                     defaultPrefix = "sprite"
                 case "mutable sprite property":
                     values += [["value", "backdrop"], ["value", "volume"]]
-                    values += [["value", "x position"], ["value", "y position"], ["value", "direction"], ["value", "costume"], ["value", "size"]] #["value", "volume"]
+                    values += [["value", "x position"], ["value", "y position"], ["value", "direction"], ["value", "costume"], ["value", "size"]]
                     defaultPrefix = "variable"
                 case "readable sprite property":
                     values += [["value", "backdrop #"], ["value", "backdrop name"], ["value", "volume"]]
-                    values += [["value", "x position"], ["value", "y position"], ["value", "direction"], ["value", "costume #"], ["value", "costume name"], ["value", "layer"], ["value", "size"]] #["value", "volume"]
+                    values += [["value", "x position"], ["value", "y position"], ["value", "direction"], ["value", "costume #"], ["value", "costume name"], ["value", "layer"], ["value", "size"]]
                     defaultPrefix = "variable"
                 case "costume":
                     # Can't be guessed
@@ -786,6 +786,11 @@ def autocompleteOptionValue(optionValue, optionType):
         result = [defaultPrefix, optionValue]
     return result
 
+def getOptionValueDefault(optionType):
+    posssibleValues = getOptimizedOptionValuesUsingNoContext(optionType=optionType)
+    assert len(posssibleValues) > 0, "No default option value found."
+    return posssibleValues[0]
+        
 
 defaultCostume = {
     "name": "empty costume",
