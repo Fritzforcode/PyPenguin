@@ -2,17 +2,34 @@ import subprocess, json
 from pypenguin.utility import readJSONFile, writeJSONFile, pp
 from pypenguin.database import getArgumentOrder, getOptimizedOpcode, autocompleteOptionValue, getInputType, getOptionType, getOptionValueDefault
 
+COMMENT_X_OFFSET = 400
+COMMENT_SIZE = [200, 80]
+COMMENT_Y_PADDING = 20
+COMMENT_IS_MINIMIZED = False
+
 variables = []
 lists     = []
 
 def convertBlock(block):
+    pp(block)
     global variables, lists
     def isStandardOpcode(opcode) -> bool:
         return bool(opcode) and all(char.isupper() or char == '_' or char.isdigit() for char in opcode)
     
+    # Handle comment
+    
+    if block["comment"] == None:
+        comment = None
+    else:
+        comment = {
+            "position": None,
+            "size": COMMENT_SIZE,
+            "isMinimized": COMMENT_IS_MINIMIZED,
+            "text": block["comment"]["label"]["value"],
+        }
+
     # Get and handle opcode
     if "id" not in block["info"]:
-        pp(block)
         if   (block["info"]["category"] == "variables") and (block["info"]["shape"] == "reporter"):
             opcode = "special_variable_value"
         elif (block["info"]["category"] == "list"     ) and (block["info"]["shape"] == "reporter"):
@@ -46,7 +63,7 @@ def convertBlock(block):
                     customOpcode += " <" + child["info"]["hash"] + ">"
             elif "cls"  in child:
                 customOpcode += " " + child["value"]
-        return {
+        newBlock = {
             "opcode": getOptimizedOpcode("special_define"),
             "inputs": {},
             "options": {
@@ -55,6 +72,8 @@ def convertBlock(block):
                 "blockType"      : ["value", "instruction"],
             },
         }
+        if comment != None: newBlock["comment"] = comment
+        return newBlock
             
     arguments = []
     for child in block["children"]:
@@ -131,11 +150,13 @@ def convertBlock(block):
         lists.append(name)
         options["LIST"    ] = autocompleteOptionValue(optionValue=name, optionType="list"    )
 
-    return {
+    newBlock = {
         "opcode"   : getOptimizedOpcode(opcode) if newOpcode==None else newOpcode,
         "inputs"   : inputs,
         "options"  : options,
     }
+    if comment != None: newBlock["comment"] = comment
+    return newBlock
 
 def convertBlocks(blocks):
     newBlocks = []
@@ -145,6 +166,38 @@ def convertBlocks(blocks):
         if newBlock == None: continue
         newBlocks.append(newBlock)
     return newBlocks
+
+def finishBlock(block, scriptPos, commentCounter):
+    if "comment" in block:
+        block["comment"]["position"] = [
+            scriptPos[0] + COMMENT_X_OFFSET,
+            scriptPos[1] + commentCounter * (COMMENT_SIZE[1] + COMMENT_Y_PADDING),
+        ]
+        commentCounter += 1
+    if "inputs" in block:
+        for inputId, inputValue in block["inputs"].items():
+            if "block" in inputValue:
+                commentCounter = finishBlock(
+                    inputValue["block"],
+                    scriptPos=scriptPos,
+                    commentCounter=commentCounter,
+                )
+            if "blocks" in inputValue:
+                commentCounter = finishBlocks(
+                    inputValue["blocks"],
+                    scriptPos=scriptPos,
+                    commentCounter=commentCounter,
+                )
+    return commentCounter
+
+def finishBlocks(blocks, scriptPos, commentCounter=0):
+    for block in blocks:
+        commentCounter = finishBlock(
+            block, 
+            scriptPos=scriptPos, 
+            commentCounter=commentCounter
+        )
+    return commentCounter
 
 # Define the code string and output file path
 code1 = """
@@ -160,10 +213,10 @@ forever
  erase all
 end"""
 code="""
-define Render (x) asd <b>
+define Render (x) asd <b> //fgh
 set [# v] to (0)
 go to x: (0) y: (0)
-go to x: ((((grid x size) / (2)) * (tile size)) * (-1)) y: ((((grid y size) / (2)) * (tile size)) * (-1))
+go to x: ((((grid x size) / (2)) * (tile size)) * (-1)) y: ((((grid y size) / (2)) * (tile size)) * (-1)) // gu
 repeat (grid y) 
   repeat (grid x)
     change [# v] by (1)
@@ -172,9 +225,12 @@ repeat (grid y)
     change x by (tile size)
   end
   change x by (((grid x size) * (tile size)) * (-1))
-  change y  by (tile size)
+  change y  by (tile size) // sdf
 end
 """
+
+#code = "stamp//sdfgt\nstamp"
+
 
 """ Draft Example
 // env:extensions=["JSON"]
@@ -187,35 +243,37 @@ jsPath     = "src/pypenguin/penguinblocks/main.js"
 outputPath = "src/pypenguin/penguinblocks/in.json"
 
 # Run the JavaScript file with arguments using Node.js
-#result = subprocess.run(
-#    ["node", jsPath, code, outputPath],
-#    capture_output=True,
-#    text=True,
-#)
-#if result.returncode == 0:
-#    if result.stdout != "": # When it isn't empty
-#        print("JavaScript output:", result.stdout)
-#else:
-#    print("Error:", result.stderr)
+result = subprocess.run(
+    ["node", jsPath, code, outputPath],
+    capture_output=True,
+    text=True,
+)
+if result.returncode == 0:
+    if result.stdout != "": # When it isn't empty
+        print("JavaScript output:", result.stdout)
+else:
+    print("Error:", result.stderr)
 
-print(f"node {jsPath} \"{code}\" {outputPath}")
-input()
+#print(f"node {jsPath} \"{code}\" {outputPath}")
+#input()
 
 scripts = readJSONFile(outputPath)["scripts"]
 
 newScripts = []
 i = 0
 for script in scripts:
+    scriptPos = [0, 1000*i]
     newBlocks = convertBlocks(script["blocks"])
     if newBlocks == []: continue
+    
+    finishBlocks(newBlocks, scriptPos=scriptPos)
     newScripts.append({
-        "position": [0, 1000*i],
+        "position": scriptPos,
         "blocks"  : newBlocks,
     })
     i += 1
 
 pp(newScripts)
-input()
 writeJSONFile("src/pypenguin/penguinblocks/opt.json", newScripts)
 
 from pypenguin import compressProject, validateProject
