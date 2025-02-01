@@ -39,8 +39,18 @@ To add an extension to your project add the extension's id to `"extensions"`. Ex
 * **Bitwise** id: `"Bitwise"` + add to extension urls: `{"Bitwise": "https://extensions.turbowarp.org/bitwise.js"}`
 * **JSON** id: `"jgJSON"`
 
+### Example
+```
+{
+    ...
+    "extensions": ["pen", "jgJSON", "Bitwise"],
+    "extensionURLs": {
+        "Bitwise": "https://extensions.turbowarp.org/bitwise.js"
+    },
+}
+```
 
-# Menu Opcodes (not updated)
+# Menu Opcodes
 * `"x position"`
 * `"y position"`
 * `"direction"`
@@ -73,3 +83,10 @@ To add an extension to your project add the extension's id to `"extensions"`. Ex
 * `"logged in?"`
 * `"value of [VARIABLE]"`
 * `"value of [LIST]"`
+* `"tempo"`
+* `"is text visible?"`
+* `"get width of the text"`
+* `"get height of the text"`
+* `"displayed text"`
+* `"get data uri of last rendered text"`
+* `"language"`

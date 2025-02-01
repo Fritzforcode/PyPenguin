@@ -2,15 +2,35 @@
 [BACK TO SPRITES](sprites.md)  
 
 ## What a Variable Definition looks like
-Must be an object with the following properties:
-* `"name"`: The name of the variable. Must be a non-empty string.
+A variable defintion must be an object with the following properties:
+| **property**        | **type**         | **description**                                                                                                                           
+|---------------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------
+| `"name"`            | non-empty string | The name of the variable.                                                                                                                 
+| `"currentValue"`    | string \| number | The value the variable currently has.                                                                                                     
+| `"isCloudVariable"` | boolean          | Wether the variable is a cloud variable. Must be a boolean. Only exists for global variables (variables in the `"globalVariables"` array).
 
-* `"currentValue"`: The value the variable currently has as a string or number. 
 
-* `"isCloudVariable"`: Wether the variable is a cloud variable. Must be a boolean. Only exists for global variables (variables in the `"globalVariables"` array).
+### Example
+```
+{
+    "name": "my variable", 
+    "currentValue": "5", 
+    "isCloudVariable": False,
+}
+```
 
 ## What a List Definition looks like
-Must be an object with the following properties:
-* `"name"`: The name of the list. Must be a non-empty string.
+A list definition be an object with the following properties:
+| **property**        | **type**                    | **description**                      
+|---------------------|-----------------------------|----------------------------------
+| `"name"`            | non-empty string            | The name of the list.            
+| `"currentValue"`    | array of strings \| numbers | The value the list currently has.
 
-* `"currentValue"`: The value the list currently has. For a list this must be an array. Each item must be either a string or a number.
+
+### Example
+```
+{
+    "name": "my list", 
+    "currentValue": ["hello", 5], 
+}
+```
