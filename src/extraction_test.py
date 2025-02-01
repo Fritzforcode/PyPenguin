@@ -8,8 +8,8 @@ import time
 start = time.time()
 
 optimizedData = extractProject(
-    projectFilePath          = "assets/categories/extension_music.pmp",
-#    projectFilePath          = "assets/studies/commentTest.pmp",
+#    projectFilePath          = "assets/categories/extension_music.pmp",
+    projectFilePath          = "assets/studies/commentTest2.",
 #    projectFilePath          = "assets/from_online/The Tale of the Three Shapes.sb3",
 #    projectFilePath          = "Greatest Common Division.pmp",
     optimizedProjectDir      = "extracted_project",
