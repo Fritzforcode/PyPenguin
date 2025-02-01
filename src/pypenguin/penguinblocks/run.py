@@ -1,5 +1,5 @@
 import subprocess, json
-from pypenguin.utility import readJSONFile, writeJSONFile, pp
+from pypenguin.utility import readJSONFile, writeJSONFile, pp, generateCustomOpcode
 from pypenguin.database import getArgumentOrder, getOptimizedOpcode, autocompleteOptionValue, getInputType, getOptionType, getOptionValueDefault
 
 COMMENT_X_OFFSET = 400
@@ -34,6 +34,8 @@ def convertBlock(block):
             opcode = "special_variable_value"
         elif (block["info"]["category"] == "list"     ) and (block["info"]["shape"] == "reporter"):
             opcode = "special_list_value"
+        elif (block["info"]["category"] == "custom"   ) and (block["info"]["selector"] == "call" ):
+            opcode = "procedures_call"
         else:
             raise ValueError(f"Couldn't recognize block with shape {repr(block['info']['hash'])}")
     else:
@@ -53,27 +55,36 @@ def convertBlock(block):
     if category == "operators": category = "operator"
     opcode: str = category + "_" + rest
     
-    if opcode == "procedures_definition":
-        customOpcode = ""
-        for child in block["children"][1]["children"]:
-            if   "info" in child:
-                if   child["info"]["argument"] == "number":
-                    customOpcode += " (" + child["info"]["hash"] + ")"
-                elif child["info"]["argument"] == "boolean":
-                    customOpcode += " <" + child["info"]["hash"] + ">"
-            elif "cls"  in child:
-                customOpcode += " " + child["value"]
-        newBlock = {
-            "opcode": getOptimizedOpcode("special_define"),
-            "inputs": {},
-            "options": {
-                "noScreenRefresh": ["value", True],
-                "customOpcode"   : ["value", customOpcode],
-                "blockType"      : ["value", "instruction"],
-            },
-        }
-        if comment != None: newBlock["comment"] = comment
-        return newBlock
+    if opcode in {"procedures_definition", "procedures_call"}:
+        children = block["children"][1]["children"] if opcode == "procedures_definition" else block["children"]
+        
+        customOpcode = generateCustomOpcode(
+            proccode=block["info"]["call"],
+            argumentNames=block["info"]["names"],
+        )
+        
+        if opcode == "procedures_definition":
+            newBlock = {
+                "opcode": getOptimizedOpcode("special_define"),
+                "inputs": {},
+                "options": {
+                    "noScreenRefresh": ["value", True],
+                    "customOpcode"   : ["value", customOpcode],
+                    "blockType"      : ["value", "instruction"],
+                },
+            }
+            if comment != None: newBlock["comment"] = comment
+            return newBlock
+        #elif opcode == "procedures_call":
+        #    newBlock = {
+        #        "opcode": getOptimizedOpcode("procedures_call"),
+        #        "inputs": {},
+        #        "options": {
+        #            "customOpcode": ["value", customOpcode],
+        #        },
+        #    }
+        #    if comment != None: newBlock["comment"] = comment
+        #    return newBlock
             
     arguments = []
     for child in block["children"]:
@@ -100,16 +111,22 @@ def convertBlock(block):
         if len(arguments) == 2: pass # Keep the opcode
         if len(arguments) == 3: opcode = "control_if_else" # When there is an "else" ar
 
-    argumentsInfo = getArgumentOrder(opcode=opcode)
-    #pp(arguments)
-    #print(opcode, argumentsInfo)
+    if opcode == "procedures_call":
+        argumentsInfo = []
+        for argumentName in block["info"]["names"]:
+            if   ("(" + argumentName + ")") in customOpcode:
+                argumentsInfo.append([argumentName, "block-and-text"])
+            elif ("<" + argumentName + ">") in customOpcode:
+                argumentsInfo.append([argumentName, "block-only"])
+            else: raise Exception()
+    else:
+        argumentsInfo = getArgumentOrder(opcode=opcode)
     inputs  = {}
     options = {}
     for i, argument in enumerate(arguments):
         argumentId, mode = argumentsInfo[i]
         argumentKind  = argument["kind" ]
         argumentValue = argument["value"]
-        #print(argumentId, mode, argumentKind, argumentValue)
         match mode:
             case "OPTION":
                 assert argumentKind == "text", "Can't convert block or substack argument to field dropdown."
@@ -140,7 +157,6 @@ def convertBlock(block):
                     }
                 inputs [argumentId] =  inputValue
         
-    newOpcode = None
     if   opcode == "special_variable_value":
         name = block["info"]["hash"]
         variables.append(name)
@@ -149,9 +165,11 @@ def convertBlock(block):
         name = block["info"]["hash"]
         lists.append(name)
         options["LIST"    ] = autocompleteOptionValue(optionValue=name, optionType="list"    )
-
+    elif opcode == "procedures_call":
+        options["customOpcode"] = ["value", customOpcode]
+    
     newBlock = {
-        "opcode"   : getOptimizedOpcode(opcode) if newOpcode==None else newOpcode,
+        "opcode"   : getOptimizedOpcode(opcode),
         "inputs"   : inputs,
         "options"  : options,
     }
@@ -200,7 +218,7 @@ def finishBlocks(blocks, scriptPos, commentCounter=0):
     return commentCounter
 
 # Define the code string and output file path
-code1 = """
+code="""
 when gf clicked
 delete all of [screen data v]
 repeat ((grid x size) * (grid y size)
@@ -211,9 +229,10 @@ set [grid x size v] to (50)
 set [grid y size v] to (50)
 forever
  erase all
-end"""
-code="""
-define Render (x) asd <b> //fgh
+ Render
+end
+
+define Render //fgh
 set [# v] to (0)
 go to x: (0) y: (0)
 go to x: ((((grid x size) / (2)) * (tile size)) * (-1)) y: ((((grid y size) / (2)) * (tile size)) * (-1)) // gu
@@ -229,9 +248,7 @@ repeat (grid y)
 end
 """
 
-#code = "stamp//sdfgt\nstamp"
-
-
+#
 """ Draft Example
 // env:extensions=["JSON"]
 // env:sprite=Cat
@@ -243,19 +260,19 @@ jsPath     = "src/pypenguin/penguinblocks/main.js"
 outputPath = "src/pypenguin/penguinblocks/in.json"
 
 # Run the JavaScript file with arguments using Node.js
-result = subprocess.run(
-    ["node", jsPath, code, outputPath],
-    capture_output=True,
-    text=True,
-)
-if result.returncode == 0:
-    if result.stdout != "": # When it isn't empty
-        print("JavaScript output:", result.stdout)
-else:
-    print("Error:", result.stderr)
+#result = subprocess.run(
+#    ["node", jsPath, code, outputPath],
+#    capture_output=True,
+#    text=True,
+#)
+#if result.returncode == 0:
+#    if result.stdout != "": # When it isn't empty
+#        print("JavaScript output:", result.stdout)
+#else:
+#    print("Error:", result.stderr)
 
-#print(f"node {jsPath} \"{code}\" {outputPath}")
-#input()
+print(f"node {jsPath} \"{code}\" {outputPath}")
+input()
 
 scripts = readJSONFile(outputPath)["scripts"]
 
@@ -278,15 +295,19 @@ writeJSONFile("src/pypenguin/penguinblocks/opt.json", newScripts)
 
 from pypenguin import compressProject, validateProject
 from pypenguin.utility import Platform
-project = {"sprites": [{"name": "Stage", "isStage": True, "scripts": [], "comments": [], "currentCostume": 0, "costumes": [], "sounds": [], "volume": 100}], "globalVariables": [], "globalLists": [], "monitors": [], "tempo": 60, "videoTransparency": 0, "videoState": "off", "textToSpeechLanguage": None, "extensionData": {}, "extensions": ["pen"], "extensionURLs": {}}
-project["sprites"][0]["scripts"] = newScripts
+project = {"sprites": [
+    {"name": "Stage", "isStage": True, "scripts": [], "comments": [], "currentCostume": 0, "costumes": [], "sounds": [], "volume": 100}, 
+    {"name": "main", "isStage": False, "scripts": [], "comments": [], "currentCostume": 0, "costumes": [], "sounds": [], "volume": 100, "layerOrder": 1, "visible": True, "position": [0, 0], "size": 100, "direction": 90, "draggable": True, "rotationStyle": "all around", "localVariables": [], "localLists": []}
+], "globalVariables": [], "globalLists": [], "monitors": [], "tempo": 60, "videoTransparency": 0, "videoState": "off", "textToSpeechLanguage": None, "extensionData": {}, "extensions": ["pen"], "extensionURLs": {}}
+
+project["sprites"][1]["scripts"] = newScripts
 project["globalVariables"] = [{"name": variable, "currentValue": "", "isCloudVariable": False} for variable in variables]
 project["globalLists"    ] = [{"name": list    , "currentValue": []} for list in lists]
 writeJSONFile("project/project.json", project)
 validateProject(project)
 compressProject(
     optimizedProjectDir="project",
-    projectFilePath="export.pmp",
-    targetPlatform=Platform.PENGUINMOD,
+    projectFilePath="export.sb3",
+    targetPlatform=Platform.SCRATCH,
     deoptimizedDebugFilePath="t_deop.json",
 )
