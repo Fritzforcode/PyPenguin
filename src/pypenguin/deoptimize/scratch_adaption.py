@@ -1,7 +1,20 @@
+import json
+
 def adaptProject(data):
     for targetData in data["targets"]:
         del targetData["customVars"]
         del targetData["id"]
+        
+        for blockData in targetData["blocks"].values():
+            if isinstance(blockData, list): continue # skip list blocks
+            if blockData["opcode"] == "procedures_prototype":
+                if blockData["mutation"]["optype"] != json.dumps("statement"):
+                    print("WARNING: Scratch only supports custom blockDatas of type 'instruction'")
+                del blockData["mutation"]["returns"]
+                del blockData["mutation"]["edited"]
+                del blockData["mutation"]["optype"]
+                del blockData["mutation"]["color"]
+                
     
     del data["extensionData"]
     if "extensionURLs" in data:

@@ -356,9 +356,10 @@ def restoreProcedureDefinitionBlock(data, blockId, commentId):
         "topLevel": True,
         "x": position[0],
         "y": position[1],
-        "comment": commentId,
         "_placementPath_": data["_placementPath_"],
     }
+    if commentId != None:
+        definitionData["comment"] = commentId
     prototypeData = {
         "opcode"  : "procedures_prototype",
         "next"    : None,

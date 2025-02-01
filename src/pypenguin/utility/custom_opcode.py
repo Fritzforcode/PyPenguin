@@ -80,7 +80,7 @@ def generateCustomOpcode(proccode: str, argumentNames: list[str]):
         char2 = proccode[i + 1] if i + 1 < len(proccode) else None
         char3 = proccode[i + 2] if i + 2 < len(proccode) else None
         
-        if char == " " and char2 == "%" and char3 == "s":
+        if char == " " and char2 == "%" and char3 in {"s", "n"}:
             argumentName = escapeChars(argumentNames[j], chars_to_escape)
             customOpcode += " (" + argumentName + ")"
             j += 1
@@ -93,5 +93,5 @@ def generateCustomOpcode(proccode: str, argumentNames: list[str]):
         else:
             customOpcode += escapeChars(char, chars_to_escape)
         i += 1
-    
     return customOpcode.removesuffix(" ")
+

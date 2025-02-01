@@ -11,6 +11,7 @@ def adaptProject(data):
         spriteData["id"        ] = token
 
         for blockData in spriteData["blocks"].values():
+            if isinstance(blockData, list): continue # skip list blocks
             if blockData["opcode"] == "procedures_prototype":
                 blockData["mutation"]["optype"] = json.dumps("statement") # Scratch custom blocks are always "instruction" blocks
     
