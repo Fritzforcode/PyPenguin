@@ -18,6 +18,7 @@ A costume be an object with these properties:
     "rotationCenter": [0, 0],
 }
 ```
+### [PenguinMod Costume Download](asset_links.md#costumes)
 
 # What a sound looks like
 A sound must be an object with these properties:
@@ -38,3 +39,4 @@ A sound must be an object with these properties:
     "sampleCount": 17867,
 }
 ```
+### [PenguinMod Sound Download](asset_links.md#sounds)
