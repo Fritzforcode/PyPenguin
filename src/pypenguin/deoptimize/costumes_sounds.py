@@ -19,15 +19,16 @@ def translateCostumes(data):
         newCostumeDatas.append(defaultCostumeModified)
     return newCostumeDatas
 
-def finalizeCostume(data, md5, md5ext, width, height):
+#def finalizeCostume(data, md5, md5ext, width, height):
+def finalizeCostume(data, md5, md5ext):
     # Integrate md5 hash, keep all other attributes
     newData = {
         "name"            : data["name"],
         "assetId"         : md5,
         "dataFormat"      : data["dataFormat"],
         "md5ext"          : md5ext,
-        "rotationCenterX" : data["rotationCenterX"] + width  / 2,
-        "rotationCenterY" : data["rotationCenterY"] + height / 2,
+        "rotationCenterX" : data["rotationCenterX"], # + width  / 2,
+        "rotationCenterY" : data["rotationCenterY"], # + height / 2,
     }
     if "bitmapResolution" in data:
         newData["bitmapResolution"] = data["bitmapResolution"]

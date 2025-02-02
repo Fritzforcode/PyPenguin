@@ -1,5 +1,5 @@
 from pypenguin.optimize import optimizeProjectJSON
-from pypenguin.optimize.costumes_sounds import finalizeCostume
+#from pypenguin.optimize.costumes_sounds import finalizeCostume
 
 import urllib.parse
 import os, shutil, zipfile
@@ -105,16 +105,17 @@ def extractProject(
                     "costumes", 
                     encodedCostumeName
                 )
-                width, height = getImageSize(file=srcPath)
+                #width, height = getImageSize(file=srcPath)
                 shutil.copy(
                     src=srcPath,
                     dst=destPath
                 )
-                newCostumes.append(finalizeCostume(
-                    data=costume,
-                    width=width,
-                    height=height,
-                ))
+                #newCostumes.append(finalizeCostume(
+                #    data=costume,
+                #    width=width,
+                #    height=height,
+                #))
+                newCostumes.append(costume)
             sprite["costumes"] = newCostumes            
             
             # Make sure the sprite dir has the sounds dir

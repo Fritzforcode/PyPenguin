@@ -9,7 +9,7 @@ start = time.time()
 
 optimizedData = extractProject(
 #    projectFilePath          = "assets/categories/extension_music.pmp",
-    projectFilePath          = "assets/studies/commentTest2.",
+    projectFilePath          = "assets/studies/assetTest.pmp",
 #    projectFilePath          = "assets/from_online/The Tale of the Three Shapes.sb3",
 #    projectFilePath          = "Greatest Common Division.pmp",
     optimizedProjectDir      = "extracted_project",
@@ -23,8 +23,9 @@ validateProject(projectData=optimizedData)
 end = time.time()
 print("The time of execution of above program is :", (end-start) * 10**3, "ms")
 
-#compressProject(
-#    projectFilePath          = "export.pmp",
-#    optimizedProjectDir      = "extracted_project",
-#    deoptimizedDebugFilePath = "temp3.json"
-#)
+compressProject(
+    projectFilePath          = "export.pmp",
+    optimizedProjectDir      = "extracted_project",
+    deoptimizedDebugFilePath = "temp3.json",
+    targetPlatform=Platform.PENGUINMOD,
+)

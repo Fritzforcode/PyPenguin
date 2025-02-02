@@ -94,8 +94,8 @@ def compressProject(
                     data=costume, 
                     md5=md5,
                     md5ext=md5ext,
-                    width=width,
-                    height=height,
+                    #width=width,
+                    #height=height,
                 ))
             
             deoptimizedSprite["costumes"] = newCostumes
