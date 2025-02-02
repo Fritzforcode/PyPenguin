@@ -213,21 +213,15 @@ writeJSONFile(
     data     = project
 )
 writeJSONFile("precompiled.json", [])
-import time
-start = time.time()
 compressProject(
     optimizedProjectDir      = "project",
     projectFilePath          = "export.pmp",
     deoptimizedDebugFilePath = "temp_wrong.json",
     targetPlatform           = Platform.PENGUINMOD,
 )
-mid = time.time()
 compressProject(
     optimizedProjectDir      = "project",
     projectFilePath          = "export.pmp",
     deoptimizedDebugFilePath = "temp_wrong.json",
     targetPlatform           = Platform.PENGUINMOD,
 )
-end=time.time()
-print(mid-start)
-print(end-mid)

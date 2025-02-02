@@ -1,4 +1,4 @@
-import subprocess, json
+import subprocess, json, shutil, sys
 from pypenguin.utility import readJSONFile, writeJSONFile, pp, generateCustomOpcode
 from pypenguin.database import getArgumentOrder, getOptimizedOpcode, autocompleteOptionValue, getInputType, getOptionType, getOptionValueDefault
 
@@ -259,20 +259,27 @@ end
 jsPath     = "src/pypenguin/penguinblocks/main.js"
 outputPath = "src/pypenguin/penguinblocks/in.json"
 
-# Run the JavaScript file with arguments using Node.js
-#result = subprocess.run(
-#    ["node", jsPath, code, outputPath],
-#    capture_output=True,
-#    text=True,
-#)
-#if result.returncode == 0:
-#    if result.stdout != "": # When it isn't empty
-#        print("JavaScript output:", result.stdout)
-#else:
-#    print("Error:", result.stderr)
+"""Check if Node.js is installed and accessible."""
+if not shutil.which("node"):
+    print("Error: Node.js is not installed or not in PATH.")
+    print("Download it from https://nodejs.org/")
+    sys.exit(1)
 
-print(f"node {jsPath} \"{code}\" {outputPath}")
-input()
+# Run the JavaScript file with arguments using Node.js
+result = subprocess.run(
+    ["node", jsPath, code, outputPath],
+    capture_output=True,
+    text=True,
+)
+if result.returncode == 0:
+    if result.stdout != "": # When it isn't empty
+        print("JavaScript output:", result.stdout)
+else:
+    print("Error:", result.stderr)
+
+
+#print(f"node {jsPath} \"{code}\" {outputPath}")
+#input()
 
 scripts = readJSONFile(outputPath)["scripts"]
 

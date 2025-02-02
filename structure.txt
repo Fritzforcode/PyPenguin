@@ -1,0 +1,26 @@
+PyPenguin/
+├── .github/
+├── .vscode/
+├── assets/
+├── docs/
+├── src/
+│   ├── examples/
+│   │   ├── pong(containing multiple py files)
+│   ├── pypenguin/
+│   │   ├── database/ (__init__.py + several py files)
+│   │   ├── deoptimize/ (__init__.py + several py files)
+│   │   ├── optimize/ (__init__.py + several py files)
+│   │   ├── penguinblocks/ (__init__.py + several py files)
+│   │   ├── utility/ (__init__.py + several py files)
+│   │   ├── validate/ (__init__.py + several py files)
+│   │   ├── __init__.py
+│   │   ├── compress.py
+│   │   ├── extract.py
+│   ├── creation_test.py (not a real test just for developing)
+│   ├── extraction_test.py (not a real test just for developing)
+│   ├── parsing_test.py (not a real test just for developing)
+├── .gitignore
+├── LICENSE
+├── pyproject.toml (outdated)
+├── README.md
+├── TODOs.md

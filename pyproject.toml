@@ -1,20 +1,29 @@
-[tool.poetry]
-name = "pypenguin-projects"  # Make sure the name matches your package directory
-version = "0.1"
-description = "Python tool for creating, editing, and inspecting Penguinmod (.pmp) files"
-readme = "README.md"
-authors = ["Fritzforcode <your_email@example.com>"]  # Optionally include your email
-license = "GPL-3.0"  # Specify your license if applicable
-homepage = "https://github.com/Fritzforcode/PyPenguin"
-repository = "https://github.com/Fritzforcode/PyPenguin"
-keywords = ["penguin", "tool", "pmp"]
-
-[tool.poetry.dependencies]
-python = ">=3.6"
-
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry.packages]
-include = [{ include = "src/pypenguin", from = "src" }]  # Specify package directory
+[project]
+name = "pypenguin"  # Ensure this is unique on PyPI
+version = "0.1.0"
+authors = [
+    { name = "Fritzforcode" }
+]
+description = "A Python package for optimizing, deoptimizing, and managing PenguinBlocks"
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = [
+    "requests",  # Add required dependencies
+]
+
+[tool.setuptools]
+packages = ["pypenguin"]
+package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+"pypenguin" = ["assets/*"]  # If you have non-Python files
+
+[project.urls]
+Homepage = "https://github.com/yourusername/PyPenguin"
+Documentation = "https://pypenguin.readthedocs.io"
+Repository = "https://github.com/yourusername/PyPenguin"
+Issues = "https://github.com/yourusername/PyPenguin/issues"

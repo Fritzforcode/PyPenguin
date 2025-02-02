@@ -1,11 +1,6 @@
 from pypenguin import extractProject, compressProject, validateProject
 from pypenguin.utility import Platform
 
-# Import time module
-import time
- 
-# record start time
-start = time.time()
 
 optimizedData = extractProject(
 #    projectFilePath          = "assets/categories/extension_music.pmp",
@@ -19,9 +14,6 @@ optimizedData = extractProject(
 )
 
 validateProject(projectData=optimizedData)
-
-end = time.time()
-print("The time of execution of above program is :", (end-start) * 10**3, "ms")
 
 compressProject(
     projectFilePath          = "export.pmp",
