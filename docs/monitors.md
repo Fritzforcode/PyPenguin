@@ -56,7 +56,7 @@ List Monitors must have these additional properties:
 | `"size"`     | array coordinate | he size of a list monitor, because their size can be changed in the editor. Must be an array coordinate. e.g. `[100, 200]`
 
 
-<script src="./scratchblocks.js"></script>
+<script src="../scratchblocks_renderer.js"></script>
 <script>
 scratchblocks.renderMatching('pre.blocks', {
     style:     'scratch3',

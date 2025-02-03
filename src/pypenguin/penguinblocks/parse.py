@@ -54,9 +54,7 @@ def convertBlock(block):
     if category == "operators": category = "operator"
     opcode: str = category + "_" + rest
     
-    if opcode in {"procedures_definition", "procedures_call"}:
-        children = block["children"][1]["children"] if opcode == "procedures_definition" else block["children"]
-        
+    if opcode in {"procedures_definition", "procedures_call"}:        
         customOpcode = generateCustomOpcode(
             proccode=block["info"]["call"],
             argumentNames=block["info"]["names"],
@@ -254,6 +252,12 @@ def parseBlockText(blockText: str):
     return newScripts
     
 if __name__ == "__main__":
+    blockText = """
+    ...
+    """
+
+    newScripts = parseBlockText(blockText)
+
     writeJSONFile("src/pypenguin/penguinblocks/opt.json", newScripts)
     
     from pypenguin import compressProject, validateProject

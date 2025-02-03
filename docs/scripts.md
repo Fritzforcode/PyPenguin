@@ -122,7 +122,7 @@ The prefix is depends on the parent block and the value is custom. Just try it o
     }
     ```
 
-<script src="./scratchblocks.js"></script>
+<script src="../scratchblocks_renderer.js"></script>
 <script>
 scratchblocks.renderMatching('pre.blocks', {
     style:     'scratch3',
