@@ -1,4 +1,4 @@
-import subprocess, json, shutil, sys
+import subprocess, json, shutil, sys, shlex
 from pypenguin.utility import readJSONFile, writeJSONFile, pp, generateCustomOpcode
 from pypenguin.database import getArgumentOrder, getOptimizedOpcode, autocompleteOptionValue, getInputType, getOptionType, getOptionValueDefault
 
@@ -11,7 +11,6 @@ variables = []
 lists     = []
 
 def convertBlock(block):
-    pp(block)
     global variables, lists
     def isStandardOpcode(opcode) -> bool:
         return bool(opcode) and all(char.isupper() or char == '_' or char.isdigit() for char in opcode)
@@ -75,16 +74,6 @@ def convertBlock(block):
             }
             if comment != None: newBlock["comment"] = comment
             return newBlock
-        #elif opcode == "procedures_call":
-        #    newBlock = {
-        #        "opcode": getOptimizedOpcode("procedures_call"),
-        #        "inputs": {},
-        #        "options": {
-        #            "customOpcode": ["value", customOpcode],
-        #        },
-        #    }
-        #    if comment != None: newBlock["comment"] = comment
-        #    return newBlock
             
     arguments = []
     for child in block["children"]:
@@ -217,104 +206,72 @@ def finishBlocks(blocks, scriptPos, commentCounter=0):
         )
     return commentCounter
 
-# Define the code string and output file path
-code="""
-when gf clicked
-delete all of [screen data v]
-repeat ((grid x size) * (grid y size)
- add (pick random (0) to (1)) to [screen data v]
-end
-set [tile size v] to (8)
-set [grid x size v] to (50)
-set [grid y size v] to (50)
-forever
- erase all
- Render
-end
+def parseBlockText(blockText: str):
+    jsPath     = "src/pypenguin/penguinblocks/main.js"
+    outputPath = "src/pypenguin/penguinblocks/in.json"
 
-define Render //fgh
-set [# v] to (0)
-go to x: (0) y: (0)
-go to x: ((((grid x size) / (2)) * (tile size)) * (-1)) y: ((((grid y size) / (2)) * (tile size)) * (-1)) // gu
-repeat (grid y) 
-  repeat (grid x)
-    change [# v] by (1)
-    switch costume to (item (#) of [screen data v])
-    stamp
-    change x by (tile size)
-  end
-  change x by (((grid x size) * (tile size)) * (-1))
-  change y  by (tile size) // sdf
-end
-"""
-
-#
-""" Draft Example
-// env:extensions=["JSON"]
-// env:sprite=Cat
-// env:spritePos=[0,0]
-// var:"abc"="hi"
-"""
-
-jsPath     = "src/pypenguin/penguinblocks/main.js"
-outputPath = "src/pypenguin/penguinblocks/in.json"
-
-"""Check if Node.js is installed and accessible."""
-if not shutil.which("node"):
-    print("Error: Node.js is not installed or not in PATH.")
-    print("Download it from https://nodejs.org/")
-    sys.exit(1)
-
-# Run the JavaScript file with arguments using Node.js
-result = subprocess.run(
-    ["node", jsPath, code, outputPath],
-    capture_output=True,
-    text=True,
-)
-if result.returncode == 0:
-    if result.stdout != "": # When it isn't empty
-        print("JavaScript output:", result.stdout)
-else:
-    print("Error:", result.stderr)
+    ## On Windows/Linux
+    #"""Check if Node.js is installed and accessible."""
+    #if not shutil.which("node"):
+    #    print("Error: Node.js is not installed or not in PATH.")
+    #    print("Download it from https://nodejs.org/")
+    #    sys.exit(1)
+    #
+    ## Run the JavaScript file with arguments using Node.js
+    #result = subprocess.run(
+    #    ["node", jsPath, code, outputPath],
+    #    capture_output=True,
+    #    text=True,
+    #)
+    #if result.returncode == 0:
+    #    if result.stdout != "": # When it isn't empty
+    #        print("JavaScript output:", result.stdout)
+    #else:
+    #    print("Error:", result.stderr)
 
 
-#print(f"node {jsPath} \"{code}\" {outputPath}")
-#input()
 
-scripts = readJSONFile(outputPath)["scripts"]
+    # On other operating systems      
+    print(shlex.join(["node", jsPath, blockText, outputPath]))
+    input()
 
-newScripts = []
-i = 0
-for script in scripts:
-    scriptPos = [0, 1000*i]
-    newBlocks = convertBlocks(script["blocks"])
-    if newBlocks == []: continue
     
-    finishBlocks(newBlocks, scriptPos=scriptPos)
-    newScripts.append({
-        "position": scriptPos,
-        "blocks"  : newBlocks,
-    })
-    i += 1
-
-pp(newScripts)
-writeJSONFile("src/pypenguin/penguinblocks/opt.json", newScripts)
-
-from pypenguin import compressProject, validateProject
-from pypenguin.utility import Platform
-project = {"sprites": [
-    {"name": "Stage", "isStage": True, "scripts": [], "comments": [], "currentCostume": 0, "costumes": [], "sounds": [], "volume": 100}, 
-    {"name": "main", "isStage": False, "scripts": [], "comments": [], "currentCostume": 0, "costumes": [], "sounds": [], "volume": 100, "layerOrder": 1, "visible": True, "position": [0, 0], "size": 100, "direction": 90, "draggable": True, "rotationStyle": "all around", "localVariables": [], "localLists": []}
-], "globalVariables": [], "globalLists": [], "monitors": [], "tempo": 60, "videoTransparency": 0, "videoState": "off", "textToSpeechLanguage": None, "extensionData": {}, "extensions": ["pen"], "extensionURLs": {}}
-
-project["sprites"][1]["scripts"] = newScripts
-project["globalVariables"] = [{"name": variable, "currentValue": "", "isCloudVariable": False} for variable in variables]
-project["globalLists"    ] = [{"name": list    , "currentValue": []} for list in lists]
-writeJSONFile("project/project.json", project)
-validateProject(project)
-compressProject(
-    optimizedProjectDir="project",
-    projectFilePath="export.sb3",
-    targetPlatform=Platform.SCRATCH,
-    deoptimizedDebugFilePath="t_deop.json",
-)
+    
+    
+    scripts = readJSONFile(outputPath, ensurePath=True)["scripts"]
+    
+    newScripts = []
+    for i, script in enumerate(scripts):
+        scriptPos = [0, 1000*i]
+        newBlocks = convertBlocks(script["blocks"])
+        if newBlocks == []: continue
+        
+        finishBlocks(newBlocks, scriptPos=scriptPos)
+        newScripts.append({
+            "position": scriptPos,
+            "blocks"  : newBlocks,
+        })
+    return newScripts
+    
+if __name__ == "__main__":
+    writeJSONFile("src/pypenguin/penguinblocks/opt.json", newScripts)
+    
+    from pypenguin import compressProject, validateProject
+    from pypenguin.utility import Platform
+    project = {"sprites": [
+        {"name": "Stage", "isStage": True, "scripts": [], "comments": [], "currentCostume": 0, "costumes": [], "sounds": [], "volume": 100}, 
+        {"name": "main", "isStage": False, "scripts": [], "comments": [], "currentCostume": 0, "costumes": [], "sounds": [], "volume": 100, "layerOrder": 1, "visible": True, "position": [0, 0], "size": 100, "direction": 90, "draggable": True, "rotationStyle": "all around", "localVariables": [], "localLists": []}
+    ], "globalVariables": [], "globalLists": [], "monitors": [], "tempo": 60, "videoTransparency": 0, "videoState": "off", "textToSpeechLanguage": None, "extensionData": {}, "extensions": ["pen"], "extensionURLs": {}}
+    
+    project["sprites"][1]["scripts"] = newScripts
+    project["globalVariables"] = [{"name": variable, "currentValue": "", "isCloudVariable": False} for variable in variables]
+    project["globalLists"    ] = [{"name": list    , "currentValue": []} for list in lists]
+    writeJSONFile("project/project.json", project)
+    validateProject(project)
+    compressProject(
+        optimizedProjectDir="project",
+        projectFilePath="export.sb3",
+        targetPlatform=Platform.SCRATCH,
+        deoptimizedDebugFilePath="t_deop.json",
+    )
+    

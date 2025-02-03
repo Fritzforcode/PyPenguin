@@ -5,14 +5,14 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pypenguin"  # Ensure this is unique on PyPI
 version = "0.1.0"
-authors = [
-    { name = "Fritzforcode" }
-]
-description = "A Python package for optimizing, deoptimizing, and managing PenguinBlocks"
+authors = [{ name = "Fritzforcode" }]
+description = "Python tool for creating, editing, and inspecting Penguinmod (.pmp) files"
 readme = "README.md"
 requires-python = ">=3.7"
+
 dependencies = [
-    "requests",  # Add required dependencies
+    "pillow",  # PIL (Pillow is its actual package name)
+    "jsoncomment",  # Required external package
 ]
 
 [tool.setuptools]
@@ -20,10 +20,9 @@ packages = ["pypenguin"]
 package-dir = {"" = "src"}
 
 [tool.setuptools.package-data]
-"pypenguin" = ["assets/*"]  # If you have non-Python files
+"pypenguin" = ["assets/*"]  # If non-Python files exist
 
 [project.urls]
-Homepage = "https://github.com/yourusername/PyPenguin"
-Documentation = "https://pypenguin.readthedocs.io"
-Repository = "https://github.com/yourusername/PyPenguin"
-Issues = "https://github.com/yourusername/PyPenguin/issues"
+Homepage = "https://github.com/your-github-username/PyPenguin"
+Repository = "https://github.com/your-github-username/PyPenguin"
+Issues = "https://github.com/your-github-username/PyPenguin/issues"

@@ -12,34 +12,36 @@ def extractProject(
     sourcePlatform          : Platform,
     deoptimizedDebugFilePath: str | None = None,
     optimizedDebugFilePath  : str | None = None,
+    developing              : bool = False,
 ):
-    projectFilePath = ensureCorrectPath(
-        projectFilePath, "PyPenguin",
-        isDir=False,
-        ensureExists=True,
-        allowNone=False,
-    )
-    
-    optimizedProjectDir = ensureCorrectPath(
-        optimizedProjectDir, "PyPenguin",
-        isDir=True,
-        ensureIsValid=True,
-        allowNone=False,
-    )
-    
-    deoptimizedDebugFilePath = ensureCorrectPath(
-        deoptimizedDebugFilePath, "PyPenguin",
-        isDir=False,
-        ensureIsValid=True,
-        allowNone=True,
-    )
-    
-    optimizedDebugFilePath = ensureCorrectPath(
-        optimizedDebugFilePath, "PyPenguin",
-        isDir=False,
-        ensureIsValid=True,
-        allowNone=True,
-    )
+    if developing:
+        projectFilePath = ensureCorrectPath(
+            projectFilePath, "PyPenguin",
+            isDir=False,
+            ensureExists=True,
+            allowNone=False,
+        )
+        
+        optimizedProjectDir = ensureCorrectPath(
+            optimizedProjectDir, "PyPenguin",
+            isDir=True,
+            ensureIsValid=True,
+            allowNone=False,
+        )
+        
+        deoptimizedDebugFilePath = ensureCorrectPath(
+            deoptimizedDebugFilePath, "PyPenguin",
+            isDir=False,
+            ensureIsValid=True,
+            allowNone=True,
+        )
+        
+        optimizedDebugFilePath = ensureCorrectPath(
+            optimizedDebugFilePath, "PyPenguin",
+            isDir=False,
+            ensureIsValid=True,
+            allowNone=True,
+        )
     
     temporaryDir = os.path.abspath(os.path.join(
         optimizedProjectDir,

@@ -13,28 +13,30 @@ def compressProject(
     projectFilePath         : str,
     targetPlatform          : Platform,
     deoptimizedDebugFilePath: str | None = None,
+    developing              : bool = False,
 ):
-    optimizedProjectDir = ensureCorrectPath(
-        optimizedProjectDir, "PyPenguin",
-        isDir=True,
-        ensureExists=True,
-        allowNone=False,
-    )
-    
-    projectFilePath = ensureCorrectPath(
-        projectFilePath, "PyPenguin",
-        isDir=False,
-        ensureIsValid=True,
-        allowNone=False,
-    )
-    
-    deoptimizedDebugFilePath = ensureCorrectPath(
-        deoptimizedDebugFilePath, "PyPenguin",
-        isDir=False,
-        ensureIsValid=True,
-        allowNone=True,
-    )
-    
+    if developing:
+        optimizedProjectDir = ensureCorrectPath(
+            optimizedProjectDir, "PyPenguin",
+            isDir=True,
+            ensureExists=True,
+            allowNone=False,
+        )
+        
+        projectFilePath = ensureCorrectPath(
+            projectFilePath, "PyPenguin",
+            isDir=False,
+            ensureIsValid=True,
+            allowNone=False,
+        )
+        
+        deoptimizedDebugFilePath = ensureCorrectPath(
+            deoptimizedDebugFilePath, "PyPenguin",
+            isDir=False,
+            ensureIsValid=True,
+            allowNone=True,
+        )
+        
     defCostumeFilePath = ensureCorrectPath(
         defaultCostumeFilePath, "PyPenguin",
     )

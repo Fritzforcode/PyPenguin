@@ -818,3 +818,45 @@ defaultCostumeDeoptimized = {
 }
 
 defaultCostumeFilePath = "assets/defaultCostume.svg"
+
+defaultStage = {
+    "name": "Stage",
+    "isStage": True,
+    "scripts": [],
+    "comments": [],
+    "currentCostume": 0,
+    "costumes": [],
+    "sounds": [],
+    "volume": 100,
+}
+
+defaultSprite = {
+    "name": "Sprite1", 
+    "isStage": False, 
+    "scripts": [], 
+    "comments": [], 
+    "currentCostume": 0, 
+    "costumes": [], 
+    "sounds": [], 
+    "volume": 100, 
+    "layerOrder": 1, 
+    "visible": True, 
+    "position": [0,0], 
+    "size": 100, 
+    "direction": 90, 
+    "draggable": True, 
+    "rotationStyle": "all around", 
+    "localVariables": [], 
+    "localLists": [],
+}
+
+defaultProject = {
+    "sprites": [
+        defaultStage,
+        defaultSprite,
+    ],
+    "globalVariables": [{"name": "my variable", "currentValue": "", "isCloudVariable": False}],
+    "globalLists": [],
+    "monitors": [],
+    "extensions": [],
+}

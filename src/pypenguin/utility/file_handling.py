@@ -53,7 +53,6 @@ def ensureCorrectPath(path, targetFolderName, ensureIsValid=False, ensureExists=
         currentPath = parentPath
 
     finalPath = os.path.join(currentPath, path)
-    
     if ensureExists and not(os.path.exists(finalPath)):
         if isDir: raise DirNotFound (f"Couldn't find directory: "+repr(path))
         else    : raise FileNotFound(f"Couldn't find file: "     +repr(path))    
@@ -153,15 +152,16 @@ def getSVGImageSize(file):
 
     return float(width), float(height)
 
-def readJSONFile(filePath):
-    filePath = ensureCorrectPath(filePath, "PyPenguin")
+def readJSONFile(filePath, ensurePath=False):
+    if ensurePath:
+        filePath = ensureCorrectPath(filePath, "PyPenguin")
     print("read", filePath)
     with open(filePath, "r", encoding="utf-8") as file:
         string = file.read()
     return parser.loads(string)
 
 def writeJSONFile(filePath, data, beautiful: bool = True):
-    filePath = ensureCorrectPath(filePath, "PyPenguin")
+    #filePath = ensureCorrectPath(filePath, "PyPenguin")
     print("write", filePath)
     with open(filePath, "w") as file:
         if beautiful:

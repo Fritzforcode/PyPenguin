@@ -11,6 +11,7 @@ if (args.length < 2) {
 
 const code = args[0]; // First argument is the code string
 const outputPath = args[1]; // Second argument is the output file path
+
 // Parse the code and write to the output file
 const doc = parse(code, {});
 fs.writeFileSync(outputPath, JSON.stringify(doc));
