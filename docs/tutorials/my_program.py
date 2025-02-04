@@ -8,26 +8,38 @@ import os # For convenience and creating a dir
 
 # Parse scratchblocks text
 block_text = """
+when green flag clicked
 say [Hello World!] for (2) secs
+ask [What's your name?] and wait
+if <(answer) = [Skywalker]> then
+    say [I don't like sand too!] for (2) secs
+end
+say (join [Welcome, ] (answer)) for (2) secs
 """
 generated_scripts = pypenguin.parseBlockText(block_text)
 
 
 # Update the project data
-myStage  = pypenguin.database.defaultStage
-mySprite = pypenguin.database.defaultSprite
+myStage  = pypenguin.defaultStage
+mySprite = pypenguin.defaultSprite
 mySprite["scripts"] = generated_scripts # Include the generated scripts.
 
-project = pypenguin.database.defaultProject
+project = pypenguin.defaultProject
 project["sprites"] = [  # Update project with the modified sprites.
     myStage,
     mySprite,
 ]
+project["sounds"] = [{
+    "name": "Squawk",
+    "extension": "wav",
+    "rate": 48000,
+    "sampleCount": 17867,
+}]
 
 
-project_directory = "my_project_directory/" # The name of the directory, you just created.
+project_directory = "my_project_directory" # The name of the directory, you just created.
 penguinmod_file   = "my_project.pmp" # The file path of the PenguinMod Project, that will be created.
-target_platform   = pypenguin.Platform.PENGUINMOD # Your target platform. May also be Platform.SCRATCH.
+target_platform   = pypenguin.Platform.PENGUINMOD # Our target platform. May also be Platform.SCRATCH.
 
 # Create our project directory
 if not os.path.exists(project_directory):
@@ -36,6 +48,11 @@ if not os.path.exists(project_directory):
 # Write our project data to project.json
 with open(os.path.join(project_directory, "project.json"), "w") as file_object:
     json.dump(project, file_object) 
+
+# Download the Squawk sound
+squawk_file = os.path.join(project_directory, "Squawk")
+if not os.path.exists(squawk_file):
+    pypenguin.downloadSound("Squawk", squawk_file)
 
 # Make sure our project is valid. The Validator is NOT perfect!
 # If the project is invalid, an Exception will be raised.

@@ -11,8 +11,9 @@ readme = "README.md"
 requires-python = ">=3.7"
 
 dependencies = [
-    "pillow",  # PIL (Pillow is its actual package name)
-    "jsoncomment",  # Required external package
+    "pillow", 
+    "jsoncomment",
+    "requests",
 ]
 
 [tool.setuptools]
