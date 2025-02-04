@@ -1,5 +1,4 @@
 from pypenguin.optimize import optimizeProjectJSON
-#from pypenguin.optimize.costumes_sounds import finalizeCostume
 
 import urllib.parse
 import os, shutil, zipfile
@@ -85,7 +84,7 @@ def extractProject(
             else:
                 encodedSpriteName = "sprite_" + urllib.parse.quote(sprite["name"])
         
-            # Make sure the sprite dir has the costume dir
+            # Make sure the sprite dir has the costumes dir
             os.makedirs(
                 os.path.join(
                     optimizedProjectDir,
@@ -94,11 +93,60 @@ def extractProject(
                 ), 
                 exist_ok=True
             )
+            
+            # Make sure the sprite dir has the sounds dir
+            os.makedirs(
+                os.path.join(
+                    optimizedProjectDir,
+                    encodedSpriteName,
+                    "sounds",
+                ), 
+                exist_ok=True
+            )
+            
+            assets = sprite["costumes"] + sprite["sounds"]
+            isCostumeFunc = lambda index: index in range(len(sprite["costumes"]))
+            
+            newCostumes = []
+            newSounds   = []
+            
+            for j, asset in enumerate(assets):
+                isCostume        = isCostumeFunc(j)
+                identifier       = "costumes" if isCostume else "sounds"
+                deoptimizedAsset = deoptimizeSprite[identifier][j]
+                oldAssetName     = deoptimizedAsset["assetId"] + "." + asset["extension"]
+                encodedAssetName = urllib.parse.quote(asset["name"] + "." + asset["extension"])
+                srcPath = os.path.join(temporaryDir, oldAssetName)
+                destPath = os.path.join(
+                    optimizedProjectDir, 
+                    encodedSpriteName, 
+                    identifier, 
+                    encodedCostumeName,
+                )
+                shutil.copy(
+                    src=srcPath,
+                    dst=destPath
+                )
+                if isCostume:
+                #    width, height = getImageSize(file=srcPath)
+                #    newCostumes.append(finalizeCostume(
+                #        data=costume,
+                #        width=width,
+                #        height=height,
+                #    ))
+                    newCostumes.append(newAsset)
+                else:
+                    newSounds.append(newAsset)
+                
+                
+            sprite["costumes"] = newCostumes
+            sprite["sounds"  ] = newSounds
+            """
             # Copy and rename costumes
             newCostumes = []
             for j, costume in enumerate(sprite["costumes"]):
                 deoptimizedCostume = deoptimizedSprite["costumes"][j]
-                oldCostumeName     =      deoptimizedCostume["assetId"] + "." + costume["extension"]
+                oldCostumeName     = deoptimizedCostume["assetId"] + "." + costume["extension"]
                 encodedCostumeName = urllib.parse.quote(costume["name"] + "." + costume["extension"])
                 srcPath = os.path.join(temporaryDir, oldCostumeName)
                 destPath = os.path.join(
@@ -118,17 +166,8 @@ def extractProject(
                 #    height=height,
                 #))
                 newCostumes.append(costume)
-            sprite["costumes"] = newCostumes            
+            sprite["costumes"] = newCostumes           
             
-            # Make sure the sprite dir has the sounds dir
-            os.makedirs(
-                os.path.join(
-                    optimizedProjectDir,
-                    encodedSpriteName,
-                    "sounds",
-                ), 
-                exist_ok=True
-            )
             # Copy and rename sounds            
             for j, sound in enumerate(sprite["sounds"]):
                 deoptimizedSound = deoptimizedSprite["sounds"][j]
@@ -145,7 +184,7 @@ def extractProject(
                     src=srcPath,
                     dst=destPath
                 )
-        
+            """
         
         if optimizedDebugFilePath != None:
             writeJSONFile(optimizedDebugFilePath, data=optimizedData)

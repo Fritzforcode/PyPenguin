@@ -31,8 +31,8 @@ def translateSounds(data):
         newSoundData = {
             "name"       : soundData["name"],
             "extension"  : soundData["dataFormat"],
-            "rate"       : soundData["rate"],        # playback speed in Hz
-            "sampleCount": soundData["sampleCount"], # = "rate" * SECONDS in secs
+            #"rate"       : soundData["rate"],        # playback speed in Hz
+            #"sampleCount": soundData["sampleCount"], # = "rate" * SECONDS in secs
         }
         newSoundDatas.append(newSoundData)
     return newSoundDatas
