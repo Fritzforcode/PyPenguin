@@ -4,7 +4,7 @@ import urllib.parse
 from pypenguin.deoptimize import deoptimizeProject
 from pypenguin.deoptimize.costumes_sounds import finalizeCostume, finalizeSound
 
-from pypenguin.utility import readJSONFile, writeJSONFile, ensureCorrectPath, getUniqueFilename, generateMd5, getImageSize, Platform
+from pypenguin.utility import readJSONFile, writeJSONFile, ensureCorrectPath, getUniqueFilename, generateMd5, getImageSize, getAudioInfo, Platform
 
 from pypenguin.database import defaultCostumeFilePath
 
@@ -73,16 +73,15 @@ def compressProject(
                 encodedSpriteName = "sprite_" + urllib.parse.quote(sprite["name"])
             
             assets = deoptimizedSprite["costumes"] + deoptimizedSprite["sounds"]
-            isCostumeFunc = lambda index: index in range(len(deoptimizedSprite["costumes"]))
             
             newCostumes = []
             newSounds   = []
-            for i, asset in assets:
-                isCostume  = isCostumeFunc(i)
+            for j, asset in enumerate(assets):
+                isCostume  = j in range(len(deoptimizedSprite["costumes"]))
                 identifier = "costumes" if isCostume else "sounds" 
-                encodedAssetName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
+                encodedAssetName = urllib.parse.quote(asset["name"] + "." + asset["dataFormat"])
                 if isCostume and asset.get("isDefault", False):
-                    srcPath = defCostumePath
+                    srcPath = defCostumeFilePath
                 else:
                     scrPath = os.path.join(
                         optimizedProjectDir, 
@@ -91,7 +90,7 @@ def compressProject(
                         encodedAssetName,
                     )
                 md5    = generateMd5(file=srcPath)
-                md5ext = md5 + "." + sound["dataFormat"]
+                md5ext = md5 + "." + asset["dataFormat"]
                 shutil.copy(
                     src=srcPath,
                     dst=os.path.join(temporaryDir, md5ext),
@@ -101,17 +100,20 @@ def compressProject(
                 if isCostume:
                     #width, height = getImageSize(file=srcPath)
                     newCostumes.append(finalizeCostume(
-                        data=costume, 
+                        data=asset, 
                         md5=md5,
                         md5ext=md5ext,
                         #width=width,
                         #height=height,
                     ))
                 else:
+                    sampleRate, sampleCount = getAudioInfo(filePath=srcPath)
                     newSounds.append(finalizeSound(
-                        data=sound, 
+                        data=asset, 
                         md5=md5,
                         md5ext=md5ext,
+                        sampleRate=sampleRate,
+                        sampleCount=sampleCount,
                     ))
             deoptimizedSprite["costumes"] = newCostumes
             deoptimizedSprite["sounds"  ] = newSounds

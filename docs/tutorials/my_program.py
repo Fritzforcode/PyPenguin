@@ -18,28 +18,29 @@ say (join [Welcome, ] (answer)) for (2) secs
 """
 generated_scripts = pypenguin.parseBlockText(block_text)
 
+project_directory = "my_project_directory" # The name of the directory, you just created.
+penguinmod_file   = "my_project.pmp" # The file path of the PenguinMod Project, that will be created.
+target_platform   = pypenguin.Platform.PENGUINMOD # Our target platform. May also be Platform.SCRATCH.
 
 # Update the project data
 myStage  = pypenguin.defaultStage
 mySprite = pypenguin.defaultSprite
 mySprite["scripts"] = generated_scripts # Include the generated scripts.
 
+mySprite["sounds"] = [pypenguin.downloadSound(
+    name             = "Squawk",
+    projectDirectory = project_directory,
+    spriteName       = "Sprite1",
+    fileName         = "Squawk",
+    doOverwrite      = True,
+)]
+
 project = pypenguin.defaultProject
 project["sprites"] = [  # Update project with the modified sprites.
     myStage,
     mySprite,
 ]
-project["sounds"] = [{
-    "name": "Squawk",
-    "extension": "wav",
-    "rate": 48000,
-    "sampleCount": 17867,
-}]
 
-
-project_directory = "my_project_directory" # The name of the directory, you just created.
-penguinmod_file   = "my_project.pmp" # The file path of the PenguinMod Project, that will be created.
-target_platform   = pypenguin.Platform.PENGUINMOD # Our target platform. May also be Platform.SCRATCH.
 
 # Create our project directory
 if not os.path.exists(project_directory):
@@ -49,10 +50,6 @@ if not os.path.exists(project_directory):
 with open(os.path.join(project_directory, "project.json"), "w") as file_object:
     json.dump(project, file_object) 
 
-# Download the Squawk sound
-squawk_file = os.path.join(project_directory, "Squawk")
-if not os.path.exists(squawk_file):
-    pypenguin.downloadSound("Squawk", squawk_file)
 
 # Make sure our project is valid. The Validator is NOT perfect!
 # If the project is invalid, an Exception will be raised.

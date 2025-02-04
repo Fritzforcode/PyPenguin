@@ -105,15 +105,14 @@ def extractProject(
             )
             
             assets = sprite["costumes"] + sprite["sounds"]
-            isCostumeFunc = lambda index: index in range(len(sprite["costumes"]))
             
             newCostumes = []
             newSounds   = []
             
             for j, asset in enumerate(assets):
-                isCostume        = isCostumeFunc(j)
+                isCostume        = j in range(len(sprite["costumes"]))
                 identifier       = "costumes" if isCostume else "sounds"
-                deoptimizedAsset = deoptimizeSprite[identifier][j]
+                deoptimizedAsset = deoptimizedSprite[identifier][j]
                 oldAssetName     = deoptimizedAsset["assetId"] + "." + asset["extension"]
                 encodedAssetName = urllib.parse.quote(asset["name"] + "." + asset["extension"])
                 srcPath = os.path.join(temporaryDir, oldAssetName)
@@ -121,7 +120,7 @@ def extractProject(
                     optimizedProjectDir, 
                     encodedSpriteName, 
                     identifier, 
-                    encodedCostumeName,
+                    encodedAssetName,
                 )
                 shutil.copy(
                     src=srcPath,
@@ -134,9 +133,9 @@ def extractProject(
                 #        width=width,
                 #        height=height,
                 #    ))
-                    newCostumes.append(newAsset)
+                    newCostumes.append(asset) # currently not changed
                 else:
-                    newSounds.append(newAsset)
+                    newSounds  .append(asset) # currently not changed
                 
                 
             sprite["costumes"] = newCostumes

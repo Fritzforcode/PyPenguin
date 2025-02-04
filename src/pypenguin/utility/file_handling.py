@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 from json import dump
 from jsoncomment import JsonComment
 from pathlib import Path
+import urllib.parse
 
 # ------
 # Errors
@@ -182,7 +183,7 @@ def getAudioInfo(filePath):
         sampleRate = audio.frame_rate
         sampleCount = (len(audio) * sampleRate) // 1000  # Convert milliseconds to samples
     else:
-        raise ValueError("Unsupported file format. Only WAV and MP3 are supported.")
+        raise ValueError("Unsupported file format. Only WAV and MP3 are supported.", filePath)
 
     return sampleRate, sampleCount
 
@@ -206,6 +207,7 @@ def writeJSONFile(filePath, data, beautiful: bool = True):
 
 assetLinks = readJSONFile("assets/asset_links.json", ensurePath=True)
 
+"""
 def downloadCostume(name, fileName):
     try:
         link = assetLinks["costumes"][name]
@@ -241,3 +243,78 @@ def downloadSound(name, fileName):
         for chunk in response.iter_content(1024):
             file.write(chunk)
     print("Sound downloaded successfully as", fileName)
+
+"""
+
+def downloadCostume(name: str, projectDirectory:str, spriteName:str, fileName:str, doOverwrite:bool) -> dict:
+    """
+    name: PenguinMod costume name e.g. "Apple"
+    projectDirectory: file path of your project folder
+    spriteName: name of the sprite, the costume will be added to. Not encoded. e.g. "My Sprite"
+    fileName: The costume will be saved under this name and will be called this in your PenguinMod Project. e.g. "apple object"
+    doOverwrite: Wether the costume will be downloaded again even if the file alredy exists.
+
+    Returns: reference to the file(dict)
+    """
+    try:
+        link = assetLinks["costumes"][name]
+    except KeyError:
+        raise ValueError(f"Unknown PenguinMod costume: {repr(name)}")
+    
+    cutLink   = link.removesuffix("/get/") if "/get/" in link else link
+    extension = cutLink[cutLink.rindex(".")+1:]
+    dirPath   = os.path.join(
+        projectDirectory,
+        urllib.parse.quote(spriteName),
+        "costumes",
+    )
+    fullPath  = os.path.join(dirPath, urllib.parse.quote(fileName))
+    finalPath = ensureExtension(fullPath, extension)
+    
+    if doOverwrite or not(os.path.exists(finalPath)):
+        if not os.path.exists(dirPath):
+            os.makedirs(dirPath)
+        response = requests.get(link, stream=True)
+        response.raise_for_status()
+        with open(finalPath, "wb") as file:
+            for chunk in response.iter_content(1024):
+                file.write(chunk)
+        print("Costume downloaded successfully as", fileName)
+
+def downloadSound(name: str, projectDirectory:str, spriteName:str, fileName:str, doOverwrite:bool) -> dict:
+    """
+    name: PenguinMod sound name e.g. "Squawk"
+    projectDirectory: file path of your project folder
+    spriteName: name of the sprite, the sound will be added to. Not encoded. e.g. "My Sprite"
+    fileName: The sound will be saved under this name and will be called this in your PenguinMod Project. e.g. "squawk sound"
+    doOverwrite: Wether the sound will be downloaded again even if the file alredy exists.
+
+    Returns: reference to the file(dict)
+    """
+    try:
+        link = assetLinks["sounds"][name]
+    except KeyError:
+        raise ValueError(f"Unknown PenguinMod sound: {repr(name)}")
+    
+    cutLink   = link.removesuffix("/get/") if "/get/" in link else link
+    extension = cutLink[cutLink.rindex(".")+1:]
+    dirPath   = os.path.join(
+        projectDirectory,
+        urllib.parse.quote(spriteName),
+        "costumes",
+    )
+    fullPath  = os.path.join(dirPath, urllib.parse.quote(fileName))
+    finalPath = ensureExtension(fullPath, extension)
+    
+    if doOverwrite or not(os.path.exists(finalPath)):
+        if not os.path.exists(dirPath):
+            os.makedirs(dirPath)
+        response = requests.get(link, stream=True)
+        response.raise_for_status()
+        with open(finalPath, "wb") as file:
+            for chunk in response.iter_content(1024):
+                file.write(chunk)
+        print("Sound downloaded successfully as", fileName)
+
+    return {"name": fileName, "extension": extension}
+
