@@ -152,6 +152,31 @@ def getSVGImageSize(file):
 
     return float(width), float(height)
 
+import scipy.io.wavfile
+from pydub import AudioSegment
+
+def getAudioInfo(filePath):
+    """
+    Extracts the sample rate and sample count from a WAV or MP3 file.
+
+    Parameters:
+    filePath (str): Path to the audio file.
+
+    Returns:
+    tuple: (sampleRate, sampleCount)
+    """
+    if filePath.lower().endswith(".wav"):
+        sampleRate, data = scipy.io.wavfile.read(filePath)
+        sampleCount = data.shape[0]  # Number of samples
+    elif filePath.lower().endswith(".mp3"):
+        audio = AudioSegment.from_file(filePath, format="mp3")
+        sampleRate = audio.frame_rate
+        sampleCount = (len(audio) * sampleRate) // 1000  # Convert milliseconds to samples
+    else:
+        raise ValueError("Unsupported file format. Only WAV and MP3 are supported.")
+
+    return sampleRate, sampleCount
+
 def readJSONFile(filePath, ensurePath=False):
     if ensurePath:
         filePath = ensureCorrectPath(filePath, "PyPenguin")

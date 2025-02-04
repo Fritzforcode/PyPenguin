@@ -179,10 +179,10 @@ soundSchema = {
     "properties": {
         "name": {"type": "string"},
         "extension": {"type": "string"},
-        "rate": {"type": "integer", "minimum": 1},
-        "sampleCount": {"type": "integer", "minimum": 1},
+        #"rate": {"type": "integer", "minimum": 1},
+        #"sampleCount": {"type": "integer", "minimum": 1},
     },
-    "required": ["name", "extension", "rate", "sampleCount"],
+    "required": ["name", "extension"], #"rate", "sampleCount"
 }
 
 blockSchema = {

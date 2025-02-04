@@ -41,20 +41,28 @@ def translateSounds(data):
             "name"       : soundData["name"],
             "assetId"    : None, # is replaced later
             "dataFormat" : soundData["extension"],
-            "rate"       : soundData["rate"],        # playback speed in Hz
-            "sampleCount": soundData["sampleCount"], # = "rate" * SECONDS in secs
-            "md5ext"     : None, # is replaced later
+            "rate"       : None, # is replaced later # playback speed in Hz
+            "sampleCount": None, # is replaced later # = "rate" * SECONDS in secs
+            "md5ext"     : None, # is replaced later # md5 hash with extension
         }
+        #newSoundData = {
+        #    "name"       : soundData["name"],
+        #    "assetId"    : None, # is replaced later
+        #    "dataFormat" : soundData["extension"],
+        #    "rate"       : soundData["rate"],        # playback speed in Hz
+        #    "sampleCount": soundData["sampleCount"], # = "rate" * SECONDS in secs
+        #    "md5ext"     : None, # is replaced later
+        #}
         newSoundDatas.append(newSoundData)
     return newSoundDatas
 
-def finalizeSound(data, md5, md5ext):
+def finalizeSound(data, md5, md5ext, sampleRate, sampleCount):
     newData = {
         "name"       : data["name"],
         "assetId"    : md5,
         "dataFormat" : data["dataFormat"],
-        "rate"       : data["rate"],
-        "sampleCount": data["sampleCount"],
+        "rate"       : sampleRate,
+        "sampleCount": sampleCount,
         "md5ext"     : md5ext,
     }
     return newData

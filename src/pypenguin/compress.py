@@ -72,6 +72,51 @@ def compressProject(
             else:
                 encodedSpriteName = "sprite_" + urllib.parse.quote(sprite["name"])
             
+            assets = deoptimizedSprite["costumes"] + deoptimizedSprite["sounds"]
+            isCostumeFunc = lambda index: index in range(len(deoptimizedSprite["costumes"]))
+            
+            newCostumes = []
+            newSounds   = []
+            for i, asset in assets:
+                isCostume  = isCostumeFunc(i)
+                identifier = "costumes" if isCostume else "sounds" 
+                encodedAssetName = urllib.parse.quote(costume["name"] + "." + costume["dataFormat"])
+                if isCostume and asset.get("isDefault", False):
+                    srcPath = defCostumePath
+                else:
+                    scrPath = os.path.join(
+                        optimizedProjectDir, 
+                        encodedSpriteName, 
+                        identifier, 
+                        encodedAssetName,
+                    )
+                md5    = generateMd5(file=srcPath)
+                md5ext = md5 + "." + sound["dataFormat"]
+                shutil.copy(
+                    src=srcPath,
+                    dst=os.path.join(temporaryDir, md5ext),
+                )
+                
+                
+                if isCostume:
+                    #width, height = getImageSize(file=srcPath)
+                    newCostumes.append(finalizeCostume(
+                        data=costume, 
+                        md5=md5,
+                        md5ext=md5ext,
+                        #width=width,
+                        #height=height,
+                    ))
+                else:
+                    newSounds.append(finalizeSound(
+                        data=sound, 
+                        md5=md5,
+                        md5ext=md5ext,
+                    ))
+            deoptimizedSprite["costumes"] = newCostumes
+            deoptimizedSprite["sounds"  ] = newSounds
+            
+            """
             # Copy and rename costumes
             newCostumes = []
             for costume in deoptimizedSprite["costumes"]:
@@ -127,7 +172,7 @@ def compressProject(
                 ))
             
             deoptimizedSprite["sounds"] = newSounds
-    
+            """
         
         if deoptimizedDebugFilePath != None:
             writeJSONFile(deoptimizedDebugFilePath, data=deoptimizedData)
