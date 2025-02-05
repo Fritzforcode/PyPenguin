@@ -83,7 +83,7 @@ def compressProject(
                 if isCostume and asset.get("isDefault", False):
                     srcPath = defCostumeFilePath
                 else:
-                    scrPath = os.path.join(
+                    srcPath = os.path.join(
                         optimizedProjectDir, 
                         encodedSpriteName, 
                         identifier, 
@@ -96,7 +96,7 @@ def compressProject(
                     dst=os.path.join(temporaryDir, md5ext),
                 )
                 
-                
+                input((asset, isCostume, srcPath))
                 if isCostume:
                     #width, height = getImageSize(file=srcPath)
                     newCostumes.append(finalizeCostume(

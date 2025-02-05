@@ -208,30 +208,30 @@ def parseBlockText(blockText: str):
     jsPath     = "src/pypenguin/penguinblocks/main.js"
     outputPath = "src/pypenguin/penguinblocks/in.json"
 
-    # On Windows/Linux
-    """Check if Node.js is installed and accessible."""
-    if not shutil.which("node"):
-        print("Error: Node.js is not installed or not in PATH.")
-        print("Download it from https://nodejs.org/")
-        sys.exit(1)
-    
-    # Run the JavaScript file with arguments using Node.js
-    result = subprocess.run(
-        ["node", jsPath, blockText, outputPath],
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode == 0:
-        if result.stdout != "": # When it isn't empty
-            print("JavaScript output:", result.stdout)
-    else:
-        print("Error:", result.stderr)
+    ## On Windows/Linux
+    #"""Check if Node.js is installed and accessible."""
+    #if not shutil.which("node"):
+    #    print("Error: Node.js is not installed or not in PATH.")
+    #    print("Download it from https://nodejs.org/")
+    #    sys.exit(1)
+    #
+    ## Run the JavaScript file with arguments using Node.js
+    #result = subprocess.run(
+    #    ["node", jsPath, blockText, outputPath],
+    #    capture_output=True,
+    #    text=True,
+    #)
+    #if result.returncode == 0:
+    #    if result.stdout != "": # When it isn't empty
+    #        print("JavaScript output:", result.stdout)
+    #else:
+    #    print("Error:", result.stderr)
 
 
 
-    ## On other operating systems      
-    #print(shlex.join(["node", jsPath, blockText, outputPath]))
-    #input()
+    # On other operating systems      
+    print(shlex.join(["node", jsPath, blockText, outputPath]))
+    input()
 
     
     

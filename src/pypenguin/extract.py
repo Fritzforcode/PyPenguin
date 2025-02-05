@@ -112,7 +112,8 @@ def extractProject(
             for j, asset in enumerate(assets):
                 isCostume        = j in range(len(sprite["costumes"]))
                 identifier       = "costumes" if isCostume else "sounds"
-                deoptimizedAsset = deoptimizedSprite[identifier][j]
+                offset           = 0 if isCostume else len(sprite["costumes"])
+                deoptimizedAsset = deoptimizedSprite[identifier][j-offset]
                 oldAssetName     = deoptimizedAsset["assetId"] + "." + asset["extension"]
                 encodedAssetName = urllib.parse.quote(asset["name"] + "." + asset["extension"])
                 srcPath = os.path.join(temporaryDir, oldAssetName)
@@ -122,6 +123,7 @@ def extractProject(
                     identifier, 
                     encodedAssetName,
                 )
+                print(srcPath, destPath)
                 shutil.copy(
                     src=srcPath,
                     dst=destPath

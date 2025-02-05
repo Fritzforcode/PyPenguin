@@ -31,9 +31,32 @@ mySprite["sounds"] = [pypenguin.downloadSound(
     name             = "Squawk",
     projectDirectory = project_directory,
     spriteName       = "Sprite1",
+    spriteIsStage    = False,
     fileName         = "Squawk",
     doOverwrite      = True,
+), pypenguin.downloadSound(
+    name             = "Splash Cymbal",
+    projectDirectory = project_directory,
+    spriteName       = "Sprite1",
+    spriteIsStage    = False,
+    fileName         = "Splash Cymbal",
+    doOverwrite      = True,
+), pypenguin.downloadSound(
+    name             = "Pop",
+    projectDirectory = project_directory,
+    spriteName       = "Sprite1",
+    spriteIsStage    = False,
+    fileName         = "Pop",
+    doOverwrite      = True,
+), pypenguin.downloadSound(
+    name             = "Pralax",
+    projectDirectory = project_directory,
+    spriteName       = "Sprite1",
+    spriteIsStage    = False,
+    fileName         = "Pralax",
+    doOverwrite      = True,
 )]
+
 
 project = pypenguin.defaultProject
 project["sprites"] = [  # Update project with the modified sprites.

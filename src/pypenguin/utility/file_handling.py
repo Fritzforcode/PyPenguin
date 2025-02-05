@@ -32,16 +32,13 @@ def ensureCorrectPath(path, targetFolderName=None, ensureIsValid=False, ensureEx
     
     if ensureIsValid:
         isValid = type(path) == str
-        print("--> A", isValid)
         if isValid:
             if isDir:
                 pathObj = Path(path)
                 isValid = pathObj.is_dir() or (pathObj != '' and not pathObj.is_reserved())
             else:
                 isValid = isValidFilePath(path)
-                raise Exception(path, isValid)
         if not isValid:
-            print("--> c", isValid)
             if isDir: raise InvalidDirPath ("Invalid directory path: "+repr(path))
             else    : raise InvalidFilePath("Invalid file path: "     +repr(path))
     
@@ -162,10 +159,11 @@ def getSVGImageSize(file):
 
     return float(width), float(height)
 
-import scipy.io.wavfile
-from pydub import AudioSegment
 
 def getAudioInfo(filePath):
+    from mutagen.mp3 import MP3
+    import scipy.io.wavfile
+    from pydub import AudioSegment
     """
     Extracts the sample rate and sample count from a WAV or MP3 file.
 
@@ -177,13 +175,13 @@ def getAudioInfo(filePath):
     """
     if filePath.lower().endswith(".wav"):
         sampleRate, data = scipy.io.wavfile.read(filePath)
-        sampleCount = data.shape[0]  # Number of samples
+        sampleCount = data.shape[0]
     elif filePath.lower().endswith(".mp3"):
-        audio = AudioSegment.from_file(filePath, format="mp3")
-        sampleRate = audio.frame_rate
-        sampleCount = (len(audio) * sampleRate) // 1000  # Convert milliseconds to samples
+        audio = MP3(filePath)
+        sampleRate = int(audio.info.sample_rate)
+        sampleCount = int(audio.info.length * sampleRate)  # Convert duration to samples
     else:
-        raise ValueError("Unsupported file format. Only WAV and MP3 are supported.", filePath)
+        raise ValueError("Unsupported file format. Only WAV and MP3 are supported.")
 
     return sampleRate, sampleCount
 
@@ -205,8 +203,11 @@ def writeJSONFile(filePath, data, beautiful: bool = True):
             dump(data, file)
 
 
-assetLinks = readJSONFile("assets/asset_links.json", ensurePath=True)
-
+assetLinks = None
+def loadLinks():
+    global assetLinks
+    if assetLinks == None:
+        assetLinks = readJSONFile("assets/asset_links.json", ensurePath=True)
 """
 def downloadCostume(name, fileName):
     try:
@@ -246,16 +247,18 @@ def downloadSound(name, fileName):
 
 """
 
-def downloadCostume(name: str, projectDirectory:str, spriteName:str, fileName:str, doOverwrite:bool) -> dict:
+def downloadCostume(name: str, projectDirectory:str, spriteName:str, spriteIsStage:bool, fileName:str, doOverwrite:bool) -> dict:
     """
     name: PenguinMod costume name e.g. "Apple"
     projectDirectory: file path of your project folder
     spriteName: name of the sprite, the costume will be added to. Not encoded. e.g. "My Sprite"
+    spriteIsStage: Wether the target sprite is the stage.
     fileName: The costume will be saved under this name and will be called this in your PenguinMod Project. e.g. "apple object"
     doOverwrite: Wether the costume will be downloaded again even if the file alredy exists.
 
     Returns: reference to the file(dict)
     """
+    loadLinks()
     try:
         link = assetLinks["costumes"][name]
     except KeyError:
@@ -263,9 +266,10 @@ def downloadCostume(name: str, projectDirectory:str, spriteName:str, fileName:st
     
     cutLink   = link.removesuffix("/get/") if "/get/" in link else link
     extension = cutLink[cutLink.rindex(".")+1:]
+    quotedSpriteName = "stage" if spriteIsStage else ("sprite_" + urllib.parse.quote(spriteName))
     dirPath   = os.path.join(
         projectDirectory,
-        urllib.parse.quote(spriteName),
+        quotedSpriteName,
         "costumes",
     )
     fullPath  = os.path.join(dirPath, urllib.parse.quote(fileName))
@@ -281,16 +285,18 @@ def downloadCostume(name: str, projectDirectory:str, spriteName:str, fileName:st
                 file.write(chunk)
         print("Costume downloaded successfully as", fileName)
 
-def downloadSound(name: str, projectDirectory:str, spriteName:str, fileName:str, doOverwrite:bool) -> dict:
+def downloadSound(name: str, projectDirectory:str, spriteName:str, spriteIsStage:bool, fileName:str, doOverwrite:bool) -> dict:
     """
     name: PenguinMod sound name e.g. "Squawk"
     projectDirectory: file path of your project folder
     spriteName: name of the sprite, the sound will be added to. Not encoded. e.g. "My Sprite"
+    spriteIsStage: Wether the target sprite is the stage.
     fileName: The sound will be saved under this name and will be called this in your PenguinMod Project. e.g. "squawk sound"
     doOverwrite: Wether the sound will be downloaded again even if the file alredy exists.
 
     Returns: reference to the file(dict)
     """
+    loadLinks()
     try:
         link = assetLinks["sounds"][name]
     except KeyError:
@@ -298,10 +304,11 @@ def downloadSound(name: str, projectDirectory:str, spriteName:str, fileName:str,
     
     cutLink   = link.removesuffix("/get/") if "/get/" in link else link
     extension = cutLink[cutLink.rindex(".")+1:]
+    quotedSpriteName = "stage" if spriteIsStage else ("sprite_" + urllib.parse.quote(spriteName))
     dirPath   = os.path.join(
         projectDirectory,
-        urllib.parse.quote(spriteName),
-        "costumes",
+        quotedSpriteName,
+        "sounds",
     )
     fullPath  = os.path.join(dirPath, urllib.parse.quote(fileName))
     finalPath = ensureExtension(fullPath, extension)
