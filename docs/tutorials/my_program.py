@@ -27,33 +27,79 @@ myStage  = pypenguin.defaultStage
 mySprite = pypenguin.defaultSprite
 mySprite["scripts"] = generated_scripts # Include the generated scripts.
 
+mySprite["costumes"] = [pypenguin.downloadCostume(
+    name             = "Ball-b",
+    projectDirectory = project_directory,
+    spriteName       = "Sprite1",
+    spriteIsStage    = False,
+    newName          = "Ball-bee",
+    doOverwrite      = True,
+), pypenguin.downloadCostume(
+    name             = "Ewo-e",
+    projectDirectory = project_directory,
+    spriteName       = "Sprite1",
+    spriteIsStage    = False,
+    newName          = "Ewo-e-io",
+    doOverwrite      = True,
+), pypenguin.downloadCostume(
+    name             = "Cheesy Puffs",
+    projectDirectory = project_directory,
+    spriteName       = "Sprite1",
+    spriteIsStage    = False,
+    newName          = "Cheesy Puffs-io",
+    doOverwrite      = True,
+), pypenguin.downloadCostume(
+    name             = "Cheesy Puffs2",
+    projectDirectory = project_directory,
+    spriteName       = "Sprite1",
+    spriteIsStage    = False,
+    newName          = "Cheesy Puffs2-io",
+    doOverwrite      = True,
+), pypenguin.localCostume(
+    filePath         = "assets/arrow.png",
+    projectDirectory = project_directory,
+    spriteName       = "Sprite1",
+    spriteIsStage    = False,
+    fileName         = "An Arrow",
+    bitmapResolution = 2,
+    rotationCenter   = [0, 0],
+    doOverwrite      = True,
+)]
+
 mySprite["sounds"] = [pypenguin.downloadSound(
     name             = "Squawk",
     projectDirectory = project_directory,
     spriteName       = "Sprite1",
     spriteIsStage    = False,
-    fileName         = "Squawk",
+    newName          = "Squawk-ee",
     doOverwrite      = True,
 ), pypenguin.downloadSound(
     name             = "Splash Cymbal",
     projectDirectory = project_directory,
     spriteName       = "Sprite1",
     spriteIsStage    = False,
-    fileName         = "Splash Cymbal",
+    newName          = "Splash Cymbal-weee",
     doOverwrite      = True,
 ), pypenguin.downloadSound(
     name             = "Pop",
     projectDirectory = project_directory,
     spriteName       = "Sprite1",
     spriteIsStage    = False,
-    fileName         = "Pop",
+    newName          = "Pop-as",
     doOverwrite      = True,
 ), pypenguin.downloadSound(
     name             = "Pralax",
     projectDirectory = project_directory,
     spriteName       = "Sprite1",
     spriteIsStage    = False,
-    fileName         = "Pralax",
+    newName          = "Pralax-doo",
+    doOverwrite      = True,
+), pypenguin.localSound(
+    filePath         = "assets/random-tbtx1-beeping-27363.mp3",
+    projectDirectory = project_directory,
+    spriteName       = "Sprite1",
+    spriteIsStage    = False,
+    fileName         = "Beep-io",
     doOverwrite      = True,
 )]
 
@@ -84,4 +130,5 @@ pypenguin.compressProject(
     optimizedProjectDir = project_directory,
     projectFilePath     = penguinmod_file, 
     targetPlatform      = target_platform,
+    deoptimizedDebugFilePath="t_deop.json",
 )
