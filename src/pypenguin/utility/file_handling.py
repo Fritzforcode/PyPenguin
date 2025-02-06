@@ -9,6 +9,8 @@ from jsoncomment import JsonComment
 from pathlib import Path
 import urllib.parse
 
+from .utility import CostumeBitmapResolutionConst, CostumeRotationCenterConst
+
 # ------
 # Errors
 # ------
@@ -23,9 +25,9 @@ class InvalidDirPath (PathError): pass
 # -----------------------
 parser = JsonComment()
 
-def ensureExtension(filePath, extension): 
-    base_name, _ = os.path.splitext(filePath)  # Split file name and ext
-    return base_name + "." + extension  # Append/replace extension
+#def ensureExtension(filePath, extension): 
+#    base_name, _ = os.path.splitext(filePath)  # Split file name and ext
+#    return base_name + "." + extension  # Append/replace extension
 
 def ensureCorrectPath(path, targetFolderName=None, ensureIsValid=False, ensureExists=False, isDir=False, allowNone=False):
     if allowNone and (path == None): return path
@@ -163,7 +165,6 @@ def getSVGImageSize(file):
 def getAudioInfo(filePath):
     from mutagen.mp3 import MP3
     import scipy.io.wavfile
-    from pydub import AudioSegment
     """
     Extracts the sample rate and sample count from a WAV or MP3 file.
 
@@ -181,7 +182,7 @@ def getAudioInfo(filePath):
         sampleRate = int(audio.info.sample_rate)
         sampleCount = int(audio.info.length * sampleRate)  # Convert duration to samples
     else:
-        raise ValueError("Unsupported file format. Only WAV and MP3 are supported.")
+        raise ValueError("Unsupported file format. Only WAV and MP3 are supported.", filePath)
 
     return sampleRate, sampleCount
 
@@ -203,125 +204,109 @@ def writeJSONFile(filePath, data, beautiful: bool = True):
             dump(data, file)
 
 
-assetLinks = None
-def loadLinks():
-    global assetLinks
-    if assetLinks == None:
-        assetLinks = readJSONFile("assets/asset_links.json", ensurePath=True)
-"""
-def downloadCostume(name, fileName):
+assetDB = None
+def loadAssetDB():
+    global assetDB
+    if assetDB == None:
+        assetDB = readJSONFile("assets/asset_db.json", ensurePath=True)
+
+def downloadAsset(name:str, projectDirectory:str, spriteName:str, spriteIsStage:bool, newName:str, doOverwrite:bool, isCostume:bool) -> dict:
+    singleIdentifier = "costume"  if isCostume else "sound"
+    groupIdentifier  = "costumes" if isCostume else "sounds"
+    loadAssetDB()
     try:
-        link = assetLinks["costumes"][name]
+        link = assetDB[groupIdentifier][name]["link"]
     except KeyError:
-        raise ValueError(f"Unknown PenguinMod costume: {repr(name)}")
-    
-    cutLink   = link.removesuffix("/get/") if "/get/" in link else link
+        raise ValueError(f"Unknown PenguinMod {singleIdentifier}: {repr(name)}")
+
+    cutLink   = link.removesuffix("/get/") if link.endswith("/get/") else link
     extension = cutLink[cutLink.rindex(".")+1:]
-    fileName  = ensureExtension(fileName, extension)
-    #ensureCorrectPath(fileName, ensureIsValid=True, isDir=False)
+    quotedSpriteName = "stage" if spriteIsStage else ("sprite_" + urllib.parse.quote(spriteName))
+    dirPath   = os.path.join(
+        projectDirectory,
+        quotedSpriteName,
+        groupIdentifier,
+    )
+    quotedNewName = urllib.parse.quote(newName)
+    fullPath  = os.path.join(dirPath, quotedNewName) + "." + extension
 
-    response = requests.get(link, stream=True)
-    response.raise_for_status()
-    with open(fileName, "wb") as file:
-        for chunk in response.iter_content(1024):
-            file.write(chunk)
-    print("Costume downloaded successfully as", fileName)
-
-def downloadSound(name, fileName):
-    try:
-        link = assetLinks["sounds"][name]
-    except KeyError:
-        raise ValueError(f"Unknown PenguinMod sounds: {repr(name)}")
+    if doOverwrite or not(os.path.exists(fullPath)):
+        if not os.path.exists(dirPath):
+            os.makedirs(dirPath)
+        response = requests.get(link, stream=True)
+        response.raise_for_status()
+        with open(fullPath, "wb") as file:
+            for chunk in response.iter_content(1024):
+                file.write(chunk)
+        print(f"{singleIdentifier} downloaded successfully as", newName)
     
-    cutLink   = link.removesuffix("/get/") if "/get/" in link else link
-    extension = cutLink[cutLink.rindex(".")+1:]
-    fileName  = ensureExtension(fileName, extension)
-    #ensureCorrectPath(fileName, ensureIsValid=True, isDir=False)
+    if isCostume:
+        bitmapResolution = assetDB[groupIdentifier][name]["bitmapResolution"]
+        rotationCenter   = assetDB[groupIdentifier][name]["rotationCenter"]
+        return {"name": newName, "extension": extension, "bitmapResolution": bitmapResolution, "rotationCenter": rotationCenter}
+    else:
+        return {"name": newName, "extension": extension}
 
-    response = requests.get(link, stream=True)
-    response.raise_for_status()
-    with open(fileName, "wb") as file:
-        for chunk in response.iter_content(1024):
-            file.write(chunk)
-    print("Sound downloaded successfully as", fileName)
-
-"""
-
-def downloadCostume(name: str, projectDirectory:str, spriteName:str, spriteIsStage:bool, fileName:str, doOverwrite:bool) -> dict:
+def downloadCostume(name:str, projectDirectory:str, spriteName:str, spriteIsStage:bool, newName:str, doOverwrite:bool) -> dict:
     """
     name: PenguinMod costume name e.g. "Apple"
     projectDirectory: file path of your project folder
     spriteName: name of the sprite, the costume will be added to. Not encoded. e.g. "My Sprite"
     spriteIsStage: Wether the target sprite is the stage.
-    fileName: The costume will be saved under this name and will be called this in your PenguinMod Project. e.g. "apple object"
+    newName(no extension): The costume will be saved under this name and will be called this in your PenguinMod Project. e.g. "apple object"
     doOverwrite: Wether the costume will be downloaded again even if the file alredy exists.
 
     Returns: reference to the file(dict)
     """
-    loadLinks()
-    try:
-        link = assetLinks["costumes"][name]
-    except KeyError:
-        raise ValueError(f"Unknown PenguinMod costume: {repr(name)}")
-    
-    cutLink   = link.removesuffix("/get/") if "/get/" in link else link
-    extension = cutLink[cutLink.rindex(".")+1:]
-    quotedSpriteName = "stage" if spriteIsStage else ("sprite_" + urllib.parse.quote(spriteName))
-    dirPath   = os.path.join(
-        projectDirectory,
-        quotedSpriteName,
-        "costumes",
-    )
-    fullPath  = os.path.join(dirPath, urllib.parse.quote(fileName))
-    finalPath = ensureExtension(fullPath, extension)
-    
-    if doOverwrite or not(os.path.exists(finalPath)):
-        if not os.path.exists(dirPath):
-            os.makedirs(dirPath)
-        response = requests.get(link, stream=True)
-        response.raise_for_status()
-        with open(finalPath, "wb") as file:
-            for chunk in response.iter_content(1024):
-                file.write(chunk)
-        print("Costume downloaded successfully as", fileName)
+    return downloadAsset(name, projectDirectory, spriteName, spriteIsStage, newName, doOverwrite, isCostume=True)
 
-def downloadSound(name: str, projectDirectory:str, spriteName:str, spriteIsStage:bool, fileName:str, doOverwrite:bool) -> dict:
+def downloadSound(name:str, projectDirectory:str, spriteName:str, spriteIsStage:bool, newName:str, doOverwrite:bool) -> dict:
     """
     name: PenguinMod sound name e.g. "Squawk"
     projectDirectory: file path of your project folder
     spriteName: name of the sprite, the sound will be added to. Not encoded. e.g. "My Sprite"
     spriteIsStage: Wether the target sprite is the stage.
-    fileName: The sound will be saved under this name and will be called this in your PenguinMod Project. e.g. "squawk sound"
+    newName(no extension): The sound will be saved under this name and will be called this in your PenguinMod Project. e.g. "squawk sound"
     doOverwrite: Wether the sound will be downloaded again even if the file alredy exists.
 
     Returns: reference to the file(dict)
     """
-    loadLinks()
-    try:
-        link = assetLinks["sounds"][name]
-    except KeyError:
-        raise ValueError(f"Unknown PenguinMod sound: {repr(name)}")
-    
-    cutLink   = link.removesuffix("/get/") if "/get/" in link else link
-    extension = cutLink[cutLink.rindex(".")+1:]
+    return downloadAsset(name, projectDirectory, spriteName, spriteIsStage, newName, doOverwrite, isCostume=False)
+
+def localAsset(filePath:str, projectDirectory:str, spriteName:str, spriteIsStage:bool, fileName:str, doOverwrite:bool, isCostume:bool, bitmapResolution:int=None, rotationCenter:list[int]=None) -> dict:
+    groupIdentifier  = "costumes" if isCostume else "sounds"
     quotedSpriteName = "stage" if spriteIsStage else ("sprite_" + urllib.parse.quote(spriteName))
-    dirPath   = os.path.join(
+    dirPath = os.path.join(
         projectDirectory,
         quotedSpriteName,
-        "sounds",
+        groupIdentifier,
     )
-    fullPath  = os.path.join(dirPath, urllib.parse.quote(fileName))
-    finalPath = ensureExtension(fullPath, extension)
+    extension = os.path.splitext(filePath)[1].removeprefix(".")
+    quotedFileName = urllib.parse.quote(fileName)
+    destPath = os.path.join(dirPath, quotedFileName) + "." + extension
+    if doOverwrite or not(os.path.exists(destPath)):
+        shutil.copy(filePath, destPath)
     
-    if doOverwrite or not(os.path.exists(finalPath)):
-        if not os.path.exists(dirPath):
-            os.makedirs(dirPath)
-        response = requests.get(link, stream=True)
-        response.raise_for_status()
-        with open(finalPath, "wb") as file:
-            for chunk in response.iter_content(1024):
-                file.write(chunk)
-        print("Sound downloaded successfully as", fileName)
+    if isCostume:
+        return {"name": fileName, "extension": extension, "bitmapResolution": bitmapResolution, "rotationCenter": rotationCenter}
+    else:
+        return {"name": fileName, "extension": extension}
 
-    return {"name": fileName, "extension": extension}
+
+def localCostume(filePath:str, projectDirectory:str, spriteName:str, spriteIsStage:bool, fileName:str, bitmapResolution:int, rotationCenter:list[int], doOverwrite:bool) -> dict:
+    """
+    Will copy the costume at [filePath] into the sprite([spriteName], [spriteIsStage]) of the [projectDirectory] and rename it to [fileName(no extension)]
+    bitmapResolution: The resolution of the bitmap. Usually 1
+    rotationCenter  : A vector from the topleft corner of the image to the rotation center point of the costume
+
+    Returns: reference to the costume(dict)
+    """
+    return localAsset(filePath, projectDirectory, spriteName, spriteIsStage, fileName, doOverwrite, isCostume=True, bitmapResolution=bitmapResolution, rotationCenter=rotationCenter)
+
+def localSound(filePath:str, projectDirectory:str, spriteName:str, spriteIsStage:bool, fileName:str, doOverwrite:bool) -> dict:
+    """
+    Will copy the sound at [filePath] into the sprite([spriteName], [spriteIsStage]) of the [projectDirectory] and rename it to [fileName(no extension)]
+    Returns: reference to the sound(dict)
+    """
+    return localAsset(filePath, projectDirectory, spriteName, spriteIsStage, fileName, doOverwrite, isCostume=False)
 

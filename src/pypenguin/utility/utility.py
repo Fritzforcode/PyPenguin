@@ -6,8 +6,14 @@ import difflib
 # Other Utility Classes and Functions
 # -----------------------------------
 class Platform(Enum):
-    PENGUINMOD = 0
-    SCRATCH    = 1
+    PENGUINMOD  = 0
+    SCRATCH     = 1
+
+class CostumeBitmapResolutionConst(Enum):
+    AUTO_SCALE  = 0
+
+class CostumeRotationCenterConst  (Enum):
+    AUTO_CENTER = 0
 
 
 class BlockSelector:
