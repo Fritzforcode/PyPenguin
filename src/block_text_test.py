@@ -4,8 +4,9 @@ import os # For convenience and creating a dir
 
 # Parse scratchblocks text
 block_text = """
-define define () //{"blockType": "textReporter", "comment": "abfdasd djk "}
+set []
 """
+globalVariables = []
 generated_scripts = pypenguin.parseBlockText(block_text)
 
 project_directory = pypenguin.utility.ensureCorrectPath("btt", "PyPenguin")
@@ -22,6 +23,8 @@ project["sprites"] = [  # Update project with the modified sprites.
     myStage,
     mySprite,
 ]
+
+project["globalVariables"] = [{"name": name, "currentValue": "", "isCloudVariable": False} for name in globalVariables]
 
 
 # Create our project directory
