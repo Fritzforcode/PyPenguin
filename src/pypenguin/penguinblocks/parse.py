@@ -1,4 +1,4 @@
-import subprocess, json, shutil, sys, shlex
+import subprocess, json, shutil, sys, shlex, json
 from pypenguin.utility import readJSONFile, writeJSONFile, pp, generateCustomOpcode
 from pypenguin.database import getArgumentOrder, getOptimizedOpcode, autocompleteOptionValue, getInputType, getOptionType, getOptionValueDefault
 
@@ -17,15 +17,24 @@ def convertBlock(block):
     
     # Handle comment
     
-    if block["comment"] == None:
-        comment = None
-    else:
-        comment = {
-            "position": None,
-            "size": COMMENT_SIZE,
-            "isMinimized": COMMENT_IS_MINIMIZED,
-            "text": block["comment"]["label"]["value"],
-        }
+    comment = None
+    specification = {}
+    if block["comment"] != None:
+        commentText = block["comment"]["label"]["value"]
+        try:
+            specification = json.loads(commentText)
+        except json.JSONDecodeError:
+            pass
+        else:
+            commentText = specification.get("comment", None)
+        
+        if commentText != None: 
+            comment = {
+                "position": None,
+                "size": COMMENT_SIZE,
+                "isMinimized": COMMENT_IS_MINIMIZED,
+                "text": commentText,
+            }
 
     # Get and handle opcode
     if "id" not in block["info"]:
@@ -54,20 +63,22 @@ def convertBlock(block):
     if category == "operators": category = "operator"
     opcode: str = category + "_" + rest
     
-    if opcode in {"procedures_definition", "procedures_call"}:        
+    if opcode in {"procedures_definition", "procedures_call"}:
         customOpcode = generateCustomOpcode(
             proccode=block["info"]["call"],
             argumentNames=block["info"]["names"],
         )
         
         if opcode == "procedures_definition":
+            noScreenRefresh = specification.get("noScreenRefresh", True)
+            blockType       = specification.get("blockType", "instruction")
             newBlock = {
                 "opcode": getOptimizedOpcode("special_define"),
                 "inputs": {},
                 "options": {
-                    "noScreenRefresh": ["value", True],
-                    "customOpcode"   : ["value", customOpcode],
-                    "blockType"      : ["value", "instruction"],
+                    "noScreenRefresh": ["value", noScreenRefresh],
+                    "customOpcode"   : ["value", customOpcode   ],
+                    "blockType"      : ["value", blockType      ],
                 },
             }
             if comment != None: newBlock["comment"] = comment
