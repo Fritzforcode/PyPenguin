@@ -1,6 +1,8 @@
-# TODO
+# Future
+Costume Limit
+x=960 y=720
 
-fix comments not work
+# TODO
 
 do more scratch research
 

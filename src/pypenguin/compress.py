@@ -96,7 +96,6 @@ def compressProject(
                     dst=os.path.join(temporaryDir, md5ext),
                 )
                 
-                input((asset, isCostume, srcPath))
                 if isCostume:
                     #width, height = getImageSize(file=srcPath)
                     newCostumes.append(finalizeCostume(
