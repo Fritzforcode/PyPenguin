@@ -23,6 +23,10 @@ export const extensions = {
   ev3: "ev3",
   boost: "boost",
   gdxfor: "gdxfor",
+
+  pm_motion: "pm_motion",
+  lmsTempVars2: "lmsTempVars2",
+  jgJSON: "jgJSON",
 }
 
 // Alias extensions: unlike movedExtensions, this is handled for both scratch2 and scratch3.

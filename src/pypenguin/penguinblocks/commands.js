@@ -1689,4 +1689,58 @@ export default [
     shape: "stack",
     category: "boost",
   },
+//  |=======================================|
+//  |           PenguinMod Blocks           |
+//  |=======================================|
+  // Motion (Incomplete)
+  {
+    id: "pm_motion.movebacksteps",
+    spec: "move back %1 steps",
+    inputs: ["%n"],
+    shape: "stack",
+    category: "pm_motion",
+  },
+  {
+    id: "pm_motion.moveupdownsteps",
+    spec: "move %1 %2 steps",
+    inputs: ["%m", "%n"],
+    shape: "stack",
+    category: "pm_motion",
+  },
+  // Operators (Incomplete)
+  {
+    id: "pm_operators.trueBoolean",
+    selector: "true",
+    spec: "true",
+    inputs: [],
+    shape: "boolean",
+    category: "pm_operators",
+  },
+  {
+    id: "pm_operators.falseBoolean",
+    selector: "false",
+    spec: "false",
+    inputs: [],
+    shape: "boolean",
+    category: "pm_operators",
+  },
+
+  // Temporary Variables
+  {
+    id: "lmsTempVars2.setRuntimeVariable",
+    spec: "set runtime var %1 to %2",
+    inputs: ["%n", "%n"],
+    shape: "stack",
+    category: "lmsTempVars2",
+  },
+
+  // JSON
+  {
+    id: "jgJSON.setValueToKeyInJSON",
+    spec: "set %1 to %2 in %3",
+    inputs: ["%n", "%n", "%n"],
+    shape: "stack",
+    category: "jgJSON",
+  }
+
 ]

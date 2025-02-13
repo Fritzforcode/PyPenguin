@@ -12,6 +12,7 @@ opcodes = {
         "newOpcode": "move back (STEPS) steps",
         "inputTypes": {"STEPS": "number"},
         "optionTypes": {},
+        "fromPenguinMod": True,
     },
     "motion_moveupdownsteps": {
         "type": "instruction",
@@ -19,6 +20,7 @@ opcodes = {
         "newOpcode": "move [DIRECTION] (STEPS) steps",
         "inputTypes": {"STEPS": "number"},
         "optionTypes": {"DIRECTION": "up|down"},
+        "fromPenguinMod": True,
     },
     "motion_turnright": {
         "type": "instruction",
@@ -55,6 +57,7 @@ opcodes = {
         "newOpcode": "change by x: (DX) y: (DY)",
         "inputTypes": {"DX": "number", "DY": "number"},
         "optionTypes": {},
+        "fromPenguinMod": True,
     },
     "motion_glideto": {
         "type": "instruction",
@@ -94,6 +97,7 @@ opcodes = {
         "newOpcode": "point towards x: (X) y: (Y)",
         "inputTypes": {"X": "number", "Y": "number"},
         "optionTypes": {},
+        "fromPenguinMod": True,
     },
     "motion_turnaround": {
         "type": "instruction",
@@ -101,6 +105,7 @@ opcodes = {
         "newOpcode": "turn around",
         "inputTypes": {},
         "optionTypes": {},
+        "fromPenguinMod": True,
     },
     "motion_changexby": {
         "type": "instruction",
@@ -144,6 +149,7 @@ opcodes = {
         "inputTypes": {"TARGET": "random|mouse || other sprite"},
         "optionTypes": {},
         "menus": [{"new": "TARGET", "outer": "SPRITE", "inner": "TOWARDS", "menuOpcode": "motion_pointtowards_menu"}],
+        "fromPenguinMod": True,
     },
     "motion_setrotationstyle": {
         "type": "instruction",
@@ -159,6 +165,7 @@ opcodes = {
         "inputTypes": {},
         "optionTypes": {"ZONE": "stage zone"},
         "optionTranslation": {"ALIGNMENT": "ZONE"},
+        "fromPenguinMod": True,
     },
     "motion_xposition": {
         "type": "stringReporter",

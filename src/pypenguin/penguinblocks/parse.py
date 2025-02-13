@@ -1,6 +1,6 @@
 import subprocess, json, shutil, sys, shlex, json
 from pypenguin.utility import readJSONFile, writeJSONFile, pp, generateCustomOpcode
-from pypenguin.database import getArgumentOrder, getOptimizedOpcode, autocompleteOptionValue, getInputType, getOptionType, getOptionValueDefault
+from pypenguin.database import getArgumentOrder, getOptimizedOpcode, autocompleteOptionValue, getInputType, getOptionType, getOptionValueDefault, opcodeExists
 
 COMMENT_X_OFFSET = 400
 COMMENT_SIZE = [200, 80]
@@ -58,9 +58,26 @@ def convertBlock(block):
     elif "." in opcode:
         opcode = opcode.split(".")[0] + "_" + ".".join(opcode.split(".")[1:])
     
+    if opcode.startswith("pm_"):
+        opcode = opcode.removeprefix("pm_")
+    if opcode.startswith("sensing_of"):
+        suggested_opcode = "motion" + opcode.removeprefix("sensing_of")
+        if opcodeExists(suggested_opcode):
+            opcode = suggested_opcode
+        else:
+            suggested_opcode = "looks" + opcode.removeprefix("sensing_of")
+            if opcodeExists(suggested_opcode):
+                opcode = suggested_opcode
+            else: raise ValueError("Couldn't identify 'sensing_of...' opcode.")
+
     category = opcode.split("_")[0]
     rest     = "_".join(opcode.split("_")[1:])
-    if category == "operators": category = "operator"
+    if category == "pm": # A penguinmod block
+        category = rest.split("_")[0]
+        rest     = "_".join(rest.split("_")[1:])
+    #print(repr(category), repr(rest))
+    if category == "operators" : category = "operator"
+    if category == "sensing_of": category = "sensing"
     opcode: str = category + "_" + rest
     
     if opcode in {"procedures_definition", "procedures_call"}:
@@ -219,30 +236,30 @@ def parseBlockText(blockText: str):
     jsPath     = "src/pypenguin/penguinblocks/main.js"
     outputPath = "src/pypenguin/penguinblocks/in.json"
 
-    ## On Windows/Linux
-    #"""Check if Node.js is installed and accessible."""
-    #if not shutil.which("node"):
-    #    print("Error: Node.js is not installed or not in PATH.")
-    #    print("Download it from https://nodejs.org/")
-    #    sys.exit(1)
-    #
-    ## Run the JavaScript file with arguments using Node.js
-    #result = subprocess.run(
-    #    ["node", jsPath, blockText, outputPath],
-    #    capture_output=True,
-    #    text=True,
-    #)
-    #if result.returncode == 0:
-    #    if result.stdout != "": # When it isn't empty
-    #        print("JavaScript output:", result.stdout)
-    #else:
-    #    print("Error:", result.stderr)
+    # On Windows/Linux
+    """Check if Node.js is installed and accessible."""
+    if not shutil.which("node"):
+        print("Error: Node.js is not installed or not in PATH.")
+        print("Download it from https://nodejs.org/")
+        sys.exit(1)
+    
+    # Run the JavaScript file with arguments using Node.js
+    result = subprocess.run(
+        ["node", jsPath, blockText, outputPath],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode == 0:
+        if result.stdout != "": # When it isn't empty
+            print("JavaScript output:", result.stdout)
+    else:
+        print("Error:", result.stderr)
 
 
 
-    # On other operating systems      
-    print(shlex.join(["node", jsPath, blockText, outputPath]))
-    input()
+    ## On other operating systems      
+    #print(shlex.join(["node", jsPath, blockText, outputPath]))
+    #input()
 
     
     

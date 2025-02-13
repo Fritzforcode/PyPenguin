@@ -1,12 +1,14 @@
 import pypenguin
 import json
 import os # For convenience and creating a dir
+from pypenguin.utility import pp
 
 # Parse scratchblocks text
-block_text = """
-set []
-"""
-globalVariables = []
+with open(pypenguin.utility.ensureCorrectPath("src/code.txt", "PyPenguin")) as file:
+    block_text = file.read()
+#block_text = "set runtime var [variable] to (0)"
+globalVariables = ["ADDRESSING", "OPCODES", "BYTEORDER", "PAGE_WRAPPING_BUG"]
+
 generated_scripts = pypenguin.parseBlockText(block_text)
 
 project_directory = pypenguin.utility.ensureCorrectPath("btt", "PyPenguin")
@@ -25,7 +27,7 @@ project["sprites"] = [  # Update project with the modified sprites.
 ]
 
 project["globalVariables"] = [{"name": name, "currentValue": "", "isCloudVariable": False} for name in globalVariables]
-
+project["extensions"     ] = ["jgJSON"]
 
 # Create our project directory
 if not os.path.exists(project_directory):
@@ -38,6 +40,7 @@ with open(os.path.join(project_directory, "project.json"), "w") as file_object:
 
 # Make sure our project is valid. The Validator is NOT perfect!
 # If the project is invalid, an Exception will be raised.
+pp(project)
 pypenguin.validateProject(project)
 
 

@@ -3,12 +3,12 @@ from pypenguin.utility import Platform
 
 
 optimizedData = extractProject(
-#    projectFilePath          = "assets/categories/extension_music.pmp",
+    projectFilePath          = "assets/categories/tw_temporary_variables.pmp",
 #    projectFilePath          = "assets/studies/assetTest.pmp",
 #    projectFilePath          = "assets/from_online/The Tale of the Three Shapes.sb3",
 #    projectFilePath          = "Greatest Common Division.pmp",
 #    projectFilePath          = "docs/tutorials/my_project.pmp",
-    projectFilePath          = "c.pmp",
+#    projectFilePath          = "c.pmp",
     optimizedProjectDir      = "extracted_project",
     deoptimizedDebugFilePath = "temp_extracted.json",
     optimizedDebugFilePath   = "temp2.json",

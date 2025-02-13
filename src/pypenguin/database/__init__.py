@@ -17,10 +17,12 @@ from pypenguin.database.extension_text_to_speech import opcodes as extension_tex
 from pypenguin.database.extension_translate      import opcodes as extension_translate
 from pypenguin.database.extension_makey_makey    import opcodes as extension_makey_makey
 
-from pypenguin.database.extension_files          import opcodes as extension_files
-from pypenguin.database.extension_bitwise        import opcodes as extension_bitwise
+from pypenguin.database.tw_files                 import opcodes as tw_files
+from pypenguin.database.tw_temporary_variables   import opcodes as tw_temporary_variables
 
-from pypenguin.database.extension_json           import opcodes as extension_json
+from pypenguin.database.link_bitwise             import opcodes as link_bitwise
+
+from pypenguin.database.pm_json                  import opcodes as pm_json
 
 from pypenguin.utility                           import flipKeysAndValues, removeDuplicates
 
@@ -63,9 +65,9 @@ opcodeDatabase = (
     extension_video_sensing | extension_text_to_speech | extension_translate |
     extension_makey_makey   |
     # Turbowarp Extensions
-    extension_files         | extension_bitwise        |
+    tw_files                | tw_temporary_variables   | link_bitwise        |
     # Penguinmod Extensions
-    extension_json
+    pm_json
 )
 
 def getAllDeoptimizedOpcodes():
@@ -92,6 +94,9 @@ def getAllMonitorOpcodes():
         if opcodeData.get("canHaveMonitor") == True:
             opcodes[oldOpcode] = opcodeData["newOpcode"]
     return list(opcodes.values())
+
+def opcodeExists(opcode):
+    return opcode in opcodeDatabase
 
 def getOptimizedOpcode(opcode):
     return opcodeDatabase[opcode]["newOpcode"]

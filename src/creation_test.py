@@ -1,17 +1,12 @@
 scriptA = {"position": [0, 0], "blocks": [
     {
-        "opcode": "switch costume to ([COSTUME])",
+        "opcode": "set runtime var (VARIABLE) to (VALUE)",
         "inputs": {
-            "COSTUME": {
-                "option": ["costume", 0],
-            },
+            "VARIABLE": {"text": "ABc"},
+            "VALUE": {"block": {
+                "opcode": "new line"
+            }},
         },
-        "comment": {
-            "position": [400, 0],
-            "size": [200, 100],
-            "isMinimized": False,
-            "text": "Hi from a comment",
-        }
     },
 ]}
 
@@ -43,10 +38,10 @@ from pypenguin.utility import writeJSONFile, Platform
 validateProject(projectData=projectData)
 print("[VALIDATION SUCCESS]")
 writeJSONFile(filePath="t_source.json", data=projectData)
-writeJSONFile(filePath="project/project.json", data=projectData)
+writeJSONFile(filePath="extracted_project/project.json", data=projectData)
 writeJSONFile(filePath="precompiled.json", data=[])
 compressProject(
-    optimizedProjectDir = "project",
+    optimizedProjectDir = "extracted_project",
     projectFilePath     = "export.pmp",
     targetPlatform      = Platform.PENGUINMOD,
     deoptimizedDebugFilePath="t_deop.json",
