@@ -1,0 +1,393 @@
+[
+    {
+        "deoptimizedBlocks": {
+            "[\"blocks\", 0]": {
+                "opcode": "event_whenflagclicked",
+                "next": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 1]"
+                },
+                "parent": null,
+                "inputs": {},
+                "fields": {},
+                "shadow": false,
+                "topLevel": true
+            },
+            "[\"blocks\", 1]": {
+                "opcode": "looks_sayforsecs",
+                "next": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 2]"
+                },
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 0]"
+                },
+                "inputs": {
+                    "MESSAGE": [
+                        1,
+                        [
+                            10,
+                            "Hello World!"
+                        ]
+                    ],
+                    "SECS": [
+                        1,
+                        [
+                            4,
+                            "2"
+                        ]
+                    ]
+                },
+                "fields": {},
+                "shadow": false,
+                "topLevel": false
+            },
+            "[\"blocks\", 2]": {
+                "opcode": "sensing_askandwait",
+                "next": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 3]"
+                },
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 1]"
+                },
+                "inputs": {
+                    "QUESTION": [
+                        1,
+                        [
+                            10,
+                            "What's your name?"
+                        ]
+                    ]
+                },
+                "fields": {},
+                "shadow": false,
+                "topLevel": false
+            },
+            "[\"blocks\", 3, \"inputs\", \"CONDITION\", \"block\", \"inputs\", \"OPERAND1\", \"block\"]": {
+                "opcode": "sensing_answer",
+                "next": null,
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 3, \"inputs\", \"CONDITION\", \"block\"]"
+                },
+                "inputs": {},
+                "fields": {},
+                "shadow": false,
+                "topLevel": false
+            },
+            "[\"blocks\", 3, \"inputs\", \"CONDITION\", \"block\"]": {
+                "opcode": "operator_equals",
+                "next": null,
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 3]"
+                },
+                "inputs": {
+                    "OPERAND1": [
+                        3,
+                        {
+                            "_custom_": true,
+                            "_type_": "BlockSelector",
+                            "path": "[\"blocks\", 3, \"inputs\", \"CONDITION\", \"block\", \"inputs\", \"OPERAND1\", \"block\"]"
+                        },
+                        [
+                            10,
+                            ""
+                        ]
+                    ],
+                    "OPERAND2": [
+                        1,
+                        [
+                            10,
+                            "Skywalker"
+                        ]
+                    ]
+                },
+                "fields": {},
+                "shadow": false,
+                "topLevel": false
+            },
+            "[\"blocks\", 3, \"inputs\", \"THEN\", \"blocks\", 0]": {
+                "opcode": "looks_sayforsecs",
+                "next": null,
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 3]"
+                },
+                "inputs": {
+                    "MESSAGE": [
+                        1,
+                        [
+                            10,
+                            "I don't like sand too!"
+                        ]
+                    ],
+                    "SECS": [
+                        1,
+                        [
+                            4,
+                            "2"
+                        ]
+                    ]
+                },
+                "fields": {},
+                "shadow": false,
+                "topLevel": false
+            },
+            "[\"blocks\", 3]": {
+                "opcode": "control_if",
+                "next": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 4]"
+                },
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 2]"
+                },
+                "inputs": {
+                    "CONDITION": [
+                        2,
+                        {
+                            "_custom_": true,
+                            "_type_": "BlockSelector",
+                            "path": "[\"blocks\", 3, \"inputs\", \"CONDITION\", \"block\"]"
+                        }
+                    ],
+                    "SUBSTACK": [
+                        2,
+                        {
+                            "_custom_": true,
+                            "_type_": "BlockSelector",
+                            "path": "[\"blocks\", 3, \"inputs\", \"THEN\", \"blocks\", 0]"
+                        }
+                    ]
+                },
+                "fields": {},
+                "shadow": false,
+                "topLevel": false
+            },
+            "[\"blocks\", 4, \"inputs\", \"MESSAGE\", \"block\", \"inputs\", \"STRING2\", \"block\"]": {
+                "opcode": "sensing_answer",
+                "next": null,
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 4, \"inputs\", \"MESSAGE\", \"block\"]"
+                },
+                "inputs": {},
+                "fields": {},
+                "shadow": false,
+                "topLevel": false
+            },
+            "[\"blocks\", 4, \"inputs\", \"MESSAGE\", \"block\"]": {
+                "opcode": "operator_join",
+                "next": null,
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 4]"
+                },
+                "inputs": {
+                    "STRING1": [
+                        1,
+                        [
+                            10,
+                            "Welcome, "
+                        ]
+                    ],
+                    "STRING2": [
+                        3,
+                        {
+                            "_custom_": true,
+                            "_type_": "BlockSelector",
+                            "path": "[\"blocks\", 4, \"inputs\", \"MESSAGE\", \"block\", \"inputs\", \"STRING2\", \"block\"]"
+                        },
+                        [
+                            10,
+                            ""
+                        ]
+                    ]
+                },
+                "fields": {},
+                "shadow": false,
+                "topLevel": false
+            },
+            "[\"blocks\", 4]": {
+                "opcode": "looks_sayforsecs",
+                "next": null,
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 3]"
+                },
+                "inputs": {
+                    "MESSAGE": [
+                        3,
+                        {
+                            "_custom_": true,
+                            "_type_": "BlockSelector",
+                            "path": "[\"blocks\", 4, \"inputs\", \"MESSAGE\", \"block\"]"
+                        },
+                        [
+                            10,
+                            ""
+                        ]
+                    ],
+                    "SECS": [
+                        1,
+                        [
+                            4,
+                            "2"
+                        ]
+                    ]
+                },
+                "fields": {},
+                "shadow": false,
+                "topLevel": false
+            }
+        },
+        "deoptimizedComments": {},
+        "optimized": [
+            {
+                "opcode": "when green flag clicked",
+                "inputs": {},
+                "options": {},
+                "comment": null
+            },
+            {
+                "opcode": "say (MESSAGE) for (SECONDS) seconds",
+                "inputs": {
+                    "MESSAGE": {
+                        "text": "Hello World!",
+                        "mode": "block-and-text",
+                        "block": null
+                    },
+                    "SECONDS": {
+                        "text": "2",
+                        "mode": "block-and-text",
+                        "block": null
+                    }
+                },
+                "options": {},
+                "comment": null
+            },
+            {
+                "opcode": "ask (QUESTION) and wait",
+                "inputs": {
+                    "QUESTION": {
+                        "text": "What's your name?",
+                        "mode": "block-and-text",
+                        "block": null
+                    }
+                },
+                "options": {},
+                "comment": null
+            },
+            {
+                "opcode": "if <CONDITION> then {THEN}",
+                "inputs": {
+                    "CONDITION": {
+                        "block": {
+                            "opcode": "(OPERAND1) = (OPERAND2)",
+                            "inputs": {
+                                "OPERAND1": {
+                                    "block": {
+                                        "opcode": "answer",
+                                        "inputs": {},
+                                        "options": {},
+                                        "comment": null
+                                    },
+                                    "mode": "block-and-text",
+                                    "text": ""
+                                },
+                                "OPERAND2": {
+                                    "text": "Skywalker",
+                                    "mode": "block-and-text",
+                                    "block": null
+                                }
+                            },
+                            "options": {},
+                            "comment": null
+                        },
+                        "mode": "block-only"
+                    },
+                    "THEN": {
+                        "blocks": [
+                            {
+                                "opcode": "say (MESSAGE) for (SECONDS) seconds",
+                                "inputs": {
+                                    "MESSAGE": {
+                                        "text": "I don't like sand too!",
+                                        "mode": "block-and-text",
+                                        "block": null
+                                    },
+                                    "SECONDS": {
+                                        "text": "2",
+                                        "mode": "block-and-text",
+                                        "block": null
+                                    }
+                                },
+                                "options": {},
+                                "comment": null
+                            }
+                        ],
+                        "mode": "script"
+                    }
+                },
+                "options": {},
+                "comment": null
+            },
+            {
+                "opcode": "say (MESSAGE) for (SECONDS) seconds",
+                "inputs": {
+                    "MESSAGE": {
+                        "block": {
+                            "opcode": "join (STRING1) (STRING2)",
+                            "inputs": {
+                                "STRING1": {
+                                    "text": "Welcome, ",
+                                    "mode": "block-and-text",
+                                    "block": null
+                                },
+                                "STRING2": {
+                                    "block": {
+                                        "opcode": "answer",
+                                        "inputs": {},
+                                        "options": {},
+                                        "comment": null
+                                    },
+                                    "mode": "block-and-text",
+                                    "text": ""
+                                }
+                            },
+                            "options": {},
+                            "comment": null
+                        },
+                        "mode": "block-and-text",
+                        "text": ""
+                    },
+                    "SECONDS": {
+                        "text": "2",
+                        "mode": "block-and-text",
+                        "block": null
+                    }
+                },
+                "options": {},
+                "comment": null
+            }
+        ]
+    }
+]

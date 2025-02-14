@@ -4,7 +4,8 @@ set [OPCODES v] to [\["brk", "ora", "   ", "   ", "   ", "ora", "asl", "   ", "p
 set [BYTEORDER v] to [little]
 set [PAGE_WRAPPING_BUG v] to <false>
 
+define set (var) . (key) to (value)
+
 define P___init__(memory) // Initialize the processor.
 set runtime var [self] to [{}]
-set runtime var [self] to (set [memory] to (memory) in [{}])
-
+set runtime var [self] to (set [memory] to (memory::custom) in [{}])

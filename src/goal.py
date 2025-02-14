@@ -44,6 +44,11 @@ BYTEORDER = "little"
 
 PAGE_WRAPPING_BUG = False
 
+
+######################################################################################################## 
+#     [For the PenguinMod Version] Here is space for custom blocks, which simplify the code.           #
+########################################################################################################
+
 """MOT-6502 Processor."""
 
 def P___init__(memory: dict) -> dict:

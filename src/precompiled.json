@@ -1,0 +1,166 @@
+[
+    {
+        "deoptimizedBlocks": {
+            "[\"blocks\", 0]": {
+                "opcode": "procedures_definition",
+                "next": null,
+                "parent": null,
+                "inputs": {
+                    "custom_block": [
+                        1,
+                        {
+                            "_custom_": true,
+                            "_type_": "BlockSelector",
+                            "path": "[\"blocks\", 0, \"CB_PROTOTYPE\"]"
+                        }
+                    ]
+                },
+                "fields": {},
+                "shadow": false,
+                "topLevel": true
+            },
+            "[\"blocks\", 0, \"CB_PROTOTYPE\"]": {
+                "opcode": "procedures_prototype",
+                "next": null,
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 0]"
+                },
+                "inputs": {
+                    "|{nKmfgyXEJeeFI,wW/s": [
+                        1,
+                        {
+                            "_custom_": true,
+                            "_type_": "BlockSelector",
+                            "path": "[\"blocks\", 0, \"CB_PROTOTYPE_ARGS\", \"var\"]"
+                        }
+                    ],
+                    "+gs%]_Bosu?UK-:QNz*B": [
+                        1,
+                        {
+                            "_custom_": true,
+                            "_type_": "BlockSelector",
+                            "path": "[\"blocks\", 0, \"CB_PROTOTYPE_ARGS\", \"key\"]"
+                        }
+                    ],
+                    "#|!K,cfi`@?D/uM.Z+Fa": [
+                        1,
+                        {
+                            "_custom_": true,
+                            "_type_": "BlockSelector",
+                            "path": "[\"blocks\", 0, \"CB_PROTOTYPE_ARGS\", \"value\"]"
+                        }
+                    ]
+                },
+                "fields": {},
+                "shadow": true,
+                "topLevel": false,
+                "mutation": {
+                    "tagName": "mutation",
+                    "children": [],
+                    "proccode": "set %s . %s to %s",
+                    "argumentids": "[\"|{nKmfgyXEJeeFI,wW/s\", \"+gs%]_Bosu?UK-:QNz*B\", \"#|!K,cfi`@?D/uM.Z+Fa\"]",
+                    "argumentnames": "[\"var\", \"key\", \"value\"]",
+                    "argumentdefaults": "[\"\", \"\", \"\"]",
+                    "warp": "true",
+                    "returns": "false",
+                    "edited": "true",
+                    "optype": "\"statement\"",
+                    "color": "[\"#FF6680\", \"#eb3d5b\", \"#df2847\"]"
+                }
+            },
+            "[\"blocks\", 0, \"CB_PROTOTYPE_ARGS\", \"var\"]": {
+                "opcode": "argument_reporter_string_number",
+                "next": null,
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 0, \"CB_PROTOTYPE\"]"
+                },
+                "inputs": {},
+                "fields": {
+                    "VALUE": [
+                        "var",
+                        "WZs,bybO^Lq)`?#q{]_m"
+                    ]
+                },
+                "shadow": true,
+                "topLevel": false,
+                "mutation": {
+                    "tagName": "mutation",
+                    "children": [],
+                    "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                }
+            },
+            "[\"blocks\", 0, \"CB_PROTOTYPE_ARGS\", \"key\"]": {
+                "opcode": "argument_reporter_string_number",
+                "next": null,
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 0, \"CB_PROTOTYPE\"]"
+                },
+                "inputs": {},
+                "fields": {
+                    "VALUE": [
+                        "key",
+                        "%CL`/uhZOr|Zg/j,:gX,"
+                    ]
+                },
+                "shadow": true,
+                "topLevel": false,
+                "mutation": {
+                    "tagName": "mutation",
+                    "children": [],
+                    "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                }
+            },
+            "[\"blocks\", 0, \"CB_PROTOTYPE_ARGS\", \"value\"]": {
+                "opcode": "argument_reporter_string_number",
+                "next": null,
+                "parent": {
+                    "_custom_": true,
+                    "_type_": "BlockSelector",
+                    "path": "[\"blocks\", 0, \"CB_PROTOTYPE\"]"
+                },
+                "inputs": {},
+                "fields": {
+                    "VALUE": [
+                        "value",
+                        "dQHs,U][;`SEJz+ibtG="
+                    ]
+                },
+                "shadow": true,
+                "topLevel": false,
+                "mutation": {
+                    "tagName": "mutation",
+                    "children": [],
+                    "color": "[\"#FF6680\",\"#eb3d5b\",\"#df2847\"]"
+                }
+            }
+        },
+        "deoptimizedComments": {},
+        "optimized": [
+            {
+                "opcode": "define custom block",
+                "inputs": {},
+                "options": {
+                    "noScreenRefresh": [
+                        "value",
+                        true
+                    ],
+                    "customOpcode": [
+                        "value",
+                        "set (var). (key)to (value)"
+                    ],
+                    "blockType": [
+                        "value",
+                        "instruction"
+                    ]
+                },
+                "comment": null
+            }
+        ]
+    }
+]
