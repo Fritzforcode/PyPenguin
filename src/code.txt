@@ -5,7 +5,8 @@ set [BYTEORDER v] to [little]
 set [PAGE_WRAPPING_BUG v] to <false>
 
 define set (var) . (key) to (value)
+set runtime var (var::custom) to (set (key::custom) to (value::custom) in (runtime var (var::custom)))
 
 define P___init__(memory) // Initialize the processor.
 set runtime var [self] to [{}]
-set runtime var [self] to (set [memory] to (memory::custom) in [{}])
+set [self] . [memory] to (memory::custom)

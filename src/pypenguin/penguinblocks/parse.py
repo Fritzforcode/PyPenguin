@@ -45,12 +45,8 @@ def convertBlock(block):
         elif (block["info"]["category"] == "custom"   ) and (block["info"].get("selector") == "call"):
             opcode = "procedures_call"
         elif (block["info"]["category"] == "custom"   ) and (block["info"]["shape"] == "reporter"):
-            pp(block)
-            input("%%%")
             opcode = "argument_reporter_string_number"
         elif (block["info"]["category"] == "custom"   ) and (block["info"]["shape"] == "boolean"):
-            pp(block)
-            input("%%%")
             opcode = "argument_reporter_boolean"
         else:
             raise ValueError(f"Couldn't recognize block with shape {repr(block['info']['hash'])}")
@@ -192,7 +188,7 @@ def convertBlock(block):
         options["customOpcode"] = ["value", customOpcode]
     elif opcode in {"argument_reporter_string_number", "argument_reporter_boolean"}:
         name = block["info"]["hash"]
-        options["ARGUMENT"] = autocompleteOptionValue(optionValue=name, optionType)
+        options["ARGUMENT"] = ["value", name]
     
     newBlock = {
         "opcode"   : getOptimizedOpcode(opcode),
@@ -247,30 +243,29 @@ def parseBlockText(blockText: str):
     jsPath     = "src/pypenguin/penguinblocks/main.js"
     outputPath = "src/pypenguin/penguinblocks/in.json"
 
-    ## On Windows/Linux
-    #"""Check if Node.js is installed and accessible."""
-    #if not shutil.which("node"):
-    #    print("Error: Node.js is not installed or not in PATH.")
-    #    print("Download it from https://nodejs.org/")
-    #    sys.exit(1)
-    #
-    ## Run the JavaScript file with arguments using Node.js
-    #result = subprocess.run(
-    #    ["node", jsPath, blockText, outputPath],
-    #    capture_output=True,
-    #    text=True,
-    #)
-    #if result.returncode == 0:
-    #    if result.stdout != "": # When it isn't empty
-    #        print("JavaScript output:", result.stdout)
-    #else:
-    #    print("Error:", result.stderr)
-
-
-
-    # On other operating systems      
-    print(shlex.join(["node", jsPath, blockText, outputPath]))
-    input()
+    if True:
+        # On Windows/Linux
+        """Check if Node.js is installed and accessible."""
+        if not shutil.which("node"):
+            print("Error: Node.js is not installed or not in PATH.")
+            print("Download it from https://nodejs.org/")
+            sys.exit(1)
+        
+        # Run the JavaScript file with arguments using Node.js
+        result = subprocess.run(
+            ["node", jsPath, blockText, outputPath],
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode == 0:
+            if result.stdout != "": # When it isn't empty
+                print("JavaScript output:", result.stdout)
+        else:
+            print("Error:", result.stderr)
+    else:
+        # On other operating systems      
+        print(shlex.join(["node", jsPath, blockText, outputPath]))
+        input()
 
     
     

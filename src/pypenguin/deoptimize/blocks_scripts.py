@@ -554,9 +554,12 @@ def restoreListBlock(data, spriteName):
     return newData
 
 def unprepareBlocks(data):
+    print(200*"=")
+    pp(data)
     mutationDatas = {}
     for blockData in data.values():
         if isinstance(blockData, dict):
+            print("- opcode", blockData["opcode"])
             if blockData["opcode"] == "procedures_prototype":
                 mutationData = blockData["mutation"]
                 mutationDatas[mutationData["proccode"]] = mutationData

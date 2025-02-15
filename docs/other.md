@@ -36,6 +36,7 @@ To add an extension to your project add the extension's id to `"extensions"`. Ex
 * **Translate** id: `"translate"`
 * **Makey Makey** id: `"makeymakey"`
 * **Files** id: `"twFiles"`
+* **Turbowarp Temporary Variables** id: `"lmsTempVars2"`
 * **Bitwise** id: `"Bitwise"` + add to extension urls: `{"Bitwise": "https://extensions.turbowarp.org/bitwise.js"}`
 * **JSON** id: `"jgJSON"`
 

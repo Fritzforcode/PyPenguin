@@ -756,7 +756,6 @@ def optimizeOptionValue(optionValue, optionType):
     return result
 
 def deoptimizeOptionValue(optionValue, optionType, context=None):
-    print(optionType, optionValue)
     if optionType in ["broadcast", "reporter name", "opcode", "variable", "list", "boolean"]:
         return optionValue[1]
     optimizedValues, defaultPrefix = getOptimizedOptionValuesUsingNoContext(optionType=optionType)

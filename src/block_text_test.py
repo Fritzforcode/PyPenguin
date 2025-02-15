@@ -7,7 +7,7 @@ from pypenguin.utility import pp
 with open(pypenguin.utility.ensureCorrectPath("src/code.txt", "PyPenguin")) as file:
     block_text = file.read()
 #block_text = "define set (var).(key) to (value)"
-block_text = "(va*r z::custom)"
+#block_text = "(va*r z::custom)"
 globalVariables = ["ADDRESSING", "OPCODES", "BYTEORDER", "PAGE_WRAPPING_BUG"]
 
 generated_scripts = pypenguin.parseBlockText(block_text)
@@ -28,7 +28,7 @@ project["sprites"] = [  # Update project with the modified sprites.
 ]
 
 project["globalVariables"] = [{"name": name, "currentValue": "", "isCloudVariable": False} for name in globalVariables]
-project["extensions"     ] = ["jgJSON"]
+project["extensions"     ] = ["jgJSON", "lmsTempVars2"]
 
 # Create our project directory
 if not os.path.exists(project_directory):
