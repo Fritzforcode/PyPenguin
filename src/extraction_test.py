@@ -3,7 +3,7 @@ from pypenguin.utility import Platform
 
 
 optimizedData = extractProject(
-    projectFilePath          = "assets/categories/tw_temporary_variables.pmp",
+    projectFilePath          = "assets/categories/link_bitwise.pmp",
 #    projectFilePath          = "assets/studies/assetTest.pmp",
 #    projectFilePath          = "assets/from_online/The Tale of the Three Shapes.sb3",
 #    projectFilePath          = "Greatest Common Division.pmp",

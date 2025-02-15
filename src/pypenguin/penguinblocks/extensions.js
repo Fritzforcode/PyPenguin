@@ -25,6 +25,9 @@ export const extensions = {
   gdxfor: "gdxfor",
 
   pm_motion: "pm_motion",
+  pm_operators: "pm_operators",
+  pm_procedures: "pm_procedures",
+  
   lmsTempVars2: "lmsTempVars2",
   jgJSON: "jgJSON",
 }

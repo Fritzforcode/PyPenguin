@@ -1710,7 +1710,6 @@ export default [
   // Operators (Incomplete)
   {
     id: "pm_operators.trueBoolean",
-    selector: "true",
     spec: "true",
     inputs: [],
     shape: "boolean",
@@ -1718,11 +1717,18 @@ export default [
   },
   {
     id: "pm_operators.falseBoolean",
-    selector: "false",
     spec: "false",
     inputs: [],
     shape: "boolean",
     category: "pm_operators",
+  },
+  // Custom Blocks
+  {
+    id: "pm_procedures.return",
+    spec: "return %1",
+    inputs: ["%n"],
+    shape: "stack",
+    category: "pm_procedures"
   },
 
   // Temporary Variables
@@ -2008,5 +2014,90 @@ export default [
     shape: "reporter",
     category: "jgJSON",
   },
-
+  
+  // Bitwise
+  {
+    id: "pm_Bitwise.isNumberBits",
+    spec: "is %0 binary?",
+    inputs: ["%n"],
+    shape: "boolean",
+    category: "pm_Bitwise",
+  },
+  {
+    id: "pm_Bitwise.toNumberBits",
+    spec: "%0 to binary",
+    inputs: ["%n"],
+    shape: "reporter",
+    category: "pm_Bitwise",
+  },
+  {
+    id: "pm_Bitwise.toBitsNumber",
+    spec: "%0 to number",
+    inputs: ["%n"],
+    shape: "reporter",
+    category: "pm_Bitwise",
+  },
+  {
+    id: "pm_Bitwise.bitwiseRightShift",
+    spec: "%0 >> %1",
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "pm_Bitwise",
+  },
+  {
+    id: "pm_Bitwise.bitwiseLeftShift",
+    spec: "%0 << %1",
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "pm_Bitwise",
+  },
+  {
+    id: "pm_Bitwise.bitwiseLogicalRightShift",
+    spec: "%0 >>> %1",
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "pm_Bitwise",
+  },
+  {
+    id: "pm_Bitwise.bitwiseCircularRightShift",
+    spec: "%0 >> circular %1",
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "pm_Bitwise",
+  },
+  {
+    id: "pm_Bitwise.bitwiseCircularLeftShift",
+    spec: "%0 << circular %1",
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "pm_Bitwise",
+  },
+  {
+    id: "pm_Bitwise.bitwiseAnd",
+    spec: "%0 and %1",
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "pm_Bitwise",
+  },
+  {
+    id: "pm_Bitwise.bitwiseOr",
+    spec: "%0 or %1",
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "pm_Bitwise",
+  },
+  {
+    id: "pm_Bitwise.bitwiseXor",
+    spec: "%0 xor %1",
+    inputs: ["%n", "%n"],
+    shape: "reporter",
+    category: "pm_Bitwise",
+  },
+  {
+    id: "pm_Bitwise.bitwiseNot",
+    spec: "not %0",
+    inputs: ["%n"],
+    shape: "reporter",
+    category: "pm_Bitwise",
+  },
 ]

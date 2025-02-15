@@ -15,6 +15,14 @@ opcodes = {
         "inputTranslation": {"CENTRAL": "NUM"},
         "optionTypes": {},
     },
+    "Bitwise_toBitsNumber": {
+        "type": "stringReporter",
+        "category": "Bitwise",
+        "newOpcode": "(NUM) to number",
+        "inputTypes": {"NUM": "number"},
+        "inputTranslation": {"CENTRAL": "NUM"},
+        "optionTypes": {},
+    },
     "Bitwise_bitwiseRightShift": {
         "type": "stringReporter",
         "category": "Bitwise",
@@ -86,6 +94,5 @@ opcodes = {
         "inputTypes": {"NUM": "number"},
         "inputTranslation": {"CENTRAL": "NUM"},
         "optionTypes": {},
-    },   
-    
+    },    
 }

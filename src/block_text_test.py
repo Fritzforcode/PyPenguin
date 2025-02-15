@@ -28,7 +28,8 @@ project["sprites"] = [  # Update project with the modified sprites.
 ]
 
 project["globalVariables"] = [{"name": name, "currentValue": "", "isCloudVariable": False} for name in globalVariables]
-project["extensions"     ] = ["jgJSON", "lmsTempVars2"]
+project["extensions"     ] = ["jgJSON", "lmsTempVars2", "Bitwise"]
+project["extensionURLs"] = {"Bitwise": "https://extensions.turbowarp.org/bitwise.js"}
 
 # Create our project directory
 if not os.path.exists(project_directory):

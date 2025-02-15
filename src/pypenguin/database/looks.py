@@ -318,6 +318,4 @@ opcodes = {
         "optionTypes": {},
         "canHaveMonitor": True,
     },
-    
-
 }

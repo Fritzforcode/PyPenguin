@@ -55,33 +55,31 @@ def convertBlock(block):
     if opcode.startswith("sb2"):
         raise NotImplementedError("Scratch 2 is not supported. Please switch to Scratch 3.")
     
-    if   isStandardOpcode(opcode):
+    if isStandardOpcode(opcode):
         opcode = opcode.lower()
     elif opcode == "scratchblocks:end":
         return None
-    elif "." in opcode:
-        opcode = opcode.split(".")[0] + "_" + ".".join(opcode.split(".")[1:])
     
-    if opcode.startswith("pm_"):
-        opcode = opcode.removeprefix("pm_")
-    if opcode.startswith("sensing_of"):
-        suggested_opcode = "motion" + opcode.removeprefix("sensing_of")
-        if opcodeExists(suggested_opcode):
-            opcode = suggested_opcode
-        else:
-            suggested_opcode = "looks" + opcode.removeprefix("sensing_of")
-            if opcodeExists(suggested_opcode):
-                opcode = suggested_opcode
-            else: raise ValueError("Couldn't identify 'sensing_of...' opcode.")
+    if "." in opcode:
+        category = opcode.split(".")[0]
+        rest = ".".join(opcode.split(".")[1:])
+    else:
+        category = opcode.split("_")[0]
+        rest = "_".join(opcode.split("_")[1:])
 
-    category = opcode.split("_")[0]
-    rest     = "_".join(opcode.split("_")[1:])
-    if category == "pm": # A penguinmod block
-        category = rest.split("_")[0]
-        rest     = "_".join(rest.split("_")[1:])
-    #print(repr(category), repr(rest))
-    if category == "operators" : category = "operator"
-    if category == "sensing_of": category = "sensing"
+    if category.startswith("pm_"):
+        category = category.removeprefix("pm_")
+    if (category == "sensing") and rest.startswith("of_"):
+        rest = rest.removeprefix("of_")
+        motion_opcode = "motion_" + rest
+        looks_opcode  =  "looks_" + rest
+        if opcodeExists(motion_opcode):
+            category = "motion"
+        elif opcodeExists(looks_opcode):
+            category = "looks"
+        else: raise ValueError("Couldn't identify 'sensing_of...' opcode.")
+    if category.startswith("pm_"): category = category.removeprefix("pm_")
+    if category == "operators"   : category = "operator"
     opcode: str = category + "_" + rest
     
     if opcode in {"procedures_definition", "procedures_call"}:
@@ -243,7 +241,7 @@ def parseBlockText(blockText: str):
     jsPath     = "src/pypenguin/penguinblocks/main.js"
     outputPath = "src/pypenguin/penguinblocks/in.json"
 
-    if True:
+    if False:
         # On Windows/Linux
         """Check if Node.js is installed and accessible."""
         if not shutil.which("node"):
