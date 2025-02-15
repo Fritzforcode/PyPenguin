@@ -15,7 +15,7 @@ opcodes = {
         "inputTranslation": {"CENTRAL": "NUM"},
         "optionTypes": {},
     },
-    "Bitwise_toBitsNumber": {
+    "Bitwise_ofNumberBits": {
         "type": "stringReporter",
         "category": "Bitwise",
         "newOpcode": "(NUM) to number",

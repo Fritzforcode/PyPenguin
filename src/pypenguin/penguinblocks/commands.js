@@ -2031,7 +2031,7 @@ export default [
     category: "pm_Bitwise",
   },
   {
-    id: "pm_Bitwise.toBitsNumber",
+    id: "pm_Bitwise.ofNumberBits",
     spec: "%0 to number",
     inputs: ["%n"],
     shape: "reporter",

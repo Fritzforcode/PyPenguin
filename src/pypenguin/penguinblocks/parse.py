@@ -241,7 +241,7 @@ def parseBlockText(blockText: str):
     jsPath     = "src/pypenguin/penguinblocks/main.js"
     outputPath = "src/pypenguin/penguinblocks/in.json"
 
-    if False:
+    if True:
         # On Windows/Linux
         """Check if Node.js is installed and accessible."""
         if not shutil.which("node"):
