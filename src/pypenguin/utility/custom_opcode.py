@@ -84,7 +84,7 @@ def generateCustomOpcode(proccode: str, argumentNames: list[str]):
             argumentName = escapeChars(argumentNames[j], chars_to_escape)
             customOpcode += " (" + argumentName + ")"
             j += 1
-            i += 3  # Skip over '%s'
+            i += 3  # Skip over '%s'/'%n'
         elif char == " " and char2 == "%" and char3 == "b":
             argumentName = escapeChars(argumentNames[j], chars_to_escape)
             customOpcode += " <" + argumentName + ">"
@@ -92,6 +92,6 @@ def generateCustomOpcode(proccode: str, argumentNames: list[str]):
             i += 3  # Skip over '%b'
         else:
             customOpcode += escapeChars(char, chars_to_escape)
-        i += 1
+            i += 1
     return customOpcode.removesuffix(" ")
 

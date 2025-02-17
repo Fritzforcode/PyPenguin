@@ -135,7 +135,7 @@ def convertBlock(block):
                 argumentsInfo.append([argumentName, "block-and-text"])
             elif ("<" + argumentName + ">") in customOpcode:
                 argumentsInfo.append([argumentName, "block-only"])
-            else: raise Exception()
+            else: raise Exception(customOpcode, argumentName)
     else:
         argumentsInfo = getArgumentOrder(opcode=opcode)
     inputs  = {}
@@ -188,12 +188,15 @@ def convertBlock(block):
         name = block["info"]["hash"]
         options["ARGUMENT"] = ["value", name]
     
+    newRow = specification.get("newRow", False)
     newBlock = {
         "opcode"   : getOptimizedOpcode(opcode),
         "inputs"   : inputs,
         "options"  : options,
+        "_info_"   : {"newRow": newRow},
     }
     if comment != None: newBlock["comment"] = comment
+    print("-->", newBlock)
     return newBlock
 
 def convertBlocks(blocks):
@@ -205,7 +208,9 @@ def convertBlocks(blocks):
         newBlocks.append(newBlock)
     return newBlocks
 
-def finishBlock(block, scriptPos, commentCounter):
+def finishBlock(block, getScriptPos, commentCounter):
+    scriptPos = getScriptPos()
+    doIncRow = False
     if "comment" in block:
         block["comment"]["position"] = [
             scriptPos[0] + COMMENT_X_OFFSET,
@@ -215,33 +220,39 @@ def finishBlock(block, scriptPos, commentCounter):
     if "inputs" in block:
         for inputId, inputValue in block["inputs"].items():
             if "block" in inputValue:
-                commentCounter = finishBlock(
+                commentCounter, temp = finishBlock(
                     inputValue["block"],
-                    scriptPos=scriptPos,
+                    getScriptPos=getScriptPos,
                     commentCounter=commentCounter,
                 )
+                doIncRow = doIncRow or temp
             if "blocks" in inputValue:
-                commentCounter = finishBlocks(
+                commentCounter, temp = finishBlocks(
                     inputValue["blocks"],
-                    scriptPos=scriptPos,
+                    getScriptPos=getScriptPos,
                     commentCounter=commentCounter,
                 )
-    return commentCounter
+                doIncRow = doIncRow or temp
+    doIncRow = doIncRow or block.get("_info_", {}).get("newRow", False)
+    del block["_info_"]
+    return commentCounter, doIncRow
 
-def finishBlocks(blocks, scriptPos, commentCounter=0):
+def finishBlocks(blocks, getScriptPos, incRow, incCol, commentCounter=0):
+    doIncRow = False
     for block in blocks:
-        commentCounter = finishBlock(
+        commentCounter, temp = finishBlock(
             block, 
-            scriptPos=scriptPos, 
-            commentCounter=commentCounter
+            getScriptPos=getScriptPos, 
+            commentCounter=commentCounter,
         )
-    return commentCounter
+        doIncRow = doIncRow or temp
+    return commentCounter, doIncRow
 
 def parseBlockText(blockText: str):
     jsPath     = "src/pypenguin/penguinblocks/main.js"
     outputPath = "src/pypenguin/penguinblocks/in.json"
 
-    if True:
+    if False:
         # On Windows/Linux
         """Check if Node.js is installed and accessible."""
         if not shutil.which("node"):
@@ -266,21 +277,36 @@ def parseBlockText(blockText: str):
         input()
 
     
-    
-    
     scripts = readJSONFile(outputPath, ensurePath=True)["scripts"]
     
+    def incRow():
+        nonlocal row, col
+        col = 0
+        row += 1
+        didIncRow = True
+    def incCol():
+        nonlocal col
+        col += 1
+    def getScriptPos():
+        nonlocal row, col
+        return [col * 1000, row * 1000]
+    
     newScripts = []
-    for i, script in enumerate(scripts):
-        scriptPos = [0, 1000*i]
+    col = 0
+    row = 0
+    for script in scripts:
         newBlocks = convertBlocks(script["blocks"])
         if newBlocks == []: continue
         
-        finishBlocks(newBlocks, scriptPos=scriptPos)
+        _, doIncRow = finishBlocks(newBlocks, getScriptPos=getScriptPos, incRow=incRow, incCol=incCol)
         newScripts.append({
-            "position": scriptPos,
+            "position": getScriptPos(),
             "blocks"  : newBlocks,
         })
+        if doIncRow:
+            incRow()
+        else:
+            incCol()
     return newScripts
     
 if __name__ == "__main__":

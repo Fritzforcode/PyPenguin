@@ -6,8 +6,16 @@ from pypenguin.utility import pp
 # Parse scratchblocks text
 with open(pypenguin.utility.ensureCorrectPath("src/code.txt", "PyPenguin")) as file:
     block_text = file.read()
-#block_text = "define set (var).(key) to (value)"
-#block_text = "(va*r z::custom)"
+#block_text = "define array2 (a) (b)"
+
+block_text = """
+when flag clicked //{"newRow":true}
+
+when flag clicked
+
+when flag clicked
+"""
+
 globalVariables = ["ADDRESSING", "OPCODES", "BYTEORDER", "PAGE_WRAPPING_BUG"]
 
 generated_scripts = pypenguin.parseBlockText(block_text)

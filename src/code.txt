@@ -4,8 +4,18 @@ set [OPCODES v] to [\["brk", "ora", "   ", "   ", "   ", "ora", "asl", "   ", "p
 set [BYTEORDER v] to [little]
 set [PAGE_WRAPPING_BUG v] to <false>
 
+define array2 (a) (b) //{"blockType":"textReporter"}
+return (in array (in array [\[\]] add (a::custom)) add (b::custom))
+
 define set (var) . (key) to (value)
 set runtime var (var::custom) to (set (key::custom) to (value::custom) in (runtime var (var::custom)))
+
+define change (var) . (key) by (value)
+set (var::custom) . (key::custom) to ((get (key::custom) from (runtime var (var::custom))) + (value::custom))
+
+define set2 (var1) (var2) to (value)
+set runtime var (var1::custom) to (in array (value::custom) get [0])
+set runtime var (var2::custom) to (in array (value::custom) get [1])
 
 define P___init__(memory) //{"blockType":"textReporter", "comment": "Initialize the processor."}
 set runtime var [self] to [{}]
@@ -30,3 +40,12 @@ set runtime var [self] to (self::custom)
 set [self] . [program_counter] to ([1111110011100010] to number) //0xFCE2
 set [self] . [stack_pointer] to ([000111111101] to number) // 0x01FD
 set [self] . [instructions] to [0]
+set [self] . [flag_i] to <true>
+set [self] . [flag_d] to <false>
+set [self] . [flag_b] to <true>
+return (array2 (runtime var [self]) [null])
+
+define P_fetch_byte(self) //{"blockType":"textReporter"}
+set2 [self] [data] to (array2 [5] [hu])
+change [self] . [program_counter] by [1]
+
