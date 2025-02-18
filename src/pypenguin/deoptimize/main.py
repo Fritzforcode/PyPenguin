@@ -150,7 +150,7 @@ def deoptimizeProject(projectData, targetPlatform):
             }
         newSpriteDatas.append(newSpriteData)
     
-    writeJSONFile("precompiled.json", exportedScriptDatas)    
+    #writeJSONFile("precompiled.json", exportedScriptDatas)    
     
     # Translate monitors
     newMonitorDatas = []

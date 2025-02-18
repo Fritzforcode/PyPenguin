@@ -2,18 +2,27 @@ import pypenguin
 import json
 import os # For convenience and creating a dir
 from pypenguin.utility import pp
-
+p = "../precompiled.json"
+if os.path.exists(p):
+    os.remove(p)
+#input()
 # Parse scratchblocks text
 with open(pypenguin.utility.ensureCorrectPath("src/code.txt", "PyPenguin")) as file:
     block_text = file.read()
-#block_text = "define array2 (a) (b)"
+block_text2 = """
+define get (var) . (key) //{"blockType":"textReporter"}
+return (get (key::custom) from (runtime var (var::custom)))
 
-block_text = """
-when flag clicked //{"newRow":true}
-
-when flag clicked
-
-when flag clicked
+define P_read_flags_register(self) //{"blockType":"textReporter"}
+set runtime var [data] to [0]
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_n])> then [128] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_v])> then  [64] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_b])> then  [16] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_d])> then   [8] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_i])> then   [4] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_z])> then   [2] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_c])> then   [1] else [0])  )
+return 
 """
 
 globalVariables = ["ADDRESSING", "OPCODES", "BYTEORDER", "PAGE_WRAPPING_BUG"]

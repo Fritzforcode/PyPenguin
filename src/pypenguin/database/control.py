@@ -135,7 +135,7 @@ opcodes = {
         "optionTypes": {},
     },
     "control_if_return_else_return": {
-        "type": "instruction",
+        "type": "stringReporter",
         "category": "Control",
         "newOpcode": "if <CONDITION> then (TRUEVALUE) else (FALSEVALUE)",
         "inputTypes": {"CONDITION": "boolean", "TRUEVALUE": "text", "FALSEVALUE": "text"},

@@ -99,11 +99,13 @@ def convertBlock(block):
                     "customOpcode"   : ["value", customOpcode   ],
                     "blockType"      : ["value", blockType      ],
                 },
+                "_info_"         : {"newRow": specification.get("newRow", False)},
             }
             if comment != None: newBlock["comment"] = comment
             return newBlock
             
     arguments = []
+    hash_alt = ""
     for child in block["children"]:
         if   "info" in child: # An input block
             if child["info"]["shape"] == "outline": continue # skip e.g. used in custom blocks
@@ -121,6 +123,10 @@ def convertBlock(block):
                 "kind": "text",
                 "value": child["value"] if child["shape"] != "boolean" else None
             })
+        elif child.get("cls") == "": # A text segment
+            if hash_alt != "":
+                hash_alt += " "
+            hash_alt += child["value"]
 
     # handle opcode exceptions
     if   opcode == "looks_nextbackdrop_block": opcode = "looks_nextbackdrop"
@@ -173,30 +179,26 @@ def convertBlock(block):
                         "option": autocompleteOptionValue(optionValue=argumentValue, optionType=optionType),
                     }
                 inputs [argumentId] =  inputValue
-        
+    
     if   opcode == "special_variable_value":
-        name = block["info"]["hash"]
-        variables.append(name)
-        options["VARIABLE"] = autocompleteOptionValue(optionValue=name, optionType="variable")
+        variables.append(hash_alt)
+        options["VARIABLE"] = autocompleteOptionValue(optionValue=hash_alt, optionType="variable")
     elif opcode == "special_list_value":
-        name = block["info"]["hash"]
-        lists.append(name)
-        options["LIST"    ] = autocompleteOptionValue(optionValue=name, optionType="list"    )
+        lists.append(hash_alt)
+        options["LIST"    ] = autocompleteOptionValue(optionValue=hash_alt, optionType="list"    )
     elif opcode == "procedures_call":
         options["customOpcode"] = ["value", customOpcode]
     elif opcode in {"argument_reporter_string_number", "argument_reporter_boolean"}:
-        name = block["info"]["hash"]
-        options["ARGUMENT"] = ["value", name]
+        hash_alt = block["info"]["hash"]
+        options["ARGUMENT"] = ["value", hash_alt]
     
-    newRow = specification.get("newRow", False)
     newBlock = {
         "opcode"   : getOptimizedOpcode(opcode),
         "inputs"   : inputs,
         "options"  : options,
-        "_info_"   : {"newRow": newRow},
+        "_info_"   : {"newRow": specification.get("newRow", False)},
     }
     if comment != None: newBlock["comment"] = comment
-    print("-->", newBlock)
     return newBlock
 
 def convertBlocks(blocks):
@@ -233,11 +235,11 @@ def finishBlock(block, getScriptPos, commentCounter):
                     commentCounter=commentCounter,
                 )
                 doIncRow = doIncRow or temp
-    doIncRow = doIncRow or block.get("_info_", {}).get("newRow", False)
+    doIncRow = doIncRow or block["_info_"].get("newRow", False)
     del block["_info_"]
     return commentCounter, doIncRow
 
-def finishBlocks(blocks, getScriptPos, incRow, incCol, commentCounter=0):
+def finishBlocks(blocks, getScriptPos, commentCounter=0):
     doIncRow = False
     for block in blocks:
         commentCounter, temp = finishBlock(
@@ -252,7 +254,7 @@ def parseBlockText(blockText: str):
     jsPath     = "src/pypenguin/penguinblocks/main.js"
     outputPath = "src/pypenguin/penguinblocks/in.json"
 
-    if False:
+    if True:
         # On Windows/Linux
         """Check if Node.js is installed and accessible."""
         if not shutil.which("node"):
@@ -298,7 +300,7 @@ def parseBlockText(blockText: str):
         newBlocks = convertBlocks(script["blocks"])
         if newBlocks == []: continue
         
-        _, doIncRow = finishBlocks(newBlocks, getScriptPos=getScriptPos, incRow=incRow, incCol=incCol)
+        _, doIncRow = finishBlocks(newBlocks, getScriptPos=getScriptPos)
         newScripts.append({
             "position": getScriptPos(),
             "blocks"  : newBlocks,

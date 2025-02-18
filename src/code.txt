@@ -2,10 +2,15 @@ when flag clicked
 set [ADDRESSING v] to [\["imp", "inx", "   ", "   ", "   ", "zp",  "zp",  "   ", "imp", "imm", "acc", "   ", "   ", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "   ", "zpx", "zpx", "   ", "imp", "aby", "   ", "   ", "   ", "abx", "abx", "   ", "abs", "inx", "   ", "   ", "zp",  "zp",  "zp",  "   ", "imp", "imm", "acc", "   ", "abs", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "   ", "zpx", "zpx", "   ", "imp", "aby", "   ", "   ", "   ", "abx", "abx", "   ", "imp", "inx", "   ", "   ", "   ", "zp",  "zp",  "   ", "imp", "imm", "acc", "   ", "abs", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "   ", "zpx", "zpx", "   ", "imp", "aby", "   ", "   ", "   ", "abx", "abx", "   ", "imp", "inx", "   ", "   ", "   ", "zp",  "zp",  "   ", "imp", "imm", "acc", "   ", "ind", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "   ", "zpx", "zpx", "   ", "imp", "aby", "   ", "   ", "   ", "abx", "abx", "   ", "   ", "inx", "   ", "   ", "zp",  "zp",  "zp",  "   ", "imp", "   ", "imp", "   ", "abs", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "zpx", "zpx", "zpy", "   ", "imp", "aby", "imp", "   ", "   ", "abx", "   ", "   ", "imm", "inx", "imm", "   ", "zp",  "zp",  "zp",  "   ", "imp", "imm", "imp", "   ", "abs", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "zpx", "zpx", "zpy", "   ", "imp", "aby", "imp", "   ", "abx", "abx", "aby", "   ", "imm", "inx", "   ", "   ", "zp",  "zp",  "zp",  "   ", "imp", "imm", "imp", "   ", "abs", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "   ", "zpx", "zpx", "   ", "imp", "aby", "   ", "   ", "   ", "abx", "abx", "   ", "imm", "inx", "   ", "   ", "zp",  "zp",  "zp",  "   ", "imp", "imm", "imp", "   ", "abs", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "   ", "zpx", "zpx", "   ", "imp", "aby", "   ", "   ", "   ", "abx", "abx", "   "\]]
 set [OPCODES v] to [\["brk", "ora", "   ", "   ", "   ", "ora", "asl", "   ", "php", "ora", "asl", "   ", "   ", "ora", "asl", "   ", "bpl", "ora", "   ", "   ", "   ", "ora", "asl", "   ", "clc", "ora", "   ", "   ", "   ", "ora", "asl", "   ", "jsr", "and", "   ", "   ", "bit", "and", "rol", "   ", "plp", "and", "rol", "   ", "bit", "and", "rol", "   ", "bmi", "and", "   ", "   ", "   ", "and", "rol", "   ", "sec", "and", "   ", "   ", "   ", "and", "rol", "   ", "rti", "eor", "   ", "   ", "   ", "eor", "lsr", "   ", "pha", "eor", "lsr", "   ", "jmp", "eor", "lsr", "   ", "bvc", "eor", "   ", "   ", "   ", "eor", "lsr", "   ", "cli", "eor", "   ", "   ", "   ", "eor", "lsr", "   ", "rts", "adc", "   ", "   ", "   ", "adc", "ror", "   ", "pla", "adc", "ror", "   ", "jmp", "adc", "ror", "   ", "bvs", "adc", "   ", "   ", "   ", "adc", "ror", "   ", "sei", "adc", "   ", "   ", "   ", "adc", "ror", "   ", "   ", "sta", "   ", "   ", "sty", "sta", "stx", "   ", "dey", "   ", "txa", "   ", "sty", "sta", "stx", "   ", "bcc", "sta", "   ", "   ", "sty", "sta", "stx", "   ", "tya", "sta", "txs", "   ", "   ", "sta", "   ", "   ", "ldy", "lda", "ldx", "   ", "ldy", "lda", "ldx", "   ", "tay", "lda", "tax", "   ", "ldy", "lda", "ldx", "   ", "bcs", "lda", "   ", "   ", "ldy", "lda", "ldx", "   ", "clv", "lda", "tsx", "   ", "ldy", "lda", "ldx", "   ", "cpy", "cmp", "   ", "   ", "cpy", "cmp", "dec", "   ", "iny", "cmp", "dex", "   ", "cpy", "cmp", "dec", "   ", "bne", "cmp", "   ", "   ", "   ", "cmp", "dec", "   ", "cld", "cmp", "   ", "   ", "   ", "cmp", "dec", "   ", "cpx", "sbc", "   ", "   ", "cpx", "sbc", "inc", "   ", "inx", "sbc", "nop", "   ", "cpx", "sbc", "inc", "   ", "beq", "sbc", "   ", "   ", "   ", "sbc", "inc", "   ", "sed", "sbc", "   ", "   ", "   ", "sbc", "inc", "   "\]]
 set [BYTEORDER v] to [little]
-set [PAGE_WRAPPING_BUG v] to <false>
+set [PAGE_WRAPPING_BUG v] to <false> //{"newRow":true}
+
+
 
 define array2 (a) (b) //{"blockType":"textReporter"}
 return (in array (in array [\[\]] add (a::custom)) add (b::custom))
+
+define get (var) . (key) //{"blockType":"textReporter"}
+return (get (key::custom) from (runtime var (var::custom)))
 
 define set (var) . (key) to (value)
 set runtime var (var::custom) to (set (key::custom) to (value::custom) in (runtime var (var::custom)))
@@ -15,7 +20,9 @@ set (var::custom) . (key::custom) to ((get (key::custom) from (runtime var (var:
 
 define set2 (var1) (var2) to (value)
 set runtime var (var1::custom) to (in array (value::custom) get [0])
-set runtime var (var2::custom) to (in array (value::custom) get [1])
+set runtime var (var2::custom) to (in array (value::custom) get [1]) //{"newRow":true}
+
+
 
 define P___init__(memory) //{"blockType":"textReporter", "comment": "Initialize the processor."}
 set runtime var [self] to [{}]
@@ -45,7 +52,130 @@ set [self] . [flag_d] to <false>
 set [self] . [flag_b] to <true>
 return (array2 (runtime var [self]) [null])
 
+
 define P_fetch_byte(self) //{"blockType":"textReporter"}
-set2 [self] [data] to (array2 [5] [hu])
+set runtime var [self] to (self::custom)
+set2 [self] [data] to (P_read_byte (runtime var [self]) (get [self] . [program_counter]))
 change [self] . [program_counter] by [1]
+return (array2 (runtime var [self]) (runtime var [data]))
+
+define P_fetch_word(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [data] to (P_read_word (runtime var [self]) (get [self] . [program_counter]))
+change [self] . [program_counter] by [2]
+return (array2 (runtime var [self]) (runtime var [data]))
+
+define P_read_byte(self) (address) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set runtime var [data] to (M___getitem__ (get [self] . [memory]) (address::custom))
+return (array2 (runtime var [self]) (runtime var [data]))
+
+define P_read_word(self) (address) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+if <<(PAGE_WRAPPING_BUG)> and <  ((address::custom) and [255]) = [255]>  > then // 0xFF = 255
+    set runtime var [second_address] to ((address::custom) and [65280]) // 0xFF00 = 65280
+else
+    set runtime var [second_address] to (((address::custom) + [1]) and [65535]) // 0xFFFF = 65535
+end
+set2 [self] [t1] to (P_read_byte (runtime var [self]) (address::custom))
+set2 [self] [t2] to (P_read_byte (runtime var [self]) (runtime var [second_address]))
+if <(BYTEORDER) = [little]> then
+    set runtime var [data] to (  (runtime var [t1]) or ((runtime var [t2]) \<\< [8])  )
+else
+    set runtime var [data] to (  ((runtime var [t1]) \<\< [8]) or (runtime var [t2])  )
+end
+return (array2 (runtime var [self]) (runtime var [data]))
+
+define P_write_byte(self) (address) (value) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set [self] . [memory] to (M___setitem__ (get [self] . [memory]) (address::custom) ((value::custom) and [255]) )
+return (array2 (runtime var [self]) [null])
+
+define P_write_word(self) (address) (value) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+if <(BYTEORDER) = [little]> then
+    set runtime var [value1] to ((value::custom) and [255])
+    set runtime var [value2] to (((value::custom) >> [8]) and [255])
+else
+    set runtime var [value1] to (((value::custom) >> [8]) and [255])
+    set runtime var [value2] to ((value::custom) and [255])
+end
+set2 [self] [_] to (P_write_byte (runtime var [self]) (address::custom) (runtime var [value1]))
+set2 [self] [_] to (P_write_byte (runtime var [self]) ((address::custom)+[1]) (runtime var [value2]))
+return (array2 (runtime var [self]) [null])
+
+define P_read_flags_register(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set runtime var [data] to [0]
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_n])> then [128] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_v])> then  [64] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_b])> then  [16] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_d])> then   [8] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_i])> then   [4] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_z])> then   [2] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_c])> then   [1] else [0])  )
+return (array2 (runtime  var [self]) (runtime var [data]))
+
+define P_set_flags_register(self) (data) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set [self] . [flag_n] to <(((data::custom) >> [7]) and [1])>
+set [self] . [flag_v] to <(((data::custom) >> [6]) and [1])>
+set [self] . [flag_d] to <(((data::custom) >> [3]) and [1])>
+set [self] . [flag_i] to <(((data::custom) >> [2]) and [1])>
+set [self] . [flag_z] to <(((data::custom) >> [1]) and [1])>
+set [self] . [flag_c] to <(((data::custom) >> [0]) and [1])>
+return (array2 (runtime  var [self]) [null])
+
+define P_push_byte(self) (data) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set [self] . [memory] to (M___setitem__  (get [self] . [memory]) (get [self] . [stack_pointer]) (data::custom)  )
+change [self] . [stack_pointer] by [-1]
+return (array2 (runtime  var [self]) [null])
+
+define P_push_word(self) (data) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+if <(BYTEORDER) = [little]> then
+    set runtime var [value1] to ((data::custom) and [255])
+    set runtime var [value2] to (((data::custom) >> [8]) and [255])
+else
+    set runtime var [value1] to (((data::custom) >> [8]) and [255])
+    set runtime var [value2] to ((data::custom) and [255])
+end
+set2 [self] [_] to (P_push_byte (runtime var [self]) (runtime var [value1]))
+set2 [self] [_] to (P_push_byte (runtime var [self]) (runtime var [value2]))
+return (array2 (runtime  var [self]) [null])
+
+define P_pop_byte(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+change [self] . [stack_pointer] by [1]
+set runtime var [data] to (M___getitem__ (get [self] . [memory]) (get [self] . [stack_pointer]))
+return (array2 (runtime  var [self]) (runtime var [data]))
+
+define P_pop_word(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [t1] to (P_pop_byte (runtime var [self]))
+set2 [self] [t2] to (P_pop_byte (runtime var [self]))
+if <(BYTEORDER) = [little]> then
+    set runtime var [data] to (((runtime var [t1]) \<\< [8]) or (runtime var [t2]))
+else
+    set runtime var [data] to ((runtime var [t1]) or ((runtime var [t2]) \<\< [8]))
+end
+return (array2 (runtime  var [self]) (runtime var [data])) //{"newRow":true}
+
+
+define P_evaluate_flag_c (self) (data) <bcd> //{"blockType":"textReporter"}
+if <bcd> then
+    set [self] . [flag_c] to ()
+else
+    set [self] . [flag_c] to ()
+end
+
+say [HI] //{"newRow":true}
+
+
+define M___getitem__(self) (address) //{"blockType":"textReporter"}
+set runtime var [mself] to (self::custom)
+
+define M___setitem__(self) (address) (value) //{"blockType":"textReporter"}
+set runtime var [mself] to (self::custom)
 

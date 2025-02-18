@@ -1707,6 +1707,14 @@ export default [
     shape: "stack",
     category: "pm_motion",
   },
+  // Control (Incomplete)
+  {
+    id: "pm_control.if_return_else_return",
+    spec: "if %1 then %2 else %3",
+    inputs: ["%b", "%n", "%n"],
+    shape: "reporter",
+    category: "pm_control",
+  },
   // Operators (Incomplete)
   {
     id: "pm_operators.trueBoolean",
@@ -1719,6 +1727,13 @@ export default [
     id: "pm_operators.falseBoolean",
     spec: "false",
     inputs: [],
+    shape: "boolean",
+    category: "pm_operators",
+  },
+  {
+    id: "pm_operators.boolify",
+    spec: "%1",
+    inputs: ["%n"],
     shape: "boolean",
     category: "pm_operators",
   },

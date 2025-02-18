@@ -140,13 +140,11 @@ def P_read_word(self: dict, address: int, page_wrapping_bug: bool = False) -> in
         # instead of the first byte on the next page (which would be correct)
     else:
         second_address = (address + 1) & 0xFFFF
+    self, t1 = P_read_byte(self, address       )
+    self, t2 = P_read_byte(self, second_address)
     if BYTEORDER == "little":
-        self, t1 = P_read_byte(self, address       )
-        self, t2 = P_read_byte(self, second_address)
-        data = t1 | (t2  << 8)
+        data = t1 | (t2 << 8)
     else:
-        self, t1 = P_read_byte(self, address       )
-        self, t2 = P_read_byte(self, second_address)
         data = (t1 << 8) | t2
     return self, data
 
@@ -170,11 +168,13 @@ def P_write_word(self: dict, address: int, value: int) -> None:
     :return: None
     """
     if BYTEORDER == "little":
-        self, _ = P_write_byte(self, address,      value       & 0xFF)
-        self, _ = P_write_byte(self, address + 1, (value >> 8) & 0xFF)
+        value1 =  value       & 0xFF
+        value2 = (value >> 8) & 0xFF
     else:
-        self, _ = P_write_byte(self, address,     (value >> 8) & 0xFF)
-        self, _ = P_write_byte(self, address + 1,  value       & 0xFF)
+        value1 = (value >> 8) & 0xFF
+        value2 =  value       & 0xFF
+    self, _ = P_write_byte(self, address,     value1)
+    self, _ = P_write_byte(self, address + 1, value2)
     return self, None
 
 def P_read_flags_register(self: dict) -> None:
@@ -212,11 +212,13 @@ def P_push_byte(self: dict, data: int) -> None:
 
 def P_push_word(self: dict, data: int) -> None:
     if BYTEORDER == "little":
-        self, _ = P_push_byte(self,  data       & 0xFF)
-        self, _ = P_push_byte(self, (data >> 8) & 0xFF)
+        value1 =  data       & 0xFF
+        value2 = (data >> 8) & 0xFF
     else:
-        self, _ = P_push_byte(self, (data >> 8) & 0xFF)
-        self, _ = P_push_byte(self,  data       & 0xFF)
+        value1 = (data >> 8) & 0xFF
+        value2 =  data       & 0xFF
+    self, _ = P_push_byte(self, value1)
+    self, _ = P_push_byte(self, value2)
     return self, None
 
 def P_pop_byte(self: dict) -> int:
@@ -230,17 +232,15 @@ def P_pop_byte(self: dict) -> int:
     return self, data
 
 def P_pop_word(self: dict) -> None:
+    self, t1 = P_pop_byte(self)
+    self, t2 = P_pop_byte(self)
     if BYTEORDER == "little":
-        self, t1 = P_pop_byte(self)
-        self, t2 = P_pop_byte(self)
         data = (t1 << 8) | t2
     else:
-        self, t1 = P_pop_byte(self)
-        self, t2 = P_pop_byte(self)
         data = t1 | (t2 << 8)
     return self, data
 
-def P_evaluate_flag_c(self: dict, data: int, bcd: bool = False) -> None:
+def P_evaluate_flag_c(self: dict, data: int, bcd: bool) -> None:
     """
     Evaluate carry flag.
 

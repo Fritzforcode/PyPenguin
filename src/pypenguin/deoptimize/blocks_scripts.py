@@ -146,7 +146,6 @@ def prepareBlock(data, parentOpcode, context, position=None, isOption=False, inp
     if opcode == "procedures_call":
         proccode, arguments = parseCustomOpcode(customOpcode=data["options"]["customOpcode"][1])
     
-    pp(data)
     newInputDatas = {}
     for inputId, inputData in data["inputs"].items():
         if inputData["mode"] == "block-and-broadcast-option":
@@ -554,15 +553,14 @@ def restoreListBlock(data, spriteName):
     return newData
 
 def unprepareBlocks(data):
-    print(200*"=")
-    pp(data)
     mutationDatas = {}
     for blockData in data.values():
         if isinstance(blockData, dict):
-            print("- opcode", blockData["opcode"], blockData.get("mutation", {}).get("proccode"))
+            print("- opcode", blockData["opcode"], repr(blockData.get("mutation", {}).get("proccode")))
             if blockData["opcode"] == "procedures_prototype":
                 mutationData = blockData["mutation"]
                 mutationDatas[mutationData["proccode"]] = mutationData
+                #mutationDatas[mutationData["proccode"].replace(" %n"," %s")] = mutationData # %n => %s for compatability
     newBlockDatas = {}
     for blockId, blockData in data.items():
         if isinstance(blockData, dict):
@@ -571,6 +569,7 @@ def unprepareBlocks(data):
                 del blockData["fields"]["customOpcode"]
                 proccode, arguments = parseCustomOpcode(customOpcode=customOpcode)
                 mutationData         = mutationDatas[proccode]
+                #mutationData         = mutationDatas[proccode.replace(" %n"," %s")] # %n => %s for compatability
                 modifiedMutationData = mutationData.copy()
                 del modifiedMutationData["argumentnames"]
                 del modifiedMutationData["argumentdefaults"]
