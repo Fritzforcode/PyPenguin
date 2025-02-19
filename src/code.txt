@@ -5,9 +5,14 @@ set [BYTEORDER v] to [little]
 set [PAGE_WRAPPING_BUG v] to <false> //{"newRow":true}
 
 
+define array1 (a) //{"blockType":"textReporter"}
+return (in array [\[\]] add (a::custom))
 
 define array2 (a) (b) //{"blockType":"textReporter"}
 return (in array (in array [\[\]] add (a::custom)) add (b::custom))
+
+define array3 (a) (b) (c) //{"blockType":"textReporter"}
+return (in array (in array (in array [\[\]] add (a::custom)) add (b::custom)) add (c::custom))
 
 define get (var) . (key) //{"blockType":"textReporter"}
 return (get (key::custom) from (runtime var (var::custom)))
@@ -20,9 +25,12 @@ set (var::custom) . (key::custom) to ((get (key::custom) from (runtime var (var:
 
 define set2 (var1) (var2) to (value)
 set runtime var (var1::custom) to (in array (value::custom) get [0])
-set runtime var (var2::custom) to (in array (value::custom) get [1]) //{"newRow":true}
+set runtime var (var2::custom) to (in array (value::custom) get [1])
 
-
+define set3 (var1) (var2) (var3) to (value)
+set runtime var (var1::custom) to (in array (value::custom) get [0])
+set runtime var (var2::custom) to (in array (value::custom) get [1])
+set runtime var (var3::custom) to (in array (value::custom) get [2]) //{"newRow":true}
 
 define P___init__(memory) //{"blockType":"textReporter", "comment": "Initialize the processor."}
 set runtime var [self] to [{}]
@@ -163,12 +171,177 @@ end
 return (array2 (runtime  var [self]) (runtime var [data])) //{"newRow":true}
 
 
-define P_evaluate_flag_c (self) (data) <bcd> //{"blockType":"textReporter"}
-if <bcd> then
-    set [self] . [flag_c] to ()
-else
-    set [self] . [flag_c] to ()
+define P_evaluate_flag_n(self) (data) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set [self] . [flag_n] to <((data::custom) and [128])>
+return (array2 (runtime  var [self]) [null])
+
+define P_evaluate_flag_z(self) (data) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set [self] . [flag_z] to <(data::custom) = [0]>
+return (array2 (runtime  var [self]) [null])
+
+define P_evaluate_flags_nz(self) (data) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [_] to (P_evaluate_flag_n (runtime var [self]) (data::custom))
+set2 [self] [_] to (P_evaluate_flag_z (runtime var [self]) (data::custom))
+return (array2 (runtime  var [self]) [null])
+
+define P_evaluate_flags_nz_a(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [_] to (P_evaluate_flags_nz (runtime var [self]) (get [self] . [reg_a]))
+return (array2 (runtime  var [self]) [null])
+
+define P_evaluate_flags_nz_x(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [_] to (P_evaluate_flags_nz (runtime var [self]) (get [self] . [reg_x]))
+return (array2 (runtime  var [self]) [null])
+
+define P_evaluate_flags_nz_y(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [_] to (P_evaluate_flags_nz (runtime var [self]) (get [self] . [reg_y]))
+return (array2 (runtime  var [self]) [null]) //{"newRow":true}
+
+define P_execute(self) (instructions)
+set runtime var [self] to (self::custom)
+while <(get [self] . [instructions]) < (instructions::custom)>
+    set2 [self] [opcode_num] to (P_fetch_byte (runtime var [self]))
+    set runtime var [opcode] to (in array (OPCODES) get (runtime var [opcode_num]))
+    set runtime var [addressing_mode] to (in array (ADDRESSING) get (runtime var [opcode_num]))
+    if <(runtime var [opcode]) = [   ]> then
+        set runtime var [opcode] to [nop]
+        set runtime var [addressing_mode] to [imp]
+    end
+    set runtime var [instr_func] to (join [P_ins_] (runtime var [opcode]))
+    if <  <(runtime var [addressing_mode]) = [imp]> or <array [\["JMP", "JSR"\]] contains (runtime var [opcode])>  > then
+        set runtime var [func_args] to (array2 (runtime var [self]) (runtime var [addressing_mode]))
+    else
+        set runtime var [addressing_func] to (join [P_addressing_] (runtime var [addressing_mode]))
+        set3 [self] [operand] [args] to (help_call_with (runtime var [addressing_func]) (array1 (runtime var [self])))
+        set runtime var [func_args] to (array3 (runtime var [self]) (runtime var [addressing_mode]) (runtime var [operand]))
+        set runtime var [func_args] to (add items from array (runtime var [args]) to array (runtime var [func_args]))
+    end
+    set2 [self] [_] to (help_call_with (runtime var [instr_func]) (runtime var [func_args]))
+    change [self] . [instructions] by [1]
 end
+return (array2 (runtime var [self]) [null]) //{"newRow":true}
+
+
+define P_addressing_imm(self) //{"blockType":"textReporter","comment":"Addressing for the MOT-6502"}
+set runtime var [self] to (self::custom)
+set2 [self] [operand] to (P_fetch_byte (runtime var [self]))
+return (array3 (runtime var [self]) (runtime var [operand]) [\[\]])
+
+define P_addressing_zp(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [address] to (P_fetch_byte (runtime var [self]))
+set2 [self] [operand] to (P_read_byte (runtime var [self]) (runtime var [address]))
+return (  array3 (runtime var [self]) (runtime var [operand]) (array1 (runtime var [address]))  )
+
+define P_addressing_zpx(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [base_address] to (P_fetch_byte (runtime var [self]))
+set runtime var [address] to (((runtime var [base_address]) + (get [self] . [reg_x])) and [255])
+set2 [self] [operand] to (P_read_byte (runtime var [self]) (runtime var [address]))
+return (  array3 (runtime var [self]) (runtime var [operand]) (array1 (runtime var [address]))  )
+
+define P_addressing_zpy(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [base_address] to (P_fetch_byte (runtime var [self]))
+set runtime var [address] to (((runtime var [base_address]) + (get [self] . [reg_y])) and [255])
+set2 [self] [operand] to (P_read_byte (runtime var [self]) (runtime var [address]))
+return (  array3 (runtime var [self]) (runtime var [operand]) (array1 (runtime var [address]))  )
+
+define P_addressing_abs(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [address] to (P_fetch_word (runtime var [self]))
+set2 [self] [operand] to (P_read_byte (runtime var [self]) (runtime var [address]))
+return (  array3 (runtime var [self]) (runtime var [operand]) (array1 (runtime var [address]))  )
+
+define P_addressing_abx(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [base_address] to (P_fetch_word (runtime var [self]))
+set runtime var [address] to (((runtime var [base_address]) + (get [self] . [reg_x])) and [65535])
+set2 [self] [operand] to (P_read_byte (runtime var [self]) (runtime var [address]))
+return (  array3 (runtime var [self]) (runtime var [operand]) (array1 (runtime var [address]))  )
+
+define P_addressing_aby(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [base_address] to (P_fetch_word (runtime var [self]))
+set runtime var [address] to (((runtime var [base_address]) + (get [self] . [reg_y])) and [65535])
+set2 [self] [operand] to (P_read_byte (runtime var [self]) (runtime var [address]))
+return (  array3 (runtime var [self]) (runtime var [operand]) (array1 (runtime var [address]))  )
+
+define P_addressing_ind(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [address] to (P_fetch_word (runtime var [self]))
+set2 [self] [operand] to (P_read_byte (runtime var [self]) (runtime var [address]))
+return (  array3 (runtime var [self]) (runtime var [operand]) (array1 (runtime var [address]))  )
+
+define P_addressing_inx(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [base_address] to (P_fetch_byte (runtime var [self]))
+set runtime var [zp_address] to (((runtime var [base_address]) + (get [self] . [reg_x])) and [255])
+set2 [self] [final_address] to (P_read_word (runtime var [self]) (runtime var [zp_address]))
+set2 [self] [operand] to (P_read_byte (runtime var [self]) (runtime var [final_address]))
+return (  array3 (runtime var [self]) (runtime var [operand]) (array1 (runtime var [final_address]))  )
+
+define P_addressing_iny(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [base_address] to (P_fetch_byte (runtime var [self]))
+set2 [self] [zp_address] to (P_read_word (runtime var [self]) (runtime var [base_address]))
+set runtime var [final_address] to (((runtime var [zp_address]) + (get [self] . [reg_y])) and [65535])
+set2 [self] [operand] to (P_read_byte (runtime var [self]) (runtime var [final_address]))
+return (  array3 (runtime var [self]) (runtime var [operand]) (array1 (runtime var [final_address]))  )
+
+define P_addressing_rel(self) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+set2 [self] [operand] to (P_fetch_byte (runtime var [self]))
+return (array3 (runtime var [self]) (runtime var [operand]) [\[\]])
+
+define P_addressing_acc(self) //{"blockType":"textReporter"}
+return (array3 (runtime var [self]) (get [self] . [reg_a]) [\[\]]) //{"newRow":true}
+
+
+define help_call_with(func_name) (args) //{"blockType":"textReporter","comment":"Subroutines for the MOT-6502"}
+set3 [arg0] [arg1] [arg2] to (args::custom)
+switch (func_name::custom)
+    case [P_addressing_imm]
+        return (P_addressing_imm (runtime var [arg0]))
+    end
+    case [P_addressing_zp]
+        return (P_addressing_zp  (runtime var [arg0]))
+    end
+    case [P_addressing_zpx]
+        return (P_addressing_zpx (runtime var [arg0]))
+    end
+    case [P_addressing_zpy]
+        return (P_addressing_zpy (runtime var [arg0]))
+    end
+    case [P_addressing_abs]
+        return (P_addressing_abs (runtime var [arg0]))
+    end
+    case [P_addressing_abx]
+        return (P_addressing_abx (runtime var [arg0]))
+    end
+    case [P_addressing_aby]
+        return (P_addressing_aby (runtime var [arg0]))
+    end
+    case [P_addressing_ind]
+        return (P_addressing_ind (runtime var [arg0]))
+    end
+    case [P_addressing_inx]
+        return (P_addressing_inx (runtime var [arg0]))
+    end
+    case [P_addressing_iny]
+        return (P_addressing_iny (runtime var [arg0]))
+    end
+    case [P_addressing_rel]
+        return (P_addressing_rel (runtime var [arg0]))
+    end
+    case [P_addressing_acc]
+        return (P_addressing_acc (runtime var [arg0]))
+    end
 
 say [HI] //{"newRow":true}
 

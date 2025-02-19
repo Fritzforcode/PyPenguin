@@ -1709,6 +1709,30 @@ export default [
   },
   // Control (Incomplete)
   {
+    id: "pm_control.switch",
+    spec: "switch %1",
+    inputs: ["%n"],
+    shape: "c-block",
+    category: "pm_control",
+    hasLoopArrow: true,
+  },
+  {
+    id: "pm_control.case",
+    spec: "case %1",
+    inputs: ["%n"],
+    shape: "c-block",
+    category: "pm_control",
+    hasLoopArrow: true,
+  },
+  {
+    id: "pm_control.while",
+    spec: "while %1",
+    inputs: ["%b"],
+    shape: "c-block",
+    category: "pm_control",
+    hasLoopArrow: true,
+  },
+  {
     id: "pm_control.if_return_else_return",
     spec: "if %1 then %2 else %3",
     inputs: ["%b", "%n", "%n"],

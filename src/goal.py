@@ -240,20 +240,6 @@ def P_pop_word(self: dict) -> None:
         data = t1 | (t2 << 8)
     return self, data
 
-def P_evaluate_flag_c(self: dict, data: int, bcd: bool) -> None:
-    """
-    Evaluate carry flag.
-
-    :param data: The data to evaluate
-    :param bcd: Wether the data is in BCD format
-    :return: None
-    """
-    if bcd:
-        self["flag_c"] = (data >> 8) > 0
-    else:
-        self["flag_c"] = data > 0xFF
-    return self, None
-
 def P_evaluate_flag_n(self: dict, data: int) -> None:
     """
     Evaluate negative flag.
@@ -261,7 +247,7 @@ def P_evaluate_flag_n(self: dict, data: int) -> None:
     :param data: The data to evaluate
     :return: None
     """
-    self["flag_n"] = (data & 0x80) != 0
+    self["flag_n"] = bool(data & 0x80)
     return self, None
 
 def P_evaluate_flag_z(self: dict, data: int) -> None:
@@ -272,6 +258,17 @@ def P_evaluate_flag_z(self: dict, data: int) -> None:
     :return: None
     """
     self["flag_z"] = (data == 0)
+    return self, None
+
+def P_evaluate_flags_nz(self: dict, data: int) -> None:
+    """
+    Evaluate the Zero and Negative Flags.
+
+    :param data: The data to evaluate
+    :return: None
+    """
+    self, _ = P_evaluate_flag_n(self, data)
+    self, _ = P_evaluate_flag_z(self, data)
     return self, None
 
 def P_evaluate_flags_nz_a(self: dict) -> None:
@@ -301,17 +298,6 @@ def P_evaluate_flags_nz_y(self: dict) -> None:
     self, _ = P_evaluate_flags_nz(self, self["reg_y"])
     return self, None
 
-def P_evaluate_flags_nz(self: dict, data: int) -> None:
-    """
-    Evaluate the Zero and Negative Flags.
-
-    :param data: The data to evaluate
-    :return: None
-    """
-    self, _ = P_evaluate_flag_n(self, data)
-    self, _ = P_evaluate_flag_z(self, data)
-    return self, None
-
 def P_execute(self: dict, instructions: int = 0, debug: bool = False) -> None:
     """
     Execute code for x instructions. Or until a breakpoint is rached.
@@ -327,10 +313,8 @@ def P_execute(self: dict, instructions: int = 0, debug: bool = False) -> None:
         if opcode == "   ": # Treated as NOP
             opcode = "nop"
             addressing_mode = "imp"
-        try:
-            instr_func = eval("P_ins_" + opcode)
-        except NameError:
-            raise NotImplementedError(f"Opcode '{opcode}' doesn't exist or is not implemented.")
+        
+        instr_func = "P_ins_" + opcode
         
         print(f"""
 CPU - STATE
@@ -353,13 +337,13 @@ CPU - STATE
                 print(f"Memory[{res}]: {hex(value)} | {value}")
             res = input(">> ")
         
-        if (addressing_mode in {"imm", "zp", "zpx", "zpy", "abs", "abx", "aby", "ind", "inx", "iny", "rel", "acc"}) and (opcode not in {"JMP", "JSR"}):
-            addressing_func = eval("P_addressing_" + addressing_mode)
-            self, operand, args = addressing_func(self)
-            self, _ = instr_func(self, addressing_mode, operand, *args)
+        if (addressing_mode == "imp") or (opcode in {"JMP", "JSR"}):
+            func_args = [self, addressing_mode]
         else:
-            self, _ = instr_func(self, addressing_mode)
-        
+            addressing_func = "P_addressing_" + addressing_mode
+            self, operand, args = help_call_with(addressing_func, [self])
+            func_args = [self, addressing_mode, operand, *args]
+        self, _ = help_call_with(instr_func, func_args)
         self["instructions"] += 1
     return self, None
 
@@ -442,8 +426,8 @@ def P_addressing_iny(self: dict):
     4. Read operand from final address.
     """
     self, base_address = P_fetch_byte(self)
-    self, zp_pointer = P_read_word(self, base_address)  # Fetch 16-bit address
-    final_address = (zp_pointer + self["reg_y"]) & 0xFFFF  # Handle wrapping
+    self, zp_address = P_read_word(self, base_address)  # Fetch 16-bit address
+    final_address = (zp_address + self["reg_y"]) & 0xFFFF  # Handle wrapping
     self, operand = P_read_byte(self, final_address)  # Read from computed address
     return self, operand, (final_address,)
 
@@ -454,7 +438,14 @@ def P_addressing_rel(self: dict):
 def P_addressing_acc(self: dict):
     return self, self["reg_a"], ()
 
-"""Subroutines for thr MOT-6502"""
+"""Subroutines for the MOT-6502"""
+def help_call_with(func_name: str, args: list):
+    try:
+        func = eval(func_name)    
+    except NameError:
+        raise NotImplementedError(f"Opcode '{opcode}' doesn't exist or isn't implemented.")
+    return func(*args)
+
 def help_bcd_to_decimal(bcd):
     tens = (bcd >> 4) & 0xF  # Extract the tens digit
     ones = bcd & 0xF         # Extract the ones digit
@@ -685,7 +676,7 @@ def P_ins_cmp(self: dict, mode: str, operand: int, *args) -> None:
     """
     reg_a = self["reg_a"]
     self, _ = P_evaluate_flags_nz(self, reg_a - operand)
-    self, _ = P_evaluate_flag_c(self, help_is_greater_equal(reg_a, operand, bcd=self["flag_d"]))
+    self["flag_c"] = help_is_greater_equal(reg_a, operand, bcd=self["flag_d"])
     return self, None
 
 def P_ins_cpx(self: dict, mode: str, operand: int, *args) -> None:
@@ -695,7 +686,7 @@ def P_ins_cpx(self: dict, mode: str, operand: int, *args) -> None:
     """
     reg_x = self["reg_x"]
     self, _ = P_evaluate_flags_nz(self, reg_x - operand)
-    self, _ = P_evaluate_flag_c(self, help_is_greater_equal(reg_x, operand, bcd=self["flag_d"]))
+    self["flag_c"] = help_is_greater_equal(reg_x, operand, bcd=self["flag_d"])
     return self, None
 
 def P_ins_cpy(self: dict, mode: str, operand: int, *args) -> None:
@@ -705,7 +696,7 @@ def P_ins_cpy(self: dict, mode: str, operand: int, *args) -> None:
     """
     reg_y = self["reg_y"]
     self, _ = P_evaluate_flags_nz(self, reg_y - operand)
-    self, _ = P_evaluate_flag_c(self, help_is_greater_equal(reg_y, operand, bcd=self["flag_d"]))
+    self["flag_c"] = help_is_greater_equal(reg_y, operand, bcd=self["flag_d"])
     return self, None
 
 def P_ins_dec(self: dict, mode: str, operand: int, address: int, *args) -> None:

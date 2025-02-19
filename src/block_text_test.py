@@ -2,10 +2,6 @@ import pypenguin
 import json
 import os # For convenience and creating a dir
 from pypenguin.utility import pp
-p = "../precompiled.json"
-if os.path.exists(p):
-    os.remove(p)
-#input()
 # Parse scratchblocks text
 with open(pypenguin.utility.ensureCorrectPath("src/code.txt", "PyPenguin")) as file:
     block_text = file.read()
