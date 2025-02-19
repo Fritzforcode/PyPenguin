@@ -308,7 +308,7 @@ def P_execute(self: dict, instructions: int = 0, debug: bool = False) -> None:
     while (self["instructions"] < instructions):
         self, opcode_num = P_fetch_byte(self)
         #print(opcode_num)
-        opcode = OPCODES[opcode_num]
+        opcode = OPCODES[opcode_num].lower()
         addressing_mode = ADDRESSING[opcode_num]
         if opcode == "   ": # Treated as NOP
             opcode = "nop"
@@ -443,7 +443,10 @@ def help_call_with(func_name: str, args: list):
     try:
         func = eval(func_name)    
     except NameError:
-        raise NotImplementedError(f"Opcode '{opcode}' doesn't exist or isn't implemented.")
+        if func_name.startswith("P_ins_"):
+            raise NotImplementedError(f"Opcode '{func_name.removeprefix("P_ins_")}' doesn't exist or isn't implemented.")
+        else:
+            raise NotImplementedError(f"Counldn't find function '{func_name}'")
     return func(*args)
 
 def help_bcd_to_decimal(bcd):
@@ -456,25 +459,15 @@ def help_decimal_to_bcd(decimal):
     ones = decimal % 10      # Extract the ones digit
     return (tens << 4) | ones  # Combine into BCD format
 
-def help_add(a, b, bcd:bool):
-    if bcd:
-        decimal1 = help_bcd_to_decimal(a)
-        decimal2 = help_bcd_to_decimal(b)
-        result_decimal = decimal1 + decimal2
-        result_bcd = help_decimal_to_bcd(result_decimal)
-        return result_bcd & 0xFF
-    else:
-        return (a + b)    & 0xFF
-
 def help_sub(a, b, bcd:bool):
     if bcd:
         decimal1 = help_bcd_to_decimal(a)
         decimal2 = help_bcd_to_decimal(b)
         result_decimal = decimal1 - decimal2
         result_bcd = help_decimal_to_bcd(result_decimal)
-        return result_bcd & 0xFF
+        return (result_bcd & 0xFF), (result_decimal > 99)
     else:
-        return (a + b)    & 0xFF
+        return ((a - b)    & 0xFF), ((a - b) > 255)
 
 def help_is_greater_equal(a, b, bcd:bool):
     if bcd:
@@ -501,9 +494,26 @@ def P_ins_adc(self: dict, mode: str, operand: int, *args) -> None:
     ADC - Add with Carry.
     :return: None
     """
-    operand += int(self["flag_c"])
-    self["reg_a"] = help_add(self["reg_a"], operand, bcd=self["flag_d"])
+    if self["flag_d"]:
+        low_nibble  = (self["reg_a"] & 0x0F) + (operand & 0x0F) + int(self["flag_c"])
+        high_nibble = (self["reg_a"] >>   4) + (operand >>   4)
+        if low_nibble > 9:
+            low_nibble -= 10
+            high_nibble += 1
+
+        if high_nibble > 9:
+            high_nibble -= 10
+            self["flag_c"] = True
+        else:
+            self["flag_c"] = False
+        final_result = (high_nibble << 4) | low_nibble
+    else:
+        intermediary_result = self["reg_a"] + operand + int(self["flag_c"])
+        final_result   = intermediary_result & 0xFF
+        self["flag_c"] = intermediary_result > 0xFF
+
     self, _ = P_evaluate_flags_nz_a(self)
+    self["flag_v"] = bool((self["reg_a"] ^ final_result) & (operand ^ final_result) & 0x80)
     return self, None
 
 def P_ins_and(self: dict, mode: str, operand: int, *args) -> None:

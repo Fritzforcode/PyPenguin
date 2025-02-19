@@ -1755,6 +1755,13 @@ export default [
     category: "pm_operators",
   },
   {
+    id: "pm_operators.toUpperLowerCase",
+    spec: "%1 to %2",
+    inputs: ["%n", "%m"],
+    shape: "reporter",
+    category: "pm_operators",
+  },
+  {
     id: "pm_operators.boolify",
     spec: "%1",
     inputs: ["%n"],
