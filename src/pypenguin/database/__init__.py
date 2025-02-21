@@ -793,8 +793,7 @@ def autocompleteOptionValue(optionValue, optionType):
     elif optionValue in secondaryAllValues:
         result = allValues[secondaryAllValues.index(optionValue)]
     else:
-        print("dv", directValues, "av", allValues)
-        if defaultPrefix == None: raise Exception(optionValue, optionType)
+        if defaultPrefix == None: raise Exception()
         result = [defaultPrefix, optionValue]
     return result
 
