@@ -1,4 +1,4 @@
-import subprocess, json, shutil, sys, shlex, json
+import platform, subprocess, json, shutil, sys, shlex, json
 from pypenguin.utility import readJSONFile, writeJSONFile, pp, generateCustomOpcode
 from pypenguin.database import getArgumentOrder, getOptimizedOpcode, autocompleteOptionValue, getInputType, getOptionType, getOptionValueDefault, opcodeExists
 
@@ -189,7 +189,6 @@ def convertBlock(block):
     elif opcode == "procedures_call":
         options["customOpcode"] = ["value", customOpcode]
     elif opcode in {"argument_reporter_string_number", "argument_reporter_boolean"}:
-        hash_alt = block["info"]["hash"]
         options["ARGUMENT"] = ["value", hash_alt]
     
     newBlock = {
@@ -254,7 +253,7 @@ def parseBlockText(blockText: str):
     jsPath     = "src/pypenguin/penguinblocks/main.js"
     outputPath = "src/pypenguin/penguinblocks/in.json"
 
-    if True:
+    if platform.system() in {"Windows", "Linux"}:
         # On Windows/Linux
         """Check if Node.js is installed and accessible."""
         if not shutil.which("node"):

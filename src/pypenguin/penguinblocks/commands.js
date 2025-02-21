@@ -1741,6 +1741,27 @@ export default [
   },
   // Operators (Incomplete)
   {
+    id: "pm_operators.gtorequal",
+    spec: "%1 >= %2",
+    inputs: ["%n", "%n"],
+    shape: "boolean",
+    category: "pm_operators"
+  },
+  {
+    id: "pm_operators.ltorequal",
+    spec: "%1 <= %2",
+    inputs: ["%n", "%n"],
+    shape: "boolean",
+    category: "pm_operators"
+  },
+  {
+    id: "pm_operators.notequal",
+    spec: "%1 != %2",
+    inputs: ["%n", "%n"],
+    shape: "boolean",
+    category: "pm_operators"
+  },
+  {
     id: "pm_operators.trueBoolean",
     spec: "true",
     inputs: [],
@@ -1752,6 +1773,13 @@ export default [
     spec: "false",
     inputs: [],
     shape: "boolean",
+    category: "pm_operators",
+  },
+  {
+    id: "pm_operators.replaceFirst",
+    spec: "in %1 replace first %2 with %3",
+    inputs: ["%n", "%n", "%n"],
+    shape: "reporter",
     category: "pm_operators",
   },
   {

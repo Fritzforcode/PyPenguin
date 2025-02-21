@@ -32,6 +32,12 @@ set runtime var (var1::custom) to (in array (value::custom) get [0])
 set runtime var (var2::custom) to (in array (value::custom) get [1])
 set runtime var (var3::custom) to (in array (value::custom) get [2]) //{"newRow":true}
 
+define set4 (var1) (var2) (var3) (var4) to (value)
+set runtime var (var1::custom) to (in array (value::custom) get [0])
+set runtime var (var2::custom) to (in array (value::custom) get [1])
+set runtime var (var3::custom) to (in array (value::custom) get [2])
+set runtime var (var4::custom) to (in array (value::custom) get [3]) //{"newRow":true}
+
 define P___init__(memory) //{"blockType":"textReporter", "comment": "Initialize the processor."}
 set runtime var [self] to [{}]
 set [self] . [memory] to (memory::custom)
@@ -206,7 +212,7 @@ define P_execute(self) (instructions)
 set runtime var [self] to (self::custom)
 while <(get [self] . [instructions]) < (instructions::custom)>
     set2 [self] [opcode_num] to (P_fetch_byte (runtime var [self]))
-    set runtime var [opcode] to (in array (OPCODES) get (runtime var [opcode_num]))
+    set runtime var [opcode] to ((in array (OPCODES) get (runtime var [opcode_num])) to [lowercase v])
     set runtime var [addressing_mode] to (in array (ADDRESSING) get (runtime var [opcode_num]))
     if <(runtime var [opcode]) = [   ]> then
         set runtime var [opcode] to [nop]
@@ -303,8 +309,8 @@ define P_addressing_acc(self) //{"blockType":"textReporter"}
 return (array3 (runtime var [self]) (get [self] . [reg_a]) [\[\]]) //{"newRow":true}
 
 
-define help_call_with(func_name) (args) //{"blockType":"textReporter","comment":"Subroutines for the MOT-6502"}
-set3 [arg0] [arg1] [arg2] to (args::custom)
+define help_call_with (func_name) (args) //{"blockType":"textReporter","comment":"Subroutines for the MOT-6502"}
+set4 [arg0] [arg1] [arg2] [arg3] to (args::custom)
 switch (func_name::custom)
     case [P_addressing_imm]
         return (P_addressing_imm (runtime var [arg0]))
@@ -342,9 +348,46 @@ switch (func_name::custom)
     case [P_addressing_acc]
         return (P_addressing_acc (runtime var [arg0]))
     end
+end
+set runtime var [instr_name] to (in (func_name::custom) replace first [P_ins_] with [])
+return (P_instruction (runtime var [instr_name]) (runtime var [arg0]) (runtime var [arg1]) (runtime var [arg2]) (runtime var [arg3]))
 
-say [HI] //{"newRow":true}
+define help_bcd_to_decimal (bcd) //{"blockType":"textReporter"}
+return (  (((bcd::custom) >> [4]) * [10]) + ((bcd::custom) and [15])  )
 
+define help_decimal_to_bcd (decimal) //{"blockType":"textReporter"}
+return (  (([floor v] of ((decimal::custom) / [10])) \<\< [4]) or ((decimal::custom) mod [10])  )
+
+define help_is_greater_equal (a) (b) <bcd> //{"blockType":"booleanReporter"}
+if <bcd::custom> then
+    return <(help_decimal_to_bcd (a::custom)) \>= (help_decimal_to_bcd (b::custom))>
+else
+    return <(a::custom) \>= (b::custom)>
+
+define help_twos_complement (num) //{"blockType":"textReporter"}
+return (if <(num::custom) \>= [128]> then ((num::custom) - [256]) else (num::custom)) //{"newRow":true}
+
+define P_instruction (instr_name) (self) (mode) (operand) (address) //{"blockType":"textReporter","comment":"MOT-6502 Instructions."}
+set runtime var [self] to (self::custom)
+switch (instr_name::custom)
+    case [nop]
+    end
+    case [adc]
+        set2 [self] [_] to (P_instr_adc (runtime var [self]) (mode::custom) (operand::custom) (address::custom))
+end
+return (array2 (runtime var [self]) [null])
+
+define P_instr_adc(self) (mode) (operand) (address) //{"blockType":"textReporter"}
+if <(get [self] . [flag_d])> then
+else
+    set runtime var [intermediary_result] to (  ((get [self] . [reg_a]) + (operand::custom)) + (get [self] . [flag_c])  )
+    set runtime var [final_result] to ((runtime var [intermediary_result]) and (255))
+    set [self] . [flag_c] to ((runtime var [intermediary_result]) > [255])
+end
+
+return (array2 (runtime var [self]) [null])
+
+say [hi] //{"newRow":true}
 
 define M___getitem__(self) (address) //{"blockType":"textReporter"}
 set runtime var [mself] to (self::custom)
