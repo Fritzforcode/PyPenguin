@@ -331,7 +331,8 @@ optionTypeDatabase = {
         "valueSegments"  : [],
     },
     "text case": {
-        "directValues"   : ["upper", "lower"], 
+        "oldDirectValues": ["upper", "lower"], 
+        "directValues"   : ["uppercase", "lowercase"],
         "valueSegments"  : [],
     },
     "stop script target": {
@@ -792,7 +793,8 @@ def autocompleteOptionValue(optionValue, optionType):
     elif optionValue in secondaryAllValues:
         result = allValues[secondaryAllValues.index(optionValue)]
     else:
-        if defaultPrefix == None: raise Exception()
+        print("dv", directValues, "av", allValues)
+        if defaultPrefix == None: raise Exception(optionValue, optionType)
         result = [defaultPrefix, optionValue]
     return result
 
