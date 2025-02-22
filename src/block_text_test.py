@@ -5,7 +5,16 @@ from pypenguin.utility import pp
 # Parse scratchblocks text
 with open(pypenguin.utility.ensureCorrectPath("src/code.txt", "PyPenguin")) as file:
     block_text = file.read()
-block_text2 = """
+block_text2 = r"""
+define M___init__ (size) //{"blockType":"textReporter"}
+set runtime var [mself] to [{}]
+set [mself] . [size] to (size::custom)
+set [mself] . [memory] to [{}]
+return (runtime var [mself])
+
+define set (var) . (key) to (value)
+set runtime var (var::custom) to (set (key::custom) to (value::custom) in (runtime var (var::custom)))
+
 """
 
 globalVariables = ["ADDRESSING", "OPCODES", "BYTEORDER", "PAGE_WRAPPING_BUG"]

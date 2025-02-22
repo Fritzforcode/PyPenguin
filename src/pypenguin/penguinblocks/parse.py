@@ -36,20 +36,22 @@ def convertBlock(block):
                 "text": commentText,
             }
 
+    if block["info"]["hash"] == "": # Ignore randomly created empty blocks
+        return None
+    
     # Get and handle opcode
-    if "id" not in block["info"]:
+    if (block["info"]["category"] == "custom"   ) and (block["info"].get("selector") == "call"):
+        opcode = "procedures_call"
+    elif (block["info"]["category"] == "custom"   ) and (block["info"]["shape"] == "reporter"):
+        opcode = "argument_reporter_string_number"
+    elif (block["info"]["category"] == "custom"   ) and (block["info"]["shape"] == "boolean"):
+        opcode = "argument_reporter_boolean"
+    elif "id" not in block["info"]:
         if   (block["info"]["category"] == "variables") and (block["info"]["shape"] == "reporter"):
             opcode = "special_variable_value"
         elif (block["info"]["category"] == "list"     ) and (block["info"]["shape"] == "reporter"):
             opcode = "special_list_value"
-        elif (block["info"]["category"] == "custom"   ) and (block["info"].get("selector") == "call"):
-            opcode = "procedures_call"
-        elif (block["info"]["category"] == "custom"   ) and (block["info"]["shape"] == "reporter"):
-            opcode = "argument_reporter_string_number"
-        elif (block["info"]["category"] == "custom"   ) and (block["info"]["shape"] == "boolean"):
-            opcode = "argument_reporter_boolean"
         else:
-            pp(block)
             raise ValueError(f"Couldn't recognize block with shape {repr(block['info']['hash'])}")
     else:
         opcode: str = block["info"]["id"]

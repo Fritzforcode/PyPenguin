@@ -4,6 +4,12 @@ set [OPCODES v] to [\["brk", "ora", "   ", "   ", "   ", "ora", "asl", "   ", "p
 set [BYTEORDER v] to [little]
 set [PAGE_WRAPPING_BUG v] to <false> //{"newRow":true}
 
+when [space v] key pressed
+set runtime var [memory] to (M___init__ (65536))
+set [memory] . [memory] to [{"64738": 169, "64739": 7, "64740": 133, "64740": 54}]
+set2 [cpu] [_] to (P_reset (P___init__ (runtime var [memory])))
+say [BYE] //{"newRow":true}
+
 define M___init__ (size) //{"blockType":"textReporter"}
 set runtime var [mself] to [{}]
 set [mself] . [size] to (size::custom)
@@ -12,7 +18,7 @@ return (runtime var [mself])
 
 define M___getitem__(mself) (address) //{"blockType":"textReporter"}
 set runtime var [mself] to (mself::custom)
-if <json (runtime var [mself]) has key (address::custom)> then
+if <json (get [mself] . [memory]) has key (address::custom)> then
     return (get (address::custom) from (get [mself] . [memory]))
 else
     return [0]
@@ -240,12 +246,12 @@ set runtime var [self] to (self::custom)
 set2 [self] [_] to (P_evaluate_flags_nz (runtime var [self]) (get [self] . [reg_y]))
 return (array2 (runtime  var [self]) [null]) //{"newRow":true}
 
-define P_execute(self) (instructions)
+define P_execute(self) (instructions) //{"blockType":"textReporter"}
 set runtime var [self] to (self::custom)
 while <(get [self] . [instructions]) < (instructions::custom)>
     set2 [self] [opcode_num] to (P_fetch_byte (runtime var [self]))
     set runtime var [opcode] to ((in array (OPCODES) get (runtime var [opcode_num])) to [lowercase v])
-    set runtime var [addressing_mode] to (in array (ADDRESSING) get (runtime var [opcode_num]))
+    set runtime var [addressing_mode] to ((in array (ADDRESSING) get (runtime var [opcode_num])) to [lowercase v])
     if <(runtime var [opcode]) = [   ]> then
         set runtime var [opcode] to [nop]
         set runtime var [addressing_mode] to [imp]
@@ -601,10 +607,3 @@ set2 [self] [pc] to (P_read_word (runtime var [self]) [65534] <false>)
 set [self] . [program_counter] to (runtime var [pc])
 set [self] . [flag_i] to <true>
 return (array2 (runtime var [self]) [null])
-
-
-say [hi] //{"newRow":true}
-
-when [space v] key pressed
-set2 [cpu] [_] to (P_reset (P___init__ ()))
-
