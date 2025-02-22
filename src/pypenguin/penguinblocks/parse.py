@@ -1,4 +1,4 @@
-import platform, subprocess, json, shutil, sys, shlex, json
+import platform, subprocess, json, shutil, sys, shlex, json, os
 from pypenguin.utility import readJSONFile, writeJSONFile, ensureCorrectPath, pp, generateCustomOpcode
 from pypenguin.database import getArgumentOrder, getOptimizedOpcode, autocompleteOptionValue, getInputType, getOptionType, getOptionValueDefault, opcodeExists
 
@@ -256,15 +256,17 @@ def parseBlockText(blockText: str):
     outputPath = "src/pypenguin/penguinblocks/in.json"
     with open(ensureCorrectPath(inputPath, "PyPenguin"), "w") as file:
         file.write(blockText)
-
-    if platform.system() in {"Windows", "Linux"}:
-        # On Windows/Linux
+    if "ANDROID_ROOT" in os.environ or "android" in platform.system().lower():
+        # On Android (NodeJS isn't available)
+        print(shlex.join(["node", jsPath, inputPath, outputPath]))
+        input()
+    else:
         """Check if Node.js is installed and accessible."""
         if not shutil.which("node"):
             print("Error: Node.js is not installed or not in PATH.")
             print("Download it from https://nodejs.org/")
             sys.exit(1)
-        
+            
         # Run the JavaScript file with arguments using Node.js
         result = subprocess.run(
             ["node", jsPath, inputPath, outputPath],
@@ -276,10 +278,7 @@ def parseBlockText(blockText: str):
                 print("JavaScript output:", result.stdout)
         else:
             print("Error:", result.stderr)
-    else:
-        # On other operating systems      
-        print(shlex.join(["node", jsPath, inputPath, outputPath]))
-        input()
+        
 
     
     scripts = readJSONFile(outputPath, ensurePath=True)["scripts"]

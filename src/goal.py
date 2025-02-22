@@ -856,6 +856,18 @@ def P_ins_pha(self: dict, mode: str) -> None:
     self, _ = P_push_byte(self, self["reg_a"])
     return self, None
 
+def P_ins_php(self: dict, mode: str) -> None:
+    """
+    Push Processor Status.
+
+    return: None
+    """
+    self["flag_b"] = True # temporarily set, so the push value has B=1
+    self, status_register = P_read_flags_register(self)
+    self["flag_b"] = False
+    self, _ = P_push_byte(self, status_register)
+    return self, None
+
 def P_ins_pla(self: dict, mode: str) -> None:
     """
     PLA - Pull Accumulator.
@@ -868,18 +880,6 @@ def P_ins_pla(self: dict, mode: str) -> None:
     self, _ = P_evaluate_flags_nz_a(self)
     return self, None
 
-def P_ins_php(self: dict, mode: str) -> None:
-    """
-    Push Processor Status.
-
-    return: None
-    """
-    self["flag_b"] = True # temporarily set, so the push value has B=1
-    self, flags = P_read_flags_register(self)
-    self["flag_b"] = False
-    self, _ = P_push_byte(self, flags)
-    return self, None
-
 def P_ins_plp(self: dict, mode: str) -> None:
     """
     Pull Processor Status.
@@ -889,8 +889,8 @@ def P_ins_plp(self: dict, mode: str) -> None:
 
     :return: None
     """
-    self, flags = P_pop_byte(self)
-    self, _ = P_set_flags_register(self, flags)
+    self, status_register = P_pop_byte(self)
+    self, _ = P_set_flags_register(self, status_register)
     return self, None
 
 def P_ins_rol(self: dict, mode: str, operand: int, address: int, *args) -> None:
@@ -898,9 +898,8 @@ def P_ins_rol(self: dict, mode: str, operand: int, address: int, *args) -> None:
     ROL - Rotate One Bit Left.
     :return: None
     """
-    old_carry = self["flag_c"]
+    result = ((operand << 1) & 0xFF) | int(self["flag_c"])
     self["flag_c"] = bool(operand & 0b10000000)
-    result = ((operand << 1) & 0xFF) | int(old_carry)
     if mode == "acc":
         self["reg_a"] = result
     else:
@@ -913,9 +912,8 @@ def P_ins_ror(self: dict, mode: str, operand: int, address: int, *args) -> None:
     ROR - Rotate One Bit Right.
     :return: None
     """
-    old_carry = self["flag_c"]
+    result = (int(self["flag_c"]) << 7) | (operand >> 1)
     self["flag_c"] = bool(operand & 0b00000001)
-    result = (int(old_carry) << 7) | (operand >> 1)
     if mode == "acc":
         self["reg_a"] = result
     else:
@@ -928,8 +926,8 @@ def P_ins_rti(self: dict, mode: str) -> None:
     RTI - Return from Interrupt.
     :return: None
     """
-    self, flags = P_pop_byte(self)
-    self, _ = P_set_flags_register(self, flags)
+    self, status_register = P_pop_byte(self)
+    self, _ = P_set_flags_register(self, status_register)
     self, self["program_counter"] = P_pop_word(self)
     return self, None
 
@@ -963,9 +961,9 @@ def P_ins_sbc(self: dict, mode: str, operand: int, *args) -> None:
         
         final_result = (high_nibble << 4) | low_nibble
     else:
-        intermediary_result = self["reg_a"] - operand - int(self["flag_c"])
+        intermediary_result = self["reg_a"] - operand - int(not self["flag_c"])
         final_result   = intermediary_result & 0xFF
-        self["flag_c"] = intermediary_result > 0xFF
+        self["flag_c"] = not (intermediary_result < 0)
     
     self["flag_v"] = bool((self["reg_a"] ^ operand) & (self["reg_a"] ^ final_result) & 0x80)
     self["reg_a"] = final_result
@@ -1091,7 +1089,7 @@ def P_ins_tya(self: dict, mode: str) -> None:
 
 """Memory bank for MOT-6502 systems."""
 
-def M___init__(size: int = None) -> dict:
+def M___init__() -> dict:
     """
     Initialize the memory.
 
@@ -1099,13 +1097,13 @@ def M___init__(size: int = None) -> dict:
     :return: None
     """
     mself = {}
-    if size is None:
-        size = 0x10000
-    if size < 0x0200:
-        raise ValueError("Memory size is not valid")
-    if size > 0x10000:
-        raise ValueError("Memory size is not valid")
-    mself["size"] = size
+    #if size is None:
+    #    size = 0x10000
+    #if size < 0x0200:
+    #    raise ValueError("Memory size is not valid")
+    #if size > 0x10000:
+    #    raise ValueError("Memory size is not valid")
+    mself["size"] = 0xFFFF
     mself["memory"] = {}
     return mself
 

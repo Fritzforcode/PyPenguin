@@ -556,9 +556,93 @@ switch (instr_name::custom)
     case [pha]
         set2 [self] [_] to (P_push_byte (runtime var [self]) (get [self] . [reg_a]))
     end
+    case [php]
+        set [self] . [flag_b] to <true>
+        set2 [self] [status_register] to (P_read_flags_register (runtime var [self]))
+        set [self] . [flag_b] to <false>
+        set2 [self] [_] to (P_push_byte (runtime var [self]) (runtime var [status_register]))
+    end
     case [pla]
-        set2 [self] [acc] to (P_pop_byte (runtime var [self]))
-        set [self] . [reg_a] to (runtime var [acc])
+        set2 [self] [a] to (P_pop_byte (runtime var [self]))
+        set [self] . [reg_a] to (runtime var [a])
+        set2 [self] [_] to (P_evaluate_flags_nz_a (runtime var [self]))
+    end
+    case [plp]
+        set2 [self] [status_register] to (P_pop_byte (runtime var [self]))
+        set2 [self] [_] to (P_set_flags_register (runtime var [self]) (runtime var [status_register]))
+    end
+    case [rol]
+        set runtime var [result] to ((((operand::custom) \<\< [1]) and [255]) or (get [self] . [flag_c]))
+        set [self] . [flag_c] to <((operand::custom) and [128])>
+        if <(mode::custom) = [acc]> then
+            set [self] . [reg_a] to (runtime var [result])
+        else
+            set2 [self] [_] to (P_write_byte (runtime var [self]) (address::custom) (runtime var [result]))
+        end
+        set2 [self] [_] to (P_evaluate_flags_nz (runtime var [self]) (runtime var [result]))
+    end
+    case [ror]
+        set runtime var [result] to (((get [self] . [flag_c]) \<\< [7]) or ((operand::custom) >> [1]))
+        set [self] . [flag_c] to <((operand::custom) and [1])>
+        if <(mode::custom) = [acc]> then
+            set [self] . [reg_a] to (runtime var [result])
+        else
+            set2 [self] [_] to (P_write_byte (runtime var [self]) (address::custom) (runtime var [result]))
+        end
+        set2 [self] [_] to (P_evaluate_flags_nz (runtime var [self]) (runtime var [result]))
+    end
+    case [rti]
+        set2 [self] [status_register] to (P_pop_byte (runtime var [self]))
+        set2 [self] [_] to (P_set_flags_register (runtime var [self]) (runtime var [status_register]))
+        set2 [self] [program_counter] to (P_pop_word (runtime var [self]))
+        set [self] . [program_counter] to (runtime var [program_counter])
+    end
+    case [rts]
+        set2 [self] [return_address] to (P_pop_word (runtime var [self]))
+        set [self] . [program_counter] to (((runtime var [return_address]) + [1]) and [65535])
+    end
+    case [sbc]
+        set2 [self] [_] to (P_instr_sbc (runtime var [self]) (mode::custom) (operand::custom) (address::custom))
+    end
+    case [sec]
+        set [self] . [flag_c] to <true>
+    end
+    case [sed]
+        set [self] . [flag_d] to <true>
+    end
+    case [sei]
+        set [self] . [flag_i] to <true>
+    end
+    case [sta]
+        set2 [self] [_] to (P_write_byte (runtime var [self]) (address::custom) (get [self] . [reg_a]))
+    end
+    case [stx]
+        set2 [self] [_] to (P_write_byte (runtime var [self]) (address::custom) (get [self] . [reg_x]))
+    end
+    case [sty]
+        set2 [self] [_] to (P_write_byte (runtime var [self]) (address::custom) (get [self] . [reg_y]))
+    end
+    case [tax]
+        set [self] . [reg_x] to (get [self] . [reg_a])
+        set2 [self] [_] to (P_evaluate_flags_nz_x (runtime var [self]))
+    end
+    case [tay]
+        set [self] . [reg_y] to (get [self] . [reg_a])
+        set2 [self] [_] to (P_evaluate_flags_nz_y (runtime var [self]))
+    end
+    case [tsx]
+        set [self] . [reg_x] to (get [self] . [stack_pointer])
+        set2 [self] [_] to (P_evaluate_flags_nz_x (runtime var [self]))
+    end
+    case [txa]
+        set [self] . [reg_a] to (get [self] . [reg_x])
+        set2 [self] [_] to (P_evaluate_flags_nz_a (runtime var [self]))
+    end
+    case [txs]
+        set [self] . [stack_pointer] to (get [self] . [reg_x])
+    end
+    case [tya]
+        set [self] . [reg_a] to (get [self] . [reg_y])
         set2 [self] [_] to (P_evaluate_flags_nz_a (runtime var [self]))
     end
 end
@@ -579,13 +663,39 @@ if <(get [self] . [flag_d])> then
     else
         set [self] . [flag_c] to <false>
     end
-    set runtime var [final_result] to (((runtime var [low_nibble]) \<\< [4]) or (runtime var [low_nibble]))
+    set runtime var [final_result] to (((runtime var [high_nibble]) \<\< [4]) or (runtime var [low_nibble]))
 else
     set runtime var [intermediary_result] to (  ((get [self] . [reg_a]) + (operand::custom)) + (get [self] . [flag_c])  )
     set runtime var [final_result] to ((runtime var [intermediary_result]) and (255))
     set [self] . [flag_c] to <(runtime var [intermediary_result]) > [255]>
 end
 set [self] . [flag_v] to <((  ((get [self] . [reg_a]) xor (operand::custom))  and  ((get [self] . [reg_a]) xor (runtime var [final_result]))  ) and [128])>
+set [self] . [reg_a] to (runtime var [final_result])
+set2 [self] [_] to (P_evaluate_flags_nz_a (runtime var [self]))
+return (array2 (runtime var [self]) [null])
+
+define P_instr_sbc(self) (mode) (operand) (address) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+if <(get [self] . [flag_d])> then
+    set runtime var [low_nibble] to ((((get [self] . [reg_a]) and [15]) - ((operand::custom) and [15])) - <not <(get [self] . [flag_c])>>)
+    set runtime var [high_nibble] to ((get [self] . [reg_a]) >> [4]) - ((operand::custom) >> [4])
+    if <(runtime var [low_nibble]) < [0]> then
+        change runtime var [low_nibble] by [10]
+        change runtime var [high_nibble] by [-1]
+    end
+    if <(runtime var [high_nibble]) < [0]> then
+        change runtime var [high_nibble] by [10]
+        set [self] . [flag_c] to <false>
+    else
+        set [self] . [flag_c] to <true>
+    end
+    set runtime var [final_result] to (((runtime var [high_nibble]) \<\< [4]) or (runtime var [low_nibble]))
+else
+    set runtime var [intermediary_result] to (((get [self] . [reg_a]) - (operand::custom)) - <not <(get [self] . [flag_c])>>)
+    set runtime var [final_result] to (runtime var [intermediary_result] and [255])
+    set [self] . [flag_c] to <not <(runtime var [intermediary_result] < [0])>>
+end
+set [self] . [flag_v] to <((  ((get [self] . [reg_a]) xor (operand::custom)) and ((get [self] . [reg_a]) xor (runtime var [final_result])  )) and [128])>
 set [self] . [reg_a] to (runtime var [final_result])
 set2 [self] [_] to (P_evaluate_flags_nz_a (runtime var [self]))
 return (array2 (runtime var [self]) [null])
