@@ -186,7 +186,7 @@ def getAudioInfo(filePath):
 
     return sampleRate, sampleCount
 
-def readJSONFile(filePath, ensurePath=False):
+def readJSONFile(filePath, ensurePath:bool=False):
     if ensurePath:
         filePath = ensureCorrectPath(filePath, "PyPenguin")
     print("read", filePath)
@@ -194,8 +194,9 @@ def readJSONFile(filePath, ensurePath=False):
         string = file.read()
     return parser.loads(string)
 
-def writeJSONFile(filePath, data, beautiful: bool = True):
-    #filePath = ensureCorrectPath(filePath, "PyPenguin")
+def writeJSONFile(filePath, data, beautiful:bool=True, ensurePath:bool=False):
+    if ensurePath:
+        filePath = ensureCorrectPath(filePath, "PyPenguin")
     print("write", filePath)
     with open(filePath, "w") as file:
         if beautiful:

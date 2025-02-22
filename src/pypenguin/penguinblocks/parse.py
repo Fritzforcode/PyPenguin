@@ -1,5 +1,5 @@
 import platform, subprocess, json, shutil, sys, shlex, json
-from pypenguin.utility import readJSONFile, writeJSONFile, pp, generateCustomOpcode
+from pypenguin.utility import readJSONFile, writeJSONFile, ensureCorrectPath, pp, generateCustomOpcode
 from pypenguin.database import getArgumentOrder, getOptimizedOpcode, autocompleteOptionValue, getInputType, getOptionType, getOptionValueDefault, opcodeExists
 
 COMMENT_X_OFFSET = 400
@@ -49,6 +49,7 @@ def convertBlock(block):
         elif (block["info"]["category"] == "custom"   ) and (block["info"]["shape"] == "boolean"):
             opcode = "argument_reporter_boolean"
         else:
+            pp(block)
             raise ValueError(f"Couldn't recognize block with shape {repr(block['info']['hash'])}")
     else:
         opcode: str = block["info"]["id"]
@@ -251,7 +252,10 @@ def finishBlocks(blocks, getScriptPos, commentCounter=0):
 
 def parseBlockText(blockText: str):
     jsPath     = "src/pypenguin/penguinblocks/main.js"
+    inputPath  = "src/pypenguin/penguinblocks/code.txt"
     outputPath = "src/pypenguin/penguinblocks/in.json"
+    with open(ensureCorrectPath(inputPath, "PyPenguin"), "w") as file:
+        file.write(blockText)
 
     if platform.system() in {"Windows", "Linux"}:
         # On Windows/Linux
@@ -263,7 +267,7 @@ def parseBlockText(blockText: str):
         
         # Run the JavaScript file with arguments using Node.js
         result = subprocess.run(
-            ["node", jsPath, blockText, outputPath],
+            ["node", jsPath, inputPath, outputPath],
             capture_output=True,
             text=True,
         )
@@ -274,7 +278,7 @@ def parseBlockText(blockText: str):
             print("Error:", result.stderr)
     else:
         # On other operating systems      
-        print(shlex.join(["node", jsPath, blockText, outputPath]))
+        print(shlex.join(["node", jsPath, inputPath, outputPath]))
         input()
 
     

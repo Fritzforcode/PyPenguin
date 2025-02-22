@@ -338,12 +338,14 @@ CPU - STATE
             res = input(">> ")
         
         if (addressing_mode == "imp") or (opcode in {"JMP", "JSR"}):
-            func_args = [self, addressing_mode]
+            func_args = [self, addressing_mode, None, None]
         else:
             addressing_func = "P_addressing_" + addressing_mode
-            self, operand, args = help_call_with(addressing_func, [self])
+            self, operand, args = call_with(addressing_func, [self])
+            assert len(args) in {0,1}
+            if len(args) == 0: args = [None]
             func_args = [self, addressing_mode, operand, *args]
-        self, _ = help_call_with(instr_func, func_args)
+        self, _ = call_with(instr_func, func_args)
         self["instructions"] += 1
     return self, None
 
@@ -439,7 +441,7 @@ def P_addressing_acc(self: dict):
     return self, self["reg_a"], ()
 
 """Subroutines for the MOT-6502"""
-def help_call_with(func_name: str, args: list):
+def call_with(func_name: str, args: list):
     try:
         func = eval(func_name)    
     except NameError:
@@ -521,7 +523,7 @@ def P_ins_asl(self: dict, mode: str, operand: int, address: int, *args) -> None:
     ASL - Arithmetic Shift Left.
     :return: None
     """
-    self["flag_c"] = bool(operand & 0b000000010000000)
+    self["flag_c"] = bool(operand & 0b10000000)
     result = (operand << 1) & 0xFF
     if mode == "acc":
         self["reg_a"] = result
@@ -562,10 +564,9 @@ def P_ins_bit(self: dict, mode: str, operand: int, *args) -> None:
     BIT - Bit Test.
     :return: None
     """
-    old_value = self["reg_a"]
-    self["flag_n"] = bool(old_value & 0b000000010000000)
-    self["flag_v"] = bool(old_value & 0b01000000)
-    self["flag_z"] = (old_value & operand) == 0
+    self["flag_n"] = bool(self["reg_a"] & 0b10000000)
+    self["flag_v"] = bool(self["reg_a"] & 0b01000000)
+    self["flag_z"] = (self["reg_a"] & operand) == 0
     return self, None
 
 def P_ins_bmi(self: dict, mode: str, operand: int, *args) -> None:
@@ -600,7 +601,7 @@ def P_ins_brk(self: dict, mode: str) -> None:
     BRK - Force Interrupt.
     :return: None
     """
-    # Increment PC (BRK uses an implied operand, so PC should skip the next byte)
+    # Push the pc onto the stack
     self, _ = P_push_word(self, self["program_counter"])
 
     # Push the Status Register onto the stack with Break flag set (B = 1)
@@ -613,7 +614,7 @@ def P_ins_brk(self: dict, mode: str) -> None:
     self, self["program_counter"] = P_read_word(self, 0xFFFE) # Set PC to the interrupt handler address
 
     # Set Interrupt Disable flag (I = 1)
-    self["flag_i"] = 1
+    self["flag_i"] = True
     return self, None
 
 def P_ins_bvc(self: dict, mode: str, operand: int, *args) -> None:
@@ -675,9 +676,8 @@ def P_ins_cmp(self: dict, mode: str, operand: int, *args) -> None:
     CMP - Compare.
     :return: None
     """
-    reg_a = self["reg_a"]
-    self, _ = P_evaluate_flags_nz(self, reg_a - operand)
-    self["flag_c"] = help_is_greater_equal(reg_a, operand, bcd=self["flag_d"])
+    self, _ = P_evaluate_flags_nz(self, self["reg_a"] - operand)
+    self["flag_c"] = help_is_greater_equal(self["reg_a"], operand, bcd=self["flag_d"])
     return self, None
 
 def P_ins_cpx(self: dict, mode: str, operand: int, *args) -> None:
@@ -685,9 +685,8 @@ def P_ins_cpx(self: dict, mode: str, operand: int, *args) -> None:
     CPX - Compare X Register.
     :return: None
     """
-    reg_x = self["reg_x"]
-    self, _ = P_evaluate_flags_nz(self, reg_x - operand)
-    self["flag_c"] = help_is_greater_equal(reg_x, operand, bcd=self["flag_d"])
+    self, _ = P_evaluate_flags_nz(self, self["reg_x"] - operand)
+    self["flag_c"] = help_is_greater_equal(self["reg_x"], operand, bcd=self["flag_d"])
     return self, None
 
 def P_ins_cpy(self: dict, mode: str, operand: int, *args) -> None:
@@ -695,9 +694,8 @@ def P_ins_cpy(self: dict, mode: str, operand: int, *args) -> None:
     CPY - Compare Y Register.
     :return: None
     """
-    reg_y = self["reg_y"]
-    self, _ = P_evaluate_flags_nz(self, reg_y - operand)
-    self["flag_c"] = help_is_greater_equal(reg_y, operand, bcd=self["flag_d"])
+    self, _ = P_evaluate_flags_nz(self, self["reg_y"] - operand)
+    self["flag_c"] = help_is_greater_equal(self["reg_y"], operand, bcd=self["flag_d"])
     return self, None
 
 def P_ins_dec(self: dict, mode: str, operand: int, address: int, *args) -> None:
@@ -732,7 +730,7 @@ def P_ins_dey(self: dict, mode: str) -> None:
 
 def P_ins_eor(self: dict, mode: str, operand: int, *args) -> None:
     """
-    XOR - Logical XOR.
+    EOR - Logical XOR.
     :return: None
     """
     self["reg_a"] ^= operand
@@ -811,7 +809,7 @@ def P_ins_ldx(self: dict, mode: str, operand: int, *args) -> None:
 
     :return: None
     """
-    self, self["reg_x"] = operand
+    self["reg_x"] = operand
     self, _ = P_evaluate_flags_nz_x(self)
     return self, None
 
@@ -821,7 +819,7 @@ def P_ins_ldy(self: dict, mode: str, operand: int, *args) -> None:
 
     :return: None
     """
-    self, self["reg_y"] = operand
+    self["reg_y"] = operand
     self, _ = P_evaluate_flags_nz_y(self)
     return self, None
 
@@ -1100,18 +1098,18 @@ def M___init__(size: int = None) -> dict:
     :param size: The size of the memory
     :return: None
     """
-    self = {}
+    mself = {}
     if size is None:
         size = 0x10000
     if size < 0x0200:
         raise ValueError("Memory size is not valid")
     if size > 0x10000:
         raise ValueError("Memory size is not valid")
-    self["size"] = size
-    self["memory"] = {}
-    return self
+    mself["size"] = size
+    mself["memory"] = {}
+    return mself
 
-def M___getitem__(self: dict, address: int) -> int:
+def M___getitem__(mself: dict, address: int) -> int:
     """
     Get the value at the specified address.
 
@@ -1120,24 +1118,9 @@ def M___getitem__(self: dict, address: int) -> int:
     """
     if 0x0000 < address > 0xFFFF:
         raise ValueError("Memory address is not valid")
-    return self["memory"].get(address, 0)
+    return mself["memory"].get(address, 0)
 
-def M_read_word(self: dict, address: int) -> int:
-    """
-    Get the value at the specified and the following address.
-
-    :param address: The lower address to read from
-    :return: The value at the specified and following address
-    """
-    if BYTEORDER == "little":
-        t1 = M___getitem__(self, address    )
-        t2 = M___getitem__(self, address + 1) << 8
-    else:
-        t1 = M___getitem__(self, address    ) << 8
-        t2 = M___getitem__(self, address + 1)
-    return t1 | t2
-
-def M___setitem__(self: dict, address: int, value: int) -> dict:
+def M___setitem__(mself: dict, address: int, value: int) -> dict:
     """
     Set the value at the specified address.
 
@@ -1149,5 +1132,5 @@ def M___setitem__(self: dict, address: int, value: int) -> dict:
         raise ValueError("Memory address is not valid")
     if value > 2**8:
         raise ValueError("Value too large")
-    self["memory"][address] = value
-    return self
+    mself["memory"][address] = value
+    return mself

@@ -5,12 +5,13 @@ import * as fs from "fs";
 const args = process.argv.slice(2); // Ignore "node" and script name
 // Use arguments to determine input code or file
 if (args.length < 2) {
-  console.error("Usage: node main.js <codeString> <outputPath>");
+  console.error("Usage: node main.js <inputPath> <outputPath>");
   process.exit(1);
 }
 
-const code = args[0]; // First argument is the code string
+const inputPath = args[0]; // First argument is the  input path
 const outputPath = args[1]; // Second argument is the output file path
+const code = fs.readFileSync(inputPath, 'utf8')
 
 // Parse the code and write to the output file
 const doc = parse(code, {});
