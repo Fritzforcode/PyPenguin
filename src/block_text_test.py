@@ -17,7 +17,7 @@ set runtime var (var::custom) to (set (key::custom) to (value::custom) in (runti
 
 """
 
-globalVariables = ["ADDRESSING", "OPCODES", "BYTEORDER", "PAGE_WRAPPING_BUG"]
+globalVariables = ["ADDRESSING", "OPCODES", "BYTEORDER", "PAGE_WRAPPING_BUG", "ROM_START"]
 
 generated_scripts = pypenguin.parseBlockText(block_text)
 

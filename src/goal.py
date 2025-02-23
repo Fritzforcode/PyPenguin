@@ -44,6 +44,7 @@ BYTEORDER = "little"
 
 PAGE_WRAPPING_BUG = False
 
+ROM_START = 0x8000 # Shouldn't be at most 0xF000
 
 ######################################################################################################## 
 #     [For the PenguinMod Version] Here is space for custom blocks, which simplify the code.           #
@@ -63,19 +64,12 @@ def P___init__(memory: dict) -> dict:
     self["reg_a"] = 0  # Accumlator A
     self["reg_y"] = 0  # Incex Register Y
     self["reg_x"] = 0  # Incex Register X
-
-    self["program_counter"] = 0  # Program Counter PC
-    self["stack_pointer"]   = 0  # Stack Pointer S
-    #self["cycles"]          = 0  # Cycles used
-    self["instructions"]    = 0  # Instructions executed
-
-    self["flag_c"] = True  # Status flag - Carry Flag
-    self["flag_z"] = True  # Status flag - Zero Flag
-    self["flag_i"] = True  # Status flag - Interrupt Disable
-    self["flag_d"] = True  # Status flag - Decimal Mode Flag
-    self["flag_b"] = True  # Status flag - Break Command
-    self["flag_v"] = True  # Status flag - Overflow Flag
-    self["flag_n"] = True  # Status flag - Negative Flag
+    
+    self["flag_c"] = False # Status flag - Carry Flag
+    self["flag_z"] = False # Status flag - Zero Flag
+    self["flag_v"] = False # Status flag - Overflow Flag
+    self["flag_n"] = False # Status flag - Negative Flag
+    self, _ = P_reset(self)
     return self
 
 def P_reset(self: dict) -> None:
@@ -84,14 +78,13 @@ def P_reset(self: dict) -> None:
 
     :return: None
     """
-    self["program_counter"] = 0xFCE2  # Hardcoded start vector post-reset
-    self["stack_pointer"]   = 0x01FD  # Hardcoded stack pointer post-reset
-    #self["cycles"]          = 0
+    #self["program_counter"] = 0xFCE2  # Hardcoded start vector post-reset
+    self, self["program_counter"] = P_read_word(self, 0xFFFC) # Read start vector from 0xFFFC-D
+    self["stack_pointer"]   = 0xFD  # Hardcoded stack pointer post-reset
     self["instructions"]    = 0
 
-    self["flag_i"] = True
-    self["flag_d"] = False
-    self["flag_b"] = True
+    self["flag_i"] = True  # Status flag - Interrupt Disable
+    self["flag_d"] = False # Status flag - Decimal Mode Flag
     return self, None
 
 def P_fetch_byte(self: dict) -> int:
@@ -102,7 +95,7 @@ def P_fetch_byte(self: dict) -> int:
     :return: int
     """
     self, data = P_read_byte(self, self["program_counter"])
-    self["program_counter"] += 1
+    self["program_counter"] = (self["program_counter"] + 1) and 0xFFFF
     return self, data
 
 def P_fetch_word(self: dict) -> int:
@@ -113,7 +106,7 @@ def P_fetch_word(self: dict) -> int:
     :return: int
     """
     self, data = P_read_word(self, self["program_counter"])
-    self["program_counter"] += 2
+    self["program_counter"] = (self["program_counter"] + 2) and 0xFFFF
     return self, data
 
 def P_read_byte(self: dict, address: int) -> int:
@@ -173,16 +166,16 @@ def P_write_word(self: dict, address: int, value: int) -> None:
     else:
         value1 = (value >> 8) & 0xFF
         value2 =  value       & 0xFF
-    self, _ = P_write_byte(self, address,     value1)
-    self, _ = P_write_byte(self, address + 1, value2)
+    self, _ = P_write_byte(self,  address,                 value1)
+    self, _ = P_write_byte(self, (address + 1) and 0xFFFF, value2)
     return self, None
 
-def P_read_flags_register(self: dict) -> None:
+def P_read_flags_register(self: dict, flag_b: bool) -> None:
     return self, (
         int(self["flag_n"]) << 7
       | int(self["flag_v"]) << 6
       | 1                   << 5
-      | int(self["flag_b"]) << 4
+      | int(flag_b        ) << 4
       | int(self["flag_d"]) << 3
       | int(self["flag_i"]) << 2
       | int(self["flag_z"]) << 1
@@ -206,8 +199,8 @@ def P_push_byte(self: dict, data: int) -> None:
 
     :return: None
     """
-    self["memory"] = M___setitem__(self["memory"], self["stack_pointer"], data)
-    self["stack_pointer"] -= 1
+    self["stack_pointer"] = (self["stack_pointer"] - 1) & 0xFF
+    self["memory"] = M___setitem__(self["memory"], (0x0100 + self["stack_pointer"]), data)
     return self, None
 
 def P_push_word(self: dict, data: int) -> None:
@@ -227,8 +220,8 @@ def P_pop_byte(self: dict) -> int:
 
     :return: int
     """
-    self["stack_pointer"] += 1
-    data = M___getitem__(self["memory"], self["stack_pointer"])
+    data = M___getitem__(self["memory"], (256 + self["stack_pointer"]))
+    self["stack_pointer"] = (self["stack_pointer"] + 1) & 0xFF
     return self, data
 
 def P_pop_word(self: dict) -> None:
@@ -315,27 +308,17 @@ def P_execute(self: dict, instructions: int = 0, debug: bool = False) -> None:
             addressing_mode = "imp"
         
         instr_func = "P_ins_" + opcode
-        
-        print(f"""
-CPU - STATE
-- A : {hex(self["reg_a"])} | {self["reg_a"]}
-- X : {hex(self["reg_x"])} | {self["reg_x"]}
-- Y : {hex(self["reg_y"])} | {self["reg_y"]}
-- PC: {hex(self["program_counter"]-1)} | {self["program_counter"]-1}
-- FLAGS (NV.BDIZC)
-        ({int(self["flag_n"])}{int(self["flag_v"])} {int(self["flag_b"])}{int(self["flag_d"])}{int(self["flag_i"])}{int(self["flag_z"])}{int(self["flag_c"])})
-""".removeprefix("\n"))
-        print(self["instructions"], f"{opcode.upper()}({addressing_mode})[{hex(opcode_num)}]", 50*"=")
-        res = input(">> ")
-        while res != "":
-            try:
-                num = int(res, base=16)
-            except Exception as err:
-                print(err)
-            else:
-                _, value = P_read_byte(self, num)
-                print(f"Memory[{res}]: {hex(value)} | {value}")
-            res = input(">> ")
+        #print(self["instructions"], f"{opcode.upper()}({addressing_mode})[{hex(opcode_num)}]", 50*"=")
+        #res = input(">> ")
+        #while res != "":
+        #    try:
+        #        num = int(res, base=16)
+        #    except Exception as err:
+        #        print(err)
+        #    else:
+        #        _, value = P_read_byte(self, num)
+        #        print(f"Memory[{res}]: {hex(value)} | {value}")
+        #    res = input(">> ")
         
         if (addressing_mode == "imp") or (opcode in {"JMP", "JSR"}):
             func_args = [self, addressing_mode, None, None]
@@ -524,7 +507,7 @@ def P_ins_asl(self: dict, mode: str, operand: int, address: int, *args) -> None:
     :return: None
     """
     self["flag_c"] = bool(operand & 0b10000000)
-    result = (operand << 1) & 0xFF
+    result = operand << 1
     if mode == "acc":
         self["reg_a"] = result
     else:
@@ -538,7 +521,7 @@ def P_ins_bcc(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if not self["flag_c"]:
-        self["program_counter"] += help_twos_complement(operand)
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
     return self, None
 
 def P_ins_bcs(self: dict, mode: str, operand: int, *args) -> None:
@@ -547,7 +530,7 @@ def P_ins_bcs(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if self["flag_c"]:
-        self["program_counter"] += help_twos_complement(operand)
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
     return self, None
 
 def P_ins_beq(self: dict, mode: str, operand: int, *args) -> None:
@@ -556,7 +539,7 @@ def P_ins_beq(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if self["flag_z"]:
-        self["program_counter"] += help_twos_complement(operand)
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
     return self, None
 
 def P_ins_bit(self: dict, mode: str, operand: int, *args) -> None:
@@ -575,7 +558,7 @@ def P_ins_bmi(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if self["flag_n"]:
-        self["program_counter"] += help_twos_complement(operand)
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
     return self, None
 
 def P_ins_bne(self: dict, mode: str, operand: int, *args) -> None:
@@ -584,7 +567,7 @@ def P_ins_bne(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if not self["flag_z"]:
-        self["program_counter"] += help_twos_complement(operand)
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
     return self, None
 
 def P_ins_bpl(self: dict, mode: str, operand: int, *args) -> None:
@@ -593,7 +576,7 @@ def P_ins_bpl(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if not self["flag_n"]:
-        self["program_counter"] += help_twos_complement(operand)
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
     return self, None
 
 def P_ins_brk(self: dict, mode: str) -> None:
@@ -605,9 +588,7 @@ def P_ins_brk(self: dict, mode: str) -> None:
     self, _ = P_push_word(self, self["program_counter"])
 
     # Push the Status Register onto the stack with Break flag set (B = 1)
-    self["flag_b"] = True
-    self, status_register = P_read_flags_register(self)
-    self["flag_b"] = False # restore B flag (B = 0)
+    self, status_register = P_read_flags_register(self, flag_b=True)
     self, _ = P_push_byte(self, status_register)
 
     # Fetch the IRQ/BRK vector at 0xFFFE-0xFFFF
@@ -623,7 +604,7 @@ def P_ins_bvc(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if not self["flag_v"]:
-        self["program_counter"] += help_twos_complement(operand)
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
     return self, None
 
 def P_ins_bvs(self: dict, mode: str, operand: int, *args) -> None:
@@ -632,7 +613,7 @@ def P_ins_bvs(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if self["flag_v"]:
-        self["program_counter"] += help_twos_complement(operand)
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
     return self, None
 
 def P_ins_clc(self: dict, mode: str) -> None:
@@ -704,8 +685,8 @@ def P_ins_dec(self: dict, mode: str, operand: int, address: int, *args) -> None:
 
     :return: None
     """
-    self, _ = P_write_byte(self, address, operand - 1)
-    self, _ = P_evaluate_flags_nz(self  , operand - 1)
+    self, _ = P_write_byte(self, address, (operand - 1) & 0xFF)
+    self, _ = P_evaluate_flags_nz(self  , (operand - 1) & 0xFF)
     return self, None
 
 def P_ins_dex(self: dict, mode: str) -> None:
@@ -714,7 +695,7 @@ def P_ins_dex(self: dict, mode: str) -> None:
 
     :return: None
     """
-    self["reg_x"] -= 1
+    self["reg_x"] = (self["reg_x"] - 1) and 0xFF
     self, _ = P_evaluate_flags_nz_x(self)
     return self, None
 
@@ -724,7 +705,7 @@ def P_ins_dey(self: dict, mode: str) -> None:
 
     :return: None
     """
-    self["reg_y"] -= 1
+    self["reg_y"] = (self["reg_y"] - 1) and 0xFF
     self, _ = P_evaluate_flags_nz_y(self)
     return self, None
 
@@ -743,8 +724,8 @@ def P_ins_inc(self: dict, mode: str, operand: int, address: int, *args) -> None:
 
     :return: None
     """
-    self, _ = P_write_byte(self, address, operand + 1)
-    self, _ = P_evaluate_flags_nz(self  , operand + 1)
+    self, _ = P_write_byte(self, address, (operand + 1) & 0xFF)
+    self, _ = P_evaluate_flags_nz(self  , (operand + 1) & 0xFF)
     return self, None
 
 def P_ins_inx(self: dict, mode: str) -> None:
@@ -753,7 +734,7 @@ def P_ins_inx(self: dict, mode: str) -> None:
 
     :return: None
     """
-    self["reg_x"] += 1
+    self["reg_x"] = (self["reg_x"] + 1) and 0xFF
     self, _ = P_evaluate_flags_nz_x(self)
     return self, None
 
@@ -763,7 +744,7 @@ def P_ins_iny(self: dict, mode: str) -> None:
 
     :return: None
     """
-    self["reg_y"] += 1 
+    self["reg_y"] = (self["reg_y"] + 1) and 0xFF
     self, _ = P_evaluate_flags_nz_y(self)
     return self, None
 
@@ -862,9 +843,7 @@ def P_ins_php(self: dict, mode: str) -> None:
 
     return: None
     """
-    self["flag_b"] = True # temporarily set, so the push value has B=1
-    self, status_register = P_read_flags_register(self)
-    self["flag_b"] = False
+    self, status_register = P_read_flags_register(self, flag_b=True)
     self, _ = P_push_byte(self, status_register)
     return self, None
 
@@ -1089,7 +1068,7 @@ def P_ins_tya(self: dict, mode: str) -> None:
 
 """Memory bank for MOT-6502 systems."""
 
-def M___init__() -> dict:
+def M___init__(rom) -> dict:
     """
     Initialize the memory.
 
@@ -1097,14 +1076,8 @@ def M___init__() -> dict:
     :return: None
     """
     mself = {}
-    #if size is None:
-    #    size = 0x10000
-    #if size < 0x0200:
-    #    raise ValueError("Memory size is not valid")
-    #if size > 0x10000:
-    #    raise ValueError("Memory size is not valid")
-    mself["size"] = 0xFFFF
-    mself["memory"] = {}
+    mself["size"] = 0x10000
+    mself["memory"] = rom
     return mself
 
 def M___getitem__(mself: dict, address: int) -> int:
@@ -1130,5 +1103,9 @@ def M___setitem__(mself: dict, address: int, value: int) -> dict:
         raise ValueError("Memory address is not valid")
     if value > 2**8:
         raise ValueError("Value too large")
-    mself["memory"][address] = value
+    if address >= ROM_START:
+        raise ValueError("Can't write to read-only addresses")
+    
+    if address < ROM_START:
+        mself["memory"][address] = value
     return mself

@@ -2,18 +2,19 @@ when flag clicked
 set [ADDRESSING v] to [\["imp", "inx", "   ", "   ", "   ", "zp",  "zp",  "   ", "imp", "imm", "acc", "   ", "   ", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "   ", "zpx", "zpx", "   ", "imp", "aby", "   ", "   ", "   ", "abx", "abx", "   ", "abs", "inx", "   ", "   ", "zp",  "zp",  "zp",  "   ", "imp", "imm", "acc", "   ", "abs", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "   ", "zpx", "zpx", "   ", "imp", "aby", "   ", "   ", "   ", "abx", "abx", "   ", "imp", "inx", "   ", "   ", "   ", "zp",  "zp",  "   ", "imp", "imm", "acc", "   ", "abs", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "   ", "zpx", "zpx", "   ", "imp", "aby", "   ", "   ", "   ", "abx", "abx", "   ", "imp", "inx", "   ", "   ", "   ", "zp",  "zp",  "   ", "imp", "imm", "acc", "   ", "ind", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "   ", "zpx", "zpx", "   ", "imp", "aby", "   ", "   ", "   ", "abx", "abx", "   ", "   ", "inx", "   ", "   ", "zp",  "zp",  "zp",  "   ", "imp", "   ", "imp", "   ", "abs", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "zpx", "zpx", "zpy", "   ", "imp", "aby", "imp", "   ", "   ", "abx", "   ", "   ", "imm", "inx", "imm", "   ", "zp",  "zp",  "zp",  "   ", "imp", "imm", "imp", "   ", "abs", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "zpx", "zpx", "zpy", "   ", "imp", "aby", "imp", "   ", "abx", "abx", "aby", "   ", "imm", "inx", "   ", "   ", "zp",  "zp",  "zp",  "   ", "imp", "imm", "imp", "   ", "abs", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "   ", "zpx", "zpx", "   ", "imp", "aby", "   ", "   ", "   ", "abx", "abx", "   ", "imm", "inx", "   ", "   ", "zp",  "zp",  "zp",  "   ", "imp", "imm", "imp", "   ", "abs", "abs", "abs", "   ", "rel", "iny", "   ", "   ", "   ", "zpx", "zpx", "   ", "imp", "aby", "   ", "   ", "   ", "abx", "abx", "   "\]]
 set [OPCODES v] to [\["brk", "ora", "   ", "   ", "   ", "ora", "asl", "   ", "php", "ora", "asl", "   ", "   ", "ora", "asl", "   ", "bpl", "ora", "   ", "   ", "   ", "ora", "asl", "   ", "clc", "ora", "   ", "   ", "   ", "ora", "asl", "   ", "jsr", "and", "   ", "   ", "bit", "and", "rol", "   ", "plp", "and", "rol", "   ", "bit", "and", "rol", "   ", "bmi", "and", "   ", "   ", "   ", "and", "rol", "   ", "sec", "and", "   ", "   ", "   ", "and", "rol", "   ", "rti", "eor", "   ", "   ", "   ", "eor", "lsr", "   ", "pha", "eor", "lsr", "   ", "jmp", "eor", "lsr", "   ", "bvc", "eor", "   ", "   ", "   ", "eor", "lsr", "   ", "cli", "eor", "   ", "   ", "   ", "eor", "lsr", "   ", "rts", "adc", "   ", "   ", "   ", "adc", "ror", "   ", "pla", "adc", "ror", "   ", "jmp", "adc", "ror", "   ", "bvs", "adc", "   ", "   ", "   ", "adc", "ror", "   ", "sei", "adc", "   ", "   ", "   ", "adc", "ror", "   ", "   ", "sta", "   ", "   ", "sty", "sta", "stx", "   ", "dey", "   ", "txa", "   ", "sty", "sta", "stx", "   ", "bcc", "sta", "   ", "   ", "sty", "sta", "stx", "   ", "tya", "sta", "txs", "   ", "   ", "sta", "   ", "   ", "ldy", "lda", "ldx", "   ", "ldy", "lda", "ldx", "   ", "tay", "lda", "tax", "   ", "ldy", "lda", "ldx", "   ", "bcs", "lda", "   ", "   ", "ldy", "lda", "ldx", "   ", "clv", "lda", "tsx", "   ", "ldy", "lda", "ldx", "   ", "cpy", "cmp", "   ", "   ", "cpy", "cmp", "dec", "   ", "iny", "cmp", "dex", "   ", "cpy", "cmp", "dec", "   ", "bne", "cmp", "   ", "   ", "   ", "cmp", "dec", "   ", "cld", "cmp", "   ", "   ", "   ", "cmp", "dec", "   ", "cpx", "sbc", "   ", "   ", "cpx", "sbc", "inc", "   ", "inx", "sbc", "nop", "   ", "cpx", "sbc", "inc", "   ", "beq", "sbc", "   ", "   ", "   ", "sbc", "inc", "   ", "sed", "sbc", "   ", "   ", "   ", "sbc", "inc", "   "\]]
 set [BYTEORDER v] to [little]
-set [PAGE_WRAPPING_BUG v] to <false> //{"newRow":true}
+set [PAGE_WRAPPING_BUG v] to <false>
+set [ROM_START] to [32768] //{"newRow":true, "comment": "Shouldn't be at most 61440"}
 
 when [space v] key pressed
-set runtime var [memory] to (M___init__ (65536))
-set [memory] . [memory] to [{"64738": 169, "64739": 7, "64740": 133, "64740": 54}]
-set2 [cpu] [_] to (P_reset (P___init__ (runtime var [memory])))
-say [BYE] //{"newRow":true}
+set runtime var [memory] to (M___init__ [{"64738": 169, "64739": 5, "64740": 24, "64741": 105, "64742": 7, "64743": 141, "64744": 0, "64745": 2}])
+set2 [cpu] [_] to (P___init__ (runtime var [memory]))
+say (P_execute (runtime var [cpu]) [5]) //{"newRow":true}
 
-define M___init__ (size) //{"blockType":"textReporter"}
+define M___init__ (rom) //{"blockType":"textReporter"}
 set runtime var [mself] to [{}]
-set [mself] . [size] to (size::custom)
-set [mself] . [memory] to [{}]
+set [mself] . [size] to [65535]
+set [mself] . [memory] to (rom::custom)
+
 return (runtime var [mself])
 
 define M___getitem__(mself) (address) //{"blockType":"textReporter"}
@@ -25,7 +26,9 @@ else
 
 define M___setitem__(mself) (address) (value) //{"blockType":"textReporter"}
 set runtime var [mself] to (mself::custom)
-set [mself] . [memory] to (  set (address::custom) to (value::custom) in (get [mself] . [memory])  ) //{"newRow":true}
+if <(address::custom) < (ROM_START)> then
+    set [mself] . [memory] to (  set (address::custom) to (value::custom) in (get [mself] . [memory])  ) //{"newRow":true}
+end
 return (runtime var [mself])
 
 define array1 (a) //{"blockType":"textReporter"}
@@ -45,6 +48,12 @@ set runtime var (var::custom) to (set (key::custom) to (value::custom) in (runti
 
 define change (var) . (key) by (value)
 set (var::custom) . (key::custom) to ((get (key::custom) from (runtime var (var::custom))) + (value::custom))
+
+define change (var) . (key) within 8 bits by (value)
+set (var::custom) . (key::custom) to (((get (key::custom) from (runtime var (var::custom))) + (value::custom)) and [255])
+
+define change (var) . (key) within 16 bits by (value)
+set (var::custom) . (key::custom) to (((get (key::custom) from (runtime var (var::custom))) + (value::custom)) and [65535])
 
 define set2 (var1) (var2) to (value)
 set runtime var (var1::custom) to (in array (value::custom) get [0])
@@ -80,41 +89,35 @@ define P___init__(memory) //{"blockType":"textReporter", "comment": "Initialize 
 set runtime var [self] to [{}]
 set [self] . [memory] to (memory::custom)
 set [self] . [reg_a] to [0]
-set [self] . [reg_y] to [0]
 set [self] . [reg_x] to [0]
-set [self] . [program_counter] to [0]
-set [self] . [stack_pointer] to [0]
-set [self] . [instructions] to [0]
-set [self] . [flag_c] to <true>
-set [self] . [flag_z] to <true>
-set [self] . [flag_i] to <true>
-set [self] . [flag_d] to <true>
-set [self] . [flag_b] to <true>
-set [self] . [flag_v] to <true>
-set [self] . [flag_n] to <true>
+set [self] . [reg_y] to [0]
+set [self] . [flag_c] to <false>
+set [self] . [flag_z] to <false>
+set [self] . [flag_v] to <false>
+set [self] . [flag_n] to <false>
 return (runtime var [self])
 
 define P_reset(self) //{"blockType":"textReporter"}
 set runtime var [self] to (self::custom)
-set [self] . [program_counter] to ([1111110011100010] to number) //0xFCE2
-set [self] . [stack_pointer] to ([000111111101] to number) // 0x01FD
+set2 [self] [program_counter] to (P_read_word (runtime var [self]) [65532])
+set [self] . [program_counter] to (runtime var [program_counter])
+set [self] . [stack_pointer] to [253] // 0xFD
 set [self] . [instructions] to [0]
 set [self] . [flag_i] to <true>
 set [self] . [flag_d] to <false>
-set [self] . [flag_b] to <true>
 return (array2 (runtime var [self]) [null])
 
 
 define P_fetch_byte(self) //{"blockType":"textReporter"}
 set runtime var [self] to (self::custom)
 set2 [self] [data] to (P_read_byte (runtime var [self]) (get [self] . [program_counter]))
-change [self] . [program_counter] by [1]
+change [self] . [program_counter] within 16 bits by [1]
 return (array2 (runtime var [self]) (runtime var [data]))
 
 define P_fetch_word(self) //{"blockType":"textReporter"}
 set runtime var [self] to (self::custom)
 set2 [self] [data] to (P_read_word (runtime var [self]) (get [self] . [program_counter]) <false>)
-change [self] . [program_counter] by [2]
+change [self] . [program_counter] within 16 bits by [2]
 return (array2 (runtime var [self]) (runtime var [data]))
 
 define P_read_byte(self) (address) //{"blockType":"textReporter"}
@@ -153,15 +156,15 @@ else
     set runtime var [value2] to ((value::custom) and [255])
 end
 set2 [self] [_] to (P_write_byte (runtime var [self]) (address::custom) (runtime var [value1]))
-set2 [self] [_] to (P_write_byte (runtime var [self]) ((address::custom)+[1]) (runtime var [value2]))
+set2 [self] [_] to (P_write_byte (runtime var [self]) (((address::custom)+[1]) and [65535]) (runtime var [value2]))
 return (array2 (runtime var [self]) [null])
 
-define P_read_flags_register(self) //{"blockType":"textReporter"}
+define P_read_flags_register(self) <flag_b> //{"blockType":"textReporter"}
 set runtime var [self] to (self::custom)
 set runtime var [data] to [0]
 set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_n])> then [128] else [0])  )
 set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_v])> then  [64] else [0])  )
-set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_b])> then  [16] else [0])  )
+set runtime var [data] to (  (runtime var [data]) or (if <flag_b::custom         > then  [16] else [0])  )
 set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_d])> then   [8] else [0])  )
 set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_i])> then   [4] else [0])  )
 set runtime var [data] to (  (runtime var [data]) or (if <(get [self] . [flag_z])> then   [2] else [0])  )
@@ -180,8 +183,8 @@ return (array2 (runtime  var [self]) [null])
 
 define P_push_byte(self) (data) //{"blockType":"textReporter"}
 set runtime var [self] to (self::custom)
-set [self] . [memory] to (M___setitem__  (get [self] . [memory]) (get [self] . [stack_pointer]) (data::custom)  )
-change [self] . [stack_pointer] by [-1]
+change [self] . [stack_pointer] within 8 bits by [-1]
+set [self] . [memory] to (M___setitem__  (get [self] . [memory]) ([256] + (get [self] . [stack_pointer])) (data::custom)  )
 return (array2 (runtime  var [self]) [null])
 
 define P_push_word(self) (data) //{"blockType":"textReporter"}
@@ -199,8 +202,8 @@ return (array2 (runtime  var [self]) [null])
 
 define P_pop_byte(self) //{"blockType":"textReporter"}
 set runtime var [self] to (self::custom)
-change [self] . [stack_pointer] by [1]
-set runtime var [data] to (M___getitem__ (get [self] . [memory]) (get [self] . [stack_pointer]))
+set runtime var [data] to (M___getitem__ (get [self] . [memory]) ([256] + (get [self] . [stack_pointer])))
+change [self] . [stack_pointer] within 8 bits by [1]
 return (array2 (runtime  var [self]) (runtime var [data]))
 
 define P_pop_word(self) //{"blockType":"textReporter"}
@@ -404,7 +407,7 @@ switch (instr_name::custom)
     end
     case [asl]
         set [self] . [flag_c] to <((operand::custom) and [128])>
-        set runtime var [result] to (((operand::custom) \<\< [1]) and [255])
+        set runtime var [result] to ((operand::custom) \<\< [1])
         if <(mode::custom) = [acc]> then
             set [self] . [reg_a] to (runtime var [result])
         else
@@ -414,17 +417,17 @@ switch (instr_name::custom)
     end
     case [bcc]
         if <not <(get [self] . [flag_c])>> then
-            change [self] . [program_counter] by (help_twos_complement (operand::custom))
+            change [self] . [program_counter] within 16 bits by (help_twos_complement (operand::custom))
         end
     end
     case [bcs]
         if <(get [self] . [flag_c])> then
-            change [self] . [program_counter] by (help_twos_complement (operand::custom))
+            change [self] . [program_counter] within 16 bits by (help_twos_complement (operand::custom))
         end
     end
     case [beq]
         if <(get [self] . [flag_z])> then
-            change [self] . [program_counter] by (help_twos_complement (operand::custom))
+            change [self] . [program_counter] within 16 bits by (help_twos_complement (operand::custom))
         end
     end
     case [bit]
@@ -434,17 +437,17 @@ switch (instr_name::custom)
     end
     case [bmi]
         if <(get [self] . [flag_n])> then
-            change [self] . [program_counter] by (help_twos_complement (operand::custom))
+            change [self] . [program_counter] within 16 bits by (help_twos_complement (operand::custom))
         end
     end
     case [bne]
         if <not <(get [self] . [flag_z])>> then
-            change [self] . [program_counter] by (help_twos_complement (operand::custom))
+            change [self] . [program_counter] within 16 bits by (help_twos_complement (operand::custom))
         end
     end
     case [bpl]
         if <not <(get [self] . [flag_n])>> then
-            change [self] . [program_counter] by (help_twos_complement (operand::custom))
+            change [self] . [program_counter] within 16 bits by (help_twos_complement (operand::custom))
         end
     end
     case [brk]
@@ -452,12 +455,12 @@ switch (instr_name::custom)
     end
     case [bvc]
         if <not <(get [self] . [flag_v])>> then
-            change [self] . [program_counter] by (help_twos_complement (operand::custom))
+            change [self] . [program_counter] within 16 bits by (help_twos_complement (operand::custom))
         end
     end
     case [bvs]
         if <(get [self] . [flag_v])> then
-            change [self] . [program_counter] by (help_twos_complement (operand::custom))
+            change [self] . [program_counter] within 16 bits by (help_twos_complement (operand::custom))
         end
     end
     case [clc]
@@ -485,15 +488,15 @@ switch (instr_name::custom)
         set [self] . [flag_c] to <help_is_greater_equal  (get [self] . [reg_y]) (operand::custom) <(get [self] . [flag_d])>  >
     end
     case [dec]
-        set2 [self] [_] to (P_write_byte  (runtime var [self]) (address::custom) ((operand::custom) - [1])  )
-        set2 [self] [_] to (P_evaluate_flags_nz  (runtime var [self]) ((operand::custom) - [1])  )
+        set2 [self] [_] to (P_write_byte  (runtime var [self]) (address::custom) (((operand::custom) - [1]) and [255])  )
+        set2 [self] [_] to (P_evaluate_flags_nz  (runtime var [self]) (((operand::custom) - [1]) and [255])  )
     end
     case [dex]
-        change [self] . [reg_x] by [-1]
+        change [self] . [reg_x] within 8 bits by [-1]
         set2 [self] [_] to (P_evaluate_flags_nz_x (runtime var [self]))
     end
     case [dey]
-        change [self] . [reg_y] by [-1]
+        change [self] . [reg_y] within 8 bits by [-1]
         set2 [self] [_] to (P_evaluate_flags_nz_y (runtime var [self]))
     end
     case [eor]
@@ -501,15 +504,15 @@ switch (instr_name::custom)
         set2 [self] [_] to (P_evaluate_flags_nz_a (runtime var [self]))
     end
     case [inc]
-        set2 [self] [_] to (P_write_byte  (runtime var [self]) (address::custom) ((operand::custom) + [1])  )
-        set2 [self] [_] to (P_evaluate_flags_nz  (runtime var [self]) ((operand::custom) + [1])  )
+        set2 [self] [_] to (P_write_byte  (runtime var [self]) (address::custom) (((operand::custom) + [1]) and [255])  )
+        set2 [self] [_] to (P_evaluate_flags_nz  (runtime var [self]) (((operand::custom) + [1]) and [255])  )
     end
     case [inx]
-        change [self] . [reg_x] by [1]
+        change [self] . [reg_x] within 8 bits by [1]
         set2 [self] [_] to (P_evaluate_flags_nz_x (runtime var [self]))
     end
     case [iny]
-        change [self] . [reg_y] by [1]
+        change [self] . [reg_y] within 8 bits by [1]
         set2 [self] [_] to (P_evaluate_flags_nz_y (runtime var [self]))
     end
     case [jmp]
@@ -562,9 +565,91 @@ switch (instr_name::custom)
     case [pha]
         set2 [self] [_] to (P_push_byte (runtime var [self]) (get [self] . [reg_a]))
     end
+    case [php]
+        set2 [self] [status_register] to (P_read_flags_register (runtime var [self]) <true>)
+        set2 [self] [_] to (P_push_byte (runtime var [self]) (runtime var [status_register]))
+    end
     case [pla]
         set2 [self] [acc] to (P_pop_byte (runtime var [self]))
         set [self] . [reg_a] to (runtime var [acc])
+        set2 [self] [_] to (P_evaluate_flags_nz_a (runtime var [self]))
+    end
+    case [plp]
+        set2 [self] [status_register] to (P_pop_byte (runtime var [self]))
+        set2 [self] [_] to (P_set_flags_register (runtime var [self]) (runtime var [status_register]))
+    end
+    case [rol]
+        set runtime var [result] to ((((operand::custom) \<\< [1]) and [255]) or (get [self] . [flag_c]))
+        set [self] . [flag_c] to <((operand::custom) and [128])>
+        if <(mode::custom) = [acc]> then
+            set [self] . [reg_a] to (runtime var [result])
+        else
+            set2 [self] [_]  to (P_write_byte (runtime var [self]) (address::custom) (runtime var [result]))
+        end
+        set2 [self] [_] to (P_evaluate_flags_nz (runtime var [self]) (runtime var [result]))
+    end
+    case [ror]
+        set runtime var [result] to (((get [self] . [flag_c]) \<\< [7]) or ((operand::custom) >> [1]))
+        set [self] . [flag_c] to <((operand::custom) and [1])>
+        if <(mode::custom) = [acc]> then
+            set [self] . [reg_a] to (runtime var [result])
+        else
+            set2 [self] [_]  to (P_write_byte (runtime var [self]) (address::custom) (runtime var [result]))
+        end
+        set2 [self] [_] to (P_evaluate_flags_nz (runtime var [self]) (runtime var [result]))
+    end
+    case [rti]
+        set2 [self] [status_register] to (P_pop_byte (runtime var [self]))
+        set2 [self] [_] to (P_set_flags_register (runtime var [self]) (runtime var [status_register]))
+        set2 [self] [program_counter] to (P_pop_word (runtime var [self]))
+        set [self] . [program_counter] to (runtime var [program_counter])
+    end
+    case [rts]
+        set2 [self] [return_address] to (P_pop_word (runtime var [self]))
+        set [self] . [program_counter] to (((runtime var [return_address]) + [1]) and [65535])
+    end
+    case [sbc]
+        set2 [self] [_] to (P_instr_sbc (runtime var [self]) (mode::custom) (operand::custom) (address::custom))
+    end
+    case [sec]
+        set [self] . [flag_c] to <true>
+    end
+    case [sed]
+        set [self] . [flag_d] to <true>
+    end
+    case [sei]
+        set [self] . [flag_i] to <true>
+    end
+    case [sta]
+        set2 [self] [_]  to (P_write_byte (runtime var [self]) (address::custom) (get [self] . [reg_a]))
+    end
+    case [stx]
+        set2 [self] [_]  to (P_write_byte (runtime var [self]) (address::custom) (get [self] . [reg_x]))
+    end
+    case [sty]
+        set2 [self] [_]  to (P_write_byte (runtime var [self]) (address::custom) (get [self] . [reg_y]))
+    end
+    case [tax]
+        set [self] . [reg_x] to (get [self] . [reg_a])
+        set2 [self] [_] to (P_evaluate_flags_nz_x (runtime var [self]))
+    end
+    case [tay]
+        set [self] . [reg_y] to (get [self] . [reg_a])
+        set2 [self] [_] to (P_evaluate_flags_nz_y (runtime var [self]))
+    end
+    case [tsx]
+        set [self] . [reg_x] to (get [self] . [stack_pointer])
+        set2 [self] [_] to (P_evaluate_flags_nz_x (runtime var [self]))
+    end
+    case [txa]
+        set [self] . [reg_a] to (get [self] . [reg_x])
+        set2 [self] [_] to (P_evaluate_flags_nz_a (runtime var [self]))
+    end
+    case [txs]
+        set [self] . [stack_pointer] to (get [self] . [reg_x])
+    end
+    case [tya]
+        set [self] . [reg_a] to (get [self] . [reg_y])
         set2 [self] [_] to (P_evaluate_flags_nz_a (runtime var [self]))
     end
 end
@@ -596,12 +681,36 @@ set [self] . [reg_a] to (runtime var [final_result])
 set2 [self] [_] to (P_evaluate_flags_nz_a (runtime var [self]))
 return (array2 (runtime var [self]) [null])
 
+define P_instr_sbc(self) (mode) (operand) (address) //{"blockType":"textReporter"}
+set runtime var [self] to (self::custom)
+if <(get [self] . [flag_d])> then
+    set runtime var [low_nibble] to (  (((get [self] . [reg_a]) and [15]) - ((operand::custom) and [15])) - <not <(get [self] . [flag_c])>>  )
+    set runtime var [high_nibble] to (  ((get [self] . [reg_a]) >> [4]) - ((operand::custom) >> [4])  )
+    if <(runtime var [low_nibble]) < [0]> then
+        change runtime var [low_nibble] by [10]
+        change runtime var [high_nibble] by [-1]
+    end
+    if <(runtime var [high_nibble]) < [0]> then
+        change runtime var [high_nibble] by [10]
+        set [self] . [flag_c] to <false>
+    else
+        set [self] . [flag_c] to <true>
+    end
+    set runtime var [final_result] to (((runtime var [low_nibble]) \<\< [4]) or (runtime var [low_nibble]))
+else
+    set runtime var [intermediary_result] to (  ((get [self] . [reg_a]) - (operand::custom)) - <not <(get [self] . [flag_c])>>  )
+    set runtime var [final_result] to ((runtime var [intermediary_result]) and (255))
+    set [self] . [flag_c] to <not <(runtime var [intermediary_result]) < [0]>>
+end
+set [self] . [flag_v] to <((  ((get [self] . [reg_a]) xor (operand::custom))  and  ((get [self] . [reg_a]) xor (runtime var [final_result]))  ) and [128])>
+set [self] . [reg_a] to (runtime var [final_result])
+set2 [self] [_] to (P_evaluate_flags_nz_a (runtime var [self]))
+return (array2 (runtime var [self]) [null])
+
 define P_instr_brk(self) (mode) (operand) (address) //{"blockType":"textReporter"}
 set runtime var [self] to (self::custom)
 set2 [self] [_] to (P_push_word (runtime var [self]) (get [self] . [program_counter]))
-set [self] . [flag_b] to <true>
-set2 [self] [status_register] to (P_read_flags_register (runtime var [self]))
-set [self] . [flag_b] to <false>
+set2 [self] [status_register] to (P_read_flags_register (runtime var [self]) <true>)
 set2 [self] [_] to (P_push_byte (runtime var [self]) (runtime var [status_register]))
 set2 [self] [pc] to (P_read_word (runtime var [self]) [65534] <false>)
 set [self] . [program_counter] to (runtime var [pc])
