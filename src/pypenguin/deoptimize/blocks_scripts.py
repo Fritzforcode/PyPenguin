@@ -556,7 +556,7 @@ def unprepareBlocks(data):
     mutationDatas = {}
     for blockData in data.values():
         if isinstance(blockData, dict):
-            print("- opcode", blockData["opcode"], repr(blockData.get("mutation", {}).get("proccode")))
+            #print("- opcode", blockData["opcode"], repr(blockData.get("mutation", {}).get("proccode")))
             if blockData["opcode"] == "procedures_prototype":
                 mutationData = blockData["mutation"]
                 mutationDatas[mutationData["proccode"]] = mutationData
