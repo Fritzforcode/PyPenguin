@@ -1,30 +1,31 @@
-from pypenguin.database.motion                   import opcodes as motion
-from pypenguin.database.looks                    import opcodes as looks
-from pypenguin.database.sounds                   import opcodes as sounds
-from pypenguin.database.events                   import opcodes as events
-from pypenguin.database.control                  import opcodes as control
-from pypenguin.database.sensing                  import opcodes as sensing
-from pypenguin.database.operators                import opcodes as operators
-from pypenguin.database.variables                import opcodes as variables
-from pypenguin.database.lists                    import opcodes as lists
+from pypenguin.database.beautiful.motion                   import opcodes as motion
+from pypenguin.database.beautiful.looks                    import opcodes as looks
+from pypenguin.database.beautiful.sounds                   import opcodes as sounds
+from pypenguin.database.beautiful.events                   import opcodes as events
+from pypenguin.database.beautiful.control                  import opcodes as control
+from pypenguin.database.beautiful.sensing                  import opcodes as sensing
+from pypenguin.database.beautiful.operators                import opcodes as operators
+from pypenguin.database.beautiful.variables                import opcodes as variables
+from pypenguin.database.beautiful.lists                    import opcodes as lists
 
-from pypenguin.database.special                  import opcodes as special
-from pypenguin.database.extension_music          import opcodes as extension_music
-from pypenguin.database.extension_pen            import opcodes as extension_pen
-from pypenguin.database.extension_text           import opcodes as extension_text
-from pypenguin.database.extension_video_sensing  import opcodes as extension_video_sensing
-from pypenguin.database.extension_text_to_speech import opcodes as extension_text_to_speech
-from pypenguin.database.extension_translate      import opcodes as extension_translate
-from pypenguin.database.extension_makey_makey    import opcodes as extension_makey_makey
+from pypenguin.database.beautiful.special                  import opcodes as special
+from pypenguin.database.beautiful.extension_music          import opcodes as extension_music
+from pypenguin.database.beautiful.extension_pen            import opcodes as extension_pen
+from pypenguin.database.beautiful.extension_text           import opcodes as extension_text
+from pypenguin.database.beautiful.extension_video_sensing  import opcodes as extension_video_sensing
+from pypenguin.database.beautiful.extension_text_to_speech import opcodes as extension_text_to_speech
+from pypenguin.database.beautiful.extension_translate      import opcodes as extension_translate
+from pypenguin.database.beautiful.extension_makey_makey    import opcodes as extension_makey_makey
 
-from pypenguin.database.tw_files                 import opcodes as tw_files
-from pypenguin.database.tw_temporary_variables   import opcodes as tw_temporary_variables
+from pypenguin.database.beautiful.tw_files                 import opcodes as tw_files
+from pypenguin.database.beautiful.tw_temporary_variables   import opcodes as tw_temporary_variables
 
-from pypenguin.database.link_bitwise             import opcodes as link_bitwise
+from pypenguin.database.beautiful.link_bitwise             import opcodes as link_bitwise
 
-from pypenguin.database.pm_json                  import opcodes as pm_json
+from pypenguin.database.beautiful.pm_json                  import opcodes as pm_json
 
-from pypenguin.utility                           import flipKeysAndValues, removeDuplicates
+#from pypenguin.utility                           import flipKeysAndValues, removeDuplicates
+from utility import flipKeysAndValues, removeDuplicates
 
 import functools, re
 
@@ -199,16 +200,16 @@ def getMenu(opcode, inputId):
     return None
 
 def getInputMagicNumber(inputType):
-    match inputType:
-        case "broadcast"       : magicNumber = 11
-        case "text"            : magicNumber = 10
-        case "color"           : magicNumber =  9
-        case "direction"       : magicNumber =  8
-        case "integer"         : magicNumber =  7
-        case "positive integer": magicNumber =  6
-        case "positive number" : magicNumber =  5
-        case "number"          : magicNumber =  4
-        case "boolean"         : pass
+    return {
+        "broadcast"       : 11,
+        "text"            : 10,
+        "color"           :  9,
+        "direction"       :  8,
+        "integer"         :  7,
+        "positive integer":  6,
+        "positive number" :  5,
+        "number"          :  4,
+    }[inputType] # "boolean" can't occur
     return magicNumber
 
 def getOptionType(opcode, optionId):

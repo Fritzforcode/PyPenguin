@@ -10,7 +10,7 @@ scriptA = {"position": [0, 0], "blocks": [
     },
 ]}
 
-from pypenguin.utility import readJSONFile
+from utility import readJSONFile
 projectData = readJSONFile("btt/project.json")
 
 projectData2 = {

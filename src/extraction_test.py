@@ -1,5 +1,5 @@
 from pypenguin import extractProject, compressProject, validateProject
-from pypenguin.utility import Platform
+from utility import Platform
 
 
 optimizedData = extractProject(

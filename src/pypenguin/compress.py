@@ -4,7 +4,7 @@ import urllib.parse
 from pypenguin.deoptimize import deoptimizeProject
 from pypenguin.deoptimize.costumes_sounds import finalizeCostume, finalizeSound
 
-from pypenguin.utility import readJSONFile, writeJSONFile, ensureCorrectPath, getUniqueFilename, generateMd5, getImageSize, getAudioInfo, Platform
+from utility import readJSONFile, writeJSONFile, ensureCorrectPath, getUniqueFilename, generateMd5, getImageSize, getAudioInfo, Platform
 
 from pypenguin.database import defaultCostumeFilePath
 

@@ -1,4 +1,4 @@
-from pypenguin.utility import stringToToken
+from utility import stringToToken
 from pypenguin.database import getDeoptimizedOpcode, getDeoptimizedOptionId
 
 def translateMonitor(data):

@@ -1,6 +1,6 @@
 import sys,os;sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from pypenguin import validateProject, compressProject
-from pypenguin.utility import writeJSONFile, pp, Platform
+from utility import writeJSONFile, pp, Platform
 from helpers import *
 import json
 

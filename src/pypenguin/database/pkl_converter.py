@@ -2,8 +2,8 @@ import os
 import pickle
 import importlib.util
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
-from pypenguin.utility import ensureCorrectPath
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from utility import ensureCorrectPath
 FOLDER_PATH = ensureCorrectPath("src/pypenguin/database/beautiful/", "PyPenguin")
 OUTPUT_FILE = ensureCorrectPath("src/pypenguin/database/database.pkl", "PyPenguin")
 
@@ -11,7 +11,6 @@ combined_opcodes = {}
 
 # Loop through all .py files in the folder
 print(os.listdir(FOLDER_PATH))
-raise Exception()
 for filename in os.listdir(FOLDER_PATH):
     if filename.endswith(".py") and filename != "__init__.py":
         file_path = os.path.join(FOLDER_PATH, filename)

@@ -1,6 +1,6 @@
 import json, copy
 
-from pypenguin.utility import numberToLiteral, BlockSelector, generateRandomToken, parseCustomOpcode, stringToToken, LocalStringToToken, Platform, getSelectors, editDataStructure, removeDuplicates
+from utility import numberToLiteral, BlockSelector, generateRandomToken, parseCustomOpcode, stringToToken, LocalStringToToken, Platform, getSelectors, editDataStructure, removeDuplicates, pp
 from pypenguin.deoptimize.options import translateOptions
 from pypenguin.deoptimize.comments import translateComment
 from pypenguin.database import *
@@ -605,8 +605,6 @@ def unprepareBlocks(data):
                 del blockData["fields"]["VERTEX_COUNT"]
             newBlockDatas[blockId] = blockData
     return newBlockDatas
-
-from pypenguin.utility import pp
 
 # Replaces block selectors with literals eg. "t"
 def makeJsonCompatible(data, commentDatas, targetPlatform):  

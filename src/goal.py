@@ -79,7 +79,7 @@ def P_reset(self: dict) -> None:
     :return: None
     """
     #self["program_counter"] = 0xFCE2  # Hardcoded start vector post-reset
-    self, self["program_counter"] = P_read_word(self, 0xFFFC) # Read start vector from 0xFFFC-D
+    self, self["program_counter"] = P_read_word(self, 0xFFFC, False) # Read start vector from 0xFFFC-D
     self["stack_pointer"]   = 0xFD  # Hardcoded stack pointer post-reset
     self["instructions"]    = 0
 
@@ -105,7 +105,7 @@ def P_fetch_word(self: dict) -> int:
     :param address: The address to read from
     :return: int
     """
-    self, data = P_read_word(self, self["program_counter"])
+    self, data = P_read_word(self, self["program_counter"], False)
     self["program_counter"] = (self["program_counter"] + 2) and 0xFFFF
     return self, data
 
@@ -119,7 +119,7 @@ def P_read_byte(self: dict, address: int) -> int:
     data = M___getitem__(self["memory"], address)
     return self, data
 
-def P_read_word(self: dict, address: int, page_wrapping_bug: bool = False) -> int:
+def P_read_word(self: dict, address: int, page_wrapping_bug: bool) -> int:
     """
     Read a word from memory.
 
@@ -381,7 +381,7 @@ def P_addressing_aby(self: dict):
 def P_addressing_ind(self: dict):
     """ Indexed Indirect Addressing. """
     self, address = P_fetch_word(self)  # Fetch 16-bit address
-    self, operand = P_read_byte(self, address)  # Read from computed address
+    self, operand = P_read_word(self, address, False)  # Read from computed address
     return self, operand, (address,)
 
 def P_addressing_inx(self: dict):
@@ -396,7 +396,7 @@ def P_addressing_inx(self: dict):
     """
     self, base_address = P_fetch_byte(self)
     zp_address = (base_address + self["reg_x"]) & 0xFF  # Zero-page wrap-around
-    self, final_address = P_read_word(self, zp_address)  # Fetch 16-bit address
+    self, final_address = P_read_word(self, zp_address, False)  # Fetch 16-bit address
     self, operand = P_read_byte(self, final_address)  # Read from computed address
     return self, operand, (final_address,)
 
@@ -411,7 +411,7 @@ def P_addressing_iny(self: dict):
     4. Read operand from final address.
     """
     self, base_address = P_fetch_byte(self)
-    self, zp_address = P_read_word(self, base_address)  # Fetch 16-bit address
+    self, zp_address = P_read_word(self, base_address, False)  # Fetch 16-bit address
     final_address = (zp_address + self["reg_y"]) & 0xFFFF  # Handle wrapping
     self, operand = P_read_byte(self, final_address)  # Read from computed address
     return self, operand, (final_address,)
@@ -592,7 +592,7 @@ def P_ins_brk(self: dict, mode: str) -> None:
     self, _ = P_push_byte(self, status_register)
 
     # Fetch the IRQ/BRK vector at 0xFFFE-0xFFFF
-    self, self["program_counter"] = P_read_word(self, 0xFFFE) # Set PC to the interrupt handler address
+    self, self["program_counter"] = P_read_word(self, 0xFFFE, False) # Set PC to the interrupt handler address
 
     # Set Interrupt Disable flag (I = 1)
     self["flag_i"] = True
@@ -748,18 +748,16 @@ def P_ins_iny(self: dict, mode: str) -> None:
     self, _ = P_evaluate_flags_nz_y(self)
     return self, None
 
-def P_ins_jmp(self: dict, mode: str) -> None:
+def P_ins_jmp(self: dict, mode: str, operand: int, address: int, *args) -> None:
     """
     JMP - Jump to New Location.
     :return: None
     """
     match mode:
         case "abs":
-            self, program_counter = P_fetch_word(self)
+            self["program_counter"] = address
         case "ind":
-            self, pointer_address = P_fetch_word(self)
-            self, program_counter = P_read_word(self, pointer_address, page_wrapping_bug=PAGE_WRAPPING_BUG)
-    self["program_counter"] = program_counter
+            self["program_counter"] = operand
     return self, None
 
 def P_ins_jsr(self: dict, mode: str) -> None:

@@ -6,15 +6,14 @@ set [PAGE_WRAPPING_BUG v] to <false>
 set [ROM_START] to [32768] //{"newRow":true, "comment": "Shouldn't be at most 61440"}
 
 when [space v] key pressed
-set runtime var [memory] to (M___init__ [{"64738": 169, "64739": 5, "64740": 24, "64741": 105, "64742": 7, "64743": 141, "64744": 0, "64745": 2}])
-set2 [cpu] [_] to (P___init__ (runtime var [memory]))
+set runtime var [memory] to (M___init__ [{"49152": 162, "49153": 0, "49154": 224, "49155": 69, "49156": 240, "49157": 4, "49158": 232, "49159": 76, "49160": 2, "49161": 192, "49162": 0, "65532": 0, "65533": 192}])
+set runtime var [cpu] to (P___init__ (runtime var [memory]))
 say (P_execute (runtime var [cpu]) [5]) //{"newRow":true}
 
 define M___init__ (rom) //{"blockType":"textReporter"}
 set runtime var [mself] to [{}]
 set [mself] . [size] to [65535]
 set [mself] . [memory] to (rom::custom)
-
 return (runtime var [mself])
 
 define M___getitem__(mself) (address) //{"blockType":"textReporter"}
@@ -95,18 +94,18 @@ set [self] . [flag_c] to <false>
 set [self] . [flag_z] to <false>
 set [self] . [flag_v] to <false>
 set [self] . [flag_n] to <false>
+set2 [self] [_] to (P_reset (runtime var [self]))
 return (runtime var [self])
 
 define P_reset(self) //{"blockType":"textReporter"}
 set runtime var [self] to (self::custom)
-set2 [self] [program_counter] to (P_read_word (runtime var [self]) [65532])
+set2 [self] [program_counter] to (P_read_word (runtime var [self]) [65532] <false>) // 0xFFFC-0xFFFD
 set [self] . [program_counter] to (runtime var [program_counter])
 set [self] . [stack_pointer] to [253] // 0xFD
 set [self] . [instructions] to [0]
 set [self] . [flag_i] to <true>
 set [self] . [flag_d] to <false>
 return (array2 (runtime var [self]) [null])
-
 
 define P_fetch_byte(self) //{"blockType":"textReporter"}
 set runtime var [self] to (self::custom)
@@ -322,7 +321,7 @@ return (  array3 (runtime var [self]) (runtime var [operand]) (array1 (runtime v
 define P_addressing_ind(self) //{"blockType":"textReporter"}
 set runtime var [self] to (self::custom)
 set2 [self] [address] to (P_fetch_word (runtime var [self]))
-set2 [self] [operand] to (P_read_byte (runtime var [self]) (runtime var [address]))
+set2 [self] [operand] to (P_read_word (runtime var [self]) (runtime var [address]) <false>)
 return (  array3 (runtime var [self]) (runtime var [operand]) (array1 (runtime var [address]))  )
 
 define P_addressing_inx(self) //{"blockType":"textReporter"}
@@ -518,14 +517,12 @@ switch (instr_name::custom)
     case [jmp]
         switch (mode::custom)
             case [abs]
-                set2 [self] [program_counter] to (P_fetch_word (runtime var [self]))
+                set [self] . [program_counter] to (address::custom)
             end
             case [ind]
-                set2 [self] [pointer_address] to (P_fetch_word (runtime var [self]))
-                set2 [self] [program_counter] to (P_read_word  (runtime var [self]) (runtime var [pointer_address]) <(PAGE_WRAPPING_BUG)>  )
+                set [self] . [program_counter] to (operand::custom)
             end
         end
-        set [self] . [program_counter] to (runtime var [program_counter])
     end
     case [jsr]
         switch (mode::custom)

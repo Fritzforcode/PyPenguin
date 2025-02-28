@@ -1,4 +1,4 @@
-from pypenguin.utility import parseCustomOpcode, getListOfClosestStrings
+from utility import parseCustomOpcode, getListOfClosestStrings
 from pypenguin.validate.constants import validateSchema, formatError, inputSchema, blockSchema, scriptSchema
 from pypenguin.validate.errors import blockTypeError, unknownOpcodeError, inputIdError, missingInputAttributeError, optionIdError, optionValueCategoryError, optionValueError, undefinedVariableError, undefinedListError, undefinedCustomOpcodeError, embeddedMenuError
 from pypenguin.validate.comments import validateComment

@@ -1,5 +1,5 @@
 import platform, subprocess, json, shutil, sys, shlex, json, os
-from pypenguin.utility import readJSONFile, writeJSONFile, ensureCorrectPath, pp, generateCustomOpcode
+from utility import readJSONFile, writeJSONFile, ensureCorrectPath, pp, generateCustomOpcode
 from pypenguin.database import getArgumentOrder, getOptimizedOpcode, autocompleteOptionValue, getInputType, getOptionType, getOptionValueDefault, opcodeExists
 
 COMMENT_X_OFFSET = 400

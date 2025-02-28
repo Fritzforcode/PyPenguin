@@ -1,6 +1,6 @@
 import json, copy
 from enum import Enum
-from pypenguin.utility import editDataStructure, BlockSelector, LocalStringToToken, getDataAtPath, pp
+from utility import editDataStructure, BlockSelector, LocalStringToToken, getDataAtPath, pp
 from pypenguin.database import getBlockType
 
 class PathConstant(Enum):

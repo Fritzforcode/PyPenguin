@@ -1,4 +1,4 @@
-from pypenguin.utility import stringToToken
+from utility import stringToToken
 import json
 
 def adaptProject(data):

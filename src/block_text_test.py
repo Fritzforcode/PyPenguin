@@ -1,9 +1,9 @@
 import pypenguin
 import json
 import os # For convenience and creating a dir
-from pypenguin.utility import pp
+import utility
 # Parse scratchblocks text
-with open(pypenguin.utility.ensureCorrectPath("src/code.txt", "PyPenguin")) as file:
+with open(utility.ensureCorrectPath("src/code.txt", "PyPenguin")) as file:
     block_text = file.read()
 block_text2 = r"""
 define M___init__ (size) //{"blockType":"textReporter"}
@@ -21,7 +21,7 @@ globalVariables = ["ADDRESSING", "OPCODES", "BYTEORDER", "PAGE_WRAPPING_BUG", "R
 
 generated_scripts = pypenguin.parseBlockText(block_text)
 
-project_directory = pypenguin.utility.ensureCorrectPath("btt", "PyPenguin")
+project_directory = utility.ensureCorrectPath("btt", "PyPenguin")
 penguinmod_file   = "export.pmp"
 target_platform   = pypenguin.Platform.PENGUINMOD
 
@@ -51,7 +51,7 @@ with open(os.path.join(project_directory, "project.json"), "w") as file_object:
 
 # Make sure our project is valid. The Validator is NOT perfect!
 # If the project is invalid, an Exception will be raised.
-pp(project)
+#pp(project)
 pypenguin.validateProject(project)
 
 

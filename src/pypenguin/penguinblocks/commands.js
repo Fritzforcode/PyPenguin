@@ -1739,6 +1739,13 @@ export default [
     shape: "reporter",
     category: "pm_control",
   },
+  {
+    id: "pm_control.backToGreenFlag",
+    spec: "run @greenFlag",
+    inputs: [],
+    shape: "command",
+    category: "pm_control",
+  },
   // Operators (Incomplete)
   {
     id: "pm_operators.gtorequal",

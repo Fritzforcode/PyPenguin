@@ -3,7 +3,7 @@ from pypenguin.optimize import optimizeProjectJSON
 import urllib.parse
 import os, shutil, zipfile
 
-from pypenguin.utility import readJSONFile, writeJSONFile, ensureCorrectPath, getUniqueFilename, ensureEmptyDir, getImageSize, Platform
+from utility import readJSONFile, writeJSONFile, ensureCorrectPath, getUniqueFilename, ensureEmptyDir, getImageSize, Platform
 
 def extractProject(
     projectFilePath         : str,
