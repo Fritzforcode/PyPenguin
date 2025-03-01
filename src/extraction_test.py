@@ -3,7 +3,7 @@ from utility import Platform
 
 
 optimizedData = extractProject(
-    projectFilePath          = "assets/categories/operators.pmp",
+    projectFilePath          = "assets/categories/extension_text.pmp",
 #    projectFilePath          = "assets/studies/assetTest.pmp",
 #    projectFilePath          = "assets/from_online/The Tale of the Three Shapes.sb3",
 #    projectFilePath          = "Greatest Common Division.pmp",

@@ -26,11 +26,11 @@ for opcode, data in opcodes.items():
     
     
     string += "  {\n"
-    string += "    id: " + json.dumps(blockId) + "\n"
-    string += "    spec: " + json.dumps(spec) + "\n"
-    string += "    inputs: " + json.dumps(inputs) + "\n"
-    string += "    shape: " + json.dumps(shape) + "\n"
-    string += "    category: " + json.dumps(cat) + "\n"
+    string += "    id: " + json.dumps(blockId) + ",\n"
+    string += "    spec: " + json.dumps(spec) + ",\n"
+    string += "    inputs: " + json.dumps(inputs) + ",\n"
+    string += "    shape: " + json.dumps(shape) + ",\n"
+    string += "    category: " + json.dumps(cat) + ",\n"
     string += "  },\n"
     
 """{

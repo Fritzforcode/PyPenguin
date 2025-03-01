@@ -1,24 +1,27 @@
 scriptA = {"position": [0, 0], "blocks": [
     {
-        "opcode": "set runtime var (VARIABLE) to (VALUE)",
+        "opcode": "broadcast ([MESSAGE]) and wait",
         "inputs": {
-            "VARIABLE": {"text": "ABc"},
-            "VALUE": {"block": {
-                "opcode": "new line"
-            }},
+            "MESSAGE": {
+                "option": [
+                    "value",
+                    "refresh"
+                ]
+            }
         },
-    },
+        "options": {}
+    }
 ]}
 
 from utility import readJSONFile
-projectData = readJSONFile("btt/project.json")
+#projectData = readJSONFile("btt/project.json", ensurePath=True)
 
 projectData = {
     "sprites": [
         {
             "name": "Stage",
             "isStage": True,
-            "scripts": [],
+            "scripts": [scriptA],
             "comments": [],
             "currentCostume": 0,
             "costumes": [],
@@ -99,12 +102,12 @@ from pypenguin import validateProject, compressProject
 from utility import writeJSONFile, Platform
 validateProject(projectData=projectData)
 print("[VALIDATION SUCCESS]")
-writeJSONFile(filePath="t_source.json", data=projectData)
-writeJSONFile(filePath="extracted_project/project.json", data=projectData)
-writeJSONFile(filePath="precompiled.json", data=[])
+writeJSONFile(filePath="t_source.json", data=projectData, ensurePath=True)
+#writeJSONFile(filePath="extracted_project/project.json", data=projectData, ensurePath=True)
+writeJSONFile(filePath="precompiled.json", data=[], ensurePath=True)
 compressProject(
-    optimizedProjectDir = "extracted_project",
-    projectFilePath     = "export.pmp",
+    optimizedProjectDir = "../extracted_project",
+    projectFilePath     = "../export.pmp",
     targetPlatform      = Platform.PENGUINMOD,
-    deoptimizedDebugFilePath="t_deop.json",
+    deoptimizedDebugFilePath="../t_deop.json",
 )

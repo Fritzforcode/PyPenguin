@@ -31,6 +31,7 @@ export const extensions = {
   
   lmsTempVars2: "lmsTempVars2",
   jgJSON: "jgJSON",
+  text: "text",
 }
 
 // Alias extensions: unlike movedExtensions, this is handled for both scratch2 and scratch3.

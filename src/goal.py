@@ -48,6 +48,8 @@ ROM_START = 0x8000 # Should be at most 0xF000
 
 KERNAL_CHROUT_ADDRESS = 0xFF00
 
+ASCII_MAPPING = ["\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\b", "\t", "\n", "\u25a1", "\f", "\r", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", " ", "!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", ";", "<", "=", ">", "?", "@", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "[", "\\", "]", "^", "_", "`", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "{", "|", "}", "~", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1", "\u25a1"]
+
 ######################################################################################################## 
 #     [For the PenguinMod Version] Here is space for custom blocks, which simplify the code.           #
 ########################################################################################################
@@ -97,7 +99,7 @@ def P_fetch_byte(self: dict) -> int:
     :return: int
     """
     self, data = P_read_byte(self, self["program_counter"])
-    self["program_counter"] = (self["program_counter"] + 1) and 0xFFFF
+    self["program_counter"] = (self["program_counter"] + 1) & 0xFFFF
     return self, data
 
 def P_fetch_word(self: dict) -> int:
@@ -108,7 +110,7 @@ def P_fetch_word(self: dict) -> int:
     :return: int
     """
     self, data = P_read_word(self, self["program_counter"], False)
-    self["program_counter"] = (self["program_counter"] + 2) and 0xFFFF
+    self["program_counter"] = (self["program_counter"] + 2) & 0xFFFF
     return self, data
 
 def P_read_byte(self: dict, address: int) -> int:
@@ -152,7 +154,7 @@ def P_write_byte(self: dict, address: int, value: int) -> None:
     :return: None
     """
     if address == KERNAL_CHROUT_ADDRESS:
-        KERNAL_CHROUT(self, value)
+        KERNAL_CHROUT(value)
     else:
         self["memory"] = M___setitem__(self["memory"], address, value & 0xFF)
     return self, None
@@ -171,8 +173,8 @@ def P_write_word(self: dict, address: int, value: int) -> None:
     else:
         value1 = (value >> 8) & 0xFF
         value2 =  value       & 0xFF
-    self, _ = P_write_byte(self,  address,                 value1)
-    self, _ = P_write_byte(self, (address + 1) and 0xFFFF, value2)
+    self, _ = P_write_byte(self,  address,               value1)
+    self, _ = P_write_byte(self, (address + 1) & 0xFFFF, value2)
     return self, None
 
 def P_read_flags_register(self: dict, flag_b: bool) -> None:
@@ -305,7 +307,6 @@ def P_execute(self: dict, instructions: int = 0, debug: bool = False) -> None:
     """
     while (self["instructions"] < instructions):
         self, opcode_num = P_fetch_byte(self)
-        #print(opcode_num)
         opcode = OPCODES[opcode_num].lower()
         addressing_mode = ADDRESSING[opcode_num]
         if opcode == "   ": # Treated as NOP
@@ -313,7 +314,9 @@ def P_execute(self: dict, instructions: int = 0, debug: bool = False) -> None:
             addressing_mode = "imp"
         
         instr_func = "P_ins_" + opcode
-        #print(self["instructions"], f"{opcode.upper()}({addressing_mode})[{hex(opcode_num)}]", 50*"=")
+        print(self["instructions"], f"{opcode.upper()}({addressing_mode})[{hex(opcode_num)}]", 50*"=")
+        print(self)
+        input("<>")
         #res = input(">> ")
         #while res != "":
         #    try:
@@ -461,7 +464,7 @@ def help_twos_complement(num):
 ############################################################################################################
 #                                          MOT-6502 Instructions.                                          #
 ###########################################################################################################
-def P_ins_nop(self: dict, mode: str) -> None:
+def P_ins_nop(self: dict, mode: str, *args) -> None:
     """
     NOP - No Operation.
 
@@ -526,7 +529,7 @@ def P_ins_bcc(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if not self["flag_c"]:
-        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) & 0xFFFF
     return self, None
 
 def P_ins_bcs(self: dict, mode: str, operand: int, *args) -> None:
@@ -535,7 +538,7 @@ def P_ins_bcs(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if self["flag_c"]:
-        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) & 0xFFFF
     return self, None
 
 def P_ins_beq(self: dict, mode: str, operand: int, *args) -> None:
@@ -544,7 +547,7 @@ def P_ins_beq(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if self["flag_z"]:
-        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) & 0xFFFF
     return self, None
 
 def P_ins_bit(self: dict, mode: str, operand: int, *args) -> None:
@@ -563,7 +566,7 @@ def P_ins_bmi(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if self["flag_n"]:
-        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) & 0xFFFF
     return self, None
 
 def P_ins_bne(self: dict, mode: str, operand: int, *args) -> None:
@@ -572,7 +575,7 @@ def P_ins_bne(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if not self["flag_z"]:
-        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) & 0xFFFF
     return self, None
 
 def P_ins_bpl(self: dict, mode: str, operand: int, *args) -> None:
@@ -581,10 +584,10 @@ def P_ins_bpl(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if not self["flag_n"]:
-        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) & 0xFFFF
     return self, None
 
-def P_ins_brk(self: dict, mode: str) -> None:
+def P_ins_brk(self: dict, mode: str, *args) -> None:
     """
     BRK - Force Interrupt.
     :return: None
@@ -609,7 +612,7 @@ def P_ins_bvc(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if not self["flag_v"]:
-        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) & 0xFFFF
     return self, None
 
 def P_ins_bvs(self: dict, mode: str, operand: int, *args) -> None:
@@ -618,10 +621,10 @@ def P_ins_bvs(self: dict, mode: str, operand: int, *args) -> None:
     :return: None
     """
     if self["flag_v"]:
-        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) and 0xFFFF
+        self["program_counter"] = (self["program_counter"] + help_twos_complement(operand)) & 0xFFFF
     return self, None
 
-def P_ins_clc(self: dict, mode: str) -> None:
+def P_ins_clc(self: dict, mode: str, *args) -> None:
     """
     CLC - Clear Carry Flag.
 
@@ -630,7 +633,7 @@ def P_ins_clc(self: dict, mode: str) -> None:
     self["flag_c"] = False
     return self, None
 
-def P_ins_cld(self: dict, mode: str) -> None:
+def P_ins_cld(self: dict, mode: str, *args) -> None:
     """
     CLD - Clear Decimal Mode.
 
@@ -639,7 +642,7 @@ def P_ins_cld(self: dict, mode: str) -> None:
     self["flag_d"] = False
     return self, None
 
-def P_ins_cli(self: dict, mode: str) -> None:
+def P_ins_cli(self: dict, mode: str, *args) -> None:
     """
     CLI - Clear Interrupt Disable.
 
@@ -648,7 +651,7 @@ def P_ins_cli(self: dict, mode: str) -> None:
     self["flag_i"] = False
     return self, None
 
-def P_ins_clv(self: dict, mode: str) -> None:
+def P_ins_clv(self: dict, mode: str, *args) -> None:
     """
     CLV - Clear Overflow Flag.
 
@@ -694,23 +697,23 @@ def P_ins_dec(self: dict, mode: str, operand: int, address: int, *args) -> None:
     self, _ = P_evaluate_flags_nz(self  , (operand - 1) & 0xFF)
     return self, None
 
-def P_ins_dex(self: dict, mode: str) -> None:
+def P_ins_dex(self: dict, mode: str, *args) -> None:
     """
     DEX - Decrement X Register.
 
     :return: None
     """
-    self["reg_x"] = (self["reg_x"] - 1) and 0xFF
+    self["reg_x"] = (self["reg_x"] - 1) & 0xFF
     self, _ = P_evaluate_flags_nz_x(self)
     return self, None
 
-def P_ins_dey(self: dict, mode: str) -> None:
+def P_ins_dey(self: dict, mode: str, *args) -> None:
     """
     DEY - Decrement Y Register.
 
     :return: None
     """
-    self["reg_y"] = (self["reg_y"] - 1) and 0xFF
+    self["reg_y"] = (self["reg_y"] - 1) & 0xFF
     self, _ = P_evaluate_flags_nz_y(self)
     return self, None
 
@@ -733,23 +736,23 @@ def P_ins_inc(self: dict, mode: str, operand: int, address: int, *args) -> None:
     self, _ = P_evaluate_flags_nz(self  , (operand + 1) & 0xFF)
     return self, None
 
-def P_ins_inx(self: dict, mode: str) -> None:
+def P_ins_inx(self: dict, mode: str, *args) -> None:
     """
     INX - Increment X Register.
 
     :return: None
     """
-    self["reg_x"] = (self["reg_x"] + 1) and 0xFF
+    self["reg_x"] = (self["reg_x"] + 1) & 0xFF
     self, _ = P_evaluate_flags_nz_x(self)
     return self, None
 
-def P_ins_iny(self: dict, mode: str) -> None:
+def P_ins_iny(self: dict, mode: str, *args) -> None:
     """
     INY - Increment Y Register.
 
     :return: None
     """
-    self["reg_y"] = (self["reg_y"] + 1) and 0xFF
+    self["reg_y"] = (self["reg_y"] + 1) & 0xFF
     self, _ = P_evaluate_flags_nz_y(self)
     return self, None
 
@@ -765,7 +768,7 @@ def P_ins_jmp(self: dict, mode: str, operand: int, address: int, *args) -> None:
             self["program_counter"] = operand
     return self, None
 
-def P_ins_jsr(self: dict, mode: str) -> None:
+def P_ins_jsr(self: dict, mode: str, *args) -> None:
     """
     JSR - Jump to New Location Saving Return Addres.
     :return: None
@@ -829,7 +832,7 @@ def P_ins_ora(self: dict, mode: str, operand: int, *args) -> None:
     self["reg_a"] |= operand
     self, _ = P_evaluate_flags_nz_a(self)
 
-def P_ins_pha(self: dict, mode: str) -> None:
+def P_ins_pha(self: dict, mode: str, *args) -> None:
     """
     PHA - Push Accumulator.
 
@@ -840,7 +843,7 @@ def P_ins_pha(self: dict, mode: str) -> None:
     self, _ = P_push_byte(self, self["reg_a"])
     return self, None
 
-def P_ins_php(self: dict, mode: str) -> None:
+def P_ins_php(self: dict, mode: str, *args) -> None:
     """
     Push Processor Status.
 
@@ -850,7 +853,7 @@ def P_ins_php(self: dict, mode: str) -> None:
     self, _ = P_push_byte(self, status_register)
     return self, None
 
-def P_ins_pla(self: dict, mode: str) -> None:
+def P_ins_pla(self: dict, mode: str, *args) -> None:
     """
     PLA - Pull Accumulator.
 
@@ -862,7 +865,7 @@ def P_ins_pla(self: dict, mode: str) -> None:
     self, _ = P_evaluate_flags_nz_a(self)
     return self, None
 
-def P_ins_plp(self: dict, mode: str) -> None:
+def P_ins_plp(self: dict, mode: str, *args) -> None:
     """
     Pull Processor Status.
 
@@ -903,7 +906,7 @@ def P_ins_ror(self: dict, mode: str, operand: int, address: int, *args) -> None:
     self, _ = P_evaluate_flags_nz(self, result)
     return self, None
 
-def P_ins_rti(self: dict, mode: str) -> None:
+def P_ins_rti(self: dict, mode: str, *args) -> None:
     """
     RTI - Return from Interrupt.
     :return: None
@@ -913,7 +916,7 @@ def P_ins_rti(self: dict, mode: str) -> None:
     self, self["program_counter"] = P_pop_word(self)
     return self, None
 
-def P_ins_rts(self: dict, mode: str) -> None:
+def P_ins_rts(self: dict, mode: str, *args) -> None:
     """
     RTI - Return from Subroutine.
     :return: None
@@ -952,7 +955,7 @@ def P_ins_sbc(self: dict, mode: str, operand: int, *args) -> None:
     self, _ = P_evaluate_flags_nz_a(self)
     return self, None
 
-def P_ins_sec(self: dict, mode: str) -> None:
+def P_ins_sec(self: dict, mode: str, *args) -> None:
     """
     SEC - Set Carry Flag.
 
@@ -961,7 +964,7 @@ def P_ins_sec(self: dict, mode: str) -> None:
     self["flag_c"] = True
     return self, None
 
-def P_ins_sed(self: dict, mode: str) -> None:
+def P_ins_sed(self: dict, mode: str, *args) -> None:
     """
     SED - Set Decimal Mode.
 
@@ -970,7 +973,7 @@ def P_ins_sed(self: dict, mode: str) -> None:
     self["flag_d"] = True
     return self, None
 
-def P_ins_sei(self: dict, mode: str) -> None:
+def P_ins_sei(self: dict, mode: str, *args) -> None:
     """
     SEI - Set Interrupt Disable.
 
@@ -1006,7 +1009,7 @@ def P_ins_sty(self: dict, mode: str, operand: int, address:int, *args) -> None:
     self, _ = P_write_byte(self, address, self["reg_y"])
     return self, None
 
-def P_ins_tax(self: dict, mode: str) -> None:
+def P_ins_tax(self: dict, mode: str, *args) -> None:
     """
     TAX - Transfer Accumulator to X.
 
@@ -1016,7 +1019,7 @@ def P_ins_tax(self: dict, mode: str) -> None:
     self, _ = P_evaluate_flags_nz_x(self)
     return self, None
 
-def P_ins_tay(self: dict, mode: str) -> None:
+def P_ins_tay(self: dict, mode: str, *args) -> None:
     """
     TAY - Transfer Accumulator to Y.
 
@@ -1026,7 +1029,7 @@ def P_ins_tay(self: dict, mode: str) -> None:
     self, _ = P_evaluate_flags_nz_y(self)
     return self, None
 
-def P_ins_tsx(self: dict, mode: str) -> None:
+def P_ins_tsx(self: dict, mode: str, *args) -> None:
     """
     TSX - Transfer Stack Pointer to X.
 
@@ -1036,7 +1039,7 @@ def P_ins_tsx(self: dict, mode: str) -> None:
     self, _ = P_evaluate_flags_nz_x(self)
     return self, None
 
-def P_ins_txa(self: dict, mode: str) -> None:
+def P_ins_txa(self: dict, mode: str, *args) -> None:
     """
     TXA - Transfer Register X to Accumulator.
 
@@ -1046,7 +1049,7 @@ def P_ins_txa(self: dict, mode: str) -> None:
     self, _ = P_evaluate_flags_nz_a(self)
     return self, None
 
-def P_ins_txs(self: dict, mode: str) -> None:
+def P_ins_txs(self: dict, mode: str, *args) -> None:
     """
     TXS - Transfer Register X to Stack Pointer.
 
@@ -1055,7 +1058,7 @@ def P_ins_txs(self: dict, mode: str) -> None:
     self["stack_pointer"] = self["reg_x"]
     return self, None
 
-def P_ins_tya(self: dict, mode: str) -> None:
+def P_ins_tya(self: dict, mode: str, *args) -> None:
     """
     TYA - Transfer Register Y to Accumulator.
 
@@ -1080,7 +1083,7 @@ def M___init__(rom) -> dict:
     """
     mself = {}
     mself["size"] = 0x10000
-    mself["memory"] = rom
+    mself["memory"] = {int(key):value for key, value in rom.items()}
     return mself
 
 def M___getitem__(mself: dict, address: int) -> int:
@@ -1117,5 +1120,11 @@ def M___setitem__(mself: dict, address: int, value: int) -> dict:
 #                                   Kernal Subroutines for my Version                                      #
 ############################################################################################################
 
-def KERNAL_CHROUT(self) -> None:
-    pass
+def KERNAL_CHROUT(char_index) -> None:
+    char = ASCII_MAPPING[char_index]
+    print(char, end="")
+
+memory = M___init__({"49152": 169, "49153": 72, "49154": 141, "49155": 0, "49156": 255, "49157": 169, "49158": 101, "49159": 141, "49160": 0, "49161": 255, "49162": 169, "49163": 108, "49164": 141, "49165": 0, "49166": 255, "49167": 169, "49168": 108, "49169": 141, "49170": 0, "49171": 255, "49172": 169, "49173": 111, "49174": 141, "49175": 0, "49176": 255, "49177": 169, "49178": 33, "49179": 141, "49180": 0, "49181": 255, "65532": 0, "65533": 192})
+cpu = P___init__(memory)
+cpu, _ = P_execute(cpu, 100)
+
