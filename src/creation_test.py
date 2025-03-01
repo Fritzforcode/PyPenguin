@@ -13,7 +13,7 @@ scriptA = {"position": [0, 0], "blocks": [
 from utility import readJSONFile
 projectData = readJSONFile("btt/project.json")
 
-projectData2 = {
+projectData = {
     "sprites": [
         {
             "name": "Stage",
@@ -29,223 +29,18 @@ projectData2 = {
             "name": "Sprite1",
             "isStage": False,
             "scripts": [
-                {
-                    "position": [
-                        0,
-                        0
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "inputs": {},
-                            "options": {
-                                "noScreenRefresh": [
-                                    "value",
-                                    True
-                                ],
-                                "customOpcode": [
-                                    "value",
-                                    "set (var) . (key) to (value)"
-                                ],
-                                "blockType": [
-                                    "value",
-                                    "instruction"
-                                ]
-                            }
-                        },
-                        {
-                            "opcode": "set runtime var (VARIABLE) to (VALUE)",
-                            "inputs": {
-                                "VARIABLE": {
-                                    "block": {
-                                        "opcode": "value of text [ARGUMENT]",
-                                        "inputs": {},
-                                        "options": {
-                                            "ARGUMENT": [
-                                                "value",
-                                                "var"
-                                            ]
-                                        }
-                                    }
-                                },
-                                "VALUE": {
-                                    "block": {
-                                        "opcode": "set (KEY) to (VALUE) in (JSON)",
-                                        "inputs": {
-                                            "KEY": {
-                                                "block": {
-                                                    "opcode": "value of text [ARGUMENT]",
-                                                    "inputs": {},
-                                                    "options": {
-                                                        "ARGUMENT": [
-                                                            "value",
-                                                            "key"
-                                                        ]
-                                                    }
-                                                }
-                                            },
-                                            "VALUE": {
-                                                "block": {
-                                                    "opcode": "value of text [ARGUMENT]",
-                                                    "inputs": {},
-                                                    "options": {
-                                                        "ARGUMENT": [
-                                                            "value",
-                                                            "value"
-                                                        ]
-                                                    }
-                                                }
-                                            },
-                                            "JSON": {
-                                                "block": {
-                                                    "opcode": "runtime var (VARIABLE)",
-                                                    "inputs": {
-                                                        "VARIABLE": {
-                                                            "block": {
-                                                                "opcode": "value of text [ARGUMENT]",
-                                                                "inputs": {},
-                                                                "options": {
-                                                                    "ARGUMENT": [
-                                                                        "value",
-                                                                        "var"
-                                                                    ]
-                                                                }
-                                                            }
-                                                        }
-                                                    },
-                                                    "options": {}
-                                                }
-                                            }
-                                        },
-                                        "options": {}
-                                    }
-                                }
-                            },
-                            "options": {}
-                        }
-                    ]
-                },
-                {
-                    "position": [
-                        1000,
-                        0
-                    ],
-                    "blocks": [
-                        {
-                            "opcode": "define custom block",
-                            "inputs": {},
-                            "options": {
-                                "noScreenRefresh": [
-                                    "value",
-                                    True
-                                ],
-                                "customOpcode": [
-                                    "value",
-                                    "change (var) . (key) by (value)"
-                                ],
-                                "blockType": [
-                                    "value",
-                                    "instruction"
-                                ]
-                            }
-                        },
-                        {
-                            "opcode": "call custom block",
-                            "inputs": {
-                                "var": {
-                                    "block": {
-                                        "opcode": "value of text [ARGUMENT]",
-                                        "inputs": {},
-                                        "options": {
-                                            "ARGUMENT": [
-                                                "value",
-                                                "var"
-                                            ]
-                                        }
-                                    }
-                                },
-                                "key": {
-                                    "block": {
-                                        "opcode": "value of text [ARGUMENT]",
-                                        "inputs": {},
-                                        "options": {
-                                            "ARGUMENT": [
-                                                "value",
-                                                "key"
-                                            ]
-                                        }
-                                    }
-                                },
-                                "value": {
-                                    "block": {
-                                        "opcode": "(OPERAND1) + (OPERAND2)",
-                                        "inputs": {
-                                            "OPERAND1": {
-                                                "block": {
-                                                    "opcode": "get (KEY) from (JSON)",
-                                                    "inputs": {
-                                                        "KEY": {
-                                                            "block": {
-                                                                "opcode": "value of text [ARGUMENT]",
-                                                                "inputs": {},
-                                                                "options": {
-                                                                    "ARGUMENT": [
-                                                                        "value",
-                                                                        "key"
-                                                                    ]
-                                                                }
-                                                            }
-                                                        },
-                                                        "JSON": {
-                                                            "block": {
-                                                                "opcode": "runtime var (VARIABLE)",
-                                                                "inputs": {
-                                                                    "VARIABLE": {
-                                                                        "block": {
-                                                                            "opcode": "value of text [ARGUMENT]",
-                                                                            "inputs": {},
-                                                                            "options": {
-                                                                                "ARGUMENT": [
-                                                                                    "value",
-                                                                                    "var"
-                                                                                ]
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                },
-                                                                "options": {}
-                                                            }
-                                                        }
-                                                    },
-                                                    "options": {}
-                                                }
-                                            },
-                                            "OPERAND2": {
-                                                "block": {
-                                                    "opcode": "value of text [ARGUMENT]",
-                                                    "inputs": {},
-                                                    "options": {
-                                                        "ARGUMENT": [
-                                                            "value",
-                                                            "value"
-                                                        ]
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        "options": {}
-                                    }
-                                }
-                            },
-                            "options": {
-                                "customOpcode": [
-                                    "value",
-                                    "set (var) . (key) to (value)"
-                                ]
-                            }
-                        }
-                    ]
-                }
+                {"position": [0,0], "blocks": [{
+                    "opcode": "(VALUE)",
+                    "inputs": {"VALUE": {"text": "\n"}},
+                }]},
+                {"position": [0,0], "blocks": [{
+                    "opcode": "(VALUE)",
+                    "inputs": {"VALUE": {"text": "\r"}},
+                }]},
+                {"position": [0,0], "blocks": [{
+                    "opcode": "(VALUE)",
+                    "inputs": {"VALUE": {"text": chr(13)}},
+                }]},
             ],
             "comments": [],
             "currentCostume": 0,
@@ -301,7 +96,7 @@ projectData2 = {
 }
 
 from pypenguin import validateProject, compressProject
-from pypenguin.utility import writeJSONFile, Platform
+from utility import writeJSONFile, Platform
 validateProject(projectData=projectData)
 print("[VALIDATION SUCCESS]")
 writeJSONFile(filePath="t_source.json", data=projectData)

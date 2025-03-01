@@ -3,7 +3,7 @@ from utility import readJSONFile, writeJSONFile, ensureCorrectPath, pp, generate
 from pypenguin.database import getArgumentOrder, getOptimizedOpcode, autocompleteOptionValue, getInputType, getOptionType, getOptionValueDefault, opcodeExists
 
 COMMENT_X_OFFSET = 400
-COMMENT_SIZE = [200, 80]
+COMMENT_SIZE = [200, 100]
 COMMENT_Y_PADDING = 20
 COMMENT_IS_MINIMIZED = False
 

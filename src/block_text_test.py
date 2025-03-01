@@ -6,18 +6,9 @@ import utility
 with open(utility.ensureCorrectPath("src/code.txt", "PyPenguin")) as file:
     block_text = file.read()
 block_text2 = r"""
-define M___init__ (size) //{"blockType":"textReporter"}
-set runtime var [mself] to [{}]
-set [mself] . [size] to (size::custom)
-set [mself] . [memory] to [{}]
-return (runtime var [mself])
-
-define set (var) . (key) to (value)
-set runtime var (var::custom) to (set (key::custom) to (value::custom) in (runtime var (var::custom)))
-
 """
 
-globalVariables = ["ADDRESSING", "OPCODES", "BYTEORDER", "PAGE_WRAPPING_BUG", "ROM_START"]
+globalVariables = ["ADDRESSING", "OPCODES", "BYTEORDER", "PAGE_WRAPPING_BUG", "ROM_START", "KERNAL_CHROUT_ADDRESS", "CONSOLE"]
 
 generated_scripts = pypenguin.parseBlockText(block_text)
 
@@ -37,7 +28,7 @@ project["sprites"] = [  # Update project with the modified sprites.
 ]
 
 project["globalVariables"] = [{"name": name, "currentValue": "", "isCloudVariable": False} for name in globalVariables]
-project["extensions"     ] = ["jgJSON", "lmsTempVars2", "Bitwise"]
+project["extensions"     ] = ["jgJSON", "lmsTempVars2", "Bitwise", "text"]
 project["extensionURLs"] = {"Bitwise": "https://extensions.turbowarp.org/bitwise.js"}
 
 # Create our project directory

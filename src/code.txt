@@ -3,10 +3,11 @@ set [ADDRESSING v] to [\["imp", "inx", "   ", "   ", "   ", "zp",  "zp",  "   ",
 set [OPCODES v] to [\["brk", "ora", "   ", "   ", "   ", "ora", "asl", "   ", "php", "ora", "asl", "   ", "   ", "ora", "asl", "   ", "bpl", "ora", "   ", "   ", "   ", "ora", "asl", "   ", "clc", "ora", "   ", "   ", "   ", "ora", "asl", "   ", "jsr", "and", "   ", "   ", "bit", "and", "rol", "   ", "plp", "and", "rol", "   ", "bit", "and", "rol", "   ", "bmi", "and", "   ", "   ", "   ", "and", "rol", "   ", "sec", "and", "   ", "   ", "   ", "and", "rol", "   ", "rti", "eor", "   ", "   ", "   ", "eor", "lsr", "   ", "pha", "eor", "lsr", "   ", "jmp", "eor", "lsr", "   ", "bvc", "eor", "   ", "   ", "   ", "eor", "lsr", "   ", "cli", "eor", "   ", "   ", "   ", "eor", "lsr", "   ", "rts", "adc", "   ", "   ", "   ", "adc", "ror", "   ", "pla", "adc", "ror", "   ", "jmp", "adc", "ror", "   ", "bvs", "adc", "   ", "   ", "   ", "adc", "ror", "   ", "sei", "adc", "   ", "   ", "   ", "adc", "ror", "   ", "   ", "sta", "   ", "   ", "sty", "sta", "stx", "   ", "dey", "   ", "txa", "   ", "sty", "sta", "stx", "   ", "bcc", "sta", "   ", "   ", "sty", "sta", "stx", "   ", "tya", "sta", "txs", "   ", "   ", "sta", "   ", "   ", "ldy", "lda", "ldx", "   ", "ldy", "lda", "ldx", "   ", "tay", "lda", "tax", "   ", "ldy", "lda", "ldx", "   ", "bcs", "lda", "   ", "   ", "ldy", "lda", "ldx", "   ", "clv", "lda", "tsx", "   ", "ldy", "lda", "ldx", "   ", "cpy", "cmp", "   ", "   ", "cpy", "cmp", "dec", "   ", "iny", "cmp", "dex", "   ", "cpy", "cmp", "dec", "   ", "bne", "cmp", "   ", "   ", "   ", "cmp", "dec", "   ", "cld", "cmp", "   ", "   ", "   ", "cmp", "dec", "   ", "cpx", "sbc", "   ", "   ", "cpx", "sbc", "inc", "   ", "inx", "sbc", "nop", "   ", "cpx", "sbc", "inc", "   ", "beq", "sbc", "   ", "   ", "   ", "sbc", "inc", "   ", "sed", "sbc", "   ", "   ", "   ", "sbc", "inc", "   "\]]
 set [BYTEORDER v] to [little]
 set [PAGE_WRAPPING_BUG v] to <false>
-set [ROM_START] to [32768] //{"newRow":true, "comment": "Shouldn't be at most 61440"}
+set [ROM_START] to [32768] //{"comment": "Should be at most 61440"}
+set [KERNAL_CHROUT_ADDRESS] to [65280] //{"newRow":true, "comment": "0xFF00"}
 
 when [space v] key pressed
-set runtime var [memory] to (M___init__ [{"49152": 162, "49153": 0, "49154": 224, "49155": 69, "49156": 240, "49157": 4, "49158": 232, "49159": 76, "49160": 2, "49161": 192, "49162": 0, "65532": 0, "65533": 192}])
+set runtime var [memory] to (M___init__ [{"49152": 162, "49153": 0, "49154": 224, "49155": 10, "49156": 240, "49157": 4, "49158": 232, "49159": 76, "49160": 2, "49161": 192, "49162": 0, "65532": 0, "65533": 192}])
 set runtime var [cpu] to (P___init__ (runtime var [memory]))
 say (P_execute (runtime var [cpu]) [5]) //{"newRow":true}
 
@@ -142,7 +143,11 @@ return (array2 (runtime var [self]) (runtime var [data]))
 
 define P_write_byte(self) (address) (value) //{"blockType":"textReporter"}
 set runtime var [self] to (self::custom)
-set [self] . [memory] to (M___setitem__ (get [self] . [memory]) (address::custom) ((value::custom) and [255]) )
+if <(address::custom) = (KERNAL_CHROUT_ADDRESS)> then
+    KERNAL_CHROUT (runtime var [self]) (value)
+else
+    set [self] . [memory] to (M___setitem__ (get [self] . [memory]) (address::custom) ((value::custom) and [255]) )
+end
 return (array2 (runtime var [self]) [null])
 
 define P_write_word(self) (address) (value) //{"blockType":"textReporter"}
@@ -712,4 +717,8 @@ set2 [self] [_] to (P_push_byte (runtime var [self]) (runtime var [status_regist
 set2 [self] [pc] to (P_read_word (runtime var [self]) [65534] <false>)
 set [self] . [program_counter] to (runtime var [pc])
 set [self] . [flag_i] to <true>
-return (array2 (runtime var [self]) [null])
+return (array2 (runtime var [self]) [null]) //{"newRow":true}
+
+define KERNAL_CHROUT(cself):
+...
+

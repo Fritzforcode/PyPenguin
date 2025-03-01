@@ -44,7 +44,9 @@ BYTEORDER = "little"
 
 PAGE_WRAPPING_BUG = False
 
-ROM_START = 0x8000 # Shouldn't be at most 0xF000
+ROM_START = 0x8000 # Should be at most 0xF000
+
+KERNAL_CHROUT_ADDRESS = 0xFF00
 
 ######################################################################################################## 
 #     [For the PenguinMod Version] Here is space for custom blocks, which simplify the code.           #
@@ -149,7 +151,10 @@ def P_write_byte(self: dict, address: int, value: int) -> None:
     :param value: The value to write
     :return: None
     """
-    self["memory"] = M___setitem__(self["memory"], address, value & 0xFF)
+    if address == KERNAL_CHROUT_ADDRESS:
+        KERNAL_CHROUT(self, value)
+    else:
+        self["memory"] = M___setitem__(self["memory"], address, value & 0xFF)
     return self, None
 
 def P_write_word(self: dict, address: int, value: int) -> None:
@@ -1107,3 +1112,10 @@ def M___setitem__(mself: dict, address: int, value: int) -> dict:
     if address < ROM_START:
         mself["memory"][address] = value
     return mself
+
+############################################################################################################
+#                                   Kernal Subroutines for my Version                                      #
+############################################################################################################
+
+def KERNAL_CHROUT(self) -> None:
+    pass
