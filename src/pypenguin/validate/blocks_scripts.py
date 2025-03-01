@@ -296,9 +296,9 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                 string += "\n- "
                 string += repr(value)
         return string
-    def validateCategory(path, data, suggestion):
+    def validateCategory(path, data, suggestion, message=None):
         if data != suggestion:
-            raise formatError(optionValueCategoryError, path, f"Must be '{suggestion}'.")
+            raise formatError(optionValueCategoryError, path, f"Must be '{suggestion}'." if message==None else message)
     match optionType:
         case "broadcast"|"reporter name"|"opcode":
             if not isinstance(data[1], str):
@@ -324,9 +324,15 @@ def validateOptionValue(path, data, opcode, optionType, context, inputDatas):
                 context=context,
                 inputDatas=inputDatas,
             )
+            _, defaultPrefix = getOptimizedOptionValuesUsingNoContext(
+                optionType=optionType,
+            )
             possibleValuesString = makeString(possibleValues)
             if data not in possibleValues:
-                raise formatError(optionValueError, path, f"Must be one of these: {possibleValuesString}")
+                if defaultPrefix == None:
+                    raise formatError(optionValueError, path, f"Must be one of these: {possibleValuesString}")
+                else:
+                    validateCategory(path, data[0], defaultPrefix, message=f"If item 0 is not {repr(defaultPrefix)} must be one of these: {possibleValuesString}")
 
 def validateScriptCustomBlocks(path, data, CBTypes, isNested=False):
     for i, block in enumerate(data):
