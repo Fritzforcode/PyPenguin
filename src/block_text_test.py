@@ -25,8 +25,6 @@ show text (.CONSOLE)
 
 main_scripts    = pypenguin.parseBlockText(main_block_text)
 console_scripts = pypenguin.parseBlockText(console_block_text)
-utility.pp(console_scripts)
-input()
 
 # Update the project data
 my_stage  = pypenguin.defaultStage
