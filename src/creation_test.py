@@ -1,13 +1,12 @@
+with open("/storage/emulated/0/Download/video_uri.txt", "r") as file:
+    uri = file.read()
+
+
 scriptA = {"position": [0, 0], "blocks": [
     {
-        "opcode": "broadcast ([MESSAGE]) and wait",
+        "opcode": "(VALUE)",
         "inputs": {
-            "MESSAGE": {
-                "option": [
-                    "value",
-                    "refresh"
-                ]
-            }
+            "VALUE": {"text": "HI"},
         },
         "options": {}
     }
@@ -21,7 +20,7 @@ projectData = {
         {
             "name": "Stage",
             "isStage": True,
-            "scripts": [scriptA],
+            "scripts": [],
             "comments": [],
             "currentCostume": 0,
             "costumes": [],
@@ -31,20 +30,7 @@ projectData = {
         {
             "name": "Sprite1",
             "isStage": False,
-            "scripts": [
-                {"position": [0,0], "blocks": [{
-                    "opcode": "(VALUE)",
-                    "inputs": {"VALUE": {"text": "\n"}},
-                }]},
-                {"position": [0,0], "blocks": [{
-                    "opcode": "(VALUE)",
-                    "inputs": {"VALUE": {"text": "\r"}},
-                }]},
-                {"position": [0,0], "blocks": [{
-                    "opcode": "(VALUE)",
-                    "inputs": {"VALUE": {"text": chr(13)}},
-                }]},
-            ],
+            "scripts": [],
             "comments": [],
             "currentCostume": 0,
             "costumes": [],
@@ -65,37 +51,12 @@ projectData = {
         }
     ],
     "globalVariables": [
-        {
-            "name": "ADDRESSING",
-            "currentValue": "",
-            "isCloudVariable": False
-        },
-        {
-            "name": "OPCODES",
-            "currentValue": "",
-            "isCloudVariable": False
-        },
-        {
-            "name": "BYTEORDER",
-            "currentValue": "",
-            "isCloudVariable": False
-        },
-        {
-            "name": "PAGE_WRAPPING_BUG",
-            "currentValue": "",
-            "isCloudVariable": False
-        }
+        {"name": "ZUVOR.MP4", "currentValue": uri, "isCloudVariable": False},
     ],
     "globalLists": [],
     "monitors": [],
-    "extensions": [
-        "jgJSON",
-        "lmsTempVars2",
-        "Bitwise"
-    ],
-    "extensionURLs": {
-        "Bitwise": "https://extensions.turbowarp.org/bitwise.js"
-    }
+    "extensions": [],
+    "extensionURLs": {}
 }
 
 from pypenguin import validateProject, compressProject
@@ -103,7 +64,7 @@ from utility import writeJSONFile, Platform
 validateProject(projectData=projectData)
 print("[VALIDATION SUCCESS]")
 writeJSONFile(filePath="t_source.json", data=projectData, ensurePath=True)
-#writeJSONFile(filePath="extracted_project/project.json", data=projectData, ensurePath=True)
+writeJSONFile(filePath="extracted_project/project.json", data=projectData, ensurePath=True)
 writeJSONFile(filePath="precompiled.json", data=[], ensurePath=True)
 compressProject(
     optimizedProjectDir = "../extracted_project",

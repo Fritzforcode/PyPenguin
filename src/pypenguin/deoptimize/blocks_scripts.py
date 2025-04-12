@@ -6,6 +6,7 @@ from pypenguin.deoptimize.comments import translateComment
 from pypenguin.database import *
 
 def standardizeScripts(data):
+    pp(data)
     def standardizeBlock(data):
         opcode = getDeoptimizedOpcode(opcode=data["opcode"])
         if opcode == "procedures_call":
